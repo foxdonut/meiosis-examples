@@ -1,0 +1,40 @@
+{
+  "name": "labeled-sliders",
+  "version": "0.1.4",
+  "description": "meiosis-examples labeled-sliders",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "meiosis": "^0.1.4",
+    "ramda": "^0.18.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "rx": "^4.1.0",
+    "union-type": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.3.21",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "webpack": "^1.12.9"
+  }
+}

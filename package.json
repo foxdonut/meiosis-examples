@@ -1,0 +1,27 @@
+{
+  "name": "meiosis-examples",
+  "version": "0.1.4",
+  "description": "meiosis-examples",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd public && serv"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "serv": "^0.2.4"
+  }
+}
