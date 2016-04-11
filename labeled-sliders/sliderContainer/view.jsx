@@ -5,14 +5,16 @@ import { Action } from "./action";
 const view = actions => model => {
 
   const onAddMeasurement = _evt => actions.onNext(Action.AddMeasurement());
-  const onRemoveMeasurement = index =>  _evt => actions.onNext(Action.RemoveMeasurement(index));
+  const onRemoveMeasurement = id =>  _evt => actions.onNext(Action.RemoveMeasurement(id));
 
-  const renderMeasurement = measurement => (
-    <div>
-      {measurement}
-      <button onClick={onRemoveMeasurement(0)}>Remove Measurement</button>
-    </div>
-  );
+  const renderMeasurement = measurement => {
+    return (
+      <div key={measurement.id}>
+        {measurement.id}
+        <button onClick={onRemoveMeasurement(measurement.id)}>Remove Measurement</button>
+      </div>
+    );
+  };
 
   return (
     <div>

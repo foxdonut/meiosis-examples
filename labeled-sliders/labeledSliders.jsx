@@ -1,6 +1,8 @@
-import { createLabeledSliderFeature } from "./labeledSlider/feature";
+//import { createLabeledSliderFeature } from "./labeledSlider/feature";
+import { createSliderContainerFeature } from "./sliderContainer/feature";
 
 export default function() {
+/*
   const labeledSliderFeature = createLabeledSliderFeature({
     initialModel: {
       label: "Height",
@@ -12,6 +14,11 @@ export default function() {
   });
 
   const view$ = labeledSliderFeature.view$;
+*/
+
+  const sliderContainerFeature = createSliderContainerFeature();
+
+  const view$ = sliderContainerFeature.view$;
 
   return { view$ };
 }

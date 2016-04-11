@@ -1,9 +1,9 @@
-import { createFeature } from "../library/feature";
+import { createFeature } from "meiosis";
 import { initialModel } from "./model";
 import { update } from "./update";
 import { view } from "./view.jsx";
 
-const createLabeledSliderFeature = config => {
+const createSliderContainerFeature = config => {
   const model = config && config.initialModel || initialModel;
   const services = {
   };
@@ -17,4 +17,4 @@ const createLabeledSliderFeature = config => {
   return createFeature(featureConfig);
 };
 
-export { createLabeledSliderFeature };
+export { createSliderContainerFeature };

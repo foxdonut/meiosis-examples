@@ -1,5 +1,6 @@
 const initialModel = {
-  measurements: []
+  measurements: [],
+  nextId: 0
 };
 
 export { initialModel };
