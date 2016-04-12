@@ -8,9 +8,12 @@ const view = actions => model => {
   const onRemoveMeasurement = id =>  _evt => actions.onNext(Action.RemoveMeasurement(id));
 
   const renderMeasurement = measurement => {
+    const view = measurement.view();
+
     return (
       <div key={measurement.id}>
         {measurement.id}
+        {view(model)}
         <button onClick={onRemoveMeasurement(measurement.id)}>Remove Measurement</button>
       </div>
     );

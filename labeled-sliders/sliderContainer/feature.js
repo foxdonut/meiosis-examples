@@ -5,12 +5,11 @@ import { view } from "./view.jsx";
 
 const createSliderContainerFeature = config => {
   const model = config && config.initialModel || initialModel;
-  const services = {
-  };
+
   const featureConfig = {
     inputs: config && config.inputs,
     initialModel: [model, null],
-    update: update(services),
+    update: update,
     view: view
   };
 
