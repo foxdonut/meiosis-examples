@@ -1,10 +1,10 @@
 import { assoc } from "ramda";
 import { Action } from "./action";
 
-// handler : Model -> [ model, Maybe (Task Action) ]
+// handler : Model -> Model
 const handler = model => ({
-  NoOp: () => [model],
-  Update: value => [assoc("value", value, model)]
+  NoOp: () => model,
+  Update: value => assoc("value", value, model)
 });
 
 // update : Action -> Model -> [ model, Maybe (Task Action) ]

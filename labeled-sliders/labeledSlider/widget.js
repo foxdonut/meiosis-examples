@@ -2,12 +2,12 @@ import { initialModel } from "./model";
 import { update } from "./update";
 import { view } from "./view.jsx";
 
-const createLabeledSliderWidget = id => {
+const createLabeledSliderWidget = (id, actions, model) => {
   const widget = {
     id: id,
-    initialModel: [initialModel],
+    model: model || initialModel,
     update: update,
-    view: view
+    view: view(actions)
   };
 
   return widget;
