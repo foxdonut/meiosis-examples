@@ -4,7 +4,7 @@
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
-    "start": "cd public && serv"
+    "start": "cd public && serv -p 3000 -b 0.0.0.0"
   },
   "repository": {
     "type": "git",
