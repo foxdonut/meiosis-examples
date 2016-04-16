@@ -2,9 +2,7 @@ import { append, assoc } from "ramda";
 import { Action } from "./action";
 
 const updateMeasurement = update => measurement =>
-  update.id === measurement.id
-    ? assoc("model", measurement.update(update.action)(measurement.model), measurement)
-    : measurement;
+  update.id === measurement.id ? update : measurement;
 
 const rnd = (min, max) => Math.round(Math.random() * min) + (max || 0);
 
@@ -29,8 +27,8 @@ const handler = model => ({
   RemoveMeasurement: id => [
     assoc("measurements", model.measurements.filter(m => m.id !== id), model)
   ],
-  UpdateMeasurement: update => [
-    assoc("measurements", model.measurements.map(updateMeasurement(update)), model)
+  UpdateMeasurement: measurement => [
+    assoc("measurements", model.measurements.map(updateMeasurement(measurement)), model)
   ]
 });
 
