@@ -2,7 +2,7 @@ import React from "react";
 
 import { Action } from "./action";
 
-const view = actions => model => {
+const view = (actions, model) => {
   const getModel = evt => parseInt(evt.target.value, 10);
 
   const onChangeValue = evt => 

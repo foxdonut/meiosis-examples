@@ -13,14 +13,14 @@ const view = actions => model => {
   const onRemoveMeasurement = id =>  _evt => actions.onNext(Action.RemoveMeasurement(id));
 
   const lsActions = measurement => ({
-    onNext: (action) => actions.onNext(Action.UpdateMeasurement(lsUpdate(action)(measurement)))
+    onNext: (action) => actions.onNext(Action.UpdateMeasurement(lsUpdate(measurement, action)))
   });
 
   const renderMeasurement = measurement => {
     return (
       <div key={measurement.id} style={{border:"1px solid gray"}}>
         id: {measurement.id}
-        {LsView(lsActions(measurement))(measurement)}
+        {LsView(lsActions(measurement), measurement)}
         <div>
           <button className="btn btn-danger btn-sm"
             onClick={onRemoveMeasurement(measurement.id)}>Remove Measurement</button>
