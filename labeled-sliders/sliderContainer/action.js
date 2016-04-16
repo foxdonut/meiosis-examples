@@ -2,9 +2,9 @@ import Type from "union-type";
 
 const Action = Type({
   NoOp: [],
-  AddMeasurement: [Function],
+  AddMeasurement: [],
   RemoveMeasurement: [Number],
-  UpdateMeasurement: [Object] // {id: N, action: labeledSlider.Action}
+  UpdateMeasurement: [Object]
 });
 
 export { Action };
