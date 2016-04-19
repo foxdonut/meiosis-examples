@@ -1,13 +1,17 @@
 import { merge } from "ramda";
 
-let model = {
-  todos: [],
-  message: "Initializing..."
+const createModel = pubsub => {
+  let model = {
+    todos: [],
+    message: "Initializing..."
+  };
+
+  const next = data => {
+    model = merge(model, data);
+    pubsub.broadcast(model);
+  };
+
+  return {model, next};
 };
 
-const next = data => {
-  model = merge(model, data);
-  return model;
-};
-
-export { model, next };
+export { createModel };

@@ -4,7 +4,8 @@
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
-    "start": "cd public && serv -p 3000 -b 0.0.0.0"
+    "start": "cd public && serv -p 3000 -b 0.0.0.0",
+    "server": "node --harmony server/main"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,10 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
+    "co-body": "^4.0.0",
+    "koa": "^1.2.0",
+    "koa-route": "^2.4.2",
+    "koa-static": "^2.0.0",
     "serv": "^0.2.4"
   }
 }

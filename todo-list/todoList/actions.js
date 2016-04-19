@@ -1,25 +1,19 @@
-const requestLoadList = next => () => {
-  next({message: "Loading...", requestLoadList: true});
-};
+const createActions = (next, services) => ({
+  requestLoadList: () => {
+    next({message: "Loading...", requestLoadList: true});
+  },
 
-const loadList = next => () => {
-  next({loadList: true});
-};
+  loadList: () => {
+    services.loadTodos.fork(null, next);
+  },
 
-const editTodo = next => (todo) => {
-  next({todo});
-};
+  editTodo: (todo) => {
+    next({todo});
+  },
 
-const deleteTodo = next => (id) => {
-  next({deleteTodo: {id}});
-};
-
-// FIXME
-const createActions = (next) => ({
-  requestLoadList: requestLoadList(next),
-  loadList: loadList(next),
-  editTodo: editTodo(next),
-  deleteTodo: deleteTodo(next)
+  deleteTodo: (id) => {
+    next({deleteTodo: {id}});
+  }
 });
 
 export { createActions };

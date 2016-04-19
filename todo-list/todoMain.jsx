@@ -1,8 +1,6 @@
-import { createTodoList, todoListModel } from "./todoList/main";
+import radio from "radio";
+import { createTodoList } from "./todoList/main";
 
 export default function(render, element) {
-  const todoList = createTodoList(render, element);
-
-  // view rendering
-  todoList.render(todoListModel);
+  createTodoList(render, element, radio("meiosis"));
 }
