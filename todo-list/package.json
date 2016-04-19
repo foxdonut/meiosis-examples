@@ -1,7 +1,7 @@
 {
-  "name": "labeled-sliders",
+  "name": "todo-list",
   "version": "0.1.5",
-  "description": "meiosis-examples labeled-sliders",
+  "description": "meiosis-examples todo-list",
   "main": "index.js",
   "scripts": {
     "start": "webpack",
@@ -23,11 +23,9 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "meiosis": "^0.1.5",
     "ramda": "^0.18.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "rx": "^4.1.0",
     "union-type": "^0.3.0"
   },
   "devDependencies": {
