@@ -28,7 +28,6 @@
     "data.task": "^3.1.0",
     "futurize": "^1.0.2",
     "meiosis": "^0.2.0",
-    "radio": "^0.2.0",
     "ramda": "^0.18.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoList = ({actions, model}) => {
+const view = ({model, actions}) => {
   const onLoad = _evt => actions.requestLoadList();
 
   const onEdit = todo => evt => {
@@ -10,7 +10,7 @@ const TodoList = ({actions, model}) => {
 
   const onDelete = todo => evt => {
     evt.preventDefault();
-    actions.deleteTodo(todo.id);
+    actions.requestDeleteTodo(todo.id);
   };
 
   const renderTodo = todo => (
@@ -47,9 +47,9 @@ const TodoList = ({actions, model}) => {
   );
 };
 
-TodoList.propTypes = {
+view.propTypes = {
   actions: React.PropTypes.object.isRequired,
   model: React.PropTypes.object.isRequired
 };
 
-export { TodoList };
+export default view;

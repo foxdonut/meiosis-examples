@@ -1,6 +1,10 @@
-import radio from "radio";
+import meiosis from "meiosis";
 import { createTodoList } from "./todoList/main";
 
 export default function(render, element) {
-  createTodoList(render, element, radio("meiosis"));
+  const adapters = {
+    render: view => render(view, element)
+  };
+  const Meiosis = meiosis(adapters);
+  Meiosis.run(createTodoList(Meiosis.createComponent));
 }

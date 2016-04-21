@@ -1,17 +1,18 @@
-import { merge } from "ramda";
+import { complement, filter, propEq } from "ramda";
 
-const createModel = pubsub => {
-  let model = {
-    todos: [],
-    message: "Initializing..."
-  };
-
-  const next = data => {
-    model = merge(model, data);
-    pubsub.broadcast(model);
-  };
-
-  return {model, next};
+const initialModel = {
+  todos: [],
+  message: "Initializing..."
 };
 
-export { createModel };
+const update = Action => (model, action) => Action.case({
+  RequestLoadList: () => ({ message: "Loading, please wait..." }),
+  LoadedList: todos => todos,
+  EditTodo: todo => ({ todo }),
+  RequestDeleteTodo: _todoId => ({ message: "Deleting, please wait..."}),
+  DeletedTodo: maybeTodoId => maybeTodoId
+    .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.todos), message: "" }))
+    .getOrElse({ todos: model.todos, message: "An error occured when deleting a Todo." })
+}, action);
+
+export { initialModel, update };

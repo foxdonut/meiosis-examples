@@ -1,19 +1,23 @@
-const createActions = (next, services) => ({
-  requestLoadList: () => {
-    next({message: "Loading...", requestLoadList: true});
-  },
+import Type from "union-type";
 
-  loadList: () => {
-    services.loadTodos.fork(null, next);
-  },
-
-  editTodo: (todo) => {
-    next({todo});
-  },
-
-  deleteTodo: (id) => {
-    next({deleteTodo: {id}});
-  }
+const Action = Type({
+  RequestLoadList: [],
+  LoadedList: [Object],
+  EditTodo: [Object],
+  RequestDeleteTodo: [Number],
+  DeletedTodo: [Object]
 });
 
-export { createActions };
+const actions = services => next => ({
+  requestLoadList: () => next(Action.RequestLoadList()),
+
+  loadList: () => services.loadTodos.fork(null, res => next(Action.LoadedList(res))),
+
+  editTodo: todo => next(Action.EditTodo(todo)),
+
+  requestDeleteTodo: id => next(Action.RequestDeleteTodo(id)),
+
+  deleteTodo: id => services.deleteTodo(id).fork(null, res => next(Action.DeletedTodo(res)))
+});
+
+export { Action, actions };

@@ -1,24 +1,15 @@
-import React from "react";
 import services from "./services";
-import { createModel } from "./model";
-import { createActions } from "./actions";
-import { TodoList } from "./view.jsx";
-import { createState } from "./state";
+import { actions, Action } from "./actions";
+import { initialModel, update } from "./model";
+import view from "./view.jsx";
+import chain from "./chain";
 
-const createTodoList = (render, element, pubsub) => {
-  const model = createModel(pubsub);
-  const actions = createActions(model.next, services);
-  const views = { display: model => render(<TodoList actions={actions} model={model}/>, element) };
-  const state = createState(actions, views);
-
-  pubsub.subscribe(model => {
-    state.render(model);
-    state.nextAction(model);
-  });
-
-  pubsub.broadcast(model.model);
-
-  return state;
-};
+const createTodoList = createComponent => createComponent({
+  initialModel,
+  update: update(Action),
+  actions: actions(services),
+  view,
+  chain: chain(Action)
+});
 
 export { createTodoList };
