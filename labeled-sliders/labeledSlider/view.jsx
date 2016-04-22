@@ -2,10 +2,7 @@ import React from "react";
 
 import { Action } from "./actions";
 
-const view = ({model, actions, index}) => {
-// FIXME: need a lens into the measurement here.
-  const measurement = model.measurements[index];
-
+const view = ({actions, measurement, index}) => {
   const getModel = evt => parseInt(evt.target.value, 10);
   const onChangeValue = evt => actions.next(Action.Update(index, getModel(evt)));
 

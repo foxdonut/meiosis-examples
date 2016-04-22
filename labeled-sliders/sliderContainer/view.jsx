@@ -12,7 +12,7 @@ const view = LabeledSlider => props => {
     return (
       <div key={measurement.id} style={{border:"1px solid gray"}}>
         id: {measurement.id}
-        <LabeledSlider index={index} {...props}/>
+        <LabeledSlider measurement={measurement} index={index} {...props}/>
         <div>
           <button className="btn btn-danger btn-sm"
             onClick={onRemoveMeasurement(measurement.id)}>Remove Measurement</button>
