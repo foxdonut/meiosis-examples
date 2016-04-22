@@ -3,7 +3,7 @@ import Type from "union-type";
 const Action = Type({
   RequestLoadList: [],
   LoadedList: [Object],
-  EditTodo: [Object],
+  EditTodo: [Object, Number],
   RequestDeleteTodo: [Number],
   DeletedTodo: [Object]
 });
@@ -13,7 +13,7 @@ const actions = services => next => ({
 
   loadList: () => services.loadTodos.fork(null, res => next(Action.LoadedList(res))),
 
-  editTodo: todo => next(Action.EditTodo(todo)),
+  editTodo: (todo, index) => next(Action.EditTodo(todo, index)),
 
   requestDeleteTodo: id => next(Action.RequestDeleteTodo(id)),
 

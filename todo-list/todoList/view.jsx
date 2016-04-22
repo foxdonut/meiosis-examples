@@ -3,9 +3,9 @@ import React from "react";
 const view = ({model, actions}) => {
   const onLoad = _evt => actions.requestLoadList();
 
-  const onEdit = todo => evt => {
+  const onEdit = (todo, index) => evt => {
     evt.preventDefault();
-    actions.editTodo(todo);
+    actions.editTodo(todo, index);
   };
 
   const onDelete = todo => evt => {
@@ -13,12 +13,12 @@ const view = ({model, actions}) => {
     actions.requestDeleteTodo(todo.id);
   };
 
-  const renderTodo = todo => (
+  const renderTodo = (todo, index) => (
     <tr key={todo.id}>
       <td>{todo.priority}</td>
       <td>{todo.description}</td>
       <td>
-        <button className="btn btn-primary btn-xs" onClick={onEdit(todo)}>Edit</button>
+        <button className="btn btn-primary btn-xs" onClick={onEdit(todo, index)}>Edit</button>
         <span> </span>
         <button className="btn btn-danger btn-xs" onClick={onDelete(todo)}>Delete</button>
       </td>
