@@ -47,9 +47,4 @@ const view = ({model, actions}) => {
   );
 };
 
-view.propTypes = {
-  actions: React.PropTypes.object.isRequired,
-  model: React.PropTypes.object.isRequired
-};
-
 export default view;

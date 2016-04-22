@@ -1,12 +1,10 @@
 import React from "react";
 
-import { Action } from "./action";
+import { Action } from "./actions";
 
-const view = (actions, model) => {
+const view = ({model, actions}) => {
   const getModel = evt => parseInt(evt.target.value, 10);
-
-  const onChangeValue = evt => 
-    actions.onNext(Action.Update(getModel(evt)));
+  const onChangeValue = evt => actions.next(Action.Update(getModel(evt)));
 
   return (
     <div>
@@ -18,4 +16,4 @@ const view = (actions, model) => {
   );
 };
 
-export { view };
+export default view;

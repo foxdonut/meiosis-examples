@@ -1,26 +1,18 @@
 import React from "react";
 
-import { Action } from "./action";
-import { view as LsView } from "../labeledSlider/view.jsx";
-import { update as lsUpdate } from "../labeledSlider/update";
+import { Action } from "./actions";
 
-const view = actions => model => {
+const view = LabeledSlider => props => {
+  const {model, actions} = props;
 
-  const onAddMeasurement = _evt => {
-    actions.onNext(Action.AddMeasurement());
-  };
-
-  const onRemoveMeasurement = id =>  _evt => actions.onNext(Action.RemoveMeasurement(id));
-
-  const lsActions = measurement => ({
-    onNext: (action) => actions.onNext(Action.UpdateMeasurement(lsUpdate(measurement, action)))
-  });
+  const onAddMeasurement = _evt => actions.next(Action.AddMeasurement());
+  const onRemoveMeasurement = id =>  _evt => actions.next(Action.RemoveMeasurement(id));
 
   const renderMeasurement = measurement => {
     return (
       <div key={measurement.id} style={{border:"1px solid gray"}}>
         id: {measurement.id}
-        {LsView(lsActions(measurement), measurement)}
+        <LabeledSlider {...props}/>
         <div>
           <button className="btn btn-danger btn-sm"
             onClick={onRemoveMeasurement(measurement.id)}>Remove Measurement</button>
@@ -40,4 +32,4 @@ const view = actions => model => {
   );
 };
 
-export { view };
+export default view;

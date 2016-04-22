@@ -1,11 +1,6 @@
 import { render } from "react-dom";
-
-import createMain from "./labeledSliders.jsx";
+import createMain from "./labeledSliders";
 
 const element = document.getElementById("app");
-
-const main = createMain();
-
-// view rendering
-main.view$.subscribe(view => render(view, element));
+createMain(render, element);
 

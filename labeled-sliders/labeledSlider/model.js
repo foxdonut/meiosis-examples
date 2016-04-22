@@ -1,9 +1,7 @@
-const initialModel = {
-  label: "Changeme",
-  value: 0,
-  min: 0,
-  max: 10,
-  units: "units"
-};
+import { assoc } from "ramda";
 
-export { initialModel };
+const update = Action => (model, action) => Action.case({
+  Update: value => assoc("value", value, model)
+}, action);
+
+export { update };
