@@ -8,11 +8,11 @@ const view = LabeledSlider => props => {
   const onAddMeasurement = _evt => actions.next(Action.AddMeasurement());
   const onRemoveMeasurement = id =>  _evt => actions.next(Action.RemoveMeasurement(id));
 
-  const renderMeasurement = measurement => {
+  const renderMeasurement = (measurement, index) => {
     return (
       <div key={measurement.id} style={{border:"1px solid gray"}}>
         id: {measurement.id}
-        <LabeledSlider {...props}/>
+        <LabeledSlider index={index} {...props}/>
         <div>
           <button className="btn btn-danger btn-sm"
             onClick={onRemoveMeasurement(measurement.id)}>Remove Measurement</button>

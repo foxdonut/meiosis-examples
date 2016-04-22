@@ -1,7 +1,7 @@
 import Type from "union-type";
 
 const Action = Type({
-  Update: [Number]
+  Update: [Number, Number]
 });
 
 export { Action };
