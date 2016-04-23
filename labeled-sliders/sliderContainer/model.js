@@ -5,9 +5,6 @@ const initialModel = {
   nextId: 0
 };
 
-const updateMeasurement = update => measurement =>
-  update.id === measurement.id ? update : measurement;
-
 const rnd = (min, max) => Math.round(Math.random() * min) + (max || 0);
 
 const update = Action => (model, action) => Action.case({
@@ -27,10 +24,7 @@ const update = Action => (model, action) => Action.case({
     ),
 
   RemoveMeasurement: id =>
-    assoc("measurements", model.measurements.filter(m => m.id !== id), model),
-
-  UpdateMeasurement: measurement =>
-    assoc("measurements", model.measurements.map(updateMeasurement(measurement)), model)
+    assoc("measurements", model.measurements.filter(m => m.id !== id), model)
 }, action);
 
 export { initialModel, update };

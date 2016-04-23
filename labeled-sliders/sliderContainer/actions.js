@@ -2,8 +2,7 @@ import Type from "union-type";
 
 const Action = Type({
   AddMeasurement: [],
-  RemoveMeasurement: [Number],
-  UpdateMeasurement: [Object]
+  RemoveMeasurement: [Number]
 });
 
 export { Action };
