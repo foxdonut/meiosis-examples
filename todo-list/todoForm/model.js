@@ -1,14 +1,14 @@
-import { assoc } from "ramda";
+import { always } from "ramda";
 
 const initialModel = {
   todo: {}
 };
 
 const update = Action => (model, action) => Action.case({
-  EditingTodo: todo => assoc("todo", todo, model),
-  ClearForm: () => ({todo: {}}),
-  RequestSaveTodo: _todo => model,
-  SavedTodo: maybeTodo => model.update(maybeTodo)
+  EditingTodo: todo => ({ todo }),
+  ClearForm: always({todo: {}}),
+  RequestSaveTodo: always({ message: "Saving, please wait..." }),
+  SavedTodo: maybeTodo => ({ savedTodo: maybeTodo })
 }, action);
 
 export { initialModel, update };

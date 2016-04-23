@@ -6,9 +6,9 @@ import chain from "./chain";
 
 const createTodoForm = createComponent => createComponent({
   initialModel,
-  update: update(Action),
   actions: actions(services),
   view,
+  update: update(Action),
   chain: chain(Action)
 });
 
