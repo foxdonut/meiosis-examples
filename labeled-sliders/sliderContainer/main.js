@@ -1,7 +1,7 @@
 import { assoc, merge } from "ramda";
 import { Action } from "./actions";
-import { initialModel, update } from "./model";
-import view from "./view.jsx";
+import { initialModel, transform } from "./model";
+import view from "./view";
 
 import createLabeledSlider from "../labeledSlider/main";
 
@@ -11,8 +11,8 @@ const createSliderContainer = createComponent => {
   return createComponent({
     initialModel,
     view: view(LabeledSlider),
-    update: update(Action),
-    pipeline: (model, update) => {
+    transform: transform(Action),
+    receivers: [(model, update) => {
       if (parseInt(update.index, 10) >= 0) {
         model.measurements[update.index] = assoc("value", update.value, model.measurements[update.index]);
       }
@@ -20,7 +20,7 @@ const createSliderContainer = createComponent => {
         model = merge(model, update);
       }
       return model;
-    }
+    }]
   });
 };
 

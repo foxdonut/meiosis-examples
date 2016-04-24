@@ -7,7 +7,7 @@ const initialModel = {
 
 const rnd = (min, max) => Math.round(Math.random() * min) + (max || 0);
 
-const update = Action => (model, action) => Action.case({
+const transform = Action => (model, action) => Action.case({
   AddMeasurement: () =>
     assoc("nextId",
       model.nextId + 1,
@@ -27,4 +27,4 @@ const update = Action => (model, action) => Action.case({
     assoc("measurements", model.measurements.filter(m => m.id !== id), model)
 }, action);
 
-export { initialModel, update };
+export { initialModel, transform };

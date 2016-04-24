@@ -1,9 +1,9 @@
 import { Action } from "./actions";
-import { update } from "./model";
-import view from "./view.jsx";
+import { transform } from "./model";
+import view from "./view";
 
 const createLabeledSlider = createComponent => createComponent({
-  update: update(Action),
+  transform: transform(Action),
   view
 });
 
