@@ -1,13 +1,8 @@
 import React from "react";
-import meiosis from "meiosis";
 import { createTodoList } from "./todoList/main";
 import { createTodoForm } from "./todoForm/main";
 
-export default function(render, element) {
-  const adapters = {
-    render: view => render(view, element)
-  };
-  const Meiosis = meiosis(adapters);
+export default function(Meiosis) {
   const createComponent = Meiosis.createComponent;
 
   const TodoList = createTodoList(createComponent);
