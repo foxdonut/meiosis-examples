@@ -1,4 +1,4 @@
-const chain = Action => (_model, action, actions) => Action.case({
+const chain = Action => (action, actions) => Action.case({
   RequestLoadList: actions.loadList,
   RequestDeleteTodo: actions.deleteTodo,
   _: () => null

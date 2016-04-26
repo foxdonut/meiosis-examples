@@ -5,7 +5,7 @@ const updateTodos = (todos, todo, index) => {
     set(lensIndex(index), todo, todos) : append(todo, todos);
 };
 
-const pipeline = (model, update) => {
+const receivers = [(model, update) => {
   if (update.savedTodo) {
     return merge(model, assoc("index", null, update.savedTodo
       .map(todo => updateTodos(model.todos, todo, model.index))
@@ -15,6 +15,6 @@ const pipeline = (model, update) => {
   else {
     return merge(model, update);
   }
-};
+}];
 
-export default pipeline;
+export default receivers;
