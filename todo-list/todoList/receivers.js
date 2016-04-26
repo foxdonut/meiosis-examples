@@ -1,4 +1,4 @@
-import { append, assoc, lensIndex, merge, set } from "ramda";
+import { append, assoc, dissoc, lensIndex, merge, set } from "ramda";
 
 const updateTodos = (todos, todo, index) => {
   return (parseInt(index, 10) >= 0) ?
@@ -13,6 +13,10 @@ const receivers = [(model, update) => {
       .getOrElse(assoc("message", "Sorry, an error occurred.", model))));
   }
   else {
+    if (update.clearTodo) {
+      model = dissoc("index", model);
+      update = dissoc("clearTodo", update);
+    }
     return merge(model, update);
   }
 }];

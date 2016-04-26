@@ -31,6 +31,7 @@
     "futurize": "^1.0.2",
     "meiosis": "^0.4.1",
     "meiosis-react": "^0.4.0",
+    "meiosis-tracer": "^0.4.1",
     "ramda": "^0.21.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
