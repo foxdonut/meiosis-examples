@@ -1,8 +1,7 @@
 import meiosis from "meiosis";
-import snabbdom from "snabbdom";
-import { renderAdapterIdConfig } from "meiosis-snabbdom";
+import meiosisSnabbdom from "meiosis-snabbdom";
 import createMain from "./labeledSliders";
 
-const Meiosis = meiosis(renderAdapterIdConfig(snabbdom, "app"));
+const Meiosis = meiosis(meiosisSnabbdom.intoId("app"));
 
 createMain(Meiosis);

@@ -8,7 +8,7 @@ const view = ({actions, measurement, index}) => {
   return (
     div([
       span(measurement.label),
-      input({attrs: {type: "range", ...measurement}, on: {change: onChangeValue}}),
+      input({attrs: {type: "range", ...measurement}, on: {input: onChangeValue}}),
       span(`${measurement.value} ${measurement.units}`)
     ])
   );
