@@ -1,9 +1,10 @@
 import { append, complement, filter, findIndex, lensIndex, merge, propEq, set } from "ramda";
 import { Action } from "./actions";
 
-const updateTodos = (todos, todo) =>
-  (parseInt(todo.id, 10) >= 0) ?
-    set(lensIndex(findIndex(propEq("id", todo.id))(todos)), todo, todos) : append(todo, todos);
+const updateTodos = (todos, todo) => {
+  const index = findIndex(propEq("id", todo.id))(todos);
+  return index >= 0 ? set(lensIndex(index), todo, todos) : append(todo, todos);
+};
 
 const receiveUpdate = (model, update) => {
   let modelUpdate = update.modelUpdate;
