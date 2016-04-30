@@ -1,20 +1,21 @@
 import Type from "union-type";
+import { initialModel } from "./model";
 
 const Action = Type({
   ClearForm: [],
   EditingTodo: [Object],
   RequestSaveTodo: [Object],
-  SavedTodo: [Object]
+  SavedTodo: []
 });
 
-const actions = services => next => ({
-  editingTodo: todo => next(Action.EditingTodo(todo)),
+const actions = services => sendUpdate => ({
+  editingTodo: todo => sendUpdate({ modelUpdate: { todo } }),
 
-  clearForm: () => next(Action.ClearForm()),
+  clearForm: () => sendUpdate({ modelUpdate: initialModel }),
 
-  requestSaveTodo: todo => next(Action.RequestSaveTodo(todo)),
+  requestSaveTodo: todo => sendUpdate({ modelUpdate: { message: "Saving, please wait..." }, action: Action.RequestSaveTodo(todo) }),
 
-  saveTodo: todo => services.saveTodo(todo).fork(null, res => next(Action.SavedTodo(res)))
+  saveTodo: todo => services.saveTodo(todo).fork(null, savedTodo => sendUpdate({ action: Action.SavedTodo(), savedTodo }))
 });
 
 export { Action, actions };

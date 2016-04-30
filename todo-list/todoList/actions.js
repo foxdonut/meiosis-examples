@@ -3,21 +3,21 @@ import Type from "union-type";
 const Action = Type({
   RequestLoadList: [],
   LoadedList: [Object],
-  EditTodo: [Object, Number],
+  EditTodo: [Object],
   RequestDeleteTodo: [Number],
   DeletedTodo: [Object]
 });
 
-const actions = services => next => ({
-  requestLoadList: () => next(Action.RequestLoadList()),
+const actions = services => sendUpdate => ({
+  requestLoadList: () => sendUpdate({ action: Action.RequestLoadList(), modelUpdate: { message: "Loading, please wait..." } }),
 
-  loadList: () => services.loadTodos.fork(null, res => next(Action.LoadedList(res))),
+  loadList: () => services.loadTodos.fork(null, model => sendUpdate({ modelUpdate: model })),
 
-  editTodo: (todo, index) => next(Action.EditTodo(todo, index)),
+  editTodo: (todo) => sendUpdate({ modelUpdate: { todo } } ),
 
-  requestDeleteTodo: id => next(Action.RequestDeleteTodo(id)),
+  requestDeleteTodo: id => sendUpdate({ action: Action.RequestDeleteTodo(id), modelUpdate: { message: "Deleting, please wait..."} } ),
 
-  deleteTodo: id => services.deleteTodo(id).fork(null, res => next(Action.DeletedTodo(res)))
+  deleteTodo: id => services.deleteTodo(id).fork(null, maybeTodoId => sendUpdate({ action: Action.DeletedTodo(maybeTodoId) }))
 });
 
 export { Action, actions };

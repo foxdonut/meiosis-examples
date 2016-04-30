@@ -1,17 +1,16 @@
 import services from "./services";
-import { actions, Action } from "./actions";
-import { initialModel, transform } from "./model";
+import { initialModel } from "./model";
 import view from "./view.jsx";
-import chain from "./chain";
-import receivers from "./receivers";
+import { actions, Action } from "./actions";
+import receiveUpdate from "./receiveUpdate";
+import nextUpdate from "./nextUpdate";
 
 const createTodoList = createComponent => createComponent({
   initialModel,
-  actions: actions(services),
   view,
-  transform: transform(Action),
-  chain: chain(Action),
-  receivers
+  actions: actions(services),
+  receiveUpdate,
+  nextUpdate: nextUpdate(Action)
 });
 
 export { createTodoList };

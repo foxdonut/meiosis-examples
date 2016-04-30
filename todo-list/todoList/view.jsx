@@ -1,11 +1,11 @@
 import React from "react";
 
-const view = ({model, actions}) => {
+const view = (model, actions) => {
   const onLoad = _evt => actions.requestLoadList();
 
-  const onEdit = (todo, index) => evt => {
+  const onEdit = todo => evt => {
     evt.preventDefault();
-    actions.editTodo(todo, index);
+    actions.editTodo(todo);
   };
 
   const onDelete = todo => evt => {
@@ -13,12 +13,12 @@ const view = ({model, actions}) => {
     actions.requestDeleteTodo(todo.id);
   };
 
-  const renderTodo = (todo, index) => (
+  const renderTodo = (todo) => (
     <tr key={todo.id}>
       <td>{todo.priority}</td>
       <td>{todo.description}</td>
       <td>
-        <button className="btn btn-primary btn-xs" onClick={onEdit(todo, index)}>Edit</button>
+        <button className="btn btn-primary btn-xs" onClick={onEdit(todo)}>Edit</button>
         <span> </span>
         <button className="btn btn-danger btn-xs" onClick={onDelete(todo)}>Delete</button>
       </td>

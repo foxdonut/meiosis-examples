@@ -8,17 +8,16 @@ export default function(Meiosis) {
 
   const TodoList = createTodoList(createComponent);
   const TodoForm = createTodoForm(createComponent);
-  const Tracer = meiosisTracer(createComponent, "tracer");
 
   const TodoMain = createComponent({
-    view: props => (
+    view: model => (
       <div>
         <div id="tracer"></div>
-        <Tracer {...props}/>
-        <TodoForm {...props}/>
-        <TodoList {...props}/>
+        <TodoForm {...model}/>
+        <TodoList {...model}/>
       </div>
     )
   });
-  Meiosis.run(TodoMain);
+  const renderRoot = Meiosis.run(TodoMain);
+  meiosisTracer(createComponent, renderRoot, "tracer");
 }
