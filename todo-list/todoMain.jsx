@@ -19,5 +19,5 @@ export default function(Meiosis) {
     )
   });
   const renderRoot = Meiosis.run(TodoMain);
-  meiosisTracer(createComponent, renderRoot, "tracer");
+  meiosisTracer(createComponent, renderRoot, "#tracer");
 }
