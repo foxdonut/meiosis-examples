@@ -1,8 +1,13 @@
+/*global process*/
+var isProduction = process.env.NODE_ENV === "production";
+var webpack = require("webpack");
+
 module.exports = {
   entry: "./main.js",
+  devtool: "source-map",
   output: {
     path: "../public",
-    filename: "generated-app.js"
+    filename: isProduction ? "generated-app.min.js" : "generated-app.js"
   },
   module: {
     loaders: [
@@ -12,5 +17,8 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
-  }
+  },
+  plugins: isProduction ? [
+    new webpack.optimize.UglifyJsPlugin()
+  ] : []
 };
