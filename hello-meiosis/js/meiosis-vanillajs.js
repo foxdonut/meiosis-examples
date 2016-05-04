@@ -86,13 +86,38 @@ var meiosisVanillaJs =
 	  return { render: renderIntoSelector(selector) };
 	};
 	
+	var on = function on(target, type, callback, useCapture) {
+	  return target.addEventListener(type, callback, !!useCapture);
+	};
+	
+	var dispatchEvent = function dispatchEvent(target, selector, handler) {
+	  return function (evt) {
+	    var targetElement = evt.target;
+	    var potentialElements = target.querySelectorAll(selector);
+	    var hasMatch = Array.prototype.indexOf.call(potentialElements, targetElement) >= 0;
+	
+	    if (hasMatch) {
+	      handler.call(targetElement, evt);
+	    }
+	  };
+	};
+	
+	var delegate = function delegate(target, selector, type, handler) {
+	  return(
+	    // https://developer.mozilla.org/en-US/docs/Web/Events/blur
+	    on(target, type, dispatchEvent(target, selector, handler), type === "blur" || type === "focus")
+	  );
+	};
+	
 	var meiosisVanillaJs = {
 	  renderIntoElement: renderIntoElement,
 	  renderIntoId: renderIntoId,
 	  renderIntoSelector: renderIntoSelector,
 	  intoElement: intoElement,
 	  intoId: intoId,
-	  intoSelector: intoSelector
+	  intoSelector: intoSelector,
+	  on: on,
+	  delegate: delegate
 	};
 	
 	exports.meiosisVanillaJs = meiosisVanillaJs;
