@@ -1,13 +1,16 @@
 /*global meiosis, meiosisVanillaJs, window*/
-(function() {
+(function(ref) {
   var Meiosis = meiosis(meiosisVanillaJs.intoSelector("body"));
 
   var createComponent = Meiosis.createComponent;
 
   var Main = createComponent({
-    initialModel: window.initialModel,
-    view: window.view
+    initialModel: ref.initialModel,
+    view: ref.view,
+    actions: ref.actions,
+    ready: ref.ready,
+    receiveUpdate: ref.receiveUpdate
   });
 
   Meiosis.run(Main);
-})();
+})(window);

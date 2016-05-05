@@ -1,4 +1,4 @@
 /*global window*/
 (function(ref) {
-  ref.initialModel = { todoItems: ref.todoStorage.load() };
+  ref.initialModel = { todos: ref.todoStorage.loadAll() };
 })(window);

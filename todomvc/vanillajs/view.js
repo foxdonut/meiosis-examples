@@ -7,30 +7,41 @@
   };
 
   var main = function(model, _actions) {
-    var todoItems = (model.todoItems || []).map(todoItem).join("");
+    // FIXME
+    var renderedTodos = (model.todos || []).map(renderTodo).join("");
 
     return "  <section class='main'>" +
       "    <input class='toggle-all' type='checkbox'>" +
       "    <label for='toggle-all'>Mark all as complete</label>" +
       "    <ul class='todo-list'>" +
-             todoItems +
+             renderedTodos +
       "    </ul>" +
       "  </section>";
   };
 
-  var todoItem = function(todoItem) {
-    return "<li data-id='" + todoItem.id + "' class='{{completed}}'>" +
+  var renderTodo = function(todo) {
+    var completed = todo.completed ? " class='completed'" : "";
+    var checked = todo.completed ? " checked" : "";
+
+    return "<li" + completed + ">" +
       "<div class='view'>" +
-			"<input class='toggle' type='checkbox' {{checked}}>" +
-			"<label>" + todoItem.title + "</label>" +
-			"<button class='destroy'></button>" +
+			"<input data-id='" + todo.id + "' class='toggle' type='checkbox'" + checked + ">" +
+			"<label>" + todo.title + "</label>" +
+			"<button data-id='" + todo.id + "' class='destroy'></button>" +
 			"</div>" +
       "</li>";
   };
 
-  var footer = function(model, _actions) {
+  var footer = function(model) {
+    // FIXME
+    var todos = (model.todos || []);
+    var notCompleted = function(todo) { return !todo.completed; };
+    var itemsLeft = todos.filter(notCompleted).length;
+    var itemsLeftText = todos.length > 0 ?
+      (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
+
     return "  <footer class='footer'>" +
-      "    <span class='todo-count'></span>" +
+      "    <span class='todo-count'>" + itemsLeftText + "</span>" +
       "    <ul class='filters'>" +
       "      <li>" +
       "        <a href='#/' class='selected'>All</a>" +
@@ -50,7 +61,7 @@
     return "<section class='todoapp'>" +
       header() +
       main(model, actions) +
-      footer(model, actions) +
+      footer(model) +
       "</section>";
   };
 
