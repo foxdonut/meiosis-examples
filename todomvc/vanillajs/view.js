@@ -18,11 +18,11 @@
       "  </section>";
   };
 
-  var todoItem = function(_todoItem) {
-    return "<li data-id='{{id}}' class='{{completed}}'>" +
+  var todoItem = function(todoItem) {
+    return "<li data-id='" + todoItem.id + "' class='{{completed}}'>" +
       "<div class='view'>" +
 			"<input class='toggle' type='checkbox' {{checked}}>" +
-			"<label>{{title}}</label>" +
+			"<label>" + todoItem.title + "</label>" +
 			"<button class='destroy'></button>" +
 			"</div>" +
       "</li>";
