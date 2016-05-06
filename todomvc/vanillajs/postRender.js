@@ -1,6 +1,6 @@
 (function(ref) {
   ref.postRender = function(_view) {
-    var input = document.querySelector("input.edit");
+    var input = document.getElementById("app").querySelector("input.edit");
 
     if (input) {
       input.focus();
