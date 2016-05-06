@@ -42,6 +42,8 @@
       actions.deleteTodoId(todoId);
     });
 
+    document.write("<div id='tracer' style='position: fixed; top: 0px; right: 0px;'></div>");
+
     /*
     // select the target node
     var target = document.querySelector("body");
