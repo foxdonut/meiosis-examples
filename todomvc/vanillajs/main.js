@@ -9,8 +9,11 @@
     view: ref.view,
     actions: ref.actions,
     ready: ref.ready,
-    receiveUpdate: ref.receiveUpdate
+    receiveUpdate: ref.receiveUpdate,
+    postRender: ref.postRender
   });
+
+  ref.viewModel(createComponent);
 
   Meiosis.run(Main);
 })(window);

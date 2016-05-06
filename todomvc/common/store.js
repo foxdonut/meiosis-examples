@@ -1,6 +1,5 @@
 (function(ref) {
   var STORAGE_KEY = "meiosis-todomvc";
-  var nextId = 1;
 
   var findIndex = function(todos, todoId) {
     var index = -1;
@@ -34,7 +33,7 @@
         todos = replaceTodoAtIndex(todos, todo, findIndex(todos, todo.id));
       }
       else {
-        todo.id = nextId++;
+        todo.id = new Date().getTime();
         todos = todos.concat([todo]);
       }
       localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));

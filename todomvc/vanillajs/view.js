@@ -20,15 +20,20 @@
   };
 
   var renderTodo = function(todo) {
+    var dataId = " data-id='" + todo.id + "'";
     var completed = todo.completed ? " class='completed'" : "";
     var checked = todo.completed ? " checked" : "";
+    var editing = todo.editing ? " class='editing'" : "";
+    var input = todo.editing ?
+      "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'>" : "";
 
-    return "<li" + completed + ">" +
+    return "<li" + completed + editing + ">" +
       "<div class='view'>" +
-			"<input data-id='" + todo.id + "' class='toggle' type='checkbox'" + checked + ">" +
-			"<label>" + todo.title + "</label>" +
-			"<button data-id='" + todo.id + "' class='destroy'></button>" +
+			"<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
+			"<label" + dataId + ">" + todo.title + "</label>" +
+			"<button" + dataId + " class='destroy'></button>" +
 			"</div>" +
+      input +
       "</li>";
   };
 
