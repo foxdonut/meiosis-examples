@@ -33,6 +33,7 @@
       }
     });
 
+//FIXME
     meiosisVanillaJs.delegate(root, "input.edit", "blur", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
       actions.saveTodo(evt.target.value, todoId);

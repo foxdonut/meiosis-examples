@@ -1,9 +1,9 @@
 import h from "snabbdom/h";
 const { div, input, span } = require("hyperscript-helpers")(h);
 
-const view = ({actions, measurement, index}) => {
+const view = ({measurement, index}, actions) => {
   const getValue = evt => parseInt(evt.target.value, 10);
-  const onChangeValue = evt => actions.next({index, value: getValue(evt)});
+  const onChangeValue = evt => actions.sendUpdate({index, value: getValue(evt)});
 
   return (
     div([
