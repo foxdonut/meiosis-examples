@@ -7,8 +7,7 @@
   };
 
   var main = function(model, _actions) {
-    // FIXME
-    var renderedTodos = (model.todos || []).map(renderTodo).join("");
+    var renderedTodos = model.todos.map(renderTodo).join("");
 
     return "  <section class='main'>" +
       "    <input class='toggle-all' type='checkbox'>" +
@@ -38,11 +37,9 @@
   };
 
   var footer = function(model) {
-    // FIXME
-    var todos = (model.todos || []);
     var notCompleted = function(todo) { return !todo.completed; };
-    var itemsLeft = todos.filter(notCompleted).length;
-    var itemsLeftText = todos.length > 0 ?
+    var itemsLeft = model.todos.filter(notCompleted).length;
+    var itemsLeftText = model.todos.length > 0 ?
       (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
 
     return "  <footer class='footer'>" +

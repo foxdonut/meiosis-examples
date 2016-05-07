@@ -23,8 +23,7 @@
 
   ref.todoStorage = {
     loadAll: function() {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) ||
-        "[{\"id\":1,\"title\":\"meiosis\",\"completed\":false}]");
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     },
     saveTodo: function(todo) {
       var todos = ref.todoStorage.loadAll();
