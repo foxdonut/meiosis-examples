@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.3"
+  }
+}
