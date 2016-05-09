@@ -7,7 +7,7 @@
   };
 
   var main = function(model, _actions) {
-    var renderedTodos = model.todos.map(renderTodo).join("");
+    var renderedTodos = model.todos.map(renderTodo(model.meta)).join("");
 
     return "  <section class='main'>" +
       "    <input class='toggle-all' type='checkbox'>" +
@@ -18,22 +18,25 @@
       "  </section>";
   };
 
-  var renderTodo = function(todo) {
-    var dataId = " data-id='" + todo.id + "'";
-    var completed = todo.completed ? " class='completed'" : "";
-    var checked = todo.completed ? " checked" : "";
-    var editing = todo.editing ? " class='editing'" : "";
-    var input = todo.editing ?
-      "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'>" : "";
+  var renderTodo = function(meta) {
+    return function(todo) {
+      var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
+      var dataId = " data-id='" + todo.id + "'";
+      var completed = todo.completed ? " class='completed'" : "";
+      var checked = todo.completed ? " checked" : "";
+      var editing = isEditing ? " class='editing'" : "";
+      var input = isEditing ?
+        "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'>" : "";
 
-    return "<li" + completed + editing + ">" +
-      "<div class='view'>" +
-			"<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
-			"<label" + dataId + ">" + todo.title + "</label>" +
-			"<button" + dataId + " class='destroy'></button>" +
-			"</div>" +
-      input +
-      "</li>";
+      return "<li" + completed + editing + ">" +
+        "<div class='view'>" +
+        "<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
+        "<label" + dataId + ">" + todo.title + "</label>" +
+        "<button" + dataId + " class='destroy'></button>" +
+        "</div>" +
+        input +
+        "</li>";
+    };
   };
 
   var footer = function(model) {
