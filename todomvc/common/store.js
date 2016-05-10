@@ -73,17 +73,6 @@
         }
       }
       return ref.todoStorage.saveAll(updatedTodos);
-    },
-    filter: function(by) {
-      var completed = by === "completed";
-
-      var filterBy = by.length > 1 ? function(todo) {
-        return todo.completed === completed;
-      } :
-      function() {
-        return true;
-      };
-      return ref.todoStorage.loadAll().filter(filterBy);
     }
   };
 })(window);
