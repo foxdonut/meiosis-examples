@@ -42,5 +42,14 @@
       var todoId = parseInt(evt.target.dataset.id, 10);
       actions.deleteTodoId(todoId);
     });
+
+    meiosisVanillaJs.delegate(root, "button.clear-completed", "click", function() {
+      actions.clearCompleted();
+    });
+
+    meiosisVanillaJs.on(window, "hashchange", function() {
+      var route = document.location.hash.split("/")[1] || " ";
+      actions.filter(route);
+    });
   };
 })(window);

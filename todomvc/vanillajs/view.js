@@ -44,21 +44,28 @@
     var itemsLeft = model.todos.filter(notCompleted).length;
     var itemsLeftText = model.todos.length > 0 ?
       (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
+    var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
+      "<button class='clear-completed'>Clear completed</button>" : "";
+
+    var classSelected = " class='selected'";
+    var allSelected = !model.filter || model.filter.length < 2 ? classSelected : "";
+    var activeSelected = model.filter === "active" ? classSelected : "";
+    var completedSelected = model.filter === "completed" ? classSelected : "";
 
     return "  <footer class='footer'>" +
       "    <span class='todo-count'>" + itemsLeftText + "</span>" +
       "    <ul class='filters'>" +
       "      <li>" +
-      "        <a href='#/' class='selected'>All</a>" +
+      "        <a href='#/'" + allSelected + ">All</a>" +
       "      </li>" +
       "      <li>" +
-      "        <a href='#/active'>Active</a>" +
+      "        <a href='#/active'" + activeSelected + ">Active</a>" +
       "      </li>" +
       "      <li>" +
-      "        <a href='#/completed'>Completed</a>" +
+      "        <a href='#/completed'" + completedSelected + ">Completed</a>" +
       "      </li>" +
       "    </ul>" +
-      "    <button class='clear-completed'>Clear completed</button>" +
+      clearCompleted +
       "  </footer>";
   };
 

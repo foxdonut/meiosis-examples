@@ -1,4 +1,4 @@
-/*global window*/
+/*global meiosis, window*/
 (function(ref) {
   ref.receiveUpdate = function(model, update) {
     if (update.saveTodo) {
@@ -8,7 +8,7 @@
         model.todos = window.todoStorage.saveTodo(update.saveTodo);
       }
       else {
-        return undefined;
+        return meiosis.REFUSE_UPDATE;
       }
     }
     else if (update.deleteTodoId) {
@@ -16,6 +16,13 @@
     }
     else if (update.setCompleted) {
       model.todos = window.todoStorage.setCompleted(update.setCompleted);
+    }
+    else if (update.clearCompleted) {
+      model.todos = window.todoStorage.clearCompleted();
+    }
+    else if (update.filter) {
+      model.todos = window.todoStorage.filter(update.filter);
+      model.filter = update.filter;
     }
     return model;
   };

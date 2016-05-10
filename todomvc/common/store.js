@@ -25,6 +25,10 @@
     loadAll: function() {
       return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     },
+    saveAll: function(todos) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+      return todos;
+    },
     saveTodo: function(todo) {
       var todos = ref.todoStorage.loadAll();
 
@@ -35,9 +39,7 @@
         todo.id = new Date().getTime();
         todos = todos.concat([todo]);
       }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-
-      return todos;
+      return ref.todoStorage.saveAll(todos);
     },
     deleteTodoId: function(todoId) {
       var todos = ref.todoStorage.loadAll();
@@ -45,7 +47,7 @@
 
       if (index >= 0) {
         todos = deleteTodoAtIndex(todos, index);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+        ref.todoStorage.saveAll(todos);
       }
       return todos;
     },
@@ -57,9 +59,31 @@
         var todo = todos[index];
         todo.completed = updatedTodo.completed;
         todos = replaceTodoAtIndex(todos, todo, index);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+        ref.todoStorage.saveAll(todos);
       }
       return todos;
+    },
+    clearCompleted: function() {
+      var todos = ref.todoStorage.loadAll();
+      var updatedTodos = [];
+
+      for (var i = 0, t = todos.length; i < t; i++) {
+        if (!todos[i].completed) {
+          updatedTodos.push(todos[i]);
+        }
+      }
+      return ref.todoStorage.saveAll(updatedTodos);
+    },
+    filter: function(by) {
+      var completed = by === "completed";
+
+      var filterBy = by.length > 1 ? function(todo) {
+        return todo.completed === completed;
+      } :
+      function() {
+        return true;
+      };
+      return ref.todoStorage.loadAll().filter(filterBy);
     }
   };
 })(window);

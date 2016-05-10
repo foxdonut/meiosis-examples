@@ -16,6 +16,12 @@
       },
       setCompleted: function(todoId, completed) {
         sendUpdate({ setCompleted: { id: todoId, completed: completed } });
+      },
+      clearCompleted: function() {
+        sendUpdate({ clearCompleted: true });
+      },
+      filter: function(by) {
+        sendUpdate({ filter: by });
       }
     };
   };
