@@ -1,16 +1,20 @@
 /*global React */
 (function(ref) {
-  var header = function() {
+  var header = function(actions) {
+    var onKeyPress = function(evt) {
+      actions.saveTodo(evt.which, evt.target.value);
+    };
+
     return (
       <header className="header">
         <h1>todos</h1>
-        <input className="new-todo" placeholder="What needs to be done?" autoFocus />
+        <input className="new-todo" placeholder="What needs to be done?" autoFocus onKeyPress={onKeyPress}/>
       </header>
     );
   };
 
-  var main = function(model, _actions) {
-    var renderedTodos = model.todos.map(renderTodo(model.meta));
+  var main = function(model, actions) {
+    var renderedTodos = model.todos.map(renderTodo(actions, model.meta));
 
     return (
       <section className="main">
@@ -23,12 +27,13 @@
     );
   };
 
-  var renderTodo = function(meta) {
+  var renderTodo = function(actions, meta) {
     return function(todo) {
       var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
+      // TODO: consider https://github.com/JedWatson/classnames
+      var completed = todo.completed ? "completed" : "";
       /*
       var dataId = " data-id='" + todo.id + "'";
-      var completed = todo.completed ? " className='completed'" : "";
       var checked = todo.completed ? " checked" : "";
       var editing = isEditing ? " className='editing'" : "";
       */
@@ -36,16 +41,28 @@
         // <input" + dataId + " type="text" className="edit" value={todo.title} /> : null;
         <input type="text" className="edit" value={todo.title} /> : null;
 
+      var onToggleTodo = function(todoId) {
+        return function(evt) {
+          actions.setCompleted(todoId, evt.target.checked);
+        };
+      };
+
+      var onDestroyTodo = function(todoId) {
+        return function(_evt) {
+          actions.deleteTodoId(todoId);
+        };
+      };
+
       return (
-        <li>
+        <li className={completed}>
         {/* <li" + completed + editing + "> */}
           <div className="view">
             {/*<input" + dataId + " className="toggle" type="checkbox"" + checked + " />
             <label" + dataId + ">" + todo.title + "</label>
             <button" + dataId + " className="destroy"></button>*/}
-            <input className="toggle" type="checkbox" />
+            <input className="toggle" type="checkbox" onChange={onToggleTodo(todo.id)}/>
             <label>{todo.title}</label>
-            <button className="destroy"></button>
+            <button className="destroy" onClick={onDestroyTodo(todo.id)}></button>
           </div>
           {input}
         </li>
@@ -61,28 +78,23 @@
     var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
       <button className="clear-completed">Clear completed</button> : null;
 
-    /*
-    var classSelected = {className: "selected"};
+    var classSelected = "selected";
     var allSelected = !model.filter || model.filter.length < 2 ? classSelected : "";
     var activeSelected = model.filter === "active" ? classSelected : "";
     var completedSelected = model.filter === "completed" ? classSelected : "";
-    */
 
     return (
       <footer className="footer">
         <span className="todo-count">{itemsLeftText}</span>
         <ul className="filters">
           <li>
-            {/*<a href="#/" + allSelected + >All</a>*/}
-            <a href="#/">All</a>
+            <a href="#/" className={allSelected}>All</a>
           </li>
           <li>
-            {/*<a href="#/active" + activeSelected + >Active</a>*/}
-            <a href="#/active">Active</a>
+            <a href="#/active" className={activeSelected}>Active</a>
           </li>
           <li>
-            {/*<a href="#/completed" + completedSelected + >Completed</a>*/}
-            <a href="#/completed">Completed</a>
+            <a href="#/completed" className={completedSelected}>Completed</a>
           </li>
         </ul>
         {clearCompleted}
@@ -93,7 +105,7 @@
   var todoapp = function(model, actions) {
     return (
       <section className="todoapp">
-        {header()}
+        {header(actions)}
         {main(model, actions)}
         {footer(model)}
       </section>

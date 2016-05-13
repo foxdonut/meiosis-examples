@@ -1,9 +1,13 @@
 /*global window*/
 (function(ref) {
   ref.actions = function(sendUpdate) {
+    var ENTER_KEY = 13;
+
     return {
-      saveTodo: function(todo, id) {
-        sendUpdate({ saveTodo: { title: todo, id: id } });
+      saveTodo: function(keyCode, todo, id) {
+        if (keyCode === ENTER_KEY) {
+          sendUpdate({ saveTodo: { title: todo, id: id } });
+        }
       },
       editTodo: function(todoId) {
         sendUpdate({ editTodoId: todoId, editing: true });
