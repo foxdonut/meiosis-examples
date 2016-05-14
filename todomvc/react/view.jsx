@@ -29,13 +29,13 @@
 
   var renderTodo = function(actions, meta) {
     return function(todo) {
-      // TODO: consider https://github.com/JedWatson/classnames
-      var todoClasses = todo.completed ? "completed" : "";
       var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
 
-      if (isEditing) {
-        todoClasses += " editing";
-      }
+      var todoClasses = ref.classNames({
+        "completed": todo.completed,
+        "editing": isEditing
+      });
+
       var input = isEditing ?
         <input type="text" className="edit" value={todo.title} /> : null;
 
