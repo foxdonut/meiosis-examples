@@ -29,21 +29,25 @@
 
   var renderTodo = function(actions, meta) {
     return function(todo) {
-      var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
       // TODO: consider https://github.com/JedWatson/classnames
-      var completed = todo.completed ? "completed" : "";
-      /*
-      var dataId = " data-id='" + todo.id + "'";
-      var checked = todo.completed ? " checked" : "";
-      var editing = isEditing ? " className='editing'" : "";
-      */
+      var todoClasses = todo.completed ? "completed" : "";
+      var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
+
+      if (isEditing) {
+        todoClasses += " editing";
+      }
       var input = isEditing ?
-        // <input" + dataId + " type="text" className="edit" value={todo.title} /> : null;
         <input type="text" className="edit" value={todo.title} /> : null;
 
       var onToggleTodo = function(todoId) {
         return function(evt) {
           actions.setCompleted(todoId, evt.target.checked);
+        };
+      };
+
+      var onEditTodo = function(todoId) {
+        return function(_evt) {
+          actions.editTodo(todoId);
         };
       };
 
@@ -54,14 +58,11 @@
       };
 
       return (
-        <li className={completed}>
-        {/* <li" + completed + editing + "> */}
+        <li className={todoClasses}>
           <div className="view">
-            {/*<input" + dataId + " className="toggle" type="checkbox"" + checked + " />
-            <label" + dataId + ">" + todo.title + "</label>
-            <button" + dataId + " className="destroy"></button>*/}
-            <input className="toggle" type="checkbox" onChange={onToggleTodo(todo.id)}/>
-            <label>{todo.title}</label>
+            <input className="toggle" type="checkbox" checked={todo.completed}
+              onChange={onToggleTodo(todo.id)}/>
+            <label onDoubleClick={onEditTodo(todo.id)}>{todo.title}</label>
             <button className="destroy" onClick={onDestroyTodo(todo.id)}></button>
           </div>
           {input}
