@@ -1,11 +1,5 @@
-/*global React, ReactRouter */
+/*global React */
 (function(ref) {
-  var Router = ReactRouter.Router;
-  var Route = ReactRouter.Route;
-  var hashHistory = ReactRouter.hashHistory;
-  var Redirect = ReactRouter.Redirect;
-  var Link = ReactRouter.Link;
-
   var header = function(actions) {
     var onKeyPress = function(evt) {
       actions.saveTodo(evt.which, evt.target.value);
@@ -85,13 +79,17 @@
     var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
       <button className="clear-completed">Clear completed</button> : null;
 
+    var allSelected = !model.filter || model.filter.length < 2;
+    var activeSelected = model.filter === "active";
+    var completedSelected = model.filter === "completed";
+
     return (
       <footer className="footer">
         <span className="todo-count">{itemsLeftText}</span>
         <ul className="filters">
-          <li><Link activeClassName="selected" to="/all">All</Link></li>
-          <li><Link activeClassName="selected" to="/active">Active</Link></li>
-          <li><Link activeClassName="selected" to="/completed">Completed</Link></li>
+          <li><a href="#/" className={ref.classNames({selected: allSelected})}>All</a></li>
+          <li><a href="#/active" className={ref.classNames({selected: activeSelected})}>Active</a></li>
+          <li><a href="#/completed" className={ref.classNames({selected: completedSelected})}>Completed</a></li>
         </ul>
         {clearCompleted}
       </footer>
@@ -118,30 +116,8 @@
     );
   };
 
-  var App = function(model, actions) {
-    return function(props) {
-      console.log(props.location.pathname);
-      return (<div>{todoapp(model, actions)}{info()}</div>);
-    };
-  };
-
-  var routes = function(model, actions) {
-    return (
-      <Route component={App(model, actions)}>
-        <Route path="all"/>
-        <Route path="active"/>
-        <Route path="completed"/>
-        <Redirect from="/" to="all"/>
-      </Route>
-    );
-  };
-
   var view = function(model, actions) {
-    // TODO: look into <Router createElement={..}/>
-    // ref: https://github.com/reactjs/react-router/blob/master/docs/API.md#router
-    return (
-      <Router history={hashHistory} routes={routes(model, actions)}/>
-    );
+    return (<div>{todoapp(model, actions)}{info()}</div>);
   };
 
   ref.view = view;

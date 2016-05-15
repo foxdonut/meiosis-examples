@@ -8,7 +8,8 @@
     initialModel: ref.initialModel,
     view: ref.view,
     actions: ref.actions,
-    receiveUpdate: ref.receiveUpdate
+    receiveUpdate: ref.receiveUpdate,
+    ready: ref.ready
   });
 
   ref.viewModel(createComponent);
