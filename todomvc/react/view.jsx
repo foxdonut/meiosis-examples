@@ -71,13 +71,16 @@
     };
   };
 
-  var footer = function(model) {
+  var footer = function(model, actions) {
     var notCompleted = function(todo) { return !todo.completed; };
     var itemsLeft = model.todos.filter(notCompleted).length;
     var itemsLeftText = model.todos.length > 0 ?
       (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
+    var onClearCompleted = function(_evt) {
+      actions.clearCompleted();
+    };
     var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
-      <button className="clear-completed">Clear completed</button> : null;
+      <button className="clear-completed" onClick={onClearCompleted}>Clear completed</button> : null;
 
     var allSelected = !model.filter || model.filter.length < 2;
     var activeSelected = model.filter === "active";
@@ -101,7 +104,7 @@
       <section className="todoapp">
         {header(actions)}
         {main(model, actions)}
-        {footer(model)}
+        {footer(model, actions)}
       </section>
     );
   };
