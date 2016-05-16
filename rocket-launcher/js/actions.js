@@ -6,7 +6,9 @@
         sendUpdate({ started: true });
       },
       decrement: function(counter) {
-        sendUpdate({ counter: counter - 1 });
+        setTimeout(function() {
+          sendUpdate({ counter: counter - 1 });
+        }, 1000);
       },
       launch: function() {
         sendUpdate({ launched: true });

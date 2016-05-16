@@ -1,5 +1,5 @@
 (function(ref) {
-  ref.nextAction = function(model, update, actions) {
+  ref.nextUpdate = function(model, update, actions) {
     if (ref.state.counting(model)) {
       if (model.counter > 0) {
         actions.decrement(model.counter);

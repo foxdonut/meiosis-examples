@@ -1,29 +1,21 @@
-/*global meiosis, window*/
+/*global window*/
 (function(ref) {
   ref.receiveUpdate = function(model, update) {
-    if (update.saveTodo) {
-      var editing = !update.saveTodo.id || model.meta[String(update.saveTodo.id)].editing;
-
-      if (editing) {
-        model.todos = ref.todoStorage.saveTodo(update.saveTodo);
+    if (ref.state.counting(model)) {
+      if (model.counter === 0) {
+        model.launched = update.launched || false;
       }
       else {
-        return meiosis.REFUSE_UPDATE;
+        model.aborted = update.aborted || false;
+        if (update.counter !== undefined) {
+          model.counter = update.counter;
+        }
       }
     }
-    else if (update.deleteTodoId) {
-      model.todos = ref.todoStorage.deleteTodoId(update.deleteTodoId);
+    else if (ref.state.ready(model)) {
+      model.started = update.started || false;
     }
-    else if (update.setCompleted) {
-      model.todos = ref.todoStorage.setCompleted(update.setCompleted);
-    }
-    else if (update.clearCompleted) {
-      model.todos = ref.todoStorage.clearCompleted();
-    }
-    else if (update.filter) {
-      model.todos = ref.todoStorage.loadAll();
-      model.filter = update.filter;
-    }
+
     return model;
   };
 })(window);

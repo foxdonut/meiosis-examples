@@ -10,7 +10,7 @@
   view.ready = function(model) {
     return (
       "<p>Counter:"+model.counter+"</p>\n\
-        <form onSubmit=\"actions.start();return false;\">\n\
+        <form class=\"start\">\n\
           <input type=\"submit\" value=\"Start\">\n\
         </form>"
     );
@@ -20,7 +20,7 @@
   view.counting = function(model) {
     return (
       "<p>Count down:"+model.counter+"</p>\n\
-        <form onSubmit=\"actions.abort();return false;\">\n\
+        <form class=\"counting\">\n\
           <input type=\"submit\" value=\"Abort\">\n\
         </form>"
     );
@@ -40,5 +40,25 @@
     );
   };
 
-  ref.view = view;
+  ref.view = function(model) {
+    var representation = "oops... something went wrong, the system is in an invalid state";
+
+    if (ref.state.ready(model)) {
+      representation = view.ready(model);
+    }
+
+    if (ref.state.counting(model)) {
+      representation = view.counting(model);
+    }
+
+    if (ref.state.launched(model)) {
+      representation = view.launched(model);
+    }
+
+    if (ref.state.aborted(model)) {
+      representation = view.aborted(model) ;
+    }
+
+    return representation;
+  };
 })(window);

@@ -10,10 +10,8 @@
     actions: ref.actions,
     ready: ref.ready,
     receiveUpdate: ref.receiveUpdate,
-    postRender: ref.postRender
+    nextUpdate: ref.nextUpdate
   });
-
-  ref.viewModel(createComponent);
 
   var renderRoot = Meiosis.run(Main);
 
