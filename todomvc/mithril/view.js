@@ -25,10 +25,10 @@
     return function(todo) {
       var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
 
-      var todoClasses = {
-        "completed": todo.completed,
-        "editing": isEditing
-      };
+      var todoClasses = [
+        todo.completed ? ".completed" : "",
+        isEditing ? "editing" : ""
+      ].join("");
 
       var input = isEditing ?
         m("input.edit[type=text]", {value: todo.title}) : m("span");
@@ -51,7 +51,7 @@
         };
       };
 
-      return m("li", {class: todoClasses}, [
+      return m("li" + todoClasses, [
         m("div.view", [
           m("input.toggle[type=checkbox]", {checked: todo.completed,
             onchange: onToggleTodo(todo.id)}),
@@ -81,9 +81,9 @@
     return m("footer.footer", [
       m("span.todo-count", itemsLeftText),
       m("ul.filters", [
-        m("li", [m("a", {href: "#/", class: {selected: allSelected}}, "All")]),
-        m("li", [m("a", {href: "#/active", class: {selected: activeSelected}}, "Active")]),
-        m("li", [m("a", {href: "#/completed", class: {selected: completedSelected}}, "Completed")])
+        m("li", [m("a", {href: "#/", class: allSelected ? "selected" : ""}, "All")]),
+        m("li", [m("a", {href: "#/active", class: activeSelected ? "selected" : ""}, "Active")]),
+        m("li", [m("a", {href: "#/completed", class: completedSelected ? "selected" : ""}, "Completed")])
       ]),
       clearCompleted
     ]);
