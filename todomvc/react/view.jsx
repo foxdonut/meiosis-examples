@@ -113,7 +113,7 @@
     return (
       <footer className="info">
         <p>Double-click to edit a todo</p>
-        <p>Created by <a href="http://twitter.com/foxdonut00">foxdonut00</a></p>
+        <p>Meiosis - React - Created by <a href="http://twitter.com/foxdonut00">foxdonut00</a></p>
         <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
       </footer>
     );

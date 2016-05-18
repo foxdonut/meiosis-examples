@@ -102,7 +102,7 @@
   var info = function() {
     return h("footer.info", [
       h("p", "Double-click to edit a todo"),
-      h("p", [h("span", "Created by "), h("a", {props: {href: "http://twitter.com/foxdonut00"}}, "foxdonut00")]),
+      h("p", [h("span", "Meiosis - Snabbdom - Created by "), h("a", {props: {href: "http://twitter.com/foxdonut00"}}, "foxdonut00")]),
       h("p", [h("span", "Part of "), h("a", {props: {href: "http://todomvc.com"}}, "TodoMVC")])
     ]);
   };

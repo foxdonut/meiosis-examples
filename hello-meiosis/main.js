@@ -1,5 +1,5 @@
 /*global meiosis, meiosisVanillaJs*/
-var Meiosis = meiosis(meiosisVanillaJs.intoId("app"));
+var Meiosis = meiosis.init(meiosisVanillaJs.intoId("app"));
 
 var createComponent = Meiosis.createComponent;
 
