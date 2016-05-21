@@ -1,6 +1,6 @@
 /*global meiosis, meiosisVanillaJs, meiosisTracer, window*/
 (function(ref) {
-  var Meiosis = meiosis.init(meiosisVanillaJs.intoId("app"));
+  var Meiosis = meiosis.init(meiosisVanillaJs.renderer.intoId("app"));
 
   var createComponent = Meiosis.createComponent;
 

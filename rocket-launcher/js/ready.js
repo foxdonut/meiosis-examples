@@ -1,16 +1,17 @@
 /*global meiosisVanillaJs, window*/
 (function(ref) {
   var root = document.getElementById("app");
+  var renderer = meiosisVanillaJs.renderer;
 
   ref.ready = function(actions) {
-    meiosisVanillaJs.delegate(root, "form.start", "submit", function() {
+    renderer.delegate(root, "form.start", "submit", function(evt) {
+      evt.preventDefault();
       actions.start();
-      return false;
     });
 
-    meiosisVanillaJs.delegate(root, "form.counting", "submit", function() {
+    renderer.delegate(root, "form.counting", "submit", function(evt) {
+      evt.preventDefault();
       actions.abort();
-      return false;
     });
   };
 })(window);

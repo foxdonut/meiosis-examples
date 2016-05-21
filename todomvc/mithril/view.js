@@ -27,7 +27,7 @@
 
       var todoClasses = [
         todo.completed ? ".completed" : "",
-        isEditing ? "editing" : ""
+        isEditing ? ".editing" : ""
       ].join("");
 
       var input = isEditing ?
@@ -72,7 +72,7 @@
       actions.clearCompleted();
     };
     var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
-      m("button.clear-completed", {onclick: onClearCompleted}, "Clear completed") : null;
+      m("button.clear-completed", {onclick: onClearCompleted}, "Clear completed") : m("span");
 
     var allSelected = !model.filter || model.filter.length < 2;
     var activeSelected = model.filter === "active";

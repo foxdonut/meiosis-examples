@@ -12,7 +12,7 @@ export default function(Meiosis) {
   const TodoMain = createComponent({
     view: model => (
       <div>
-        <div id="tracer"></div>
+        <div id="tracer" style={{position: "fixed", top: "0px", right: "0px"}}></div>
         <TodoForm {...model}/>
         <TodoList {...model}/>
       </div>

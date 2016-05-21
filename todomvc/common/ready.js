@@ -1,6 +1,6 @@
 /*global window*/
 (function(ref) {
-  ref.ready = function(actions) {
+  ref.commonReady = function(actions) {
     var history = ref.History.createHistory();
 
     history.listen(function(location) {

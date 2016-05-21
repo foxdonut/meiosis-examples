@@ -1,6 +1,6 @@
 /*global meiosisSnabbdom */
 (function(ref) {
-  var h = meiosisSnabbdom.h;
+  var h = meiosisSnabbdom.renderer.h;
 
   var header = function(actions) {
     var onKeyPress = function(evt) {
@@ -42,21 +42,17 @@
       };
 
       var onEditTodo = function(todoId) {
-        return function(_evt) {
-          actions.editTodo(todoId);
-        };
+        actions.editTodo(todoId);
       };
 
       var onDestroyTodo = function(todoId) {
-        return function(_evt) {
-          actions.deleteTodoId(todoId);
-        };
+        actions.deleteTodoId(todoId);
       };
 
       return h("li", {class: todoClasses}, [
         h("div.view", [
           h("input.toggle", {props: {type: "checkbox", checked: todo.completed},
-            on: {change: [onToggleTodo, todo.id]}}),
+            on: {change: onToggleTodo(todo.id)}}),
           h("label", {on: {dblclick: [onEditTodo, todo.id]}}, todo.title),
           h("button.destroy", {on: {click: [onDestroyTodo, todo.id]}})
         ]),
@@ -74,7 +70,7 @@
       actions.clearCompleted();
     };
     var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
-      h("button.clear-completed", {on: {click: onClearCompleted}}, "Clear completed") : null;
+      h("button.clear-completed", {on: {click: onClearCompleted}}, "Clear completed") : h("span");
 
     var allSelected = !model.filter || model.filter.length < 2;
     var activeSelected = model.filter === "active";

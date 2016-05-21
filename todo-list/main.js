@@ -1,7 +1,7 @@
-import meiosis from "meiosis";
-import meiosisReact from "meiosis-react";
+import { init } from "meiosis";
+import { renderer } from "meiosis-react";
 import createMain from "./todoMain.jsx";
 
-const Meiosis = meiosis(meiosisReact.intoId("app"));
+const Meiosis = init(renderer.intoId("app"));
 
 createMain(Meiosis);

@@ -1,5 +1,6 @@
 /*global meiosis, meiosisVanillaJs*/
-var Meiosis = meiosis.init(meiosisVanillaJs.intoId("app"));
+var renderer = meiosisVanillaJs.renderer;
+var Meiosis = meiosis.init(renderer.intoId("app"));
 
 var createComponent = Meiosis.createComponent;
 
@@ -10,10 +11,10 @@ var Main = createComponent({
       "<div><button id='inc'>+</button> <button id='decr'>-</button></div>";
   },
   ready: function(actions) {
-    meiosisVanillaJs.delegate(document.body, "button#inc", "click", function() {
+    renderer.delegate(document.body, "button#inc", "click", function() {
       actions.sendUpdate({ add: 1 });
     });
-    meiosisVanillaJs.delegate(document.body, "button#decr", "click", function() {
+    renderer.delegate(document.body, "button#decr", "click", function() {
       actions.sendUpdate({ add: -1 });
     });
   },
