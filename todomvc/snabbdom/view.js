@@ -55,10 +55,20 @@
       };
 
       var input = isEditing ?
-        h("input.edit", {props: {type: "text", value: todo.title}, on: {
-          keyup: onEditKeyUp(todo.id),
-          blur: onEditBlur(todo.id)
-        }}) : h("span");
+        h("input.edit", {
+          props: { type: "text", value: todo.title },
+          on: {
+            keyup: onEditKeyUp(todo.id),
+            blur: onEditBlur(todo.id)
+          },
+          hook: {
+            insert: function(vnode) {
+              var elm = vnode.elm;
+              elm.focus();
+              elm.selectionStart = elm.value.length;
+            }
+          }
+        }) : h("span");
 
       var onToggleTodo = function(todoId) {
         return function(evt) {
