@@ -2,14 +2,18 @@
 requirejs.config({
   paths: {
     meiosis: "../lib/meiosis.min",
-    meiosisVanillaJs: "../lib/meiosis-vanillajs.min"
+    meiosisVanillaJs: "../lib/meiosis-vanillajs.min",
+    meiosisTracer: "../lib/meiosis-tracer.min"
   }
 });
 
-requirejs(["require", "meiosis", "meiosisVanillaJs", "./model", "./view", "./ready", "./receiveUpdate"],
+requirejs(["require", "meiosis", "meiosisVanillaJs", "meiosisTracer",
+    "./model", "./view", "./ready", "./receiveUpdate"
+  ],
   function(require) {
     var meiosis = require("meiosis");
     var meiosisVanillaJs = require("meiosisVanillaJs");
+    var meiosisTracer = require("meiosisTracer");
 
     var model = require("./model");
     var view = require("./view");
@@ -28,6 +32,8 @@ requirejs(["require", "meiosis", "meiosisVanillaJs", "./model", "./view", "./rea
       receiveUpdate: receiveUpdate
     });
 
-    Meiosis.run(Main);
+    var renderRoot = Meiosis.run(Main);
+
+    meiosisTracer(createComponent, renderRoot, "#tracer");
   }
 );
