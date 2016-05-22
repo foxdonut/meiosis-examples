@@ -1,12 +1,15 @@
 /*global meiosisVanillaJs, window*/
 (function(ref) {
   var renderer = meiosisVanillaJs.renderer;
+  var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
   var root = document.getElementById("app");
 
   ref.ready = function(actions) {
     renderer.delegate(root, "input.new-todo", "keypress", function(evt) {
-      actions.saveTodo(evt.keyCode, evt.target.value);
+      if (evt.keyCode === ENTER_KEY) {
+        actions.saveTodo(evt.keyCode, evt.target.value);
+      }
     });
 
     renderer.delegate(root, "input.toggle", "change", function(evt) {
@@ -26,8 +29,8 @@
       if (evt.keyCode === ESCAPE_KEY) {
         actions.cancelEdit(todoId);
       }
-      else {
-        actions.saveTodo(evt.keyCode, evt.target.value, todoId);
+      else if (evt.keyCode === ENTER_KEY) {
+        actions.saveTodo(evt.target.value, todoId);
       }
     });
 

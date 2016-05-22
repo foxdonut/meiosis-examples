@@ -1,8 +1,13 @@
 /*global React */
 (function(ref) {
+  var ENTER_KEY = 13;
+  var ESCAPE_KEY = 27;
+
   var header = function(actions) {
     var onKeyPress = function(evt) {
-      actions.saveTodo(evt.which, evt.target.value);
+      if (evt.which === ENTER_KEY) {
+        actions.saveTodo(evt.target.value);
+      }
     };
 
     return (
@@ -36,8 +41,35 @@
         "editing": isEditing
       });
 
+      var onEditKeyUp = function(todoId) {
+        return function(evt) {
+          if (evt.which === ESCAPE_KEY) {
+            actions.cancelEdit(todoId);
+          }
+          else if (evt.which === ENTER_KEY) {
+            actions.saveTodo(evt.target.value, todoId);
+          }
+        };
+      };
+
+      var onEditChange = function(todoId) {
+        return function(evt) {
+          actions.editingTodo(evt.target.value, todoId);
+        };
+      };
+
+      var onEditBlur = function(todoId) {
+        return function(evt) {
+          actions.saveTodo(evt.target.value, todoId);
+        };
+      };
+
       var input = isEditing ?
-        <input type="text" className="edit" value={todo.title} /> : null;
+        <input type="text" className="edit" value={todo.title}
+          onKeyUp={onEditKeyUp(todo.id)}
+          onChange={onEditChange(todo.id)}
+          onBlur={onEditBlur(todo.id)}
+        /> : null;
 
       var onToggleTodo = function(todoId) {
         return function(evt) {

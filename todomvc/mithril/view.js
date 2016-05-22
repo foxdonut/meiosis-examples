@@ -1,8 +1,13 @@
 /*global m */
 (function(ref) {
+  var ENTER_KEY = 13;
+  var ESCAPE_KEY = 27;
+
   var header = function(actions) {
     var onKeyPress = function(evt) {
-      actions.saveTodo(evt.keyCode, evt.target.value);
+      if (evt.keyCode === ENTER_KEY) {
+        actions.saveTodo(evt.target.value);
+      }
     };
 
     return m("header.header", [
@@ -30,8 +35,29 @@
         isEditing ? ".editing" : ""
       ].join("");
 
+      var onEditKeyUp = function(todoId) {
+        return function(evt) {
+          if (evt.keyCode === ESCAPE_KEY) {
+            actions.cancelEdit(todoId);
+          }
+          else if (evt.keyCode === ENTER_KEY) {
+            actions.saveTodo(evt.target.value, todoId);
+          }
+        };
+      };
+
+      var onEditBlur = function(todoId) {
+        return function(evt) {
+          actions.saveTodo(evt.target.value, todoId);
+        };
+      };
+
       var input = isEditing ?
-        m("input.edit[type=text]", {value: todo.title}) : m("span");
+        m("input.edit[type=text]", {
+          value: todo.title,
+          onkeyup: onEditKeyUp(todo.id),
+          onblur: onEditBlur(todo.id)
+        }) : m("span");
 
       var onToggleTodo = function(todoId) {
         return function(evt) {
