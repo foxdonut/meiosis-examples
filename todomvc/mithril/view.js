@@ -17,7 +17,7 @@
   };
 
   var main = function(model, actions) {
-    var renderedTodos = model.todos.map(renderTodo(actions, model.meta));
+    var renderedTodos = model.todos.map(renderTodo(actions));
 
     return m("section.main", [
       m("input.toggle-all[type=checkbox]"),
@@ -26,13 +26,17 @@
     ]);
   };
 
-  var renderTodo = function(actions, meta) {
-    return function(todo) {
-      var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
+  var classIf = function(className) {
+    return function(indicator) {
+      return indicator ? className : "";
+    };
+  };
 
+  var renderTodo = function(actions) {
+    return function(todo) {
       var todoClasses = [
-        todo.completed ? ".completed" : "",
-        isEditing ? ".editing" : ""
+        classIf(".completed")(todo.completed),
+        classIf(".editing")(todo.editing)
       ].join("");
 
       var onEditKeyUp = function(todoId) {
@@ -52,7 +56,7 @@
         };
       };
 
-      var input = isEditing ?
+      var input = todo.editing ?
         m("input.edit[type=text]", {
           value: todo.title,
           onkeyup: onEditKeyUp(todo.id),
@@ -90,26 +94,20 @@
   };
 
   var footer = function(model, actions) {
-    var notCompleted = function(todo) { return !todo.completed; };
-    var itemsLeft = model.todos.filter(notCompleted).length;
-    var itemsLeftText = model.todos.length > 0 ?
-      (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
     var onClearCompleted = function(_evt) {
       actions.clearCompleted();
     };
-    var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
+    var clearCompleted = model.clearCompleted ?
       m("button.clear-completed", {onclick: onClearCompleted}, "Clear completed") : m("span");
 
-    var allSelected = !model.filter || model.filter.length < 2;
-    var activeSelected = model.filter === "active";
-    var completedSelected = model.filter === "completed";
+    var classSelected = classIf("selected");
 
     return m("footer.footer", [
-      m("span.todo-count", itemsLeftText),
+      m("span.todo-count", model.itemsLeftText),
       m("ul.filters", [
-        m("li", [m("a", {href: "#/", class: allSelected ? "selected" : ""}, "All")]),
-        m("li", [m("a", {href: "#/active", class: activeSelected ? "selected" : ""}, "Active")]),
-        m("li", [m("a", {href: "#/completed", class: completedSelected ? "selected" : ""}, "Completed")])
+        m("li", [m("a", {href: "#/", class: classSelected(model.allSelected)}, "All")]),
+        m("li", [m("a", {href: "#/active", class: classSelected(model.activeSelected)}, "Active")]),
+        m("li", [m("a", {href: "#/completed", class: classSelected(model.completedSelected)}, "Completed")])
       ]),
       clearCompleted
     ]);

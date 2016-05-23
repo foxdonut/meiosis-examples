@@ -7,7 +7,7 @@
   };
 
   var main = function(model, _actions) {
-    var renderedTodos = model.todos.map(renderTodo(model.meta)).join("");
+    var renderedTodos = model.todos.map(renderTodo).join("");
 
     return "  <section class='main'>" +
       "    <input class='toggle-all' type='checkbox'>" +
@@ -18,46 +18,41 @@
       "  </section>";
   };
 
-  var renderTodo = function(meta) {
-    return function(todo) {
-      var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
-      var dataId = " data-id='" + todo.id + "'";
-      var completed = todo.completed ? " class='completed'" : "";
-      var checked = todo.completed ? " checked" : "";
-      var editing = isEditing ? " class='editing'" : "";
-      var input = isEditing ?
-        "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'>" : "";
-
-      return "<li" + completed + editing + ">" +
-        "<div class='view'>" +
-        "<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
-        "<label" + dataId + ">" + todo.title + "</label>" +
-        "<button" + dataId + " class='destroy'></button>" +
-        "</div>" +
-        input +
-        "</li>";
+  var classIf = function(className) {
+    return function(indicator) {
+      var classSelected = " class='" + className + "'";
+      return indicator ? classSelected : "";
     };
   };
 
+  var renderTodo = function(todo) {
+    var dataId = " data-id='" + todo.id + "'";
+    var checked = todo.completed ? " checked" : "";
+    var input = todo.editing ?
+      "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'>" : "";
+
+    return "<li" + classIf("completed")(todo.completed) + classIf("editing")(todo.editing) + ">" +
+      "<div class='view'>" +
+      "<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
+      "<label" + dataId + ">" + todo.title + "</label>" +
+      "<button" + dataId + " class='destroy'></button>" +
+      "</div>" +
+      input +
+      "</li>";
+  };
+
   var footer = function(model) {
-    var notCompleted = function(todo) { return !todo.completed; };
-    var itemsLeft = model.todos.filter(notCompleted).length;
-    var itemsLeftText = model.todos.length > 0 ?
-      (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
-    var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
+    var clearCompleted = model.clearCompleted ?
       "<button class='clear-completed'>Clear completed</button>" : "";
 
-    var classSelected = " class='selected'";
-    var allSelected = !model.filter || model.filter.length < 2 ? classSelected : "";
-    var activeSelected = model.filter === "active" ? classSelected : "";
-    var completedSelected = model.filter === "completed" ? classSelected : "";
+    var classSelected = classIf("selected");
 
     return "  <footer class='footer'>" +
-      "    <span class='todo-count'>" + itemsLeftText + "</span>" +
+      "    <span class='todo-count'>" + model.itemsLeftText + "</span>" +
       "    <ul class='filters'>" +
-      "      <li><a href='#/'" + allSelected + ">All</a></li>" +
-      "      <li><a href='#/active'" + activeSelected + ">Active</a></li>" +
-      "      <li><a href='#/completed'" + completedSelected + ">Completed</a></li>" +
+      "      <li><a href='#/'" + classSelected(model.allSelected) + ">All</a></li>" +
+      "      <li><a href='#/active'" + classSelected(model.activeSelected) + ">Active</a></li>" +
+      "      <li><a href='#/completed'" + classSelected(model.completedSelected) + ">Completed</a></li>" +
       "    </ul>" +
       clearCompleted +
       "  </footer>";

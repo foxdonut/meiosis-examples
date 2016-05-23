@@ -5,7 +5,7 @@
 
   var h = meiosisSnabbdom.renderer.h;
 
-  var header = function(actions) {
+  var header = function(model, actions) {
     var onKeyPress = function(evt) {
       if (evt.keyCode === ENTER_KEY) {
         actions.saveTodo(evt.target.value);
@@ -14,12 +14,13 @@
 
     return h("header.header", [
       h("h1", "todos"),
-      h("input.new-todo", {props: {placeholder: "What needs to be done?", autoFocus: true}, on: {keypress: onKeyPress}})
+      h("input.new-todo", {props: {placeholder: "What needs to be done?", autoFocus: true, value: model.newTodo},
+        on: {keypress: onKeyPress}})
     ]);
   };
 
   var main = function(model, actions) {
-    var renderedTodos = model.todos.map(renderTodo(actions, model.meta));
+    var renderedTodos = model.todos.map(renderTodo(actions));
 
     return h("section.main", [
       h("input.toggle-all", {props: {type: "checkbox"}}),
@@ -28,13 +29,11 @@
     ]);
   };
 
-  var renderTodo = function(actions, meta) {
+  var renderTodo = function(actions) {
     return function(todo) {
-      var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
-
       var todoClasses = {
         "completed": todo.completed,
-        "editing": isEditing
+        "editing": todo.editing
       };
 
       var onEditKeyUp = function(todoId) {
@@ -54,7 +53,7 @@
         };
       };
 
-      var input = isEditing ?
+      var input = todo.editing ?
         h("input.edit", {
           props: { type: "text", value: todo.title },
           on: {
@@ -97,26 +96,18 @@
   };
 
   var footer = function(model, actions) {
-    var notCompleted = function(todo) { return !todo.completed; };
-    var itemsLeft = model.todos.filter(notCompleted).length;
-    var itemsLeftText = model.todos.length > 0 ?
-      (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
     var onClearCompleted = function(_evt) {
       actions.clearCompleted();
     };
-    var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
+    var clearCompleted = model.clearCompleted ?
       h("button.clear-completed", {on: {click: onClearCompleted}}, "Clear completed") : h("span");
 
-    var allSelected = !model.filter || model.filter.length < 2;
-    var activeSelected = model.filter === "active";
-    var completedSelected = model.filter === "completed";
-
     return h("footer.footer", [
-      h("span.todo-count", itemsLeftText),
+      h("span.todo-count", String(model.itemsLeftText)),
       h("ul.filters", [
-        h("li", [h("a", {props: {href: "#/"}, class: {selected: allSelected}}, "All")]),
-        h("li", [h("a", {props: {href: "#/active"}, class: {selected: activeSelected}}, "Active")]),
-        h("li", [h("a", {props: {href: "#/completed"}, class: {selected: completedSelected}}, "Completed")])
+        h("li", [h("a", {props: {href: "#/"}, class: {selected: model.allSelected}}, "All")]),
+        h("li", [h("a", {props: {href: "#/active"}, class: {selected: model.activeSelected}}, "Active")]),
+        h("li", [h("a", {props: {href: "#/completed"}, class: {selected: model.completedSelected}}, "Completed")])
       ]),
       clearCompleted
     ]);
@@ -124,7 +115,7 @@
 
   var todoapp = function(model, actions) {
     return h("section.todoapp", [
-      header(actions),
+      header(model, actions),
       main(model, actions),
       footer(model, actions)
     ]);

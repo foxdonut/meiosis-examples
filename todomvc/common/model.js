@@ -2,6 +2,7 @@
 (function(ref) {
   ref.initialModel = {
     todos: ref.todoStorage.loadAll(),
-    meta: {}
+    newTodo: "",
+    filter: "all"
   };
 })(window);

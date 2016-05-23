@@ -1,29 +1,28 @@
-/*global meiosisVanillaJs, window*/
+/*global $, window*/
 (function(ref) {
-  var renderer = meiosisVanillaJs.renderer;
   var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
-  var root = document.getElementById("app");
+  var $root = $(document.getElementById("app"));
 
   ref.ready = function(actions) {
-    renderer.delegate(root, "input.new-todo", "keypress", function(evt) {
+    $root.on("keypress", "input.new-todo", function(evt) {
       if (evt.keyCode === ENTER_KEY) {
         actions.saveTodo(evt.target.value);
       }
     });
 
-    renderer.delegate(root, "input.toggle", "change", function(evt) {
+    $root.on("change", "input.toggle", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
       var completed = evt.target.checked;
       actions.setCompleted(todoId, completed);
     });
 
-    renderer.delegate(root, ".view label", "dblclick", function(evt) {
+    $root.on("dblclick", ".view label", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
       actions.editTodo(todoId);
     });
 
-    renderer.delegate(root, "input.edit", "keyup", function(evt) {
+    $root.on("keyup", "input.edit", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
 
       if (evt.keyCode === ESCAPE_KEY) {
@@ -34,23 +33,18 @@
       }
     });
 
-    renderer.delegate(root, "input.edit", "blur", function(evt) {
+    $root.on("blur", "input.edit", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
       actions.saveTodo(evt.target.value, todoId);
     });
 
-    renderer.delegate(root, "button.destroy", "click", function(evt) {
+    $root.on("click", "button.destroy", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
       actions.deleteTodoId(todoId);
     });
 
-    renderer.delegate(root, "button.clear-completed", "click", function() {
+    $root.on("click", "button.clear-completed", function() {
       actions.clearCompleted();
-    });
-
-    renderer.on(window, "hashchange", function() {
-      var route = document.location.hash.split("/")[1] || " ";
-      actions.filter(route);
     });
   };
 })(window);

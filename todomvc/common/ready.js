@@ -4,7 +4,7 @@
     var history = ref.History.createHistory();
 
     history.listen(function(location) {
-      var route = location.hash.split("/")[1] || " ";
+      var route = location.hash.split("/")[1] || "all";
       actions.filter(route);
     });
   };

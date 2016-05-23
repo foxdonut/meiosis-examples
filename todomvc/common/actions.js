@@ -5,6 +5,9 @@
       saveTodo: function(todo, id) {
         sendUpdate({ saveTodo: { title: todo, id: id } });
       },
+      clearInput: function() {
+        sendUpdate({ newTodo: true });
+      },
       editTodo: function(todoId) {
         sendUpdate({ editTodoId: todoId, editing: true });
       },

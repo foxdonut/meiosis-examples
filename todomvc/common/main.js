@@ -16,7 +16,8 @@
       postRender: ref.postRender,
       ready: ready,
       receiveUpdate: ref.receiveUpdate,
-      view: ref.view
+      view: ref.view,
+      nextUpdate: ref.nextUpdate
     });
 
     ref.viewModel(createComponent);

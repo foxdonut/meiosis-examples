@@ -19,7 +19,7 @@
   };
 
   var main = function(model, actions) {
-    var renderedTodos = model.todos.map(renderTodo(actions, model.meta));
+    var renderedTodos = model.todos.map(renderTodo(actions));
 
     return (
       <section className="main">
@@ -32,13 +32,11 @@
     );
   };
 
-  var renderTodo = function(actions, meta) {
+  var renderTodo = function(actions) {
     return function(todo) {
-      var isEditing = meta[String(todo.id)] && meta[String(todo.id)].editing;
-
       var todoClasses = ref.classNames({
         "completed": todo.completed,
-        "editing": isEditing
+        "editing": todo.editing
       });
 
       var onEditKeyUp = function(todoId) {
@@ -64,7 +62,7 @@
         };
       };
 
-      var input = isEditing ?
+      var input = todo.editing ?
         <input type="text" className="edit" value={todo.title}
           onKeyUp={onEditKeyUp(todo.id)}
           onChange={onEditChange(todo.id)}
@@ -104,27 +102,19 @@
   };
 
   var footer = function(model, actions) {
-    var notCompleted = function(todo) { return !todo.completed; };
-    var itemsLeft = model.todos.filter(notCompleted).length;
-    var itemsLeftText = model.todos.length > 0 ?
-      (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
     var onClearCompleted = function(_evt) {
       actions.clearCompleted();
     };
-    var clearCompleted = (model.todos.length - itemsLeft) > 0 ?
+    var clearCompleted = model.clearCompleted ?
       <button className="clear-completed" onClick={onClearCompleted}>Clear completed</button> : null;
-
-    var allSelected = !model.filter || model.filter.length < 2;
-    var activeSelected = model.filter === "active";
-    var completedSelected = model.filter === "completed";
 
     return (
       <footer className="footer">
-        <span className="todo-count">{itemsLeftText}</span>
+        <span className="todo-count">{model.itemsLeftText}</span>
         <ul className="filters">
-          <li><a href="#/" className={ref.classNames({selected: allSelected})}>All</a></li>
-          <li><a href="#/active" className={ref.classNames({selected: activeSelected})}>Active</a></li>
-          <li><a href="#/completed" className={ref.classNames({selected: completedSelected})}>Completed</a></li>
+          <li><a href="#/" className={ref.classNames({selected: model.allSelected})}>All</a></li>
+          <li><a href="#/active" className={ref.classNames({selected: model.activeSelected})}>Active</a></li>
+          <li><a href="#/completed" className={ref.classNames({selected: model.completedSelected})}>Completed</a></li>
         </ul>
         {clearCompleted}
       </footer>

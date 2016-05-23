@@ -47,10 +47,5 @@
     renderer.delegate(root, "button.clear-completed", "click", function() {
       actions.clearCompleted();
     });
-
-    renderer.on(window, "hashchange", function() {
-      var route = document.location.hash.split("/")[1] || " ";
-      actions.filter(route);
-    });
   };
 })(window);
