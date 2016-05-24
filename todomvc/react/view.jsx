@@ -1,24 +1,13 @@
 /*global React */
 (function(ref) {
-  var ENTER_KEY = 13;
-  var ESCAPE_KEY = 27;
-
   var header = function(model, actions) {
-    var onKeyUp = function(evt) {
-      if (evt.which === ENTER_KEY) {
-        actions.saveTodo(evt.target.value);
-      }
-    };
-
-    var onChange = function(evt) {
-      actions.newTodo(evt.target.value);
-    };
+    var events = ref.events(actions);
 
     return (
       <header className="header">
         <h1>todos</h1>
-        <input className="new-todo" placeholder="What needs to be done?" autoFocus
-          value={model.newTodo} onKeyUp={onKeyUp} onChange={onChange}/>
+        <input className="new-todo" placeholder="What needs to be done?" autoFocus value={model.newTodo}
+          onKeyUp={events.onNewTodoKeyUpEnterOnly} onChange={events.onNewTodoChange}/>
       </header>
     );
   };
@@ -39,66 +28,30 @@
 
   var renderTodo = function(model, actions) {
     return function(todo) {
+      var events = ref.events(actions);
+
+      var editing = todo.id === model.editTodo.id;
+
       var todoClasses = ref.classNames({
         "completed": todo.completed,
-        "editing": todo.id === model.editTodo.id
+        "editing": editing
       });
 
-      var onEditKeyUp = function(todoId) {
-        return function(evt) {
-          if (evt.which === ESCAPE_KEY) {
-            actions.cancelEdit();
-          }
-          else if (evt.which === ENTER_KEY) {
-            actions.saveTodo(evt.target.value, todoId);
-          }
-        };
-      };
-
-      var onEditChange = function(todoId) {
-        return function(evt) {
-          actions.editTodo(evt.target.value, todoId);
-        };
-      };
-
-      var onEditBlur = function(todoId) {
-        return function(evt) {
-          actions.saveTodo(evt.target.value, todoId);
-        };
-      };
-
-      var input = todo.editing ?
-        <input type="text" className="edit" value={todo.title}
-          onKeyUp={onEditKeyUp(todo.id)}
-          onChange={onEditChange(todo.id)}
-          onBlur={onEditBlur(todo.id)}
+      var input = editing ?
+        <input type="text" className="edit" value={model.editTodo.title}
+          onKeyUp={events.onEditKeyUp(model.editTodo.id)}
+          onChange={events.onEditChange(model.editTodo.id)}
+          onBlur={events.onEditBlur(model.editTodo.id)}
+          autoFocus
         /> : null;
-
-      var onToggleTodo = function(todoId) {
-        return function(evt) {
-          actions.setCompleted(todoId, evt.target.checked);
-        };
-      };
-
-      var onEditTodo = function(title, todoId) {
-        return function(_evt) {
-          actions.editTodo(title, todoId);
-        };
-      };
-
-      var onDestroyTodo = function(todoId) {
-        return function(_evt) {
-          actions.deleteTodoId(todoId);
-        };
-      };
 
       return (
         <li className={todoClasses}>
           <div className="view">
             <input className="toggle" type="checkbox" checked={todo.completed}
-              onChange={onToggleTodo(todo.id)}/>
-            <label onDoubleClick={onEditTodo(todo.title, todo.id)}>{todo.title}</label>
-            <button className="destroy" onClick={onDestroyTodo(todo.id)}></button>
+              onChange={events.onToggleTodo(todo.id)}/>
+            <label onDoubleClick={events.onEditTodo(todo)}>{todo.title}</label>
+            <button className="destroy" onClick={events.onDestroyTodo(todo.id)}></button>
           </div>
           {input}
         </li>

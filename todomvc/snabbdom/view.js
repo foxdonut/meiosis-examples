@@ -33,10 +33,10 @@
 
       var input = editing ?
         h("input.edit", {
-          props: { type: "text", value: todo.title },
+          props: { type: "text", value: model.editTodo.title },
           on: {
-            keyup: events.onEditKeyUp(todo.id),
-            blur: events.onEditBlur(todo.id)
+            keyup: events.onEditKeyUp(model.editTodo.id),
+            blur: events.onEditBlur(model.editTodo.id)
           },
           hook: {
             insert: function(vnode) {

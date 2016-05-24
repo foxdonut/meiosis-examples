@@ -13,14 +13,27 @@
           actions.newTodo(evt.target.value);
         }
       },
+      onNewTodoKeyUpEnterOnly: function(evt) {
+        if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
+          actions.saveTodo(evt.target.value);
+        }
+      },
+      onNewTodoChange: function(evt) {
+        actions.newTodo(evt.target.value);
+      },
       onEditKeyUp: function(todoId) {
         return function(evt) {
-          if (evt.keyCode === ESCAPE_KEY) {
-            actions.cancelEdit(todoId);
+          if (evt.keyCode === ESCAPE_KEY || evt.which === ESCAPE_KEY) {
+            actions.cancelEdit();
           }
-          else if (evt.keyCode === ENTER_KEY) {
+          else if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
             actions.saveTodo(evt.target.value, todoId);
           }
+        };
+      },
+      onEditChange: function(todoId) {
+        return function(evt) {
+          actions.editTodo(evt.target.value, todoId);
         };
       },
       onEditBlur: function(todoId) {

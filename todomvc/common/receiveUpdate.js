@@ -3,8 +3,9 @@
   ref.receiveUpdate = function(model, update) {
     if (update.saveTodo) {
       var editing = !update.saveTodo.id || update.saveTodo.id === model.editTodo.id;
+      update.saveTodo.title = update.saveTodo.title.trim();
 
-      if (editing) {
+      if (editing && update.saveTodo.title) {
         model.todos = ref.todoStorage.saveTodo(update.saveTodo);
       }
       else {

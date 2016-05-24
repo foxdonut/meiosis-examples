@@ -29,7 +29,7 @@
       var events = ref.events(actions);
 
       var editing = todo.id === model.editTodo.id;
-      
+
       var todoClasses = [
         classIf(".completed")(todo.completed),
         classIf(".editing")(editing)
@@ -37,9 +37,13 @@
 
       var input = editing ?
         m("input.edit[type=text]", {
-          value: todo.title,
-          onkeyup: events.onEditKeyUp(todo.id),
-          onblur: events.onEditBlur(todo.id)
+          value: model.editTodo.title,
+          onkeyup: events.onEditKeyUp(model.editTodo.id),
+          onblur: events.onEditBlur(model.editTodo.id),
+          config: function(elm) {
+            elm.focus();
+            elm.selectionStart = elm.value.length;
+          }
         }) : m("span");
 
       return m("li" + todoClasses, [
