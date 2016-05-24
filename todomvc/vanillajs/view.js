@@ -7,7 +7,7 @@
   };
 
   var main = function(model, _actions) {
-    var renderedTodos = model.todos.map(renderTodo).join("");
+    var renderedTodos = model.todos.map(renderTodo(model)).join("");
 
     return "  <section class='main'>" +
       "    <input class='toggle-all' type='checkbox'>" +
@@ -25,20 +25,23 @@
     };
   };
 
-  var renderTodo = function(todo) {
-    var dataId = " data-id='" + todo.id + "'";
-    var checked = todo.completed ? " checked" : "";
-    var input = todo.editing ?
-      "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'>" : "";
+  var renderTodo = function(model) {
+    return function(todo) {
+      var dataId = " data-id='" + todo.id + "'";
+      var checked = todo.completed ? " checked" : "";
+      var editing = todo.id === model.editTodo.id;
+      var input = editing ?
+        "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'>" : "";
 
-    return "<li" + classIf("completed")(todo.completed) + classIf("editing")(todo.editing) + ">" +
-      "<div class='view'>" +
-      "<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
-      "<label" + dataId + ">" + todo.title + "</label>" +
-      "<button" + dataId + " class='destroy'></button>" +
-      "</div>" +
-      input +
-      "</li>";
+      return "<li" + classIf("completed")(todo.completed) + classIf("editing")(editing) + ">" +
+        "<div class='view'>" +
+        "<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
+        "<label" + dataId + ">" + todo.title + "</label>" +
+        "<button" + dataId + " class='destroy'></button>" +
+        "</div>" +
+        input +
+        "</li>";
+    };
   };
 
   var footer = function(model) {

@@ -19,7 +19,8 @@
 
     $root.on("dblclick", ".view label", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
-      actions.editTodo(todoId);
+      var title = evt.target.innerHTML;
+      actions.editTodo(title, todoId);
     });
 
     $root.on("keyup", "input.edit", function(evt) {

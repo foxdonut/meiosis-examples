@@ -3,21 +3,25 @@
   var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
 
-  var header = function(actions) {
-    var onKeyPress = function(evt) {
+  var header = function(model, actions) {
+    var onKeyUp = function(evt) {
       if (evt.keyCode === ENTER_KEY) {
         actions.saveTodo(evt.target.value);
+      }
+      else {
+        actions.newTodo(evt.target.value);
       }
     };
 
     return m("header.header", [
       m("h1", "todos"),
-      m("input.new-todo", {placeholder: "What needs to be done?", autoFocus: true, onkeypress: onKeyPress})
+      m("input.new-todo", {placeholder: "What needs to be done?", autoFocus: true,
+        value: model.newTodo, onkeyup: onKeyUp})
     ]);
   };
 
   var main = function(model, actions) {
-    var renderedTodos = model.todos.map(renderTodo(actions));
+    var renderedTodos = model.todos.map(renderTodo(model, actions));
 
     return m("section.main", [
       m("input.toggle-all[type=checkbox]"),
@@ -32,11 +36,12 @@
     };
   };
 
-  var renderTodo = function(actions) {
+  var renderTodo = function(model, actions) {
     return function(todo) {
+      var editing = todo.id === model.editTodo.id;
       var todoClasses = [
         classIf(".completed")(todo.completed),
-        classIf(".editing")(todo.editing)
+        classIf(".editing")(editing)
       ].join("");
 
       var onEditKeyUp = function(todoId) {
@@ -56,7 +61,7 @@
         };
       };
 
-      var input = todo.editing ?
+      var input = editing ?
         m("input.edit[type=text]", {
           value: todo.title,
           onkeyup: onEditKeyUp(todo.id),
@@ -69,9 +74,9 @@
         };
       };
 
-      var onEditTodo = function(todoId) {
+      var onEditTodo = function(todo) {
         return function(_evt) {
-          actions.editTodo(todoId);
+          actions.editTodo(todo.title, todo.id);
         };
       };
 
@@ -85,7 +90,7 @@
         m("div.view", [
           m("input.toggle[type=checkbox]", {checked: todo.completed,
             onchange: onToggleTodo(todo.id)}),
-          m("label", {ondblclick: onEditTodo(todo.id)}, todo.title),
+          m("label", {ondblclick: onEditTodo(todo)}, todo.title),
           m("button.destroy", {onclick: onDestroyTodo(todo.id)})
         ]),
         input
@@ -115,7 +120,7 @@
 
   var todoapp = function(model, actions) {
     return m("section.todoapp", [
-      header(actions),
+      header(model, actions),
       main(model, actions),
       footer(model, actions)
     ]);

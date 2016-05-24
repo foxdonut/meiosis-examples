@@ -2,11 +2,7 @@
 (function(ref) {
   ref.viewModel = function(createComponent) {
     createComponent({
-      receiveUpdate: function(model, update) {
-        for (var i = 0, t = model.todos.length; i < t; i++) {
-          model.todos[i].editing = (model.todos[i].id === update.editTodoId ? update.editing : false);
-        }
-
+      receiveUpdate: function(model) {
         var by = model.filter;
         var completed = by === "completed";
 

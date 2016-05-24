@@ -4,7 +4,7 @@
 
   var mainTemplate = Handlebars.compile($("#main").html());
 
-  var main = function(model, _actions) {
+  var main = function(model) {
     return mainTemplate(model);
   };
 
@@ -14,18 +14,20 @@
     return footerTemplate(model);
   };
 
-  var todoapp = function(model, actions) {
-    return "<section class='todoapp'>" +
-      header +
-      main(model, actions) +
-      footer(model) +
-      "</section>";
+  var todoappTemplate = Handlebars.compile($("#todoapp").html());
+
+  var todoapp = function(model) {
+    return todoappTemplate({
+      header: header,
+      main: main(model),
+      footer: footer(model)
+    });
   };
 
   var info = Handlebars.compile($("#info").html())();
 
-  var view = function(model, actions) {
-    return todoapp(model, actions) + info;
+  var view = function(model) {
+    return todoapp(model) + info;
   };
 
   ref.view = view;

@@ -6,21 +6,24 @@
   var h = meiosisSnabbdom.renderer.h;
 
   var header = function(model, actions) {
-    var onKeyPress = function(evt) {
+    var onKeyUp = function(evt) {
       if (evt.keyCode === ENTER_KEY) {
         actions.saveTodo(evt.target.value);
+      }
+      else {
+        actions.newTodo(evt.target.value);
       }
     };
 
     return h("header.header", [
       h("h1", "todos"),
-      h("input.new-todo", {props: {placeholder: "What needs to be done?", autoFocus: true, value: model.newTodo},
-        on: {keypress: onKeyPress}})
+      h("input.new-todo", {props: {placeholder: "What needs to be done?", autoFocus: true,
+        value: model.newTodo}, on: {keyup: onKeyUp}})
     ]);
   };
 
   var main = function(model, actions) {
-    var renderedTodos = model.todos.map(renderTodo(actions));
+    var renderedTodos = model.todos.map(renderTodo(model, actions));
 
     return h("section.main", [
       h("input.toggle-all", {props: {type: "checkbox"}}),
@@ -29,17 +32,17 @@
     ]);
   };
 
-  var renderTodo = function(actions) {
+  var renderTodo = function(model, actions) {
     return function(todo) {
       var todoClasses = {
         "completed": todo.completed,
-        "editing": todo.editing
+        "editing": todo.id === model.editTodo.id
       };
 
       var onEditKeyUp = function(todoId) {
         return function(evt) {
           if (evt.keyCode === ESCAPE_KEY) {
-            actions.cancelEdit(todoId);
+            actions.cancelEdit();
           }
           else if (evt.keyCode === ENTER_KEY) {
             actions.saveTodo(evt.target.value, todoId);
@@ -75,8 +78,8 @@
         };
       };
 
-      var onEditTodo = function(todoId) {
-        actions.editTodo(todoId);
+      var onEditTodo = function(todo) {
+        actions.editTodo(todo.title, todo.id);
       };
 
       var onDestroyTodo = function(todoId) {
@@ -87,7 +90,7 @@
         h("div.view", [
           h("input.toggle", {props: {type: "checkbox", checked: todo.completed},
             on: {change: onToggleTodo(todo.id)}}),
-          h("label", {on: {dblclick: [onEditTodo, todo.id]}}, todo.title),
+          h("label", {on: {dblclick: [onEditTodo, todo]}}, todo.title),
           h("button.destroy", {on: {click: [onDestroyTodo, todo.id]}})
         ]),
         input

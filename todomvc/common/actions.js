@@ -2,20 +2,20 @@
 (function(ref) {
   ref.actions = function(sendUpdate) {
     return {
-      saveTodo: function(todo, id) {
-        sendUpdate({ saveTodo: { title: todo, id: id } });
+      newTodo: function(title) {
+        sendUpdate({ newTodo: title });
+      },
+      saveTodo: function(title, id) {
+        sendUpdate({ saveTodo: { title: title, id: id } });
       },
       clearInput: function() {
-        sendUpdate({ newTodo: true });
+        sendUpdate({ newTodo: "" });
       },
-      editTodo: function(todoId) {
-        sendUpdate({ editTodoId: todoId, editing: true });
+      editTodo: function(title, id) {
+        sendUpdate({ editTodo: { title: title, id: id } });
       },
-      editingTodo: function(todo, todoId) {
-        sendUpdate({ editTodoId: todoId, editing: true, editingTodo: { id: todoId, title: todo }});
-      },
-      cancelEdit: function(todoId) {
-        sendUpdate({ editTodoId: todoId, editing: false });
+      cancelEdit: function() {
+        sendUpdate({ editTodo: { } });
       },
       deleteTodoId: function(todoId) {
         sendUpdate({ deleteTodoId: todoId });

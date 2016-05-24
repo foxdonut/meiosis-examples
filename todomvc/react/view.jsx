@@ -3,23 +3,28 @@
   var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
 
-  var header = function(actions) {
-    var onKeyPress = function(evt) {
+  var header = function(model, actions) {
+    var onKeyUp = function(evt) {
       if (evt.which === ENTER_KEY) {
         actions.saveTodo(evt.target.value);
       }
     };
 
+    var onChange = function(evt) {
+      actions.newTodo(evt.target.value);
+    };
+
     return (
       <header className="header">
         <h1>todos</h1>
-        <input className="new-todo" placeholder="What needs to be done?" autoFocus onKeyPress={onKeyPress}/>
+        <input className="new-todo" placeholder="What needs to be done?" autoFocus
+          value={model.newTodo} onKeyUp={onKeyUp} onChange={onChange}/>
       </header>
     );
   };
 
   var main = function(model, actions) {
-    var renderedTodos = model.todos.map(renderTodo(actions));
+    var renderedTodos = model.todos.map(renderTodo(model, actions));
 
     return (
       <section className="main">
@@ -32,17 +37,17 @@
     );
   };
 
-  var renderTodo = function(actions) {
+  var renderTodo = function(model, actions) {
     return function(todo) {
       var todoClasses = ref.classNames({
         "completed": todo.completed,
-        "editing": todo.editing
+        "editing": todo.id === model.editTodo.id
       });
 
       var onEditKeyUp = function(todoId) {
         return function(evt) {
           if (evt.which === ESCAPE_KEY) {
-            actions.cancelEdit(todoId);
+            actions.cancelEdit();
           }
           else if (evt.which === ENTER_KEY) {
             actions.saveTodo(evt.target.value, todoId);
@@ -52,7 +57,7 @@
 
       var onEditChange = function(todoId) {
         return function(evt) {
-          actions.editingTodo(evt.target.value, todoId);
+          actions.editTodo(evt.target.value, todoId);
         };
       };
 
@@ -75,9 +80,9 @@
         };
       };
 
-      var onEditTodo = function(todoId) {
+      var onEditTodo = function(title, todoId) {
         return function(_evt) {
-          actions.editTodo(todoId);
+          actions.editTodo(title, todoId);
         };
       };
 
@@ -92,7 +97,7 @@
           <div className="view">
             <input className="toggle" type="checkbox" checked={todo.completed}
               onChange={onToggleTodo(todo.id)}/>
-            <label onDoubleClick={onEditTodo(todo.id)}>{todo.title}</label>
+            <label onDoubleClick={onEditTodo(todo.title, todo.id)}>{todo.title}</label>
             <button className="destroy" onClick={onDestroyTodo(todo.id)}></button>
           </div>
           {input}
@@ -124,7 +129,7 @@
   var todoapp = function(model, actions) {
     return (
       <section className="todoapp">
-        {header(actions)}
+        {header(model, actions)}
         {main(model, actions)}
         {footer(model, actions)}
       </section>

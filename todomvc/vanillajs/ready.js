@@ -20,7 +20,8 @@
 
     renderer.delegate(root, ".view label", "dblclick", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
-      actions.editTodo(todoId);
+      var title = evt.target.innerHTML;
+      actions.editTodo(title, todoId);
     });
 
     renderer.delegate(root, "input.edit", "keyup", function(evt) {
