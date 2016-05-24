@@ -1,24 +1,12 @@
 /*global meiosisSnabbdom */
 (function(ref) {
-  var ENTER_KEY = 13;
-  var ESCAPE_KEY = 27;
-
   var h = meiosisSnabbdom.renderer.h;
 
   var header = function(model, actions) {
-    var onKeyUp = function(evt) {
-      if (evt.keyCode === ENTER_KEY) {
-        actions.saveTodo(evt.target.value);
-      }
-      else {
-        actions.newTodo(evt.target.value);
-      }
-    };
-
     return h("header.header", [
       h("h1", "todos"),
       h("input.new-todo", {props: {placeholder: "What needs to be done?", autoFocus: true,
-        value: model.newTodo}, on: {keyup: onKeyUp}})
+        value: model.newTodo}, on: {keyup: ref.events(actions).onNewTodoKeyUp}})
     ]);
   };
 
@@ -34,34 +22,21 @@
 
   var renderTodo = function(model, actions) {
     return function(todo) {
+      var events = ref.events(actions);
+
+      var editing = todo.id === model.editTodo.id;
+
       var todoClasses = {
         "completed": todo.completed,
-        "editing": todo.id === model.editTodo.id
+        "editing": editing
       };
 
-      var onEditKeyUp = function(todoId) {
-        return function(evt) {
-          if (evt.keyCode === ESCAPE_KEY) {
-            actions.cancelEdit();
-          }
-          else if (evt.keyCode === ENTER_KEY) {
-            actions.saveTodo(evt.target.value, todoId);
-          }
-        };
-      };
-
-      var onEditBlur = function(todoId) {
-        return function(evt) {
-          actions.saveTodo(evt.target.value, todoId);
-        };
-      };
-
-      var input = todo.editing ?
+      var input = editing ?
         h("input.edit", {
           props: { type: "text", value: todo.title },
           on: {
-            keyup: onEditKeyUp(todo.id),
-            blur: onEditBlur(todo.id)
+            keyup: events.onEditKeyUp(todo.id),
+            blur: events.onEditBlur(todo.id)
           },
           hook: {
             insert: function(vnode) {
@@ -72,26 +47,12 @@
           }
         }) : h("span");
 
-      var onToggleTodo = function(todoId) {
-        return function(evt) {
-          actions.setCompleted(todoId, evt.target.checked);
-        };
-      };
-
-      var onEditTodo = function(todo) {
-        actions.editTodo(todo.title, todo.id);
-      };
-
-      var onDestroyTodo = function(todoId) {
-        actions.deleteTodoId(todoId);
-      };
-
       return h("li", {class: todoClasses}, [
         h("div.view", [
           h("input.toggle", {props: {type: "checkbox", checked: todo.completed},
-            on: {change: onToggleTodo(todo.id)}}),
-          h("label", {on: {dblclick: [onEditTodo, todo]}}, todo.title),
-          h("button.destroy", {on: {click: [onDestroyTodo, todo.id]}})
+            on: {change: events.onToggleTodo(todo.id)}}),
+          h("label", {on: {dblclick: events.onEditTodo(todo)}}, todo.title),
+          h("button.destroy", {on: {click: events.onDestroyTodo(todo.id)}})
         ]),
         input
       ]);

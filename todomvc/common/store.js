@@ -36,8 +36,7 @@
         todos = replaceTodoAtIndex(todos, todo, findIndex(todos, todo.id));
       }
       else {
-        todo.id = new Date().getTime();
-        todos = todos.concat([todo]);
+        todos = todos.concat([{title: todo.title, id: new Date().getTime()}]);
       }
       return ref.todoStorage.saveAll(todos);
     },

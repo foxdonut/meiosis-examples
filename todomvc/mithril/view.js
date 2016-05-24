@@ -1,22 +1,10 @@
 /*global m */
 (function(ref) {
-  var ENTER_KEY = 13;
-  var ESCAPE_KEY = 27;
-
   var header = function(model, actions) {
-    var onKeyUp = function(evt) {
-      if (evt.keyCode === ENTER_KEY) {
-        actions.saveTodo(evt.target.value);
-      }
-      else {
-        actions.newTodo(evt.target.value);
-      }
-    };
-
     return m("header.header", [
       m("h1", "todos"),
       m("input.new-todo", {placeholder: "What needs to be done?", autoFocus: true,
-        value: model.newTodo, onkeyup: onKeyUp})
+        value: model.newTodo, onkeyup: ref.events(actions).onNewTodoKeyUp})
     ]);
   };
 
@@ -38,60 +26,28 @@
 
   var renderTodo = function(model, actions) {
     return function(todo) {
+      var events = ref.events(actions);
+
       var editing = todo.id === model.editTodo.id;
+      
       var todoClasses = [
         classIf(".completed")(todo.completed),
         classIf(".editing")(editing)
       ].join("");
 
-      var onEditKeyUp = function(todoId) {
-        return function(evt) {
-          if (evt.keyCode === ESCAPE_KEY) {
-            actions.cancelEdit(todoId);
-          }
-          else if (evt.keyCode === ENTER_KEY) {
-            actions.saveTodo(evt.target.value, todoId);
-          }
-        };
-      };
-
-      var onEditBlur = function(todoId) {
-        return function(evt) {
-          actions.saveTodo(evt.target.value, todoId);
-        };
-      };
-
       var input = editing ?
         m("input.edit[type=text]", {
           value: todo.title,
-          onkeyup: onEditKeyUp(todo.id),
-          onblur: onEditBlur(todo.id)
+          onkeyup: events.onEditKeyUp(todo.id),
+          onblur: events.onEditBlur(todo.id)
         }) : m("span");
-
-      var onToggleTodo = function(todoId) {
-        return function(evt) {
-          actions.setCompleted(todoId, evt.target.checked);
-        };
-      };
-
-      var onEditTodo = function(todo) {
-        return function(_evt) {
-          actions.editTodo(todo.title, todo.id);
-        };
-      };
-
-      var onDestroyTodo = function(todoId) {
-        return function(_evt) {
-          actions.deleteTodoId(todoId);
-        };
-      };
 
       return m("li" + todoClasses, [
         m("div.view", [
           m("input.toggle[type=checkbox]", {checked: todo.completed,
-            onchange: onToggleTodo(todo.id)}),
-          m("label", {ondblclick: onEditTodo(todo)}, todo.title),
-          m("button.destroy", {onclick: onDestroyTodo(todo.id)})
+            onchange: events.onToggleTodo(todo.id)}),
+          m("label", {ondblclick: events.onEditTodo(todo)}, todo.title),
+          m("button.destroy", {onclick: events.onDestroyTodo(todo.id)})
         ]),
         input
       ]);
@@ -99,11 +55,9 @@
   };
 
   var footer = function(model, actions) {
-    var onClearCompleted = function(_evt) {
-      actions.clearCompleted();
-    };
     var clearCompleted = model.clearCompleted ?
-      m("button.clear-completed", {onclick: onClearCompleted}, "Clear completed") : m("span");
+        m("button.clear-completed", {onclick: ref.events(actions).onClearCompleted}, "Clear completed")
+      : m("span");
 
     var classSelected = classIf("selected");
 
