@@ -1,15 +1,16 @@
 import h from "snabbdom/h";
-const { div, input, span } = require("hyperscript-helpers")(h);
+import { merge } from "ramda";
 
 const view = ({measurement, index}, actions) => {
   const getValue = evt => parseInt(evt.target.value, 10);
   const onChangeValue = evt => actions.sendUpdate({index, value: getValue(evt)});
+  const attrs = merge({type: "range"}, measurement);
 
   return (
-    div([
-      span(measurement.label),
-      input({attrs: {type: "range", ...measurement}, on: {input: onChangeValue}}),
-      span(`${measurement.value} ${measurement.units}`)
+    h("div", [
+      h("span", measurement.label),
+      h("input", {attrs, on: {input: onChangeValue}}),
+      h("span", `${measurement.value} ${measurement.units}`)
     ])
   );
 };

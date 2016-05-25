@@ -13,14 +13,13 @@
     var Main = createComponent({
       actions: ref.actions,
       initialModel: ref.initialModel,
+      viewModel: ref.viewModel,
+      view: ref.view,
       postRender: ref.postRender,
       ready: ready,
       receiveUpdate: ref.receiveUpdate,
-      view: ref.view,
       nextUpdate: ref.nextUpdate
     });
-
-    ref.viewModel(createComponent);
 
     var renderRoot = Meiosis.run(Main);
 
