@@ -6,8 +6,16 @@ var app = koa();
 var routes = require("koa-route");
 var parse = require("co-body");
 var serve = require("koa-static");
+var render = require("./render");
 
 app.use(serve("public"));
+app.use(serve("examples"));
+
+var showExample = function*(example) {
+  this.body = yield render(example + "/index");
+};
+
+app.use(routes.get("/example/:example", showExample));
 
 var createTodoList = function() {
   return [
@@ -17,20 +25,16 @@ var createTodoList = function() {
     {id: 4, priority: 4, description: "Watch TV"},
     {id: 5, priority: 5, description: "Sleep"}
   ];
-}
+};
 var todoList = [];
 
 var nextId = 6;
 
 var getTodoList = function() {
-  return new Promise(function(resolve) {
-    setTimeout(() => {
-      if (todoList.length === 0) {
-        todoList = createTodoList();
-      }
-      resolve(todoList);
-    }, 2); // increase value to simulate slower server response
-  });
+  if (todoList.length === 0) {
+    todoList = createTodoList();
+  }
+  return todoList;
 };
 
 
@@ -82,7 +86,7 @@ var saveTodo = function(todo) {
     }
   }
   return todo;
-}
+};
 
 var onSaveTodo = function*() {
   saveTodo(yield parse.json(this));
@@ -98,4 +102,3 @@ var api_onSaveTodo = function*() {
 app.use(routes.post("/api/saveTodo", api_onSaveTodo));
 
 module.exports = app;
-

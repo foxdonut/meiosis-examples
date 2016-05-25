@@ -1,11 +1,10 @@
 {
   "name": "meiosis-examples",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
-    "start": "cd public && serv -p 3000 -b 0.0.0.0",
-    "server": "node --harmony server/main"
+    "start": "node --harmony server/main"
   },
   "repository": {
     "type": "git",
@@ -24,10 +23,11 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "co-body": "^4.2.0",
+    "co-views": "^2.1.0",
     "koa": "^1.2.0",
     "koa-route": "^2.4.2",
     "koa-static": "^2.0.0",
-    "serv": "^0.2.4"
+    "swig": "^1.4.2"
   },
   "devDependencies": {
     "eslint": "^2.10.2",

@@ -1,9 +1,9 @@
 /*global requirejs*/
 requirejs.config({
   paths: {
-    meiosis: "../lib/meiosis.min",
-    meiosisVanillaJs: "../lib/meiosis-vanillajs.min",
-    meiosisTracer: "../lib/meiosis-tracer.min"
+    meiosis: "/lib/meiosis.min",
+    meiosisVanillaJs: "/lib/meiosis-vanillajs.min",
+    meiosisTracer: "/lib/meiosis-tracer.min"
   }
 });
 
