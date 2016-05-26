@@ -4,6 +4,7 @@
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm i && (cd examples/labeled-sliders && npm i && npm start); (cd examples/todo-list && npm i && npm start)",
     "start": "node --harmony server/main"
   },
   "repository": {

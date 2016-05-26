@@ -1,7 +1,7 @@
 module.exports = {
   entry: "./main.js",
   output: {
-    path: "../public",
+    path: ".",
     filename: "generated-app.js"
   },
   module: {

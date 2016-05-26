@@ -6,7 +6,7 @@ module.exports = {
   entry: "./main.js",
   devtool: "source-map",
   output: {
-    path: "../public",
+    path: ".",
     filename: isProduction ? "generated-app.min.js" : "generated-app.js"
   },
   module: {
