@@ -11,6 +11,12 @@ var render = require("./render");
 app.use(serve("public"));
 app.use(serve("examples"));
 
+var showExampleVariant = function*(example, variant) {
+  this.body = yield render(example + "/" + variant + "/index");
+};
+
+app.use(routes.get("/example/:example/:variant", showExampleVariant));
+
 var showExample = function*(example) {
   this.body = yield render(example + "/index");
 };
