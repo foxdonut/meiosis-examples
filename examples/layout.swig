@@ -3,22 +3,22 @@
   <head>
     <link rel="shortcut icon" size="16x16, 32x32, 48x48, 64x64, 128x128, 256x256" href="/favicon.ico">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap.flatly.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap.flatly.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 
     <title>Meiosis Example - {% block title %}Title{% endblock %}</title>
   </head>
   <body class="container">
     <div>
-      <img src="/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px">
+      <img src="/public/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px">
       <h2 style="display: inline;">Meiosis Example - {% block title %}Title{% endblock %}</h2>
       <span style="margin-left: 16px;"><a href="/index.html">Back to list of examples</a></span>
 
       <div id="app"></div>
       <div id="tracer" style="position: fixed; top: 0px; right: 0px;"></div>
     </div>
-  </body>
 
-  {% block content %}Content{% endblock %}
+    {% block content %}Content{% endblock %}
+  </body>
 </html>

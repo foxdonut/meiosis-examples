@@ -5,12 +5,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="/examples/todomvc/css/index.css">
 
-    <title>Meiosis Example - Snabbdom</title>
+    <title>Meiosis Example - {% block title %}Title{% endblock %}</title>
   </head>
   <body class="container">
     <div>
       <img src="/public/images/meiosis.png" style="margin-right: 8px" width="53px">
-      <h2 style="display: inline">Meiosis TodoMVC - Snabbdom</h2>
+      <h2 style="display: inline">Meiosis TodoMVC - {% block title %}Title{% endblock %}</h2>
       <span style="margin-left: 16px;"><a href="/index.html">Back to list of examples</a></span>
 
       <div id="app"></div>
@@ -29,11 +29,5 @@
   <script src="/examples/todomvc/common/viewModel.js"></script>
   <script src="/examples/todomvc/common/ready.js"></script>
   <script src="/examples/todomvc/common/main.js"></script>
-  
-<script src="/public/lib/meiosis-snabbdom.min.js"></script>
-<script src="/examples/todomvc/common/events.js"></script>
-<script src="/examples/todomvc/snabbdom/view.js"></script>
-<script src="/examples/todomvc/snabbdom/main.js"></script>
-
+  {% block content %}Content{% endblock %}
 </html>
-

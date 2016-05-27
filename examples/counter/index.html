@@ -1,9 +1,41 @@
-{% extends '../layout.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" size="16x16, 32x32, 48x48, 64x64, 128x128, 256x256" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap.flatly.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 
-{% block title %}Counter{% endblock %}
+    <title>Meiosis Example - Counter</title>
+  </head>
+  <body class="container">
+    <div>
+      <img src="/public/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px">
+      <h2 style="display: inline;">Meiosis Example - Counter</h2>
+      <span style="margin-left: 16px;"><a href="/index.html">Back to list of examples</a></span>
 
-{% block content %}
-  <script src="/lib/meiosis.min.js"></script>
-  <script src="/lib/meiosis-vanillajs.min.js"></script>
-  <script src="/counter/main.js"></script>
-{% endblock %}
+      <div id="app"></div>
+      <div id="tracer" style="position: fixed; top: 0px; right: 0px;"></div>
+    </div>
+
+    
+  <script src="/public/lib/meiosis.min.js"></script>
+  <script src="/public/lib/meiosis-vanillajs.min.js"></script>
+  <script src="/public/lib/jquery-2.2.3.min.js"></script>
+
+  <script src="/examples/counter/main.js"></script>
+
+  <div id="reactApp"></div>
+
+  <script src="/public/lib/react-15.0.2.min.js"></script>
+  <script src="/public/lib/react-dom-15.0.2.min.js"></script>
+  <script src="/public/lib/browser.min.js"></script>
+  <script src="/public/lib/meiosis-react.min.js"></script>
+
+  <script src="/examples/counter/view.jsx" type="text/babel"></script>
+  <script src="/examples/counter/main.jsx" type="text/babel"></script>
+
+  </body>
+</html>
+

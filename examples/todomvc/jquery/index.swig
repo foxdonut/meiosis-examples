@@ -1,36 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="shortcut icon" size="16x16, 32x32, 48x48, 64x64, 128x128, 256x256" href="/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/examples/todomvc/css/index.css">
-
-    <title>Meiosis Example - jQuery</title>
-  </head>
-  <body class="container">
-    <div>
-      <img src="/public/images/meiosis.png" style="margin-right: 8px" width="53px">
-      <h2 style="display: inline">Meiosis TodoMVC - jQuery</h2>
-      <span style="margin-left: 16px;"><a href="/index.html">Back to list of examples</a></span>
-
-      <div id="app"></div>
-      <div id="tracer" style="position: fixed; top: 0px; right: 0px;"></div>
-    </div>
-  </body>
-
-  <script src="/public/lib/meiosis.min.js"></script>
-  <script src="/public/lib/meiosis-tracer.min.js"></script> <!-- development only -->
-  <script src="/public/lib/history.min.js"></script>
-  <script src="/examples/todomvc/common/store.js"></script>
-  <script src="/examples/todomvc/common/actions.js"></script>
-  <script src="/examples/todomvc/common/model.js"></script>
-  <script src="/examples/todomvc/common/nextUpdate.js"></script>
-  <script src="/examples/todomvc/common/receiveUpdate.js"></script>
-  <script src="/examples/todomvc/common/viewModel.js"></script>
-  <script src="/examples/todomvc/common/ready.js"></script>
-  <script src="/examples/todomvc/common/main.js"></script>
-  
-
+{% extends '../index-common.swig' %}
+{% block title %}jQuery{% endblock %}
+{% block content %}
+{% raw %}
 <script id="todoapp" type="text/x-handlebars-template">
   <section class="todoapp">
     {{{header}}}
@@ -88,7 +59,7 @@
     <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
   </footer>
 </script>
-
+{% endraw %}
 <script src="/public/lib/meiosis-vanillajs.min.js"></script>
 <script src="/public/lib/jquery-2.2.3.min.js"></script>
 <script src="/public/lib/handlebars.min-v4.0.5.js"></script>
@@ -96,6 +67,4 @@
 <script src="/examples/todomvc/jquery/view.js"></script>
 <script src="/examples/todomvc/jquery/ready.js"></script>
 <script src="/examples/todomvc/jquery/main.js"></script>
-
-</html>
-
+{% endblock %}

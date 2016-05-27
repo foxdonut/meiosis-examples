@@ -1,17 +1,37 @@
-{% extends '../layout.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" size="16x16, 32x32, 48x48, 64x64, 128x128, 256x256" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/bootstrap.flatly.min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 
-{% block title %}Rocket Launcher{% endblock %}
+    <title>Meiosis Example - Rocket Launcher</title>
+  </head>
+  <body class="container">
+    <div>
+      <img src="/public/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px">
+      <h2 style="display: inline;">Meiosis Example - Rocket Launcher</h2>
+      <span style="margin-left: 16px;"><a href="/index.html">Back to list of examples</a></span>
 
-{% block content %}
-  <script src="/lib/meiosis.min.js"></script>
-  <script src="/lib/meiosis-vanillajs.min.js"></script>
-  <script src="/lib/meiosis-tracer.min.js"></script> <!-- development only -->
-  <script src="/rocket-launcher/js/actions.js"></script>
-  <script src="/rocket-launcher/js/model.js"></script>
-  <script src="/rocket-launcher/js/state.js"></script>
-  <script src="/rocket-launcher/js/nextUpdate.js"></script>
-  <script src="/rocket-launcher/js/receiveUpdate.js"></script>
-  <script src="/rocket-launcher/js/view.js"></script>
-  <script src="/rocket-launcher/js/ready.js"></script>
-  <script src="/rocket-launcher/js/main.js"></script>
-{% endblock %}
+      <div id="app"></div>
+      <div id="tracer" style="position: fixed; top: 0px; right: 0px;"></div>
+    </div>
+
+    
+  <script src="/public/lib/meiosis.min.js"></script>
+  <script src="/public/lib/meiosis-vanillajs.min.js"></script>
+  <script src="/public/lib/meiosis-tracer.min.js"></script> <!-- development only -->
+  <script src="/examples/rocket-launcher/js/actions.js"></script>
+  <script src="/examples/rocket-launcher/js/model.js"></script>
+  <script src="/examples/rocket-launcher/js/state.js"></script>
+  <script src="/examples/rocket-launcher/js/nextUpdate.js"></script>
+  <script src="/examples/rocket-launcher/js/receiveUpdate.js"></script>
+  <script src="/examples/rocket-launcher/js/view.js"></script>
+  <script src="/examples/rocket-launcher/js/ready.js"></script>
+  <script src="/examples/rocket-launcher/js/main.js"></script>
+
+  </body>
+</html>
+
