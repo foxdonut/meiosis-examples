@@ -7,9 +7,7 @@ var receiveUpdate = function(model, update) {
   return { counter: model.counter + update.add };
 };
 
-var renderer = meiosisReact.renderer;
-
-var Meiosis = meiosis.init(renderer.intoId("reactApp"));
+var Meiosis = meiosis.init(meiosisReact.renderer.intoId("reactApp"));
 
 var Main = Meiosis.createComponent({
   initialModel: initialModel,

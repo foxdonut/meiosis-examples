@@ -21,9 +21,7 @@ var ready = function(actions) {
   });
 };
 
-var renderer = meiosisVanillaJs.renderer;
-
-var Meiosis = meiosis.init(renderer.intoId("app"));
+var Meiosis = meiosis.init(meiosisVanillaJs.renderer.intoId("app"));
 
 var Main = Meiosis.createComponent({
   initialModel: initialModel,
