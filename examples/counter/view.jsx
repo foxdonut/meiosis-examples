@@ -10,7 +10,10 @@
     return (
       <div>
         <div><span>Counter: {model.counter}</span></div>
-        <div><button onClick={onInc}>+</button> <button onClick={onDecr}>-</button></div>
+        <div>
+          <button onClick={onInc}>+</button>
+          <button onClick={onDecr}>-</button>
+        </div>
       </div>
     );
   };
