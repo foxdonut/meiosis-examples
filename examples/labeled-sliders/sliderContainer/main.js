@@ -2,10 +2,10 @@ import { initialModel } from "./model";
 import receiveUpdate from "./receiveUpdate";
 import view from "./view";
 
-import createLabeledSlider from "../labeledSlider/main";
+import labeledSliderConfig from "../labeledSlider/main";
 
 const createSliderContainer = createComponent => {
-  const LabeledSlider = createLabeledSlider(createComponent);
+  const LabeledSlider = createComponent(labeledSliderConfig);
 
   return createComponent({
     initialModel,

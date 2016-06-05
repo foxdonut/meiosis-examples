@@ -5,12 +5,12 @@ import { actions, Action } from "./actions";
 import receiveUpdate from "./receiveUpdate";
 import nextUpdate from "./nextUpdate";
 
-const createTodoList = createComponent => createComponent({
+const todoListConfig = {
   initialModel,
   view,
   actions: actions(services),
   receiveUpdate,
   nextUpdate: nextUpdate(Action)
-});
+};
 
-export { createTodoList };
+export default todoListConfig;

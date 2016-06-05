@@ -4,11 +4,11 @@ import { initialModel } from "./model";
 import view from "./view.jsx";
 import nextUpdate from "./nextUpdate";
 
-const createTodoForm = createComponent => createComponent({
+const todoFormConfig = {
   initialModel,
   view,
   actions: actions(services),
   nextUpdate: nextUpdate(Action)
-});
+};
 
-export { createTodoForm };
+export default todoFormConfig;

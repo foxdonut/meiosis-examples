@@ -1,6 +1,5 @@
 import view from "./view";
 
-const createLabeledSlider = createComponent => createComponent({ view });
+const labeledSliderConfig = { view };
 
-export default createLabeledSlider;
-
+export default labeledSliderConfig;

@@ -8,7 +8,7 @@ const view = LabeledSlider => (model, actions) => {
 
   const renderMeasurement = (measurement, index) =>
     h("div", {key: measurement.id, style: {border: "1px solid gray"}, id: measurement.id}, [
-      LabeledSlider({measurement, index}, actions),
+      LabeledSlider({measurement, index}),
       h("div", [
         h("button.btn.btn-danger.btn-sm",
           {on: {click: [onRemoveMeasurement, measurement.id]}}, "Remove Measurement")
