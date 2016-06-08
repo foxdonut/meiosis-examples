@@ -6,11 +6,11 @@
 
   var Main = createComponent({
     initialModel: ref.initialModel,
-    view: ref.view,
+    view: ref.display(ref.state, ref.view),
     actions: ref.actions,
     ready: ref.ready,
-    receiveUpdate: ref.receiveUpdate,
-    nextUpdate: ref.nextUpdate
+    receiveUpdate: ref.receiveUpdate(ref.state),
+    nextUpdate: ref.nextUpdate(ref.state)
   });
 
   var renderRoot = Meiosis.run(Main);
