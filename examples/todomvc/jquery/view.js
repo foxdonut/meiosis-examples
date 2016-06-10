@@ -2,6 +2,12 @@
 (function(ref) {
   var header = Handlebars.compile($("#header").html())();
 
+  Handlebars.registerHelper("if_editing", function(todo, model, options) {
+    if (todo.id === model.editTodo.id) {
+      return options.fn(this);
+    }
+  });
+
   var mainTemplate = Handlebars.compile($("#main").html());
 
   var main = function(model) {

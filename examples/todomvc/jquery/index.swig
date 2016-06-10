@@ -23,15 +23,15 @@
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
       {{#each todos}}
-        <li class="{{#if completed}}completed{{/if}} {{#if editing}}editing{{/if}}">
+        <li class="{{#if completed}}completed{{/if}} {{#if_editing this ..}}editing{{/if_editing}}">
           <div class="view">
             <input data-id="{{id}}" class="toggle" type="checkbox" {{#if completed}}checked{{/if}}>
             <label data-id="{{id}}">{{title}}</label>
             <button data-id="{{id}}" class="destroy"></button>
           </div>
-          {{#if editing}}
+          {{#if_editing this ..}}
             <input data-id="{{id}}" type="text" class="edit" value="{{title}}">
-          {{/if}}
+          {{/if_editing}}
         </li>
       {{/each}}
     </ul>
