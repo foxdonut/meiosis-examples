@@ -1,6 +1,6 @@
 /*global window*/
 (function(ref) {
-  ref.viewModel = function(model) {
+  var viewModel = function(model) {
     var viewModel = Object.assign({}, model);
     var by = model.filter;
     var completed = by === "completed";
@@ -24,5 +24,11 @@
     viewModel.completedSelected = model.filter === "completed";
 
     return viewModel;
+  };
+
+  ref.display = function(view) {
+    return function(model, actions) {
+      return view(viewModel(model), actions);
+    };
   };
 })(window);

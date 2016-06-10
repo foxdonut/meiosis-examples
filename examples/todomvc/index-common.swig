@@ -26,7 +26,7 @@
   <script src="/examples/todomvc/common/model.js"></script>
   <script src="/examples/todomvc/common/nextUpdate.js"></script>
   <script src="/examples/todomvc/common/receiveUpdate.js"></script>
-  <script src="/examples/todomvc/common/viewModel.js"></script>
+  <script src="/examples/todomvc/common/display.js"></script>
   <script src="/examples/todomvc/common/ready.js"></script>
   <script src="/examples/todomvc/common/main.js"></script>
   {% block content %}Content{% endblock %}

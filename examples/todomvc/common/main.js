@@ -14,7 +14,7 @@
       actions: ref.actions,
       initialModel: ref.initialModel,
       viewModel: ref.viewModel,
-      view: ref.view,
+      view: ref.display(ref.view),
       postRender: ref.postRender,
       ready: ready,
       receiveUpdate: ref.receiveUpdate,
