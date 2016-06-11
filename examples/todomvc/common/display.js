@@ -1,7 +1,7 @@
 /*global window*/
 (function(ref) {
   var viewModel = function(model) {
-    var viewModel = Object.assign({}, model);
+    var viewModel = model;
     var by = model.filter;
     var completed = by === "completed";
 
@@ -11,13 +11,13 @@
     function() {
       return true;
     };
-    viewModel.todos = model.todos.filter(filterBy);
+    viewModel.filteredTodos = model.todos.filter(filterBy);
 
     var notCompleted = function(todo) { return !todo.completed; };
-    var itemsLeft = viewModel.todos.filter(notCompleted).length;
-    viewModel.itemsLeftText = viewModel.todos.length > 0 ?
+    var itemsLeft = viewModel.filteredTodos.filter(notCompleted).length;
+    viewModel.itemsLeftText = viewModel.filteredTodos.length > 0 ?
       (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
-    viewModel.clearCompleted = (viewModel.todos.length - itemsLeft) > 0;
+    viewModel.clearCompleted = (viewModel.filteredTodos.length - itemsLeft) > 0;
 
     viewModel.allSelected = model.filter === "all";
     viewModel.activeSelected = model.filter === "active";
@@ -26,9 +26,18 @@
     return viewModel;
   };
 
-  ref.display = function(view) {
+  ref.display = function(state, view, todoItem) {
     return function(model, actions) {
-      return view(viewModel(model), actions);
+      var vmodel = viewModel(model);
+
+      var header = view.header(vmodel, actions);
+      var renderedTodos = vmodel.filteredTodos.map(todoItem(vmodel, actions));
+      var main = view.main(renderedTodos);
+      var footer = view.footer(vmodel, actions);
+      var todoapp = view.todoapp(header, main, footer);
+      var info = view.info();
+
+      return view.root(todoapp, info);
     };
   };
 })(window);

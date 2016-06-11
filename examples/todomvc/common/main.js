@@ -10,12 +10,14 @@
       ref.ready(actions);
     } : ref.commonReady;
 
+    var todoItem = ref.todoItemDisplay(ref.todoItemState, ref.todoItemView);
+
     var Main = createComponent({
-      actions: ref.actions,
       initialModel: ref.initialModel,
-      view: ref.display(ref.view),
+      view: ref.display(ref.state, ref.view, todoItem),
       postRender: ref.postRender, // only jquery and vanillajs need postRender
       ready: ready,
+      actions: ref.actions,
       receiveUpdate: ref.receiveUpdate,
       nextUpdate: ref.nextUpdate
     });
