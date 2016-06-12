@@ -14,7 +14,7 @@
 
     var Main = createComponent({
       initialModel: ref.initialModel,
-      view: ref.display(ref.state, ref.view, todoItem),
+      view: ref.display(ref.view, todoItem),
       postRender: ref.postRender, // only jquery and vanillajs need postRender
       ready: ready,
       actions: ref.actions,

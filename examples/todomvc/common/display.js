@@ -26,7 +26,7 @@
     return viewModel;
   };
 
-  ref.display = function(state, view, todoItem) {
+  ref.display = function(view, todoItem) {
     return function(model, actions) {
       var vmodel = viewModel(model);
 
