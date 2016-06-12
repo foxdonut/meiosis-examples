@@ -1,8 +1,8 @@
 /*global React */
 (function(ref) {
   ref.todoItemView = {
-    todoItem: function(model, actions, todo, input) {
-      var events = ref.events(actions);
+    todoItem: function(model, events, input) {
+      var todo = model.todo;
 
       return (
         <li className={model.todoClasses}>
@@ -17,14 +17,12 @@
       );
     },
 
-    todoInput: function(model, actions) {
-      var events = ref.events(actions);
-
+    todoInput: function(todo, events) {
       return (
-        <input type="text" className="edit" value={model.editTodo.title}
-          onKeyUp={events.onEditKeyUp(model.editTodo.id)}
-          onChange={events.onEditChange(model.editTodo.id)}
-          onBlur={events.onEditBlur(model.editTodo.id)}
+        <input type="text" className="edit" value={todo.title}
+          onKeyUp={events.onEditKeyUp(todo.id)}
+          onChange={events.onEditChange(todo.id)}
+          onBlur={events.onEditBlur(todo.id)}
           autoFocus
         />
       );
