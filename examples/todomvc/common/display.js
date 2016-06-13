@@ -31,7 +31,7 @@
       var vmodel = viewModel(model);
 
       var header = view.header(vmodel, actions);
-      var renderedTodos = vmodel.filteredTodos.map(todoItem(vmodel, actions));
+      var renderedTodos = vmodel.filteredTodos.map(todoItem(vmodel));
       var main = view.main(renderedTodos);
       var footer = view.footer(vmodel, actions);
       var todoapp = view.todoapp(header, main, footer);
