@@ -1,7 +1,9 @@
 /*global React */
 (function(ref) {
-  ref.todoItemView = {
-    todoItem: function(model, events, input) {
+  ref.todoItem = ref.todoItem || {};
+
+  ref.todoItem.view = {
+    todoItem: function(model, input, events) {
       var todo = model.todo;
 
       return (
@@ -26,6 +28,10 @@
           autoFocus
         />
       );
+    },
+
+    noTodoInput: function() {
+      return null;
     }
   };
 })(window);

@@ -26,15 +26,14 @@
     return viewModel;
   };
 
-  ref.display = function(view, todoItem) {
+  ref.display = function(view, header, todoItem) {
     return function(model, actions) {
       var vmodel = viewModel(model);
 
-      var header = view.header(vmodel, actions);
       var renderedTodos = vmodel.filteredTodos.map(todoItem(vmodel));
       var main = view.main(renderedTodos);
       var footer = view.footer(vmodel, actions);
-      var todoapp = view.todoapp(header, main, footer);
+      var todoapp = view.todoapp(header(vmodel), main, footer);
       var info = view.info();
 
       return view.root(todoapp, info);

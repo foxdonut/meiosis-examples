@@ -1,18 +1,6 @@
 /*global React */
 (function(ref) {
   ref.view = {
-    header: function(model, actions) {
-      var events = ref.events(actions);
-
-      return (
-        <header className="header">
-          <h1>todos</h1>
-          <input className="new-todo" placeholder="What needs to be done?" autoFocus value={model.newTodo}
-            onKeyUp={events.onNewTodoKeyUpEnterOnly} onChange={events.onNewTodoChange}/>
-        </header>
-      );
-    },
-
     main: function(renderedTodos) {
       return (
         <section className="main">

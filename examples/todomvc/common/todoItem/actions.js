@@ -1,26 +1,30 @@
 /*global window*/
 (function(ref) {
-  var ENTER_KEY = 13;
-  var ESCAPE_KEY = 27;
+  ref.todoItem = ref.todoItem || {};
 
-  ref.events = function(actions) {
-    return {
-      onNewTodoKeyUp: function(evt) {
-        if (evt.keyCode === ENTER_KEY) {
-          actions.saveTodo(evt.target.value);
-        }
-        else {
-          actions.newTodo(evt.target.value);
-        }
+  ref.todoItem.actions = function(sendUpdate) {
+    var actions = {
+      saveTodo: function(title, id) {
+        sendUpdate({ saveTodo: { title: title, id: id } });
       },
-      onNewTodoKeyUpEnterOnly: function(evt) {
-        if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-          actions.saveTodo(evt.target.value);
-        }
+      editTodo: function(title, id) {
+        sendUpdate({ editTodo: { title: title, id: id } });
       },
-      onNewTodoChange: function(evt) {
-        actions.newTodo(evt.target.value);
+      cancelEdit: function() {
+        sendUpdate({ editTodo: { } });
       },
+      deleteTodoId: function(todoId) {
+        sendUpdate({ deleteTodoId: todoId });
+      },
+      setCompleted: function(todoId, completed) {
+        sendUpdate({ setCompleted: { id: todoId, completed: completed } });
+      }
+    };
+
+    var ENTER_KEY = 13;
+    var ESCAPE_KEY = 27;
+
+    actions.events = {
       onEditKeyUp: function(todoId) {
         return function(evt) {
           if (evt.keyCode === ESCAPE_KEY || evt.which === ESCAPE_KEY) {
@@ -55,10 +59,9 @@
         return function(_evt) {
           actions.deleteTodoId(todoId);
         };
-      },
-      onClearCompleted: function(_evt) {
-        actions.clearCompleted();
       }
     };
+
+    return actions;
   };
 })(window);

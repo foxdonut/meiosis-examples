@@ -10,16 +10,16 @@
       ref.ready(actions);
     } : ref.commonReady;
 
-    var todoItemComponent = createComponent(ref.todoItemComponent());
+    var header = createComponent(ref.header.component());
+    var todoItem = createComponent(ref.todoItem.component());
 
     var Main = createComponent({
       initialModel: ref.initialModel,
-      view: ref.display(ref.view, todoItemComponent),
+      view: ref.display(ref.view, header, todoItem),
       postRender: ref.postRender, // only jquery and vanillajs need postRender
       ready: ready,
       actions: ref.actions,
-      receiveUpdate: ref.receiveUpdate,
-      nextUpdate: ref.nextUpdate
+      receiveUpdate: ref.receiveUpdate
     });
 
     var renderRoot = Meiosis.run(Main);

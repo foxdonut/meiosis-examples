@@ -1,5 +1,7 @@
 /*global window*/
 (function(ref) {
+  ref.todoItem = ref.todoItem || {};
+
   var getTodoClasses = function(state, model, todo) {
     return ref.classNames({
       "completed": todo.completed,
@@ -7,13 +9,12 @@
     });
   };
 
-  ref.todoItemDisplay = function(state, view) {
+  ref.todoItem.display = function(state, view) {
     return function(model, actions) {
       return function(todo) {
         var todoClasses = getTodoClasses(state, model, todo);
-        var events = ref.events(actions);
-        var input = state.editing ? view.todoInput(model.editTodo, events) : null;
-        return view.todoItem({todo: todo, todoClasses: todoClasses}, events, input);
+        var input = state.editing ? view.todoInput(model.editTodo, actions.events) : view.noTodoInput();
+        return view.todoItem({todo: todo, todoClasses: todoClasses}, input, actions.events);
       };
     };
   };

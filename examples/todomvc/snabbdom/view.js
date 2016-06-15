@@ -6,7 +6,7 @@
     return h("header.header", [
       h("h1", "todos"),
       h("input.new-todo", {props: {placeholder: "What needs to be done?", autoFocus: true,
-        value: model.newTodo}, on: {keyup: ref.events(actions).onNewTodoKeyUp}})
+        value: model.newTodo}, on: {keyup: actions.events.onNewTodoKeyUp}})
     ]);
   };
 
@@ -22,7 +22,7 @@
 
   var renderTodo = function(model, actions) {
     return function(todo) {
-      var events = ref.events(actions);
+      var events = actions.events;
 
       var editing = todo.id === model.editTodo.id;
 
