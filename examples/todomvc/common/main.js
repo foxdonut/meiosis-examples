@@ -5,20 +5,15 @@
 
     var createComponent = Meiosis.createComponent;
 
-    var ready = ref.ready ? function(actions) {
-      ref.commonReady(actions);
-      ref.ready(actions);
-    } : ref.commonReady;
-
     var header = createComponent(ref.header.component());
     var todoItem = createComponent(ref.todoItem.component());
+    var footer = createComponent(ref.footer.component());
 
     var Main = createComponent({
       initialModel: ref.initialModel,
-      view: ref.display(ref.view, header, todoItem),
+      view: ref.display(ref.view, header, todoItem, footer),
       postRender: ref.postRender, // only jquery and vanillajs need postRender
-      ready: ready,
-      actions: ref.actions,
+      ready: ref.ready,
       receiveUpdate: ref.receiveUpdate
     });
 

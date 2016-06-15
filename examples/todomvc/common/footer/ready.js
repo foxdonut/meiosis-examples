@@ -1,6 +1,8 @@
 /*global window*/
 (function(ref) {
-  ref.commonReady = function(actions) {
+  ref.footer = ref.footer || {};
+
+  ref.footer.ready = function(actions) {
     var history = ref.History.createHistory();
 
     history.listen(function(location) {
