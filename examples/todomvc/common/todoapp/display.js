@@ -26,16 +26,19 @@
     return viewModel;
   };
 
-  ref.display = function(view, header, todoItem, footer) {
-    return function(model, _actions) {
+  ref.todoapp = ref.todoapp || {};
+
+  ref.todoapp.display = function(createComponent) {
+    var header = createComponent(ref.header.component());
+    var todoItem = createComponent(ref.todoItem.component());
+    var footer = createComponent(ref.footer.component());
+
+    return function(model) {
       var vmodel = viewModel(model);
-
       var renderedTodos = vmodel.filteredTodos.map(todoItem(vmodel));
-      var main = view.main(renderedTodos);
-      var todoapp = view.todoapp(header(vmodel), main, footer(vmodel));
-      var info = view.info();
+      var main = ref.main.view(renderedTodos);
 
-      return view.root(todoapp, info);
+      return ref.todoapp.view(header(vmodel), main, footer(vmodel));
     };
   };
 })(window);

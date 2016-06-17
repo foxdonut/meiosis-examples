@@ -63,7 +63,7 @@
 <script src="/public/lib/meiosis-vanillajs.min.js"></script>
 <script src="/public/lib/jquery-2.2.3.min.js"></script>
 <script src="/public/lib/handlebars.min-v4.0.5.js"></script>
-<script src="/examples/todomvc/common/postRender.js"></script>
+<script src="/examples/todomvc/common/todoItem/postRender.js"></script>
 <script src="/examples/todomvc/jquery/view.js"></script>
 <script src="/examples/todomvc/jquery/ready.js"></script>
 <script src="/examples/todomvc/jquery/main.js"></script>

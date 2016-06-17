@@ -8,7 +8,9 @@
 <script src="/public/lib/meiosis-react.min.js"></script>
 <script type="text/babel" src="/examples/todomvc/react/header/view.jsx"></script>
 <script type="text/babel" src="/examples/todomvc/react/todoItem/view.jsx"></script>
+<script type="text/babel" src="/examples/todomvc/react/main/view.jsx"></script>
 <script type="text/babel" src="/examples/todomvc/react/footer/view.jsx"></script>
-<script type="text/babel" src="/examples/todomvc/react/view.jsx"></script>
+<script type="text/babel" src="/examples/todomvc/react/todoapp/view.jsx"></script>
+<script type="text/babel" src="/examples/todomvc/react/root/view.jsx"></script>
 <script type="text/babel" src="/examples/todomvc/react/main.jsx"></script>
 {% endblock %}
