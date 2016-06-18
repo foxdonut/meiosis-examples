@@ -3,11 +3,8 @@
   ref.footer = ref.footer || {};
 
   ref.footer.view = function(model, actions) {
-    var onClearCompleted = function(_evt) {
-      actions.clearCompleted();
-    };
     var clearCompleted = model.clearCompleted ?
-      <button className="clear-completed" onClick={onClearCompleted}>Clear completed</button> : null;
+      <button className="clear-completed" onClick={actions.events.onClearCompleted}>Clear completed</button> : null;
 
     return (
       <footer className="footer">

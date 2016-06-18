@@ -1,17 +1,13 @@
 /*global meiosisVanillaJs, window*/
 (function(ref) {
+  ref.todoItem = ref.todoItem || {};
+
   var renderer = meiosisVanillaJs.renderer;
   var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
   var root = document.getElementById("app");
 
-  ref.ready = function(actions) {
-    renderer.delegate(root, "input.new-todo", "keypress", function(evt) {
-      if (evt.keyCode === ENTER_KEY) {
-        actions.saveTodo(evt.target.value);
-      }
-    });
-
+  ref.todoItem.ready = function(actions) {
     renderer.delegate(root, "input.toggle", "change", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
       var completed = evt.target.checked;

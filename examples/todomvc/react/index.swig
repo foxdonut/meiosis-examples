@@ -4,7 +4,6 @@
 <script src="/public/lib/react-15.0.2.min.js"></script>
 <script src="/public/lib/react-dom-15.0.2.min.js"></script>
 <script src="/public/lib/browser.min.js"></script>
-<script src="/public/lib/classnames.min.js"></script>
 <script src="/public/lib/meiosis-react.min.js"></script>
 <script type="text/babel" src="/examples/todomvc/react/header/view.jsx"></script>
 <script type="text/babel" src="/examples/todomvc/react/todoItem/view.jsx"></script>

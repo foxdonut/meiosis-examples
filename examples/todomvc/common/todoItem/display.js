@@ -13,7 +13,7 @@
     return function(model, actions) {
       return function(todo) {
         var todoClasses = getTodoClasses(state, model, todo);
-        var input = state.editing ? view.todoInput(model.editTodo, actions.events) : view.noTodoInput();
+        var input = state.editing(model, todo) ? view.todoInput(model.editTodo, actions.events) : view.noTodoInput();
         return view.todoItem({todo: todo, todoClasses: todoClasses}, input, actions.events);
       };
     };
