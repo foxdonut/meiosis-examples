@@ -41,6 +41,7 @@
   <script src="/examples/todomvc/common/main.js"></script>
   
 
+
 <script id="todoapp" type="text/x-handlebars-template">
   <section class="todoapp">
     {{{header}}}
@@ -49,6 +50,8 @@
   </section>
 </script>
 
+
+
 <script id="header" type="text/x-handlebars-template">
   <header class="header">
     <h1>todos</h1>
@@ -56,26 +59,38 @@
   </header>
 </script>
 
+
+
+<script id="todoItem" type="text/x-handlebars-template">
+  {{#with todo}}
+    <li class="{{model.todoClasses}}">
+      <div class="view">
+        <input data-id="{{id}}" class="toggle" type="checkbox" {{#if completed}}checked{{/if}}>
+        <label data-id="{{id}}">{{title}}</label>
+        <button data-id="{{id}}" class="destroy"></button>
+      </div>
+      {{{input}}}
+    </li>
+  {{/with}}
+</script>
+
+<script id="todoInput" type="text/x-handlebars-template">
+  <input data-id="{{todo.id}}" type="text" class="edit" value="{{todo.title}}">
+</script>
+
+
+
 <script id="main" type="text/x-handlebars-template">
   <section class="main">
     <input class="toggle-all" type="checkbox">
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
-      {{#each todos}}
-        <li class="{{#if completed}}completed{{/if}} {{#if_editing this ..}}editing{{/if_editing}}">
-          <div class="view">
-            <input data-id="{{id}}" class="toggle" type="checkbox" {{#if completed}}checked{{/if}}>
-            <label data-id="{{id}}">{{title}}</label>
-            <button data-id="{{id}}" class="destroy"></button>
-          </div>
-          {{#if_editing this ..}}
-            <input data-id="{{id}}" type="text" class="edit" value="{{title}}">
-          {{/if_editing}}
-        </li>
-      {{/each}}
+      {{{renderedTodos}}}
     </ul>
   </section>
 </script>
+
+
 
 <script id="footer" type="text/x-handlebars-template">
   <footer class="footer">
@@ -91,6 +106,8 @@
   </footer>
 </script>
 
+
+
 <script id="info" type="text/x-handlebars-template">
   <footer class="info">
     <p>Double-click to edit a todo</p>
@@ -99,13 +116,23 @@
   </footer>
 </script>
 
+
+
 <script src="/public/lib/meiosis-vanillajs.min.js"></script>
 <script src="/public/lib/jquery-2.2.3.min.js"></script>
 <script src="/public/lib/handlebars.min-v4.0.5.js"></script>
 <script src="/examples/todomvc/common/todoItem/postRender.js"></script>
-<script src="/examples/todomvc/jquery/view.js"></script>
+<script src="/examples/todomvc/jquery/header/view.js"></script>
+<script src="/examples/todomvc/jquery/header/ready.js"></script>
+<script src="/examples/todomvc/jquery/todoItem/view.js"></script>
+<script src="/examples/todomvc/jquery/todoItem/ready.js"></script>
+<script src="/examples/todomvc/jquery/main/view.js"></script>
+<script src="/examples/todomvc/jquery/footer/view.js"></script>
+<script src="/examples/todomvc/jquery/todoapp/view.js"></script>
+<script src="/examples/todomvc/jquery/root/view.js"></script>
 <script src="/examples/todomvc/jquery/ready.js"></script>
 <script src="/examples/todomvc/jquery/main.js"></script>
+
 
 </html>
 
