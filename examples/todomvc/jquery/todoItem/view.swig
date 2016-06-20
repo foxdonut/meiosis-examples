@@ -1,15 +1,13 @@
 {% raw %}
 <script id="todoItem" type="text/x-handlebars-template">
-  {{#with todo}}
-    <li class="{{model.todoClasses}}">
-      <div class="view">
-        <input data-id="{{id}}" class="toggle" type="checkbox" {{#if completed}}checked{{/if}}>
-        <label data-id="{{id}}">{{title}}</label>
-        <button data-id="{{id}}" class="destroy"></button>
-      </div>
-      {{{input}}}
-    </li>
-  {{/with}}
+  <li class="{{model.todoClasses}}">
+    <div class="view">
+      <input data-id="{{model.todo.id}}" class="toggle" type="checkbox" {{#if model.todo.completed}}checked{{/if}}>
+      <label data-id="{{model.todo.id}}">{{model.todo.title}}</label>
+      <button data-id="{{model.todo.id}}" class="destroy"></button>
+    </div>
+    {{{input}}}
+  </li>
 </script>
 
 <script id="todoInput" type="text/x-handlebars-template">

@@ -2,5 +2,9 @@
 (function(ref) {
   ref.main = ref.main || {};
 
-  ref.main.view = Handlebars.compile($("#main").html());
+  var mainTemplate = Handlebars.compile($("#main").html());
+
+  ref.main.view = function(renderedTodos) {
+    return mainTemplate({renderedTodos: renderedTodos.join("")});
+  };
 })(window);

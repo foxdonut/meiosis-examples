@@ -7,7 +7,7 @@
 
   ref.todoItem.view = {
     todoItem: function(model, input) {
-      return todoItemTemplate({todo: model.todo, input: input});
+      return todoItemTemplate({model: model, input: input});
     },
 
     todoInput: function(todo) {

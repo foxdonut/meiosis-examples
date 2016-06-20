@@ -40,9 +40,5 @@
       var todoId = parseInt(evt.target.dataset.id, 10);
       actions.deleteTodoId(todoId);
     });
-
-    renderer.delegate(root, "button.clear-completed", "click", function() {
-      actions.clearCompleted();
-    });
   };
 })(window);
