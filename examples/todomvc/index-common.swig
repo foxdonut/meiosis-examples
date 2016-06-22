@@ -33,9 +33,12 @@
   <script src="/examples/todomvc/common/main/display.js"></script>
   <script src="/examples/todomvc/common/main/component.js"></script>
   <script src="/examples/todomvc/common/todoItem/state.js"></script>
+  <script src="/examples/todomvc/common/todoInput/actions.js"></script>
+  <script src="/examples/todomvc/common/todoInput/display.js"></script>
+  <script src="/examples/todomvc/common/todoInput/nextUpdate.js"></script>
+  <script src="/examples/todomvc/common/todoInput/component.js"></script>
   <script src="/examples/todomvc/common/todoItem/actions.js"></script>
   <script src="/examples/todomvc/common/todoItem/display.js"></script>
-  <script src="/examples/todomvc/common/todoItem/nextUpdate.js"></script>
   <script src="/examples/todomvc/common/todoItem/component.js"></script>
   <script src="/examples/todomvc/common/footer/actions.js"></script>
   <script src="/examples/todomvc/common/footer/ready.js"></script>

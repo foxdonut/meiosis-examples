@@ -1,7 +1,8 @@
+/*global document, window*/
 (function(ref) {
-  ref.todoItem = ref.todoItem || {};
+  ref.todoInput = ref.todoInput || {};
 
-  ref.todoItem.postRender = function(_view) {
+  ref.todoInput.postRender = function(_view) {
     var input = document.getElementById("app").querySelector("input.edit");
 
     if (input) {

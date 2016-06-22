@@ -29,9 +29,9 @@
   ref.todoapp = ref.todoapp || {};
 
   ref.todoapp.display = function(createComponent) {
-    var header = createComponent(ref.header.component());
-    var main = createComponent(ref.main.component());
-    var footer = createComponent(ref.footer.component());
+    var header = ref.header.component(createComponent);
+    var main = ref.main.component(createComponent);
+    var footer = ref.footer.component(createComponent);
 
     return function(model) {
       var vmodel = viewModel(model);

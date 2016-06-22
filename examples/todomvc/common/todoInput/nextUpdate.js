@@ -1,8 +1,8 @@
 /*global window*/
 (function(ref) {
-  ref.todoItem = ref.todoItem || {};
+  ref.todoInput = ref.todoInput || {};
 
-  ref.todoItem.nextUpdate = function(model, update, actions) {
+  ref.todoInput.nextUpdate = function(model, update, actions) {
     if (update.saveTodo && update.saveTodo.id) {
       actions.cancelEdit();
     }

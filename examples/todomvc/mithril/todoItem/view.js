@@ -2,9 +2,10 @@
 (function(ref) {
   ref.todoItem = ref.todoItem || {};
 
-  ref.todoItem.view = {
-    todoItem: function(model, input, events) {
+  ref.todoItem.view = function(todoInputComponent) {
+    return function(model, actions) {
       var todo = model.todo;
+      var events = actions.events;
 
       return m("li", {class: model.todoClasses}, [
         m("div.view", [
@@ -13,24 +14,8 @@
           m("label", {ondblclick: events.onEditTodo(todo)}, todo.title),
           m("button.destroy", {onclick: events.onDestroyTodo(todo.id)})
         ]),
-        input
+        todoInputComponent(model)
       ]);
-    },
-
-    todoInput: function(todo, events) {
-      return m("input.edit[type=text]", {
-        value: todo.title,
-        onkeyup: events.onEditKeyUp(todo.id),
-        onblur: events.onEditBlur(todo.id),
-        config: function(elm) {
-          elm.focus();
-          elm.selectionStart = elm.value.length;
-        }
-      });
-    },
-
-    noTodoInput: function() {
-      return m("span");
-    }
+    };
   };
 })(window);
