@@ -1,4 +1,4 @@
 /*global meiosisSnabbdom, window*/
 (function(ref) {
-  ref.main(meiosisSnabbdom);
+  ref.app(meiosisSnabbdom);
 })(window);

@@ -9,5 +9,5 @@
 <script src="/examples/todomvc/mithril/footer/view.js"></script>
 <script src="/examples/todomvc/mithril/todoapp/view.js"></script>
 <script src="/examples/todomvc/mithril/root/view.js"></script>
-<script src="/examples/todomvc/mithril/main.js"></script>
+<script src="/examples/todomvc/mithril/app.js"></script>
 {% endblock %}

@@ -62,6 +62,14 @@
       }
       return todos;
     },
+    setAllCompleted: function(update) {
+      var todos = ref.todoStorage.loadAll();
+      todos.forEach(function(todo) {
+        todo.completed = update.completed;
+      });
+      ref.todoStorage.saveAll(todos);
+      return todos;
+    },
     clearCompleted: function() {
       var todos = ref.todoStorage.loadAll();
       var updatedTodos = [];

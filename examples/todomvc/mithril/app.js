@@ -1,4 +1,4 @@
 /*global meiosisMithril, window*/
 (function(ref) {
-  ref.main(meiosisMithril);
+  ref.app(meiosisMithril);
 })(window);

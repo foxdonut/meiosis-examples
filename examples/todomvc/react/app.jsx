@@ -1,4 +1,4 @@
 /*global meiosisReact, window*/
 (function(ref) {
-  ref.main(meiosisReact);
+  ref.app(meiosisReact);
 })(window);

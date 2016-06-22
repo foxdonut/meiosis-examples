@@ -12,5 +12,5 @@
 <script src="/examples/todomvc/vanillajs/footer/ready.js"></script>
 <script src="/examples/todomvc/vanillajs/todoapp/view.js"></script>
 <script src="/examples/todomvc/vanillajs/root/view.js"></script>
-<script src="/examples/todomvc/vanillajs/main.js"></script>
+<script src="/examples/todomvc/vanillajs/app.js"></script>
 {% endblock %}

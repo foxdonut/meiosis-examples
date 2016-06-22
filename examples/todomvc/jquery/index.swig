@@ -24,6 +24,6 @@
 <script src="/examples/todomvc/jquery/footer/ready.js"></script>
 <script src="/examples/todomvc/jquery/todoapp/view.js"></script>
 <script src="/examples/todomvc/jquery/root/view.js"></script>
-<script src="/examples/todomvc/jquery/main.js"></script>
+<script src="/examples/todomvc/jquery/app.js"></script>
 
 {% endblock %}

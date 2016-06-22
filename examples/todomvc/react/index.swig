@@ -11,5 +11,5 @@
 <script type="text/babel" src="/examples/todomvc/react/footer/view.jsx"></script>
 <script type="text/babel" src="/examples/todomvc/react/todoapp/view.jsx"></script>
 <script type="text/babel" src="/examples/todomvc/react/root/view.jsx"></script>
-<script type="text/babel" src="/examples/todomvc/react/main.jsx"></script>
+<script type="text/babel" src="/examples/todomvc/react/app.jsx"></script>
 {% endblock %}

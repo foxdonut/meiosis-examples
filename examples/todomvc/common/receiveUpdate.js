@@ -18,6 +18,9 @@
     else if (update.setCompleted) {
       model.todos = ref.todoStorage.setCompleted(update.setCompleted);
     }
+    else if (update.setAllCompleted) {
+      model.todos = ref.todoStorage.setAllCompleted(update.setAllCompleted);
+    }
     else if (update.clearCompleted) {
       model.todos = ref.todoStorage.clearCompleted();
     }

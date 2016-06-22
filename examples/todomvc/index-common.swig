@@ -28,6 +28,8 @@
   <script src="/examples/todomvc/common/header/actions.js"></script>
   <script src="/examples/todomvc/common/header/nextUpdate.js"></script>
   <script src="/examples/todomvc/common/header/component.js"></script>
+  <script src="/examples/todomvc/common/main/actions.js"></script>
+  <script src="/examples/todomvc/common/main/component.js"></script>
   <script src="/examples/todomvc/common/todoItem/state.js"></script>
   <script src="/examples/todomvc/common/todoItem/actions.js"></script>
   <script src="/examples/todomvc/common/todoItem/display.js"></script>
@@ -38,6 +40,6 @@
   <script src="/examples/todomvc/common/footer/component.js"></script>
   <script src="/examples/todomvc/common/todoapp/display.js"></script>
   <script src="/examples/todomvc/common/root/display.js"></script>
-  <script src="/examples/todomvc/common/main.js"></script>
+  <script src="/examples/todomvc/common/app.js"></script>
   {% block content %}Content{% endblock %}
 </html>
