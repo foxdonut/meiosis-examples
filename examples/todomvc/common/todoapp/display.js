@@ -22,7 +22,6 @@
     viewModel.allSelected = model.filter === "all";
     viewModel.activeSelected = model.filter === "active";
     viewModel.completedSelected = model.filter === "completed";
-    viewModel.allCompleted = itemsLeft === 0;
 
     return viewModel;
   };
@@ -32,15 +31,11 @@
   ref.todoapp.display = function(createComponent) {
     var header = createComponent(ref.header.component());
     var main = createComponent(ref.main.component());
-    var todoItem = createComponent(ref.todoItem.component());
     var footer = createComponent(ref.footer.component());
 
     return function(model) {
       var vmodel = viewModel(model);
-      var renderedTodos = vmodel.filteredTodos.map(todoItem(vmodel));
-      var mainData = {renderedTodos: renderedTodos, allCompleted: vmodel.allCompleted};
-
-      return ref.todoapp.view(header(vmodel), main(mainData), footer(vmodel));
+      return ref.todoapp.view(header(vmodel), main(vmodel), footer(vmodel));
     };
   };
 })(window);

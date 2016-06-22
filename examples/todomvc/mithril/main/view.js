@@ -2,14 +2,14 @@
 (function(ref) {
   ref.main = ref.main || {};
 
-  ref.main.view = function(data, actions) {
+  ref.main.view = function(model, actions) {
     return m("section.main", [
       m("input.toggle-all[type=checkbox]", {
-        checked: data.allCompleted,
+        checked: model.allCompleted,
         onchange: actions.events.onToggleAllTodos
       }),
       m("label", {for: "toggle-all"}, "Mark all as complete"),
-      m("ul.todo-list", data.renderedTodos)
+      m("ul.todo-list", model.renderedTodos)
     ]);
   };
 })(window);
