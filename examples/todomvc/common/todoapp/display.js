@@ -28,7 +28,8 @@
 
   ref.todoapp = ref.todoapp || {};
 
-  ref.todoapp.display = function(createComponent) {
+  // FIXME
+  ref.todoapp.component = function(createComponent) {
     var header = ref.header.component(createComponent);
     var main = ref.main.component(createComponent);
     var footer = ref.footer.component(createComponent);

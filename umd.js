@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // above is boilerplate code, the "real" code starts below.
+}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "mainView",
   ["jquery", "handlebars"],
   ["$", "Handlebars"],

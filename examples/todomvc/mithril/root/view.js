@@ -8,7 +8,9 @@
 
   ref.root = ref.root || {};
 
-  ref.root.view = function(todoapp) {
-    return m("div", [todoapp, info]);
+  ref.root.view = function(todoappComponent) {
+    return function(model) {
+      return m("div", [todoappComponent(model), info]);
+    };
   };
 })(window);
