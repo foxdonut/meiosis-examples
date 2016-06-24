@@ -20,29 +20,30 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoInputView",
-  ["mithril"],
-  ["m"],
+  "todoEditReceiveUpdate",
+  ["meiosis"],
+  ["meiosis"],
 
-  function(m) {
-    return {
-      todoInput: function(todo, actions) {
-        var events = actions.events;
+  function(meiosis) {
+    return function(todoStorage) {
+      return function(model, update) {
+        if (update.saveTodo && update.saveTodo.id) {
+          var editing = update.saveTodo.id === model.editTodo.id;
+          update.saveTodo.title = update.saveTodo.title.trim();
 
-        return m("input.edit[type=text]", {
-          value: todo.title,
-          onkeyup: events.onEditKeyUp(todo.id),
-          onblur: events.onEditBlur(todo.id),
-          config: function(element) {
-            element.focus();
-            element.selectionStart = element.value.length;
+          if (editing && update.saveTodo.title) {
+            model.todos = todoStorage.saveTodo(update.saveTodo);
           }
-        });
-      },
+          else {
+            return meiosis.REFUSE_UPDATE;
+          }
+        }
+        else if (update.editTodo !== undefined) {
+          model.editTodo = update.editTodo;
+        }
 
-      noTodoInput: function() {
-        return m("span");
-      }
+        return model;
+      };
     };
   }
 ));

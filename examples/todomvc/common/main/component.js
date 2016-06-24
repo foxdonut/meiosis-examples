@@ -21,16 +21,17 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "mainComponent",
-  ["./actions", "./state", "./display", "variant/main/view", "../todoItem/component"],
-  ["mainActions", "mainState", "mainDisplay", "mainView", "todoItemComponent"],
+  ["./actions", "./state", "./display", "./receiveUpdate", "variant/main/view", "../todoItem/component"],
+  ["mainActions", "mainState", "mainDisplay", "mainReceiveUpdate", "mainView", "todoItemComponent"],
 
-  function(mainActions, mainState, mainDisplay, mainView, todoItemComponent) {
-    return function(createComponent) {
-      var todoItem = todoItemComponent(createComponent);
+  function(mainActions, mainState, mainDisplay, mainReceiveUpdate, mainView, todoItemComponent) {
+    return function(createComponent, todoStorage) {
+      var todoItem = todoItemComponent(createComponent, todoStorage);
 
       return createComponent({
         actions: mainActions,
-        view: mainDisplay(mainState, mainView(todoItem))
+        view: mainDisplay(mainState, mainView(todoItem)),
+        receiveUpdate: mainReceiveUpdate(todoStorage)
       });
     };
   }

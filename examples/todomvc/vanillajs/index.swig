@@ -2,7 +2,7 @@
 {% block title %}VanillaJs{% endblock %}
 {% block content %}
 <script src="/public/lib/meiosis-vanillajs.min.js"></script>
-<script src="/examples/todomvc/common/todoInput/postRender.js"></script>
+<script src="/examples/todomvc/common/todoEdit/postRender.js"></script>
 <script src="/examples/todomvc/vanillajs/header/view.js"></script>
 <script src="/examples/todomvc/vanillajs/header/ready.js"></script>
 <script src="/examples/todomvc/vanillajs/todoItem/view.js"></script>

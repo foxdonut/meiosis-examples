@@ -25,7 +25,7 @@
   function() {
     return function(model, update, actions) {
       if (update.saveTodo && !update.saveTodo.id) {
-        actions.clearInput();
+        actions.clearNew();
       }
     };
   }

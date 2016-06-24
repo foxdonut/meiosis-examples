@@ -20,34 +20,14 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "rootReceiveUpdate",
+  "footerReceiveUpdate",
   ["meiosis"],
   ["meiosis"],
 
   function(meiosis) {
     return function(todoStorage) {
       return function(model, update) {
-        if (update.saveTodo) {
-          var editing = !update.saveTodo.id || update.saveTodo.id === model.editTodo.id;
-          update.saveTodo.title = update.saveTodo.title.trim();
-
-          if (editing && update.saveTodo.title) {
-            model.todos = todoStorage.saveTodo(update.saveTodo);
-          }
-          else {
-            return meiosis.REFUSE_UPDATE;
-          }
-        }
-        else if (update.deleteTodoId) {
-          model.todos = todoStorage.deleteTodoId(update.deleteTodoId);
-        }
-        else if (update.setCompleted) {
-          model.todos = todoStorage.setCompleted(update.setCompleted);
-        }
-        else if (update.setAllCompleted) {
-          model.todos = todoStorage.setAllCompleted(update.setAllCompleted);
-        }
-        else if (update.clearCompleted) {
+        if (update.clearCompleted) {
           model.todos = todoStorage.clearCompleted();
         }
         else if (update.filter) {
@@ -56,12 +36,6 @@
           }
           model.todos = todoStorage.loadAll();
           model.filter = update.filter;
-        }
-        else if (update.newTodo !== undefined) {
-          model.newTodo = update.newTodo;
-        }
-        else if (update.editTodo !== undefined) {
-          model.editTodo = update.editTodo;
         }
 
         return model;

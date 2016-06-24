@@ -20,19 +20,29 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "headerComponent",
-  ["./actions", "./receiveUpdate", "./nextUpdate", "variant/header/view", "variant/header/ready"],
-  ["headerActions", "headerReceiveUpdate", "headerNextUpdate", "headerView", "headerReady"],
+  "headerReceiveUpdate",
+  ["meiosis"],
+  ["meiosis"],
 
-  function(headerActions, headerReceiveUpdate, headerNextUpdate, headerView, headerReady) {
-    return function(createComponent, todoStorage) {
-      return createComponent({
-        actions: headerActions,
-        view: headerView,
-        receiveUpdate: headerReceiveUpdate(todoStorage),
-        ready: headerReady, // only jquery and vanillajs need ready
-        nextUpdate: headerNextUpdate
-      });
+  function(meiosis) {
+    return function(todoStorage) {
+      return function(model, update) {
+        if (update.saveTodo && !update.saveTodo.id) {
+          update.saveTodo.title = update.saveTodo.title.trim();
+
+          if (update.saveTodo.title) {
+            model.todos = todoStorage.saveTodo(update.saveTodo);
+          }
+          else {
+            return meiosis.REFUSE_UPDATE;
+          }
+        }
+        else if (update.newTodo !== undefined) {
+          model.newTodo = update.newTodo;
+        }
+
+        return model;
+      };
     };
   }
 ));

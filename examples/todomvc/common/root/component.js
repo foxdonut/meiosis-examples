@@ -21,17 +21,16 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "rootComponent",
-  ["./model", "./receiveUpdate", "variant/root/view", "variant/root/ready", "../todoapp/component"],
-  ["todoModel", "rootReceiveUpdate", "rootView", "rootReady", "todoappComponent"],
+  ["./model", "variant/root/view", "variant/root/ready", "../todoapp/component"],
+  ["todoModel", "rootView", "rootReady", "todoappComponent"],
 
-  function(todoModel, rootReceiveUpdate, rootView, rootReady, todoappComponent) {
+  function(todoModel, rootView, rootReady, todoappComponent) {
     return function(createComponent, todoStorage) {
-      var todoapp = todoappComponent(createComponent);
+      var todoapp = todoappComponent(createComponent, todoStorage);
 
       return createComponent({
         initialModel: todoModel(todoStorage),
         view: rootView(todoapp),
-        receiveUpdate: rootReceiveUpdate(todoStorage),
         ready: rootReady // only jquery and vanillajs need ready
       });
     };

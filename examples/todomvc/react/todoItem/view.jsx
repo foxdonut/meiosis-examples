@@ -19,7 +19,7 @@
       );
     },
 
-    todoInput: function(todo, events) {
+    todoEdit: function(todo, events) {
       return (
         <input type="text" className="edit" value={todo.title}
           onKeyUp={events.onEditKeyUp(todo.id)}

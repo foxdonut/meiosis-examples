@@ -20,19 +20,17 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoInputComponent",
-  ["./actions", "variant/todoInput/view", "./display", "./postRender", "variant/todoInput/ready", "./nextUpdate", "../todoItem/state"],
-  ["todoInputActions", "todoInputView", "todoInputDisplay", "todoInputPostRender", "todoInputReady", "todoInputNextUpdate", "todoItemState"],
+  "mainReceiveUpdate", [], [],
 
-  function(todoInputActions, todoInputView, todoInputDisplay, todoInputPostRender, todoInputReady, todoInputNextUpdate, todoItemState) {
-    return function(createComponent) {
-      return createComponent({
-        actions: todoInputActions,
-        view: todoInputDisplay(todoItemState, todoInputView),
-        postRender: todoInputPostRender, // only jquery and vanillajs need postRender
-        ready: todoInputReady, // only jquery and vanillajs need ready
-        nextUpdate: todoInputNextUpdate
-      });
+  function() {
+    return function(todoStorage) {
+      return function(model, update) {
+        if (update.setAllCompleted) {
+          model.todos = todoStorage.setAllCompleted(update.setAllCompleted);
+        }
+
+        return model;
+      };
     };
   }
 ));

@@ -20,15 +20,29 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoInputDisplay", [], [],
+  "todoEditView",
+  ["mithril"],
+  ["m"],
 
-  function() {
-    return function(state, view) {
-      return function(model, actions) {
-        return state.editing(model.model, model.todo) ?
-          view.todoInput(model.model.editTodo, actions) :
-          view.noTodoInput();
-      };
+  function(m) {
+    return {
+      todoEdit: function(todo, actions) {
+        var events = actions.events;
+
+        return m("input.edit[type=text]", {
+          value: todo.title,
+          onkeyup: events.onEditKeyUp(todo.id),
+          onblur: events.onEditBlur(todo.id),
+          config: function(element) {
+            element.focus();
+            element.selectionStart = element.value.length;
+          }
+        });
+      },
+
+      noTodoInput: function() {
+        return m("span");
+      }
     };
   }
 ));

@@ -20,18 +20,19 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "headerComponent",
-  ["./actions", "./receiveUpdate", "./nextUpdate", "variant/header/view", "variant/header/ready"],
-  ["headerActions", "headerReceiveUpdate", "headerNextUpdate", "headerView", "headerReady"],
+  "todoEditComponent",
+  ["./actions", "variant/todoEdit/view", "./display", "./receiveUpdate", "./postRender", "variant/todoEdit/ready", "./nextUpdate", "../todoItem/state"],
+  ["todoEditActions", "todoEditView", "todoEditDisplay", "todoEditReceiveUpdate", "todoEditPostRender", "todoEditReady", "todoEditNextUpdate", "todoItemState"],
 
-  function(headerActions, headerReceiveUpdate, headerNextUpdate, headerView, headerReady) {
+  function(todoEditActions, todoEditView, todoEditDisplay, todoEditReceiveUpdate, todoEditPostRender, todoEditReady, todoEditNextUpdate, todoItemState) {
     return function(createComponent, todoStorage) {
       return createComponent({
-        actions: headerActions,
-        view: headerView,
-        receiveUpdate: headerReceiveUpdate(todoStorage),
-        ready: headerReady, // only jquery and vanillajs need ready
-        nextUpdate: headerNextUpdate
+        actions: todoEditActions,
+        view: todoEditDisplay(todoItemState, todoEditView),
+        receiveUpdate: todoEditReceiveUpdate(todoStorage),
+        postRender: todoEditPostRender, // only jquery and vanillajs need postRender
+        ready: todoEditReady, // only jquery and vanillajs need ready
+        nextUpdate: todoEditNextUpdate
       });
     };
   }

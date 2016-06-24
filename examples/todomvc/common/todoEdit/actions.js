@@ -20,7 +20,7 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoInputActions", [], [],
+  "todoEditActions", [], [],
 
   function() {
     return function(sendUpdate) {
@@ -28,7 +28,7 @@
         saveTodo: function(title, id) {
           sendUpdate({ saveTodo: { title: title, id: id } });
         },
-        cancelEdit: function() {
+        clearEdit: function() {
           sendUpdate({ editTodo: { } });
         }
       };
@@ -40,7 +40,7 @@
         onEditKeyUp: function(todoId) {
           return function(evt) {
             if (evt.keyCode === ESCAPE_KEY || evt.which === ESCAPE_KEY) {
-              actions.cancelEdit();
+              actions.clearEdit();
             }
             else if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
               actions.saveTodo(evt.target.value, todoId);

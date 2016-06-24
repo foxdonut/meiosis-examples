@@ -20,19 +20,23 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "headerComponent",
-  ["./actions", "./receiveUpdate", "./nextUpdate", "variant/header/view", "variant/header/ready"],
-  ["headerActions", "headerReceiveUpdate", "headerNextUpdate", "headerView", "headerReady"],
+  "todoItemReceiveUpdate", [], [],
 
-  function(headerActions, headerReceiveUpdate, headerNextUpdate, headerView, headerReady) {
-    return function(createComponent, todoStorage) {
-      return createComponent({
-        actions: headerActions,
-        view: headerView,
-        receiveUpdate: headerReceiveUpdate(todoStorage),
-        ready: headerReady, // only jquery and vanillajs need ready
-        nextUpdate: headerNextUpdate
-      });
+  function() {
+    return function(todoStorage) {
+      return function(model, update) {
+        if (update.deleteTodoId) {
+          model.todos = todoStorage.deleteTodoId(update.deleteTodoId);
+        }
+        else if (update.setCompleted) {
+          model.todos = todoStorage.setCompleted(update.setCompleted);
+        }
+        else if (update.editTodo !== undefined) {
+          model.editTodo = update.editTodo;
+        }
+
+        return model;
+      };
     };
   }
 ));

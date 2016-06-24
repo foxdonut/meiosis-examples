@@ -19,7 +19,7 @@
         "</li>";
     },
 
-    todoInput: function(todo) {
+    todoEdit: function(todo) {
       var dataId = " data-id='" + todo.id + "'";
       return "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'/>";
     },

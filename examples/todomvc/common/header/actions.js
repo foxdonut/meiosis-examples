@@ -31,7 +31,7 @@
         saveNewTodo: function(title, id) {
           sendUpdate({ saveTodo: { title: title, id: id } });
         },
-        clearInput: function() {
+        clearNew: function() {
           sendUpdate({ newTodo: "" });
         }
       };

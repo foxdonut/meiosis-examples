@@ -25,7 +25,7 @@
   ["m"],
 
   function(m) {
-    return function(todoInputComponent) {
+    return function(todoEditComponent) {
       return function(model, actions) {
         var todo = model.todo;
         var events = actions.events;
@@ -37,7 +37,7 @@
             m("label", {ondblclick: events.onEditTodo(todo)}, todo.title),
             m("button.destroy", {onclick: events.onDestroyTodo(todo.id)})
           ]),
-          todoInputComponent(model)
+          todoEditComponent(model)
         ]);
       };
     };

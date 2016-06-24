@@ -19,7 +19,7 @@
       ]);
     },
 
-    todoInput: function(todo, events) {
+    todoEdit: function(todo, events) {
       return h("input.edit", {
         props: { type: "text", value: todo.title },
         on: {

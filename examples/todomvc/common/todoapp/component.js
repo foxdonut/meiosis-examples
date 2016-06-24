@@ -51,10 +51,10 @@
       return viewModel;
     };
 
-    return function(createComponent) {
-      var header = headerComponent(createComponent);
-      var main = mainComponent(createComponent);
-      var footer = footerComponent(createComponent);
+    return function(createComponent, todoStorage) {
+      var header = headerComponent(createComponent, todoStorage);
+      var main = mainComponent(createComponent, todoStorage);
+      var footer = footerComponent(createComponent, todoStorage);
 
       var view = todoappView(header, main, footer);
 

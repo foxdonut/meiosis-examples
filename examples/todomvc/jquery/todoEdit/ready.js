@@ -1,17 +1,17 @@
 /*global $, window*/
 (function(ref) {
-  ref.todoInput = ref.todoInput || {};
+  ref.todoEdit = ref.todoEdit || {};
 
   var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
   var $root = $(document.getElementById("app"));
 
-  ref.todoInput.ready = function(actions) {
+  ref.todoEdit.ready = function(actions) {
     $root.on("keyup", "input.edit", function(evt) {
       var todoId = parseInt(evt.target.dataset.id, 10);
 
       if (evt.keyCode === ESCAPE_KEY) {
-        actions.cancelEdit(todoId);
+        actions.clearEdit(todoId);
       }
       else if (evt.keyCode === ENTER_KEY) {
         actions.saveTodo(evt.target.value, todoId);
