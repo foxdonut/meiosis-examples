@@ -1,13 +1,37 @@
-/*global window*/
-(function(ref) {
-  ref.main = ref.main || {};
+/*global define, exports, module, require*/
 
-  ref.main.component = function(createComponent) {
-    var todoItemComponent = ref.todoItem.component(createComponent);
-
-    return createComponent({
-      actions: ref.main.actions,
-      view: ref.main.display(ref.main.state, ref.main.view(todoItemComponent))
+// This boilerplate is to support running this code with either, just the browser, or RequireJS,
+// or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
+// Meiosis. It is for convenience to be able to run the example with your preferred module system.
+(function(root, moduleName, depNames, depVars, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(depNames, factory);
+  }
+  else if (typeof exports === "object") {
+    var requires = depNames.map(function(depName) {
+      return require(depName);
     });
-  };
-})(window);
+    module.exports = factory.apply(root, requires);
+  }
+  else {
+    var vars = depVars.map(function(depVar) {
+      return root[depVar];
+    });
+    root[moduleName] = factory.apply(root, vars);
+  }
+}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+  "mainComponent",
+  ["./actions", "./state", "./display", "variant/main/view", "../todoItem/component"],
+  ["mainActions", "mainState", "mainDisplay", "mainView", "todoItemComponent"],
+
+  function(mainActions, mainState, mainDisplay, mainView, todoItemComponent) {
+    return function(createComponent) {
+      var todoItem = todoItemComponent(createComponent);
+
+      return createComponent({
+        actions: mainActions,
+        view: mainDisplay(mainState, mainView(todoItem))
+      });
+    };
+  }
+));

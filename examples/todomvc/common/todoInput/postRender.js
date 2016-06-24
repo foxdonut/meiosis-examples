@@ -1,13 +1,35 @@
-/*global document, window*/
-(function(ref) {
-  ref.todoInput = ref.todoInput || {};
+/*global define, exports, module, require*/
 
-  ref.todoInput.postRender = function(_view) {
-    var input = document.getElementById("app").querySelector("input.edit");
+// This boilerplate is to support running this code with either, just the browser, or RequireJS,
+// or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
+// Meiosis. It is for convenience to be able to run the example with your preferred module system.
+(function(root, moduleName, depNames, depVars, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(depNames, factory);
+  }
+  else if (typeof exports === "object") {
+    var requires = depNames.map(function(depName) {
+      return require(depName);
+    });
+    module.exports = factory.apply(root, requires);
+  }
+  else {
+    var vars = depVars.map(function(depVar) {
+      return root[depVar];
+    });
+    root[moduleName] = factory.apply(root, vars);
+  }
+}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+  "todoItemPostRender", [], [],
 
-    if (input) {
-      input.focus();
-      input.selectionStart = input.value.length;
-    }
-  };
-})(window);
+  function() {
+    return function(_view) {
+      var input = document.getElementById("app").querySelector("input.edit");
+
+      if (input) {
+        input.focus();
+        input.selectionStart = input.value.length;
+      }
+    };
+  }
+));

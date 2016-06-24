@@ -21,14 +21,14 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "app",
-  ["meiosis", "meiosisTracer", "./root/component"],
-  ["meiosis", "meiosisTracer", "rootComponent"],
+  ["meiosis", "meiosisTracer", "./root/component", "./store"],
+  ["meiosis", "meiosisTracer", "rootComponent", "todoStorage"],
 
-  function(meiosis, meiosisTracer, rootComponent) {
+  function(meiosis, meiosisTracer, rootComponent, todoStorage) {
     return function(meiosisRender) {
       var Meiosis = meiosis.init(meiosisRender.renderer.intoId("app"));
       var createComponent = Meiosis.createComponent;
-      var root = rootComponent(createComponent);
+      var root = rootComponent(createComponent, todoStorage);
       var renderRoot = Meiosis.run(root);
       meiosisTracer(createComponent, renderRoot, "#tracer");
     };

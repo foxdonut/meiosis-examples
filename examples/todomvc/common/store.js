@@ -20,9 +20,7 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoStorage",
-  [],
-  [],
+  "todoStorage", [], [],
 
   function() {
     var STORAGE_KEY = "meiosis-todomvc";
