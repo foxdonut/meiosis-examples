@@ -22,10 +22,13 @@
   <script src="/public/lib/meiosis-tracer.min.js"></script> <!-- development only -->
   <script src="/public/lib/history.min.js"></script>
   <script src="/public/lib/classnames.min.js"></script>
+  <script src="/public/lib/union-type.js"></script>
+
   <script src="/examples/todomvc/common/store.js"></script>
 
   {% block content %}Content{% endblock %}
 
+  <script src="/examples/todomvc/common/header/actionTypes.js"></script>
   <script src="/examples/todomvc/common/header/actions.js"></script>
   <script src="/examples/todomvc/common/header/receiveUpdate.js"></script>
   <script src="/examples/todomvc/common/header/nextUpdate.js"></script>

@@ -20,19 +20,21 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "headerActions", [], [],
+  "headerActions",
+  ["./actionTypes"],
+  ["headerActionTypes"],
 
-  function() {
+  function(HeaderAction) {
     return function(sendUpdate) {
       var actions = {
         newTodo: function(title) {
-          sendUpdate({ newTodo: title });
+          sendUpdate(HeaderAction.NewTodo(title));
         },
-        saveNewTodo: function(title, id) {
-          sendUpdate({ saveTodo: { title: title, id: id } });
+        saveTodo: function(title) {
+          sendUpdate(HeaderAction.SaveTodo(title));
         },
-        clearNew: function() {
-          sendUpdate({ newTodo: "" });
+        clearNewTodo: function() {
+          sendUpdate(HeaderAction.ClearNewTodo());
         }
       };
 
@@ -41,7 +43,7 @@
       actions.events = {
         onNewTodoKeyUp: function(evt) {
           if (evt.keyCode === ENTER_KEY) {
-            actions.saveNewTodo(evt.target.value);
+            actions.saveTodo(evt.target.value);
           }
           else {
             actions.newTodo(evt.target.value);
@@ -49,7 +51,7 @@
         },
         onNewTodoKeyUpEnterOnly: function(evt) {
           if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-            actions.saveNewTodo(evt.target.value);
+            actions.saveTodo(evt.target.value);
           }
         },
         onNewTodoChange: function(evt) {

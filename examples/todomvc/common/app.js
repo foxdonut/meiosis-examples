@@ -21,11 +21,13 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "app",
-  ["meiosis", "meiosisTracer", "./root/component", "./store"],
-  ["meiosis", "meiosisTracer", "rootComponent", "todoStorage"],
+  ["meiosis", "meiosisTracer", "union-type", "./root/component", "./store"],
+  ["meiosis", "meiosisTracer", "unionType", "rootComponent", "todoStorage"],
 
-  function(meiosis, meiosisTracer, rootComponent, todoStorage) {
+  function(meiosis, meiosisTracer, Type, rootComponent, todoStorage) {
     return function(meiosisRender) {
+      Type.check = false;
+
       var Meiosis = meiosis.init(meiosisRender.renderer.intoId("app"));
       var createComponent = Meiosis.createComponent;
       var root = rootComponent(createComponent, todoStorage);

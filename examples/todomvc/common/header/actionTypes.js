@@ -20,18 +20,15 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "headerNextUpdate",
-  ["./actionTypes"],
-  ["headerActionTypes"],
+  "headerActionTypes",
+  ["union-type"],
+  ["unionType"],
 
-  function(HeaderAction) {
-    return function(model, update, actions) {
-      HeaderAction.case({
-        SaveTodo: function() {
-          actions.clearNewTodo();
-        },
-        _: function() { }
-      }, update);
-    };
+  function(Type) {
+    return Type({
+      NewTodo: [ String ],
+      SaveTodo: [ String ],
+      ClearNewTodo: []
+    });
   }
 ));

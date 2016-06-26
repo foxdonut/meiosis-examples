@@ -21,27 +21,36 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "headerReceiveUpdate",
-  ["meiosis"],
-  ["meiosis"],
+  ["meiosis", "./actionTypes"],
+  ["meiosis", "headerActionTypes"],
 
-  function(meiosis) {
+  function(meiosis, HeaderAction) {
     return function(todoStorage) {
       return function(model, update) {
-        if (update.saveTodo && !update.saveTodo.id) {
-          update.saveTodo.title = update.saveTodo.title.trim();
+        return HeaderAction.case({
+          NewTodo: function(title) {
+            model.newTodo = title;
+            return model;
+          },
+          SaveTodo: function(title) {
+            title = title.trim();
 
-          if (update.saveTodo.title) {
-            model.todos = todoStorage.saveTodo(update.saveTodo);
+            if (title) {
+              model.todos = todoStorage.saveTodo({title: title});
+              return model;
+            }
+            else {
+              return meiosis.REFUSE_UPDATE;
+            }
+          },
+          ClearNewTodo: function() {
+            model.newTodo = "";
+            return model;
+          },
+          _: function() {
+            return model;
           }
-          else {
-            return meiosis.REFUSE_UPDATE;
-          }
-        }
-        else if (update.newTodo !== undefined) {
-          model.newTodo = update.newTodo;
-        }
-
-        return model;
+        }, update);
       };
     };
   }
