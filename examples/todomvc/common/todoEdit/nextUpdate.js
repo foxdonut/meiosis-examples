@@ -20,13 +20,18 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoEditNextUpdate", [], [],
+  "todoEditNextUpdate",
+  ["./actionTypes"],
+  ["todoEditActionTypes"],
 
-  function() {
+  function(EditAction) {
     return function(model, update, actions) {
-      if (update.saveTodo && update.saveTodo.id) {
-        actions.clearEdit();
-      }
+      EditAction.case({
+        SaveTodo: function() {
+          actions.clearEdit();
+        },
+        _: function() { }
+      }, update);
     };
   }
 ));

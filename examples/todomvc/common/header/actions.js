@@ -31,7 +31,7 @@
           sendUpdate(HeaderAction.NewTodo(title));
         },
         saveTodo: function(title) {
-          sendUpdate(HeaderAction.SaveTodo(title));
+          sendUpdate(HeaderAction.SaveNewTodo(title));
         },
         clearNewTodo: function() {
           sendUpdate(HeaderAction.ClearNewTodo());

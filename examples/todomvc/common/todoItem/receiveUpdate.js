@@ -20,22 +20,30 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoItemReceiveUpdate", [], [],
+  "todoItemReceiveUpdate",
+  ["./actionTypes"],
+  ["todoItemActionTypes"],
 
-  function() {
+  function(ItemAction) {
     return function(todoStorage) {
       return function(model, update) {
-        if (update.deleteTodoId) {
-          model.todos = todoStorage.deleteTodoId(update.deleteTodoId);
-        }
-        else if (update.setCompleted) {
-          model.todos = todoStorage.setCompleted(update.setCompleted);
-        }
-        else if (update.editTodo !== undefined) {
-          model.editTodo = update.editTodo;
-        }
-
-        return model;
+        return ItemAction.case({
+          SetCompleted: function(todoId, completed) {
+            model.todos = todoStorage.setCompleted(todoId, completed);
+            return model;
+          },
+          EditTodo: function(todo) {
+            model.editTodo = todo;
+            return model;
+          },
+          DeleteTodo: function(todoId) {
+            model.todos = todoStorage.deleteTodoId(todoId);
+            return model;
+          },
+          _: function() {
+            return model;
+          }
+        }, update);
       };
     };
   }

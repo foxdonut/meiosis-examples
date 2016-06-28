@@ -20,13 +20,15 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "mainActions", [], [],
+  "mainActions",
+  ["./actionTypes"],
+  ["mainActionTypes"],
 
-  function() {
+  function(MainAction) {
     return function(sendUpdate) {
       var actions = {
         setAllCompleted: function(completed) {
-          sendUpdate({ setAllCompleted: { completed: completed }});
+          sendUpdate(MainAction.SetAllCompleted(completed));
         }
       };
 

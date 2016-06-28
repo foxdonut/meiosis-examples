@@ -21,24 +21,29 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "footerReceiveUpdate",
-  ["meiosis"],
-  ["meiosis"],
+  ["meiosis", "./actionTypes"],
+  ["meiosis", "footerActionTypes"],
 
-  function(meiosis) {
+  function(meiosis, FooterAction) {
     return function(todoStorage) {
       return function(model, update) {
-        if (update.clearCompleted) {
-          model.todos = todoStorage.clearCompleted();
-        }
-        else if (update.filter) {
-          if (update.filter === model.filter) {
-            return meiosis.REFUSE_UPDATE;
+        return FooterAction.case({
+          ClearCompleted: function() {
+            model.todos = todoStorage.clearCompleted();
+            return model;
+          },
+          Filter: function(by) {
+            if (by === model.filter) {
+              return meiosis.REFUSE_UPDATE;
+            }
+            model.todos = todoStorage.loadAll();
+            model.filter = by;
+            return model;
+          },
+          _: function() {
+            return model;
           }
-          model.todos = todoStorage.loadAll();
-          model.filter = update.filter;
-        }
-
-        return model;
+        }, update);
       };
     };
   }

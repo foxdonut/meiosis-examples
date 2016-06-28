@@ -20,19 +20,21 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoItemActions", [], [],
+  "todoItemActions",
+  ["./actionTypes"],
+  ["todoItemActionTypes"],
 
-  function() {
+  function(ItemAction) {
     return function(sendUpdate) {
       var actions = {
         setCompleted: function(todoId, completed) {
-          sendUpdate({ setCompleted: { id: todoId, completed: completed } });
+          sendUpdate(ItemAction.SetCompleted(todoId, completed));
         },
-        editTodo: function(title, id) {
-          sendUpdate({ editTodo: { title: title, id: id } });
+        editTodo: function(todo) {
+          sendUpdate(ItemAction.EditTodo(todo));
         },
         deleteTodoId: function(todoId) {
-          sendUpdate({ deleteTodoId: todoId });
+          sendUpdate(ItemAction.DeleteTodo(todoId));
         }
       };
 
@@ -44,7 +46,7 @@
         },
         onEditTodo: function(todo) {
           return function(_evt) {
-            actions.editTodo(todo.title, todo.id);
+            actions.editTodo(todo);
           };
         },
         onDestroyTodo: function(todoId) {

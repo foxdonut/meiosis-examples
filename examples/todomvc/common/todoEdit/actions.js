@@ -20,16 +20,18 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoEditActions", [], [],
+  "todoEditActions",
+  ["./actionTypes"],
+  ["todoEditActionTypes"],
 
-  function() {
+  function(EditAction) {
     return function(sendUpdate) {
       var actions = {
         saveTodo: function(title, id) {
-          sendUpdate({ saveTodo: { title: title, id: id } });
+          sendUpdate(EditAction.SaveTodo({ title: title, id: id }));
         },
         clearEdit: function() {
-          sendUpdate({ editTodo: { } });
+          sendUpdate(EditAction.ClearEdit());
         }
       };
 

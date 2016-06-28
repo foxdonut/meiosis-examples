@@ -74,13 +74,13 @@
         }
         return todos;
       },
-      setCompleted: function(updatedTodo) {
+      setCompleted: function(id, completed) {
         var todos = this.loadAll();
-        var index = findIndex(todos, updatedTodo.id);
+        var index = findIndex(todos, id);
 
         if (index >= 0) {
           var todo = todos[index];
-          todo.completed = updatedTodo.completed;
+          todo.completed = completed;
           todos = replaceTodoAtIndex(todos, todo, index);
           this.saveAll(todos);
         }

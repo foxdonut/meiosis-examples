@@ -20,16 +20,18 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "footerActions", [], [],
+  "footerActions",
+  ["./actionTypes"],
+  ["footerActionTypes"],
 
-  function() {
+  function(FooterAction) {
     return function(sendUpdate) {
       var actions = {
         clearCompleted: function() {
-          sendUpdate({ clearCompleted: true });
+          sendUpdate(FooterAction.ClearCompleted());
         },
         filter: function(by) {
-          sendUpdate({ filter: by });
+          sendUpdate(FooterAction.Filter(by));
         }
       };
 

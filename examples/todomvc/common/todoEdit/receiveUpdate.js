@@ -21,28 +21,33 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoEditReceiveUpdate",
-  ["meiosis"],
-  ["meiosis"],
+  ["meiosis", "./actionTypes"],
+  ["meiosis", "todoEditActionTypes"],
 
-  function(meiosis) {
+  function(meiosis, EditAction) {
     return function(todoStorage) {
       return function(model, update) {
-        if (update.saveTodo && update.saveTodo.id) {
-          var editing = update.saveTodo.id === model.editTodo.id;
-          update.saveTodo.title = update.saveTodo.title.trim();
+        return EditAction.case({
+          SaveTodo: function(todo) {
+            var editing = todo.id === model.editTodo.id;
+            todo.title = todo.title.trim();
 
-          if (editing && update.saveTodo.title) {
-            model.todos = todoStorage.saveTodo(update.saveTodo);
+            if (editing && todo.title) {
+              model.todos = todoStorage.saveTodo(todo);
+              return model;
+            }
+            else {
+              return meiosis.REFUSE_UPDATE;
+            }
+          },
+          ClearEdit: function() {
+            model.editTodo = { };
+            return model;
+          },
+          _: function() {
+            return model;
           }
-          else {
-            return meiosis.REFUSE_UPDATE;
-          }
-        }
-        else if (update.editTodo !== undefined) {
-          model.editTodo = update.editTodo;
-        }
-
-        return model;
+        }, update);
       };
     };
   }

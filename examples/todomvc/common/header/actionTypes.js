@@ -27,7 +27,7 @@
   function(Type) {
     return Type({
       NewTodo: [ String ],
-      SaveTodo: [ String ],
+      SaveNewTodo: [ String ],
       ClearNewTodo: []
     });
   }

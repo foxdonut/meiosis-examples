@@ -27,7 +27,7 @@
   function(HeaderAction) {
     return function(model, update, actions) {
       HeaderAction.case({
-        SaveTodo: function() {
+        SaveNewTodo: function() {
           actions.clearNewTodo();
         },
         _: function() { }
