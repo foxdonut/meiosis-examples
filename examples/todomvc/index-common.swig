@@ -28,6 +28,14 @@
 
   {% block content %}Content{% endblock %}
 
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/header/view.{% block ext %}{% endblock %}"></script>
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoEdit/view.{% block ext %}{% endblock %}"></script>
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoItem/view.{% block ext %}{% endblock %}"></script>
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/main/view.{% block ext %}{% endblock %}"></script>
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/footer/view.{% block ext %}{% endblock %}"></script>
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoapp/view.{% block ext %}{% endblock %}"></script>
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/root/view.{% block ext %}{% endblock %}"></script>
+
   <script src="/examples/todomvc/common/header/actionTypes.js"></script>
   <script src="/examples/todomvc/common/header/actions.js"></script>
   <script src="/examples/todomvc/common/header/receive.js"></script>
@@ -60,5 +68,6 @@
   <script src="/examples/todomvc/common/root/model.js"></script>
   <script src="/examples/todomvc/common/root/component.js"></script>
   <script src="/examples/todomvc/common/app.js"></script>
-  <script src="/examples/todomvc/{% block variant %}{% endblock %}/app.js"></script>
+
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/app.{% block ext %}{% endblock %}"></script>
 </html>

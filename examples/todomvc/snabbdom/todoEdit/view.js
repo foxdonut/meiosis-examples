@@ -20,28 +20,36 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoItemView",
+  "todoEditView",
   ["meiosis-snabbdom"],
   ["meiosisSnabbdom"],
 
   function(meiosisSnabbdom) {
-    return function(todoEditComponent) {
-      return function(model, actions) {
-        var h = meiosisSnabbdom.renderer.h;
+    var h = meiosisSnabbdom.renderer.h;
 
-        var todo = model.todo;
+    return {
+      todoEdit: function(todo, actions) {
         var events = actions.events;
 
-        return h("li", {attrs: {class: model.todoClasses}}, [
-          h("div.view", [
-            h("input.toggle", {props: {type: "checkbox", checked: todo.completed},
-              on: {change: events.onToggleTodo(todo.id)}}),
-            h("label", {on: {dblclick: events.onEditTodo(todo)}}, todo.title),
-            h("button.destroy", {on: {click: events.onDestroyTodo(todo.id)}})
-          ]),
-          todoEditComponent(model)
-        ]);
-      };
+        return h("input.edit", {
+          props: { type: "text", value: todo.title },
+          on: {
+            keyup: events.onEditKeyUp(todo.id),
+            blur: events.onEditBlur(todo.id)
+          },
+          hook: {
+            insert: function(vnode) {
+              var element = vnode.elm;
+              element.focus();
+              element.selectionStart = element.value.length;
+            }
+          }
+        });
+      },
+
+      noTodoInput: function() {
+        return h("span");
+      }
     };
   }
 ));
