@@ -9,7 +9,7 @@
   <script src="/examples/rocket-launcher/js/model.js"></script>
   <script src="/examples/rocket-launcher/js/state.js"></script>
   <script src="/examples/rocket-launcher/js/display.js"></script>
-  <script src="/examples/rocket-launcher/js/receiveUpdate.js"></script>
-  <script src="/examples/rocket-launcher/js/nextUpdate.js"></script>
+  <script src="/examples/rocket-launcher/js/receive.js"></script>
+  <script src="/examples/rocket-launcher/js/nextAction.js"></script>
 {% block subcontent %}{% endblock %}
 {% endblock %}

@@ -25,10 +25,10 @@
   ["mainActionTypes"],
 
   function(MainAction) {
-    return function(sendUpdate) {
+    return function(propose) {
       var actions = {
         setAllCompleted: function(completed) {
-          sendUpdate(MainAction.SetAllCompleted(completed));
+          propose(MainAction.SetAllCompleted(completed));
         }
       };
 

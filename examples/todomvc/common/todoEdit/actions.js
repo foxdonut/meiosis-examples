@@ -25,13 +25,13 @@
   ["todoEditActionTypes"],
 
   function(EditAction) {
-    return function(sendUpdate) {
+    return function(propose) {
       var actions = {
         saveTodo: function(title, id) {
-          sendUpdate(EditAction.SaveTodo({ title: title, id: id }));
+          propose(EditAction.SaveTodo({ title: title, id: id }));
         },
         clearEdit: function() {
-          sendUpdate(EditAction.ClearEdit());
+          propose(EditAction.ClearEdit());
         }
       };
 

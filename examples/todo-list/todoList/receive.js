@@ -6,18 +6,18 @@ const updateTodos = (todos, todo) => {
   return index >= 0 ? set(lensIndex(index), todo, todos) : append(todo, todos);
 };
 
-const receiveUpdate = (model, update) => {
-  let modelUpdate = update.modelUpdate;
+const receive = (model, proposal) => {
+  let modelUpdate = proposal.modelUpdate;
 
-  if (!modelUpdate && Action.prototype.isPrototypeOf(update.action)) {
+  if (!modelUpdate && Action.prototype.isPrototypeOf(proposal.action)) {
     modelUpdate = Action.case({
       DeletedTodo: maybeTodoId => maybeTodoId
         .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.todos), message: "" }))
         .getOrElse({ todos: model.todos, message: "An error occured when deleting a Todo." })
-    }, update.action);
+    }, proposal.action);
   }
-  else if (update.savedTodo) {
-    modelUpdate = update.savedTodo
+  else if (proposal.savedTodo) {
+    modelUpdate = proposal.savedTodo
       .map(todo => updateTodos(model.todos, todo))
       .map(todos => ({ todos, message: "" }))
       .getOrElse({ message: "An error occurred when saving a Todo." });
@@ -25,4 +25,4 @@ const receiveUpdate = (model, update) => {
   return merge(model, modelUpdate);
 };
 
-export default receiveUpdate;
+export default receive;

@@ -20,22 +20,30 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "mainReceiveUpdate",
+  "todoItemReceive",
   ["./actionTypes"],
-  ["mainActionTypes"],
+  ["todoItemActionTypes"],
 
-  function(MainAction) {
+  function(ItemAction) {
     return function(todoStorage) {
-      return function(model, update) {
-        return MainAction.case({
-          SetAllCompleted: function(completed) {
-            model.todos = todoStorage.setAllCompleted(completed);
+      return function(model, proposal) {
+        return ItemAction.case({
+          SetCompleted: function(todoId, completed) {
+            model.todos = todoStorage.setCompleted(todoId, completed);
+            return model;
+          },
+          EditTodo: function(todo) {
+            model.editTodo = todo;
+            return model;
+          },
+          DeleteTodo: function(todoId) {
+            model.todos = todoStorage.deleteTodoId(todoId);
             return model;
           },
           _: function() {
             return model;
           }
-        }, update);
+        }, proposal);
       };
     };
   }

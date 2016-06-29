@@ -2,9 +2,9 @@ import h from "snabbdom/h";
 
 import { Action } from "./actions";
 
-const view = LabeledSlider => (model, actions) => {
-  const onAddMeasurement = _evt => actions.sendUpdate(Action.AddMeasurement());
-  const onRemoveMeasurement = id => actions.sendUpdate(Action.RemoveMeasurement(id));
+const view = LabeledSlider => (model, propose) => {
+  const onAddMeasurement = _evt => propose(Action.AddMeasurement());
+  const onRemoveMeasurement = id => propose(Action.RemoveMeasurement(id));
 
   const renderMeasurement = (measurement, index) =>
     h("div", {key: measurement.id, style: {border: "1px solid gray"}, id: measurement.id}, [

@@ -3,7 +3,7 @@ import { Action } from "./actions";
 
 const rnd = (min, max) => Math.round(Math.random() * min) + (max || 0);
 
-const transform = (model, action) => Action.case({
+const transform = (model, proposal) => Action.case({
   AddMeasurement: () =>
     assoc("nextId",
       model.nextId + 1,
@@ -21,16 +21,16 @@ const transform = (model, action) => Action.case({
 
   RemoveMeasurement: id =>
     assoc("measurements", model.measurements.filter(m => m.id !== id), model)
-}, action);
+}, proposal);
 
-const receiveUpdate = (model, update) => {
-  if (parseInt(update.index, 10) >= 0) {
-    model.measurements[update.index] = assoc("value", update.value, model.measurements[update.index]);
+const receive = (model, proposal) => {
+  if (parseInt(proposal.index, 10) >= 0) {
+    model.measurements[proposal.index] = assoc("value", proposal.value, model.measurements[proposal.index]);
   }
   else {
-    model = merge(model, transform(model, update));
+    model = merge(model, transform(model, proposal));
   }
   return model;
 };
 
-export default receiveUpdate;
+export default receive;

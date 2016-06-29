@@ -21,15 +21,15 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "footerComponent",
-  ["./actions", "variant/footer/view", "./receiveUpdate", "./ready"],
-  ["footerActions", "footerView", "footerReceiveUpdate", "footerReady"],
+  ["./actions", "variant/footer/view", "./receive", "./ready"],
+  ["footerActions", "footerView", "footerReceive", "footerReady"],
 
-  function(footerActions, footerView, footerReceiveUpdate, footerReady) {
+  function(footerActions, footerView, footerReceive, footerReady) {
     return function(createComponent, todoStorage) {
       return createComponent({
         actions: footerActions,
         view: footerView,
-        receiveUpdate: footerReceiveUpdate(todoStorage),
+        receive: footerReceive(todoStorage),
         ready: footerReady
       });
     };

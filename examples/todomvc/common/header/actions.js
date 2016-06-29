@@ -25,16 +25,16 @@
   ["headerActionTypes"],
 
   function(HeaderAction) {
-    return function(sendUpdate) {
+    return function(propose) {
       var actions = {
         newTodo: function(title) {
-          sendUpdate(HeaderAction.NewTodo(title));
+          propose(HeaderAction.NewTodo(title));
         },
         saveTodo: function(title) {
-          sendUpdate(HeaderAction.SaveNewTodo(title));
+          propose(HeaderAction.SaveNewTodo(title));
         },
         clearNewTodo: function() {
-          sendUpdate(HeaderAction.ClearNewTodo());
+          propose(HeaderAction.ClearNewTodo());
         }
       };
 

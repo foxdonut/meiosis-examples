@@ -20,30 +20,30 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoItemReceiveUpdate",
-  ["./actionTypes"],
-  ["todoItemActionTypes"],
+  "footerReceive",
+  ["meiosis", "./actionTypes"],
+  ["meiosis", "footerActionTypes"],
 
-  function(ItemAction) {
+  function(meiosis, FooterAction) {
     return function(todoStorage) {
-      return function(model, update) {
-        return ItemAction.case({
-          SetCompleted: function(todoId, completed) {
-            model.todos = todoStorage.setCompleted(todoId, completed);
+      return function(model, proposal) {
+        return FooterAction.case({
+          ClearCompleted: function() {
+            model.todos = todoStorage.clearCompleted();
             return model;
           },
-          EditTodo: function(todo) {
-            model.editTodo = todo;
-            return model;
-          },
-          DeleteTodo: function(todoId) {
-            model.todos = todoStorage.deleteTodoId(todoId);
+          Filter: function(by) {
+            if (by === model.filter) {
+              return meiosis.REFUSE_PROPOSAL;
+            }
+            model.todos = todoStorage.loadAll();
+            model.filter = by;
             return model;
           },
           _: function() {
             return model;
           }
-        }, update);
+        }, proposal);
       };
     };
   }

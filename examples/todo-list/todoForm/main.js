@@ -2,13 +2,13 @@ import services from "./services";
 import { actions, Action } from "./actions";
 import { initialModel } from "./model";
 import view from "./view.jsx";
-import nextUpdate from "./nextUpdate";
+import nextAction from "./nextAction";
 
 const todoFormConfig = {
   initialModel,
   view,
   actions: actions(services),
-  nextUpdate: nextUpdate(Action)
+  nextAction: nextAction(Action)
 };
 
 export default todoFormConfig;

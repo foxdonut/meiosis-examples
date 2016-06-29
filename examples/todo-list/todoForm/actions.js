@@ -8,14 +8,14 @@ const Action = Type({
   SavedTodo: []
 });
 
-const actions = services => sendUpdate => ({
-  editingTodo: todo => sendUpdate({ modelUpdate: { todo } }),
+const actions = services => propose => ({
+  editingTodo: todo => propose({ modelUpdate: { todo } }),
 
-  clearForm: () => sendUpdate({ modelUpdate: initialModel }),
+  clearForm: () => propose({ modelUpdate: initialModel }),
 
-  requestSaveTodo: todo => sendUpdate({ modelUpdate: { message: "Saving, please wait..." }, action: Action.RequestSaveTodo(todo) }),
+  requestSaveTodo: todo => propose({ modelUpdate: { message: "Saving, please wait..." }, action: Action.RequestSaveTodo(todo) }),
 
-  saveTodo: todo => services.saveTodo(todo).fork(null, savedTodo => sendUpdate({ action: Action.SavedTodo(), savedTodo }))
+  saveTodo: todo => services.saveTodo(todo).fork(null, savedTodo => propose({ action: Action.SavedTodo(), savedTodo }))
 });
 
 export { Action, actions };

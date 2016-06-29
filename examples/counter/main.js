@@ -6,18 +6,18 @@ var view = function(model) {
     "<div><button id='inc'>+</button> <button id='decr'>-</button></div>";
 };
 
-var receiveUpdate = function(model, update) {
-  return { counter: model.counter + update.add };
+var receive = function(model, proposal) {
+  return { counter: model.counter + proposal.add };
 };
 
-var ready = function(actions) {
+var ready = function(propose) {
   var $root = $(document.getElementById("app"));
 
   $root.on("click", "button#inc", function(_evt) {
-    actions.sendUpdate({ add: 1 });
+    propose({ add: 1 });
   });
   $root.on("click", "button#decr", function(_evt) {
-    actions.sendUpdate({ add: -1 });
+    propose({ add: -1 });
   });
 };
 
@@ -27,7 +27,7 @@ var Main = Meiosis.createComponent({
   initialModel: initialModel,
   view: view,
   ready: ready,
-  receiveUpdate: receiveUpdate
+  receive: receive
 });
 
 Meiosis.run(Main);

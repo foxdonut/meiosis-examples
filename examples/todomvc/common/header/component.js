@@ -21,17 +21,17 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "headerComponent",
-  ["./actions", "./receiveUpdate", "./nextUpdate", "variant/header/view", "variant/header/ready"],
-  ["headerActions", "headerReceiveUpdate", "headerNextUpdate", "headerView", "headerReady"],
+  ["./actions", "./receive", "./nextAction", "variant/header/view", "variant/header/ready"],
+  ["headerActions", "headerReceive", "headerNextAction", "headerView", "headerReady"],
 
-  function(headerActions, headerReceiveUpdate, headerNextUpdate, headerView, headerReady) {
+  function(headerActions, headerReceive, headerNextAction, headerView, headerReady) {
     return function(createComponent, todoStorage) {
       return createComponent({
         actions: headerActions,
         view: headerView,
-        receiveUpdate: headerReceiveUpdate(todoStorage),
+        receive: headerReceive(todoStorage),
         ready: headerReady, // only jquery and vanillajs need ready
-        nextUpdate: headerNextUpdate
+        nextAction: headerNextAction
       });
     };
   }

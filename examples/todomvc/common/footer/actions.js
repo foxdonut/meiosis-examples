@@ -25,13 +25,13 @@
   ["footerActionTypes"],
 
   function(FooterAction) {
-    return function(sendUpdate) {
+    return function(propose) {
       var actions = {
         clearCompleted: function() {
-          sendUpdate(FooterAction.ClearCompleted());
+          propose(FooterAction.ClearCompleted());
         },
         filter: function(by) {
-          sendUpdate(FooterAction.Filter(by));
+          propose(FooterAction.Filter(by));
         }
       };
 

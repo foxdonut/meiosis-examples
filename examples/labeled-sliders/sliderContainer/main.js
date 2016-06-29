@@ -1,5 +1,5 @@
 import { initialModel } from "./model";
-import receiveUpdate from "./receiveUpdate";
+import receive from "./receive";
 import view from "./view";
 
 import labeledSliderConfig from "../labeledSlider/main";
@@ -10,7 +10,7 @@ const createSliderContainer = createComponent => {
   return createComponent({
     initialModel,
     view: view(LabeledSlider),
-    receiveUpdate: receiveUpdate
+    receive: receive
   });
 };
 

@@ -8,16 +8,16 @@ const Action = Type({
   DeletedTodo: [Object]
 });
 
-const actions = services => sendUpdate => ({
-  requestLoadList: () => sendUpdate({ action: Action.RequestLoadList(), modelUpdate: { message: "Loading, please wait..." } }),
+const actions = services => propose => ({
+  requestLoadList: () => propose({ action: Action.RequestLoadList(), modelUpdate: { message: "Loading, please wait..." } }),
 
-  loadList: () => services.loadTodos.fork(null, model => sendUpdate({ modelUpdate: model })),
+  loadList: () => services.loadTodos.fork(null, model => propose({ modelUpdate: model })),
 
-  editTodo: (todo) => sendUpdate({ modelUpdate: { todo } } ),
+  editTodo: (todo) => propose({ modelUpdate: { todo } } ),
 
-  requestDeleteTodo: id => sendUpdate({ action: Action.RequestDeleteTodo(id), modelUpdate: { message: "Deleting, please wait..."} } ),
+  requestDeleteTodo: id => propose({ action: Action.RequestDeleteTodo(id), modelUpdate: { message: "Deleting, please wait..."} } ),
 
-  deleteTodo: id => services.deleteTodo(id).fork(null, maybeTodoId => sendUpdate({ action: Action.DeletedTodo(maybeTodoId) }))
+  deleteTodo: id => services.deleteTodo(id).fork(null, maybeTodoId => propose({ action: Action.DeletedTodo(maybeTodoId) }))
 });
 
 export { Action, actions };

@@ -1,20 +1,20 @@
 /*global window*/
 (function(ref) {
-  ref.actions = function(sendUpdate) {
+  ref.actions = function(propose) {
     return {
       start: function() {
-        sendUpdate({ started: true });
+        propose({ started: true });
       },
       decrement: function(counter) {
         setTimeout(function() {
-          sendUpdate({ counter: counter - 1 });
+          propose({ counter: counter - 1 });
         }, 1000);
       },
       launch: function() {
-        sendUpdate({ launched: true });
+        propose({ launched: true });
       },
       abort: function() {
-        sendUpdate({ aborted: true });
+        propose({ aborted: true });
       }
     };
   };

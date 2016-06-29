@@ -2,15 +2,15 @@ import services from "./services";
 import { initialModel } from "./model";
 import view from "./view.jsx";
 import { actions, Action } from "./actions";
-import receiveUpdate from "./receiveUpdate";
-import nextUpdate from "./nextUpdate";
+import receive from "./receive";
+import nextAction from "./nextAction";
 
 const todoListConfig = {
   initialModel,
   view,
   actions: actions(services),
-  receiveUpdate,
-  nextUpdate: nextUpdate(Action)
+  receive,
+  nextAction: nextAction(Action)
 };
 
 export default todoListConfig;

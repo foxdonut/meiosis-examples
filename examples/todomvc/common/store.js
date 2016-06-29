@@ -86,10 +86,10 @@
         }
         return todos;
       },
-      setAllCompleted: function(update) {
+      setAllCompleted: function(completed) {
         var todos = this.loadAll();
         todos.forEach(function(todo) {
-          todo.completed = update.completed;
+          todo.completed = completed;
         });
         this.saveAll(todos);
         return todos;

@@ -1,6 +1,6 @@
 {
   "name": "todo-list",
-  "version": "0.5.10",
+  "version": "0.6.0",
   "description": "meiosis-examples todo-list",
   "main": "index.js",
   "scripts": {
@@ -24,24 +24,24 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "axios": "^0.9.1",
+    "axios": "^0.12.0",
     "data.maybe": "^1.2.2",
     "data.task": "^3.1.0",
     "form-serialize": "^0.7.1",
     "futurize": "^1.0.2",
-    "meiosis": "^0.5.10",
+    "meiosis": "^0.6.0",
     "meiosis-react": "^0.5.0",
-    "meiosis-tracer": "^0.5.0",
+    "meiosis-tracer": "^0.6.0",
     "ramda": "^0.21.0",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "union-type": "^0.3.0"
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "union-type": "^0.3.1"
   },
   "devDependencies": {
-    "babel-core": "^6.7.7",
-    "babel-loader": "^6.2.0",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-react": "^6.3.13",
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
     "webpack": "^1.13.0"
   }
 }

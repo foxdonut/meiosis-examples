@@ -1,11 +1,11 @@
 /*global window, React*/
 (function(ref) {
-  ref.reactView = function(model, actions) {
+  ref.reactView = function(model, propose) {
     var onInc = function(_evt) {
-      actions.sendUpdate({ add: 10 });
+      propose({ add: 10 });
     };
     var onDecr = function(_evt) {
-      actions.sendUpdate({ add: -10 });
+      propose({ add: -10 });
     };
     return (
       <div>

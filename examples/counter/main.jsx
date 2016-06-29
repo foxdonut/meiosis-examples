@@ -3,8 +3,8 @@ var initialModel = { counter: 0 };
 
 var view = window.reactView;
 
-var receiveUpdate = function(model, update) {
-  return { counter: model.counter + update.add };
+var receive = function(model, proposal) {
+  return { counter: model.counter + proposal.add };
 };
 
 var Meiosis = meiosis.init(meiosisReact.renderer.intoId("reactApp"));
@@ -12,7 +12,7 @@ var Meiosis = meiosis.init(meiosisReact.renderer.intoId("reactApp"));
 var Main = Meiosis.createComponent({
   initialModel: initialModel,
   view: view,
-  receiveUpdate: receiveUpdate
+  receive: receive
 });
 
 Meiosis.run(Main);

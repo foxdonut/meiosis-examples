@@ -25,16 +25,16 @@
   ["todoItemActionTypes"],
 
   function(ItemAction) {
-    return function(sendUpdate) {
+    return function(propose) {
       var actions = {
         setCompleted: function(todoId, completed) {
-          sendUpdate(ItemAction.SetCompleted(todoId, completed));
+          propose(ItemAction.SetCompleted(todoId, completed));
         },
         editTodo: function(todo) {
-          sendUpdate(ItemAction.EditTodo(todo));
+          propose(ItemAction.EditTodo(todo));
         },
         deleteTodoId: function(todoId) {
-          sendUpdate(ItemAction.DeleteTodo(todoId));
+          propose(ItemAction.DeleteTodo(todoId));
         }
       };
 

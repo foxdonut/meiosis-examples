@@ -8,7 +8,7 @@ requirejs.config({
 });
 
 requirejs(["require", "meiosis", "meiosisVanillaJs", "meiosisTracer",
-    "./model", "./view", "./ready", "./receiveUpdate"
+    "./model", "./view", "./ready", "./receive"
   ],
   function(require) {
     var meiosis = require("meiosis");
@@ -18,7 +18,7 @@ requirejs(["require", "meiosis", "meiosisVanillaJs", "meiosisTracer",
     var model = require("./model");
     var view = require("./view");
     var ready = require("./ready");
-    var receiveUpdate = require("./receiveUpdate");
+    var receive = require("./receive");
 
     var renderer = meiosisVanillaJs.renderer;
     var Meiosis = meiosis.init(renderer.intoId("app"));
@@ -29,7 +29,7 @@ requirejs(["require", "meiosis", "meiosisVanillaJs", "meiosisTracer",
       initialModel: model.initialModel,
       view: view,
       ready: ready,
-      receiveUpdate: receiveUpdate
+      receive: receive
     });
 
     var renderRoot = Meiosis.run(Main);

@@ -21,17 +21,17 @@
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoItemComponent",
-  ["./actions", "./state", "./display", "variant/todoItem/view", "./receiveUpdate", "variant/todoItem/ready", "../todoEdit/component"],
-  ["todoItemActions", "todoItemState", "todoItemDisplay", "todoItemView", "todoItemReceiveUpdate", "todoItemReady", "todoEditComponent"],
+  ["./actions", "./state", "./display", "variant/todoItem/view", "./receive", "variant/todoItem/ready", "../todoEdit/component"],
+  ["todoItemActions", "todoItemState", "todoItemDisplay", "todoItemView", "todoItemReceive", "todoItemReady", "todoEditComponent"],
 
-  function(todoItemActions, todoItemState, todoItemDisplay, todoItemView, todoItemReceiveUpdate, todoItemReady, todoEditComponent) {
+  function(todoItemActions, todoItemState, todoItemDisplay, todoItemView, todoItemReceive, todoItemReady, todoEditComponent) {
     return function(createComponent, todoStorage) {
       var todoEdit = todoEditComponent(createComponent, todoStorage);
 
       return createComponent({
         actions: todoItemActions,
         view: todoItemDisplay(todoItemState, todoItemView(todoEdit)),
-        receiveUpdate: todoItemReceiveUpdate(todoStorage),
+        receive: todoItemReceive(todoStorage),
         ready: todoItemReady // only jquery and vanillajs need ready
       });
     };

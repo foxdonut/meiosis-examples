@@ -20,18 +20,38 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoEditNextUpdate",
-  ["./actionTypes"],
-  ["todoEditActionTypes"],
+  "headerReceive",
+  ["meiosis", "./actionTypes"],
+  ["meiosis", "headerActionTypes"],
 
-  function(EditAction) {
-    return function(model, update, actions) {
-      EditAction.case({
-        SaveTodo: function() {
-          actions.clearEdit();
-        },
-        _: function() { }
-      }, update);
+  function(meiosis, HeaderAction) {
+    return function(todoStorage) {
+      return function(model, proposal) {
+        return HeaderAction.case({
+          NewTodo: function(title) {
+            model.newTodo = title;
+            return model;
+          },
+          SaveNewTodo: function(title) {
+            title = title.trim();
+
+            if (title) {
+              model.todos = todoStorage.saveTodo({title: title});
+              return model;
+            }
+            else {
+              return meiosis.REFUSE_PROPOSAL;
+            }
+          },
+          ClearNewTodo: function() {
+            model.newTodo = "";
+            return model;
+          },
+          _: function() {
+            return model;
+          }
+        }, proposal);
+      };
     };
   }
 ));

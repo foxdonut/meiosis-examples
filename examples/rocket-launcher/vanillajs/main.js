@@ -9,8 +9,8 @@
     view: ref.display(ref.state, ref.view),
     actions: ref.actions,
     ready: ref.ready,
-    receiveUpdate: ref.receiveUpdate(ref.state),
-    nextUpdate: ref.nextUpdate(ref.state)
+    receive: ref.receive(ref.state),
+    nextAction: ref.nextAction(ref.state)
   });
 
   var renderRoot = Meiosis.run(Main);
