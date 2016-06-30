@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "mainComponent",
   ["./actions", "./state", "./display", "./receive", "variant/main/view", "../todoItem/component"],
   ["mainActions", "mainState", "mainDisplay", "mainReceive", "mainView", "todoItemComponent"],

@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoEditComponent",
   ["./actions", "variant/todoEdit/view", "./display", "./receive", "./postRender", "variant/todoEdit/ready", "./nextAction", "../todoItem/state"],
   ["todoEditActions", "todoEditView", "todoEditDisplay", "todoEditReceive", "todoEditPostRender", "todoEditReady", "todoEditNextAction", "todoItemState"],

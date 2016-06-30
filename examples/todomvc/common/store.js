@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoStorage", [], [],
 
   function() {
@@ -60,7 +60,7 @@
           todos = replaceTodoAtIndex(todos, todo, findIndex(todos, todo.id));
         }
         else {
-          todos = todos.concat([{title: todo.title, id: new Date().getTime()}]);
+          todos = todos.concat([{title: todo.title, id: new Date().getTime(), completed: false}]);
         }
         return this.saveAll(todos);
       },

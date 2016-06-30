@@ -19,13 +19,14 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoEditActionTypes",
   ["union-type"],
   ["unionType"],
 
   function(Type) {
     return Type({
+      EditingTodo: [ Object ],
       SaveTodo: [ Object ],
       ClearEdit: [ ]
     });

@@ -1,4 +1,4 @@
-/*global define, exports, module, require*/
+/*global define, exports, module, require, React*/
 
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
@@ -19,12 +19,12 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "footerView",
   ["react", "classNames"],
-  ["React", "classNames"],
+  ["classNames"],
 
-  function(React, classNames) {
+  function(classNames) {
     return function(model, actions) {
       var clearCompleted = model.clearCompleted ?
         <button className="clear-completed" onClick={actions.events.onClearCompleted}>Clear completed</button> : null;

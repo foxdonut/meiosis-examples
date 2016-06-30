@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoEditActions",
   ["./actionTypes"],
   ["todoEditActionTypes"],
@@ -27,6 +27,9 @@
   function(EditAction) {
     return function(propose) {
       var actions = {
+        editingTodo: function(title, id) {
+          propose(EditAction.EditingTodo({ title: title, id: id }));
+        },
         saveTodo: function(title, id) {
           propose(EditAction.SaveTodo({ title: title, id: id }));
         },
@@ -51,7 +54,7 @@
         },
         onEditChange: function(todoId) {
           return function(evt) {
-            actions.editTodo(evt.target.value, todoId);
+            actions.editingTodo(evt.target.value, todoId);
           };
         },
         onEditBlur: function(todoId) {

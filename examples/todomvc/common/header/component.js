@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "headerComponent",
   ["./actions", "./receive", "./nextAction", "variant/header/view", "variant/header/ready"],
   ["headerActions", "headerReceive", "headerNextAction", "headerView", "headerReady"],

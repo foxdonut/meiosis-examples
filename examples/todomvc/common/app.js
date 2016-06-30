@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "app",
   ["meiosis", "meiosisTracer", "union-type", "./root/component", "./store"],
   ["meiosis", "meiosisTracer", "unionType", "rootComponent", "todoStorage"],

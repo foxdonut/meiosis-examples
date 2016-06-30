@@ -1,4 +1,4 @@
-/*global define, exports, module, require*/
+/*global define, exports, module, require, React*/
 
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
@@ -19,19 +19,19 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoItemView",
   ["react"],
-  ["React"],
+  [],
 
-  function(React) {
+  function() {
     return function(todoEditComponent) {
       return function(model, actions) {
         var todo = model.todo;
         var events = actions.events;
 
         return (
-          <li className={model.todoClasses}>
+          <li key={todo.id} className={model.todoClasses}>
             <div className="view">
               <input className="toggle" type="checkbox" checked={todo.completed}
                 onChange={events.onToggleTodo(todo.id)}/>

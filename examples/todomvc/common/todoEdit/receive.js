@@ -19,7 +19,7 @@
     });
     root[moduleName] = factory.apply(root, vars);
   }
-}(this, // ^^ the code above is boilerplate. the "real" code starts below. vv
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "todoEditReceive",
   ["meiosis", "./actionTypes"],
   ["meiosis", "todoEditActionTypes"],
@@ -28,6 +28,10 @@
     return function(todoStorage) {
       return function(model, proposal) {
         return EditAction.case({
+          EditingTodo: function(todo) {
+            model.editTodo = todo;
+            return model;
+          },
           SaveTodo: function(todo) {
             var editing = todo.id === model.editTodo.id;
             todo.title = todo.title.trim();
