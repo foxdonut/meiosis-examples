@@ -26,7 +26,6 @@
     return function(todoItemComponent) {
       return function(model) {
         var checked = model.allCompleted ? "checked" : "";
-        // FIXME: onchange: actions.events.onToggleAllTodos
 
         return "<section class='main'>" +
           "<input class='toggle-all' type='checkbox' " + checked + ">" +

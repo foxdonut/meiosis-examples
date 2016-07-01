@@ -1,4 +1,4 @@
-/*global define, exports, module, require*/
+/*global define, exports, module, require, document*/
 
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
@@ -20,21 +20,15 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoappView",
-  ["jquery", "handlebars"],
-  ["jQuery", "Handlebars"],
+  "mainReady",
+  ["jquery"],
+  ["jQuery"],
 
-  function($, Handlebars) {
-    var todoappTemplate = Handlebars.compile($("#todoapp").html());
+  function($) {
+    var $root = $(document.getElementById("app"));
 
-    return function(header, main, footer) {
-      return function(model) {
-        return todoappTemplate({
-          header: header(model),
-          main: main(model),
-          footer: footer(model)
-        });
-      };
+    return function(actions) {
+      $root.on("change", "input.toggle-all", actions.events.onToggleAllTodos);
     };
   }
 ));

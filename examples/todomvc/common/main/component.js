@@ -21,17 +21,18 @@
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
   "mainComponent",
-  ["./actions", "./state", "./display", "./receive", "variant/main/view", "../todoItem/component"],
-  ["mainActions", "mainState", "mainDisplay", "mainReceive", "mainView", "todoItemComponent"],
+  ["./actions", "./state", "./display", "./receive", "variant/main/view", "variant/main/ready", "../todoItem/component"],
+  ["mainActions", "mainState", "mainDisplay", "mainReceive", "mainView", "mainReady", "todoItemComponent"],
 
-  function(mainActions, mainState, mainDisplay, mainReceive, mainView, todoItemComponent) {
+  function(mainActions, mainState, mainDisplay, mainReceive, mainView, mainReady, todoItemComponent) {
     return function(createComponent, todoStorage) {
       var todoItem = todoItemComponent(createComponent, todoStorage);
 
       return createComponent({
         actions: mainActions,
         view: mainDisplay(mainState, mainView(todoItem)),
-        receive: mainReceive(todoStorage)
+        receive: mainReceive(todoStorage),
+        ready: mainReady // only jquery and vanillajs need ready
       });
     };
   }

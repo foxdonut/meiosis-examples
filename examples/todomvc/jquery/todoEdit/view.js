@@ -20,21 +20,20 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoappView",
+  "todoEditView",
   ["jquery", "handlebars"],
   ["jQuery", "Handlebars"],
 
   function($, Handlebars) {
-    var todoappTemplate = Handlebars.compile($("#todoapp").html());
+    return {
+      todoEdit: function(todo) {
+        var todoEditTemplate = Handlebars.compile($("#todoEdit").html());
+        return todoEditTemplate({todo: todo});
+      },
 
-    return function(header, main, footer) {
-      return function(model) {
-        return todoappTemplate({
-          header: header(model),
-          main: main(model),
-          footer: footer(model)
-        });
-      };
+      noTodoInput: function() {
+        return "";
+      }
     };
   }
 ));

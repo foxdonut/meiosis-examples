@@ -48,6 +48,12 @@
 
 
 
+<script id="todoEdit" type="text/x-handlebars-template">
+  <input data-id="{{todo.id}}" type="text" class="edit" value="{{todo.title}}">
+</script>
+
+
+
 <script id="todoItem" type="text/x-handlebars-template">
   <li class="{{model.todoClasses}}">
     <div class="view">
@@ -59,15 +65,11 @@
   </li>
 </script>
 
-<script id="todoEdit" type="text/x-handlebars-template">
-  <input data-id="{{todo.id}}" type="text" class="edit" value="{{todo.title}}">
-</script>
-
 
 
 <script id="main" type="text/x-handlebars-template">
   <section class="main">
-    <input class="toggle-all" type="checkbox">
+    <input class="toggle-all" type="checkbox" {{#if allCompleted}}checked{{/if}}>
     <label for="toggle-all">Mark all as complete</label>
     <ul class="todo-list">
       {{{renderedTodos}}}
@@ -107,26 +109,21 @@
 <script src="/public/lib/jquery-2.2.3.min.js"></script>
 <script src="/public/lib/handlebars.min-v4.0.5.js"></script>
 <script src="/examples/todomvc/common/todoEdit/postRender.js"></script>
-<script src="/examples/todomvc/jquery/header/view.js"></script>
 <script src="/examples/todomvc/jquery/header/ready.js"></script>
-<script src="/examples/todomvc/jquery/todoItem/view.js"></script>
 <script src="/examples/todomvc/jquery/todoItem/ready.js"></script>
-<script src="/examples/todomvc/jquery/main/view.js"></script>
-<script src="/examples/todomvc/jquery/footer/view.js"></script>
+<script src="/examples/todomvc/jquery/todoEdit/ready.js"></script>
+<script src="/examples/todomvc/jquery/main/ready.js"></script>
 <script src="/examples/todomvc/jquery/footer/ready.js"></script>
-<script src="/examples/todomvc/jquery/todoapp/view.js"></script>
-<script src="/examples/todomvc/jquery/root/view.js"></script>
-<script src="/examples/todomvc/jquery/app.js"></script>
 
 
 
-  <script src="/examples/todomvc//header/view."></script>
-  <script src="/examples/todomvc//todoEdit/view."></script>
-  <script src="/examples/todomvc//todoItem/view."></script>
-  <script src="/examples/todomvc//main/view."></script>
-  <script src="/examples/todomvc//footer/view."></script>
-  <script src="/examples/todomvc//todoapp/view."></script>
-  <script src="/examples/todomvc//root/view."></script>
+  <script src="/examples/todomvc/jquery/header/view.js"></script>
+  <script src="/examples/todomvc/jquery/todoEdit/view.js"></script>
+  <script src="/examples/todomvc/jquery/todoItem/view.js"></script>
+  <script src="/examples/todomvc/jquery/main/view.js"></script>
+  <script src="/examples/todomvc/jquery/footer/view.js"></script>
+  <script src="/examples/todomvc/jquery/todoapp/view.js"></script>
+  <script src="/examples/todomvc/jquery/root/view.js"></script>
 
   <script src="/examples/todomvc/common/header/actionTypes.js"></script>
   <script src="/examples/todomvc/common/header/actions.js"></script>
@@ -160,6 +157,6 @@
   <script src="/examples/todomvc/common/root/component.js"></script>
   <script src="/examples/todomvc/common/app.js"></script>
 
-  <script src="/examples/todomvc//app."></script>
+  <script src="/examples/todomvc/jquery/app.js"></script>
 </html>
 
