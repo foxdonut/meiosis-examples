@@ -1,31 +1,44 @@
-/*global window */
-(function(ref) {
-  ref.todoItem = ref.todoItem || {};
+/*global define, exports, module, require*/
 
-  ref.todoItem.view = {
-    todoItem: function(model, input) {
-      var todo = model.todo;
+// This boilerplate is to support running this code with either, just the browser, or RequireJS,
+// or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
+// Meiosis. It is for convenience to be able to run the example with your preferred module system.
+(function(root, moduleName, depNames, depVars, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(depNames, factory);
+  }
+  else if (typeof exports === "object") {
+    var requires = depNames.map(function(depName) {
+      return require(depName);
+    });
+    module.exports = factory.apply(root, requires);
+  }
+  else {
+    var vars = depVars.map(function(depVar) {
+      return root[depVar];
+    });
+    root[moduleName] = factory.apply(root, vars);
+  }
+}(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
+  "todoItemView", [], [],
 
-      var dataId = " data-id='" + todo.id + "'";
-      var checked = todo.completed ? " checked" : "";
+  function() {
+    return function(todoEditComponent) {
+      return function(model) {
+        var todo = model.todo;
 
-      return "<li class='" + model.todoClasses + " '>" +
-        "<div class='view'>" +
-        "<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
-        "<label" + dataId + ">" + todo.title + "</label>" +
-        "<button" + dataId + " class='destroy'></button>" +
-        "</div>" +
-        input +
-        "</li>";
-    },
+        var dataId = " data-id='" + todo.id + "'";
+        var checked = todo.completed ? " checked" : "";
 
-    todoEdit: function(todo) {
-      var dataId = " data-id='" + todo.id + "'";
-      return "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'/>";
-    },
-
-    noTodoInput: function() {
-      return "";
-    }
-  };
-})(window);
+        return "<li class='" + model.todoClasses + " '>" +
+          "<div class='view'>" +
+          "<input" + dataId + " class='toggle' type='checkbox'" + checked + ">" +
+          "<label" + dataId + ">" + todo.title + "</label>" +
+          "<button" + dataId + " class='destroy'></button>" +
+          "</div>" +
+          todoEditComponent(model) +
+          "</li>";
+      };
+    };
+  }
+));

@@ -20,18 +20,18 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoEditNextAction",
-  ["./actionTypes"],
-  ["todoEditActionTypes"],
+  "todoEditView", [], [],
 
-  function(EditAction) {
-    return function(model, proposal, actions) {
-      EditAction.case({
-        SaveTodo: function() {
-          actions.clearEdit();
-        },
-        _: function() { }
-      }, proposal);
+  function() {
+    return {
+      todoEdit: function(todo) {
+        var dataId = " data-id='" + todo.id + "'";
+        return "<input" + dataId + " type='text' class='edit' value='" + todo.title + "'/>";
+      },
+
+      noTodoInput: function() {
+        return "";
+      }
     };
   }
 ));

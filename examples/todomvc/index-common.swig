@@ -51,7 +51,6 @@
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/actions.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/display.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/receive.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/nextAction.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/component.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoItem/actionTypes.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoItem/actions.js"></script>

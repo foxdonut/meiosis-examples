@@ -38,6 +38,7 @@
 
             if (editing && todo.title) {
               model.todos = todoStorage.saveTodo(todo);
+              model.editTodo = { };
               return model;
             }
             else {
