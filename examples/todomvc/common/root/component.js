@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["./model", "variant/root/view", "variant/root/ready", "../todoapp/component"], function(todoModel, rootView, rootReady, todoappComponent) {
-      return (root.omponent = factory(todoModel, iew, eady, todoappComponent));
+    define(["../../common/model", "./view", "./ready", "../todoapp/component"], function(todoModel, rootView, rootReady, todoappComponent) {
+      return (root.omponent = factory(todoModel, rootView, rootReady, todoappComponent));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.rootComponent = factory(require("./model"), require("variant/root/view"), require("variant/root/ready"), require("../todoapp/component")));
+    module.exports = (root.rootComponent = factory(require("../../common/model"), require("./view"), require("./ready"), require("../todoapp/component")));
   }
   else {
     root.rootComponent = factory(root.todoModel, root.rootView, root.rootReady, root.todoappComponent);

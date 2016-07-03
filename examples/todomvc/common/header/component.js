@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["./actions", "./receive", "./nextAction", "variant/header/view", "variant/header/ready"], function(headerActions, headerReceive, headerNextAction, headerView, headerReady) {
+    define(["../../common/actions", "../../common/receive", "../../common/nextAction", "./view", "./ready"], function(headerActions, headerReceive, headerNextAction, headerView, headerReady) {
       return (root.headerComponent = factory(headerActions, headerReceive, headerNextAction, headerView, headerReady));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.headerComponent = factory(require("./actions"), require("./receive"), require("./nextAction"), require("variant/header/view"), require("variant/header/ready")));
+    module.exports = (root.headerComponent = factory(require("../../common/actions"), require("../../common/receive"), require("../../common/nextAction"), require("./view"), require("./ready")));
   }
   else {
     root.headerComponent = factory(root.headerActions, root.headerReceive, root.headerNextAction, root.headerView, root.headerReady);

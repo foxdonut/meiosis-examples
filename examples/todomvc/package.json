@@ -4,6 +4,7 @@
   "description": "meiosis-examples todomvc",
   "main": "index.js",
   "scripts": {
+    "prestart": "for C in footer header main root todoEdit todoItem todoapp; do for V in jquery mithril react snabbdom vanillajs; do cp common/$C/component.js $V/$C/; done; done",
     "start": "webpack",
     "watch": "webpack --progress --colors --watch"
   },

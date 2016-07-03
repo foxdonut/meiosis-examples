@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["./actions", "variant/todoEdit/view", "./display", "./receive", "./postRender", "variant/todoEdit/ready", "../todoItem/state"], function(todoEditActions, todoEditView, todoEditDisplay, todoEditReceive, todoEditPostRender, todoEditReady, todoItemState) {
+    define(["../../common/actions", "./view", "../../common/display", "../../common/receive", "../../common/postRender", "./ready", "../../common/todoItem/state"], function(todoEditActions, todoEditView, todoEditDisplay, todoEditReceive, todoEditPostRender, todoEditReady, todoItemState) {
       return (root.todoEditComponent = factory(todoEditActions, todoEditView, todoEditDisplay, todoEditReceive, todoEditPostRender, todoEditReady, todoItemState));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.todoEditComponent = factory(require("./actions"), require("variant/todoEdit/view"), require("./display"), require("./receive"), require("./postRender"), require("variant/todoEdit/ready"), require("../todoItem/state")));
+    module.exports = (root.todoEditComponent = factory(require("../../common/actions"), require("./view"), require("../../common/display"), require("../../common/receive"), require("../../common/postRender"), require("./ready"), require("../../common/todoItem/state")));
   }
   else {
     root.todoEditComponent = factory(root.todoEditActions, root.todoEditView, root.todoEditDisplay, root.todoEditReceive, root.todoEditPostRender, root.todoEditReady, root.todoItemState);

@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["./actions", "./state", "./display", "./receive", "variant/main/view", "variant/main/ready", "../todoItem/component"], function(mainActions, mainState, mainDisplay, mainReceive, mainView, mainReady, todoItemComponent) {
+    define(["../../common/actions", "../../common/state", "../../common/display", "../../common/receive", "./view", "./ready", "../todoItem/component"], function(mainActions, mainState, mainDisplay, mainReceive, mainView, mainReady, todoItemComponent) {
       return (root.mainComponent = factory(mainActions, mainState, mainDisplay, mainReceive, mainView, mainReady, todoItemComponent));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.mainComponent = factory(require("./actions"), require("./state"), require("./display"), require("./receive"), require("variant/main/view"), require("variant/main/ready"), require("../todoItem/component")));
+    module.exports = (root.mainComponent = factory(require("../../common/actions"), require("../../common/state"), require("../../common/display"), require("../../common/receive"), require("./view"), require("./ready"), require("../todoItem/component")));
   }
   else {
     root.mainComponent = factory(root.mainActions, root.mainState, root.mainDisplay, root.mainReceive, root.mainView, root.mainReady, root.todoItemComponent);
