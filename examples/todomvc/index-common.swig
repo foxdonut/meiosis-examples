@@ -68,5 +68,6 @@
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/root/component.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/app.js"></script>
 
+  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/runapp.{% block ext %}{% endblock %}"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/app.{% block ext %}{% endblock %}"></script>
 </html>
