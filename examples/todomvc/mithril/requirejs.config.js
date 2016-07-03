@@ -12,9 +12,9 @@ requirejs.config({
     "mithril": "/public/lib/mithril.min",
     "union-type": "/public/lib/union-type"
   },
-  shim: {
-    "mithril": {
-      exports: "m"
+  map: {
+    "*": {
+      "m": "mithril"
     }
   }
 });
