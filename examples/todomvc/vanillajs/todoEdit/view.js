@@ -20,7 +20,9 @@
     root[moduleName] = factory.apply(root, vars);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoEditView", [], [],
+  "todoEditView",
+  [],
+  [],
 
   function() {
     return {
