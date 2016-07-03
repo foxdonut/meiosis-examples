@@ -1,30 +1,23 @@
-/*global define, exports, module, require, React*/
+/*global define, exports, module, require*/
 
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
-(function(root, moduleName, depNames, depVars, factory) {
-  if (typeof exports === "object") {
-    var requires = depNames.map(function(depName) {
-      return require(depName);
+(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["react"], function(React) {
+      return (root.rootView = factory(React));
     });
-    module.exports = factory.apply(root, requires);
   }
-  else if (typeof define === "function" && define.amd) {
-    define(depNames, factory);
+  else if (typeof module === "object" && module.exports) {
+    module.exports = (root.rootView = factory(require("react")));
   }
   else {
-    var vars = depVars.map(function(depVar) {
-      return root[depVar];
-    });
-    root[moduleName] = factory.apply(root, vars);
+    root.rootView = factory(root.React);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "rootView",
-  ["react"],
-  [],
 
-  function() {
+  function(React) {
     var info = (
       <footer className="info">
         <p>Double-click to edit a todo</p>
