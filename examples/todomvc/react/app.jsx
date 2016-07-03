@@ -5,19 +5,19 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosisReact", "../common/app"], function(meiosisReact, app) {
-      return (root.reactApp = factory(meiosisReact, app));
+    define(["meiosisReact", "./runapp"], function(meiosisReact, runapp) {
+      return (root.reactApp = factory(meiosisReact, runapp));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.reactApp = factory(require("meiosisReact"), require("../common/app")));
+    module.exports = (root.reactApp = factory(require("meiosisReact"), require("./runapp")));
   }
   else {
-    root.reactApp = factory(root.meiosisReact, root.app);
+    root.reactApp = factory(root.meiosisReact, root.runapp);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(meiosisReact, app) {
-    app(meiosisReact);
+  function(meiosisReact, runapp) {
+    runapp(meiosisReact);
   }
 ));

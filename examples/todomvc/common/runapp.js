@@ -5,15 +5,15 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosis", "meiosis-tracer", "union-type", "./root/component", "./store"], function(meiosis, meiosisTracer, Type, rootComponent, todoStorage) {
-      return (root.app = factory(meiosis, meiosisTracer, Type, rootComponent, todoStorage));
+    define(["meiosis", "meiosis-tracer", "union-type", "./root/component", "../common/store"], function(meiosis, meiosisTracer, Type, rootComponent, todoStorage) {
+      return (root.runapp = factory(meiosis, meiosisTracer, Type, rootComponent, todoStorage));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.app = factory(require("meiosis"), require("meiosis-tracer"), require("union-type"), require("./root/component"), require("./store")));
+    module.exports = (root.runapp = factory(require("meiosis"), require("meiosis-tracer"), require("union-type"), require("./root/component"), require("../common/store")));
   }
   else {
-    root.app = factory(root.meiosis, root.meiosisTracer, root.unionType, root.rootComponent, root.todoStorage);
+    root.runapp = factory(root.meiosis, root.meiosisTracer, root.unionType, root.rootComponent, root.todoStorage);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 

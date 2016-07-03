@@ -5,7 +5,7 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosis", "./actionTypes"], function(meiosis, HeaderAction) {
+    define(["meiosis", "./actionTypes"], function(meiosis, headerActionTypes) {
       return (root.headerReceive = factory(meiosis, headerActionTypes));
     });
   }

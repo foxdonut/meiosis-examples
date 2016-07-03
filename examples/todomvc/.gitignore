@@ -34,3 +34,8 @@ vanillajs/root/component.js
 vanillajs/todoEdit/component.js
 vanillajs/todoItem/component.js
 vanillajs/todoapp/component.js
+jquery/runapp.js
+mithril/runapp.js
+react/runapp.js
+snabbdom/runapp.js
+vanillajs/runapp.js

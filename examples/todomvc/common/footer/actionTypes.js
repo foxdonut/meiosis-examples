@@ -6,7 +6,7 @@
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["union-type"], function(Type) {
-      return (root.footerActionTypes = factory(unionType));
+      return (root.footerActionTypes = factory(Type));
     });
   }
   else if (typeof module === "object" && module.exports) {

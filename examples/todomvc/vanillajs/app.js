@@ -5,19 +5,19 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosisVanillaJs", "../common/app"], function(meiosisVanillaJs, app) {
-      return (root.vanillaJsApp = factory(meiosisVanillaJs, app));
+    define(["meiosisVanillaJs", "./runapp"], function(meiosisVanillaJs, runapp) {
+      return (root.vanillaJsApp = factory(meiosisVanillaJs, runapp));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.vanillaJsApp = factory(require("meiosisVanillaJs"), require("../common/app")));
+    module.exports = (root.vanillaJsApp = factory(require("meiosisVanillaJs"), require("./runapp")));
   }
   else {
-    root.vanillaJsApp = factory(root.meiosisVanillaJs, root.app);
+    root.vanillaJsApp = factory(root.meiosisVanillaJs, root.runapp);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(meiosisVanillaJs, app) {
-    app(meiosisVanillaJs);
+  function(meiosisVanillaJs, runapp) {
+    runapp(meiosisVanillaJs);
   }
 ));

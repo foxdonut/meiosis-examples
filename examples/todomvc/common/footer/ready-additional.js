@@ -5,19 +5,21 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["history"], function(History) {
-      return (root.footerReady = factory(History));
+    // only jquery and vanillajs need an additional ready function
+    define(["history", "variant/footer/ready"], function(History, otherFooterReady) {
+      return (root.footerReady = factory(History, otherFooterReady));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.footerReady = factory(require("history")));
+    module.exports = (root.footerReady = factory(require("history"), require("variant/footer/ready")));
   }
   else {
-    root.footerReady = factory(root.History);
+    root.footerReady = factory(root.History, root.otherFooterReady);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(History) {
+  // only jquery and vanillajs need an additional ready function
+  function(History, otherFooterReady) {
     return function(actions) {
       var history = History.createHistory();
 
@@ -25,6 +27,10 @@
         var route = location.hash.split("/")[1] || "all";
         actions.filter(route);
       });
+
+      if (typeof otherFooterReady === "function") {
+        otherFooterReady(actions);
+      }
     };
   }
 ));
