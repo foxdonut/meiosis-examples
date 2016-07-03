@@ -5,21 +5,21 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["classNames"], function(classNames) {
-      return (root.todoItemDisplay = factory(classNames));
+    define(["classnames"], function(classnames) {
+      return (root.todoItemDisplay = factory(classnames));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.todoItemDisplay = factory(require("classNames")));
+    module.exports = (root.todoItemDisplay = factory(require("classnames")));
   }
   else {
-    root.todoItemDisplay = factory(root.classNames);
+    root.todoItemDisplay = factory(root.classnames);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(classNames) {
+  function(classnames) {
     var getTodoClasses = function(state, model, todo) {
-      return classNames({
+      return classnames({
         "completed": todo.completed,
         "editing": state.editing(model, todo)
       });
