@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosisVanillaJs", "./runapp"], function(meiosisVanillaJs, runapp) {
+    define(["meiosis-vanillajs", "./runapp"], function(meiosisVanillaJs, runapp) {
       return (root.jqueryApp = factory(meiosisVanillaJs, runapp));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.jqueryApp = factory(require("meiosisVanillaJs"), require("./runapp")));
+    module.exports = (root.jqueryApp = factory(require("meiosis-vanillajs"), require("./runapp")));
   }
   else {
     root.jqueryApp = factory(root.meiosisVanillaJs, root.runapp);

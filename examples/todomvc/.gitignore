@@ -7,7 +7,6 @@ jquery/todoItem/component.js
 jquery/todoapp/component.js
 mithril/footer/component.js
 mithril/header/component.js
-mithril/index-node.html
 mithril/main/component.js
 mithril/root/component.js
 mithril/todoEdit/component.js

@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosisSnabbdom", "./runapp"], function(meiosisSnabbdom, runapp) {
+    define(["meiosis-snabbdom", "./runapp"], function(meiosisSnabbdom, runapp) {
       return (root.snabbdomApp = factory(meiosisSnabbdom, runapp));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.snabbdomApp = factory(require("meiosisSnabbdom"), require("./runapp")));
+    module.exports = (root.snabbdomApp = factory(require("meiosis-snabbdom"), require("./runapp")));
   }
   else {
     root.snabbdomApp = factory(root.meiosisSnabbdom, root.runapp);
