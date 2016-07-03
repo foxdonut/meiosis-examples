@@ -3,26 +3,19 @@
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
-(function(root, moduleName, depNames, depVars, factory) {
-  if (typeof exports === "object") {
-    var requires = depNames.map(function(depName) {
-      return require(depName);
+(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["meiosis", "meiosis-tracer", "union-type", "./root/component", "./store"], function(meiosis, meiosisTracer, Type, rootComponent, todoStorage) {
+      return (root.app = factory(meiosis, meiosisTracer, Type, rootComponent, todoStorage));
     });
-    module.exports = factory.apply(root, requires);
   }
-  else if (typeof define === "function" && define.amd) {
-    define(depNames, factory);
+  else if (typeof module === "object" && module.exports) {
+    module.exports = (root.app = factory(require("meiosis"), require("meiosis-tracer"), require("union-type"), require("./root/component"), require("./store")));
   }
   else {
-    var vars = depVars.map(function(depVar) {
-      return root[depVar];
-    });
-    root[moduleName] = factory.apply(root, vars);
+    root.app = factory(root.meiosis, root.meiosisTracer, root.unionType, root.rootComponent, root.todoStorage);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "app",
-  ["meiosis", "meiosisTracer", "union-type", "./root/component", "./store"],
-  ["meiosis", "meiosisTracer", "unionType", "rootComponent", "todoStorage"],
 
   function(meiosis, meiosisTracer, Type, rootComponent, todoStorage) {
     return function(meiosisRender) {

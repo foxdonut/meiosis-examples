@@ -3,26 +3,19 @@
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
-(function(root, moduleName, depNames, depVars, factory) {
-  if (typeof exports === "object") {
-    var requires = depNames.map(function(depName) {
-      return require(depName);
+(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["./actions", "./receive", "./nextAction", "variant/header/view", "variant/header/ready"], function(headerActions, headerReceive, headerNextAction, headerView, headerReady) {
+      return (root.headerComponent = factory(headerActions, headerReceive, headerNextAction, headerView, headerReady));
     });
-    module.exports = factory.apply(root, requires);
   }
-  else if (typeof define === "function" && define.amd) {
-    define(depNames, factory);
+  else if (typeof module === "object" && module.exports) {
+    module.exports = (root.headerComponent = factory(require("./actions"), require("./receive"), require("./nextAction"), require("variant/header/view"), require("variant/header/ready")));
   }
   else {
-    var vars = depVars.map(function(depVar) {
-      return root[depVar];
-    });
-    root[moduleName] = factory.apply(root, vars);
+    root.headerComponent = factory(root.headerActions, root.headerReceive, root.headerNextAction, root.headerView, root.headerReady);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "headerComponent",
-  ["./actions", "./receive", "./nextAction", "variant/header/view", "variant/header/ready"],
-  ["headerActions", "headerReceive", "headerNextAction", "headerView", "headerReady"],
 
   function(headerActions, headerReceive, headerNextAction, headerView, headerReady) {
     return function(createComponent, todoStorage) {

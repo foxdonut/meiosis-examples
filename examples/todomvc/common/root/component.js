@@ -3,26 +3,19 @@
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
-(function(root, moduleName, depNames, depVars, factory) {
-  if (typeof exports === "object") {
-    var requires = depNames.map(function(depName) {
-      return require(depName);
+(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["./model", "variant/root/view", "variant/root/ready", "../todoapp/component"], function(todoModel, rootView, rootReady, todoappComponent) {
+      return (root.omponent = factory(todoModel, iew, eady, todoappComponent));
     });
-    module.exports = factory.apply(root, requires);
   }
-  else if (typeof define === "function" && define.amd) {
-    define(depNames, factory);
+  else if (typeof module === "object" && module.exports) {
+    module.exports = (root.rootComponent = factory(require("./model"), require("variant/root/view"), require("variant/root/ready"), require("../todoapp/component")));
   }
   else {
-    var vars = depVars.map(function(depVar) {
-      return root[depVar];
-    });
-    root[moduleName] = factory.apply(root, vars);
+    root.rootComponent = factory(root.todoModel, root.rootView, root.rootReady, root.todoappComponent);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "rootComponent",
-  ["./model", "variant/root/view", "variant/root/ready", "../todoapp/component"],
-  ["todoModel", "rootView", "rootReady", "todoappComponent"],
 
   function(todoModel, rootView, rootReady, todoappComponent) {
     return function(createComponent, todoStorage) {

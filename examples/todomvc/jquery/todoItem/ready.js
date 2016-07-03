@@ -3,26 +3,19 @@
 // This boilerplate is to support running this code with either, just the browser, or RequireJS,
 // or node.js / npm (browserify, webpack, etc.) Do not think this boilerplate is necessary to run
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
-(function(root, moduleName, depNames, depVars, factory) {
-  if (typeof exports === "object") {
-    var requires = depNames.map(function(depName) {
-      return require(depName);
+(function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["jquery"], function($) {
+      return (root.todoItemReady = factory(jQuery));
     });
-    module.exports = factory.apply(root, requires);
   }
-  else if (typeof define === "function" && define.amd) {
-    define(depNames, factory);
+  else if (typeof module === "object" && module.exports) {
+    module.exports = (root.todoItemReady = factory(require("jquery")));
   }
   else {
-    var vars = depVars.map(function(depVar) {
-      return root[depVar];
-    });
-    root[moduleName] = factory.apply(root, vars);
+    root.todoItemReady = factory(root.jQuery);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
-  "todoItemReady",
-  ["jquery"],
-  ["jQuery"],
 
   function($) {
     var $root = $(document.getElementById("app"));
