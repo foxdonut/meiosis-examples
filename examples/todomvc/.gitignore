@@ -38,3 +38,8 @@ mithril/runapp.js
 react/runapp.js
 snabbdom/runapp.js
 vanillajs/runapp.js
+jquery/requirejs.config.js
+mithril/requirejs.config.js
+react/requirejs.config.js
+snabbdom/requirejs.config.js
+vanillajs/requirejs.config.js
