@@ -9,9 +9,10 @@ const Action = Type({
 });
 
 const actions = services => propose => ({
-  requestLoadList: () => propose({ action: Action.RequestLoadList(), modelUpdate: { message: "Loading, please wait..." } }),
-
-  loadList: () => services.loadTodos.fork(null, model => propose({ modelUpdate: model })),
+  requestLoadList: () => {
+    propose(Action.RequestLoadList());
+    services.loadTodos.fork(null, model => propose(Action.LoadedList(model)));
+  },
 
   editTodo: (todo) => propose({ modelUpdate: { todo } } ),
 
