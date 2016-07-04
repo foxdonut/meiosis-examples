@@ -18,5 +18,10 @@
     </div>
   </body>
 
-  <script data-main="/examples/todomvc/{% block variant %}{% endblock %}/requirejs.config.js" src="/public/lib/require.js"></script>
+  <script src="/public/lib/require.js"></script>
+  <script>
+    require(["../requirejs.config"], function() {
+      require(["./app"]);
+    });
+  </script>
 </html>

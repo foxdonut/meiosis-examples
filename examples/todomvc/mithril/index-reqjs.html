@@ -18,6 +18,11 @@
     </div>
   </body>
 
-  <script data-main="/examples/todomvc/mithril/requirejs.config.js" src="/public/lib/require.js"></script>
+  <script src="/public/lib/require.js"></script>
+  <script>
+    require(["../requirejs.config"], function() {
+      require(["./app"]);
+    });
+  </script>
 </html>
 

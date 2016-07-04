@@ -18,5 +18,3 @@ requirejs.config({
     }
   }
 });
-
-requirejs(["./app"]);
