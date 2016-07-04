@@ -50,9 +50,12 @@
       },
       saveTodo: function(todo) {
         var todos = this.loadAll();
+        var id = parseInt(todo.id, 10);
 
-        if (parseInt(todo.id, 10) > 0) {
-          todos = replaceTodoAtIndex(todos, todo, findIndex(todos, todo.id));
+        if (id > 0) {
+          var index = findIndex(todos, id);
+          todo.completed = todos[index].completed;
+          todos = replaceTodoAtIndex(todos, todo, index);
         }
         else {
           todos = todos.concat([{title: todo.title, id: new Date().getTime(), completed: false}]);
