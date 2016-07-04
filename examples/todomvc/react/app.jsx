@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosis-react", "./runapp"], function(meiosisReact, runapp) {
+    define(["meiosis-react", "./runapp.jsx"], function(meiosisReact, runapp) {
       return (root.reactApp = factory(meiosisReact, runapp));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.reactApp = factory(require("meiosis-react"), require("./runapp")));
+    module.exports = (root.reactApp = factory(require("meiosis-react"), require("./runapp.jsx")));
   }
   else {
     root.reactApp = factory(root.meiosisReact, root.runapp);

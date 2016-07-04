@@ -39,7 +39,6 @@
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/header/actionTypes.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/header/actions.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/header/receive.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/header/nextAction.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/header/component.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/footer/actionTypes.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/footer/actions.js"></script>

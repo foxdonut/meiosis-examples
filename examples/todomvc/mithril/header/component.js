@@ -5,25 +5,24 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["../../common/header/actions", "../../common/header/receive", "../../common/header/nextAction", "./view"], function(headerActions, headerReceive, headerNextAction, headerView) {
-      return (root.headerComponent = factory(headerActions, headerReceive, headerNextAction, headerView));
+    define(["../../common/header/actions", "../../common/header/receive", "./view"], function(headerActions, headerReceive, headerView) {
+      return (root.headerComponent = factory(headerActions, headerReceive, headerView));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.headerComponent = factory(require("../../common/header/actions"), require("../../common/header/receive"), require("../../common/header/nextAction"), require("./view")));
+    module.exports = (root.headerComponent = factory(require("../../common/header/actions"), require("../../common/header/receive"), require("./view")));
   }
   else {
-    root.headerComponent = factory(root.headerActions, root.headerReceive, root.headerNextAction, root.headerView);
+    root.headerComponent = factory(root.headerActions, root.headerReceive, root.headerView);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(headerActions, headerReceive, headerNextAction, headerView) {
+  function(headerActions, headerReceive, headerView) {
     return function(createComponent, todoStorage) {
       return createComponent({
         actions: headerActions,
         view: headerView,
-        receive: headerReceive(todoStorage),
-        nextAction: headerNextAction
+        receive: headerReceive(todoStorage)
       });
     };
   }

@@ -30,6 +30,7 @@
 
             if (title) {
               model.todos = todoStorage.saveTodo({title: title});
+              model.newTodo = "";
               return model;
             }
             else {
