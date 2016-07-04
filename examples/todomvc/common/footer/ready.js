@@ -13,7 +13,9 @@
     module.exports = (root.footerReady = factory(require("history")));
   }
   else {
-    root.footerReady = factory(root.History);
+    if (!root.footerReady) {
+      root.footerReady = factory(root.History);
+    }
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
