@@ -1,8 +1,11 @@
+/*global process*/
+var variant = process.env.VARIANT;
+
 module.exports = {
-  entry: "./vanillajs/app.js",
+  entry: "./" + variant + "/app.js" + (variant === "react" ? "x" : ""),
   devtool: "source-map",
   output: {
-    path: "./vanillajs/",
+    path: "./" + variant + "/",
     filename: "generated-app.js"
   },
   module: {
