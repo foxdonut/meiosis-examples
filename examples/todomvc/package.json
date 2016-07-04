@@ -4,7 +4,6 @@
   "description": "meiosis-examples todomvc",
   "main": "index.js",
   "scripts": {
-    "prestart": "for V in jquery mithril react snabbdom vanillajs; do cp common/runapp.js $V/; for C in footer header main root todoEdit todoItem todoapp; do cp common/$C/component.js $V/$C/; done; done; for C in footer header main root todoEdit todoItem todoapp; do ed react/$C/component.js < react.ed; if [ -f common/$C/component-with-ready.js ] ; then cp common/$C/component-with-ready.js jquery/$C/component.js; cp common/$C/component-with-ready.js vanillajs/$C/component.js; fi; done",
     "start": "for V in mithril react snabbdom vanillajs; do VARIANT=$V webpack; done"
   },
   "repository": {
