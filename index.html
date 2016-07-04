@@ -14,63 +14,84 @@
       <img src="/public/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px">
       <h2 style="display: inline;">Meiosis Examples</h2>
 
-      <ul>
-        <li>
-          Counter
-          <ul>
-            <li><a href="/examples/counter/index.html">jQuery, React / browser</a></li>
-            <li><a href="/examples/requirejs/index.html">VanillaJS + Meiosis-Tracer / requirejs</a></li>
-          </ul>
-        <li>
-          Rocket Launcher / browser
-          <ul>
-            <li><a href="/examples/rocket-launcher/react/index.html">React</a></li>
-            <li><a href="/examples/rocket-launcher/snabbdom/index.html">Snabbdom</a></li>
-            <li><a href="/examples/rocket-launcher/vanillajs/index.html">VanillaJS</a></li>
-          </ul>
-        <li><a href="/examples/labeled-sliders/index.html">Labeled Sliders / Snabbdom</a></li>
-        <li><a href="/examples/todo-list/index.html">Todo List / React</a></li>
-        <li>
-          Todo MVC / node modules
-          <div class="row">
-            <div class="col-md-8">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>browser</th>
-                    <th>node modules</th>
-                    <th>requirejs</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a href="/examples/todomvc/jquery/index.html">jQuery</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="/examples/todomvc/mithril/index.html">Mithril</a></td>
-                    <td><a href="/examples/todomvc/mithril/index-node.html">Mithril</a></td>
-                    <td><a href="/examples/todomvc/mithril/index-reqjs.html">Mithril</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="/examples/todomvc/react/index.html">React</a></td>
-                    <td><a href="/examples/todomvc/react/index-node.html">React</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="/examples/todomvc/snabbdom/index.html">Snabbdom</a></td>
-                    <td><a href="/examples/todomvc/snabbdom/index-node.html">Snabbdom</a></td>
-                    <td><a href="/examples/todomvc/snabbdom/index-reqjs.html">Snabbdom</a></td>
-                  </tr>
-                  <tr>
-                    <td><a href="/examples/todomvc/vanillajs/index.html">VanillaJS</a></td>
-                    <td><a href="/examples/todomvc/vanillajs/index-node.html">VanillaJS</a></td>
-                    <td><a href="/examples/todomvc/vanillajs/index-reqjs.html">VanillaJS</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </li>
-      </ul/index.html>
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>browser</th>
+                <th>node modules</th>
+                <th>requirejs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>jQuery</th>
+                <td>
+                  <div><a href="/examples/counter/index.html">Counter</a></div>
+                  <div><a href="/examples/todomvc/jquery/index.html">Todo MVC</a></div>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Mithril</th>
+                <td>
+                  <div><a href="/examples/todomvc/mithril/index.html">Todo MVC</a></div>
+                </td>
+                <td>
+                  <div><a href="/examples/todomvc/mithril/index-node.html">Todo MVC</a></div>
+                </td>
+                <td>
+                  <div><a href="/examples/todomvc/mithril/index-reqjs.html">Todo MVC</a></div>
+                </td>
+              </tr>
+              <tr>
+                <th>React</th>
+                <td>
+                  <div><a href="/examples/counter/index.html">Counter</a></div>
+                  <div><a href="/examples/rocket-launcher/react/index.html">Rocket Launcher</a></div>
+                  <div><a href="/examples/todomvc/react/index.html">Todo MVC</a></div>
+                </td>
+                <td>
+                  <div><a href="/examples/todo-list/index.html">Todo List With Server</a></div>
+                  <div><a href="/examples/todomvc/react/index-node.html">Todo MVC</a></div>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Snabbdom</th>
+                <td>
+                  <div><a href="/examples/rocket-launcher/snabbdom/index.html">Rocket Launcher</a></div>
+                  <div><a href="/examples/todomvc/snabbdom/index.html">Todo MVC</a></div>
+                </td>
+                <td>
+                  <div><a href="/examples/labeled-sliders/index.html">Labeled Sliders</a></div>
+                  <div><a href="/examples/todomvc/snabbdom/index-node.html">Todo MVC</a></div>
+                </td>
+                <td>
+                  <div><a href="/examples/todomvc/snabbdom/index-reqjs.html">Todo MVC</a></div>
+                </td>
+              </tr>
+              <tr>
+                <th>VanillaJS</th>
+                <td>
+                  <div><a href="/examples/rocket-launcher/vanillajs/index.html">Rocket Launcher</a></div>
+                  <div><a href="/examples/todomvc/vanillajs/index.html">Todo MVC</a></div>
+                </td>
+                <td>
+                  <div><a href="/examples/todomvc/vanillajs/index-node.html">Todo MVC</a></div>
+                </td>
+                <td>
+                  <div><a href="/examples/requirejs/index.html">Counter</a></div>
+                  <div><a href="/examples/todomvc/vanillajs/index-reqjs.html">Todo MVC</a></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </body>
 </html>
