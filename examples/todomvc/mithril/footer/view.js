@@ -13,7 +13,7 @@
     module.exports = (root.footerView = factory(require("mithril"), require("classnames")));
   }
   else {
-    root.footerView = factory(root.m, root.classnames);
+    root.footerView = factory(root.m, root.classNames);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 

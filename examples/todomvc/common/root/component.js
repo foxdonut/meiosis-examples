@@ -6,14 +6,14 @@
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["../../common/root/model", "./view", "../todoapp/component"], function(todoModel, rootView, todoappComponent) {
-      return (root.omponent = factory(todoModel, rootView, todoappComponent));
+      return (root.todoappComponent = factory(todoModel, rootView, todoappComponent));
     });
   }
   else if (typeof module === "object" && module.exports) {
     module.exports = (root.rootComponent = factory(require("../../common/root/model"), require("./view"), require("../todoapp/component")));
   }
   else {
-    root.rootComponent = factory(root.todoModel, root.rootView, root.rootReady, root.todoappComponent);
+    root.rootComponent = factory(root.todoModel, root.rootView, root.todoappComponent);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 

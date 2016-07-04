@@ -13,7 +13,7 @@
     module.exports = (root.todoEditComponent = factory(require("../../common/todoEdit/actions"), require("./view"), require("../../common/todoEdit/display"), require("../../common/todoEdit/receive"), require("../../common/todoItem/state")));
   }
   else {
-    root.todoEditComponent = factory(root.todoEditActions, root.todoEditView, root.todoEditDisplay, root.todoEditReceive, root.todoEditPostRender, root.todoItemState);
+    root.todoEditComponent = factory(root.todoEditActions, root.todoEditView, root.todoEditDisplay, root.todoEditReceive, root.todoItemState);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 

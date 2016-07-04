@@ -13,7 +13,7 @@
     module.exports = (root.todoItemDisplay = factory(require("classnames")));
   }
   else {
-    root.todoItemDisplay = factory(root.classnames);
+    root.todoItemDisplay = factory(root.classNames);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
