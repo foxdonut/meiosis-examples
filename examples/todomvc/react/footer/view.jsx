@@ -13,7 +13,7 @@
     module.exports = (root.footerView = factory(require("react"), require("classnames")));
   }
   else {
-    root.footerView = factory(root.React, root.classnames);
+    root.footerView = factory(root.React, root.classNames);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
