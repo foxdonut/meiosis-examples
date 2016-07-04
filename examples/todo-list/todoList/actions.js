@@ -4,7 +4,7 @@ const Action = Type({
   RequestLoadList: [],
   LoadedList: [Object],
   EditTodo: [Object],
-  RequestDeleteTodo: [Number],
+  RequestDeleteTodo: [],
   DeletedTodo: [Object]
 });
 
@@ -14,11 +14,12 @@ const actions = services => propose => ({
     services.loadTodos.fork(null, model => propose(Action.LoadedList(model)));
   },
 
-  editTodo: (todo) => propose({ modelUpdate: { todo } } ),
+  editTodo: (todo) => propose(Action.EditTodo(todo)),
 
-  requestDeleteTodo: id => propose({ action: Action.RequestDeleteTodo(id), modelUpdate: { message: "Deleting, please wait..."} } ),
-
-  deleteTodo: id => services.deleteTodo(id).fork(null, maybeTodoId => propose({ action: Action.DeletedTodo(maybeTodoId) }))
+  requestDeleteTodo: id => {
+    propose(Action.RequestDeleteTodo());
+    services.deleteTodo(id).fork(null, maybeTodoId => propose(Action.DeletedTodo(maybeTodoId)));
+  }
 });
 
 export { Action, actions };
