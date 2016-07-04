@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosisVanillaJs"], function(meiosisVanillaJs) {
+    define(["meiosis-vanillajs"], function(meiosisVanillaJs) {
       return (root.mainReady = factory(meiosisVanillaJs));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.mainReady = factory(require("meiosisVanillaJs")));
+    module.exports = (root.mainReady = factory(require("meiosis-vanillajs")));
   }
   else {
     root.mainReady = factory(root.meiosisVanillaJs);

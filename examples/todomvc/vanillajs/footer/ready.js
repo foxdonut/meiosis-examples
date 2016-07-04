@@ -5,12 +5,12 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["meiosisVanillaJs", "../../common/footer/ready"], function(meiosisVanillaJs, footerReady) {
+    define(["meiosis-vanillajs", "../../common/footer/ready"], function(meiosisVanillaJs, footerReady) {
       return (root.footerReady = factory(meiosisVanillaJs, footerReady));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.footerReady = factory(require("meiosisVanillaJs"), require("../../common/footer/ready")));
+    module.exports = (root.footerReady = factory(require("meiosis-vanillajs"), require("../../common/footer/ready")));
   }
   else {
     root.footerReady = factory(root.meiosisVanillaJs, root.footerReady);

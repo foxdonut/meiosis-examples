@@ -6,7 +6,7 @@
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
     define(["jquery", "handlebars"], function($, Handlebars) {
-      return (root.iew = factory(jQuery, Handlebars));
+      return (root.rootView = factory($, Handlebars));
     });
   }
   else if (typeof module === "object" && module.exports) {
