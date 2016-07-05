@@ -1,4 +1,4 @@
-const initialModel = {
+export default {
   todos: [],
   message: "Initializing...",
   todo: {
@@ -7,5 +7,3 @@ const initialModel = {
     description: ""
   }
 };
-
-export { initialModel };

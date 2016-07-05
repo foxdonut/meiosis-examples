@@ -12,7 +12,7 @@ const Action = Type({
   SavedTodo: []
 });
 
-const actions = services => propose => ({
+const createActions = services => propose => ({
   requestLoadList: () => {
     propose(Action.RequestLoadList());
     services.loadTodos.fork(null, model => propose(Action.LoadedList(model)));
@@ -40,4 +40,4 @@ const actions = services => propose => ({
 export { Action, actions };
  */
 
-export { Action, actions };
+export { Action, createActions };
