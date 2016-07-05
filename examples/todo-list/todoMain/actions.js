@@ -5,7 +5,11 @@ const Action = Type({
   LoadedList: [Object],
   EditTodo: [Object],
   RequestDeleteTodo: [],
-  DeletedTodo: [Object]
+  DeletedTodo: [Object],
+  ClearForm: [],
+  EditingTodo: [Object],
+  RequestSaveTodo: [Object],
+  SavedTodo: []
 });
 
 const actions = services => propose => ({
@@ -21,5 +25,19 @@ const actions = services => propose => ({
     services.deleteTodo(id).fork(null, maybeTodoId => propose(Action.DeletedTodo(maybeTodoId)));
   }
 });
+
+/*
+const actions = services => propose => ({
+  editingTodo: todo => propose({ modelUpdate: { todo } }),
+
+  clearForm: () => propose({ modelUpdate: initialModel }),
+
+  requestSaveTodo: todo => propose({ modelUpdate: { message: "Saving, please wait..." }, action: Action.RequestSaveTodo(todo) }),
+
+  saveTodo: todo => services.saveTodo(todo).fork(null, savedTodo => propose({ action: Action.SavedTodo(), savedTodo }))
+});
+
+export { Action, actions };
+ */
 
 export { Action, actions };
