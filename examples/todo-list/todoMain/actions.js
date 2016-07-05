@@ -7,37 +7,29 @@ const Action = Type({
   RequestDeleteTodo: [],
   DeletedTodo: [Object],
   ClearForm: [],
-  EditingTodo: [Object],
-  RequestSaveTodo: [Object],
-  SavedTodo: []
+  RequestSaveTodo: [],
+  SavedTodo: [Object]
 });
 
 const createActions = services => propose => ({
-  requestLoadList: () => {
+  loadList: () => {
     propose(Action.RequestLoadList());
     services.loadTodos.fork(null, model => propose(Action.LoadedList(model)));
   },
 
-  editTodo: (todo) => propose(Action.EditTodo(todo)),
+  editTodo: todo => propose(Action.EditTodo(todo)),
 
-  requestDeleteTodo: id => {
+  saveTodo: todo => {
+    propose(Action.RequestSaveTodo());
+    services.saveTodo(todo).fork(null, savedTodo => propose(Action.SavedTodo(savedTodo)));
+  },
+
+  clearForm: () => propose(Action.ClearForm()),
+
+  deleteTodo: id => {
     propose(Action.RequestDeleteTodo());
     services.deleteTodo(id).fork(null, maybeTodoId => propose(Action.DeletedTodo(maybeTodoId)));
   }
 });
-
-/*
-const actions = services => propose => ({
-  editingTodo: todo => propose({ modelUpdate: { todo } }),
-
-  clearForm: () => propose({ modelUpdate: initialModel }),
-
-  requestSaveTodo: todo => propose({ modelUpdate: { message: "Saving, please wait..." }, action: Action.RequestSaveTodo(todo) }),
-
-  saveTodo: todo => services.saveTodo(todo).fork(null, savedTodo => propose({ action: Action.SavedTodo(), savedTodo }))
-});
-
-export { Action, actions };
- */
 
 export { Action, createActions };

@@ -8,7 +8,7 @@ const view = (model, actions) => {
 
   const onDelete = todo => evt => {
     evt.preventDefault();
-    actions.requestDeleteTodo(todo.id);
+    actions.deleteTodo(todo.id);
   };
 
   const renderTodo = (todo) => (

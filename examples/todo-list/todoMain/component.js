@@ -18,6 +18,6 @@ export default function(createComponent) {
     actions,
     view: view(todoForm, todoList),
     receive: receive,
-    ready: actions => actions.requestLoadList()
+    ready: actions => actions.loadList()
   });
 }

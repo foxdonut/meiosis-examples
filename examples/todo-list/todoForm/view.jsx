@@ -4,11 +4,11 @@ import serialize from "form-serialize";
 const view = (model, actions) => {
   const getTodo = evt => serialize(evt.target.form, {hash: true, empty: true});
 
-  const onChangeText = evt => actions.editingTodo(getTodo(evt));
+  const onChangeText = evt => actions.editTodo(getTodo(evt));
 
   const onSave = evt => {
     evt.preventDefault();
-    actions.requestSaveTodo(getTodo(evt));
+    actions.saveTodo(getTodo(evt));
   };
 
   const onCancel = function(evt) {
