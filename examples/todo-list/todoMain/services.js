@@ -1,43 +1,38 @@
-import Task from "data.task";
 import { Just, Nothing } from "data.maybe";
-import { futurizeP } from "futurize";
 import { always } from "ramda";
 
 import ajax from "../util/ajax-axios";
 import todoUrl from "../util/todoUrl";
 
-const toTask = f => futurizeP(Task)(f)();
-
 const intoModel = todos => ({ todos: todos, message: "" });
 
 // loadTodosHttp : Task Http.Error Model
-const loadTodosHttp = toTask(() => ajax.getJSON(todoUrl.get)).map(intoModel);
+const loadTodosHttp = ajax.getJSON(todoUrl.get).then(intoModel);
 
 // deleteTodoHttp : Number -> Task Http.Error Number
 const deleteTodoHttp = todoId =>
-  toTask(() => ajax.deleteJSON(todoUrl.delete(todoId))).map(always(todoId));
+  ajax.deleteJSON(todoUrl.delete(todoId)).then(always(todoId));
 
 // errorMessage : Http.Error -> Task Never Model
-const errorMessage = always(Task.of({ todos: [], message: "An error occurred." }));
+const errorMessage = always({ todos: [], message: "An error occurred." });
 
 // loadTodos : Task Never Model
-const loadTodos = loadTodosHttp.orElse(errorMessage);
+const loadTodos = loadTodosHttp.catch(errorMessage);
 
 // nothingTask : Http.Error -> Task Never (Maybe Number)
-const nothingTask = always(Task.of(Nothing()));
+const nothingTask = always(Nothing());
 
 // deleteTodo : Number -> Task Never (Maybe Number)
 const deleteTodo = todoId =>
-  deleteTodoHttp(todoId).map(Just).orElse(nothingTask);
+  deleteTodoHttp(todoId).then(Just).catch(nothingTask);
 
 // saveTodoHttp : Todo -> Task Http.Error Todo
-const saveTodoHttp = todo => toTask(() => ajax.postJSON(todoUrl.save, todo));
+const saveTodoHttp = todo => ajax.postJSON(todoUrl.save, todo);
 
 // saveTodo : Todo -> Task Never (Maybe Todo)
 const saveTodo = todo =>
-  saveTodoHttp(todo).map(Just).orElse(nothingTask);
+  saveTodoHttp(todo).then(Just).catch(nothingTask);
 
 const services = { loadTodos, deleteTodo, saveTodo };
 
 export default services;
-

@@ -26,9 +26,7 @@
   "dependencies": {
     "axios": "^0.12.0",
     "data.maybe": "^1.2.2",
-    "data.task": "^3.1.0",
     "form-serialize": "^0.7.1",
-    "futurize": "^1.0.2",
     "meiosis": "^0.6.0",
     "meiosis-react": "^0.5.0",
     "meiosis-tracer": "^0.6.0",

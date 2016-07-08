@@ -14,21 +14,21 @@ const Action = Type({
 const createActions = services => propose => ({
   loadList: () => {
     propose(Action.RequestLoadList());
-    services.loadTodos.fork(null, model => propose(Action.LoadedList(model)));
+    services.loadTodos.then(model => propose(Action.LoadedList(model)));
   },
 
   editTodo: todo => propose(Action.EditTodo(todo)),
 
   saveTodo: todo => {
     propose(Action.RequestSaveTodo());
-    services.saveTodo(todo).fork(null, savedTodo => propose(Action.SavedTodo(savedTodo)));
+    services.saveTodo(todo).then(savedTodo => propose(Action.SavedTodo(savedTodo)));
   },
 
   clearForm: () => propose(Action.ClearForm()),
 
   deleteTodo: id => {
     propose(Action.RequestDeleteTodo());
-    services.deleteTodo(id).fork(null, maybeTodoId => propose(Action.DeletedTodo(maybeTodoId)));
+    services.deleteTodo(id).then(maybeTodoId => propose(Action.DeletedTodo(maybeTodoId)));
   }
 });
 
