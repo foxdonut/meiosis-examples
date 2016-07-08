@@ -1,7 +1,7 @@
 import React from "react";
 import serialize from "form-serialize";
 
-const view = (model, actions) => {
+const view = (todo, actions) => {
   const getTodo = evt => serialize(evt.target.form, {hash: true, empty: true});
 
   const onChangeText = evt => actions.editTodo(getTodo(evt));
@@ -15,8 +15,6 @@ const view = (model, actions) => {
     evt.preventDefault();
     actions.clearForm();
   };
-
-  const todo = model.todo;
 
   return (
     <div className="row">

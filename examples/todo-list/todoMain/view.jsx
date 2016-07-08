@@ -2,7 +2,7 @@ import React from "react";
 
 const view = (todoForm, todoList) => model => (
   <div>
-    {todoForm(model)}
+    {todoForm(model.todo)}
     {todoList(model)}
   </div>
 );
