@@ -1,5 +1,5 @@
 /*global window, meiosis, meiosisRiot*/
-var initialModel = { counter: 0, tag: "yellow" };
+var initialModel = { counter: 0 };
 
 var view = window.riotView;
 

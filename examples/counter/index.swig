@@ -11,6 +11,7 @@
 
   <div id="reactApp"></div>
   <div id="riotApp"></div>
+  <div id="vueApp"></div>
 
   <script src="/public/lib/react-15.1.0.js"></script>
   <script src="/public/lib/react-dom-15.1.0.js"></script>
@@ -25,4 +26,9 @@
   <script src="/examples/counter/view.tag" type="riot/tag"></script>
   <script src="/examples/counter/view-riot.js"></script>
   <script src="/examples/counter/main-riot.js"></script>
+
+  <script src="/public/lib/vue.js"></script>
+  {% include "./view-vue.html" %}
+  <script src="/examples/counter/view-vue.js"></script>
+  <script src="/examples/counter/main-vue.js"></script>
 {% endblock %}

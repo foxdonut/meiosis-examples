@@ -5,6 +5,5 @@
       <button onclick={events.onInc}>+ 5</button>
       <button onclick={events.onDecr}>- 5</button>
     </div>
-    <div riot-tag={model.tag}></div>
   </div>
 </counter>
