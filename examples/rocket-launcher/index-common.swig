@@ -13,5 +13,5 @@
   <script src="/examples/rocket-launcher/js/nextAction.js"></script>
 {% block subcontent %}{% endblock %}
 <hr/>
-<div>Rocket launcher example credit <a href="http://www.ebpml.org/about">Jean-Jacques Dubray</a></div>
+<div>Rocket launcher example idea credit: <a href="http://www.ebpml.org/about">Jean-Jacques Dubray</a></div>
 {% endblock %}
