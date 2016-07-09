@@ -16,7 +16,10 @@
       <div id="app"></div>
       <div id="tracer" style="position: fixed; top: 0px; right: 0px;"></div>
     </div>
+
+    <hr/><div>Todo MVC example credit <a href="http://todomvc.com">todomvc.com</a></div>
   </body>
 
   <script src="/examples/todomvc/{% block variant %}{% endblock %}/generated-app.js"></script>
+
 </html>

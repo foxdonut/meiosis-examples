@@ -10,6 +10,7 @@
   <script src="/examples/counter/main.js"></script>
 
   <div id="reactApp"></div>
+  <div id="riotApp"></div>
 
   <script src="/public/lib/react-15.1.0.js"></script>
   <script src="/public/lib/react-dom-15.1.0.js"></script>
@@ -18,4 +19,10 @@
 
   <script src="/examples/counter/view.jsx" type="text/babel"></script>
   <script src="/examples/counter/main.jsx" type="text/babel"></script>
+
+  <script src="/public/lib/riot+compiler.min.js"></script>
+  <script src="/public/lib/meiosis-riot.min.js"></script>
+  <script src="/examples/counter/view.tag" type="riot/tag"></script>
+  <script src="/examples/counter/view-riot.js"></script>
+  <script src="/examples/counter/main-riot.js"></script>
 {% endblock %}

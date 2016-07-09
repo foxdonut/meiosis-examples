@@ -9,10 +9,10 @@
     };
     return (
       <div>
-        <div><span>Counter: {model.counter}</span></div>
+        <div><span>React Counter: {model.counter}</span></div>
         <div>
-          <button onClick={onInc}>+</button>
-          <button onClick={onDecr}>-</button>
+          <button onClick={onInc}>+ 10</button>
+          <button onClick={onDecr}>- 10</button>
         </div>
       </div>
     );

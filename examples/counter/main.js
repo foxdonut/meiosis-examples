@@ -2,8 +2,8 @@
 var initialModel = { counter: 0 };
 
 var view = function(model) {
-  return "<div><span>Counter: " + model.counter + "</span></div>" +
-    "<div><button id='inc'>+</button> <button id='decr'>-</button></div>";
+  return "<div><span>jQuery Counter: " + model.counter + "</span></div>" +
+    "<div><button id='inc'>+ 1</button> <button id='decr'>- 1</button></div>";
 };
 
 var receive = function(model, proposal) {
