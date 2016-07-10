@@ -4,7 +4,8 @@
   "description": "meiosis-examples todo-list",
   "main": "index.js",
   "scripts": {
-    "start": "webpack",
+    "vue": "webpack --config webpack.vue.config.js",
+    "start": "npm run vue && webpack",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
@@ -33,7 +34,8 @@
     "ramda": "^0.21.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "union-type": "^0.3.1"
+    "union-type": "^0.3.1",
+    "vue": "^1.0.26"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",

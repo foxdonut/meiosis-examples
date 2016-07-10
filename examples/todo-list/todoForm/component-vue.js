@@ -1,0 +1,40 @@
+import Vue from "vue";
+
+export default function(actions) {
+  Vue.component("todo-form", {
+    props: ["todo"],
+    template: `
+      <div class="row">
+        <div class="col-md-4">
+          <form>
+            <input type="hidden" name="id" v-model="todo.id"/>
+            <div class="form-group">
+              <label for="priority">Priority:</label>
+              <input type="text" id="priority" name="priority" class="form-control" v-model="todo.priority"/>
+            </div>
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description" class="form-control" v-model="todo.description"/>
+            </div>
+            <div>
+              <button class="btn btn-primary btn-xs" v-on:click="onSave">Save</button>
+              <span> </span>
+              <button class="btn btn-danger btn-xs" v-on:click="onCancel">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    `,
+    methods: {
+      onSave: evt => {
+        evt.preventDefault();
+        actions.saveTodo(getTodo(evt));
+      },
+
+      onCancel: evt => {
+        evt.preventDefault();
+        actions.clearForm();
+      }
+    }
+  });
+}

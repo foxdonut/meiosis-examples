@@ -30,9 +30,9 @@ const view = (todo, actions) => {
             <input type="text" id="description" name="description" className="form-control" value={todo.description} onChange={onChangeText}/>
           </div>
           <div>
-            <button className="btn btn-primary btn-xs" onClick={onSave} data-action="save">Save</button>
+            <button className="btn btn-primary btn-xs" onClick={onSave}>Save</button>
             <span> </span>
-            <button className="btn btn-danger btn-xs" onClick={onCancel} data-action="cancel">Cancel</button>
+            <button className="btn btn-danger btn-xs" onClick={onCancel}>Cancel</button>
           </div>
         </form>
       </div>

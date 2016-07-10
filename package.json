@@ -7,7 +7,7 @@
     "labeled-sliders": "(cd examples/labeled-sliders && npm i && npm start)",
     "todo-list": "(cd examples/todo-list && npm i && npm start)",
     "todomvc": "(cd examples/todomvc && npm i && npm start)",
-    "preexamples": "for F in $(find . -name 'index.swig') $(find . -name 'index-node.swig') $(find . -name 'index-reqjs.swig'); do node_modules/swig/bin/swig.js render $F > $(echo $F | sed -e 's/swig/html/'); done",
+    "preexamples": "for F in $(find . -name 'index*.swig' | grep -v common) ; do node_modules/swig/bin/swig.js render $F > $(echo $F | sed -e 's/swig/html/'); done",
     "examples": "npm run labeled-sliders && npm run todo-list && npm run todomvc",
     "prestart": "npm i && npm run examples",
     "start": "node --harmony server/main"
