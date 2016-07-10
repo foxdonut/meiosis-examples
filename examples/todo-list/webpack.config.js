@@ -8,7 +8,7 @@ module.exports = {
   devtool: "source-map",
   output: {
     path: ".",
-    filename: "generated-" + variant + (isProduction ? ".min" : "") + ".js"
+    filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
   },
   module: {
     loaders: [

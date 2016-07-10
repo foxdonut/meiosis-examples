@@ -30,7 +30,10 @@ const receive = (model, proposal) => {
   }, proposal);
 
   if (modelUpdate) {
-    return merge(model, modelUpdate);
+    //return merge(model, modelUpdate);
+    for (let k in modelUpdate) {
+      model[k] = modelUpdate[k];
+    }
   }
   return model;
 };

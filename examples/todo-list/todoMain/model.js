@@ -1,9 +1,9 @@
 export default {
-  todos: [{id:1, priority:1, description:"test"}],
+  todos: [],
   message: "Initializing...",
   todo: {
-    id: "1",
-    priority: "1",
-    description: "test"
+    id: "",
+    priority: "",
+    description: ""
   }
 };
