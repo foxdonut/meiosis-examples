@@ -1,6 +1,5 @@
-import React from "react";
 import meiosisTracer from "meiosis-tracer";
-import todoMainComponent from "./todoMain/component";
+import todoMainComponent from "./todoMain/component-react";
 
 export default function(Meiosis) {
   const createComponent = Meiosis.createComponent;
