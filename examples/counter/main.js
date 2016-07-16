@@ -21,13 +21,11 @@ var ready = function(propose) {
   });
 };
 
-var Meiosis = meiosis.init(meiosisVanillaJs.renderer.intoId("app"));
-
-var Main = Meiosis.createComponent({
+var Main = meiosis.createComponent({
   initialModel: initialModel,
   view: view,
   ready: ready,
   receive: receive
 });
 
-Meiosis.run(Main);
+meiosis.run(meiosisVanillaJs.renderer().intoId(document, "app"), Main);

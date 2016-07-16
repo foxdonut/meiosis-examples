@@ -7,7 +7,7 @@ var receive = function(model, proposal) {
   return { counter: model.counter + proposal.add };
 };
 
-var Meiosis = meiosis.init(meiosisReact.renderer.intoId("reactApp"));
+var Meiosis = meiosis.init();
 
 var Main = Meiosis.createComponent({
   initialModel: initialModel,
@@ -15,4 +15,4 @@ var Main = Meiosis.createComponent({
   receive: receive
 });
 
-Meiosis.run(Main);
+Meiosis.run(meiosisReact.renderer().intoId(document, "reactApp"), Main);

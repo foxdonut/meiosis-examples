@@ -7,8 +7,8 @@ var receive = function(model, proposal) {
   return { counter: model.counter + proposal.add };
 };
 
-meiosisRiot.renderer("counter").renderIntoId("riotApp").then(function(render) {
-  var Meiosis = meiosis.init({render: render});
+meiosisRiot.renderer("counter").intoId(document, "riotApp").then(function(render) {
+  var Meiosis = meiosis.init();
 
   var Main = Meiosis.createComponent({
     initialModel: initialModel,
@@ -16,5 +16,5 @@ meiosisRiot.renderer("counter").renderIntoId("riotApp").then(function(render) {
     receive: receive
   });
 
-  Meiosis.run(Main);
+  Meiosis.run(render, Main);
 });

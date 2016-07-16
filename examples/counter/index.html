@@ -45,10 +45,11 @@
   <script src="/examples/counter/main-riot.js"></script>
 
   <script src="/public/lib/vue.js"></script>
+  <script src="/public/lib/meiosis-vue.min.js"></script>
   
 <script type="x-template" id="view-vue">
 <div>
-  <div><span>Vue Counter: {{counter}}</span></div>
+  <div><span>Vue Counter: {{model.counter}}</span></div>
   <div>
     <button v-on:click='onInc'>+ 2</button>
     <button v-on:click='onDecr'>- 2</button>

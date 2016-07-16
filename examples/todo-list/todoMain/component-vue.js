@@ -11,7 +11,7 @@ export default function(createComponent) {
   createTodoList();
 
   Vue.component("todo-main", {
-    props: ["model", "duck"],
+    props: ["model"],
     template: `<div>
       <todo-form :todo="model.todo" :model="model"></todo-form>
       <todo-list :model="model"></todo-list>

@@ -1,4 +1,4 @@
-/*global window, meiosis, Vue*/
+/*global window, meiosis, meiosisVue */
 var initialModel = { counter: 0 };
 
 var ready = window.vueView(initialModel);
@@ -8,9 +8,9 @@ var receive = function(model, proposal) {
   return model;
 };
 
-var render = function(element, view) { };
+var render = meiosisVue.renderer(initialModel, "model");
 
-var Meiosis = meiosis.init({render: render});
+var Meiosis = meiosis.init();
 
 var Main = Meiosis.createComponent({
   initialModel: initialModel,
@@ -18,4 +18,4 @@ var Main = Meiosis.createComponent({
   ready: ready
 });
 
-Meiosis.run(Main);
+Meiosis.run(render, Main);
