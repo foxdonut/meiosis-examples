@@ -1,21 +1,23 @@
 /*global window, meiosis, meiosisVue */
-var initialModel = { counter: 0 };
+(function() {
+  var initialModel = { counter: 0 };
 
-var ready = window.vueView(initialModel);
+  var ready = window.vueView(initialModel);
 
-var receive = function(model, proposal) {
-  model.counter += proposal.add;
-  return model;
-};
+  var receive = function(model, proposal) {
+    model.counter += proposal.add;
+    return model;
+  };
 
-var render = meiosisVue.renderer(initialModel, "model");
+  var render = meiosisVue.renderer(initialModel, "model");
 
-var Meiosis = meiosis.init();
+  var Meiosis = meiosis.init();
 
-var Main = Meiosis.createComponent({
-  initialModel: initialModel,
-  receive: receive,
-  ready: ready
-});
+  var Main = Meiosis.createComponent({
+    initialModel: initialModel,
+    receive: receive,
+    ready: ready
+  });
 
-Meiosis.run(render, Main);
+  Meiosis.run(render, Main);
+})();

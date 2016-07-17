@@ -1,20 +1,19 @@
 /*global window, meiosis, meiosisRiot*/
-var initialModel = { counter: 0 };
+(function() {
+  var initialModel = { counter: 0 };
 
-var view = window.riotView;
+  var receive = function(model, proposal) {
+    return { counter: model.counter + proposal.add };
+  };
 
-var receive = function(model, proposal) {
-  return { counter: model.counter + proposal.add };
-};
+  meiosisRiot.renderer("counter").intoId(document, "riotApp").then(function(render) {
+    var Meiosis = meiosis.init();
 
-meiosisRiot.renderer("counter").intoId(document, "riotApp").then(function(render) {
-  var Meiosis = meiosis.init();
+    var Main = Meiosis.createComponent({
+      initialModel: initialModel,
+      receive: receive
+    });
 
-  var Main = Meiosis.createComponent({
-    initialModel: initialModel,
-    view: view,
-    receive: receive
+    Meiosis.run(render, Main);
   });
-
-  Meiosis.run(render, Main);
-});
+})();
