@@ -6,7 +6,7 @@
     return { counter: model.counter + proposal.add };
   };
 
-  meiosisRiot.renderer("counter").intoId(document, "riotApp").then(function(render) {
+  meiosisRiot.renderer("app").intoId(document, "riotApp").then(function(render) {
     var Meiosis = meiosis.init();
 
     var Main = Meiosis.createComponent({

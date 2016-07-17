@@ -9,10 +9,10 @@
         template: "#view-vue",
         methods: {
           onInc: function() {
-            propose({ add: 2 });
+            propose({ add: 4 });
           },
           onDecr: function() {
-            propose({ add: -2 });
+            propose({ add: -4 });
           }
         }
       });

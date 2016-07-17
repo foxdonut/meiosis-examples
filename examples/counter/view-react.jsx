@@ -2,17 +2,17 @@
 (function(ref) {
   ref.reactView = function(model, propose) {
     var onInc = function(_evt) {
-      propose({ add: 10 });
+      propose({ add: 2 });
     };
     var onDecr = function(_evt) {
-      propose({ add: -10 });
+      propose({ add: -2 });
     };
     return (
       <div>
         <div><span>React Counter: {model.counter}</span></div>
         <div>
-          <button onClick={onInc}>+ 10</button>
-          <button onClick={onDecr}>- 10</button>
+          <button onClick={onInc}>+ 2</button>
+          <button onClick={onDecr}>- 2</button>
         </div>
       </div>
     );
