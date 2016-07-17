@@ -28,7 +28,6 @@
 
   <script src="/public/lib/vue.js"></script>
   <script src="/public/lib/meiosis-vue.min.js"></script>
-  {% include "./view-vue.html" %}
   <script src="/examples/counter/view-vue.js"></script>
   <script src="/examples/counter/main-vue.js"></script>
 {% endblock %}
