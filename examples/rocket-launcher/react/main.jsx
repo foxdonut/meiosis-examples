@@ -1,10 +1,6 @@
 /*global meiosis, meiosisReact, meiosisTracer, window*/
 (function(ref) {
-  var Meiosis = meiosis.init(meiosisReact.renderer.intoId("app"));
-
-  var createComponent = Meiosis.createComponent;
-
-  var Main = createComponent({
+  var Main = meiosis.createComponent({
     initialModel: ref.initialModel,
     view: ref.display(ref.state, ref.view),
     actions: ref.actions,
@@ -12,7 +8,7 @@
     nextAction: ref.nextAction(ref.state)
   });
 
-  var renderRoot = Meiosis.run(Main);
+  var renderRoot = meiosis.run(meiosisReact.renderer().intoId(document, "app"), Main);
 
-  meiosisTracer(createComponent, renderRoot, "#tracer");
+  meiosisTracer(meiosis.createComponent, renderRoot, "#tracer");
 })(window);

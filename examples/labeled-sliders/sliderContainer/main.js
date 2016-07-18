@@ -1,11 +1,12 @@
+import { createComponent } from "meiosis";
 import { initialModel } from "./model";
 import receive from "./receive";
 import view from "./view";
 
-import labeledSliderConfig from "../labeledSlider/main";
+import createLabeledSlider from "../labeledSlider/main";
 
-const createSliderContainer = createComponent => {
-  const LabeledSlider = createComponent(labeledSliderConfig);
+const createSliderContainer = () => {
+  const LabeledSlider = createLabeledSlider();
 
   return createComponent({
     initialModel,

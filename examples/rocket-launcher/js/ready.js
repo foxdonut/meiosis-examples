@@ -1,7 +1,7 @@
 /*global meiosisVanillaJs, window*/
 (function(ref) {
   var root = document.getElementById("app");
-  var renderer = meiosisVanillaJs.renderer;
+  var renderer = meiosisVanillaJs.renderer();
 
   ref.ready = function(actions) {
     renderer.delegate(root, "form.start", "submit", function(evt) {

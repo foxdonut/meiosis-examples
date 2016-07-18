@@ -1,3 +1,4 @@
+import { createComponent } from "meiosis";
 import initialModel from "./model";
 import receive from "./receive";
 import services from "./services";
@@ -6,7 +7,7 @@ import Vue from "vue";
 import createTodoForm from "../todoForm/component-vue";
 import createTodoList from "../todoList/component-vue";
 
-export default function(createComponent) {
+export default function() {
   createTodoForm();
   createTodoList();
 

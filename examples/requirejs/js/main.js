@@ -20,20 +20,17 @@ requirejs(["require", "meiosis", "meiosisVanillaJs", "meiosisTracer",
     var ready = require("./ready");
     var receive = require("./receive");
 
-    var renderer = meiosisVanillaJs.renderer;
-    var Meiosis = meiosis.init(renderer.intoId("app"));
+    var renderer = meiosisVanillaJs.renderer();
 
-    var createComponent = Meiosis.createComponent;
-
-    var Main = createComponent({
+    var Main = meiosis.createComponent({
       initialModel: model.initialModel,
       view: view,
       ready: ready,
       receive: receive
     });
 
-    var renderRoot = Meiosis.run(Main);
+    var renderRoot = meiosis.run(renderer.intoId(document, "app"), Main);
 
-    meiosisTracer(createComponent, renderRoot, "#tracer");
+    meiosisTracer(meiosis.createComponent, renderRoot, "#tracer");
   }
 );

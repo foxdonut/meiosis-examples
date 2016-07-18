@@ -1,7 +1,6 @@
-import meiosis from "meiosis";
+import { run } from "meiosis";
 import { renderer } from "meiosis-snabbdom";
-import createMain from "./labeledSliders";
+import createSliderContainer from "./sliderContainer/main";
 
-const Meiosis = meiosis.init(renderer.intoId("app"));
-
-createMain(Meiosis);
+const SliderContainer = createSliderContainer();
+run(renderer().intoId(document, "app"), SliderContainer);

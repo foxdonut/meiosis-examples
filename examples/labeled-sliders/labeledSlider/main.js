@@ -1,5 +1,6 @@
+import { createComponent } from "meiosis";
 import view from "./view";
 
-const labeledSliderConfig = { view };
+const labeledSlider = () => createComponent({ view });
 
-export default labeledSliderConfig;
+export default labeledSlider;
