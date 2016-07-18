@@ -5,19 +5,19 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["./view", "../header/component", "../main/component", "../footer/component"], function(todoappView, headerComponent, mainComponent, footerComponent) {
-      return (root.todoappComponent = factory(todoappView, headerComponent, mainComponent, footerComponent));
+    define(["meiosis", "./view", "../header/component", "../main/component", "../footer/component"], function(meiosis, todoappView, headerComponent, mainComponent, footerComponent) {
+      return (root.todoappComponent = factory(meiosis, todoappView, headerComponent, mainComponent, footerComponent));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.todoappComponent = factory(require("./view"), require("../header/component"), require("../main/component"), require("../footer/component")));
+    module.exports = (root.todoappComponent = factory(require("meiosis"), require("./view"), require("../header/component"), require("../main/component"), require("../footer/component")));
   }
   else {
-    root.todoappComponent = factory(root.todoappView, root.headerComponent, root.mainComponent, root.footerComponent);
+    root.todoappComponent = factory(root.meiosis, root.todoappView, root.headerComponent, root.mainComponent, root.footerComponent);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(todoappView, headerComponent, mainComponent, footerComponent) {
+  function(meiosis, todoappView, headerComponent, mainComponent, footerComponent) {
     var viewModel = function(model) {
       var viewModel = model;
       var by = model.filter;
@@ -44,14 +44,14 @@
       return viewModel;
     };
 
-    return function(createComponent, todoStorage) {
-      var header = headerComponent(createComponent, todoStorage);
-      var main = mainComponent(createComponent, todoStorage);
-      var footer = footerComponent(createComponent, todoStorage);
+    return function(todoStorage) {
+      var header = headerComponent(todoStorage);
+      var main = mainComponent(todoStorage);
+      var footer = footerComponent(todoStorage);
 
       var view = todoappView(header, main, footer);
 
-      return createComponent({
+      return meiosis.createComponent({
         view: function(model) {
           return view(viewModel(model));
         }

@@ -5,23 +5,23 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["../../common/root/model", "./view.jsx", "../todoapp/component"], function(todoModel, rootView, todoappComponent) {
-      return (root.todoappComponent = factory(todoModel, rootView, todoappComponent));
+    define(["meiosis", "../../common/root/model", "./view.jsx", "../todoapp/component"], function(meiosis, todoModel, rootView, todoappComponent) {
+      return (root.todoappComponent = factory(meiosis, todoModel, rootView, todoappComponent));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.rootComponent = factory(require("../../common/root/model"), require("./view.jsx"), require("../todoapp/component")));
+    module.exports = (root.rootComponent = factory(require("meiosis"), require("../../common/root/model"), require("./view.jsx"), require("../todoapp/component")));
   }
   else {
-    root.rootComponent = factory(root.todoModel, root.rootView, root.todoappComponent);
+    root.rootComponent = factory(root.meiosis, root.todoModel, root.rootView, root.todoappComponent);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(todoModel, rootView, todoappComponent) {
-    return function(createComponent, todoStorage) {
-      var todoapp = todoappComponent(createComponent, todoStorage);
+  function(meiosis, todoModel, rootView, todoappComponent) {
+    return function(todoStorage) {
+      var todoapp = todoappComponent(todoStorage);
 
-      return createComponent({
+      return meiosis.createComponent({
         initialModel: todoModel(todoStorage),
         view: rootView(todoapp)
       });

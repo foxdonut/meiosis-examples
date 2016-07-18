@@ -21,11 +21,9 @@
     return function(meiosisRender) {
       Type.check = false;
 
-      var Meiosis = meiosis.init(meiosisRender.renderer.intoId("app"));
-      var createComponent = Meiosis.createComponent;
-      var root = rootComponent(createComponent, todoStorage);
-      var renderRoot = Meiosis.run(root);
-      meiosisTracer(createComponent, renderRoot, "#tracer");
+      var root = rootComponent(todoStorage);
+      var renderRoot = meiosis.run(meiosisRender.renderer().intoId(document, "app"), root);
+      meiosisTracer(meiosis.createComponent, renderRoot, "#tracer");
     };
   }
 ));

@@ -18,7 +18,7 @@
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
   function(History, meiosisVanillaJs) {
-    var renderer = meiosisVanillaJs.renderer;
+    var renderer = meiosisVanillaJs.renderer();
     var root = document.getElementById("app");
 
     return function(actions) {

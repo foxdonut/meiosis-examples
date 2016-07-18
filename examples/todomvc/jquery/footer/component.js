@@ -5,21 +5,21 @@
 // Meiosis. It is for convenience to be able to run the example with your preferred module system.
 (function(root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["../../common/footer/actions", "./view", "../../common/footer/receive", "./ready"], function(footerActions, footerView, footerReceive, footerReady) {
-      return (root.footerComponent = factory(footerActions, footerView, footerReceive, footerReady));
+    define(["meiosis", "../../common/footer/actions", "./view", "../../common/footer/receive", "./ready"], function(meiosis, footerActions, footerView, footerReceive, footerReady) {
+      return (root.footerComponent = factory(meiosis, footerActions, footerView, footerReceive, footerReady));
     });
   }
   else if (typeof module === "object" && module.exports) {
-    module.exports = (root.footerComponent = factory(require("../../common/footer/actions"), require("./view"), require("../../common/footer/receive"), require("./ready")));
+    module.exports = (root.footerComponent = factory(require("meiosis"), require("../../common/footer/actions"), require("./view"), require("../../common/footer/receive"), require("./ready")));
   }
   else {
-    root.footerComponent = factory(root.footerActions, root.footerView, root.footerReceive, root.footerReady);
+    root.footerComponent = factory(root.meiosis, root.footerActions, root.footerView, root.footerReceive, root.footerReady);
   }
 }(this || window, // ^^ the code above is boilerplate. the "real" code starts below. vv
 
-  function(footerActions, footerView, footerReceive, footerReady) {
-    return function(createComponent, todoStorage) {
-      return createComponent({
+  function(meiosis, footerActions, footerView, footerReceive, footerReady) {
+    return function(todoStorage) {
+      return meiosis.createComponent({
         actions: footerActions,
         view: footerView,
         receive: footerReceive(todoStorage),
