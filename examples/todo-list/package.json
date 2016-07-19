@@ -30,7 +30,7 @@
     "form-serialize": "^0.7.1",
     "meiosis": "^0.7.0",
     "meiosis-react": "^0.7.0",
-    "meiosis-tracer": "^0.6.0",
+    "meiosis-tracer": "^0.7.0",
     "meiosis-vue": "^0.7.0",
     "ramda": "^0.21.0",
     "react": "^15.1.0",

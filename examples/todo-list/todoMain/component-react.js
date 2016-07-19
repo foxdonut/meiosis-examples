@@ -1,5 +1,5 @@
 import { createComponent } from "meiosis";
-import initialModel from "./model";
+import { model } from "./model";
 import view from "./view-react.jsx";
 import receive from "./receive";
 import services from "./services";
@@ -15,7 +15,7 @@ export default function() {
   const todoList = createComponent({view: todoListView, actions});
 
   return createComponent({
-    initialModel,
+    initialModel: model,
     actions,
     view: view(todoForm, todoList),
     receive: receive,

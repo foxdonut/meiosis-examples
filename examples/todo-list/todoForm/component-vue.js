@@ -17,24 +17,17 @@ export default function(actions) {
               <input type="text" id="description" name="description" class="form-control" v-model="todo.description"/>
             </div>
             <div>
-              <button class="btn btn-primary btn-xs" v-on:click="onSave">Save</button>
+              <button class="btn btn-primary btn-xs" v-on:click.prevent="onSave(todo)">Save</button>
               <span> </span>
-              <button class="btn btn-danger btn-xs" v-on:click="onCancel">Cancel</button>
+              <button class="btn btn-danger btn-xs" v-on:click.prevent="onCancel">Cancel</button>
             </div>
           </form>
         </div>
       </div>
     `,
     methods: {
-      onSave: evt => {
-        evt.preventDefault();
-        actions.saveTodo(getTodo(evt));
-      },
-
-      onCancel: evt => {
-        evt.preventDefault();
-        actions.clearForm();
-      }
+      onSave: actions.saveTodo,
+      onCancel: actions.clearForm
     }
   });
 }

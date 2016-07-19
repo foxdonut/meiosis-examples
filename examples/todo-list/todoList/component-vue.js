@@ -5,11 +5,11 @@ export default function(actions) {
   createTodoItem(actions);
 
   Vue.component("todo-list", {
-    props: ["model"],
+    props: ["todos", "message"],
     template: `
       <div class="row">
         <div class="col-md-8">
-          <div>Todo List: {{model.message}}</div>
+          <div>Todo List: {{message}}</div>
           <table class="table ng-table">
             <thead>
               <tr>
@@ -19,22 +19,11 @@ export default function(actions) {
               </tr>
             </thead>
             <tbody>
-              <tr is="todo-item" v-for="todo in model.todos" :todo="todo"></tr>
+              <tr is="todo-item" v-for="todo in todos" :todo="todo"></tr>
             </tbody>
           </table>
         </div>
       </div>
-    `,
-    methods: {
-      onSave: evt => {
-        evt.preventDefault();
-        actions.saveTodo(getTodo(evt));
-      },
-
-      onCancel: evt => {
-        evt.preventDefault();
-        actions.clearForm();
-      }
-    }
+    `
   });
 }

@@ -1,5 +1,5 @@
 import { append, complement, filter, findIndex, identity, lensIndex, merge, propEq, set } from "ramda";
-import initialModel from "./model";
+import { initialModel } from "./model";
 import { Action } from "./actions";
 
 const updateTodos = (todos, todo) => {
@@ -16,24 +16,21 @@ const receive = (model, proposal) => {
     EditTodo: todo => ({ todo }),
     RequestSaveTodo: () => ({ message: "Saving, please wait..."}),
 
-    SavedTodo: savedTodo => merge({ todo: initialModel.todo },
+    SavedTodo: savedTodo => merge({ todo: initialModel().root.todo },
       savedTodo
-        .map(todo => updateTodos(model.todos, todo))
+        .map(todo => updateTodos(model.root.todos, todo))
         .map(todos => ({ todos, message: "" }))
         .getOrElse({ message: "An error occurred when saving a Todo." })),
 
-    ClearForm: () => ({ todo: initialModel.todo }),
+    ClearForm: () => ({ todo: initialModel().root.todo }),
     RequestDeleteTodo: () => ({ message: "Deleting, please wait..."}),
     DeletedTodo: maybeTodoId => maybeTodoId
-      .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.todos), message: "" }))
-      .getOrElse({ todos: model.todos, message: "An error occured when deleting a Todo." })
+      .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.root.todos), message: "" }))
+      .getOrElse({ todos: model.root.todos, message: "An error occured when deleting a Todo." })
   }, proposal);
 
   if (modelUpdate) {
-    //return merge(model, modelUpdate);
-    for (let k in modelUpdate) {
-      model[k] = modelUpdate[k];
-    }
+    return { root: merge(model.root, modelUpdate) };
   }
   return model;
 };

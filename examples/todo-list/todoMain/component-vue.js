@@ -1,5 +1,5 @@
 import { createComponent } from "meiosis";
-import initialModel from "./model";
+import { model } from "./model";
 import receive from "./receive";
 import services from "./services";
 import { createActions } from "./actions";
@@ -7,24 +7,28 @@ import Vue from "vue";
 import createTodoForm from "../todoForm/component-vue";
 import createTodoList from "../todoList/component-vue";
 
-export default function() {
-  createTodoForm();
-  createTodoList();
+const ready = actions => {
+  actions.loadList();
+
+  createTodoForm(actions);
+  createTodoList(actions);
 
   Vue.component("todo-main", {
-    props: ["model"],
+    props: ["root"],
     template: `<div>
-      <todo-form :todo="model.todo" :model="model"></todo-form>
-      <todo-list :model="model"></todo-list>
+      <todo-form :todo="root.todo"></todo-form>
+      <todo-list :todos="root.todos" :message="root.message"></todo-list>
     </div>`
   });
+};
 
+export default function() {
   const actions = createActions(services);
 
   return createComponent({
-    initialModel,
+    initialModel: model,
     actions,
     receive: receive,
-    ready: actions => actions.loadList()
+    ready
   });
 }
