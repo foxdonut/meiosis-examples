@@ -6,19 +6,19 @@
     return { counter: model.counter + proposal.add };
   };
 
+  var actions = function(propose) {
+    return {
+      onInc: function() {
+        propose({ add: 3 });
+      },
+      onDecr: function() {
+        propose({ add: -3 });
+      }
+    };
+  };
+
   meiosisRiot.renderer("app").intoId(document, "riotApp").then(function(resolved) {
     var Meiosis = meiosis.init();
-
-    var actions = function(propose) {
-      return {
-        onInc: function() {
-          propose({ add: 3 });
-        },
-        onDecr: function() {
-          propose({ add: -3 });
-        }
-      };
-    };
 
     var ready = function(actions) {
       resolved.tags[0].tags["counter"].update({actions: actions});
