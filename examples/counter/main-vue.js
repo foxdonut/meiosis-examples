@@ -9,7 +9,7 @@
     return model;
   };
 
-  var render = meiosisVue.renderer(initialModel, "model");
+  var render = meiosisVue.renderer(initialModel, "counter");
 
   var Meiosis = meiosis.init();
 
