@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "vue": "webpack --config webpack.vue.config.js",
-    "start": "for V in react vue; do VARIANT=$V webpack; done",
+    "start": "for V in react riot vue; do VARIANT=$V webpack; done",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
@@ -30,11 +30,13 @@
     "form-serialize": "^0.7.1",
     "meiosis": "^0.7.0",
     "meiosis-react": "^0.7.0",
+    "meiosis-riot": "^0.7.0",
     "meiosis-tracer": "^0.7.0",
     "meiosis-vue": "^0.7.0",
     "ramda": "^0.21.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "riot": "^2.5.0",
     "union-type": "^0.3.1",
     "vue": "^1.0.26"
   },
