@@ -16,21 +16,21 @@ const receive = (model, proposal) => {
     EditTodo: todo => ({ todo }),
     RequestSaveTodo: () => ({ message: "Saving, please wait..."}),
 
-    SavedTodo: savedTodo => merge({ todo: initialModel().root.todo },
+    SavedTodo: savedTodo => merge({ todo: initialModel().store.todo },
       savedTodo
-        .map(todo => updateTodos(model.root.todos, todo))
+        .map(todo => updateTodos(model.store.todos, todo))
         .map(todos => ({ todos, message: "" }))
         .getOrElse({ message: "An error occurred when saving a Todo." })),
 
-    ClearForm: () => ({ todo: initialModel().root.todo }),
+    ClearForm: () => ({ todo: initialModel().store.todo }),
     RequestDeleteTodo: () => ({ message: "Deleting, please wait..."}),
     DeletedTodo: maybeTodoId => maybeTodoId
-      .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.root.todos), message: "" }))
-      .getOrElse({ todos: model.root.todos, message: "An error occured when deleting a Todo." })
+      .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.store.todos), message: "" }))
+      .getOrElse({ todos: model.store.todos, message: "An error occured when deleting a Todo." })
   }, proposal);
 
   if (modelUpdate) {
-    return { root: merge(model.root, modelUpdate) };
+    return { store: merge(model.store, modelUpdate) };
   }
   return model;
 };

@@ -1,5 +1,5 @@
 const initialModel = () => ({
-  root: {
+  store: {
     todos: [],
     message: "Initializing...",
     todo: {

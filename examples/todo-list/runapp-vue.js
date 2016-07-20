@@ -6,12 +6,12 @@ import { model } from "./todoMain/model";
 import Vue from "vue";
 
 export default function() {
-  const renderRoot = run(renderer(model, "root"), todoMainComponent());
+  const renderRoot = run(renderer(model, "store"), todoMainComponent());
   meiosisTracer(createComponent, renderRoot, "#tracer");
 
   return new Vue({
     el: "#app",
     data: model,
-    template: "<div><div is='todo-main' :root='root'></div></div>"
+    template: "<div><div is='todo-main' :store='store'></div></div>"
   });
 }

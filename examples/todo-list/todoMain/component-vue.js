@@ -8,18 +8,18 @@ import createTodoForm from "../todoForm/component-vue";
 import createTodoList from "../todoList/component-vue";
 
 const ready = actions => {
-  actions.loadList();
-
   createTodoForm(actions);
   createTodoList(actions);
 
   Vue.component("todo-main", {
-    props: ["root"],
+    props: ["store"],
     template: `<div>
-      <todo-form :todo="root.todo"></todo-form>
-      <todo-list :todos="root.todos" :message="root.message"></todo-list>
+      <todo-form :todo="store.todo"></todo-form>
+      <todo-list :todos="store.todos" :message="store.message"></todo-list>
     </div>`
   });
+
+  actions.loadList();
 };
 
 export default function() {

@@ -1,22 +1,16 @@
-import { compose, prop } from "ramda";
+import riot from "riot";
 
 export default function(actions) {
-  Vue.component("todo-item", {
-    props: ["todo"],
-    template: `
-      <tr>
-        <td>{{todo.priority}}</td>
-        <td>{{todo.description}}</td>
-        <td>
-          <button class="btn btn-primary btn-xs" v-on:click.prevent="onEdit(todo)">Edit</button>
-          <span> </span>
-          <button class="btn btn-danger btn-xs" v-on:click.prevent="onDelete(todo)">Delete</button>
-        </td>
-      </tr>
-    `,
-    methods: {
-      onEdit: actions.editTodo,
-      onDelete: compose(actions.deleteTodo, prop("id"))
-    }
+  riot.tag("todo-item", `
+    <td>{ todo.priority }</td>
+    <td>{ todo.description }</td>
+    <td>
+      <button class="btn btn-primary btn-xs" onclick="{ opts.onEdit(todo) }">Edit</button>
+      <span> </span>
+      <button class="btn btn-danger btn-xs" onclick="{ opts.onDelete(todo) }">Delete</button>
+    </td>
+  `, (opts) => {
+    opts.onEdit = todo => _evt => actions.editTodo(todo);
+    opts.onDelete = todo => _evt => actions.deleteTodo(todo.id);
   });
 }
