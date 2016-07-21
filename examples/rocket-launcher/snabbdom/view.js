@@ -12,7 +12,7 @@
       return h("div", [
         h("p", "Counter: " + model.counter),
         h("form", [
-          h("input", {attrs: {type: "submit", value: "Start"}, on: {click: onStart}})
+          h("input.btn.btn-primary", {attrs: {type: "submit", value: "Start"}, on: {click: onStart}})
         ])
       ]);
     },
@@ -26,7 +26,7 @@
       return h("div", [
         h("p", "Count down: " + model.counter),
         h("form", [
-          h("input", {attrs: {type: "submit", value: "Abort"}, on: {click: onAbort}})
+          h("input.btn.btn-danger", {attrs: {type: "submit", value: "Abort"}, on: {click: onAbort}})
         ])
       ]);
     },

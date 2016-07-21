@@ -5,7 +5,7 @@
       return (
         "<p>Counter:"+model.counter+"</p>\n\
           <form class=\"start\">\n\
-            <input type=\"submit\" value=\"Start\">\n\
+            <input type=\"submit\" class=\"btn btn-primary\" value=\"Start\">\n\
           </form>"
       );
     },
@@ -15,7 +15,7 @@
       return (
         "<p>Count down:"+model.counter+"</p>\n\
           <form class=\"counting\">\n\
-            <input type=\"submit\" value=\"Abort\">\n\
+            <input type=\"submit\" class=\"btn btn-danger\" value=\"Abort\">\n\
           </form>"
       );
     },

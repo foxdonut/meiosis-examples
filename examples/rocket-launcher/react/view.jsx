@@ -10,7 +10,7 @@
       return (<div>
         <p>Counter: {model.counter}</p>
         <form>
-          <input type="submit" value="Start" onClick={onStart}/>
+          <input type="submit" className="btn btn-primary" value="Start" onClick={onStart}/>
         </form>
       </div>);
     },
@@ -24,7 +24,7 @@
       return (<div>
         <p>Count down: {model.counter}</p>
         <form>
-          <input type="submit" value="Abort" onClick={onAbort}/>
+          <input type="submit" className="btn btn-danger" value="Abort" onClick={onAbort}/>
         </form>
       </div>);
     },
