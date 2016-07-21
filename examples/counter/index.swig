@@ -21,9 +21,9 @@
   <script src="/examples/counter/view-react.jsx" type="text/babel"></script>
   <script src="/examples/counter/main-react.jsx" type="text/babel"></script>
 
-  <script src="/public/lib/riot+compiler.min.js"></script>
+  <script src="/public/lib/riot.min.js"></script>
   <script src="/public/lib/meiosis-riot.min.js"></script>
-  <script src="/examples/counter/view-riot.tag" type="riot/tag"></script>
+  <script src="/examples/counter/view-riot.js"></script>
   <script src="/examples/counter/main-riot.js"></script>
 
   <script src="/public/lib/vue.js"></script>

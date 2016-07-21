@@ -2,7 +2,7 @@ import React from "react";
 import serialize from "form-serialize";
 
 const view = (todo, actions) => {
-  const getTodo = evt => serialize(evt.target.form, {hash: true, empty: true});
+  const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
 
   const onChangeText = evt => actions.editTodo(getTodo(evt));
 

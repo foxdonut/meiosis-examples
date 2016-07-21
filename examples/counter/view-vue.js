@@ -10,8 +10,8 @@
           <div>
             <div><span>Vue Counter: {{model.counter}}</span></div>
             <div>
-              <button v-on:click='onInc'>+ 4</button>
-              <button v-on:click='onDecr'>- 4</button>
+              <button class='btn btn-sm btn-primary' v-on:click='onInc'>+ 4</button>
+              <button class='btn btn-sm btn-default' v-on:click='onDecr'>- 4</button>
             </div>
           </div>
         `,
