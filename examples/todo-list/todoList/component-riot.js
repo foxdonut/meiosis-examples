@@ -24,7 +24,4 @@ export default function(actions) {
     </div>
   `
   );
-  /*
-  <todo-item each={ model.root.todos } todo="{ this }"></todo-item>
-*/
 }

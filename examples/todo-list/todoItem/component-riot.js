@@ -5,12 +5,12 @@ export default function(actions) {
     <td>{ todo.priority }</td>
     <td>{ todo.description }</td>
     <td>
-      <button class="btn btn-primary btn-xs" onclick="{ opts.onEdit(todo) }">Edit</button>
+      <button class="btn btn-primary btn-xs" onclick="{ onEdit(todo) }">Edit</button>
       <span> </span>
-      <button class="btn btn-danger btn-xs" onclick="{ opts.onDelete(todo) }">Delete</button>
+      <button class="btn btn-danger btn-xs" onclick="{ onDelete(todo) }">Delete</button>
     </td>
-  `, (opts) => {
-    opts.onEdit = todo => _evt => actions.editTodo(todo);
-    opts.onDelete = todo => _evt => actions.deleteTodo(todo.id);
+  `, function() {
+    this.onEdit = todo => _evt => actions.editTodo(todo);
+    this.onDelete = todo => _evt => actions.deleteTodo(todo.id);
   });
 }

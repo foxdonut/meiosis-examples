@@ -15,16 +15,15 @@ export default function(actions) {
             <input type="text" id="description" name="description" class="form-control" value="{ opts.todo.description }"/>
           </div>
           <div>
-            <button class="btn btn-primary btn-xs" onclick="{ opts.onSave(opts.todo) }">Save</button>
+            <button class="btn btn-primary btn-xs" onclick="{ onSave(opts.todo) }">Save</button>
             <span> </span>
-            <button class="btn btn-danger btn-xs" onclick="{ opts.onCancel }">Cancel</button>
+            <button class="btn btn-danger btn-xs" onclick="{ onCancel }">Cancel</button>
           </div>
         </form>
       </div>
     </div>
-  `,
-  (opts) => {
-    opts.onSave = todo => _evt => actions.saveTodo(todo);
-    opts.onCancel = actions.clearForm;
+  `, function() {
+    this.onSave = todo => _evt => actions.saveTodo(todo);
+    this.onCancel = actions.clearForm;
   });
 }
