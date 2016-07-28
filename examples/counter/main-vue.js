@@ -1,8 +1,8 @@
 /*global window, meiosis, meiosisVue */
-(function() {
+(function(ref) {
   var initialModel = { counter: 0 };
 
-  var ready = window.vueView(initialModel);
+  var setup = ref.vueView(initialModel);
 
   var receive = function(model, proposal) {
     model.counter += proposal.add;
@@ -15,9 +15,9 @@
 
   var Main = Meiosis.createComponent({
     initialModel: initialModel,
-    receive: receive,
-    ready: ready
+    setup: setup,
+    receive: receive
   });
 
   Meiosis.run(render, Main);
-})();
+})(window);

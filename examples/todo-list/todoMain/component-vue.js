@@ -7,7 +7,7 @@ import Vue from "vue";
 import createTodoForm from "../todoForm/component-vue";
 import createTodoList from "../todoList/component-vue";
 
-const ready = actions => {
+const setup = actions => {
   createTodoForm(actions);
   createTodoList(actions);
 
@@ -18,9 +18,9 @@ const ready = actions => {
       <todo-list :todos="store.todos" :message="store.message"></todo-list>
     </div>`
   });
-
-  actions.loadList();
 };
+
+const ready = actions => actions.loadList();
 
 export default function() {
   const actions = createActions(services);
@@ -28,7 +28,8 @@ export default function() {
   return createComponent({
     initialModel: model,
     actions,
-    receive: receive,
+    setup,
+    receive,
     ready
   });
 }
