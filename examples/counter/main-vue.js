@@ -13,11 +13,11 @@
 
   var Meiosis = meiosis.init();
 
-  var Main = Meiosis.createComponent({
+  Meiosis.createComponent({
     initialModel: initialModel,
     setup: setup,
     receive: receive
   });
 
-  Meiosis.run(render, Main);
+  Meiosis.run(render);
 })(window);
