@@ -4,7 +4,6 @@
   "description": "meiosis-examples todo-list",
   "main": "index.js",
   "scripts": {
-    "vue": "webpack --config webpack.vue.config.js",
     "start": "for V in react riot vue; do VARIANT=$V webpack; done",
     "watch": "webpack --progress --colors --watch"
   },
