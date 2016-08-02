@@ -45,6 +45,8 @@ python3 -m http.server
 
 Then, open [http://localhost:8000](http://localhost:8000) in your browser. You can use a different port number by specifying it at the end of the Python command.
 
+Of course, you can use another tool of your choice to start an HTTP server.
+
 You will see two tables of all the examples. The first table is organized by view library, while the second is organized by example.
 
 Without Node, you can run all the examples except for those under the `node modules` environment.
@@ -70,13 +72,19 @@ cd examples/todomvc
 npm start
 ```
 
-This will regenerate the bundles for all view libraries. To automatically regenerate the bundle for a specific view library and avoid having to run a command every time you make a change, use this command:
+This will regenerate the bundles for all view libraries. To automatically regenerate the bundle for a specific view library and avoid having to run a command every time you make a change, use this command (except for Windows, see further below):
 
 ```
 VARIANT=react npm run watch
 ```
 
-This will work for the `react` view library. Replace with `mithril`, `snabbdom`, `vanillajs`, `vue`, or `riot` depending on the view library and the example. Not all view libraries are in every example.
+On Windows, use this command:
+
+```
+cmd /V /C "set "VARIANT=react" && npm run watch"
+```
+
+This will work for the `react` view library. Replace with `mithril`, `snabbdom`, `vanillajs`, `vue`, or `riot` depending on the view library and the example. Not all view libraries are in every example. Please make sure to have run `npm start` from the `meiosis-examples` directory before running the command above to regenerate a specific bundle.
 
 Finally, note that the `labeled-sliders` example only uses Snabbdom, so you can simply use `npm run watch` under the `examples/labeled-sliders` directory to watch for changes and automatically regenerate the application.
 

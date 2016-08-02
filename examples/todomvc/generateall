@@ -1,0 +1,6 @@
+#!/bin/bash
+VARIANT=mithril node node_modules/webpack/bin/webpack.js
+VARIANT=react node node_modules/webpack/bin/webpack.js
+VARIANT=snabbdom node node_modules/webpack/bin/webpack.js
+VARIANT=vanillajs node node_modules/webpack/bin/webpack.js
+

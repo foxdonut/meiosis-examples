@@ -4,7 +4,7 @@
   "description": "meiosis-examples todomvc",
   "main": "index.js",
   "scripts": {
-    "start": "for V in mithril react snabbdom vanillajs; do VARIANT=$V webpack; done",
+    "start": "generateall",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
