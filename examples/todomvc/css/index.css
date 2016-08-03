@@ -127,7 +127,7 @@ label[for='toggle-all'] {
 }
 
 .toggle-all:before {
-	content: '❯';
+  content: '\00203A';
 	font-size: 22px;
 	color: #e6e6e6;
 	padding: 10px 27px 10px 27px;

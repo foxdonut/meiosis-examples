@@ -1,6 +1,7 @@
 {% extends '../layout.swig' %}
 
 {% block title %}Counter{% endblock %}
+{% block example %}counter{% endblock %}
 
 {% block content %}
   <script src="/public/lib/meiosis.min.js"></script>
