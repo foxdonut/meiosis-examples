@@ -11,6 +11,9 @@ module.exports = {
     filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
   },
   module: {
+    noParse: [
+      /node_modules\/sinon/
+    ],
     loaders: [
       {
         loader: "babel-loader",
