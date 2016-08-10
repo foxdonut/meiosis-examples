@@ -1,6 +1,6 @@
 {
   "name": "todomvc",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "meiosis-examples todomvc",
   "main": "index.js",
   "scripts": {
@@ -32,11 +32,11 @@
     "handlebars": "^4.0.5",
     "history": "^3.0.0",
     "jquery": "^2.2.3",
-    "meiosis": "^0.7.0",
+    "meiosis": "^0.7.1",
     "meiosis-mithril": "^0.7.0",
     "meiosis-react": "^0.7.0",
     "meiosis-snabbdom": "^0.7.0",
-    "meiosis-tracer": "^0.7.0",
+    "meiosis-tracer": "^0.7.1",
     "meiosis-vanillajs": "^0.7.0",
     "mithril": "^0.2.5",
     "react": "^15.1.0",

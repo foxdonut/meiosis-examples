@@ -1,6 +1,6 @@
 {
   "name": "todo-list",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "meiosis-examples todo-list",
   "main": "index.js",
   "scripts": {
@@ -27,10 +27,10 @@
     "axios": "^0.12.0",
     "data.maybe": "^1.2.2",
     "form-serialize": "^0.7.1",
-    "meiosis": "^0.7.0",
+    "meiosis": "^0.7.1",
     "meiosis-react": "^0.7.0",
     "meiosis-riot": "^0.7.0",
-    "meiosis-tracer": "^0.7.0",
+    "meiosis-tracer": "^0.7.1",
     "meiosis-vue": "^0.7.0",
     "ramda": "^0.21.0",
     "react": "^15.1.0",
