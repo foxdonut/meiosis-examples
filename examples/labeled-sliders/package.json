@@ -25,7 +25,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "meiosis": "^0.7.1",
-    "meiosis-snabbdom": "^0.7.0",
+    "meiosis-snabbdom": "^0.7.1",
     "ramda": "^0.21.0",
     "snabbdom": "^0.5.0",
     "union-type": "^0.3.1"
