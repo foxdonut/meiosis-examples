@@ -2,10 +2,10 @@ import initialModel from "./model";
 import receive from "./receive";
 import view from "./view";
 
-const temperatureConfig = {
+const temperatureConfig = (id, label) => ({
   initialModel,
-  receive,
-  view
-};
+  receive: receive(id),
+  view: view(id, label)
+});
 
 export default temperatureConfig;

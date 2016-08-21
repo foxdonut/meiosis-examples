@@ -1,8 +1,8 @@
-div, span {
+div {
   margin-top: 2px;
   margin-bottom: 2px;
   padding: 2px;
 }
-button {
+span, button {
   margin-right: 4px;
 }
