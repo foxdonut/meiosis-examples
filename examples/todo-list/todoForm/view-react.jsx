@@ -31,7 +31,6 @@ const view = (todo, actions) => {
           </div>
           <div>
             <button className="btn btn-primary btn-xs" onClick={onSave}>Save</button>
-            <span> </span>
             <button className="btn btn-danger btn-xs" onClick={onCancel}>Cancel</button>
           </div>
         </form>

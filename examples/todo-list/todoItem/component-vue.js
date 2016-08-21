@@ -10,7 +10,6 @@ export default function(actions) {
         <td>{{todo.description}}</td>
         <td>
           <button class="btn btn-primary btn-xs" v-on:click.prevent="onEdit(todo)">Edit</button>
-          <span> </span>
           <button class="btn btn-danger btn-xs" v-on:click.prevent="onDelete(todo)">Delete</button>
         </td>
       </tr>

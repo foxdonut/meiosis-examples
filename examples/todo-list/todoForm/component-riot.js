@@ -19,7 +19,6 @@ export default function(actions) {
           </div>
           <div>
             <button class="btn btn-primary btn-xs" onclick="{ onSave }">Save</button>
-            <span> </span>
             <button class="btn btn-danger btn-xs" onclick="{ onCancel }">Cancel</button>
           </div>
         </form>

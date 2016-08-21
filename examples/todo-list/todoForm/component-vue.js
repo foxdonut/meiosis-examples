@@ -18,7 +18,6 @@ export default function(actions) {
             </div>
             <div>
               <button class="btn btn-primary btn-xs" v-on:click.prevent="onSave(todo)">Save</button>
-              <span> </span>
               <button class="btn btn-danger btn-xs" v-on:click.prevent="onCancel">Cancel</button>
             </div>
           </form>

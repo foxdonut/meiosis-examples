@@ -6,7 +6,6 @@ export default function(actions) {
     <td>{ todo.description }</td>
     <td>
       <button class="btn btn-primary btn-xs" onclick="{ onEdit(todo) }">Edit</button>
-      <span> </span>
       <button class="btn btn-danger btn-xs" onclick="{ onDelete(todo) }">Delete</button>
     </td>
   `, function() {

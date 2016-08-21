@@ -17,7 +17,6 @@ const view = (model, actions) => {
       <td>{todo.description}</td>
       <td>
         <button className="btn btn-primary btn-xs" onClick={onEdit(todo)}>Edit</button>
-        <span> </span>
         <button className="btn btn-danger btn-xs" onClick={onDelete(todo)}>Delete</button>
       </td>
     </tr>
