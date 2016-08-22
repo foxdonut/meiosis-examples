@@ -1,0 +1,11 @@
+import objectPath from "object-path";
+
+const initialModel = model => {
+  objectPath.set(model, "store.date", {
+    value: "",
+    error: null
+  });
+  return model;
+};
+
+export default initialModel;
