@@ -21,10 +21,7 @@ const receive = MainAction => (model, proposal) => {
   }, proposal);
 
   MainAction.case({
-    Validate: () => {
-      const errors = validate(model, validation);
-      model.store.date.error = errors && errors["store.date.value"][0];
-    },
+    Validate: () => model.store.errors = validate(model, validation),
     _: () => {}
   }, proposal);
 
