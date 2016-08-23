@@ -1,5 +1,6 @@
 import { createComponent } from "meiosis";
-import objectPath from "object-path";
+
+import nestComponent from "../util/nest-component";
 
 import initialModel from "./model";
 import Action from "./actions";
@@ -7,31 +8,18 @@ import nextAction from "./nextAction";
 import receive from "./receive";
 import view from "./view";
 
-import createEntryComponent from "../entry/main";
-import createDateComponent from "../date/main";
+import entry from "../entry/main";
+import date from "../date/main";
 import temperature from "../temperature/main";
 
-const entryComponent = createEntryComponent(Action);
-const dateComponent = createDateComponent(Action);
+const entryComponent = createComponent(nestComponent(entry(Action), "store.entry"));
+const dateComponent = createComponent(nestComponent(date(Action), "store.date"));
 
-const wrapTemperatureComponent = (path, id, label) => {
-  const config = temperature(id, label);
+const nestTemperatureComponent = (path, id, label) =>
+  createComponent(nestComponent(temperature(id, label), path));
 
-  return createComponent({
-    initialModel: model => {
-      objectPath.set(model, path, config.initialModel({}));
-      return model;
-    },
-    receive: (model, proposal) => {
-      config.receive(objectPath.get(model, path), proposal);
-      return model;
-    },
-    view: (model, propose) => config.view(objectPath.get(model, path), propose)
-  });
-};
-
-const airTemperature = wrapTemperatureComponent("store.airTemperature", "t1", "Air temperature:");
-const waterTemperature = wrapTemperatureComponent("store.waterTemperature", "t2", "Water temperature:");
+const airTemperature = nestTemperatureComponent("store.temperature.air", "t1", "Air temperature:");
+const waterTemperature = nestTemperatureComponent("store.temperature.water", "t2", "Water temperature:");
 
 const FormComponent = createComponent({
   initialModel,

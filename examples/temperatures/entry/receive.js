@@ -1,10 +1,9 @@
-import objectPath from "object-path";
 import validate from "validate.js";
 
 import Action from "./actions";
 
 const validation = {
-  "store.entry.value": {
+  value: {
     presence: { message: "^Entry number is required." },
     numericality: {
       onlyInteger: true,
@@ -16,21 +15,13 @@ const validation = {
 
 const receive = FormAction => (model, proposal) => {
   Action.case({
-    EditEntryValue: value => model.store.entry.value = value,
+    EditEntryValue: value => model.value = value,
     _: () => {}
   }, proposal);
 
   FormAction.case({
     Validate: () => {
-      const key = "store.entry.value";
-      const errors = validate(model, validation);
-
-      if (errors) {
-        objectPath.set(model, ["store", "errors", key], errors[key]);
-      }
-      else {
-        objectPath.del(model, ["store", "errors", key]);
-      }
+      model.errors = validate(model, validation);
     },
     _: () => {}
   }, proposal);

@@ -1,7 +1,5 @@
-import objectPath from "object-path";
-
 const initialModel = model => {
-  objectPath.set(model, "store.entry.value", "");
+  model.value = "";
   return model;
 };
 
