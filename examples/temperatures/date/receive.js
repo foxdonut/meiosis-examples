@@ -1,3 +1,4 @@
+import objectPath from "object-path";
 import validate from "validate.js";
 
 import Action from "./actions";
@@ -14,14 +15,24 @@ const validation = {
   }
 };
 
-const receive = MainAction => (model, proposal) => {
+const receive = FormAction => (model, proposal) => {
   Action.case({
     EditDateValue: value => model.store.date.value = value,
     _: () => {}
   }, proposal);
 
-  MainAction.case({
-    Validate: () => model.store.errors = validate(model, validation),
+  FormAction.case({
+    Validate: () => {
+      const key = "store.date.value";
+      const errors = validate(model, validation);
+
+      if (errors) {
+        objectPath.set(model, ["store", "errors", key], errors[key]);
+      }
+      else {
+        objectPath.del(model, ["store", "errors", key]);
+      }
+    },
     _: () => {}
   }, proposal);
 

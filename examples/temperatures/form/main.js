@@ -7,9 +7,11 @@ import nextAction from "./nextAction";
 import receive from "./receive";
 import view from "./view";
 
+import createEntryComponent from "../entry/main";
 import createDateComponent from "../date/main";
 import temperature from "../temperature/main";
 
+const entryComponent = createEntryComponent(Action);
 const dateComponent = createDateComponent(Action);
 
 const wrapTemperatureComponent = (path, id, label) => {
@@ -33,7 +35,7 @@ const waterTemperature = wrapTemperatureComponent("store.waterTemperature", "t2"
 
 const FormComponent = createComponent({
   initialModel,
-  view: view(dateComponent, airTemperature, waterTemperature),
+  view: view(entryComponent, dateComponent, airTemperature, waterTemperature),
   nextAction,
   receive
 });

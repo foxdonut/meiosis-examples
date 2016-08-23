@@ -11,9 +11,9 @@ const view = (model, propose) => {
 
   const error = objectPath.get(model, ["store", "errors", "store.date.value"]);
 
-  return h("div",
+  return h("span",
     h("span", "Date:"),
-    h("input:text", { value: model.store.date.value, onChange: onChange }),
+    h("input:text[size=10]", { value: model.store.date.value, onChange: onChange }),
     h("span.has-error", h("span.help-block", error))
   );
 };

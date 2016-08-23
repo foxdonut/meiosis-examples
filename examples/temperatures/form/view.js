@@ -5,10 +5,11 @@ import Action from "./actions";
 
 const h = jsnox(React);
 
-const view = (dateComponent, airTemperature, waterTemperature) => (model, propose) => {
+const view = (entryComponent, dateComponent, airTemperature, waterTemperature) => (model, propose) => {
   const onSave = _evt => propose(Action.Validate(model));
 
   return h("div",
+    entryComponent(model),
     dateComponent(model),
     airTemperature(model),
     waterTemperature(model),
