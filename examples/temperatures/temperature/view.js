@@ -14,7 +14,7 @@ const view = (id, label) => (model, propose) => {
     h("div",
       h("span", label),
       h("span", model.value),
-      h("button.btn.btn-sm.btn-primary", { onClick: onChangeUnits }, " \xB0" +  model.units),
+      h("button.btn.btn-sm.btn-primary", { onClick: onChangeUnits }, "\xB0" + model.units),
       h("button.btn.btn-sm.btn-default", { onClick: onIncrease }, "+"),
       h("button.btn.btn-sm.btn-default", { onClick: onDecrease }, "-")
     )

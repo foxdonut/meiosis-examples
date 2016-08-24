@@ -6,7 +6,8 @@ import initialModel from "./model";
 import Action from "./actions";
 import nextAction from "./nextAction";
 import receive from "./receive";
-import view from "./view";
+//import view from "./view";
+import view from "./view.jsx";
 
 import entry from "../entry/main";
 import date from "../date/main";
