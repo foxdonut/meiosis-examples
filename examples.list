@@ -30,6 +30,8 @@
 ./examples/rocket-launcher/vanillajs/index.html
 ./examples/rocket-launcher/vanillajs/main.js
 ./examples/rocket-launcher/vanillajs/view.js
+./examples/temperatures/generated-app.js
+./examples/temperatures/index.html
 ./examples/todo-list/generated-react-app.js
 ./examples/todo-list/generated-react-app.js.map
 ./examples/todo-list/generated-riot-app.js
