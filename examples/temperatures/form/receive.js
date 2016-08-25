@@ -1,7 +1,5 @@
-import Action from "./actions";
-
 const receive = (model, proposal) => {
-  Action.case({
+  proposal.case({
     Save: save => {
       const air = save.store.temperature.air;
       const water = save.store.temperature.water;
@@ -14,7 +12,7 @@ const receive = (model, proposal) => {
       model.store.date.value = "";
     },
     _: () => {}
-  }, proposal);
+  });
 
   return model;
 };

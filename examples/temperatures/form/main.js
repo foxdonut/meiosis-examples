@@ -3,7 +3,6 @@ import { createComponent } from "meiosis";
 import nestComponent from "../util/nest-component";
 
 import initialModel from "./model";
-import Action from "./actions";
 import nextAction from "./nextAction";
 import receive from "./receive";
 //import view from "./view";
@@ -13,8 +12,8 @@ import entry from "../entry/main";
 import date from "../date/main";
 import temperature from "../temperature/main";
 
-const entryComponent = createComponent(nestComponent(entry(Action), "store.entry"));
-const dateComponent = createComponent(nestComponent(date(Action), "store.date"));
+const entryComponent = createComponent(nestComponent(entry, "store.entry"));
+const dateComponent = createComponent(nestComponent(date, "store.date"));
 
 const nestTemperatureComponent = (path, id, label) =>
   createComponent(nestComponent(temperature(id, label), path));

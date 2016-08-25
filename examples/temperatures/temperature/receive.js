@@ -1,8 +1,6 @@
-import Action from "./actions";
-
 const receive = id => (model, proposal) => {
   if (proposal.id === id) {
-    Action.case({
+    proposal.case({
       Increase: amount => {
         model.value = model.value + amount;
       },
@@ -20,7 +18,7 @@ const receive = id => (model, proposal) => {
         }
       },
       _: () => {}
-    }, proposal.action);
+    });
   }
 
   return model;

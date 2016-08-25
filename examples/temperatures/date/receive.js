@@ -1,7 +1,5 @@
 import validate from "validate.js";
 
-import Action from "./actions";
-
 validate.extend(validate.validators.datetime, {
   parse: value => new Date(value),
   format: date => date.toISOString().substring(0, 10)
@@ -14,18 +12,12 @@ const validation = {
   }
 };
 
-const receive = FormAction => (model, proposal) => {
-  Action.case({
+const receive = (model, proposal) => {
+  proposal.case({
     EditDateValue: value => model.value = value,
+    Validate: () => model.errors = validate(model, validation),
     _: () => {}
-  }, proposal);
-
-  FormAction.case({
-    Validate: () => {
-      model.errors = validate(model, validation);
-    },
-    _: () => {}
-  }, proposal);
+  });
 
   return model;
 };

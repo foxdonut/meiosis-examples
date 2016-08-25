@@ -3,10 +3,10 @@ import receive from "./receive";
 //import view from "./view";
 import view from "./view.jsx";
 
-const entryConfig = MainAction => ({
+const entryConfig = ({
   initialModel,
   view,
-  receive: receive(MainAction)
+  receive
 });
 
 export default entryConfig;

@@ -3,10 +3,10 @@ import receive from "./receive";
 //import view from "./view";
 import view from "./view.jsx";
 
-const dateConfig = MainAction => ({
+const dateConfig = ({
   initialModel,
   view,
-  receive: receive(MainAction)
+  receive
 });
 
 export default dateConfig;
