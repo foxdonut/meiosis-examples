@@ -7,6 +7,7 @@ const Action = Type({
   RequestDeleteTodo: [],
   DeletedTodo: [Object],
   ClearForm: [],
+  ValidateTodo: [Object],
   RequestSaveTodo: [],
   SavedTodo: [Object]
 });
@@ -18,6 +19,10 @@ const createActions = services => propose => ({
   },
 
   editTodo: todo => propose(Action.EditTodo(todo)),
+
+  validateTodo: todo => {
+    propose(Action.ValidateTodo(todo));
+  },
 
   saveTodo: todo => {
     propose(Action.RequestSaveTodo());

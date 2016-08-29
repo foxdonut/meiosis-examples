@@ -2,6 +2,7 @@ import { createComponent } from "meiosis";
 import { model } from "./model";
 import view from "./view-react.jsx";
 import receive from "./receive";
+import nextAction from "./nextAction";
 import services from "./services";
 import { createActions } from "./actions";
 
@@ -19,6 +20,7 @@ export default function() {
     actions,
     view: view(todoForm, todoList),
     receive: receive,
+    nextAction: nextAction(services),
     ready: actions => actions.loadList()
   });
 }

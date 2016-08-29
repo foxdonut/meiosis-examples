@@ -1,6 +1,7 @@
 import { append, complement, filter, findIndex, identity, lensIndex, merge, propEq, set } from "ramda";
 import { initialModel } from "./model";
 import { Action } from "./actions";
+import validate from "./validation";
 
 const updateTodos = (todos, todo) => {
   const index = findIndex(propEq("id", todo.id))(todos);
@@ -8,12 +9,11 @@ const updateTodos = (todos, todo) => {
 };
 
 const receive = (model, proposal) => {
-  let modelUpdate = null;
-
-  modelUpdate = Action.case({
+  let modelUpdate = Action.case({
     RequestLoadList: () => ({ message: "Loading, please wait..." }),
     LoadedList: identity,
     EditTodo: todo => ({ todo }),
+    ValidateTodo: todo => ({ validationErrors: validate(todo) }),
     RequestSaveTodo: () => ({ message: "Saving, please wait..."}),
 
     SavedTodo: savedTodo => merge({ todo: initialModel().store.todo },
@@ -22,7 +22,7 @@ const receive = (model, proposal) => {
         .map(todos => ({ todos, message: "" }))
         .getOrElse({ message: "An error occurred when saving a Todo." })),
 
-    ClearForm: () => ({ todo: initialModel().store.todo }),
+    ClearForm: () => ({ todo: initialModel().store.todo, validationErrors: {} }),
     RequestDeleteTodo: () => ({ message: "Deleting, please wait..."}),
     DeletedTodo: maybeTodoId => maybeTodoId
       .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.store.todos), message: "" }))

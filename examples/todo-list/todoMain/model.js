@@ -6,7 +6,8 @@ const initialModel = () => ({
       id: "",
       priority: "",
       description: ""
-    }
+    },
+    validationErrors: {}
   }
 });
 

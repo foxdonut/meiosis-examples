@@ -1,14 +1,14 @@
 import React from "react";
 import serialize from "form-serialize";
 
-const view = (todo, actions) => {
+const view = (model, actions) => {
   const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
 
   const onChangeText = evt => actions.editTodo(getTodo(evt));
 
   const onSave = evt => {
     evt.preventDefault();
-    actions.saveTodo(getTodo(evt));
+    actions.validateTodo(getTodo(evt));
   };
 
   const onCancel = function(evt) {
@@ -16,18 +16,26 @@ const view = (todo, actions) => {
     actions.clearForm();
   };
 
+  const inputField = (name, value) =>
+    <input type="text" id={name} name={name} className="form-control" value={value} onChange={onChangeText}/>;
+
+  const errorMessage = error => error ?
+    <span className="has-error"><span className="help-block">{error}</span></span> : null;
+
   return (
     <div className="row">
       <div className="col-md-4">
         <form>
-          <input type="hidden" name="id" value={todo.id}/>
+          <input type="hidden" name="id" value={model.todo.id}/>
           <div className="form-group">
             <label htmlFor="priority">Priority:</label>
-            <input type="text" id="priority" name="priority" className="form-control" value={todo.priority} onChange={onChangeText}/>
+            {inputField("priority", model.todo.priority)}
+            {errorMessage(model.validationErrors.priority)}
           </div>
           <div className="form-group">
             <label htmlFor="description">Description:</label>
-            <input type="text" id="description" name="description" className="form-control" value={todo.description} onChange={onChangeText}/>
+            {inputField("description", model.todo.description)}
+            {errorMessage(model.validationErrors.description)}
           </div>
           <div>
             <button className="btn btn-primary btn-xs" onClick={onSave}>Save</button>
