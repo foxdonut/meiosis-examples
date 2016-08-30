@@ -1,6 +1,6 @@
 import { Action } from "./actions";
 
-const nextAction = services => (model, proposal, actions) => {
+const nextAction = (model, proposal, actions) => {
   Action.case({
     ValidateTodo: todo => {
       if (Object.keys(model.store.validationErrors).length === 0) {

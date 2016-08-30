@@ -6,3 +6,6 @@ div {
 span, button {
   margin-right: 4px;
 }
+span.has-error {
+  margin-right: 0;
+}

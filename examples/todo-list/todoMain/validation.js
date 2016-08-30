@@ -25,5 +25,4 @@ let validationSpec = {
 
 export default function(model) {
   return validate(model, validationSpec) || {};
-};
-
+}

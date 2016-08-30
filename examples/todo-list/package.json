@@ -37,7 +37,7 @@
     "react-dom": "^15.1.0",
     "riot": "^2.5.0",
     "sinon": "^1.17.5",
-    "union-type": "^0.3.1",
+    "union-type": "^0.3.2",
     "validate.js": "^0.10.0",
     "vue": "^1.0.26"
   },

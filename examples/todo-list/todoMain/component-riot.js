@@ -2,6 +2,7 @@ import { createComponent } from "meiosis";
 import riot from "riot";
 import { model } from "./model";
 import receive from "./receive";
+import nextAction from "./nextAction";
 import services from "./services";
 import { createActions } from "./actions";
 import createTodoForm from "../todoForm/component-riot";
@@ -13,7 +14,7 @@ const setup = actions => {
 
   riot.tag("todo-main", `
     <div>
-      <todo-form todo="{ store.todo }"></todo-form>
+      <todo-form todo="{ store.todo }" errors="{ store.validationErrors }"></todo-form>
       <todo-list todos="{ store.todos }"></todo-list>
     </div>`
   );
@@ -29,6 +30,7 @@ export default function() {
     actions,
     setup,
     receive,
+    nextAction,
     ready
   });
 }

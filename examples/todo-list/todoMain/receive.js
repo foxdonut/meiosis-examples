@@ -1,6 +1,5 @@
 import { append, complement, filter, findIndex, identity, lensIndex, merge, propEq, set } from "ramda";
 import { initialModel } from "./model";
-import { Action } from "./actions";
 import validate from "./validation";
 
 const updateTodos = (todos, todo) => {
@@ -9,7 +8,7 @@ const updateTodos = (todos, todo) => {
 };
 
 const receive = (model, proposal) => {
-  let modelUpdate = Action.case({
+  let modelUpdate = proposal.case({
     RequestLoadList: () => ({ message: "Loading, please wait..." }),
     LoadedList: identity,
     EditTodo: todo => ({ todo }),
@@ -27,7 +26,7 @@ const receive = (model, proposal) => {
     DeletedTodo: maybeTodoId => maybeTodoId
       .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.store.todos), message: "" }))
       .getOrElse({ todos: model.store.todos, message: "An error occured when deleting a Todo." })
-  }, proposal);
+  });
 
   if (modelUpdate) {
     return { store: merge(model.store, modelUpdate) };

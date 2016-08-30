@@ -19,8 +19,8 @@ export default function() {
     initialModel: model,
     actions,
     view: view(todoForm, todoList),
-    receive: receive,
-    nextAction: nextAction(services),
+    receive,
+    nextAction,
     ready: actions => actions.loadList()
   });
 }
