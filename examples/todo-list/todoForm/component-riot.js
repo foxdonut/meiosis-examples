@@ -3,7 +3,7 @@ import serialize from "form-serialize";
 
 const inputField = property => `
   <input type="text" id="${property}" name="${property}" class="form-control"
-   value="{ opts.todo.${property} }" />`;
+   value="{ opts.todo.${property} }" onkeyup="{ onChangeText }" />`;
 
 const errorMessage = property => `
   <span if="{ opts.errors.${property} }" class="has-error">
@@ -35,6 +35,7 @@ export default function(actions) {
     </div>
   `, function() {
     const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
+    this.onChangeText = evt => actions.editTodo(getTodo(evt));
     this.onSave = evt => actions.validateTodo(getTodo(evt));
     this.onCancel = actions.clearForm;
   });

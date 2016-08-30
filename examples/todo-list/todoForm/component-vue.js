@@ -1,15 +1,15 @@
 import Vue from "vue";
 
-const inputField = property => `
-  <input type="text" id="${property}" name="${property}" class="form-control"
-    v-model="todo.${property}"/>`;
-
-const errorMessage = property => `
-  <span v-if="errors['${property}']" class="has-error">
-    <span class="help-block">{{errors.${property}}}</span>
-  </span>`;
-
 export default function(actions) {
+  const inputField = property => `
+    <input type="text" id="${property}" name="${property}" class="form-control"
+      v-model="todo.${property}" v-on:keyup="onChangeText(todo)"/>`;
+
+  const errorMessage = property => `
+    <span v-if="errors['${property}']" class="has-error">
+      <span class="help-block">{{errors.${property}}}</span>
+    </span>`;
+
   Vue.component("todo-form", {
     props: ["todo", "errors"],
     template: `
@@ -36,6 +36,7 @@ export default function(actions) {
       </div>
     `,
     methods: {
+      onChangeText: actions.editTodo,
       onSave: actions.validateTodo,
       onCancel: actions.clearForm
     }
