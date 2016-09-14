@@ -2,8 +2,12 @@ import React from "react";
 
 const view = (todoForm, todoList) => model => (
   <div>
-    {todoForm(model.store)}
-    {todoList(model.store)}
+    <div className="row">
+      <div className="col-md-4">
+        {todoForm(model.store.form)}
+      </div>
+    </div>
+    {todoList(model.store.list)}
   </div>
 );
 

@@ -1,26 +1,28 @@
 import { createComponent } from "meiosis";
-import { model } from "./model";
+import { compose } from "ramda";
+
+import nestComponent from "../util/nest-component";
 import view from "./view-react.jsx";
-import receive from "./receive";
-import nextAction from "./nextAction";
 import services from "./services";
-import { createActions } from "./actions";
 
 import todoFormView from "../todoForm/view-react.jsx";
+import todoFormMain from "../todoForm/main";
 import todoListView from "../todoList/view-react.jsx";
+import todoListConfig from "../todoList/main";
 
 export default function() {
-  const actions = createActions(services);
+  const createNestedComponent = (path, config, params) =>
+    compose(createComponent, nestComponent(path), config)(params);
 
-  const todoForm = createComponent({view: todoFormView, actions});
-  const todoList = createComponent({view: todoListView, actions});
+  const todoFormParams = { services, view: todoFormView };
+  const todoFormObj = todoFormMain(todoFormParams);
+
+  const todoForm = createComponent(nestComponent("store.form")(todoFormObj.config));
+  const todoList = createNestedComponent("store.list", todoListConfig,
+    { ActionForm: todoFormObj.Action, services, view: todoListView });
+
 
   return createComponent({
-    initialModel: model,
-    actions,
-    view: view(todoForm, todoList),
-    receive,
-    nextAction,
-    ready: actions => actions.loadList()
+    view: view(todoForm, todoList)
   });
 }

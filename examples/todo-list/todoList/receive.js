@@ -1,6 +1,4 @@
 import { append, complement, filter, findIndex, identity, lensIndex, merge, propEq, set } from "ramda";
-import { initialModel } from "./model";
-import validate from "./validation";
 
 const updateTodos = (todos, todo) => {
   const index = findIndex(propEq("id", todo.id))(todos);
@@ -11,25 +9,24 @@ const receive = (model, proposal) => {
   let modelUpdate = proposal.case({
     RequestLoadList: () => ({ message: "Loading, please wait..." }),
     LoadedList: identity,
-    EditTodo: todo => ({ todo }),
-    ValidateTodo: todo => ({ validationErrors: validate(todo) }),
     RequestSaveTodo: () => ({ message: "Saving, please wait..."}),
 
-    SavedTodo: savedTodo => merge({ todo: initialModel().store.todo },
+    SavedTodo: savedTodo =>
       savedTodo
-        .map(todo => updateTodos(model.store.todos, todo))
+        .map(todo => updateTodos(model.todos, todo))
         .map(todos => ({ todos, message: "" }))
-        .getOrElse({ message: "An error occurred when saving a Todo." })),
+        .getOrElse({ message: "An error occurred when saving a Todo." }),
 
-    ClearForm: () => ({ todo: initialModel().store.todo, validationErrors: {} }),
     RequestDeleteTodo: () => ({ message: "Deleting, please wait..."}),
     DeletedTodo: maybeTodoId => maybeTodoId
-      .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.store.todos), message: "" }))
-      .getOrElse({ todos: model.store.todos, message: "An error occured when deleting a Todo." })
+      .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.todos), message: "" }))
+      .getOrElse({ todos: model.todos, message: "An error occured when deleting a Todo." }),
+
+    _: () => null
   });
 
   if (modelUpdate) {
-    return { store: merge(model.store, modelUpdate) };
+    return merge(model, modelUpdate);
   }
   return model;
 };
