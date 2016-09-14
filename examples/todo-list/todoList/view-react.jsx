@@ -1,26 +1,8 @@
 import React from "react";
+import todoItem from "../todoItem/view-react.jsx";
 
 const view = (model, actions) => {
-  const onEdit = todo => evt => {
-    evt.preventDefault();
-    actions.editTodo(todo);
-  };
-
-  const onDelete = todo => evt => {
-    evt.preventDefault();
-    actions.deleteTodo(todo.id);
-  };
-
-  const renderTodo = (todo) => (
-    <tr key={todo.id}>
-      <td>{todo.priority}</td>
-      <td>{todo.description}</td>
-      <td>
-        <button className="btn btn-primary btn-xs" onClick={onEdit(todo)}>Edit</button>
-        <button className="btn btn-danger btn-xs" onClick={onDelete(todo)}>Delete</button>
-      </td>
-    </tr>
-  );
+  const renderTodo = todoItem(actions);
 
   return (
     <div className="row">

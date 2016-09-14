@@ -1,3 +1,3 @@
 import app from "./app";
-import runapp from "./runapp-react.jsx";
+import runapp from "./runapp-react";
 app(runapp);

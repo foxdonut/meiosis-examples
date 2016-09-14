@@ -2,11 +2,10 @@ import { createComponent, run } from "meiosis";
 import { renderer } from "meiosis-vue";
 import meiosisTracer from "meiosis-tracer";
 import createTodoMainComponent from "./todoMain/component-vue";
-import { model } from "./todoMain/model";
 import Vue from "vue";
 
 export default function() {
-  createTodoMainComponent();
+  const model = createTodoMainComponent();
   const renderRoot = run(renderer(model, "store"));
   meiosisTracer(createComponent, renderRoot, "#tracer");
 
