@@ -5,6 +5,7 @@ node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\react\index
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\snabbdom\index.swig > .\examples\rocket-launcher\snabbdom\index.html
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\vanillajs\index.swig > .\examples\rocket-launcher\vanillajs\index.html
 node node_modules\swig\bin\swig.js render .\examples\temperatures\index.swig > .\examples\temperatures\index.html
+node node_modules\swig\bin\swig.js render .\examples\todo-list\index-inferno.swig > .\examples\todo-list\index-inferno.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-react.swig > .\examples\todo-list\index-react.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-riot.swig > .\examples\todo-list\index-riot.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-vue.swig > .\examples\todo-list\index-vue.html
