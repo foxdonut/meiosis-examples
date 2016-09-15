@@ -6,7 +6,7 @@ const view = (model, actions) => {
 
   return h("div", { className: "row" }, [
     h("div", { className: "col-md-8" }, [
-      h("div", null, model.message),
+      h("div", null, "Todo List: " + model.message),
       h("table", { className: "table table-bordered table-striped table-hover" }, [
         h("thead", null, [
           h("tr", null, [
@@ -19,26 +19,6 @@ const view = (model, actions) => {
       ])
     ])
   ]);
-  /*
-    <div className="row">
-      <div className="col-md-8">
-        <div>Todo List: {model.message}</div>
-        <table className="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Priority</th>
-              <th>Description</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {model.todos.map(renderTodo)}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-  */
 };
 
 export default view;

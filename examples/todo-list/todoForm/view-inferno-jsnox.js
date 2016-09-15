@@ -1,4 +1,4 @@
-import { createVElement as h } from "inferno";
+import h from "../util/jsnox-inferno";
 import serialize from "form-serialize";
 
 const view = (model, actions) => {
@@ -17,25 +17,25 @@ const view = (model, actions) => {
   };
 
   const inputField = (name, value) =>
-    h("input", { type: "text", id: name, name, className: "form-control", value, onKeyUp: onChangeText });
+    h("input:text#" + name + ".form-control[name=" + name + "]", { value, onKeyUp: onChangeText });
 
   const errorMessage = error => error ?
-    h("span", { className: "has-error" }, [h("span", { className: "help-block" }, error)]) : null;
+    h("span.has-error", [h("span.help-block", error)]) : null;
 
   const inputDiv = (field, label) =>
-    h("div", { className: "form-group"}, [
-      h("label", { htmlFor: field }, label),
+    h("div.form-group", [
+      h("label[for=" + field +"]", label),
       inputField(field, model.todo[field]),
       errorMessage(model.validationErrors[field])
     ]);
 
-  return h("form", null, [
-    h("input", { type: "hidden", name: "id", value: String(model.todo.id) }),
+  return h("form", [
+    h("input:hidden[name=id][value=" + model.todo.id + "]"),
     inputDiv("priority", "Priority:"),
     inputDiv("description", "Description:"),
-    h("div", null, [
-      h("button", { className: "btn btn-primary btn-xs", onClick: onSave }, "Save"),
-      h("button", { className: "btn btn-danger btn-xs", onClick: onCancel }, "Cancel")
+    h("div", [
+      h("button.btn.btn-primary.btn-xs", { onClick: onSave }, "Save"),
+      h("button.btn.btn-danger.btn-xs", { onClick: onCancel }, "Cancel")
     ])
   ]);
 };
