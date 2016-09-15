@@ -12,31 +12,27 @@ const errorMessage = property => `
 
 export default function(actions) {
   riot.tag("todo-form", `
-    <div class="row">
-      <div class="col-md-4">
-        <form>
-          <input type="hidden" name="id" value="{ opts.todo.id }"/>
-          <div class="form-group">
-            <label for="priority">Priority:</label>
-            ${inputField("priority")}
-            ${errorMessage("priority")}
-          </div>
-          <div class="form-group">
-            <label for="description">Description:</label>
-            ${inputField("description")}
-            ${errorMessage("description")}
-          </div>
-          <div>
-            <button class="btn btn-primary btn-xs" onclick="{ onSave }">Save</button>
-            <button class="btn btn-danger btn-xs" onclick="{ onCancel }">Cancel</button>
-          </div>
-        </form>
+    <form>
+      <input type="hidden" name="id" value="{ opts.todo.id }"/>
+      <div class="form-group">
+        <label for="priority">Priority:</label>
+        ${inputField("priority")}
+        ${errorMessage("priority")}
       </div>
-    </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        ${inputField("description")}
+        ${errorMessage("description")}
+      </div>
+      <div>
+        <button class="btn btn-primary btn-xs" onclick="{ onSave }">Save</button>
+        <button class="btn btn-danger btn-xs" onclick="{ onCancel }">Cancel</button>
+      </div>
+    </form>
   `, function() {
     const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
     this.onChangeText = evt => actions.editTodo(getTodo(evt));
-    this.onSave = evt => actions.validateTodo(getTodo(evt));
+    this.onSave = evt => actions.saveTodo(getTodo(evt));
     this.onCancel = actions.clearForm;
   });
 }

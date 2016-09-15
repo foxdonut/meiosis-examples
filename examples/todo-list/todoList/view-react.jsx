@@ -8,7 +8,7 @@ const view = (model, actions) => {
     <div className="row">
       <div className="col-md-8">
         <div>Todo List: {model.message}</div>
-        <table className="table ng-table">
+        <table className="table table-bordered table-striped table-hover">
           <thead>
             <tr>
               <th>Priority</th>

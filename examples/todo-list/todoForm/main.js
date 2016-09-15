@@ -3,7 +3,7 @@ import { Action, createActions } from "./actions";
 import receive from "./receive";
 import nextAction from "./nextAction";
 
-const todoFormConfig = ({services, view, name, setup}) => {
+const todoFormConfig = ({services, view, setup}) => {
   return {
     Action,
     config: {
@@ -12,7 +12,7 @@ const todoFormConfig = ({services, view, name, setup}) => {
       receive,
       nextAction,
       view,
-      setup: setup ? setup(name) : null
+      setup
     }
   };
 };

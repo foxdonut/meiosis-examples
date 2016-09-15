@@ -1,36 +1,35 @@
 import { createComponent } from "meiosis";
 import riot from "riot";
-import { model } from "./model";
-import receive from "./receive";
-import nextAction from "./nextAction";
+import { compose } from "ramda";
+
+import nestComponent from "../util/nest-component";
 import services from "./services";
-import { createActions } from "./actions";
+import todoFormMain from "../todoForm/main";
 import createTodoForm from "../todoForm/component-riot";
+import todoListConfig from "../todoList/main";
 import createTodoList from "../todoList/component-riot";
 
-const setup = actions => {
-  createTodoForm(actions);
-  createTodoList(actions);
-
-  riot.tag("todo-main", `
-    <div>
-      <todo-form todo="{ store.todo }" errors="{ store.validationErrors }"></todo-form>
-      <todo-list todos="{ store.todos }"></todo-list>
-    </div>`
-  );
-};
-
-const ready = actions => actions.loadList();
-
 export default function() {
-  const actions = createActions(services);
+  const setup = () => {
+    const createNestedComponent = (path, config, params) =>
+      compose(createComponent, nestComponent(path), config)(params);
 
-  return createComponent({
-    initialModel: model,
-    actions,
-    setup,
-    receive,
-    nextAction,
-    ready
-  });
+    const todoFormParams = { services, setup: createTodoForm };
+    const todoFormObj = todoFormMain(todoFormParams);
+
+    createComponent(nestComponent("store.form")(todoFormObj.config));
+    createNestedComponent("store.list", todoListConfig,
+      { ActionForm: todoFormObj.Action, services, setup: createTodoList });
+
+    riot.tag("todo-main", `
+      <div class="row">
+        <div class="col-md-4">
+          <todo-form todo="{ store.form.todo }" errors="{ store.form.validationErrors }"></todo-form>
+        </div>
+        <todo-list todos="{ store.list.todos }"></todo-list>
+      </div>`
+    );
+  };
+
+  return createComponent({ setup });
 }

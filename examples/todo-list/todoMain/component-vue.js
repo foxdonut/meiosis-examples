@@ -1,37 +1,40 @@
 import { createComponent } from "meiosis";
-import { model } from "./model";
-import receive from "./receive";
-import nextAction from "./nextAction";
-import services from "./services";
-import { createActions } from "./actions";
 import Vue from "vue";
+import { compose } from "ramda";
+
+import nestComponent from "../util/nest-component";
+import services from "./services";
+import todoFormMain from "../todoForm/main";
 import createTodoForm from "../todoForm/component-vue";
+import todoListConfig from "../todoList/main";
 import createTodoList from "../todoList/component-vue";
 
-const setup = actions => {
-  createTodoForm(actions);
-  createTodoList(actions);
-
-  Vue.component("todo-main", {
-    props: ["store"],
-    template: `<div>
-      <todo-form :todo="store.todo" :errors="store.validationErrors"></todo-form>
-      <todo-list :todos="store.todos" :message="store.message"></todo-list>
-    </div>`
-  });
-};
-
-const ready = actions => actions.loadList();
-
 export default function() {
-  const actions = createActions(services);
+  const setup = () => {
+    const createNestedComponent = (path, config, params) =>
+      compose(createComponent, nestComponent(path), config)(params);
 
-  return createComponent({
-    initialModel: model,
-    actions,
-    setup,
-    receive,
-    nextAction,
-    ready
-  });
+    const todoFormParams = { services, setup: createTodoForm };
+    const todoFormObj = todoFormMain(todoFormParams);
+
+    createComponent(nestComponent("store.form")(todoFormObj.config));
+    createNestedComponent("store.list", todoListConfig,
+      { ActionForm: todoFormObj.Action, services, setup: createTodoList });
+
+    Vue.component("todo-main", {
+      props: ["store"],
+      template: `<div>
+        <div class="row">
+          <div class="col-md-4">
+            <todo-form :todo="store.form.todo" :errors="store.form.validationErrors"></todo-form>
+          </div>
+        </div>
+        <todo-list :todos="store.list.todos" :message="store.message"></todo-list>
+      </div>`
+    });
+  };
+
+  let model = null;
+  createComponent({ initialModel: m => { model = m; return m; }, setup });
+  return model;
 }

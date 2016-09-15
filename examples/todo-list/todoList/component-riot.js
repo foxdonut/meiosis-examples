@@ -8,7 +8,7 @@ export default function(actions) {
     <div class="row">
       <div class="col-md-8">
         <div>Todo List: { message }</div>
-        <table class="table ng-table">
+        <table class="table table-bordered table-striped table-hover">
           <thead>
             <tr>
               <th>Priority</th>
