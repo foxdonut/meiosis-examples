@@ -2,6 +2,7 @@ import Type from "union-type";
 
 const Action = Type({
   EditTodo: [Object],
+  EditingTodo: [Object],
   ClearForm: [],
   ValidateTodo: [Object],
   RequestSaveTodo: [],
@@ -10,6 +11,8 @@ const Action = Type({
 
 const createActions = services => propose => ({
   editTodo: todo => propose(Action.EditTodo(todo)),
+
+  editingTodo: todo => propose(Action.EditingTodo(todo)),
 
   saveTodo: todo => {
     propose(Action.ValidateTodo(todo));

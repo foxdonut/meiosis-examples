@@ -4,7 +4,8 @@ import validate from "./validation";
 
 const receive = (model, proposal) => {
   let modelUpdate = proposal.case({
-    EditTodo: todo => ({ todo }),
+    EditTodo: todo => ({ todo, validationErrors: {} }),
+    EditingTodo: todo => ({ todo }),
     ValidateTodo: todo => ({ validationErrors: validate(todo) }),
     ClearForm: () => ({ todo: emptyTodo(), validationErrors: {} }),
 

@@ -34,7 +34,7 @@ export default function(actions) {
       </form>
     `,
     methods: {
-      onChangeText: evt => actions.editTodo(getTodo(evt)),
+      onChangeText: evt => actions.editingTodo(getTodo(evt)),
       onSave: actions.saveTodo,
       onCancel: actions.clearForm
     }

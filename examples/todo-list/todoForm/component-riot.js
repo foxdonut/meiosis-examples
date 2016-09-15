@@ -30,7 +30,7 @@ export default function(actions) {
     </form>
   `, function() {
     const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
-    this.onChangeText = evt => actions.editTodo(getTodo(evt));
+    this.onChangeText = evt => actions.editingTodo(getTodo(evt));
     this.onSave = evt => actions.saveTodo(getTodo(evt));
     this.onCancel = actions.clearForm;
   });
