@@ -10,20 +10,19 @@ const errorMessage = property => `
     <span class="help-block">{ opts.errors.${property} }</span>
   </span>`;
 
+const inputDiv = (field, label) =>
+  `<div class="form-group">
+    <label for="${field}">${label}</label>
+    ${inputField(field)}
+    ${errorMessage(field)}
+  </div>`;
+
 export default function(actions) {
   riot.tag("todo-form", `
     <form>
       <input type="hidden" name="id" value="{ opts.todo.id }"/>
-      <div class="form-group">
-        <label for="priority">Priority:</label>
-        ${inputField("priority")}
-        ${errorMessage("priority")}
-      </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        ${inputField("description")}
-        ${errorMessage("description")}
-      </div>
+      ${inputDiv("priority", "Priority:")}
+      ${inputDiv("description", "Description:")}
       <div>
         <button class="btn btn-primary btn-xs" onclick="{ onSave }">Save</button>
         <button class="btn btn-danger btn-xs" onclick="{ onCancel }">Cancel</button>

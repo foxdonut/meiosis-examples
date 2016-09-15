@@ -31,8 +31,8 @@ const view = (model, actions) => {
 
   return h("form", null, [
     h("input", { type: "hidden", name: "id", value: String(model.todo.id) }),
-    inputDiv("priority", "Priority"),
-    inputDiv("description", "Description"),
+    inputDiv("priority", "Priority:"),
+    inputDiv("description", "Description:"),
     h("div", null, [
       h("button", { className: "btn btn-primary btn-xs", onClick: onSave }, "Save"),
       h("button", { className: "btn btn-danger btn-xs", onClick: onCancel }, "Cancel"),
