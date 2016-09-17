@@ -1,4 +1,4 @@
-import React from "react";
+import Inferno from "inferno";
 
 const view = actions => todo => {
   const onEdit = todo => evt => {

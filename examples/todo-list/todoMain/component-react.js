@@ -2,12 +2,12 @@ import { createComponent } from "meiosis";
 import { compose } from "ramda";
 
 import nestComponent from "../util/nest-component";
-import view from "./view-react.jsx";
+import view from "./view-react";
 import services from "./services";
 
-import todoFormView from "../todoForm/view-react.jsx";
+import todoFormView from "../todoForm/view-react";
 import todoFormMain from "../todoForm/main";
-import todoListView from "../todoList/view-react.jsx";
+import todoListView from "../todoList/view-react";
 import todoListConfig from "../todoList/main";
 
 export default function() {

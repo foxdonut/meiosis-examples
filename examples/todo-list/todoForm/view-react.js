@@ -1,4 +1,4 @@
-import h from "../util/jsnox-inferno";
+import h from "../util/jsnox-react";
 import serialize from "form-serialize";
 
 const view = (model, actions) => {
@@ -17,7 +17,7 @@ const view = (model, actions) => {
   };
 
   const inputField = (name, value) =>
-    h("input:text#" + name + ".form-control[name=" + name + "]", { value, onKeyUp: onChangeText });
+    h("input:text#" + name + ".form-control[name=" + name + "]", { value, onChange: onChangeText });
 
   const errorMessage = error => error ?
     h("span.has-error", [h("span.help-block", error)]) : null;

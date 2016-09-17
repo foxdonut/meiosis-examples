@@ -1,5 +1,5 @@
-import h from "../util/jsnox-inferno";
-import todoItem from "../todoItem/view-inferno-jsnox";
+import h from "../util/jsnox-react";
+import todoItem from "../todoItem/view-react";
 
 const view = (model, actions) => {
   const renderTodo = todoItem(actions);

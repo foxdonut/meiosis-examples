@@ -1,5 +1,5 @@
-import React from "react";
-import todoItem from "../todoItem/view-react.jsx";
+import Inferno from "inferno";
+import todoItem from "../todoItem/view-inferno.jsx";
 
 const view = (model, actions) => {
   const renderTodo = todoItem(actions);

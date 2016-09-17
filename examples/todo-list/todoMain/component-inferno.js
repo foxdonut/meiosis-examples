@@ -2,12 +2,12 @@ import { createComponent } from "meiosis";
 import { compose } from "ramda";
 
 import nestComponent from "../util/nest-component";
-import view from "./view-inferno.js";
+import view from "./view-inferno.jsx";
 import services from "./services";
 
-import todoFormView from "../todoForm/view-inferno.js";
+import todoFormView from "../todoForm/view-inferno.jsx";
 import todoFormMain from "../todoForm/main";
-import todoListView from "../todoList/view-inferno.js";
+import todoListView from "../todoList/view-inferno.jsx";
 import todoListConfig from "../todoList/main";
 
 export default function() {

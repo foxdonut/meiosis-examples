@@ -1,4 +1,4 @@
-import h from "../util/jsnox-inferno";
+import h from "../util/jsnox-react";
 
 const view = actions => todo => {
   const onEdit = todo => evt => {
