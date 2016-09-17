@@ -32,12 +32,15 @@
 ./examples/rocket-launcher/vanillajs/view.js
 ./examples/temperatures/generated-app.js
 ./examples/temperatures/index.html
+./examples/todo-list/generated-inferno-app.js
+./examples/todo-list/generated-inferno-app.js.map
 ./examples/todo-list/generated-react-app.js
 ./examples/todo-list/generated-react-app.js.map
 ./examples/todo-list/generated-riot-app.js
 ./examples/todo-list/generated-riot-app.js.map
 ./examples/todo-list/generated-vue-app.js
 ./examples/todo-list/generated-vue-app.js.map
+./examples/todo-list/index-inferno.html
 ./examples/todo-list/index-react.html
 ./examples/todo-list/index-riot.html
 ./examples/todo-list/index-vue.html

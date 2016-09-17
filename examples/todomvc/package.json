@@ -36,7 +36,7 @@
     "meiosis-mithril": "^0.7.1",
     "meiosis-react": "^0.7.1",
     "meiosis-snabbdom": "^0.7.1",
-    "meiosis-tracer": "^0.7.1",
+    "meiosis-tracer": "^0.7.2",
     "meiosis-vanillajs": "^0.7.1",
     "mithril": "^0.2.5",
     "react": "^15.3.1",
