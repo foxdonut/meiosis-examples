@@ -1,4 +1,4 @@
 {
   "presets": ["es2015"],
-  "plugins": ["inferno", "syntax-jsx"]
+  "plugins": ["inferno"]
 }

@@ -17,7 +17,7 @@ const view = (model, actions) => {
   };
 
   const inputField = (name, value) =>
-    <input type="text" id={name} name={name} className="form-control" value={value} onChange={onChangeText}/>;
+    <input type="text" id={name} name={name} className="form-control" value={value} onKeyUp={onChangeText}/>;
 
   const errorMessage = error => error ?
     <span className="has-error"><span className="help-block">{error}</span></span> : null;

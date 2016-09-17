@@ -27,8 +27,8 @@
     "axios": "^0.14.0",
     "data.maybe": "^1.2.2",
     "form-serialize": "^0.7.1",
-    "inferno": "^1.0.0-alpha8",
-    "inferno-dom": "^1.0.0-alpha8",
+    "inferno": "^0.7.27",
+    "inferno-dom": "^0.7.27",
     "jsnox": "^2.1.3",
     "meiosis": "^0.7.3",
     "meiosis-inferno": "^0.7.2",
@@ -36,6 +36,7 @@
     "meiosis-riot": "^0.7.1",
     "meiosis-tracer": "^0.7.1",
     "meiosis-vue": "^0.7.2",
+    "object-path": "^0.11.2",
     "ramda": "^0.22.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -48,10 +49,8 @@
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
-    "babel-plugin-inferno": "^1.0.0-alpha8",
-    "babel-plugin-syntax-jsx": "^6.13.0",
+    "babel-plugin-inferno": "^0.7.7",
     "babel-preset-es2015": "^6.14.0",
-    "babel-preset-react": "^6.11.1",
     "webpack": "^1.13.2"
   }
 }

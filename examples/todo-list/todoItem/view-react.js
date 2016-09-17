@@ -11,14 +11,14 @@ const view = actions => todo => {
     actions.deleteTodo(todo.id);
   };
 
-  return h("tr", [
+  return h("tr", { key: todo.id },
     h("td", String(todo.priority)),
     h("td", todo.description),
-    h("td", [
+    h("td",
       h("button.btn.btn-primary.btn-xs", { onClick: onEdit(todo) }, "Edit"),
       h("button.btn.btn-danger.btn-xs", { onClick: onDelete(todo) }, "Delete")
-    ])
-  ], todo.id);
+    )
+  );
 };
 
 export default view;

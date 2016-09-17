@@ -20,24 +20,24 @@ const view = (model, actions) => {
     h("input:text#" + name + ".form-control[name=" + name + "]", { value, onChange: onChangeText });
 
   const errorMessage = error => error ?
-    h("span.has-error", [h("span.help-block", error)]) : null;
+    h("span.has-error", h("span.help-block", error)) : null;
 
   const inputDiv = (field, label) =>
-    h("div.form-group", [
-      h("label[for=" + field +"]", label),
+    h("div.form-group",
+      h("label[htmlFor=" + field +"]", label),
       inputField(field, model.todo[field]),
       errorMessage(model.validationErrors[field])
-    ]);
+    );
 
-  return h("form", [
-    h("input:hidden[name=id][value=" + model.todo.id + "]"),
+  return h("form",
+    h("input:hidden[name=id]", { value: model.todo.id }),
     inputDiv("priority", "Priority:"),
     inputDiv("description", "Description:"),
-    h("div", [
+    h("div",
       h("button.btn.btn-primary.btn-xs", { onClick: onSave }, "Save"),
       h("button.btn.btn-danger.btn-xs", { onClick: onCancel }, "Cancel")
-    ])
-  ]);
+    )
+  );
 };
 
 export default view;
