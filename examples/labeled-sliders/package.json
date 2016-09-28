@@ -1,6 +1,6 @@
 {
   "name": "labeled-sliders",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "meiosis-examples labeled-sliders",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "meiosis": "^0.7.3",
+    "meiosis": "^0.7.4",
     "meiosis-snabbdom": "^0.7.1",
     "ramda": "^0.22.1",
     "snabbdom": "^0.5.3",
