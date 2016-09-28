@@ -2,10 +2,8 @@
 ./examples/counter/main-jquery.js
 ./examples/counter/main-react.jsx
 ./examples/counter/main-riot.js
-./examples/counter/main-vue.js
 ./examples/counter/view-react.jsx
 ./examples/counter/view-riot.js
-./examples/counter/view-vue.js
 ./examples/labeled-sliders/generated-app.js
 ./examples/labeled-sliders/index.html
 ./examples/requirejs/index.html
