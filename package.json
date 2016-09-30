@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "labeled-sliders": "(cd examples/labeled-sliders && npm i && npm start)",
+    "library": "(cd examples/library && npm i && npm start)",
     "temperatures": "(cd examples/temperatures && npm i && npm start)",
     "todo-list": "(cd examples/todo-list && npm i && npm start)",
     "todomvc": "(cd examples/todomvc && npm i && npm start)",
     "preexamples": "swigtohtml",
-    "examples": "npm run labeled-sliders && npm run temperatures && npm run todo-list && npm run todomvc",
+    "examples": "npm run labeled-sliders && npm run library && npm run temperatures && npm run todo-list && npm run todomvc",
     "prestart": "npm i && npm run examples",
     "start": "node --harmony server/main"
   },

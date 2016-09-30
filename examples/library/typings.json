@@ -1,0 +1,11 @@
+{
+  "name": "meiosis-react",
+  "main": "lib/index.d.ts",
+  "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20160704162008",
+    "jsdom": "registry:dt/jsdom#2.0.0+20160316155526",
+    "node": "registry:dt/node#6.0.0+20160709114037",
+    "react": "registry:dt/react#0.14.0+20160423065914",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040"
+  }
+}

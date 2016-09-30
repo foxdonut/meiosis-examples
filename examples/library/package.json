@@ -1,0 +1,51 @@
+{
+  "name": "library",
+  "version": "0.7.4",
+  "description": "meiosis-examples library",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive",
+    "react"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "addressbar": "^1.0.2",
+    "axios": "^0.14.0",
+    "data.maybe": "^1.2.2",
+    "form-serialize": "^0.7.1",
+    "meiosis": "^0.7.4",
+    "meiosis-react": "^0.7.1",
+    "object-path": "^0.11.2",
+    "ramda": "^0.22.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "sinon": "^1.17.6",
+    "union-type": "^0.3.2",
+    "url-mapper": "^1.1.1",
+    "validate.js": "^0.10.0"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "jquery": "^3.1.0",
+    "jsdom": "^9.4.1",
+    "ts-loader": "^0.8.2",
+    "tslint": "^3.15.1",
+    "typescript": "^1.8.10",
+    "webpack": "^1.13.2"
+  }
+}
