@@ -10,7 +10,7 @@ module.exports = {
     filename: "generated-app" + (isProduction ? ".min" : "") + ".js"
   },
   resolve: {
-    extensions: ["", ".js", ".ts"]
+    extensions: ["", ".js", ".ts", ".tsx"]
   },
   ts: {
     compilerOptions: {
@@ -24,10 +24,21 @@ module.exports = {
     loaders: [
       {
         loader: "ts",
-        test: /\.ts$/,
+        test: /\.tsx?$/,
+        exclude: /node_modules/
+      }
+    ],
+    preloaders: [
+      {
+        loader: "source-map",
+        test: /\.js$/,
         exclude: /node_modules/
       }
     ]
+  },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
   },
   plugins: isProduction ? [
     new webpack.optimize.UglifyJsPlugin()
