@@ -15,8 +15,7 @@ const validation = {
 const receive = (model, proposal) => {
   proposal.case({
     EditDateValue: value => model.value = value,
-    Validate: () => model.errors = validate(model, validation),
-    _: () => {}
+    Validate: () => model.errors = validate(model, validation)
   });
 
   return model;

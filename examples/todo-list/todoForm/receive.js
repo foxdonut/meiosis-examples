@@ -7,9 +7,7 @@ const receive = (model, proposal) => {
     EditTodo: todo => ({ todo, validationErrors: {} }),
     EditingTodo: todo => ({ todo }),
     ValidateTodo: todo => ({ validationErrors: validate(todo) }),
-    ClearForm: () => ({ todo: emptyTodo(), validationErrors: {} }),
-
-    _: () => null
+    ClearForm: () => ({ todo: emptyTodo(), validationErrors: {} })
   });
 
   if (modelUpdate) {

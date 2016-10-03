@@ -31,7 +31,7 @@
     "object-path": "^0.11.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "union-type": "^0.3.2",
+    "union-type": "^0.3.3",
     "validate.js": "^0.10.0"
   },
   "devDependencies": {

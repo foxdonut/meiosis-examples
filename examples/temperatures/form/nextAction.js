@@ -1,3 +1,5 @@
+import Action from "./actions";
+
 const nextAction = (model, proposal, propose) => {
   proposal.case({
     Validate: () => {

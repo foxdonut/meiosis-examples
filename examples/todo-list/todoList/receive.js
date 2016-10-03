@@ -20,9 +20,7 @@ const receive = (model, proposal) => {
     RequestDeleteTodo: () => ({ message: "Deleting, please wait..."}),
     DeletedTodo: maybeTodoId => maybeTodoId
       .map(todoId => ({ todos: filter(complement(propEq("id", todoId)), model.todos), message: "" }))
-      .getOrElse({ todos: model.todos, message: "An error occured when deleting a Todo." }),
-
-    _: () => null
+      .getOrElse({ todos: model.todos, message: "An error occured when deleting a Todo." })
   });
 
   if (modelUpdate) {

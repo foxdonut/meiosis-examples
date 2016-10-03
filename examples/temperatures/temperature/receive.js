@@ -16,8 +16,7 @@ const receive = id => (model, proposal) => {
           model.value = Math.round( model.value * 9 / 5 + 32 );
           model.units = "F";
         }
-      },
-      _: () => {}
+      }
     });
   }
 

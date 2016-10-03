@@ -10,8 +10,7 @@ const receive = (model, proposal) => {
 
       model.store.entry.value = "";
       model.store.date.value = "";
-    },
-    _: () => {}
+    }
   });
 
   return model;

@@ -28,7 +28,7 @@
     "meiosis-snabbdom": "^0.7.1",
     "ramda": "^0.22.1",
     "snabbdom": "^0.5.3",
-    "union-type": "^0.3.2"
+    "union-type": "^0.3.3"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",

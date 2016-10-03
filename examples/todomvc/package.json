@@ -30,7 +30,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "handlebars": "^4.0.5",
-    "history": "^4.2.0",
+    "history": "^4.3.0",
     "jquery": "^3.1.1",
     "meiosis": "^0.7.4",
     "meiosis-mithril": "^0.7.1",
@@ -42,7 +42,7 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "snabbdom": "^0.5.3",
-    "union-type": "^0.3.2"
+    "union-type": "^0.3.3"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
