@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2015"
+  },
+  "files": [
+    "./sample-tests.tsx",
+    "../../typings/index.d.ts"
+  ]
+}

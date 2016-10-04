@@ -12,7 +12,7 @@
     "preexamples": "swigtohtml",
     "examples": "npm run labeled-sliders && npm run library && npm run temperatures && npm run todo-list && npm run todomvc",
     "prestart": "npm i && npm run examples",
-    "start": "node --harmony server/main"
+    "start": "node --harmony server/todo-list/main"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "co-body": "^4.2.0",
+    "hapi": "^15.1.1",
+    "inert": "^4.0.2",
     "koa": "^1.2.4",
     "koa-route": "^2.4.2",
     "koa-static": "^2.0.0"

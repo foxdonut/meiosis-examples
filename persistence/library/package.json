@@ -1,7 +1,7 @@
 {
-  "name": "library",
+  "name": "library-persistence",
   "version": "0.7.4",
-  "description": "meiosis-examples library",
+  "description": "meiosis-examples library persistence",
   "main": "index.js",
   "scripts": {
     "prestart": "tsc",
@@ -27,27 +27,10 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "addressbar": "^1.0.2",
-    "axios": "^0.14.0",
-    "data.maybe": "^1.2.2",
-    "form-serialize": "^0.7.1",
-    "material-ui": "^0.15.4",
-    "meiosis": "^0.7.4",
-    "meiosis-react": "^0.7.1",
-    "object-path": "^0.11.2",
-    "ramda": "^0.22.1",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-tap-event-plugin": "^1.0.0",
-    "sinon": "^1.17.6",
-    "union-type": "^0.3.3",
-    "url-mapper": "^1.1.1",
-    "validate.js": "^0.10.0"
+    "sql.js": "^0.3.2"
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "jquery": "^3.1.0",
-    "jsdom": "^9.4.1",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
     "tslint": "^3.15.1",

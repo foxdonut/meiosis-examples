@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "sql.js": "registry:dt/sql.js#0.0.0+20160906140629"
+  }
+}
