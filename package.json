@@ -12,7 +12,9 @@
     "preexamples": "swigtohtml",
     "examples": "npm run labeled-sliders && npm run library && npm run temperatures && npm run todo-list && npm run todomvc",
     "prestart": "npm i && npm run examples",
-    "start": "node --harmony server/todo-list/main"
+    "start": "node --harmony server/todo-list/main",
+    "prelibrary-server": "npm i && npm run library",
+    "library-server": "node server/library/main"
   },
   "repository": {
     "type": "git",
