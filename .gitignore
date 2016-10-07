@@ -34,3 +34,9 @@ node_modules
 
 generated-*.js
 generated-*.js.map
+
+persistence/library/dist
+persistence/library/lib
+persistence/library/test/build
+examples/library/dist
+server/library/build

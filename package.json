@@ -4,8 +4,9 @@
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
+    "persistence-library": "(cd persistence/library && npm i && npm start)",
+    "library": "npm run persistence-library && (cd examples/library && npm i && npm link ../../persistence/library && npm start)",
     "labeled-sliders": "(cd examples/labeled-sliders && npm i && npm start)",
-    "library": "(cd examples/library && npm i && npm start)",
     "temperatures": "(cd examples/temperatures && npm i && npm start)",
     "todo-list": "(cd examples/todo-list && npm i && npm start)",
     "todomvc": "(cd examples/todomvc && npm i && npm start)",
@@ -13,9 +14,8 @@
     "examples": "npm run labeled-sliders && npm run library && npm run temperatures && npm run todo-list && npm run todomvc",
     "prestart": "npm i && npm run examples",
     "start": "node --harmony server/todo-list/main",
-    "persistence-library": "(cd persistence/library && npm i && npm start)",
-    "prelibrary-server": "npm i && npm run persistence-library && npm run library",
-    "library-server": "node server/library/main"
+    "prelibrary-server": "npm run library && npm i && (cd server/library && tsc) && npm link persistence/library",
+    "library-server": "node server/library/build/main"
   },
   "repository": {
     "type": "git",

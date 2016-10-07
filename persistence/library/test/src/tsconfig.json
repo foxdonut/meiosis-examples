@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "../build/",
+    "target": "es2015"
+  },
+  "files": [
+    "./book-tests.ts",
+    "../../typings/index.d.ts"
+  ]
+}

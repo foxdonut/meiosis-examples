@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/8c6386ebf41ab6f7f6ce40f1456325ee036b55b9/sql.js/sql.js.d.ts",
+    "raw": "registry:dt/sql.js#0.0.0+20160906140629",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/8c6386ebf41ab6f7f6ce40f1456325ee036b55b9/sql.js/sql.js.d.ts"
+  }
+}

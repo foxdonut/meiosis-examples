@@ -40,6 +40,7 @@
     "react-dom": "^15.3.2",
     "react-tap-event-plugin": "^1.0.0",
     "sinon": "^1.17.6",
+    "sql.js": "^0.3.2",
     "union-type": "^0.3.3",
     "url-mapper": "^1.1.1",
     "validate.js": "^0.10.0"

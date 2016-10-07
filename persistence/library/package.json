@@ -8,7 +8,7 @@
     "start": "webpack",
     "watch": "webpack --progress --colors --watch",
     "pretest": "npm start && tsc -p test/src",
-    "test": "ava -v test/src/*-tests.js"
+    "test": "ava -v test/build/*-tests.js"
   },
   "repository": {
     "type": "git",

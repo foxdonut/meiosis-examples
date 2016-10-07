@@ -1,10 +1,9 @@
 {
-  "dependencies": {
-    "react": "registry:npm/react#15.0.1+20160601175240",
-    "react-dom": "registry:npm/react-dom#15.0.1+20160826174104"
-  },
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "node": "registry:dt/node#6.0.0+20160928143418"
+    "node": "registry:dt/node#6.0.0+20161006230116",
+    "react": "registry:dt/react#0.14.0+20160927082313",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "sql.js": "registry:dt/sql.js#0.0.0+20160906140629"
   }
 }

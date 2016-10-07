@@ -1,27 +1,22 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "isolatedModules": false,
-    "jsx": "react",
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitUseStrict": false,
     "noLib": false,
-    "outDir": "dist",
+    "outDir": "./build/",
     "preserveConstEnums": true,
     "removeComments": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5"
   },
   "files": [
     "./typings/index.d.ts",
-    "./index.ts",
-    "./src/root/model.ts",
-    "./src/root/view.tsx"
+    "./src/app.ts",
+    "./src/book.ts",
+    "./src/main.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

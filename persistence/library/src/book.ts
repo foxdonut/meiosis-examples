@@ -29,5 +29,6 @@ function getAllBooks(db: Database): Array<Book> {
 }
 
 export {
+  Book,
   getAllBooks
 };
