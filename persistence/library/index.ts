@@ -37,3 +37,5 @@ function toBinArray (str) {
 }
 var db = new SQL.Database(toBinArray(localStorage.getItem("mydata")));
 */
+
+export * from "./src/book";

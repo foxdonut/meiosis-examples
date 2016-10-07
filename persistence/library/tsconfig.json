@@ -18,7 +18,8 @@
   },
   "files": [
     "typings/index.d.ts",
-    "index.ts"
+    "index.ts",
+    "src/book.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,
