@@ -1,4 +1,4 @@
-import { Book } from "library-persistence";
+import { Book } from "../../persistence/book";
 
 interface Model {
   books: Array<Book>;

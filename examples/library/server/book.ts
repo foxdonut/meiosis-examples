@@ -1,6 +1,6 @@
 import { IReply, IRequestHandler, Request, Server } from "hapi";
 import { Database } from "sql.js";
-import { Book, getAllBooks } from "library-persistence";
+import { Book, getAllBooks } from "../persistence/book";
 
 function addBookRoutes(server: Server, db: Database): void {
   const handler: any = (request: Request, reply: IReply) => {

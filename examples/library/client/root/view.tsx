@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactElement} from "react";
-import { Book } from "library-persistence";
+import { Book } from "../../persistence/book";
 
 import { Model } from "./model";
 
