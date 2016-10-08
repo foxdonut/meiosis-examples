@@ -8,7 +8,7 @@
     "start": "webpack",
     "watch": "webpack --progress --colors --watch",
     "pretest": "npm start && tsc -p test/src",
-    "test": "ava -v test/src/*-tests.js"
+    "test": "ava -v test/build/*-tests.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
     "axios": "^0.14.0",
     "data.maybe": "^1.2.2",
     "form-serialize": "^0.7.1",
+    "hapi": "^15.1.1",
+    "inert": "^4.0.2",
     "material-ui": "^0.15.4",
     "meiosis": "^0.7.4",
     "meiosis-react": "^0.7.1",

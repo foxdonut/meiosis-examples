@@ -8,7 +8,7 @@ import { addBookRoutes } from "./book";
 const server: Hapi.Server = new Hapi.Server();
 
 function start(port: number): void {
-  const fb: Buffer = fs.readFileSync("../library.db");
+  const fb: Buffer = fs.readFileSync("server/library/library.db");
   const db: Database = new Database(fb);
 
   server.connection({ port: port });

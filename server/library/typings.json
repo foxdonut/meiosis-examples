@@ -1,7 +1,0 @@
-{
-  "globalDependencies": {
-    "hapi": "registry:dt/hapi#13.0.0+20160928135445",
-    "node": "registry:dt/node#6.0.0+20161006230116",
-    "sql.js": "registry:dt/sql.js#0.0.0+20160906140629"
-  }
-}

@@ -10,7 +10,7 @@
     "noImplicitAny": true,
     "noImplicitUseStrict": false,
     "noLib": false,
-    "outDir": "dist",
+    "outDir": "lib",
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,
@@ -18,10 +18,14 @@
     "target": "es5"
   },
   "files": [
-    "./typings/index.d.ts",
-    "./index.ts",
-    "./src/root/model.ts",
-    "./src/root/view.tsx"
+    "typings/index.d.ts",
+    "index.ts",
+    "client/root/model.ts",
+    "client/root/view.tsx",
+    "persistence/book.ts",
+    "server/app.ts",
+    "server/book.ts",
+    "server/main.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

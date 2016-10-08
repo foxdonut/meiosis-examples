@@ -40,3 +40,4 @@ persistence/library/lib
 persistence/library/test/build
 examples/library/dist
 server/library/build
+typings

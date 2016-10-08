@@ -1,8 +1,0 @@
-{
-  "resolution": "main",
-  "tree": {
-    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/881408c91909383843f7cf10de4f39fcd71baa06/hapi/hapi.d.ts",
-    "raw": "registry:dt/hapi#13.0.0+20160928135445",
-    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/881408c91909383843f7cf10de4f39fcd71baa06/hapi/hapi.d.ts"
-  }
-}
