@@ -4,4 +4,10 @@ interface Model {
   books: Array<Book>;
 }
 
-export { Model };
+function initialModel(): Model {
+  return {
+    books: [{id: 1, title: "Book One"}, {id: 2, title: "Book Two"}]
+  };
+}
+
+export { Model, initialModel };

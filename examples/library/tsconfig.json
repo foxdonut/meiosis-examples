@@ -10,7 +10,7 @@
     "noImplicitAny": true,
     "noImplicitUseStrict": false,
     "noLib": false,
-    "outDir": "lib",
+    "outDir": "build",
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": true,

@@ -1,11 +1,11 @@
 import { Database, QueryResults } from "sql.js";
 
 interface Book {
-  id: number;
+  id?: number;
   title: string;
-  isbn: string;
-  pages: number;
-  publishedDate: string;
+  isbn?: string;
+  pages?: number;
+  publishedDate?: string;
 }
 
 function toBook(row: Array<any>): Book {

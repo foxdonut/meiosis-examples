@@ -35,7 +35,6 @@ node_modules
 generated-*.js
 generated-*.js.map
 
-examples/library/dist
-examples/library/lib
+examples/library/build
 examples/library/test/build
 typings

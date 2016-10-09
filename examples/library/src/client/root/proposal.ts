@@ -1,0 +1,5 @@
+interface Proposal {
+
+}
+
+export { Proposal };

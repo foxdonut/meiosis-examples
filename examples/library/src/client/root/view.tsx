@@ -1,18 +1,21 @@
 import * as React from "react";
-import { ReactElement} from "react";
+import { ReactElement } from "react";
 import { Book } from "../../persistence/book";
 
 import { Model } from "./model";
 
-function renderBook(book: Book): ReactElement<any> {
+type View = ReactElement<any>;
+
+function renderBook(book: Book): View {
   return (
-    <li>{book.title}</li>
+    <li key={book.id}>{book.title}</li>
   );
 }
 
-function view(model: Model): ReactElement<any> {
+function view(model: Model): View {
   return (
     <div>
+      <div>Books:</div>
       <ul>
         {model.books.map(renderBook)}
       </ul>
@@ -20,4 +23,4 @@ function view(model: Model): ReactElement<any> {
   );
 }
 
-export { view };
+export { View, view };
