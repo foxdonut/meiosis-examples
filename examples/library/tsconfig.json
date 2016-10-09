@@ -17,15 +17,10 @@
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5"
   },
-  "files": [
+  "include": [
     "typings/index.d.ts",
     "index.ts",
-    "client/root/model.ts",
-    "client/root/view.tsx",
-    "persistence/book.ts",
-    "server/app.ts",
-    "server/book.ts",
-    "server/main.ts"
+    "src/**/*"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

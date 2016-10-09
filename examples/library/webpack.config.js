@@ -3,7 +3,7 @@ var isProduction = process.env.NODE_ENV === "production";
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./index.ts",
+  entry: "./src/client/index.ts",
   devtool: "source-map",
   output: {
     path: ".",
