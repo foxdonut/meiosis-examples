@@ -2,6 +2,7 @@
   "globalDependencies": {
     "hapi": "registry:dt/hapi#13.0.0+20160928135445",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "material-ui": "registry:dt/material-ui#0.15.1+20161004183428",
     "node": "registry:dt/node#6.0.0+20161008175459",
     "react": "registry:dt/react#0.14.0+20161008064207",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",

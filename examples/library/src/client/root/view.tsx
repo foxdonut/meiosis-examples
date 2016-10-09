@@ -1,25 +1,38 @@
 import * as React from "react";
 import { ReactElement } from "react";
-import { Book } from "../../persistence/book";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
+import { Book } from "../../persistence/book";
 import { Model } from "./model";
 
 type View = ReactElement<any>;
 
 function renderBook(book: Book): View {
   return (
-    <li key={book.id}>{book.title}</li>
+    <TableRow key={ book.id }>
+      <TableHeaderColumn>{ book.title }</TableHeaderColumn>
+    </TableRow>
   );
 }
 
 function view(model: Model): View {
   return (
-    <div>
-      <div>Books:</div>
-      <ul>
-        {model.books.map(renderBook)}
-      </ul>
-    </div>
+    <MuiThemeProvider>
+      <div>
+        <div>Books:</div>
+        <Table>
+          <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>
+            <TableRow>
+              <TableHeaderColumn>Title</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={ false }>
+            { model.books.map(renderBook) }
+          </TableBody>
+        </Table>
+      </div>
+    </MuiThemeProvider>
   );
 }
 
