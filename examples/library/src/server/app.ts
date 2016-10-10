@@ -21,7 +21,7 @@ function start(port: number): void {
 
     server.route({
       method: "GET",
-      path: "/{param*}",
+      path: "/{file*}",
       handler: {
         directory: {
           path: "../.."

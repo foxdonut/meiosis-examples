@@ -35,6 +35,7 @@ function view(model: Model): View {
         </Tab>
         <Tab label="Something Else">
           <div>Coming soon</div>
+          <div><a href="#/list">List</a></div>
         </Tab>
       </Tabs>
     </MuiThemeProvider>
