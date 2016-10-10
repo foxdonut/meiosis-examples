@@ -36,10 +36,12 @@ module.exports = {
       }
     ]
   },
+  /*
   externals: {
     "react": "React",
     "react-dom": "ReactDOM"
   },
+  */
   plugins: isProduction ? [
     new webpack.optimize.UglifyJsPlugin()
   ] : []

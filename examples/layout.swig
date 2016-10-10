@@ -1,28 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="shortcut icon" size="16x16, 32x32, 48x48, 64x64, 128x128, 256x256" href="/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+{% extends 'base-layout.swig' %}
+{% block head %}    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap.flatly.min.css">
     <link rel="stylesheet" href="/public/css/style.css">
     <script src="/public/lib/jquery-2.2.3.min.js"></script>
     <script src="/public/lib/bootstrap.min.js"></script>
-
-    <title>Meiosis Example - {% block title %}Title{% endblock %}</title>
-  </head>
-  <body class="container">
-    <div>
-      <a href="http://meiosis.js.org"><img src="/public/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px"></a>
-      <h2 style="display: inline;">Meiosis Example - {% block title %}Title{% endblock %}</h2>
-      <div><a href="/index.html">Back to list of examples</a></div>
-      <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/{% block example %}{% endblock %}">Source code</a></div>
-      <hr>
-
-      <div id="app"></div>
-      <div id="tracer" style="position: fixed; top: 0px; right: 0px;"></div>
-    </div>
-
-    {% block content %}Content{% endblock %}
-  </body>
-</html>
+{% endblock %}
