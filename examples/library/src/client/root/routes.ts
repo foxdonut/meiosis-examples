@@ -1,8 +1,12 @@
+import { Emitter } from "meiosis";
+import { Proposal } from "./proposal";
+
 const LocationBar = require("location-bar");
 const createHistory = require("history").createBrowserHistory;
 
-function initRoutes(): void {
+function initRoutes(propose: Emitter<Proposal>): void {
   const root = "/examples/library";
+  propose("foo");
   /*
   const locationBar = new LocationBar();
 
