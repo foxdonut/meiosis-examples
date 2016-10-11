@@ -29,9 +29,11 @@
   "dependencies": {
     "addressbar": "^1.0.2",
     "axios": "^0.14.0",
+    "crossroads": "^0.12.2",
     "data.maybe": "^1.2.2",
     "form-serialize": "^0.7.1",
     "hapi": "^15.1.1",
+    "history": "^4.3.0",
     "inert": "^4.0.2",
     "location-bar": "^2.1.0",
     "material-ui": "^0.16.0",

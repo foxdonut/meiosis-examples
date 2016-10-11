@@ -28,6 +28,21 @@ function start(port: number): void {
         }
       }
     });
+
+    server.route({
+      method: "GET",
+      path: "/examples/library/{file*}",
+      handler: function(request: Hapi.Request, reply: Hapi.IReply) {
+        try {
+          const file = "./" + request.params["file"];
+          fs.statSync(file);
+          reply.file(file);
+        }
+        catch (err) {
+          reply.file("./index.html");
+        }
+      }
+    });
   });
 
   server.start(function(err) {
