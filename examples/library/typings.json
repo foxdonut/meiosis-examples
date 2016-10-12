@@ -3,6 +3,7 @@
     "crossroads": "registry:dt/crossroads#0.0.0+20160317120654",
     "hapi": "registry:dt/hapi#13.0.0+20160928135445",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "js-signals": "registry:dt/js-signals#0.0.0+20160316155526",
     "material-ui": "registry:dt/material-ui#0.15.1+20161004183428",
     "node": "registry:dt/node#6.0.0+20161010101523",
     "react": "registry:dt/react#0.14.0+20161008064207",

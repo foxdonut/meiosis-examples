@@ -1,6 +1,6 @@
 {
   "name": "library",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "description": "meiosis-examples library",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "inert": "^4.0.2",
     "location-bar": "^2.1.0",
     "material-ui": "^0.16.0",
-    "meiosis": "^0.7.4",
+    "meiosis": "^0.8.0",
     "meiosis-react": "^0.7.1",
     "object-path": "^0.11.2",
     "ramda": "^0.22.1",
