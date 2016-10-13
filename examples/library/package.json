@@ -10,6 +10,11 @@
     "pretest": "npm start && tsc -p test/src",
     "test": "ava -v test/build/*-tests.js"
   },
+  "ava": {
+    "require": [
+      "./test/build/setup-browser-env.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/foxdonut/meiosis-examples.git"
@@ -31,6 +36,7 @@
     "axios": "^0.14.0",
     "crossroads": "^0.12.2",
     "data.maybe": "^1.2.2",
+    "es6-promise": "^4.0.5",
     "form-serialize": "^0.7.1",
     "hapi": "^15.1.1",
     "history": "^4.3.0",
@@ -38,7 +44,7 @@
     "location-bar": "^2.1.0",
     "material-ui": "^0.16.0",
     "meiosis": "^0.8.0",
-    "meiosis-react": "^0.7.1",
+    "meiosis-react": "^0.8.0",
     "object-path": "^0.11.2",
     "ramda": "^0.22.1",
     "react": "^15.3.2",
@@ -46,14 +52,13 @@
     "react-tap-event-plugin": "^1.0.0",
     "sinon": "^1.17.6",
     "sql.js": "^0.3.2",
-    "union-type": "^0.3.3",
     "url-mapper": "^1.1.1",
     "validate.js": "^0.10.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "jquery": "^3.1.0",
-    "jsdom": "^9.4.1",
+    "browser-env": "^2.0.11",
+    "jquery": "^3.1.1",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
     "tslint": "^3.15.1",

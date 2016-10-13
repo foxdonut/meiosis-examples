@@ -1,12 +1,11 @@
-import { Config } from "meiosis";
-import { Model, initialModel } from "./model";
-import { View, view } from "./view";
-import { Proposal } from "./proposal";
+import { initialModel } from "./model";
+import { view } from "./view";
+import { ComponentConfig } from "./types";
 import { initRoutes } from "./routes";
 
-function rootConfig(): Config<Model, View, Proposal> {
+function rootConfig(): ComponentConfig {
   return {
-    initialModel: initialModel(),
+    initialModel,
     view,
     ready: initRoutes
   };

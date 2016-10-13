@@ -6,7 +6,9 @@
     "target": "es2015"
   },
   "files": [
+    "./setup-browser-env.ts",
     "./sample-tests.tsx",
+    "./persistence/book-tests.ts",
     "../../typings/index.d.ts"
   ]
 }

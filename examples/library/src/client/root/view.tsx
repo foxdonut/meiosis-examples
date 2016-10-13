@@ -1,13 +1,10 @@
 import * as React from "react";
-import { ReactElement } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { Tabs, Tab } from "material-ui/Tabs";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 
 import { Book } from "../../persistence/book";
-import { Model } from "./model";
-
-type View = ReactElement<any>;
+import { Model, View } from "./types";
 
 function renderBook(book: Book): View {
   return (
@@ -35,6 +32,7 @@ function view(model: Model): View {
         </Tab>
         <Tab label="Something Else">
           <div>Coming soon</div>
+          {/* instead of href, use onclick, and propose with url change that does a push on the history */}
           <div><a href="/examples/library/booklist">List</a></div>
         </Tab>
       </Tabs>
