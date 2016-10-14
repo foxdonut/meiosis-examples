@@ -3,11 +3,16 @@ import { ReactElement } from "react";
 import { Book } from "../../persistence/book";
 
 export interface Model {
-  books?: Array<Book>;
+  url?: string;
+  tab?: string;
+  booksById?: { [id: string]: Book };
+  bookIds?: Array<string>;
 }
 
 export interface Proposal {
   type: string,
+  url?: string,
+  tab?: string,
   payload?: any
 }
 

@@ -4,12 +4,14 @@ import { renderer } from "meiosis-react";
 
 import { rootConfig } from "./root/main";
 import { Model, Proposal, View } from "./root/types";
+import { urlComponent } from "./util/urlHandler";
 
 injectTapEventPlugin();
 
 const meiosis: MeiosisApp<Model, View, Proposal> = init<Model, View, Proposal>();
 
 const rootComponent: Component<Model, View> = meiosis.createComponent(rootConfig());
+meiosis.createComponent(urlComponent());
 
 /*
 const reactRenderer: Renderer<Model, View, Proposal> = renderer().intoId(document, "app");

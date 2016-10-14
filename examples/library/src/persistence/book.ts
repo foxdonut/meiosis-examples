@@ -1,7 +1,7 @@
 import { Database, QueryResults } from "sql.js";
 
 interface Book {
-  id?: number;
+  id?: string;
   title: string;
   isbn?: string;
   pages?: number;

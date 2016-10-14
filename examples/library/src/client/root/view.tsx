@@ -4,21 +4,28 @@ import { Tabs, Tab } from "material-ui/Tabs";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 
 import { Book } from "../../persistence/book";
-import { Model, View } from "./types";
+import { Model, View, Propose } from "./types";
 
-function renderBook(book: Book): View {
-  return (
-    <TableRow key={ book.id }>
-      <TableHeaderColumn>{ book.title }</TableHeaderColumn>
-    </TableRow>
-  );
+function renderBook(booksById: { [id: string]: Book }): (id: string) => View {
+  return function(bookId: string): View {
+    const book: Book = booksById[bookId];
+    return (
+      <TableRow key={ book.id }>
+        <TableHeaderColumn>{ book.title }</TableHeaderColumn>
+      </TableRow>
+    );
+  };
 }
 
-function view(model: Model): View {
+function view(model: Model, propose: Propose): View {
+  function onTabsChange(tab: string) {
+    propose({ type: "TabChange", tab: tab });
+  }
+
   return (
     <MuiThemeProvider>
-      <Tabs>
-        <Tab label="Books">
+      <Tabs value={model.tab} onChange={onTabsChange}>
+        <Tab value="books" label="Books">
           <Table>
             <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>
               <TableRow>
@@ -26,11 +33,11 @@ function view(model: Model): View {
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={ false }>
-              { model.books.map(renderBook) }
+              { model.bookIds.map(renderBook(model.booksById)) }
             </TableBody>
           </Table>
         </Tab>
-        <Tab label="Something Else">
+        <Tab value="other" label="Something Else">
           <div>Coming soon</div>
           {/* instead of href, use onclick, and propose with url change that does a push on the history */}
           <div><a href="/examples/library/booklist">List</a></div>
@@ -40,4 +47,4 @@ function view(model: Model): View {
   );
 }
 
-export { View, view };
+export { view };
