@@ -1,6 +1,7 @@
 import { ComponentConfig, Model, Proposal, Propose } from "../root/types";
-const Mapper = require("url-mapper");
 const createHistory = require("history").createBrowserHistory;
+const Mapper = require("url-mapper");
+import * as crossroads from "crossroads";
 
 interface LibraryUrl {
   get: string,
@@ -50,38 +51,63 @@ function initRoutes(propose: Propose): void {
   // handle browser Back button
   history.listen(function(location: any, action: string) {
     if (action === "POP") {
-      propose({ type: "UrlChange", url: location.pathname });
+      propose({ type: "UrlChanged", url: location.pathname });
     }
   });
 
   const initialUrl: string = window.location.pathname.substring(rootPath.length) || "/";
-  propose({ type: "UrlChange", url: initialUrl });
+  propose({ type: "UrlChanged", url: initialUrl });
 }
 
 function urlComponent(): ComponentConfig {
   const urlMapper = Mapper();
 
   const urlToTabMappings = {
+    "/orders/:id": "orders",
+    "/circulation/:id": "circulation",
+    "/repairs/:id": "repairs",
     "/other": "other",
     "*": "books"
   };
 
-  const tabToUrlMappings = {
-    "books": "/",
-    "other": "/other"
-  };
+  crossroads.addRoute("/orders/:id:", function(model: Model, id: string) {
+    model.tab = "orders";
+    console.log("order id:", id);
+  });
+
+  crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {
+    model.tab = "circulation";
+    console.log("circulation id:", id);
+  });
+
+  crossroads.addRoute("/repairs/:id:", function(model: Model, id: string) {
+    model.tab = "repairs";
+    console.log("repairs id:", id);
+  });
+
+  crossroads.addRoute("/other/:id:", function(model: Model, id: string) {
+    model.tab = "other";
+    console.log("other id:", id);
+  });
+
+  crossroads.addRoute(/^.*$/, function(model: Model) {
+    model.tab = "books";
+  });
 
   return {
     receive: (model: Model, proposal: Proposal): Model => {
       switch (proposal.type) {
         case "UrlChange":
+          history.push(proposal.url);
+        case "UrlChanged":
           model.url = proposal.url;
-          model.tab = urlMapper.map(proposal.url, urlToTabMappings).match;
-          break;
-        case "TabChange":
-          model.url = tabToUrlMappings[proposal.tab];
-          model.tab = proposal.tab;
-          history.push(model.url);
+          crossroads.parse(proposal.url, [model]);
+          /*
+          const urlMapping = urlMapper.map(proposal.url, urlToTabMappings);
+          console.log("urlMapping:", urlMapping);
+          console.log("values:", urlMapping.values);
+          model.tab = urlMapping.match;
+          */
           break;
       }
       return model;

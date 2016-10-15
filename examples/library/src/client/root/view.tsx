@@ -19,13 +19,22 @@ function renderBook(booksById: { [id: string]: Book }): (id: string) => View {
 
 function view(model: Model, propose: Propose): View {
   function onTabsChange(tab: string) {
-    propose({ type: "TabChange", tab: tab });
+    propose({ type: "UrlChange", url: "/" + tab });
   }
 
   return (
     <MuiThemeProvider>
       <Tabs value={model.tab} onChange={onTabsChange}>
-        <Tab value="books" label="Books">
+        <Tab value="orders" label="Orders">
+          <div>Orders</div>
+        </Tab>
+        <Tab value="circulation" label="Circulation">
+          <div>Circulation</div>
+        </Tab>
+        <Tab value="repairs" label="Repairs">
+          <div>Repairs</div>
+        </Tab>
+        <Tab value="books" label="All Books">
           <Table>
             <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>
               <TableRow>

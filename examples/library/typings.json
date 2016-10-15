@@ -2,11 +2,11 @@
   "globalDependencies": {
     "axios": "registry:dt/axios#0.9.1+20160629101425",
     "crossroads": "registry:dt/crossroads#0.0.0+20160317120654",
-    "hapi": "registry:dt/hapi#13.0.0+20160928135445",
+    "hapi": "registry:dt/hapi#13.0.0+20161014012508",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "js-signals": "registry:dt/js-signals#0.0.0+20160316155526",
     "material-ui": "registry:dt/material-ui#0.15.1+20161004183428",
-    "node": "registry:dt/node#6.0.0+20161010101523",
+    "node": "registry:dt/node#6.0.0+20161014191813",
     "object-path": "registry:dt/object-path#0.9.0+20160317120654",
     "react": "registry:dt/react#0.14.0+20161008064207",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
