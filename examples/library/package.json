@@ -8,7 +8,9 @@
     "start": "webpack",
     "watch": "webpack --progress --colors --watch",
     "pretest": "npm start && tsc -p test/src",
-    "test": "ava -v test/build/*-tests.js"
+    "test": "ava -v test/build/*-tests.js",
+    "preserver": "tsc",
+    "server": "node build/server/main"
   },
   "ava": {
     "require": [

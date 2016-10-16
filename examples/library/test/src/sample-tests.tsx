@@ -1,14 +1,11 @@
 import test from "ava";
 import { ReactElement } from "react";
 import * as React from "react";
+const $ = require("jquery");
 
 import { renderer } from "meiosis-react";
 import { createComponent, run } from "meiosis";
 import { CreateComponent, Component, Emitter, Renderer, RenderRoot } from "meiosis";
-
-const jsdomSetup = require("./jsdom-setup");
-
-jsdomSetup();
 
 interface Model {
   counter: number;
@@ -22,10 +19,9 @@ interface Proposal {
 }
 
 test("implements a render function for React", t => {
-  const $ = require("jquery");
-
   const id = "app";
-  const render: Renderer<Model, View, Proposal> = renderer().intoId(document, id);
+  document.write("<div id='" + id + "'></div>");
+  const render: Renderer<Model, View> = renderer().intoId(document, id);
 
   let propose: Emitter<Proposal> = null;
 

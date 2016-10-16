@@ -1,11 +1,11 @@
 import test, { TestContext } from "ava";
 import { Database } from "sql.js";
 import * as fs from "fs";
-import { Book, getAllBooks } from "../../lib/index";
+import { Book, getAllBooks } from "../../../build/persistence/index";
 
 test("implements a function to get all books", (t: TestContext) => {
   const db: Database = new Database();
-  const sql = fs.readFileSync("../../src/book.sql", "utf8");
+  const sql = fs.readFileSync("../../../src/persistence/ddl.sql", "utf8");
   db.run(sql);
 
   const insert = fs.readFileSync("../src/book-tests.sql", "utf8");
