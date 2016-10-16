@@ -62,22 +62,19 @@ function initRoutes(propose: Propose): void {
 function urlComponent(): ComponentConfig {
   const urlMapper = Mapper();
 
-  const urlToTabMappings = {
-    "/orders/:id": "orders",
-    "/circulation/:id": "circulation",
-    "/repairs/:id": "repairs",
-    "/other": "other",
-    "*": "books"
-  };
+  crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {
+    model.tab = "circulation";
+    console.log("circulation id:", id);
+  });
+
+  crossroads.addRoute("/members/:id:", function(model: Model, id: string) {
+    model.tab = "members";
+    console.log("member id:", id);
+  });
 
   crossroads.addRoute("/orders/:id:", function(model: Model, id: string) {
     model.tab = "orders";
     console.log("order id:", id);
-  });
-
-  crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {
-    model.tab = "circulation";
-    console.log("circulation id:", id);
   });
 
   crossroads.addRoute("/repairs/:id:", function(model: Model, id: string) {
@@ -102,12 +99,6 @@ function urlComponent(): ComponentConfig {
         case "UrlChanged":
           model.url = proposal.url;
           crossroads.parse(proposal.url, [model]);
-          /*
-          const urlMapping = urlMapper.map(proposal.url, urlToTabMappings);
-          console.log("urlMapping:", urlMapping);
-          console.log("values:", urlMapping.values);
-          model.tab = urlMapping.match;
-          */
           break;
       }
       return model;

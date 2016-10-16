@@ -25,11 +25,14 @@ function view(model: Model, propose: Propose): View {
   return (
     <MuiThemeProvider>
       <Tabs value={model.tab} onChange={onTabsChange}>
-        <Tab value="orders" label="Orders">
-          <div>Orders</div>
-        </Tab>
         <Tab value="circulation" label="Circulation">
           <div>Circulation</div>
+        </Tab>
+        <Tab value="members" label="Members">
+          <div>Members</div>
+        </Tab>
+        <Tab value="orders" label="Orders">
+          <div>Orders</div>
         </Tab>
         <Tab value="repairs" label="Repairs">
           <div>Repairs</div>

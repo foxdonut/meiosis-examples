@@ -10,7 +10,7 @@ function addBookRoutes(server: Server, db: Database): void {
 
   server.route({
     method: "GET",
-    path: "/examples/library/books",
+    path: "/examples/library/api/books",
     handler
   });
 }
