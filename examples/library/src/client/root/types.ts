@@ -1,4 +1,4 @@
-import { Config, Emitter } from "meiosis";
+import { Config, Emitter, View } from "meiosis";
 import { ReactElement } from "react";
 import { Book } from "../../persistence/book";
 
@@ -16,7 +16,7 @@ export interface Proposal {
   payload?: any
 }
 
-export type View = ReactElement<any>;
+export type VDom = ReactElement<any>;
 export type Propose = Emitter<Proposal>;
-export type ComponentConfig = Config<Model, View, Proposal, Propose>;
-
+export type ComponentConfig<A> = Config<Model, VDom, Proposal, A>;
+export type View = View<Model, VDom, Proposal, Propose>;

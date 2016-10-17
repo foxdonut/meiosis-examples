@@ -1,8 +1,8 @@
 import { initialModel } from "./model";
 import { view } from "./view";
-import { ComponentConfig } from "./types";
+import { ComponentConfig, Propose } from "./types";
 
-function rootConfig(): ComponentConfig {
+function rootConfig(): ComponentConfig<Propose> {
   return {
     initialModel,
     view

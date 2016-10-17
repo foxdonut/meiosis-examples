@@ -59,7 +59,7 @@ function initRoutes(propose: Propose): void {
   propose({ type: "UrlChanged", url: initialUrl });
 }
 
-function urlComponent(): ComponentConfig {
+function urlComponent(): ComponentConfig<Propose> {
   const urlMapper = Mapper();
 
   crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {

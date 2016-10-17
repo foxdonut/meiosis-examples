@@ -2,15 +2,15 @@ const injectTapEventPlugin = require("react-tap-event-plugin");
 import { Component, MeiosisApp, Renderer, init } from "meiosis";
 import { renderer } from "meiosis-react";
 
-import { rootConfig } from "./root/main";
-import { Model, Proposal, View } from "./root/types";
+import { rootConfig } from "./root/config";
+import { Model, Proposal, VDom } from "./root/types";
 import { urlComponent } from "./util/urlHandler";
 
 injectTapEventPlugin();
 
-const meiosis: MeiosisApp<Model, View, Proposal> = init<Model, View, Proposal>();
+const meiosis: MeiosisApp<Model, VDom, Proposal> = init<Model, VDom, Proposal>();
 
-const rootComponent: Component<Model, View> = meiosis.createComponent(rootConfig());
+const rootComponent: Component<Model, VDom> = meiosis.createComponent(rootConfig());
 meiosis.createComponent(urlComponent());
 
 /*
