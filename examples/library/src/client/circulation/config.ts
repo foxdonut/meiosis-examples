@@ -1,11 +1,13 @@
 import { view } from "./view";
 import { CirculationActions, createActions } from "./actions";
-import { ComponentConfig } from "../root/types";
+import { ComponentConfig, BookListModel } from "../root/types";
+import { BookServices } from "../services/book";
 
-function circulationConfig(): ComponentConfig<CirculationActions> {
+function circulationConfig(services: BookServices): ComponentConfig<BookListModel, CirculationActions> {
   return {
     view,
-    actions: createActions()
+    actions: createActions(services),
+    ready: (actions: CirculationActions) => actions.loadBookList()
   };
 }
 

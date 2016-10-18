@@ -51,15 +51,15 @@ function initRoutes(propose: Propose): void {
   // handle browser Back button
   history.listen(function(location: any, action: string) {
     if (action === "POP") {
-      propose({ type: "UrlChanged", url: location.pathname });
+      propose({ type: "Root.UrlChanged", url: location.pathname });
     }
   });
 
   const initialUrl: string = window.location.pathname.substring(rootPath.length) || "/";
-  propose({ type: "UrlChanged", url: initialUrl });
+  propose({ type: "Root.UrlChanged", url: initialUrl });
 }
 
-function urlComponent(): ComponentConfig<Propose> {
+function urlComponent(): ComponentConfig<Model, Propose> {
   const urlMapper = Mapper();
 
   crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {
@@ -94,9 +94,9 @@ function urlComponent(): ComponentConfig<Propose> {
   return {
     receive: (model: Model, proposal: Proposal): Model => {
       switch (proposal.type) {
-        case "UrlChange":
+        case "Root.UrlChange":
           history.push(proposal.url);
-        case "UrlChanged":
+        case "Root.UrlChanged":
           model.url = proposal.url;
           crossroads.parse(proposal.url, [model]);
           break;

@@ -3,14 +3,19 @@ import { Component, MeiosisApp, Renderer, init } from "meiosis";
 import { renderer } from "meiosis-react";
 
 import { rootConfig } from "./root/config";
-import { Model, Proposal, VDom } from "./root/types";
+import { BookListModel, Model, Proposal, VDom } from "./root/types";
+import { ajax } from "./util/ajax-axios";
+import { createBookServices } from "./services/book";
 import { urlComponent } from "./util/urlHandler";
+import { circulationConfig } from "./circulation/config";
 
 injectTapEventPlugin();
 
 const meiosis: MeiosisApp<Model, VDom, Proposal> = init<Model, VDom, Proposal>();
 
-const rootComponent: Component<Model, VDom> = meiosis.createComponent(rootConfig());
+const bookServices = createBookServices(ajax);
+const circulationComponent: Component<BookListModel, VDom> = meiosis.createComponent(circulationConfig(bookServices));
+const rootComponent: Component<Model, VDom> = meiosis.createComponent(rootConfig(circulationComponent));
 meiosis.createComponent(urlComponent());
 
 /*

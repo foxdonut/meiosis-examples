@@ -1,11 +1,15 @@
+import { Component } from "meiosis";
+import { BookListModel, VDom } from "./types";
 import { initialModel } from "./model";
-import { view } from "./view";
-import { ComponentConfig, Propose } from "./types";
+import { createView } from "./view";
+import { receive } from "./receive";
+import { ComponentConfig, Model, Propose } from "./types";
 
-function rootConfig(): ComponentConfig<Propose> {
+function rootConfig(circulation: Component<BookListModel, VDom>): ComponentConfig<Model, Propose> {
   return {
     initialModel,
-    view
+    view: createView(circulation),
+    receive
   };
 }
 
