@@ -42,4 +42,4 @@ export type Proposal = UrlChange | UrlChanged | LoadBookList | LoadedBookList;
 export type VDom = ReactElement<any>;
 export type Propose = Emitter<Proposal>;
 export type ComponentConfig<M, A> = Config<M, VDom, Proposal, A>;
-export type View<A> = View<Model, VDom, Proposal, A>;
+export type View<M, A> = View<M, VDom, Proposal, A>;

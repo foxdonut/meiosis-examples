@@ -18,7 +18,7 @@ function renderBook(booksById: { [id: string]: Book }): (id: string) => VDom {
   };
 }
 
-const view: View<CirculationActions> = (model: BookListModel, actions: CirculationActions): VDom => {
+const view: View<BookListModel, CirculationActions> = (model: BookListModel, actions: CirculationActions): VDom => {
   return (
     <Table>
       <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>

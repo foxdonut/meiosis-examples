@@ -7,6 +7,7 @@ import { BookListModel, Model, Proposal, VDom } from "./root/types";
 import { ajax } from "./util/ajax-axios";
 import { createBookServices } from "./services/book";
 import { urlComponent } from "./util/urlHandler";
+import { progressDialogConfig } from "./common/progressDialog";
 import { circulationConfig } from "./circulation/config";
 
 injectTapEventPlugin();
@@ -14,8 +15,9 @@ injectTapEventPlugin();
 const meiosis: MeiosisApp<Model, VDom, Proposal> = init<Model, VDom, Proposal>();
 
 const bookServices = createBookServices(ajax);
-const circulationComponent: Component<BookListModel, VDom> = meiosis.createComponent(circulationConfig(bookServices));
-const rootComponent: Component<Model, VDom> = meiosis.createComponent(rootConfig(circulationComponent));
+const progressDialog: Component<Model, VDom> = meiosis.createComponent(progressDialogConfig());
+const circulation: Component<BookListModel, VDom> = meiosis.createComponent(circulationConfig(bookServices));
+const rootComponent: Component<Model, VDom> = meiosis.createComponent(rootConfig({progressDialog, circulation}));
 meiosis.createComponent(urlComponent());
 
 /*

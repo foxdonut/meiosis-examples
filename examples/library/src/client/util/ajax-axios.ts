@@ -1,9 +1,6 @@
 import * as Axios from "axios";
 import { Promise } from "es6-promise";
-
-export interface Ajax {
-  getJSON: <T>(url: string) => Promise<T>;
-}
+import { Ajax } from "./ajax";
 
 export const ajax: Ajax = {
   getJSON: <T>(url: string): Promise<T> => {
