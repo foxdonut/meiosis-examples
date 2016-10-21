@@ -16,8 +16,8 @@ export interface Model {
 
 export type Section = "circulation";
 
-export interface UrlChange {
-  type: "Root.UrlChange";
+export interface LocationChange {
+  type: "Root.LocationChange";
   url: string;
 }
 
@@ -37,7 +37,7 @@ export interface LoadedBookList {
   books: Array<Book>;
 }
 
-export type Proposal = UrlChange | UrlChanged | LoadBookList | LoadedBookList;
+export type Proposal = LocationChange | UrlChanged | LoadBookList | LoadedBookList;
 
 export type VDom = ReactElement<any>;
 export type Propose = Emitter<Proposal>;

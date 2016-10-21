@@ -69,7 +69,7 @@ function urlComponent(): ComponentConfig<Model, Propose> {
   return {
     receive: (model: Model, proposal: Proposal): Model => {
       switch (proposal.type) {
-        case "Root.UrlChange":
+        case "Root.LocationChange":
           history.push(proposal.url);
         case "Root.UrlChanged":
           model.url = proposal.url;

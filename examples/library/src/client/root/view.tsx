@@ -14,12 +14,12 @@ export interface RootViews {
 function createView(views: RootViews): View<Model, Propose> {
   const view: View<Model, Propose> = (model: Model, propose: Propose): VDom => {
     function onTabsChange(tab: string) {
-      propose({ type: "Root.UrlChange", url: "/" + tab });
+      propose({ type: "Root.LocationChange", url: "/" + tab });
     }
 
     const goToRepairs: EventHandler<SyntheticEvent> = (evt: SyntheticEvent): void => {
       evt.preventDefault();
-      propose({ type: "Root.UrlChange", url: "/repairs" });
+      propose({ type: "Root.LocationChange", url: "/repairs" });
     }
 
     return (

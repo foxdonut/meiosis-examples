@@ -1,5 +1,6 @@
 import { view } from "./view";
 import { CirculationActions, createActions } from "./actions";
+import { nextAction } from "./nextAction";
 import { ComponentConfig, BookListModel } from "../root/types";
 import { BookServices } from "../services/book";
 
@@ -7,7 +8,7 @@ function circulationConfig(services: BookServices): ComponentConfig<BookListMode
   return {
     view,
     actions: createActions(services),
-    ready: (actions: CirculationActions) => actions.loadBookList()
+    nextAction
   };
 }
 
