@@ -34,8 +34,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "addressbar": "^1.0.2",
-    "axios": "^0.14.0",
+    "axios": "^0.15.2",
     "crossroads": "^0.12.2",
     "data.maybe": "^1.2.2",
     "es6-promise": "^4.0.5",
@@ -43,7 +42,6 @@
     "hapi": "^15.1.1",
     "history": "^4.3.0",
     "inert": "^4.0.2",
-    "location-bar": "^2.1.0",
     "material-ui": "^0.16.0",
     "meiosis": "^0.8.0",
     "meiosis-react": "^0.8.0",
@@ -54,7 +52,6 @@
     "react-tap-event-plugin": "^1.0.0",
     "sinon": "^1.17.6",
     "sql.js": "^0.3.2",
-    "url-mapper": "^1.1.1",
     "validate.js": "^0.10.0"
   },
   "devDependencies": {

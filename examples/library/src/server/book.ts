@@ -8,7 +8,7 @@ function addBookRoutes(server: Server, db: Database): void {
     const books: Array<Book> = getAllBooks(db);
     //reply(books);
     reply(new Promise((resolve: (value: Array<Book>) => void) => {
-      setTimeout(() => resolve(books), 4000);
+      setTimeout(() => resolve(books), 2000);
     }));
   };
 

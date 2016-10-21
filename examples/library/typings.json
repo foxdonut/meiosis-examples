@@ -1,6 +1,6 @@
 {
   "globalDependencies": {
-    "axios": "registry:dt/axios#0.9.1+20160629101425",
+    "axios": "registry:dt/axios#0.9.1+20161016142654",
     "crossroads": "registry:dt/crossroads#0.0.0+20160317120654",
     "hapi": "registry:dt/hapi#13.0.0+20161014012508",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",

@@ -6,7 +6,7 @@ import { rootConfig } from "./root/config";
 import { BookListModel, Model, Proposal, VDom } from "./root/types";
 import { ajax } from "./util/ajax-axios";
 import { createBookServices } from "./services/book";
-import { urlComponent } from "./util/urlHandler";
+import { urlComponent } from "./common/urlHandler";
 import { progressDialogConfig } from "./common/progressDialog";
 import { circulationConfig } from "./circulation/config";
 

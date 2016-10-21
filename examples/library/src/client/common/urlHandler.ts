@@ -1,6 +1,5 @@
 import { ComponentConfig, Model, Proposal, Propose } from "../root/types";
 const createHistory = require("history").createBrowserHistory;
-const Mapper = require("url-mapper");
 import * as crossroads from "crossroads";
 
 interface LibraryUrl {
@@ -20,33 +19,11 @@ const libraryUrl: LibraryUrl = {
 const rootPath = "/examples/library";
 
 const history = createHistory({
-  basename: rootPath/*,
-  getUserConfirmation: function(message: string, callback: any) {
-    console.log("Are you sure?");
-    return callback(window.confirm("Are you sure?"));
-  }*/
+  basename: rootPath
 });
 
 function initRoutes(propose: Propose): void {
   const root = "/examples/library";
-  // propose({ type: "routeChange" });
-  /*
-  const locationBar = new LocationBar();
-
-  locationBar.onChange(function(path: string) {
-    console.log("new path:", path);
-  });
-
-  locationBar.start({
-    root
-  });
-  */
-
-/*
-  history.block(function(location: string, action: any) {
-    return "Confirm leaving?";
-  });
-  */
 
   // handle browser Back button
   history.listen(function(location: any, action: string) {
@@ -60,8 +37,6 @@ function initRoutes(propose: Propose): void {
 }
 
 function urlComponent(): ComponentConfig<Model, Propose> {
-  const urlMapper = Mapper();
-
   crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {
     model.tab = "circulation";
     console.log("circulation id:", id);
