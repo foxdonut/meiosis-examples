@@ -4,14 +4,10 @@ import { EventHandler, SyntheticEvent } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { Tabs, Tab } from "material-ui/Tabs";
 
-import { BookListModel, Model, Propose, VDom, View } from "./types";
+import { BookListModel, Model, Propose, RootViews } from "../root/types";
+import { VDom, View } from "./types";
 
-export interface RootViews {
-  progressDialog: Component<Model, VDom>;
-  circulation: Component<BookListModel, VDom>;
-}
-
-function createView(views: RootViews): View<Model, Propose> {
+export function createRootView(views: RootViews<VDom>): View<Model, Propose> {
   const view: View<Model, Propose> = (model: Model, propose: Propose): VDom => {
     function onTabsChange(tab: string) {
       propose({ type: "Root.LocationChange", url: "/" + tab });
@@ -55,5 +51,3 @@ function createView(views: RootViews): View<Model, Propose> {
 
   return view;
 }
-
-export { createView };

@@ -3,7 +3,7 @@ import { merge } from "ramda";
 import { InitialModel, Config, Emitter } from "meiosis";
 import { ComponentConfig, Proposal } from "../root/types";
 
-const nestComponent = <A>(path: string) => (config: ComponentConfig<any, A>): ComponentConfig<any, A> => ({
+const nestComponent = <V, A>(path: string) => (config: ComponentConfig<any, V, A>): ComponentConfig<any, V, A> => ({
   initialModel: config.initialModel ? (model: any): any => {
     objectPath.set(model, path, merge(objectPath.get(model, path), (<InitialModel<any>>config.initialModel)({})));
     return model;

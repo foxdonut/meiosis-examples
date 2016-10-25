@@ -2,8 +2,9 @@ import * as React from "react";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 
 import { Book } from "../../persistence/book";
-import { BookListModel, VDom, View } from "../root/types";
-import { CirculationActions } from "./actions";
+import { BookListModel } from "../root/types";
+import { VDom, View } from "./types";
+import { CirculationActions } from "../circulation/actions";
 
 function renderBook(booksById: { [id: string]: Book }): (id: string) => VDom {
   return function(bookId: string): VDom {
@@ -18,7 +19,7 @@ function renderBook(booksById: { [id: string]: Book }): (id: string) => VDom {
   };
 }
 
-const view: View<BookListModel, CirculationActions> = (model: BookListModel, actions: CirculationActions): VDom => {
+export const circulationView: View<BookListModel, CirculationActions> = (model: BookListModel, actions: CirculationActions): VDom => {
   return (
     <Table>
       <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>
@@ -34,5 +35,3 @@ const view: View<BookListModel, CirculationActions> = (model: BookListModel, act
     </Table>
   );
 }
-
-export { view };

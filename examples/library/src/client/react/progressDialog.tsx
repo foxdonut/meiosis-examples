@@ -1,6 +1,7 @@
 import * as React from "react";
 import Dialog from "material-ui/Dialog";
-import { ComponentConfig, Model, Propose, VDom, View } from "../root/types";
+import { Model, Propose } from "../root/types";
+import { ComponentConfig, VDom, View } from "./types";
 
 const view: View<Model, Propose> = function(model: Model): VDom {
   return (

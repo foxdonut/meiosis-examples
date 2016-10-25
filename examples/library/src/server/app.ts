@@ -39,7 +39,7 @@ function start(port: number): void {
           reply.file(file);
         }
         catch (err) {
-          reply.file("./index.html");
+          reply.file("./index-react.html");
         }
       }
     });

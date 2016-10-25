@@ -36,7 +36,7 @@ function initRoutes(propose: Propose): void {
   propose({ type: "Root.UrlChanged", url: initialUrl });
 }
 
-function urlComponent(): ComponentConfig<Model, Propose> {
+function urlComponent(): ComponentConfig<Model, any, Propose> {
   crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {
     model.tab = "circulation";
     console.log("circulation id:", id);

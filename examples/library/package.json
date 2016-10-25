@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "tsc",
-    "start": "webpack",
+    "start": "generateall",
     "watch": "webpack --progress --colors --watch",
     "pretest": "npm start && tsc -p test/src",
     "test": "ava -v test/build/*-tests.js",
@@ -44,7 +44,9 @@
     "inert": "^4.0.2",
     "material-ui": "^0.16.0",
     "meiosis": "^0.8.0",
+    "meiosis-mithril": "^0.8.0",
     "meiosis-react": "^0.8.0",
+    "mithril": "github:lhorie/mithril.js#rewrite",
     "object-path": "^0.11.2",
     "ramda": "^0.22.1",
     "react": "^15.3.2",

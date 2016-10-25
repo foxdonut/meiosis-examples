@@ -1,13 +1,14 @@
 /*global process*/
 var isProduction = process.env.NODE_ENV === "production";
+var variant = process.env.VARIANT;
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/client/index.ts",
+  entry: "./src/client/index-" + variant + ".ts",
   devtool: "source-map",
   output: {
     path: ".",
-    filename: "generated-app" + (isProduction ? ".min" : "") + ".js"
+    filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
   },
   resolve: {
     extensions: ["", ".js", ".ts", ".tsx"]
