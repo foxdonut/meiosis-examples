@@ -6,6 +6,7 @@
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "js-signals": "registry:dt/js-signals#0.0.0+20160316155526",
     "material-ui": "registry:dt/material-ui#0.15.1+20161004183428",
+    "mithril": "registry:dt/mithril#0.0.0+20160501155657",
     "node": "registry:dt/node#6.0.0+20161014191813",
     "object-path": "registry:dt/object-path#0.9.0+20160317120654",
     "react": "registry:dt/react#0.14.0+20161008064207",

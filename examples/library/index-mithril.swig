@@ -4,5 +4,5 @@
 {% block example %}library{% endblock %}
 
 {% block content %}
-  <script src="/examples/library/generated-mithril-app.js"></script>
+  <script src="/examples/library-mithril/generated-mithril-app.js"></script>
 {% endblock %}

@@ -16,27 +16,27 @@ const libraryUrl: LibraryUrl = {
   }
 };
 
-const rootPath = "/examples/library";
+function initRoutes(history: any, rootPath: string): (propose: Propose) => void {
+  return function(propose: Propose): void {
+    // handle browser Back button
+    history.listen(function(location: any, action: string) {
+      if (action === "POP") {
+        propose({ type: "Root.UrlChanged", url: location.pathname });
+      }
+    });
 
-const history = createHistory({
-  basename: rootPath
-});
-
-function initRoutes(propose: Propose): void {
-  const root = "/examples/library";
-
-  // handle browser Back button
-  history.listen(function(location: any, action: string) {
-    if (action === "POP") {
-      propose({ type: "Root.UrlChanged", url: location.pathname });
-    }
-  });
-
-  const initialUrl: string = window.location.pathname.substring(rootPath.length) || "/";
-  propose({ type: "Root.UrlChanged", url: initialUrl });
+    const initialUrl: string = window.location.pathname.substring(rootPath.length) || "/";
+    propose({ type: "Root.UrlChanged", url: initialUrl });
+  };
 }
 
-function urlComponent(): ComponentConfig<Model, any, Propose> {
+function urlComponent(variant: string): ComponentConfig<Model, any, Propose> {
+  const rootPath = "/examples/library-" + variant;
+
+  const history = createHistory({
+    basename: rootPath
+  });
+
   crossroads.addRoute("/circulation/:id:", function(model: Model, id: string) {
     model.tab = "circulation";
     console.log("circulation id:", id);
@@ -81,12 +81,8 @@ function urlComponent(): ComponentConfig<Model, any, Propose> {
     postRender: (model: Model): void => {
       history.replace(model.url);
     },
-    ready: initRoutes
+    ready: initRoutes(history, rootPath)
   };
 }
 
-function gotoUrl(url: string): void {
-
-}
-
-export { LibraryUrl, libraryUrl, urlComponent, gotoUrl };
+export { LibraryUrl, libraryUrl, urlComponent };

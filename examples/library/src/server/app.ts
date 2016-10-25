@@ -13,6 +13,19 @@ function start(port: number): void {
 
   server.connection({ port: port });
 
+  function handler(variant: String): (request: Hapi.Request, reply: Hapi.IReply) => void {
+    return function(request: Hapi.Request, reply: Hapi.IReply): void {
+      try {
+        const file = "./" + request.params["file"];
+        fs.statSync(file);
+        reply.file(file);
+      }
+      catch (err) {
+        reply.file("./index-" + variant + ".html");
+      }
+    }
+  }
+
   server.register(inert, function(err) {
     if (err) {
       throw err;
@@ -31,17 +44,14 @@ function start(port: number): void {
 
     server.route({
       method: "GET",
-      path: "/examples/library/{file*}",
-      handler: function(request: Hapi.Request, reply: Hapi.IReply) {
-        try {
-          const file = "./" + request.params["file"];
-          fs.statSync(file);
-          reply.file(file);
-        }
-        catch (err) {
-          reply.file("./index-react.html");
-        }
-      }
+      path: "/examples/library-react/{file*}",
+      handler: handler("react")
+    });
+
+    server.route({
+      method: "GET",
+      path: "/examples/library-mithril/{file*}",
+      handler: handler("mithril")
     });
   });
 
