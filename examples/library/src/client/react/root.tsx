@@ -39,7 +39,6 @@ export function createRootView(views: RootViews<VDom>): View<Model, Propose> {
             </Tab>
             <Tab value="other" label="Something Else">
               <div>Coming soon</div>
-              {/* instead of href, use onclick, and propose with url change that does a push on the history */}
               <div><a href="#" onClick={goToRepairs}>Repairs</a></div>
             </Tab>
           </Tabs>

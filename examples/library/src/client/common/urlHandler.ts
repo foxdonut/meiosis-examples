@@ -31,7 +31,7 @@ function initRoutes(history: any, rootPath: string): (propose: Propose) => void 
 }
 
 function urlComponent(variant: string): ComponentConfig<Model, any, Propose> {
-  const rootPath = "/examples/library-" + variant;
+  const rootPath = "/examples/library/" + variant;
 
   const history = createHistory({
     basename: rootPath

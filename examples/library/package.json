@@ -35,6 +35,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "axios": "^0.15.2",
+    "classnames": "^2.2.5",
     "crossroads": "^0.12.2",
     "data.maybe": "^1.2.2",
     "es6-promise": "^4.0.5",

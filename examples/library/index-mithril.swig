@@ -3,6 +3,10 @@
 {% block title %}Library{% endblock %}
 {% block example %}library{% endblock %}
 
+{% block top %}
+  <a href="/examples/library/react">React + Material UI version</a>
+{% endblock %}
+
 {% block content %}
-  <script src="/examples/library-mithril/generated-mithril-app.js"></script>
+  <script src="/examples/library/mithril/generated-mithril-app.js"></script>
 {% endblock %}

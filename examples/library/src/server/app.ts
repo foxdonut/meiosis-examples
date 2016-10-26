@@ -44,13 +44,13 @@ function start(port: number): void {
 
     server.route({
       method: "GET",
-      path: "/examples/library-react/{file*}",
+      path: "/examples/library/react/{file*}",
       handler: handler("react")
     });
 
     server.route({
       method: "GET",
-      path: "/examples/library-mithril/{file*}",
+      path: "/examples/library/mithril/{file*}",
       handler: handler("mithril")
     });
   });

@@ -9,8 +9,7 @@ function circulationConfig<V>(services: BookServices, view: View<BookListModel, 
   return {
     view,
     actions: createActions(services),
-    nextAction,
-    ready: (actions: CirculationActions) => actions.loadBookList()
+    nextAction
   };
 }
 
