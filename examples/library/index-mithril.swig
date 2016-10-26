@@ -1,4 +1,4 @@
-{% extends '../base-layout.swig' %}
+{% extends '../layout.swig' %}
 
 {% block title %}Library{% endblock %}
 {% block example %}library{% endblock %}
