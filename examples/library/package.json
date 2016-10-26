@@ -39,10 +39,10 @@
     "data.maybe": "^1.2.2",
     "es6-promise": "^4.0.5",
     "form-serialize": "^0.7.1",
-    "hapi": "^15.1.1",
+    "hapi": "^15.2.0",
     "history": "^4.3.0",
     "inert": "^4.0.2",
-    "material-ui": "^0.16.0",
+    "material-ui": "^0.16.1",
     "meiosis": "^0.8.0",
     "meiosis-mithril": "^0.8.0",
     "meiosis-react": "^0.8.0",
@@ -58,12 +58,12 @@
   },
   "devDependencies": {
     "ava": "^0.16.0",
-    "browser-env": "^2.0.11",
+    "browser-env": "^2.0.15",
     "jquery": "^3.1.1",
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2",
+    "ts-loader": "^0.9.5",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.3",
+    "typescript": "^2.0.6",
     "webpack": "^1.13.2"
   }
 }
