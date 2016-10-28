@@ -1,7 +1,7 @@
 node node_modules\swig\bin\swig.js render .\examples\counter\index.swig > .\examples\counter\index.html
 node node_modules\swig\bin\swig.js render .\examples\labeled-sliders\index.swig > .\examples\labeled-sliders\index.html
-node node_modules\swig\bin\swig.js render .\examples\library\index-mithril.swig > .\examples\library\index-mithril.html
-node node_modules\swig\bin\swig.js render .\examples\library\index-react.swig > .\examples\library\index-react.html
+node node_modules\swig\bin\swig.js render .\examples\library\mithril\index.swig > .\examples\library\mithril\index.html
+node node_modules\swig\bin\swig.js render .\examples\library\react\index.swig > .\examples\library\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\requirejs\index.swig > .\examples\requirejs\index.html
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\react\index.swig > .\examples\rocket-launcher\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\snabbdom\index.swig > .\examples\rocket-launcher\snabbdom\index.html

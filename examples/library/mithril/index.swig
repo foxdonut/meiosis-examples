@@ -1,4 +1,4 @@
-{% extends '../layout.swig' %}
+{% extends '../../layout.swig' %}
 
 {% block title %}Library{% endblock %}
 {% block example %}library{% endblock %}
@@ -8,5 +8,5 @@
 {% endblock %}
 
 {% block content %}
-  <script src="/examples/library/mithril/generated-mithril-app.js"></script>
+  <script src="/examples/library/mithril/generated-app.js"></script>
 {% endblock %}

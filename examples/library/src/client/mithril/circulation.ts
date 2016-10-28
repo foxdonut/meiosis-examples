@@ -1,16 +1,20 @@
 import * as m from "mithril";
 
-import { Book } from "../../persistence/book";
+import { Author, Book } from "../../persistence";
 import { BookListModel } from "../root/types";
 import { VDom, View } from "./types";
 import { CirculationActions } from "../circulation/actions";
+
+function renderAuthor(author: Author) {
+  return m("div", author.lastName + ", " + author.firstName);
+}
 
 function renderBook(booksById: { [id: string]: Book }): (id: string) => VDom {
   return function(bookId: string): VDom {
     const book: Book = booksById[bookId];
     return m("tr", [
       m("td", book.title),
-      m("td", ""),
+      m("td", book.authors.map(renderAuthor)),
       m("td", book.genre)
     ]);
   };

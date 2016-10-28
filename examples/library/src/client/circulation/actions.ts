@@ -1,5 +1,5 @@
 import { ActionCreator } from "meiosis";
-import { Book } from "../../persistence/book";
+import { Book } from "../../persistence";
 import { Proposal, Propose } from "../root/types";
 import { BookServices } from "../services/book";
 

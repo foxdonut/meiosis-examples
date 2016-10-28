@@ -9,6 +9,9 @@ import { renderer } from "meiosis-mithril";
 import { VDom } from "./mithril/types";
 import { View, circulationView, createRootView, progressDialogConfig } from "./mithril";
 
+import { createServer } from "./sinonServer";
+createServer();
+
 const meiosis: MeiosisApp<Model, VDom, Proposal> = init<Model, VDom, Proposal>();
 
 const bookServices = createBookServices(ajax);

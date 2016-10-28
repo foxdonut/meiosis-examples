@@ -10,6 +10,9 @@ import { renderer } from "meiosis-react";
 import { VDom } from "./react/types";
 import { View, circulationView, createRootView, progressDialogConfig } from "./react";
 
+import { createServer } from "./sinonServer";
+createServer();
+
 injectTapEventPlugin();
 
 const meiosis: MeiosisApp<Model, VDom, Proposal> = init<Model, VDom, Proposal>();

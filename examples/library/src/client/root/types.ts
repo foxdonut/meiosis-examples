@@ -1,6 +1,6 @@
 import { Component, Config, Emitter, View } from "meiosis";
 import { ReactElement } from "react";
-import { Book } from "../../persistence/book";
+import { Book } from "../../persistence";
 
 export interface BookListModel {
   booksById?: { [id: string]: Book };

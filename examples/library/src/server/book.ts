@@ -1,7 +1,7 @@
 import { IReply, IRequestHandler, Request, Server } from "hapi";
 import { Database } from "sql.js";
 import { Promise } from "es6-promise";
-import { Book, getAllBooks } from "../persistence/book";
+import { Book, getAllBooks } from "../persistence";
 
 function addBookRoutes(server: Server, db: Database): void {
   const handler: any = function(request: Request, reply: IReply) {

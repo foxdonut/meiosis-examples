@@ -1,6 +1,6 @@
 import { Promise } from "es6-promise";
 import { Ajax } from "./ajax";
-import { Book } from "../../persistence/book";
+import { Book } from "../../persistence";
 
 export interface BookServices {
   loadBooks: () => Promise<Array<Book>>;

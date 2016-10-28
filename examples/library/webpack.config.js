@@ -8,7 +8,7 @@ module.exports = {
   devtool: "source-map",
   output: {
     path: ".",
-    filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
+    filename: "./" + variant + "/generated-app" + (isProduction ? ".min" : "") + ".js"
   },
   resolve: {
     extensions: ["", ".js", ".ts", ".tsx"]
@@ -36,6 +36,9 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
+  },
+  node: {
+    fs: "empty"
   },
   /*
   externals: {
