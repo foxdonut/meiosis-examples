@@ -33,13 +33,11 @@
     "meiosis": "^0.7.4",
     "meiosis-inferno": "^0.7.2",
     "meiosis-react": "^0.7.1",
-    "meiosis-riot": "^0.7.1",
     "meiosis-tracer": "^0.7.3",
     "object-path": "^0.11.2",
     "ramda": "^0.22.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "riot": "^2.6.2",
     "sinon": "^1.17.6",
     "union-type": "^0.3.3",
     "validate.js": "^0.10.0"
