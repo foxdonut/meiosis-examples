@@ -13,10 +13,6 @@ interface TabSpec {
 
 export function createRootView(views: RootViews<VDom>): View<Model, Propose> {
   const view: View<Model, Propose> = (model: Model, propose: Propose): VDom => {
-    function onTabsChange(tab: string) {
-      propose({ type: "Root.LocationChange", url: "/" + tab });
-    }
-
     function activeClass(tab: string): string {
       return classnames({ active: model.tab === tab });
     }
