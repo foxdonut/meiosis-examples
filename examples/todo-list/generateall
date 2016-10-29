@@ -2,4 +2,3 @@
 VARIANT=inferno node node_modules/webpack/bin/webpack.js
 VARIANT=react node node_modules/webpack/bin/webpack.js
 VARIANT=riot node node_modules/webpack/bin/webpack.js
-VARIANT=vue node node_modules/webpack/bin/webpack.js

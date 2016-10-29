@@ -19,7 +19,6 @@ The examples use the following view libraries (not all examples are demonstrated
 - React
 - Snabbdom
 - Mithril
-- Vue
 - Riot
 - VanillaJS
 
@@ -84,7 +83,7 @@ On Windows, use this command:
 cmd /V /C "set "VARIANT=react" && npm run watch"
 ```
 
-This will work for the `react` view library. Replace with `mithril`, `snabbdom`, `vanillajs`, `vue`, or `riot` depending on the view library and the example. Not all view libraries are in every example. Please make sure to have run `npm start` from the `meiosis-examples` directory before running the command above to regenerate a specific bundle.
+This will work for the `react` view library. Replace with `mithril`, `snabbdom`, `vanillajs`, or `riot` depending on the view library and the example. Not all view libraries are in every example. Please make sure to have run `npm start` from the `meiosis-examples` directory before running the command above to regenerate a specific bundle.
 
 Finally, note that the `labeled-sliders` example only uses Snabbdom, so you can simply use `npm run watch` under the `examples/labeled-sliders` directory to watch for changes and automatically regenerate the application.
 

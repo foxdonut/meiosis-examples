@@ -10,7 +10,6 @@ node node_modules\swig\bin\swig.js render .\examples\temperatures\index.swig > .
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-inferno.swig > .\examples\todo-list\index-inferno.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-react.swig > .\examples\todo-list\index-react.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-riot.swig > .\examples\todo-list\index-riot.html
-node node_modules\swig\bin\swig.js render .\examples\todo-list\index-vue.swig > .\examples\todo-list\index-vue.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\jquery\index.swig > .\examples\todomvc\jquery\index.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\mithril\index-node.swig > .\examples\todomvc\mithril\index-node.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\mithril\index-reqjs.swig > .\examples\todomvc\mithril\index-reqjs.html
