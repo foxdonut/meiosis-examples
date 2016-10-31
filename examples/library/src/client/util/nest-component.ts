@@ -14,7 +14,6 @@ const nestComponent = <V, A>(path: string) => (config: ComponentConfig<any, V, A
   } : null,
   view: config.view,
   actions: config.actions,
-  setup: config.setup,
   postRender: config.postRender ? (model: any): void => config.postRender(objectPath.get(model, path)) : null,
   ready: config.ready,
   nextAction: config.nextAction ? (model: any, proposal: Proposal, actions: A): void =>

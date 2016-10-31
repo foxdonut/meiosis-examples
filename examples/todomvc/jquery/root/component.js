@@ -22,7 +22,7 @@
       var todoapp = todoappComponent(todoStorage);
 
       return meiosis.createComponent({
-        initialModel: todoModel(todoStorage),
+        initialModel: function() { return todoModel(todoStorage); },
         view: rootView(todoapp)
       });
     };
