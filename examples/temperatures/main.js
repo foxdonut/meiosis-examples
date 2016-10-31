@@ -7,5 +7,5 @@ import FormComponent from "./form/main";
 
 Type.check = false;
 
-const renderRoot = run(renderer().intoId(document, "app"), FormComponent);
+const renderRoot = run({ renderer: renderer().intoId(document, "app"), rootComponent: FormComponent });
 meiosisTracer(createComponent, renderRoot, "#tracer");
