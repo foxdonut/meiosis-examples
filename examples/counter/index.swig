@@ -12,8 +12,8 @@
 
   <div id="reactApp"></div>
 
-  <script src="/public/lib/react-15.1.0.js"></script>
-  <script src="/public/lib/react-dom-15.1.0.js"></script>
+  <script src="/public/lib/react.js"></script>
+  <script src="/public/lib/react-dom.js"></script>
   <script src="/public/lib/browser.min.js"></script>
   <script src="/public/lib/meiosis-react.min.js"></script>
 

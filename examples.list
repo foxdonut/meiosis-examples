@@ -196,7 +196,7 @@
 ./public/lib/meiosis.min.js.map
 ./public/lib/mithril.min.js
 ./public/lib/mithril.min.js.map
-./public/lib/react-15.1.0.js
-./public/lib/react-dom-15.1.0.js
+./public/lib/react-15.3.2.js
+./public/lib/react-dom-15.3.2.js
 ./public/lib/require.js
 ./public/lib/union-type.js
