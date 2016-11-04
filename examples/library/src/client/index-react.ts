@@ -16,7 +16,7 @@ createServer();
 
 injectTapEventPlugin();
 
-const meiosis: MeiosisApp<Model, VDom, Proposal> = newInstance<Model, VDom, Proposal>();
+const meiosis: MeiosisApp<Model, Model, VDom, Proposal> = newInstance<Model, Model, VDom, Proposal>();
 
 const bookServices = createBookServices(ajax);
 

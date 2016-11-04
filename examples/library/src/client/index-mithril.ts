@@ -13,7 +13,7 @@ import { View, circulationView, createRootView, progressDialogConfig } from "./m
 import { createServer } from "./sinonServer";
 createServer();
 
-const meiosis: MeiosisApp<Model, VDom, Proposal> = newInstance<Model, VDom, Proposal>();
+const meiosis: MeiosisApp<Model, Model, VDom, Proposal> = newInstance<Model, Model, VDom, Proposal>();
 
 const bookServices = createBookServices(ajax);
 

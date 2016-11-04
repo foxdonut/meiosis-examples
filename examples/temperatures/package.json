@@ -27,7 +27,7 @@
     "jsnox": "^2.1.3",
     "meiosis": "^0.8.0",
     "meiosis-react": "^0.8.0",
-    "meiosis-tracer": "^0.7.3",
+    "meiosis-tracer": "^0.8.0",
     "object-path": "^0.11.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",

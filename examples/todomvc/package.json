@@ -36,7 +36,7 @@
     "meiosis-mithril": "^0.8.0",
     "meiosis-react": "^0.8.0",
     "meiosis-snabbdom": "^0.8.0",
-    "meiosis-tracer": "^0.7.3",
+    "meiosis-tracer": "^0.8.0",
     "meiosis-vanillajs": "^0.8.0",
     "mithril": "github:lhorie/mithril.js#rewrite",
     "react": "^15.3.2",
