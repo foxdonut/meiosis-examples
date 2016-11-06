@@ -47,7 +47,7 @@
     "meiosis": "^0.8.0",
     "meiosis-mithril": "^0.8.0",
     "meiosis-react": "^0.8.0",
-    "mithril": "github:lhorie/mithril.js#rewrite",
+    "mithril": "0.2.5",
     "object-path": "^0.11.2",
     "ramda": "^0.22.1",
     "react": "^15.3.2",
