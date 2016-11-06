@@ -62,12 +62,11 @@
   <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoItem/component.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/actionTypes.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/actions.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/state.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/display.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/receive.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/main/component.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoapp/component.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/common/root/model.js"></script>
+  <script {% block type %}{% endblock %}src="/examples/todomvc/common/root/state.js"></script>
   <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/root/component.js"></script>
 
   <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/runapp.{% block ext %}{% endblock %}"></script>

@@ -1,5 +1,7 @@
 node node_modules\swig\bin\swig.js render .\examples\counter\index.swig > .\examples\counter\index.html
 node node_modules\swig\bin\swig.js render .\examples\labeled-sliders\index.swig > .\examples\labeled-sliders\index.html
+node node_modules\swig\bin\swig.js render .\examples\library\mithril\index.swig > .\examples\library\mithril\index.html
+node node_modules\swig\bin\swig.js render .\examples\library\react\index.swig > .\examples\library\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\requirejs\index.swig > .\examples\requirejs\index.html
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\react\index.swig > .\examples\rocket-launcher\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\snabbdom\index.swig > .\examples\rocket-launcher\snabbdom\index.html
@@ -7,8 +9,6 @@ node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\vanillajs\i
 node node_modules\swig\bin\swig.js render .\examples\temperatures\index.swig > .\examples\temperatures\index.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-inferno.swig > .\examples\todo-list\index-inferno.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-react.swig > .\examples\todo-list\index-react.html
-node node_modules\swig\bin\swig.js render .\examples\todo-list\index-riot.swig > .\examples\todo-list\index-riot.html
-node node_modules\swig\bin\swig.js render .\examples\todo-list\index-vue.swig > .\examples\todo-list\index-vue.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\jquery\index.swig > .\examples\todomvc\jquery\index.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\mithril\index-node.swig > .\examples\todomvc\mithril\index-node.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\mithril\index-reqjs.swig > .\examples\todomvc\mithril\index-reqjs.html

@@ -9,7 +9,7 @@ const createSliderContainer = () => {
   const LabeledSlider = createLabeledSlider();
 
   return createComponent({
-    initialModel,
+    initialModel: () => initialModel,
     view: view(LabeledSlider),
     receive: receive
   });

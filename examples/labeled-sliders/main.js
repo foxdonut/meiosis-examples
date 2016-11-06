@@ -3,4 +3,4 @@ import { renderer } from "meiosis-snabbdom";
 import createSliderContainer from "./sliderContainer/main";
 
 const SliderContainer = createSliderContainer();
-run(renderer().intoId(document, "app"), SliderContainer);
+run({ renderer: renderer().intoId(document, "app"), rootComponent: SliderContainer });
