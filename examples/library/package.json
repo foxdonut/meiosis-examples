@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "typings i && tsc",
-    "start": "VARIANT=react webpack && VARIANT=mithril webpack",
+    "start": "cross-env VARIANT=react webpack && cross-env VARIANT=mithril webpack",
     "watch": "webpack --progress --colors --watch",
     "pretest": "npm start && tsc -p test/src",
     "test": "ava -v test/build/*-tests.js",
@@ -60,6 +60,7 @@
   "devDependencies": {
     "ava": "^0.16.0",
     "browser-env": "^2.0.15",
+    "cross-env": "^3.1.3",
     "jquery": "^3.1.1",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.9.5",
