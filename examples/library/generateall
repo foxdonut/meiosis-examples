@@ -1,3 +1,0 @@
-#!/bin/bash
-VARIANT=mithril node node_modules/webpack/bin/webpack.js
-VARIANT=react node node_modules/webpack/bin/webpack.js

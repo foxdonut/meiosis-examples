@@ -1,3 +1,0 @@
-#!/bin/bash
-VARIANT=inferno node node_modules/webpack/bin/webpack.js
-VARIANT=react node node_modules/webpack/bin/webpack.js
