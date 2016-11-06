@@ -4,7 +4,7 @@
   "description": "meiosis-examples temperatures",
   "main": "index.js",
   "scripts": {
-    "start": "webpack",
+    "start": "cross-env VARIANT=react webpack",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
@@ -15,7 +15,7 @@
     "example",
     "meiosis",
     "reactive",
-    "snabbdom"
+    "react"
   ],
   "author": "foxdonut",
   "license": "MIT",
@@ -39,6 +39,7 @@
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "cross-env": "^3.1.3",
     "webpack": "^1.13.3"
   }
 }
