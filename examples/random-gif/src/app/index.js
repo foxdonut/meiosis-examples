@@ -13,11 +13,12 @@ import { config as randomGifConfig } from "../random-gif";
 export function startApp() {
   const button = createComponent(nestComponent("button")(buttonConfig()));
   const counter = createComponent(nestComponent("counter")(counterConfig()));
-  const randomGif = createComponent(nestComponent("randomGif")(randomGifConfig()));
+  const randomGif1 = createComponent(nestComponent("randomGif1")(randomGifConfig()));
+  const randomGif2 = createComponent(nestComponent("randomGif2")(randomGifConfig()));
 
   const renderRoot = run({
     renderer: renderer().intoId(document, "app"),
-    rootComponent: createComponent(config({ button, counter, randomGif }))
+    rootComponent: createComponent(config({ button, counter, randomGif1, randomGif2 }))
   });
 
   meiosisTracer(createComponent, renderRoot, "#tracer");

@@ -29,6 +29,7 @@
     "meiosis": "^0.8.0",
     "meiosis-mithril": "^0.8.0",
     "mithril": "^0.2.5",
+    "node-uuid": "^1.4.7",
     "object-path": "^0.11.2"
   },
   "devDependencies": {

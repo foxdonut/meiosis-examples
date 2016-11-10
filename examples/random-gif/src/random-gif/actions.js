@@ -1,11 +1,11 @@
 import * as C from "./constants";
 
-export const actions = ajax => propose => ({
-  editTag: tag => propose({ type: C.GIF_TAG_EDIT, tag }),
+export const actions = (id, ajax) => propose => ({
+  editTag: tag => propose({ type: C.GIF_TAG_EDIT, id, tag }),
   newGif: tag => {
-    propose({ type: C.GIF_NEW_START, tag });
+    propose({ type: C.GIF_NEW_START, id, tag });
     ajax.getJSON({ url: C.GIF_NEW_URL, params: { api_key: "dc6zaTOxFJmzC", tag }}).
-      then(response => propose({ type: C.GIF_NEW_SUCCESS, data: response.data })).
-      catch(error => propose({ type: C.GIF_NEW_ERROR, error }));
+      then(response => propose({ type: C.GIF_NEW_SUCCESS, id, data: response.data })).
+      catch(error => propose({ type: C.GIF_NEW_ERROR, id, error }));
   }
 });
