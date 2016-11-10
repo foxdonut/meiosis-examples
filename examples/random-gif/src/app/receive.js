@@ -1,5 +1,4 @@
-// FIXME
-const C = { GIF_NEW_SUCCESS: "GIF_NEW_SUCCESS" };
+import * as C from "../random-gif";
 
 export function receive(model, proposal) {
   if (proposal.type === C.GIF_NEW_SUCCESS) {
