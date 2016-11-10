@@ -1,13 +1,12 @@
 import objectPath from "object-path";
-import { merge } from "ramda";
 
 const nestComponent = path => config => ({
   initialModel: config.initialModel ? model => {
-    objectPath.set(model, path, merge(objectPath.get(model, path), config.initialModel({})));
+    objectPath.set(model, path, Object.assign(objectPath.get(model, path) || {}, config.initialModel({})));
     return model;
   } : null,
   receive: config.receive ? (model, proposal) => {
-    objectPath.set(model, path, config.receive(objectPath.get(model, path), proposal));
+    objectPath.set(model, path, config.receive(objectPath.get(model, path) || {}, proposal));
     return model;
   } : null,
   view: config.view,

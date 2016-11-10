@@ -6,8 +6,7 @@ export function view(state, actions) {
     evt.preventDefault();
     actions.toggleButton();
   };
-  const classes = classnames({ active: state.active, inactive: !state.active });
+  const classes = classnames({ "btn-primary": state.active, "btn-danger": !state.active });
   const label = state.active ? "Active" : "Inactive";
-  return m("button", { class: classes, onclick: onToggleButton }, label);
+  return m("button.btn", { class: classes, onclick: onToggleButton }, label);
 }
-
