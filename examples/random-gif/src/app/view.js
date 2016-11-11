@@ -14,7 +14,9 @@ export function view(components) {
       m("div", "Random Gif Pair:"),
       components.randomGifPair(state.randomGifPair),
       m("div", "Random Gif Pair Pair:"),
-      components.randomGifPairPair(state.randomGifPairPair)
+      components.randomGifPairPair(state.randomGifPairPair),
+      m("div", "Random Gif List:"),
+      components.randomGifList(state.randomGifList)
     ]);
   };
 }
