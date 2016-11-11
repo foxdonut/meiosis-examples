@@ -2,7 +2,7 @@ import { createComponent, run } from "meiosis";
 import { renderer } from "meiosis-mithril";
 import meiosisTracer from "meiosis-tracer";
 
-import nestComponent from "../util/nest-component";
+import { nestComponent } from "../util";
 
 import { config } from "./config";
 

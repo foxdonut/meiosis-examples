@@ -1,6 +1,6 @@
 import objectPath from "object-path";
 
-const nestComponent = path => config => ({
+export const nestComponent = path => config => ({
   initialModel: config.initialModel ? model => {
     objectPath.set(model, path, Object.assign(objectPath.get(model, path) || {}, config.initialModel({})));
     return model;
@@ -16,5 +16,3 @@ const nestComponent = path => config => ({
   nextAction: config.nextAction ? (model, proposal, actions) =>
     config.nextAction(objectPath.get(model, path), proposal, actions) : null
 });
-
-export default nestComponent;
