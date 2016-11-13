@@ -1,5 +1,5 @@
-//import { view } from "./view";
-import { view } from "./view.jsx";
+//mithril import { view } from "./view";
+/*react*/ import { view } from "./view.jsx";
 import { config as randomGifConfig } from "../random-gif";
 import { composeComponents } from "../util";
 

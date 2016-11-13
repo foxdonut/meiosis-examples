@@ -1,5 +1,5 @@
-//import { renderer } from "meiosis-mithril";
-import { renderer } from "meiosis-react";
+//mithril import { renderer } from "meiosis-mithril";
+/*react*/ import { renderer } from "meiosis-react";
 import { startApp } from "./app";
 
 startApp(renderer);
