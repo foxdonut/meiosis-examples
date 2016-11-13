@@ -1,5 +1,6 @@
+//import { view } from "./view";
+import { view } from "./view.jsx";
 import { config as randomGifPairConfig } from "../random-gif-pair";
-import { view } from "./view";
 import { composeComponents } from "../util";
 
 export function config() {
