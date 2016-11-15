@@ -15,7 +15,7 @@ export function view(components) {
     const randomGif = id => {
       const component = components.randomGifConfigs[id];
 
-      return m("div", { style: "display: inline-block" }, [
+      return m("div", { key: id, style: "display: inline-block" }, [
         component.view(state[id], component.actions(actions.propose)),
         m("button.btn.btn-default.btn-xs", { onclick: onRemove(id) }, "Remove")
       ]);
