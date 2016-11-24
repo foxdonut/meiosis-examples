@@ -2,6 +2,6 @@
 /*react*/ import { view } from "./view.jsx";
 import { receive } from "./receive";
 
-export function config(components) {
+export function component(components) {
   return { view: view(components), receive };
 }

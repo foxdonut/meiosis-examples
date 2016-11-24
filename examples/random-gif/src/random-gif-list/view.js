@@ -13,7 +13,7 @@ export function view(components) {
     };
 
     const randomGif = id => {
-      const component = components.randomGifConfigs[id];
+      const component = components.randomGifComponents[id];
 
       return m("div", { key: id, style: "display: inline-block" }, [
         component.view(state[id], component.actions(actions.propose)),

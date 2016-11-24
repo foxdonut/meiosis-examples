@@ -3,27 +3,27 @@ import meiosisTracer from "meiosis-tracer";
 
 import { nestComponent } from "../util";
 
-import { config } from "./config";
+import { component } from "./component";
 
-import { config as buttonConfig } from "../button";
-import { config as counterConfig } from "../counter";
-import { config as randomGifConfig } from "../random-gif";
-import { config as randomGifPairConfig } from "../random-gif-pair";
-import { config as randomGifPairPairConfig } from "../random-gif-pair-pair";
-import { config as randomGifListConfig } from "../random-gif-list";
+import { component as buttonComponent } from "../button";
+import { component as counterComponent } from "../counter";
+import { component as randomGifComponent } from "../random-gif";
+import { component as randomGifPairComponent } from "../random-gif-pair";
+import { component as randomGifPairPairComponent } from "../random-gif-pair-pair";
+import { component as randomGifListComponent } from "../random-gif-list";
 
 export function startApp(renderer) {
-  const button = createComponent(nestComponent("button")(buttonConfig()));
-  const counter = createComponent(nestComponent("counter")(counterConfig()));
-  const randomGif1 = createComponent(nestComponent("randomGif1")(randomGifConfig()));
-  const randomGif2 = createComponent(nestComponent("randomGif2")(randomGifConfig()));
-  const randomGifPair = createComponent(nestComponent("randomGifPair")(randomGifPairConfig()));
-  const randomGifPairPair = createComponent(nestComponent("randomGifPairPair")(randomGifPairPairConfig()));
-  const randomGifList = createComponent(nestComponent("randomGifList")(randomGifListConfig()));
+  const button = createComponent(nestComponent("button")(buttonComponent()));
+  const counter = createComponent(nestComponent("counter")(counterComponent()));
+  const randomGif1 = createComponent(nestComponent("randomGif1")(randomGifComponent()));
+  const randomGif2 = createComponent(nestComponent("randomGif2")(randomGifComponent()));
+  const randomGifPair = createComponent(nestComponent("randomGifPair")(randomGifPairComponent()));
+  const randomGifPairPair = createComponent(nestComponent("randomGifPairPair")(randomGifPairPairComponent()));
+  const randomGifList = createComponent(nestComponent("randomGifList")(randomGifListComponent()));
 
   const renderRoot = run({
     renderer: renderer().intoId(document, "app"),
-    rootComponent: createComponent(config({ button, counter, randomGif1, randomGif2, randomGifPair,
+    rootComponent: createComponent(component({ button, counter, randomGif1, randomGif2, randomGifPair,
       randomGifPairPair, randomGifList }))
   });
 

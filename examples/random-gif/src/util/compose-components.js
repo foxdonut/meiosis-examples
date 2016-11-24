@@ -1,21 +1,21 @@
-export const composeComponents = (configs, view) => {
+export const composeComponents = (components, view) => {
   return {
-    view: view(configs),
+    view: view(components),
     initialModel: model => {
-      Object.keys(configs).forEach(key => {
-        model[key] = configs[key].initialModel({});
+      Object.keys(components).forEach(key => {
+        model[key] = components[key].initialModel({});
       });
       return model;
     },
-    actions: propose => Object.keys(configs).reduce(
+    actions: propose => Object.keys(components).reduce(
       (allActions, key) => {
-        allActions[key] = configs[key].actions(propose);
+        allActions[key] = components[key].actions(propose);
         return allActions;
       }, {}
     ),
     receive: (model, proposal) => {
-      Object.keys(configs).forEach(key => {
-        model[key] = configs[key].receive(model[key], proposal);
+      Object.keys(components).forEach(key => {
+        model[key] = components[key].receive(model[key], proposal);
       });
       return model;
     }
