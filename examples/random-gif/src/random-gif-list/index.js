@@ -8,8 +8,8 @@ export function component() {
   const randomGifComponents = {};
 
   return {
-    view: view({ randomGifComponents }),
     initialModel,
+    view: view({ randomGifComponents }),
     actions,
     receive: receive(randomGifComponents)
   };

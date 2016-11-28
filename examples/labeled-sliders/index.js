@@ -1,6 +1,6 @@
-import { run } from "meiosis";
+import { createComponent, run } from "meiosis";
 import { renderer } from "meiosis-snabbdom";
-import createSliderContainer from "./sliderContainer/main";
+import sliderContainer from "./sliderContainer";
 
-const SliderContainer = createSliderContainer();
-run({ renderer: renderer().intoId(document, "app"), rootComponent: SliderContainer });
+const rootComponent = createComponent(sliderContainer());
+run({ renderer: renderer().intoId(document, "app"), rootComponent });

@@ -1,4 +1,3 @@
-import { append, assoc, merge } from "ramda";
 import { Action } from "./actions";
 
 const rnd = (min, max) => Math.round(Math.random() * min) + (max || 0);
@@ -23,13 +22,25 @@ const transform = (model, proposal) => Action.case({
     assoc("measurements", model.measurements.filter(m => m.id !== id), model)
 }, proposal);
 
-const receive = (model, proposal) => {
-  if (parseInt(proposal.index, 10) >= 0) {
-    model.measurements[proposal.index] = assoc("value", proposal.value, model.measurements[proposal.index]);
-  }
-  else {
-    model = merge(model, transform(model, proposal));
-  }
+const receive = sliders => (model, proposal) => {
+  Action.case({
+    AddMeasurement: () => {
+      const id = uuid.v1();
+      model.sliderIds.push(id);
+
+      const randomGif = randomGifComponent(id);
+      randomGifComponents[id] = randomGif;
+      model[id] = randomGif.initialModel({});
+    },
+    RemoveMeasurement: id => {
+      delete model[id];
+      delete sliders[id];
+      model.randomGifIds.splice(model.randomGifIds.indexOf(id), 1);
+    },
+    UpdateMeasurement: (id, value) => {
+      model[id] = sliders[id].receive(model[id], proposal);
+    }
+  }, proposal);
   return model;
 };
 

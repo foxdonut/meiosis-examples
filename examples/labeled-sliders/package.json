@@ -26,7 +26,6 @@
   "dependencies": {
     "meiosis": "^0.8.0",
     "meiosis-snabbdom": "^0.8.0",
-    "ramda": "^0.22.1",
     "snabbdom": "^0.5.4",
     "union-type": "^0.3.3"
   },

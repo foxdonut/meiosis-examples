@@ -3,4 +3,4 @@ const initialModel = () => ({
   nextId: 0
 });
 
-export { initialModel };
+export default initialModel;

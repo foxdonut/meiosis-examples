@@ -2,7 +2,10 @@ import Type from "union-type";
 
 const Action = Type({
   AddMeasurement: [],
-  RemoveMeasurement: [Number]
+  RemoveMeasurement: [String],
+  UpdateMeasurement: [String, Number]
 });
 
-export { Action };
+const actions = null;
+
+export { Action, actions };
