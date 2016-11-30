@@ -10,15 +10,15 @@ const receive = sliders => (model, proposal) => {
 
       const slider = sliderComponent(id);
       sliders[id] = slider;
-      model[id] = slider.initialModel({});
+      model.slidersById[id] = slider.initialModel({});
     },
     RemoveMeasurement: id => {
-      delete model[id];
+      delete model.slidersById[id];
       delete sliders[id];
       model.sliderIds.splice(model.sliderIds.indexOf(id), 1);
     },
     UpdateMeasurement: id => {
-      model[id] = sliders[id].receive(model[id], proposal);
+      model.slidersById[id] = sliders[id].receive(model.slidersById[id], proposal);
     }
   }, proposal);
 

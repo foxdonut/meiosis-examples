@@ -1,15 +1,17 @@
 import h from "snabbdom/h";
 
-export const view = ({measurement, index}, propose) => {
+import { Action } from "./actions";
+
+export const view = id => (model, propose) => {
   const getValue = evt => parseInt(evt.target.value, 10);
-  const onChangeValue = evt => propose({index, value: getValue(evt)});
-  const attrs = Object.assign({type: "range"}, measurement);
+  const onChangeValue = evt => propose(Action.UpdateMeasurement(id, getValue(evt)));
+  const attrs = Object.assign({type: "range"}, model);
 
   return (
     h("div", [
-      h("span", measurement.label),
+      h("span", model.label),
       h("input", {attrs, on: {input: onChangeValue}}),
-      h("span", `${measurement.value} ${measurement.units}`)
+      h("span", `${model.value} ${model.units}`)
     ])
   );
 };

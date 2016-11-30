@@ -1,5 +1,6 @@
 const initialModel = () => ({
-  sliderIds: []
+  sliderIds: [],
+  slidersById: {}
 });
 
 export default initialModel;
