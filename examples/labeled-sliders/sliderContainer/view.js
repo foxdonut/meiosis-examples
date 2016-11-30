@@ -2,30 +2,30 @@ import h from "snabbdom/h";
 
 import { Action } from "./actions";
 
-const view = LabeledSlider => (model, propose) => {
+const view = components => (model, propose) => {
   const onAddMeasurement = _evt => propose(Action.AddMeasurement());
-  const onRemoveMeasurement = id => propose(Action.RemoveMeasurement(id));
+  const onRemoveMeasurement = id => _evt => propose(Action.RemoveMeasurement(id));
 
-  const renderMeasurement = (measurement, index) =>
-    h("div", {key: measurement.id, style: {border: "1px solid gray"}, id: measurement.id}, [
-      LabeledSlider({measurement, index}),
+  const renderSlider = id => {
+    const component = components.sliderComponents[id];
+
+    return h("div", { key: id, style: { border: "1px solid gray" } }, [
+      component.view(model[id], propose),
       h("div", [
         h("button.btn.btn-danger.btn-sm",
-          {on: {click: [onRemoveMeasurement, measurement.id]}}, "Remove Measurement")
+          { on: { click: onRemoveMeasurement(id) } }, "Remove Measurement")
       ])
     ]);
+  };
 
-  const measurementNodes = model.measurements.map(renderMeasurement);
-
-  let nodes = [
-    h("div", `Measurements: ${model.measurements.map(JSON.stringify)}`),
+  return h("div", [
+    //h("div", `Measurements: ${model.measurements.map(JSON.stringify)}`),
     h("div", [
       h("button.btn.btn-primary.btn-sm",
-        {on: {click: onAddMeasurement}}, "Add Measurement")
-    ])
-  ].concat(measurementNodes);
-
-  return h("div", nodes);
+        { on: { click: onAddMeasurement } }, "Add Measurement")
+    ]),
+    h("div", model.sliderIds.map(renderSlider))
+  ]);
 };
 
 export default view;

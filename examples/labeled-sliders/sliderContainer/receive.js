@@ -1,26 +1,6 @@
+import uuid from "node-uuid";
 import { Action } from "./actions";
-
-const rnd = (min, max) => Math.round(Math.random() * min) + (max || 0);
-
-const transform = (model, proposal) => Action.case({
-  AddMeasurement: () =>
-    assoc("nextId",
-      model.nextId + 1,
-      assoc("measurements",
-        append({
-          id: model.nextId,
-          label: "Measurement",
-          value: rnd(50),
-          max: rnd(50,100),
-          units: rnd(10) % 2 === 0 ? "cm" : "mm"
-        }, model.measurements),
-        model
-      )
-    ),
-
-  RemoveMeasurement: id =>
-    assoc("measurements", model.measurements.filter(m => m.id !== id), model)
-}, proposal);
+import { component as sliderComponent } from "../labeledSlider";
 
 const receive = sliders => (model, proposal) => {
   Action.case({
@@ -28,19 +8,20 @@ const receive = sliders => (model, proposal) => {
       const id = uuid.v1();
       model.sliderIds.push(id);
 
-      const randomGif = randomGifComponent(id);
-      randomGifComponents[id] = randomGif;
-      model[id] = randomGif.initialModel({});
+      const slider = sliderComponent(id);
+      sliders[id] = slider;
+      model[id] = slider.initialModel({});
     },
     RemoveMeasurement: id => {
       delete model[id];
       delete sliders[id];
-      model.randomGifIds.splice(model.randomGifIds.indexOf(id), 1);
+      model.sliderIds.splice(model.sliderIds.indexOf(id), 1);
     },
-    UpdateMeasurement: (id, value) => {
+    UpdateMeasurement: id => {
       model[id] = sliders[id].receive(model[id], proposal);
     }
   }, proposal);
+
   return model;
 };
 

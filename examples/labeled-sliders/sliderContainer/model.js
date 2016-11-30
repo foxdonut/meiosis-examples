@@ -1,6 +1,5 @@
 const initialModel = () => ({
-  measurements: [],
-  nextId: 0
+  sliderIds: []
 });
 
 export default initialModel;

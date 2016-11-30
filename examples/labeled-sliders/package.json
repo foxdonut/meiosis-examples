@@ -26,6 +26,7 @@
   "dependencies": {
     "meiosis": "^0.8.0",
     "meiosis-snabbdom": "^0.8.0",
+    "node-uuid": "^1.4.7",
     "snabbdom": "^0.5.4",
     "union-type": "^0.3.3"
   },
