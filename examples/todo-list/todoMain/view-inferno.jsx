@@ -4,10 +4,10 @@ const view = (todoForm, todoList) => model => (
   <div>
     <div className="row">
       <div className="col-md-4">
-        {todoForm(model.store.form)}
+        {todoForm(model)}
       </div>
     </div>
-    {todoList(model.store.list)}
+    {todoList(model)}
   </div>
 );
 

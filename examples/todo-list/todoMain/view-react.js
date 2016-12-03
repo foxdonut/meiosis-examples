@@ -4,10 +4,10 @@ const view = (todoForm, todoList) => model =>
   h("div",
     h("div.row",
       h("div.col-md-4",
-        todoForm(model.store.form)
+        todoForm(model)
       )
     ),
-    todoList(model.store.list)
+    todoList(model)
   );
 
 export default view;

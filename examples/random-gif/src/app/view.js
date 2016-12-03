@@ -1,22 +1,22 @@
 import m from "mithril";
 
 export function view(components) {
-  return function(state) {
+  return function(model) {
     return m("div", [
       m("div", "Counter:"),
-      components.counter(state.counter),
+      components.counter(model),
       m("div", "Button:"),
-      components.button(state.button),
+      components.button(model),
       m("div", "Random Gif:"),
-      components.randomGif1(state.randomGif1),
+      components.randomGif1(model),
       m("div", "Another Random Gif:"),
-      components.randomGif2(state.randomGif2),
+      components.randomGif2(model),
       m("div", "Random Gif Pair:"),
-      components.randomGifPair(state.randomGifPair),
+      components.randomGifPair(model),
       m("div", "Random Gif Pair Pair:"),
-      components.randomGifPairPair(state.randomGifPairPair),
+      components.randomGifPairPair(model),
       m("div", "Random Gif List:"),
-      components.randomGifList(state.randomGifList)
+      components.randomGifList(model)
     ]);
   };
 }

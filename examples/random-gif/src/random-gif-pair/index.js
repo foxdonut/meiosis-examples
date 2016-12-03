@@ -1,5 +1,5 @@
-//mithril import { view } from "./view";
-/*react*/ import { view } from "./view.jsx";
+/*mithril*/ import { view } from "./view";
+//react import { view } from "./view.jsx";
 import { component as randomGifComponent } from "../random-gif";
 import { composeComponents } from "../util";
 

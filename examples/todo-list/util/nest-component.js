@@ -10,7 +10,7 @@ const nestComponent = path => config => ({
     objectPath.set(model, path, config.receive(objectPath.get(model, path), proposal));
     return model;
   } : null,
-  view: config.view,
+  view: (model, propose) => config.view(objectPath.get(model, path), propose),
   actions: config.actions,
   postRender: config.postRender ? model => config.postRender(objectPath.get(model, path)) : null,
   ready: config.ready,

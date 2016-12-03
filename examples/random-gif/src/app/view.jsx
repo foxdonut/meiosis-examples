@@ -1,22 +1,22 @@
 import React from "react";
 
 export function view(components) {
-  return function(state) {
+  return function(model) {
     return (<div>
       <div>Counter:</div>
-      {components.counter(state.counter)}
+      {components.counter(model)}
       <div>Button:</div>
-      {components.button(state.button)}
+      {components.button(model)}
       <div>Random Gif:</div>
-      {components.randomGif1(state.randomGif1)}
+      {components.randomGif1(model)}
       <div>Another Random Gif:</div>
-      {components.randomGif2(state.randomGif2)}
+      {components.randomGif2(model)}
       <div>Random Gif Pair:</div>
-      {components.randomGifPair(state.randomGifPair)}
+      {components.randomGifPair(model)}
       <div>Random Gif Pair Pair:</div>
-      {components.randomGifPairPair(state.randomGifPairPair)}
+      {components.randomGifPairPair(model)}
       <div>Random Gif List:</div>
-      {components.randomGifList(state.randomGifList)}
+      {components.randomGifList(model)}
     </div>);
   };
 }

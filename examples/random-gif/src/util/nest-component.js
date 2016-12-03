@@ -9,7 +9,7 @@ export const nestComponent = path => component => ({
     objectPath.set(model, path, component.receive(objectPath.get(model, path) || {}, proposal));
     return model;
   } : null,
-  view: component.view,
+  view: (model, propose) => component.view(objectPath.get(model, path), propose),
   actions: component.actions,
   postRender: component.postRender ? model => component.postRender(objectPath.get(model, path)) : null,
   ready: component.ready,
