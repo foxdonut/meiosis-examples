@@ -1,6 +1,6 @@
 import * as objectPath from "object-path";
 import { merge } from "ramda";
-import { InitialModel, Config, Emitter } from "meiosis";
+import { Config, Context, Emitter, InitialModel } from "meiosis";
 import { ComponentConfig, Proposal } from "../root/types";
 
 const nestComponent = <V, A>(path: string) => (config: ComponentConfig<any, V, A>): ComponentConfig<any, V, A> => ({
@@ -16,8 +16,8 @@ const nestComponent = <V, A>(path: string) => (config: ComponentConfig<any, V, A
   actions: config.actions,
   postRender: config.postRender ? (model: any): void => config.postRender(objectPath.get(model, path)) : null,
   ready: config.ready,
-  nextAction: config.nextAction ? (model: any, proposal: Proposal, actions: A): void =>
-    config.nextAction(objectPath.get(model, path), proposal, actions) : null
+  nextAction: config.nextAction ? (context: Context<any, Proposal, A>): void =>
+    config.nextAction({ model: objectPath.get(context.model, path), proposal: context.proposal, actions: context.actions }) : null
 });
 
 export default nestComponent;

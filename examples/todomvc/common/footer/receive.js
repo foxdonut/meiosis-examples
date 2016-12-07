@@ -25,11 +25,10 @@
             model.todos = todoStorage.clearCompleted();
           },
           Filter: function(by) {
-            if (by === model.filter) {
-              return meiosis.REFUSE_PROPOSAL;
+            if (by !== model.filter) {
+              model.todos = todoStorage.loadAll();
+              model.filter = by;
             }
-            model.todos = todoStorage.loadAll();
-            model.filter = by;
           }
         }, proposal);
 

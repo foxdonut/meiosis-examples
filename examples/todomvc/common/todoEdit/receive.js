@@ -32,9 +32,6 @@
               model.todos = todoStorage.saveTodo(todo);
               model.editTodo = { };
             }
-            else {
-              return meiosis.REFUSE_PROPOSAL;
-            }
           },
           ClearEdit: function() {
             model.editTodo = { };

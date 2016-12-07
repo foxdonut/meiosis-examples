@@ -1,6 +1,6 @@
 {
   "name": "random-gif",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "meiosis-examples random-gif",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   "dependencies": {
     "axios": "^0.15.2",
     "classnames": "^2.2.5",
-    "meiosis": "^0.8.0",
+    "meiosis": "^0.9.0",
     "meiosis-mithril": "^0.8.0",
     "meiosis-react": "^0.8.0",
     "mithril": "^0.2.5",

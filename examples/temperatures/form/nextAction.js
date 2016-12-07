@@ -1,6 +1,6 @@
 import Action from "./actions";
 
-const nextAction = (model, proposal, propose) => {
+const nextAction = ({model, proposal, propose}) => {
   proposal.case({
     Validate: () => {
       if (!model.store.entry.errors && !model.store.date.errors) {

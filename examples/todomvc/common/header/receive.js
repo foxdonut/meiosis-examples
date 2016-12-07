@@ -31,9 +31,6 @@
               model.todos = todoStorage.saveTodo({title: title});
               model.newTodo = "";
             }
-            else {
-              return meiosis.REFUSE_PROPOSAL;
-            }
           },
           ClearNewTodo: function() {
             model.newTodo = "";

@@ -14,8 +14,8 @@ const nestComponent = path => config => ({
   actions: config.actions,
   postRender: config.postRender ? model => config.postRender(objectPath.get(model, path)) : null,
   ready: config.ready,
-  nextAction: config.nextAction ? (model, proposal, actions) =>
-    config.nextAction(objectPath.get(model, path), proposal, actions) : null
+  nextAction: config.nextAction ? ({ model, proposal, actions }) =>
+    config.nextAction({ model: objectPath.get(model, path), proposal, actions }) : null
 });
 
 export default nestComponent;
