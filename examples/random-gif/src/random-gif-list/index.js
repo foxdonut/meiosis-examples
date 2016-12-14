@@ -3,14 +3,15 @@
 import { initialModel } from "./model";
 import { actions } from "./actions";
 import { receive } from "./receive";
+import childComponents from "../util/child-components";
 
 export function component() {
   const randomGifComponents = {};
 
-  return {
+  return childComponents({
     initialModel,
     view: view({ randomGifComponents }),
     actions,
-    receive: receive(randomGifComponents)
-  };
+    receive: receive(randomGifComponents),
+  }, randomGifComponents);
 }

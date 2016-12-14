@@ -5,6 +5,10 @@ export const nestComponent = path => component => ({
     objectPath.set(model, path, Object.assign(objectPath.get(model, path) || {}, component.initialModel({})));
     return model;
   } : null,
+  state: component.state ? (model, state) => {
+    objectPath.set(state, path, component.state(objectPath.get(model, path) || {}, objectPath.get(state, path) || {}));
+    return state;
+  } : null,
   receive: component.receive ? (model, proposal) => {
     objectPath.set(model, path, component.receive(objectPath.get(model, path) || {}, proposal));
     return model;

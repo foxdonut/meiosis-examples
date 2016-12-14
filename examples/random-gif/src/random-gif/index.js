@@ -8,7 +8,9 @@ import uuid from "node-uuid";
 
 export function component(componentId) {
   const id = componentId || uuid.v1();
-  return { view, initialModel, actions: actions(id, ajax), receive: receive(id) };
+  return { view, initialModel, actions: actions(id, ajax), receive: receive(id) // };
+    ,state: (m, s) => { console.log("state"); s.duck = "QUACK"; return s; }, postRender: () => { console.log("postRender"); }, ready: () => { console.log("ready"); }
+    ,nextAction: () => { console.log("nextAction"); } };
 }
 
 export * from "./constants";
