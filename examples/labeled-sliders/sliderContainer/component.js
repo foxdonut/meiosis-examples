@@ -40,6 +40,5 @@ export const component = componentContainer({
     initialModel,
     receive
   },
-  getComponentIds: model => model.sliderIds,
-  getComponentById
+  getComponents: model => model.sliderIds.map(getComponentById)
 });
