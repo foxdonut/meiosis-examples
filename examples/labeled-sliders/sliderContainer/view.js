@@ -2,7 +2,7 @@ import { propose } from "meiosis";
 import h from "snabbdom/h";
 
 import { Action } from "./actions";
-import { view as sliderView } from "../labeledSlider/view";
+import { view as sliderView } from "../labeledSlider";
 
 export const view = model => {
   const onAddMeasurement = _evt => propose(Action.AddMeasurement());
