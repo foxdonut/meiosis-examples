@@ -1,9 +1,19 @@
+import { on, run } from "meiosis";
+import snabbdom from "snabbdom";
 import Type from "union-type";
-import { createComponent, run } from "meiosis";
-import { renderer } from "meiosis-snabbdom";
-import { component as sliderContainer } from "./sliderContainer";
+import { component, view } from "./sliderContainer";
 
 Type.check = false;
 
-const rootComponent = createComponent(sliderContainer());
-run({ renderer: renderer().intoId(document, "app"), rootComponent });
+const model = run({ initialModel: { }, components: [ component ] }).model;
+
+const patch = snabbdom.init([
+  require("snabbdom/modules/attributes"),
+  require("snabbdom/modules/class"),
+  require("snabbdom/modules/eventlisteners"),
+  require("snabbdom/modules/props"),
+  require("snabbdom/modules/style")
+]);
+
+let vnode = document.getElementById("app");
+on(model => vnode = patch(vnode, view(model)), model);
