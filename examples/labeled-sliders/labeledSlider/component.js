@@ -11,7 +11,7 @@ function initialModel(model) {
   return model;
 }
 
-const receive = id => (model, proposal) => {
+const receive = ({ id, model, proposal }) => {
   Action.case({
     UpdateMeasurement: (proposalId, value) => {
       if (proposalId === id) {
@@ -23,7 +23,7 @@ const receive = id => (model, proposal) => {
   return model;
 };
 
-export const component = id => ({
+export const component = {
   initialModel,
-  receive: receive(id)
-});
+  receive
+};

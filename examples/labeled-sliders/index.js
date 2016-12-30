@@ -5,7 +5,10 @@ import { component, view } from "./sliderContainer";
 
 Type.check = false;
 
-const model = run({ initialModel: { }, components: [ component ] }).model;
+const { model } = run({
+  initial: component.initialModel,
+  scanner: { model: component.receive }
+});
 
 const patch = snabbdom.init([
   require("snabbdom/modules/attributes"),
