@@ -1,5 +1,9 @@
-/*mithril*/ import { renderer } from "meiosis-mithril";
-//react import { renderer } from "meiosis-react";
+import { on } from "meiosis";
+import { render as reactRender } from "react-dom";
 import { startApp } from "./app";
+import { view } from "./view/react/index.jsx";
 
-startApp(renderer);
+const { model } = startApp();
+const element = document.getElementById("app");
+const render = model => reactRender(view(model), element);
+on(render, model);

@@ -1,10 +1,10 @@
-import { propose, run } from "meiosis";
+import { run } from "meiosis";
 //import meiosisTracer from "meiosis-tracer";
 
 import { component } from "./component";
 
-//import { component as buttonComponent } from "../button";
 import { component as counterComponent } from "../counter";
+import { component as buttonComponent } from "../button";
 //import { component as randomGifComponent } from "../random-gif";
 //import { component as randomGifPairComponent } from "../random-gif-pair";
 //import { component as randomGifPairPairComponent } from "../random-gif-pair-pair";
@@ -19,9 +19,17 @@ export function startApp() {
   //const randomGifPairPair = createComponent(nestComponent("randomGifPairPair")(randomGifPairPairComponent()));
   //const randomGifList = createComponent(nestComponent("randomGifList")(randomGifListComponent()));
 
-  const receive = component.receive;
+  const receive = (model, proposal) => {
+    component.receive(model, proposal);
+    buttonComponent.receive(model.button, proposal);
+    return model;
+  };
 
   //meiosisTracer(createComponent, renderRoot, "#tracer");
+  const initial = {
+    counter: counterComponent.initialModel({}),
+    button: buttonComponent.initialModel({})
+  };
 
-  return run({ initial: {}, scanner: { model: receive } });
+  return run({ initial, scanner: { model: receive } });
 }

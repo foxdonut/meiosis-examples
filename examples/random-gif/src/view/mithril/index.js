@@ -1,11 +1,13 @@
 import m from "mithril";
 import { view as counter } from "./counter";
+import { view as button } from "./button";
 
 export const view = model =>
   m("div",
     m("div", "Mithril"),
-    m("div", "Counter:"),
-    counter(model)
+    counter(model.counter),
+    m("div", "Button:"),
+    button(model.button)
   );/*,
     m("div", "Button:"),
     components.button(model),

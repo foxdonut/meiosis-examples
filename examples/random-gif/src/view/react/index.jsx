@@ -1,12 +1,14 @@
 import React from "react";
+import { view as counter } from "./counter.jsx";
+import { view as button } from "./button.jsx";
 
-export function view(components) {
-  return function(model) {
-    return (<div>
-      <div>Counter:</div>
-      {components.counter(model)}
-      <div>Button:</div>
-      {components.button(model)}
+export const view = model => (
+  <div>
+    <div>React</div>
+    {counter(model.counter)}
+    <div>Button:</div>
+    {button(model.button)}
+      {/*
       <div>Random Gif:</div>
       {components.randomGif1(model)}
       <div>Another Random Gif:</div>
@@ -17,6 +19,6 @@ export function view(components) {
       {components.randomGifPairPair(model)}
       <div>Random Gif List:</div>
       {components.randomGifList(model)}
-    </div>);
-  };
-}
+      */}
+  </div>
+);
