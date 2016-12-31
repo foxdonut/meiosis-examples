@@ -1,17 +1,15 @@
-/*mithril*/ import { view } from "./view";
-//react import { view } from "./view.jsx";
 import { initialModel } from "./model";
 import { actions } from "./actions";
 import { receive } from "./receive";
 import childComponents from "../util/child-components";
 
-export function component() {
+export function component(propose) {
   const randomGifComponents = {};
 
+  //FIXME
   return childComponents({
     initialModel,
-    view: view({ randomGifComponents }),
-    actions,
+    actions: actions(propose),
     receive: receive(randomGifComponents),
   }, randomGifComponents);
 }

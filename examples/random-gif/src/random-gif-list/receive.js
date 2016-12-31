@@ -10,6 +10,7 @@ export const receive = randomGifComponents => (model, proposal) => {
 
     const randomGif = nestComponent(id)(randomGifComponent(id));
     randomGifComponents[id] = randomGif;
+    //FIXME
     //model[id] = randomGif.initialModel({});
   }
   else if (proposal.type === C.GIF_LIST_REMOVE) {

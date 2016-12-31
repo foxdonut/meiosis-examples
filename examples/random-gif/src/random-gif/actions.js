@@ -1,6 +1,6 @@
 import * as C from "./constants";
 
-export const actions = (id, ajax) => propose => ({
+export const actions = (propose, id, ajax) => ({
   editTag: tag => propose({ type: C.GIF_TAG_EDIT, id, tag }),
   newGif: tag => {
     propose({ type: C.GIF_NEW_START, id, tag });
