@@ -1,8 +1,9 @@
 import React from "react";
+import { view as randomGifPair } from "./random-gif-pair.jsx";
 
-export const view = actions => model => (
+export const view = model => (
   <div>
-    {components.randomGifPairOne.view(model.randomGifPairOne, actions.randomGifPairOne)}
-    {components.randomGifPairTwo.view(model.randomGifPairTwo, actions.randomGifPairTwo)}
+    {randomGifPair(model.randomGifPairOne, "randomGifPairOne")}
+    {randomGifPair(model.randomGifPairTwo, "randomGifPairTwo")}
   </div>
 );

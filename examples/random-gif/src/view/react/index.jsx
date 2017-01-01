@@ -3,6 +3,7 @@ import { view as counter } from "./counter.jsx";
 import { view as button } from "./button.jsx";
 import { view as randomGif } from "./random-gif.jsx";
 import { view as randomGifPair } from "./random-gif-pair.jsx";
+import { view as randomGifPairPair } from "./random-gif-pair-pair.jsx";
 
 export const view = model => (
   <div>
@@ -15,10 +16,10 @@ export const view = model => (
     <div>Another Random Gif:</div>
     {randomGif(model.randomGif2, "randomGif2")}
     <div>Random Gif Pair:</div>
-    {randomGifPair(model.randomGifPair)}
+    {randomGifPair(model.randomGifPair, "randomGifPair")}
+    <div>Random Gif Pair Pair:</div>
+    {randomGifPairPair(model.randomGifPairPair)}
       {/*
-      <div>Random Gif Pair Pair:</div>
-      {components.randomGifPairPair(model)}
       <div>Random Gif List:</div>
       {components.randomGifList(model)}
       */}

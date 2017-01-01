@@ -20,6 +20,6 @@ export const view = (model, id) => {
     <span>Tag:</span>
     <input type="text" value={model.tag} onChange={onEditTag}/>
     <button className="btn btn-xs btn-default" onClick={onNewGif}>Random Gif</button>
-    <div><img width="200" height="200" src={src}/></div>0
+    <div><img width="200" height="200" src={src}/></div>
   </div>);
 };

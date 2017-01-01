@@ -18,6 +18,6 @@ export function receive(model, proposal, id) {
       model.isLoading = false;
       model.isError = true;
     }
-    return model;
   }
+  return model;
 }

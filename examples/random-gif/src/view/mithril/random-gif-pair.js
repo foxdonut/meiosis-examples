@@ -1,9 +1,10 @@
 import m from "mithril";
+import { view as randomGif } from "./random-gif";
 
-export const view = actions => model =>
-  m("div", [
+export const view = model =>
+  m("div",
     m("div", { style: "display: inline-block" },
-      components.randomGifFirst.view(model.randomGifFirst, actions.randomGifFirst)),
+      randomGif(model.randomGifFirst)),
     m("div", { style: "display: inline-block" },
-      components.randomGifSecond.view(model.randomGifSecond, actions.randomGifSecond))
-  ]);
+      randomGif(model.randomGifSecond))
+  );
