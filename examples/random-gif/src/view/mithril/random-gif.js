@@ -1,6 +1,7 @@
 import m from "mithril";
+import { actions } from "../../random-gif";
 
-export const view = actions => model => {
+export const view = model => {
   const onEditTag = evt => {
     evt.preventDefault();
     actions.editTag(evt.target.value);

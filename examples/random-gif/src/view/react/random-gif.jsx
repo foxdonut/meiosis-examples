@@ -1,14 +1,15 @@
 import React from "react";
+import { actions } from "../../random-gif";
 
-export const view = actions => model => {
+export const view = (model, id) => {
   const onEditTag = evt => {
     evt.preventDefault();
-    actions.editTag(evt.target.value);
+    actions.editTag(id, evt.target.value);
   };
 
   const onNewGif = evt => {
     evt.preventDefault();
-    actions.newGif(model.tag);
+    actions.newGif(id, model.tag);
   };
 
   const src = model.isLoading ? "/examples/random-gif/images/loading.gif" : (
@@ -21,4 +22,4 @@ export const view = actions => model => {
     <button className="btn btn-xs btn-default" onClick={onNewGif}>Random Gif</button>
     <div><img width="200" height="200" src={src}/></div>0
   </div>);
-}
+};

@@ -1,12 +1,13 @@
-import { initialModel } from "./model";
-import { actions } from "./actions";
-import { receive } from "./receive";
 import ajax from "../util/ajax-axios";
-import uuid from "node-uuid";
+import { createActions } from "./actions";
+import { initialModel } from "./model";
+import { receive } from "./receive";
 
-export function component(propose, componentId) {
-  const id = componentId || uuid.v1();
-  return { initialModel, actions: actions(propose, id, ajax), receive: receive(id) };
-}
+export const component = {
+  initialModel,
+  receive
+};
+
+export const actions = createActions(ajax);
 
 export * from "./constants";
