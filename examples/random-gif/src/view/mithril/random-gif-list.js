@@ -1,6 +1,8 @@
 import m from "mithril";
+import { actions } from "../../random-gif-list";
+import { view as randomGif } from "./random-gif";
 
-export const view = actions => model => {
+export const view = model => {
   const onAdd = evt => {
     evt.preventDefault();
     actions.addToRandomGifList();
@@ -11,20 +13,17 @@ export const view = actions => model => {
     actions.removeFromRandomGifList(id);
   };
 
-  const randomGif = id => {
-    const component = components.randomGifComponents[id];
-
-    return m("div", { key: id, style: "display: inline-block" }, [
-      component.view(model),
+  const randomGifView = id =>
+    m("div", { key: id, style: "display: inline-block" }, [
+      randomGif(model.randomGifsById[id]),
       m("button.btn.btn-default.btn-xs", { onclick: onRemove(id) }, "Remove")
     ]);
-  };
 
   return m("div", [
     m("div", [
       m("button.btn.btn-default.btn-xs", { onclick: onAdd }, "Add")
     ]),
-    m("div", model.randomGifIds.map(randomGif))
+    m("div", model.randomGifIds.map(randomGifView))
   ]);
 };
 

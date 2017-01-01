@@ -7,7 +7,7 @@ import { component as button } from "../button";
 import { component as randomGif } from "../random-gif";
 import { component as randomGifPair } from "../random-gif-pair";
 import { component as randomGifPairPair } from "../random-gif-pair-pair";
-//import { component as randomGifList } from "../random-gif-list";
+import { component as randomGifList } from "../random-gif-list";
 
 export function startApp() {
   const receive = (model, proposal) => {
@@ -17,7 +17,7 @@ export function startApp() {
     model.randomGif2 = randomGif.receive(model.randomGif2, proposal, "randomGif2");
     model.randomGifPair = randomGifPair.receive(model.randomGifPair, proposal, "randomGifPair");
     model.randomGifPairPair = randomGifPairPair.receive(model.randomGifPairPair, proposal);
-    //randomGifList.receive(model.randomGifList, proposal);
+    model.randomGifList = randomGifList.receive(model.randomGifList, proposal);
     return model;
   };
 
@@ -28,7 +28,7 @@ export function startApp() {
     randomGif2: randomGif.initialModel({}),
     randomGifPair: randomGifPair.initialModel({}),
     randomGifPairPair: randomGifPairPair.initialModel({}),
-    //randomGifList: randomGifList.initialModel({})
+    randomGifList: randomGifList.initialModel({})
   };
 
   return run({ initial, scanner: { model: receive } });

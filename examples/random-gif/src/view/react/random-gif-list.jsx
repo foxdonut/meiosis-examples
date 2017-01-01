@@ -1,6 +1,8 @@
 import React from "react";
+import { actions } from "../../random-gif-list";
+import { view as randomGif } from "./random-gif.jsx";
 
-export const view = actions => model => {
+export const view = model => {
   const onAdd = evt => {
     evt.preventDefault();
     actions.addToRandomGifList();
@@ -11,19 +13,17 @@ export const view = actions => model => {
     actions.removeFromRandomGifList(id);
   };
 
-  const randomGif = id => {
-    const component = components.randomGifComponents[id];
-
-    return (<div key={id} style={{display: "inline-block"}}>
-      {component.view(model[id], component.actions(actions.propose))}
+  const randomGifView = id => (
+    <div key={id} style={{display: "inline-block"}}>
+      {randomGif(model.randomGifsById[id], id)}
       <button className="btn btn-default btn-xs" onClick={onRemove(id)}>Remove</button>
-    </div>);
-  };
+    </div>
+  );
 
   return (<div>
     <div>
       <button className="btn btn-default btn-xs" onClick={onAdd}>Add</button>
     </div>
-    <div>{model.randomGifIds.map(randomGif)}</div>
+    <div>{model.randomGifIds.map(randomGifView)}</div>
   </div>);
 };

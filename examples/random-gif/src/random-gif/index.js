@@ -1,4 +1,4 @@
-import ajax from "../util/ajax-axios";
+import { ajax } from "../util";
 import { createActions } from "./actions";
 import { initialModel } from "./model";
 import { receive } from "./receive";
