@@ -18,13 +18,9 @@ export function startApp() {
   const receive = (model, proposal) => {
     component.receive(model, proposal);
     button.receive(model.button, proposal);
-
-    ["randomGif1", "randomGif2"].forEach(id => {
-      randomGif.receive(model[id], proposal, id);
-    });
-
+    randomGif.receive(model.randomGif1, proposal, "randomGif1");
+    randomGif.receive(model.randomGif2, proposal, "randomGif2");
     randomGifPair.receive(model.randomGifPair, proposal);
-
     return model;
   };
 
