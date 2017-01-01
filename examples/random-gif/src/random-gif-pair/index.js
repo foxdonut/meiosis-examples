@@ -1,10 +1,7 @@
-import { component as randomGifComponent } from "../random-gif";
-import { composeComponents } from "../util";
+import { initialModel } from "./model";
+import { receive } from "./receive";
 
-//FIXME
-export function component() {
-  return composeComponents({
-    randomGifFirst: randomGifComponent(),
-    randomGifSecond: randomGifComponent()
-  });
-}
+export const component = {
+  initialModel,
+  receive
+};
