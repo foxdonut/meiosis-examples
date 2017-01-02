@@ -1,12 +1,11 @@
-import uuid from "uuid";
 import * as C from "./constants";
 import { component as randomGif } from "../random-gif";
 
 export const receive = (model, proposal) => {
   if (proposal.type === C.GIF_LIST_ADD) {
-    const id = uuid.v1();
-    model.randomGifIds.push(id);
-    model.randomGifsById[id] = randomGif.initialModel({});
+    const randomGifModel = randomGif.initialModel();
+    model.randomGifIds.push(randomGifModel.id);
+    model.randomGifsById[randomGifModel.id] = randomGifModel;
   }
   else if (proposal.type === C.GIF_LIST_REMOVE) {
     const id = proposal.id;
@@ -14,7 +13,7 @@ export const receive = (model, proposal) => {
     model.randomGifIds.splice(model.randomGifIds.indexOf(id), 1);
   }
   else {
-    model.randomGifIds.forEach(id => randomGif.receive(model.randomGifsById[id], proposal, id));
+    model.randomGifIds.forEach(id => randomGif.receive(model.randomGifsById[id], proposal));
   }
   return model;
 };

@@ -1,4 +1,3 @@
-export function initialModel(model) {
-  model.active = false;
-  return model;
-}
+export const initialModel = () => ({
+  active: false
+});

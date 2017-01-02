@@ -1,4 +1,3 @@
-export function initialModel(model) {
-  model.value = 0;
-  return model;
-}
+export const initialModel = () => ({
+  value: 0
+});

@@ -1,5 +1,4 @@
-export const initialModel = model => {
-  model.randomGifIds = [];
-  model.randomGifsById = {};
-  return model;
-};
+export const initialModel = () => ({
+  randomGifIds: [],
+  randomGifsById: {}
+});

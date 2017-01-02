@@ -13,22 +13,22 @@ export function startApp() {
   const receive = (model, proposal) => {
     model = component.receive(model, proposal);
     model.button = button.receive(model.button, proposal);
-    model.randomGif1 = randomGif.receive(model.randomGif1, proposal, "randomGif1");
-    model.randomGif2 = randomGif.receive(model.randomGif2, proposal, "randomGif2");
-    model.randomGifPair = randomGifPair.receive(model.randomGifPair, proposal, "randomGifPair");
+    model.randomGif1 = randomGif.receive(model.randomGif1, proposal);
+    model.randomGif2 = randomGif.receive(model.randomGif2, proposal);
+    model.randomGifPair = randomGifPair.receive(model.randomGifPair, proposal);
     model.randomGifPairPair = randomGifPairPair.receive(model.randomGifPairPair, proposal);
     model.randomGifList = randomGifList.receive(model.randomGifList, proposal);
     return model;
   };
 
   const initial = {
-    counter: counter.initialModel({}),
-    button: button.initialModel({}),
-    randomGif1: randomGif.initialModel({}),
-    randomGif2: randomGif.initialModel({}),
-    randomGifPair: randomGifPair.initialModel({}),
-    randomGifPairPair: randomGifPairPair.initialModel({}),
-    randomGifList: randomGifList.initialModel({})
+    counter: counter.initialModel(),
+    button: button.initialModel(),
+    randomGif1: randomGif.initialModel(),
+    randomGif2: randomGif.initialModel(),
+    randomGifPair: randomGifPair.initialModel(),
+    randomGifPairPair: randomGifPairPair.initialModel(),
+    randomGifList: randomGifList.initialModel()
   };
 
   return run({ initial, scanner: { model: receive } });

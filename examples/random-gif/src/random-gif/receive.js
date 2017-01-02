@@ -1,7 +1,7 @@
 import * as C from "./constants";
 
-export function receive(model, proposal, id) {
-  if (proposal.id === id) {
+export function receive(model, proposal) {
+  if (proposal.id === model.id) {
     if (proposal.type === C.GIF_TAG_EDIT) {
       model.tag = proposal.tag;
     }
