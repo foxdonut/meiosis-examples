@@ -6,4 +6,4 @@ export const component = {
   receive,
 };
 
-export { actions } from "./actions";
+export { actions, handlers } from "./actions";

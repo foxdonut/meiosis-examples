@@ -1,7 +1,7 @@
 import { initialModel } from "./model";
 import { receive } from "./receive";
 
-export { actions } from "./actions";
+export { actions, handlers } from "./actions";
 
 export const component = {
   initialModel,

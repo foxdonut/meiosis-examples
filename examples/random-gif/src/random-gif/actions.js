@@ -10,3 +10,14 @@ export const createActions = ajax => ({
       catch(error => propose({ type: C.GIF_NEW_ERROR, id, error }));
   }
 });
+
+export const createHandlers = actions => ({
+  onEditTag: id => evt => {
+    evt.preventDefault();
+    actions.editTag(id, evt.target.value);
+  },
+  onNewGif: (id, tag) => evt => {
+    evt.preventDefault();
+    actions.newGif(id, tag);
+  }
+});
