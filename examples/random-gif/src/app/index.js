@@ -24,8 +24,8 @@ export function startApp() {
   const initial = {
     counter: counter.initialModel(),
     button: button.initialModel(),
-    randomGif1: randomGif.initialModel(),
-    randomGif2: randomGif.initialModel(),
+    randomGif1: randomGif.initialModel("randomGif1"), // can either assign an id...
+    randomGif2: randomGif.initialModel(),             // or use the component's generated id
     randomGifPair: randomGifPair.initialModel(),
     randomGifPairPair: randomGifPairPair.initialModel(),
     randomGifList: randomGifList.initialModel()
