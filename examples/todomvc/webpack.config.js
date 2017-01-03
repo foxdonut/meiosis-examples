@@ -2,7 +2,7 @@
 var variant = process.env.VARIANT;
 
 module.exports = {
-  entry: "./" + variant + "/app.js" + (variant === "react" ? "x" : ""),
+  entry: "./" + variant + "/index.js" + (variant === "react" ? "x" : ""),
   devtool: "source-map",
   output: {
     path: "./" + variant + "/",

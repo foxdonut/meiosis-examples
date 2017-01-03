@@ -7,6 +7,5 @@
 {% block content %}
 
 <script src="/public/lib/mithril.min.js"></script>
-<script src="/public/lib/meiosis-mithril.min.js"></script>
 
 {% endblock %}
