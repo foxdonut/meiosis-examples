@@ -1,5 +1,7 @@
 import m from "mithril";
 import { header } from "../header/view";
+import { main } from "../main/view";
+import { footer } from "../footer/view";
 
 export const view = model => {
   const info = m("footer.info", [
@@ -8,5 +10,12 @@ export const view = model => {
     m("p", [m("span", "Part of "), m("a", {href: "http://todomvc.com"}, "TodoMVC")])
   ]);
 
-  return m("div", m("section.todoapp", header(model), /*main(model), footer(model)),*/ info));
+  return m("div",
+    m("section.todoapp",
+      header(model),
+      main(model),
+      footer(model),
+      info
+    )
+  );
 };
