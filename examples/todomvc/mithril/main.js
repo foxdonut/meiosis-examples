@@ -1,5 +1,5 @@
 import m from "mithril";
-import { todoItem } from "../todoItem/view";
+import { todoItem } from "./todoItem";
 //FIXME
 const actions = { events: { onNewTodoKeyUp: () => undefined }};
 

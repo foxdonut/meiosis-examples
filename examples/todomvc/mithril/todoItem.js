@@ -1,7 +1,7 @@
 import m from "mithril";
-import todoEdit from "../todoEdit/view";
-import getTodoClasses from "../../common/todoItem/display";
+import { todoEdit } from "./todoEdit";
 //FIXME
+import { getTodoClasses } from "../common/todoItem/display";
 const events = { onToggleTodo: () => () => null, onEditTodo: () => () => null, onDestroyTodo: () => () => null  };
 
 export const todoItem = model => todo =>

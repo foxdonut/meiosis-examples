@@ -1,9 +1,9 @@
 import m from "mithril";
-import { header } from "../header/view";
-import { main } from "../main/view";
-import { footer } from "../footer/view";
+import { header } from "./header";
+import { main } from "./main";
+import { footer } from "./footer";
 
-export const view = model => {
+export const root = model => {
   const info = m("footer.info", [
     m("p", "Double-click to edit a todo"),
     m("p", [m("span", "Meiosis - Mithril - Created by "), m("a", {href: "http://twitter.com/foxdonut00"}, "foxdonut00")]),

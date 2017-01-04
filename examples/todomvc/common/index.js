@@ -1,11 +1,12 @@
 import { run } from "meiosis";
+import { todoStorage } from "./store";
 
 export function startApp() {
   const initial = {
     editTodo: {},
     filter: "all",
     newTodo: "",
-    todos: []
+    todos: todoStorage.loadAll()
   };
 
   const receive = (model, proposal) => {
@@ -15,7 +16,7 @@ export function startApp() {
   const state = model => {
     const appState = JSON.parse(JSON.stringify(model));
 
-    appState.filteredTodos = [];
+    appState.filteredTodos = appState.todos;
 
     return appState;
   };

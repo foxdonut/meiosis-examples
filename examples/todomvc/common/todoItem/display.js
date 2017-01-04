@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import state from "./state";
+import { state } from "./state";
 
 export const getTodoClasses = (model, todo) =>
   classnames({
