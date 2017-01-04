@@ -1,7 +1,7 @@
 import m from "mithril";
+import { todoItem } from "../todoItem/view";
 //FIXME
 const actions = { events: { onNewTodoKeyUp: () => undefined }};
-const todoItemComponent = () => () => m("span");
 
 export const main = model =>
   m("section.main",
@@ -10,5 +10,5 @@ export const main = model =>
       onchange: actions.events.onToggleAllTodos
     }),
     m("label", {for: "toggle-all"}, "Mark all as complete"),
-    m("ul.todo-list", model.filteredTodos.map(todoItemComponent(model)))
+    m("ul.todo-list", model.filteredTodos.map(todoItem(model)))
   );
