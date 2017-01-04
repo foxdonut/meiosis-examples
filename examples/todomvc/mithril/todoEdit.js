@@ -1,6 +1,7 @@
+import { propose } from "meiosis";
 import m from "mithril";
-//FIXME
-const events = { onEditKeyUp: () => () => null, onEditBlur: () => () => null };
+import { editActions } from "../common/todoEdit/actions";
+const events = editActions(propose).events;
 
 export const todoEdit = todo =>
   m("input.edit[type=text]", {

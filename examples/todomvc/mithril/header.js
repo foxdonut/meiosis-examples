@@ -1,6 +1,8 @@
+import { propose } from "meiosis";
 import m from "mithril";
-//FIXME
-const actions = { events: { onNewTodoKeyUp: () => undefined }};
+import { headerActions } from "../common/header/actions";
+
+const actions = headerActions(propose);
 
 export const header = model =>
   m("header.header",

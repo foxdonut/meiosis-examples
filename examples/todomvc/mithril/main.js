@@ -1,13 +1,15 @@
+import { propose } from "meiosis";
 import m from "mithril";
 import { todoItem } from "./todoItem";
-//FIXME
-const actions = { events: { onNewTodoKeyUp: () => undefined }};
+import { mainActions } from "../common/main/actions";
+
+const events = mainActions(propose);
 
 export const main = model =>
   m("section.main",
     m("input.toggle-all[type=checkbox]", {
       checked: model.allCompleted,
-      onchange: actions.events.onToggleAllTodos
+      onchange: events.onToggleAllTodos
     }),
     m("label", {for: "toggle-all"}, "Mark all as complete"),
     m("ul.todo-list", model.filteredTodos.map(todoItem(model)))
