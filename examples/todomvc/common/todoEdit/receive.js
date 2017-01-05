@@ -6,7 +6,7 @@ export const createEditReceive = todoStorage => (model, proposal) => {
       model.editTodo = todo;
     },
     SaveTodo: function(todo) {
-      const editing = todo.id === model.editTodo.id;
+      const editing = todo.id && (todo.id === model.editTodo.id);
       todo.title = todo.title.trim();
 
       if (editing && todo.title) {

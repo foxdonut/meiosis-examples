@@ -6,7 +6,7 @@ export const EditAction = Type({
   ClearEdit: [ ]
 });
 
-export const editActions = propose => {
+export const createEditActions = propose => {
   const actions = {
     editingTodo: function(title, id) {
       propose(EditAction.EditingTodo({ title: title, id: id }));

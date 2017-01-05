@@ -5,7 +5,7 @@ export const FooterAction = Type({
   Filter: [ String ]
 });
 
-export const footerActions = propose => {
+export const createFooterActions = propose => {
   const actions = {
     clearCompleted: function() {
       propose(FooterAction.ClearCompleted());

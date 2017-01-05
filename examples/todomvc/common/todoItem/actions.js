@@ -6,7 +6,7 @@ export const ItemAction = Type({
   DeleteTodo: [ Number ]
 });
 
-export const itemActions = propose => {
+export const createItemActions = propose => {
   const actions = {
     setCompleted: function(todoId, completed) {
       propose(ItemAction.SetCompleted(todoId, completed));

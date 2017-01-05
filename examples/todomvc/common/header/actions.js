@@ -6,7 +6,7 @@ export const HeaderAction = Type({
   ClearNewTodo: []
 });
 
-export const headerActions = propose => {
+export const createHeaderActions = propose => {
   const actions = {
     newTodo: function(title) {
       propose(HeaderAction.NewTodo(title));

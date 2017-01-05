@@ -4,7 +4,7 @@ export const MainAction = Type({
   SetAllCompleted: [ Boolean ]
 });
 
-export const mainActions = propose => {
+export const createMainActions = propose => {
   const actions = {
     setAllCompleted: function(completed) {
       propose(MainAction.SetAllCompleted(completed));

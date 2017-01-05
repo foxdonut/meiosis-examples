@@ -1,16 +1,18 @@
-import { propose } from "meiosis";
 import m from "mithril";
-import { todoItem } from "./todoItem";
-import { mainActions } from "../common/main/actions";
+import { createTodoItem } from "./todoItem";
+import { createMainActions } from "../common/main/actions";
 
-const events = mainActions(propose);
+export const createMain = propose => {
+  const events = createMainActions(propose).events;
+  const todoItem = createTodoItem(propose);
 
-export const main = model =>
-  m("section.main",
-    m("input.toggle-all[type=checkbox]", {
-      checked: model.allCompleted,
-      onchange: events.onToggleAllTodos
-    }),
-    m("label", {for: "toggle-all"}, "Mark all as complete"),
-    m("ul.todo-list", model.filteredTodos.map(todoItem(model)))
-  );
+  return model =>
+    m("section.main",
+      m("input.toggle-all[type=checkbox]", {
+        checked: model.allCompleted,
+        onchange: events.onToggleAllTodos
+      }),
+      m("label", {for: "toggle-all"}, "Mark all as complete"),
+      m("ul.todo-list", model.filteredTodos.map(todoItem(model)))
+    );
+};
