@@ -5,7 +5,7 @@ import { view as randomGif } from "./random-gif";
 export const view = model => {
   const randomGifView = id =>
     m("div", { key: id, style: "display: inline-block" }, [
-      randomGif(model.randomGifsById[id], id),
+      randomGif(model.randomGifsById[id]),
       m("button.btn.btn-default.btn-xs", { onclick: handlers.onRemove(id) }, "Remove")
     ]);
 

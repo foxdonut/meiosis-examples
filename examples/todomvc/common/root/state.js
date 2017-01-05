@@ -10,17 +10,15 @@ const allCompleted = function(filteredTodos) {
   return result;
 };
 
-export const state = model => {
-  const state = Object.assign({}, model);
+export const rootState = model => {
+  const state = JSON.parse(JSON.stringify(model));
   const by = model.filter;
   const completed = by === "completed";
 
-  const filterBy = (by && by !== "all") ? function(todo) {
-    return (!!todo.completed) === completed;
-  } :
-  function() {
-    return true;
-  };
+  const filterBy = (by && by !== "all") ?
+    todo => (!!todo.completed) === completed
+    : () => true;
+
   state.filteredTodos = model.todos.filter(filterBy);
   state.allCompleted = allCompleted(state.filteredTodos);
 

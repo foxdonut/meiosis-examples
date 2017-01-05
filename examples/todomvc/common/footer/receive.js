@@ -1,6 +1,6 @@
 import { FooterAction } from "./actions";
 
-export const receive = todoStorage => (model, proposal) => {
+export const createFooterReceive = todoStorage => (model, proposal) => {
   FooterAction.case({
     ClearCompleted: function() {
       model.todos = todoStorage.clearCompleted();

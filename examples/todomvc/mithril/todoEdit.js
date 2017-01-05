@@ -9,11 +9,11 @@ export const createTodoEdit = propose => {
       value: todo.title,
       onkeyup: events.onEditKeyUp(todo.id),
       onblur: events.onEditBlur(todo.id),
-      config: function(element) {
-        element.focus();
-        element.selectionStart = element.value.length;
+      oncreate: function(vnode) {
+        vnode.dom.focus();
+        vnode.dom.selectionStart = vnode.dom.value.length;
       }
     });
 };
 
-export const noTodoInput = () => m("span");
+export const noTodoEdit = m("span");
