@@ -12,11 +12,16 @@
     return appState;
   };
 
+  var lastPropose = meiosis.propose();
+
   var element = document.getElementById("app");
   var streams = meiosis.run({ initial: ref.initialModel, scanner: receive, mappers: [{ state: state }] });
   meiosis.on(function(state) {
     ReactDOM.render(view(state), element, function() {
-      nextAction(state);
+      if (meiosis.propose() !== lastPropose) {
+        nextAction(state);
+        lastPropose = meiosis.propose();
+      }
     });
   }, streams.state);
 
