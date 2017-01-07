@@ -25,5 +25,5 @@
     });
   }, streams.state);
 
-  meiosisTracer({ selector: "#tracer" });
+  //meiosisTracer({ selector: "#tracer" });
 })(window);
