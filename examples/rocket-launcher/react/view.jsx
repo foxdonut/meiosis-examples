@@ -1,8 +1,8 @@
 /*global React*/
 (function(ref) {
-  ref.view = {
+  ref.view = actions => ({
     // State representation of the ready state
-    ready: (model, actions) => {
+    ready: model => {
       const onStart = function(evt) {
         evt.preventDefault();
         actions.start();
@@ -16,7 +16,7 @@
     },
 
     // State representation of the counting state
-    counting: (model, actions) => {
+    counting: model => {
       const onAbort = function(evt) {
         evt.preventDefault();
         actions.abort();
@@ -37,5 +37,5 @@
 
     // State representation of the launched state
     launched: () => (<p>Launched</p>)
-  };
+  });
 })(window);

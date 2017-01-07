@@ -1,12 +1,12 @@
 (function(ref) {
-  ref.nextAction = function(state) {
-    return function(context) {
-      if (state.counting(context.model)) {
-        if (context.model.counter > 0) {
-          context.actions.decrement(context.model.counter);
+  ref.nextAction = function(state, actions) {
+    return function(model) {
+      if (state.counting(model)) {
+        if (model.counter > 0) {
+          actions.decrement(model.counter);
         }
         else if (context.model.counter === 0) {
-          context.actions.launch();
+          actions.launch();
         }
       }
     };
