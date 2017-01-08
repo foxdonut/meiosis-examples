@@ -21,7 +21,7 @@ export function startApp() {
     return model;
   };
 
-  const initial = {
+  const initialModel = {
     counter: counter.initialModel(),
     button: button.initialModel(),
     randomGif1: randomGif.initialModel("randomGif1"), // can either assign an id...
@@ -31,5 +31,5 @@ export function startApp() {
     randomGifList: randomGifList.initialModel()
   };
 
-  return run({ initial, scanner: { model: receive } });
+  return run({ initialModel, scanner: { model: receive } });
 }

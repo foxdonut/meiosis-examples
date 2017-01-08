@@ -15,7 +15,11 @@
   var lastPropose = meiosis.propose();
 
   var element = document.getElementById("app");
-  var streams = meiosis.run({ initial: ref.initialModel, scanner: receive, mappers: [{ state: state }] });
+  var streams = meiosis.run({
+    initialModel: ref.initialModel,
+    scanner: receive,
+    mappers: [{ state: state }]
+  });
   meiosis.on(function(state) {
     ReactDOM.render(view(state), element, function() {
       if (meiosis.propose() !== lastPropose) {
@@ -25,5 +29,5 @@
     });
   }, streams.state);
 
-  //meiosisTracer({ selector: "#tracer" });
+  meiosisTracer({ selector: "#tracer" });
 })(window);

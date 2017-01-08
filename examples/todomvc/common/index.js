@@ -11,7 +11,7 @@ import { rootState } from "./root/state";
 export function startApp() {
   Type.check = false;
 
-  const initial = {
+  const initialModel = {
     editTodo: {},
     filter: "all",
     newTodo: "",
@@ -32,7 +32,7 @@ export function startApp() {
   };
 
   return run({
-    initial,
+    initialModel,
     scanner: { model: receive },
     mappers: [
       { state: rootState }
