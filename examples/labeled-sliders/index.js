@@ -6,7 +6,7 @@ import { component, view } from "./sliderContainer";
 Type.check = false;
 
 const { model } = run({
-  initial: component.initialModel,
+  initialModel: component.initialModel,
   scanner: { model: component.receive }
 });
 
