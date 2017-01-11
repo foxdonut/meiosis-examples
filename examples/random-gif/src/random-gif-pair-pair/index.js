@@ -1,7 +1,7 @@
 import { initialModel } from "./model";
 import { receive } from "./receive";
 
-export const component = {
+export const randomGifPairPair = {
   initialModel,
   receive
 };

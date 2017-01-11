@@ -1,7 +1,6 @@
 import m from "mithril";
-import { view as randomGif } from "./random-gif";
 
-export const view = model =>
+export const createRandomGifPair = ({ randomGif }) => model =>
   m("div",
     m("div", { style: "display: inline-block" },
       randomGif(model.randomGifFirst)),

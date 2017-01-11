@@ -1,14 +1,11 @@
-import { ajax } from "../util";
-import { createActions, createHandlers } from "./actions";
 import { initialModel } from "./model";
 import { receive } from "./receive";
+import { createActions } from "./actions";
 
-export const component = {
+export const randomGif = {
   initialModel,
-  receive
+  receive,
+  createActions
 };
-
-export const actions = createActions(ajax);
-export const handlers = createHandlers(actions);
 
 export * from "./constants";

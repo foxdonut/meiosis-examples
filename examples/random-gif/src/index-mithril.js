@@ -1,9 +1,10 @@
 import { on } from "meiosis";
 import m from "mithril";
 import { startApp } from "./app";
-import { view } from "./view/mithril";
+import { createView } from "./view/mithril";
 
-const { model } = startApp();
+const app = startApp();
+const view = createView(app);
 const element = document.getElementById("app");
 const render = model => m.render(element, view(model));
-on(render, model);
+on(render, app.streams.model);

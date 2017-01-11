@@ -1,5 +1,5 @@
 import { receive } from "./receive";
 
-export const component = {
+export const app = {
   receive
 };

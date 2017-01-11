@@ -1,5 +1,5 @@
 import * as C from "./constants";
-import { component as randomGif } from "../random-gif";
+import { randomGif } from "../random-gif";
 
 export const receive = (model, proposal) => {
   if (proposal.type === C.GIF_LIST_ADD) {

@@ -1,4 +1,4 @@
-import { component as randomGifPair } from "../random-gif-pair";
+import { randomGifPair } from "../random-gif-pair";
 
 export const initialModel = () => ({
   randomGifPairOne: randomGifPair.initialModel(),

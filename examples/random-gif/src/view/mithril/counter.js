@@ -1,6 +1,3 @@
 import m from "mithril";
 
-export function view(model) {
-  return m("div", "Counter: " + model.value);
-}
-
+export const counter = model => m("div", "Counter: " + model.value);

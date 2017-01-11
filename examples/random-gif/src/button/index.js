@@ -1,9 +1,9 @@
 import { initialModel } from "./model";
 import { receive } from "./receive";
+import { createActions } from "./actions";
 
-export { actions, handlers } from "./actions";
-
-export const component = {
+export const button = ({
   initialModel,
-  receive
-};
+  receive,
+  createActions
+});

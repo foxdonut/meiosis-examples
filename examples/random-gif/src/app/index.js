@@ -1,26 +1,16 @@
-import { run } from "meiosis";
+import { propose, run } from "meiosis";
+import { ajax } from "../util";
 
-import { component } from "./component";
+import { app } from "./component";
 
-import { component as counter } from "../counter";
-import { component as button } from "../button";
-import { component as randomGif } from "../random-gif";
-import { component as randomGifPair } from "../random-gif-pair";
-import { component as randomGifPairPair } from "../random-gif-pair-pair";
-import { component as randomGifList } from "../random-gif-list";
+import { counter } from "../counter";
+import { button } from "../button";
+import { randomGif } from "../random-gif";
+import { randomGifPair } from "../random-gif-pair";
+import { randomGifPairPair } from "../random-gif-pair-pair";
+import { randomGifList } from "../random-gif-list";
 
 export function startApp() {
-  const receive = (model, proposal) => {
-    model = component.receive(model, proposal);
-    model.button = button.receive(model.button, proposal);
-    model.randomGif1 = randomGif.receive(model.randomGif1, proposal);
-    model.randomGif2 = randomGif.receive(model.randomGif2, proposal);
-    model.randomGifPair = randomGifPair.receive(model.randomGifPair, proposal);
-    model.randomGifPairPair = randomGifPairPair.receive(model.randomGifPairPair, proposal);
-    model.randomGifList = randomGifList.receive(model.randomGifList, proposal);
-    return model;
-  };
-
   const initialModel = {
     counter: counter.initialModel(),
     button: button.initialModel(),
@@ -31,5 +21,22 @@ export function startApp() {
     randomGifList: randomGifList.initialModel()
   };
 
-  return run({ initialModel, scanner: { model: receive } });
+  const receive = (model, proposal) => {
+    model = app.receive(model, proposal);
+    model.button = button.receive(model.button, proposal);
+    model.randomGif1 = randomGif.receive(model.randomGif1, proposal);
+    model.randomGif2 = randomGif.receive(model.randomGif2, proposal);
+    model.randomGifPair = randomGifPair.receive(model.randomGifPair, proposal);
+    model.randomGifPairPair = randomGifPairPair.receive(model.randomGifPairPair, proposal);
+    model.randomGifList = randomGifList.receive(model.randomGifList, proposal);
+
+    return model;
+  };
+
+  return {
+    streams: run({ initialModel, scanner: { model: receive } }),
+    buttonActions: button.createActions({ propose }),
+    randomGifActions: randomGif.createActions({ propose, ajax }),
+    randomGifListActions: randomGifList.createActions({ propose })
+  };
 }

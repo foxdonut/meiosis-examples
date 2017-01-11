@@ -1,4 +1,4 @@
-import { component as randomGif } from "../random-gif";
+import { randomGif } from "../random-gif";
 
 export function receive(model, proposal) {
   model.randomGifFirst = randomGif.receive(model.randomGifFirst, proposal);

@@ -1,5 +1,5 @@
 import { initialModel } from "./model";
 
-export const component = {
+export const counter = {
   initialModel
 };
