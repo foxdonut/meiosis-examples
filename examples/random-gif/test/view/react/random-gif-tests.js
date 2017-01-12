@@ -10,6 +10,12 @@ const id = "test";
 const sel = "#" + id;
 let element = null;
 
+$.fn.triggerEvent = function(eventType) {
+  const event = document.createEvent("HTMLEvents");
+  event.initEvent(eventType, true, true);
+  $(this)[0].dispatchEvent(event);
+};
+
 test.beforeEach(function() {
   if ($(sel).length === 0) {
     document.write("<div id='" + id + "'></div>");
@@ -25,4 +31,14 @@ test("renders the tag in the text input", t => {
   render(randomGifView(model), element);
 
   t.is($(sel).find("input").val(), tag);
+});
+
+test("sends the tag with the id when typing in the text input", t => {
+  const id = "42";
+  const tag = "test";
+  const input = $(sel).find("input");
+
+  input.val(tag).triggerEvent("input");
+
+  t.is(randomGif.intents.editTag(), { id, tag });
 });

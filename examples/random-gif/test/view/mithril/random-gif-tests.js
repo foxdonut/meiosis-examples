@@ -26,3 +26,13 @@ test("renders the tag in the text input", t => {
 
   t.is($(sel).find("input").val(), tag);
 });
+
+test("sends the tag with the id when typing in the text input", t => {
+  const id = "42";
+  const tag = "test";
+  const input = $(sel).find("input");
+
+  input.val(tag).trigger("keyup");
+
+  t.is(randomGif.intents.editTag(), { id, tag });
+});
