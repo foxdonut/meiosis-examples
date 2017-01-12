@@ -1,7 +1,7 @@
-import { propose, run } from "meiosis";
+import { map, propose, run } from "meiosis";
 import { ajax } from "../util";
 
-import { app } from "./component";
+import { app } from "./app";
 
 import { counter } from "../counter";
 import { button } from "../button";
@@ -33,10 +33,9 @@ export function startApp() {
     return model;
   };
 
-  return {
-    streams: run({ initialModel, scanner: { model: receive } }),
-    buttonActions: button.createActions({ propose }),
-    randomGifActions: randomGif.createActions({ propose, ajax }),
-    randomGifListActions: randomGifList.createActions({ propose })
-  };
+  button.createActions({ propose });
+  randomGif.createActions({ propose, ajax });
+  randomGifList.createActions({ propose });
+
+  return run({ initialModel, scanner: { model: receive } });
 }

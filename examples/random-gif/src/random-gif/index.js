@@ -9,3 +9,4 @@ export const randomGif = {
 };
 
 export * from "./constants";
+export { randomGifIntents } from "./actions";

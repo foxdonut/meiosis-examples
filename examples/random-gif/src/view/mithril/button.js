@@ -1,8 +1,9 @@
 import m from "mithril";
 import classnames from "classnames";
+import { buttonIntents } from "../../button";
 
-export const createButton = ({ actions }) => model => {
+export const button = model => {
   const classes = classnames({ "btn-primary": model.active, "btn-danger": !model.active });
   const label = model.active ? "Active" : "Inactive";
-  return m("button.btn", { class: classes, onclick: actions.onToggleButton }, label);
+  return m("button.btn", { class: classes, onclick: buttonIntents.toggle }, label);
 };

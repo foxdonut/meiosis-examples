@@ -7,3 +7,5 @@ export const randomGifList = {
   receive,
   createActions
 };
+
+export { randomGifListIntents } from "./actions";

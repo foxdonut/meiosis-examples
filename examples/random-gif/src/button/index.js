@@ -7,3 +7,5 @@ export const button = ({
   receive,
   createActions
 });
+
+export { buttonIntents } from "./actions";

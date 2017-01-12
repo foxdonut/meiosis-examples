@@ -1,12 +1,12 @@
+import { map, stream } from "meiosis";
 import * as C from "./constants";
 
-export const createActions = ({ propose }) => ({
-  onAdd: evt => {
-    evt.preventDefault();
-    propose({ type: C.GIF_LIST_ADD });
-  },
-  onRemove: id => evt => {
-    evt.preventDefault();
-    propose({ type: C.GIF_LIST_REMOVE, id });
-  }
-});
+export const randomGifListIntents = {
+  add: stream(),
+  remove: stream()
+};
+
+export const createActions = ({ propose }) => {
+  map(() => propose({ type: C.GIF_LIST_ADD }), randomGifListIntents.add);
+  map(id => propose({ type: C.GIF_LIST_REMOVE, id }), randomGifListIntents.remove);
+};
