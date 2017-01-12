@@ -1,4 +1,4 @@
-import { map, propose, run } from "meiosis";
+import { propose, run } from "meiosis";
 import { ajax } from "../util";
 
 import { app } from "./app";
