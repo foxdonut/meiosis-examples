@@ -1,10 +1,10 @@
 import { map, stream } from "meiosis";
 import { BUTTON_TOGGLE } from "./constants";
 
-export const buttonIntents = {
+export const intents = {
   toggle: stream()
 };
 
 export const createActions = ({ propose }) => {
-  map(() => propose({ type: BUTTON_TOGGLE }), buttonIntents.toggle);
+  map(() => propose({ type: BUTTON_TOGGLE }), intents.toggle);
 };

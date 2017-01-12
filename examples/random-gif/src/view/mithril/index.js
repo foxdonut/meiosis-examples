@@ -1,25 +1,25 @@
 import m from "mithril";
-import { counter } from "./counter";
-import { button } from "./button";
-import { randomGif } from "./random-gif";
-import { randomGifPair } from "./random-gif-pair";
-import { randomGifPairPair } from "./random-gif-pair-pair";
-import { randomGifList } from "./random-gif-list";
+import { counterView } from "./counter";
+import { buttonView } from "./button";
+import { randomGifView } from "./random-gif";
+import { randomGifPairView } from "./random-gif-pair";
+import { randomGifPairPairView } from "./random-gif-pair-pair";
+import { randomGifListView } from "./random-gif-list";
 
 export const view = model =>
   m("div",
     m("div", "Mithril"),
-    counter(model.counter),
+    counterView(model.counter),
     m("div", "Button:"),
-    button(model.button),
+    buttonView(model.button),
     m("div", "Random Gif:"),
-    randomGif(model.randomGif1),
+    randomGifView(model.randomGif1),
     m("div", "Another Random Gif:"),
-    randomGif(model.randomGif2),
+    randomGifView(model.randomGif2),
     m("div", "Random Gif Pair:"),
-    randomGifPair(model.randomGifPair),
+    randomGifPairView(model.randomGifPair),
     m("div", "Random Gif Pair Pair:"),
-    randomGifPairPair(model.randomGifPairPair),
+    randomGifPairPairView(model.randomGifPairPair),
     m("div", "Random Gif List:"),
-    randomGifList(model.randomGifList)
+    randomGifListView(model.randomGifList)
   );

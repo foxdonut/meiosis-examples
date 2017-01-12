@@ -1,8 +1,8 @@
 import m from "mithril";
-import { randomGifPair } from "./random-gif-pair";
+import { randomGifPairView } from "./random-gif-pair";
 
-export const randomGifPairPair = model =>
+export const randomGifPairPairView = model =>
   m("div",
-    randomGifPair(model.randomGifPairOne),
-    randomGifPair(model.randomGifPairTwo)
+    randomGifPairView(model.randomGifPairOne),
+    randomGifPairView(model.randomGifPairTwo)
   );

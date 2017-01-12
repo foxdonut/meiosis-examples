@@ -1,29 +1,28 @@
 import test from "ava";
 import $ from "jquery";
 
-import { on, run } from "meiosis";
 import m from "mithril";
 
-import { randomGif as randomGifView} from "../../../src/view/mithril/random-gif";
+import { randomGifView } from "../../../src/view/mithril/random-gif";
 import { randomGif } from "../../../src/random-gif";
 
-const id = "app";
-let app = null;
-let model = null;
+const id = "test";
+const sel = "#" + id;
+let element = null;
 
-(function() {
-  document.write("<div id='" + id + "'></div>");
-  model = randomGif.initialModel();
-  const receive = (model, _proposal) => model;
-  app = run({ initialModel: model, scanner: { model: receive } });
-  const element = document.getElementById("app");
-  const render = model => m.render(element, randomGifView(model));
-  on(render, app.model);
-})();
+test.beforeEach(function() {
+  if ($(sel).length === 0) {
+    document.write("<div id='" + id + "'></div>");
+    element = document.getElementById(id);
+  }
+});
 
 test("renders the tag in the text input", t => {
   const tag = "Duck Quack";
+  const model = randomGif.initialModel();
   model.tag = tag;
-  app.model(model);
-  t.is($("input").val(), tag);
+
+  m.render(element, randomGifView(model));
+
+  t.is($(sel).find("input").val(), tag);
 });
