@@ -11,7 +11,7 @@ function loadDatabase(): Promise<Database> {
     xhr.responseType = "arraybuffer";
 
     xhr.onload = function(evt: Event): void {
-      const uInt8Array: Uint8Array = new Uint8Array(this.response);
+      const uInt8Array: Uint8Array = new Uint8Array(xhr.response);
       const db: Database = new Database(uInt8Array);
 
       resolve(db);
