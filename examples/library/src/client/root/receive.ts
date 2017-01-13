@@ -8,7 +8,7 @@ export function receive(model: Model, proposal: Proposal): Model {
       break;
     case "Server.LoadedBookList":
       model.inProgress = false;
-      model[proposal.section].bookIds = pluck("id", proposal.books);
+      model[proposal.section].bookIds = pluck("id")<string>(proposal.books);
 
       model[proposal.section].booksById = reduce((booksById, book) => {
         booksById[String(book.id)] = book;
