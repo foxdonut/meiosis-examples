@@ -1,6 +1,6 @@
 import { Stream } from "meiosis";
 import { Model, Proposal } from "../root/types";
-const createHistory = require("history").createBrowserHistory;
+import createHistory from "history/createBrowserHistory";
 import * as crossroads from "crossroads";
 
 interface LibraryUrl {

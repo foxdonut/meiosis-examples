@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
+    "@types/history": "^4.5.0",
     "antd": "^2.6.1",
     "axios": "^0.15.3",
     "classnames": "^2.2.5",
