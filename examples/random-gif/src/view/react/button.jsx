@@ -1,9 +1,9 @@
 import React from "react";
 import classnames from "classnames";
-import { handlers } from "../../button";
+import { button } from "../../button";
 
-export const view = model => {
+export const buttonView = model => {
   const classes = classnames({ "btn": true, "btn-primary": model.active, "btn-danger": !model.active });
   const label = model.active ? "Active" : "Inactive";
-  return (<button className={classes} onClick={handlers.onToggleButton}>{label}</button>);
+  return (<button className={ classes } onClick={ button.intents.toggle }>{ label }</button>);
 };

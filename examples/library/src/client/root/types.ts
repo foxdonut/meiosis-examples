@@ -1,4 +1,3 @@
-import { Component, Config, Emitter, View } from "meiosis";
 import { ReactElement } from "react";
 import { Book } from "../../persistence";
 
@@ -38,11 +37,10 @@ export interface LoadedBookList {
 }
 
 export type Proposal = LocationChange | UrlChanged | LoadBookList | LoadedBookList;
-export type Propose = Emitter<Proposal>;
-export type View<M, V, A> = View<M, V, Proposal, A>;
-export type ComponentConfig<M, V, A> = Config<M, M, V, Proposal, A>;
 
+/*
 export interface RootViews<V> {
   progressDialog: Component<Model, V>;
   circulation: Component<BookListModel, V>;
 }
+*/

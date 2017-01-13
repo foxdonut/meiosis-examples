@@ -1,30 +1,37 @@
-import { Component, MeiosisApp, Renderer, newInstance } from "meiosis";
+import { MeiosisApp, MeiosisInstance, newInstance, on } from "meiosis";
+import { render } from "react-dom";
+
 import { initialModel } from "./root/model";
-import { rootConfig } from "./root/config";
-import { BookListModel, Model, Proposal, Propose, RootViews } from "./root/types";
+//import { rootConfig } from "./root/config";
+import { BookListModel, Model, Proposal } from "./root/types";
 import { ajax, createBookServices } from "./services";
 import { urlComponent } from "./common";
 import { circulationConfig } from "./circulation/config";
 
 const injectTapEventPlugin = require("react-tap-event-plugin");
-import { renderer } from "meiosis-react";
 import { VDom } from "./react/types";
-import { View, circulationView, createRootView, progressDialogConfig } from "./react";
+import { circulationView, rootView, progressDialogView } from "./react";
 
 import { createServer } from "./sinonServer";
 createServer();
 
 injectTapEventPlugin();
 
-const meiosis: MeiosisApp<Model, Model, VDom, Proposal> = newInstance<Model, Model, VDom, Proposal>();
+const meiosis: MeiosisInstance<Model, Proposal> = newInstance<Model, Proposal>();
 
 const bookServices = createBookServices(ajax);
 
+/*
 const progressDialog: Component<Model, VDom> = meiosis.createComponent(progressDialogConfig());
 const circulation: Component<BookListModel, VDom> = meiosis.createComponent(circulationConfig(bookServices, circulationView));
 const rootViews: RootViews<VDom> = { circulation, progressDialog };
 const rootView: View<Model, Propose> = createRootView(rootViews);
 const rootComponent: Component<Model, VDom> = meiosis.createComponent(rootConfig(rootView));
 meiosis.createComponent(urlComponent("react"));
+*/
 
-meiosis.run({ renderer: renderer().intoId(document, "app"), initialModel, rootComponent });
+const receive: any = null;
+const app: MeiosisApp = meiosis.run({ initialModel, scanner: { model: receive } });
+const view: any = (model: Model) => 42;
+const element: HTMLElement = document.getElementById("app");
+on((model: Model) => render(view(model), element), app["model"]);

@@ -2,7 +2,7 @@ import * as m from "mithril";
 
 import { Author, Book } from "../../persistence";
 import { BookListModel } from "../root/types";
-import { VDom, View } from "./types";
+import { VDom } from "./types";
 import { CirculationActions } from "../circulation/actions";
 
 function renderAuthor(author: Author) {
@@ -20,7 +20,7 @@ function renderBook(booksById: { [id: string]: Book }): (id: string) => VDom {
   };
 }
 
-export const circulationView: View<BookListModel, CirculationActions> = (model: BookListModel, actions: CirculationActions): VDom => {
+export const circulationView = (model: BookListModel): VDom => {
   return m("table.table.table-bordered.table-striped.table-hover.table-condensed", [
     m("thead", [
       m("tr", [
@@ -31,4 +31,4 @@ export const circulationView: View<BookListModel, CirculationActions> = (model: 
     ]),
     m("tbody", model.bookIds.map(renderBook(model.booksById)))
   ]);
-}
+};

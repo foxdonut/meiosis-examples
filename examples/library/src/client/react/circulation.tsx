@@ -3,7 +3,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 
 import { Author, Book } from "../../persistence";
 import { BookListModel } from "../root/types";
-import { VDom, View } from "./types";
+import { VDom } from "./types";
 import { CirculationActions } from "../circulation/actions";
 
 function renderAuthor(author: Author) {
@@ -25,7 +25,7 @@ function renderBook(booksById: { [id: string]: Book }): (id: string) => VDom {
   };
 }
 
-export const circulationView: View<BookListModel, CirculationActions> = (model: BookListModel, actions: CirculationActions): VDom => {
+export const circulationView = (model: BookListModel): VDom => {
   return (
     <Table>
       <TableHeader displaySelectAll={ false } adjustForCheckbox={ false }>

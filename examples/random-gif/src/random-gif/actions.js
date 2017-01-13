@@ -1,4 +1,4 @@
-import { map, stream } from "meiosis";
+import { on, stream } from "meiosis";
 import * as C from "./constants";
 
 export const intents = {
@@ -7,9 +7,9 @@ export const intents = {
 };
 
 export const createActions = ({ ajax, propose }) => {
-  map(({ id, tag }) => propose({ type: C.GIF_TAG_EDIT, id, tag }), intents.editTag);
+  on(({ id, tag }) => propose({ type: C.GIF_TAG_EDIT, id, tag }), intents.editTag);
 
-  map(({ id, tag }) => {
+  on(({ id, tag }) => {
     propose({ type: C.GIF_NEW_START, id, tag });
     ajax.getJSON({ url: C.GIF_NEW_URL, params: { api_key: "dc6zaTOxFJmzC", tag }}).
       then(response => propose({ type: C.GIF_NEW_SUCCESS, id, data: response.data })).

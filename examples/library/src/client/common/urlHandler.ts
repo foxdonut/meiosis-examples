@@ -1,4 +1,5 @@
-import { ComponentConfig, Model, Proposal, Propose } from "../root/types";
+import { Stream } from "meiosis";
+import { Model, Proposal } from "../root/types";
 const createHistory = require("history").createBrowserHistory;
 import * as crossroads from "crossroads";
 
@@ -16,8 +17,8 @@ const libraryUrl: LibraryUrl = {
   }
 };
 
-function initRoutes(history: any, rootPath: string): (propose: Propose) => void {
-  return function(propose: Propose): void {
+function initRoutes(history: any, rootPath: string): (propose: Stream<Proposal>) => void {
+  return function(propose: Stream<Proposal>): void {
     // handle browser Back button
     history.listen(function(location: any, action: string) {
       if (action === "POP") {
@@ -30,7 +31,7 @@ function initRoutes(history: any, rootPath: string): (propose: Propose) => void 
   };
 }
 
-function urlComponent(variant: string): ComponentConfig<Model, any, Propose> {
+function urlComponent(variant: string): any {
   const rootPath = "/examples/library/" + variant;
 
   const history = createHistory({

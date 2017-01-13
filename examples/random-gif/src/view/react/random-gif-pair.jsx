@@ -1,13 +1,13 @@
 import React from "react";
-import { view as randomGif } from "./random-gif.jsx";
+import { randomGifView } from "./random-gif.jsx";
 
-export const view = (model, id) => (
+export const randomGifPairView = model => (
   <div>
-    <div style={{display: "inline-block"}}>
-      {randomGif(model.randomGifFirst, id + "_randomGifFirst")}
+    <div style={ { display: "inline-block" } }>
+      { randomGifView(model.randomGifFirst) }
     </div>
     <div style={{display: "inline-block"}}>
-      {randomGif(model.randomGifSecond, id + "_randomGifSecond")}
+      { randomGifView(model.randomGifSecond) }
     </div>
   </div>
 );

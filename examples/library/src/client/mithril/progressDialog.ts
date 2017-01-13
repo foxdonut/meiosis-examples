@@ -1,9 +1,8 @@
 import * as m from "mithril";
-import { PostRender, Ready } from "meiosis";
-import { Model, Propose } from "../root/types";
-import { ComponentConfig, VDom, View } from "./types";
+import { Model } from "../root/types";
+import { VDom } from "./types";
 
-const view: View<Model, Propose> = function(model: Model): VDom {
+const view: any = function(model: Model): VDom {
   return m("#inProgress.modal", [
     m(".modal-dialog", [
       m(".modal-content", [
@@ -14,14 +13,14 @@ const view: View<Model, Propose> = function(model: Model): VDom {
   ]);
 };
 
-const postRender: PostRender<Model> = function(model: Model): void {
+const postRender: any = function(model: Model): void {
   $("#inProgress").modal(model.inProgress ? "show" : "hide");
 };
 
-const ready: Ready<any, any> = function(): void {
+const ready: any = function(): void {
   $("#inProgress").modal({ backdrop: "static" });
 };
 
-export function progressDialogConfig(): ComponentConfig<Model, Propose> {
+export function progressDialogConfig(): any {
   return { view, postRender, ready };
 }

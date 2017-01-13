@@ -1,8 +1,8 @@
-import { Component } from "meiosis";
-import { BookListModel, RootViews } from "./types";
+import { BookListModel } from "./types";
 import { receive } from "./receive";
-import { ComponentConfig, Model, Propose, View } from "./types";
+import { Model } from "./types";
 
+/*
 function rootConfig<V>(view: View<Model, V, Propose>): ComponentConfig<Model, V, Propose> {
   return {
     view,
@@ -11,3 +11,4 @@ function rootConfig<V>(view: View<Model, V, Propose>): ComponentConfig<Model, V,
 }
 
 export { rootConfig };
+*/

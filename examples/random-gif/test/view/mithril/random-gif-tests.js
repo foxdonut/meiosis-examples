@@ -30,9 +30,11 @@ test("renders the tag in the text input", t => {
 test("sends the tag with the id when typing in the text input", t => {
   const id = "42";
   const tag = "test";
-  const input = $(sel).find("input");
+  const model = randomGif.initialModel(id);
+  model.tag = tag;
+  m.render(element, randomGifView(model));
 
-  input.val(tag).trigger("keyup");
+  $(sel).find("input").val(tag).trigger("keyup");
 
-  t.is(randomGif.intents.editTag(), { id, tag });
+  t.deepEqual(randomGif.intents.editTag(), { id, tag });
 });
