@@ -1,7 +1,7 @@
 import * as m from "mithril";
 import * as classnames from "classnames";
 
-import { BookListModel, Model } from "../root/types";
+import { BookListModel, Model, propose } from "../root";
 import { VDom } from "./types";
 
 interface TabSpec {
@@ -31,7 +31,7 @@ export const rootView = (model: Model): VDom => {
   function onTabChange(tab: string) {
     return function(evt: Event): void {
       evt.preventDefault();
-      //propose({ type: "Root.LocationChange", url: "/" + tab });
+      propose({ type: "Root.LocationChange", url: "/" + tab });
     }
   }
 

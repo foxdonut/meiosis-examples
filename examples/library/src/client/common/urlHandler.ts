@@ -1,15 +1,16 @@
 import { Stream } from "meiosis";
-import { Model, Proposal } from "../root/types";
+
+import { Model, Proposal, propose } from "../root";
 import createHistory from "history/createBrowserHistory";
 import * as crossroads from "crossroads";
 
-interface LibraryUrl {
+export interface LibraryUrl {
   get: string,
   save: string,
   delete: (todoId: number) => string;
 };
 
-const libraryUrl: LibraryUrl = {
+export const libraryUrl: LibraryUrl = {
   get: "/todoList",
   save: "/api/saveTodo",
   delete: function(todoId: number) {
@@ -17,21 +18,19 @@ const libraryUrl: LibraryUrl = {
   }
 };
 
-function initRoutes(history: any, rootPath: string): (propose: Stream<Proposal>) => void {
-  return function(propose: Stream<Proposal>): void {
-    // handle browser Back button
-    history.listen(function(location: any, action: string) {
-      if (action === "POP") {
-        propose({ type: "Root.UrlChanged", url: location.pathname });
-      }
-    });
+function initRoutes(history: any, rootPath: string): void {
+  // handle browser Back button
+  history.listen(function(location: any, action: string) {
+    if (action === "POP") {
+      propose({ type: "Root.UrlChanged", url: location.pathname });
+    }
+  });
 
-    const initialUrl: string = window.location.pathname.substring(rootPath.length) || "/";
-    propose({ type: "Root.UrlChanged", url: initialUrl });
-  };
+  const initialUrl: string = window.location.pathname.substring(rootPath.length) || "/";
+  propose({ type: "Root.UrlChanged", url: initialUrl });
 }
 
-function urlComponent(variant: string): any {
+export function urlHandler(variant: string): any {
   const rootPath = "/examples/library/" + variant;
 
   const history = createHistory({
@@ -67,6 +66,8 @@ function urlComponent(variant: string): any {
     model.tab = "books";
   });
 
+  initRoutes(history, rootPath);
+
   return {
     receive: (model: Model, proposal: Proposal): Model => {
       switch (proposal.type) {
@@ -74,16 +75,11 @@ function urlComponent(variant: string): any {
           history.push(proposal.url);
         case "Root.UrlChanged":
           model.url = proposal.url;
+          history.replace(model.url);
           crossroads.parse(proposal.url, [model]);
           break;
       }
       return model;
-    },
-    postRender: (model: Model): void => {
-      history.replace(model.url);
-    },
-    ready: initRoutes(history, rootPath)
+    }
   };
 }
-
-export { LibraryUrl, libraryUrl, urlComponent };
