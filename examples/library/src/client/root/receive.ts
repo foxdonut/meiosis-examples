@@ -1,7 +1,8 @@
+import { Scanner } from "meiosis";
 import { pluck, reduce } from "ramda";
 import { Model, Proposal } from "./types";
 
-export function receive(model: Model, proposal: Proposal): Model {
+export const receive: Scanner<Model, Proposal> = (model: Model, proposal: Proposal) => {
   switch (proposal.type) {
     case "Server.LoadBookList":
       model.inProgress = true;

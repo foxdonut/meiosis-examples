@@ -1,3 +1,4 @@
+import { Scanner } from "meiosis";
 import { ReactElement } from "react";
 import { Book } from "../../persistence";
 
@@ -11,6 +12,11 @@ export interface Model {
   tab?: string;
   inProgress?: boolean;
   circulation?: BookListModel;
+}
+
+export interface Component<M, P> {
+  initialModel?: M;
+  receive: Scanner<M, P>;
 }
 
 export type Section = "circulation";
@@ -37,10 +43,3 @@ export interface LoadedBookList {
 }
 
 export type Proposal = LocationChange | UrlChanged | LoadBookList | LoadedBookList;
-
-/*
-export interface RootViews<V> {
-  progressDialog: Component<Model, V>;
-  circulation: Component<BookListModel, V>;
-}
-*/
