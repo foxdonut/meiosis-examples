@@ -12,7 +12,7 @@ export const receive: (variant: String) => Scanner<Model, Proposal> = (variant: 
 
   return (model: Model, proposal: Proposal) => {
     model = rootReceive(model, proposal);
-    model = url.receive(model, proposal); // FIXME
+    model = url.receive(model, proposal);
     return model;
   };
 };

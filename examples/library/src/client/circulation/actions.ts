@@ -1,13 +1,12 @@
-import { Stream } from "meiosis";
 import { Book } from "../../persistence";
-import { Proposal } from "../root/types";
+import { propose } from "../root";
 import { BookServices } from "../services/book";
 
 export interface CirculationActions {
   loadBookList: () => void;
 };
 
-export function createActions(propose: Stream<Proposal>, services: BookServices): CirculationActions {
+export function createActions(services: BookServices): CirculationActions {
   return {
     loadBookList: () => {
       propose({ type: "Server.LoadBookList", section: "circulation" });
