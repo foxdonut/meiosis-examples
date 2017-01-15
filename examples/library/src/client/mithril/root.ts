@@ -45,9 +45,9 @@ export const rootView = (model: Model): VDom => {
     { tab: "other", label: "Something Else", content: m("span", "Coming soon") }
   ];
 
-  return m("div", [
+  return m("div",
     m("ul.nav.nav-tabs", tabSpecs.map(tabHeader)),
-    m(".tab-content", tabSpecs.map(tabContent)),
+    m(".tab-content", tabSpecs.map(tabContent))
     //views.progressDialog(model)
-  ]);
+  );
 };
