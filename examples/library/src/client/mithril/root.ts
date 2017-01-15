@@ -3,6 +3,7 @@ import * as classnames from "classnames";
 
 import { BookListModel, Model, propose } from "../root";
 import { VDom } from "./types";
+import { circulationView } from "./circulation";
 
 interface TabSpec {
   tab: string;
@@ -36,8 +37,7 @@ export const rootView = (model: Model): VDom => {
   }
 
   const tabSpecs: Array<TabSpec> = [
-    //{ tab: "circulation", label: "Circulation", content: views.circulation(model.circulation) },
-    { tab: "circulation", label: "Circulation", content: m("span", "Circulation") },
+    { tab: "circulation", label: "Circulation", content: circulationView(model.circulation) },
     { tab: "members", label: "Members", content: m("span", "Members") },
     { tab: "orders", label: "Orders", content: m("span", "Orders") },
     { tab: "repairs", label: "Repairs", content: m("span", "Repairs") },

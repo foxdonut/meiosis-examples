@@ -1,13 +1,16 @@
-import { MeiosisInstance, Scanner, Stream, newInstance } from "meiosis";
+import { MeiosisInstance, MeiosisApp, Scanner, Stream, newInstance, on, stream } from "meiosis";
 import { Component, Model, Proposal } from "./types";
 import { initialModel } from "./model";
 import { rootReceive } from "./receive";
 import { urlHandler } from "../common";
+import { ajax, createBookServices } from "../services";
+import { createCirculation } from "../circulation";
 
 export const meiosis: MeiosisInstance<Model, Proposal> = newInstance<Model, Proposal>();
 export const propose: Stream<Proposal> = meiosis.propose;
+export const rendered: Stream<Model> = stream<Model>();
 
-export const receive: (variant: String) => Scanner<Model, Proposal> = (variant: String) => {
+export const receive: (variant: string) => Scanner<Model, Proposal> = (variant: string) => {
   const url = urlHandler("mithril");
 
   return (model: Model, proposal: Proposal) => {
@@ -17,9 +20,19 @@ export const receive: (variant: String) => Scanner<Model, Proposal> = (variant: 
   };
 };
 
-export const createRoot: (variant: String) => Component<Model, Proposal> = (variant: String) => ({
+const createRoot: (variant: string) => Component<Model, Proposal> = (variant: string) => ({
   initialModel,
   receive: receive(variant)
 });
+
+export function createApp(variant: string): MeiosisApp {
+  const root = createRoot(variant);
+  return meiosis.run({ initialModel: root.initialModel, scanner: { model: root.receive } });
+}
+
+const bookServices = createBookServices(ajax);
+const circulation = createCirculation(bookServices);
+
+on((model: Model) => circulation.nextAction(model, propose()), rendered);
 
 export * from "./types";

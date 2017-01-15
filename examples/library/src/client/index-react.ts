@@ -6,7 +6,6 @@ import { initialModel } from "./root/model";
 import { BookListModel, Model, Proposal } from "./root/types";
 import { ajax, createBookServices } from "./services";
 import { urlHandler } from "./common";
-import { circulationConfig } from "./circulation/config";
 
 const injectTapEventPlugin = require("react-tap-event-plugin");
 import { VDom } from "./react/types";

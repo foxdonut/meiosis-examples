@@ -1,18 +1,13 @@
 import { MeiosisApp, MeiosisInstance, newInstance, on } from "meiosis";
 import * as m from "mithril";
 
-import { meiosis, createRoot } from "./root";
-import { BookListModel, Model, Proposal } from "./root/types";
-import { ajax, createBookServices } from "./services";
-import { circulationConfig } from "./circulation/config";
+import { BookListModel, Model, Proposal, meiosis, createApp, propose, rendered } from "./root";
 
 import { VDom } from "./mithril/types";
 import { circulationView, rootView, progressDialogConfig } from "./mithril";
 
 import { createServer } from "./sinonServer";
 createServer();
-
-const bookServices = createBookServices(ajax);
 
 /*
 const progressDialog: Component<Model, VDom> = meiosis.createComponent(progressDialogConfig());
@@ -23,7 +18,9 @@ const rootComponent: Component<Model, VDom> = meiosis.createComponent(rootConfig
 meiosis.createComponent(urlComponent("mithril"));
 */
 
-const root = createRoot("mithril");
-const app: MeiosisApp = meiosis.run({ initialModel: root.initialModel, scanner: { model: root.receive } });
+const app: MeiosisApp = createApp("mithril");
 const element: HTMLElement = document.getElementById("app");
-on((model: Model) => m.render(element, rootView(model)), app["model"]);
+on((model: Model) => {
+  m.render(element, rootView(model));
+  rendered(model);
+}, app["model"]);

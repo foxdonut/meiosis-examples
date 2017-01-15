@@ -1,11 +1,9 @@
 import { CirculationActions, createActions } from "./actions";
-import { nextAction } from "./nextAction";
-import { BookListModel } from "../root/types";
+import { createNextAction } from "./nextAction";
 import { BookServices } from "../services/book";
 
-export function circulation(services: BookServices): any {
+export function createCirculation(services: BookServices): any {
   return {
-    //actions: createActions(services),
-    nextAction
+    nextAction: createNextAction(createActions(services))
   };
 }
