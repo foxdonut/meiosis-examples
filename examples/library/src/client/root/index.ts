@@ -8,7 +8,6 @@ import { createCirculation } from "../circulation";
 
 export const meiosis: MeiosisInstance<Model, Proposal> = newInstance<Model, Proposal>();
 export const propose: Stream<Proposal> = meiosis.propose;
-export const rendered: Stream<Model> = stream<Model>();
 
 export const receive: (variant: string) => Scanner<Model, Proposal> = (variant: string) => {
   const url = urlHandler("mithril");
@@ -27,12 +26,14 @@ const createRoot: (variant: string) => Component<Model, Proposal> = (variant: st
 
 export function createApp(variant: string): MeiosisApp {
   const root = createRoot(variant);
-  return meiosis.run({ initialModel: root.initialModel, scanner: { model: root.receive } });
+  return meiosis.run({
+    initialModel: root.initialModel,
+    scanner: { model: root.receive },
+    nextAction: circulation.nextAction
+  });
 }
 
 const bookServices = createBookServices(ajax);
 const circulation = createCirculation(bookServices);
-
-on((model: Model) => circulation.nextAction(model, propose()), rendered);
 
 export * from "./types";

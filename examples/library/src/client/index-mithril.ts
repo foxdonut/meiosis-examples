@@ -1,7 +1,7 @@
 import { MeiosisApp, MeiosisInstance, newInstance, on } from "meiosis";
 import * as m from "mithril";
 
-import { BookListModel, Model, Proposal, meiosis, createApp, propose, rendered } from "./root";
+import { BookListModel, Model, Proposal, meiosis, createApp, propose } from "./root";
 
 import { VDom } from "./mithril/types";
 import { circulationView, rootView, progressDialogConfig } from "./mithril";
@@ -22,5 +22,5 @@ const app: MeiosisApp = createApp("mithril");
 const element: HTMLElement = document.getElementById("app");
 on((model: Model) => {
   m.render(element, rootView(model));
-  rendered(model);
+  app["rendered"]({ model, proposal: propose() });
 }, app["model"]);
