@@ -12,22 +12,16 @@
     return appState;
   };
 
-  var lastPropose = meiosis.propose();
-
   var element = document.getElementById("app");
   var streams = meiosis.run({
     initialModel: ref.initialModel,
     scanner: receive,
-    mappers: [{ state: state }]
+    mappers: [ state ],
+    nextAction: nextAction
   });
   meiosis.on(function(state) {
-    ReactDOM.render(view(state), element, function() {
-      if (meiosis.propose() !== lastPropose) {
-        nextAction(state);
-        lastPropose = meiosis.propose();
-      }
-    });
-  }, streams.state);
+    ReactDOM.render(view(state), element);
+  }, streams.render);
 
   meiosisTracer({ selector: "#tracer" });
 })(window);

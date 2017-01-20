@@ -5,7 +5,7 @@
         if (model.counter > 0) {
           actions.decrement(model.counter);
         }
-        else if (context.model.counter === 0) {
+        else if (model.counter === 0) {
           actions.launch();
         }
       }
