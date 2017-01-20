@@ -24,19 +24,20 @@ const createRoot: (variant: string) => Component<Model, Proposal> = (variant: st
   receive: receive(variant)
 });
 
+const nextAction = (model: Model, proposal: Proposal) => {
+  circulation.nextAction(model, proposal);
+};
+
 export function createApp(variant: string): MeiosisApp {
   const root = createRoot(variant);
   return meiosis.run({
     initialModel: root.initialModel,
-    scanner: { model: root.receive }
+    scanner: root.receive,
+    nextAction
   });
 }
 
 const bookServices = createBookServices(ajax);
 const circulation = createCirculation(bookServices);
-
-export const nextAction = (model: Model, proposal: Proposal) => {
-  circulation.nextAction(model, proposal);
-};
 
 export * from "./types";
