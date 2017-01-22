@@ -5,9 +5,9 @@ import { component, view } from "./sliderContainer";
 
 Type.check = false;
 
-const { model } = run({
+const { render } = run({
   initialModel: component.initialModel,
-  scanner: { model: component.receive }
+  scanner: component.receive
 });
 
 const patch = snabbdom.init([
@@ -19,4 +19,4 @@ const patch = snabbdom.init([
 ]);
 
 let vnode = document.getElementById("app");
-on(model => vnode = patch(vnode, view(model)), model);
+on(model => vnode = patch(vnode, view(model)), render);
