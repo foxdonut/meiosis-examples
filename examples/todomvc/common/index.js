@@ -33,9 +33,7 @@ export function startApp() {
 
   return run({
     initialModel,
-    scanner: { model: receive },
-    mappers: [
-      { state: rootState }
-    ]
+    scanner: receive,
+    mappers: [ rootState ]
   });
 }
