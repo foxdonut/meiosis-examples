@@ -3,12 +3,13 @@ import { EventHandler, SyntheticEvent } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { Tabs, Tab } from "material-ui/Tabs";
 
-import { BookListModel, Model } from "../root/types";
+import { BookListModel, Model, propose } from "../root";
 import { VDom } from "./types";
+import { circulationView } from "./circulation";
 
 export const rootView = (model: Model): VDom => {
   function onTabsChange(tab: string) {
-    //propose({ type: "Root.LocationChange", url: "/" + tab });
+    propose({ type: "Root.LocationChange", url: "/" + tab });
   }
 
   const goToRepairs: EventHandler<SyntheticEvent> = (evt: SyntheticEvent): void => {
@@ -22,7 +23,7 @@ export const rootView = (model: Model): VDom => {
         <Tabs value={model.tab} onChange={onTabsChange}>
           <Tab value="circulation" label="Circulation">
             <div>Circulation</div>
-            {/*views.circulation(model.circulation)*/}
+            {circulationView(model.circulation)}
           </Tab>
           <Tab value="members" label="Members">
             <div>Members</div>

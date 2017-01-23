@@ -2,9 +2,8 @@ import * as React from "react";
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from "material-ui/Table";
 
 import { Author, Book } from "../../persistence";
-import { BookListModel } from "../root/types";
+import { BookListModel } from "../root";
 import { VDom } from "./types";
-import { CirculationActions } from "../circulation/actions";
 
 function renderAuthor(author: Author) {
   return (

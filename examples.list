@@ -4,12 +4,6 @@
 ./examples/counter/view-react.jsx
 ./examples/labeled-sliders/generated-app.js
 ./examples/labeled-sliders/index.html
-./examples/requirejs/index.html
-./examples/requirejs/js/main.js
-./examples/requirejs/js/model.js
-./examples/requirejs/js/ready.js
-./examples/requirejs/js/receive.js
-./examples/requirejs/js/view.js
 ./examples/rocket-launcher/js/actions.js
 ./examples/rocket-launcher/js/display.js
 ./examples/rocket-launcher/js/model.js
@@ -89,7 +83,6 @@
 ./examples/todomvc/mithril/header/component.js
 ./examples/todomvc/mithril/header/view.js
 ./examples/todomvc/mithril/index-node.html
-./examples/todomvc/mithril/index-reqjs.html
 ./examples/todomvc/mithril/index.html
 ./examples/todomvc/mithril/main/component.js
 ./examples/todomvc/mithril/main/view.js
@@ -122,7 +115,6 @@
 ./examples/todomvc/react/todoItem/view.jsx
 ./examples/todomvc/react/todoapp/component.js
 ./examples/todomvc/react/todoapp/view.jsx
-./examples/todomvc/requirejs.config.js
 ./examples/todomvc/snabbdom/app.js
 ./examples/todomvc/snabbdom/footer/component.js
 ./examples/todomvc/snabbdom/footer/view.js
@@ -131,7 +123,6 @@
 ./examples/todomvc/snabbdom/header/component.js
 ./examples/todomvc/snabbdom/header/view.js
 ./examples/todomvc/snabbdom/index-node.html
-./examples/todomvc/snabbdom/index-reqjs.html
 ./examples/todomvc/snabbdom/index.html
 ./examples/todomvc/snabbdom/main/component.js
 ./examples/todomvc/snabbdom/main/view.js
@@ -154,7 +145,6 @@
 ./examples/todomvc/vanillajs/header/ready.js
 ./examples/todomvc/vanillajs/header/view.js
 ./examples/todomvc/vanillajs/index-node.html
-./examples/todomvc/vanillajs/index-reqjs.html
 ./examples/todomvc/vanillajs/index.html
 ./examples/todomvc/vanillajs/main/component.js
 ./examples/todomvc/vanillajs/main/ready.js
@@ -198,5 +188,4 @@
 ./public/lib/mithril.min.js.map
 ./public/lib/react-15.3.2.js
 ./public/lib/react-dom-15.3.2.js
-./public/lib/require.js
 ./public/lib/union-type.js

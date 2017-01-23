@@ -10,7 +10,7 @@ export const meiosis: MeiosisInstance<Model, Proposal> = newInstance<Model, Prop
 export const propose: Stream<Proposal> = meiosis.propose;
 
 export const receive: (variant: string) => Scanner<Model, Proposal> = (variant: string) => {
-  const url = urlHandler("mithril");
+  const url = urlHandler(variant);
 
   return (model: Model, proposal: Proposal) => {
     model = rootReceive(model, proposal);
