@@ -3,8 +3,7 @@ import * as m from "mithril";
 
 import { BookListModel, Model, Proposal, meiosis, createApp, propose } from "./root";
 
-import { VDom } from "./mithril/types";
-import { circulationView, rootView, progressDialogConfig } from "./mithril";
+import { VDom, circulationView, rootView } from "./mithril";
 
 import { createServer } from "./sinonServer";
 createServer();
