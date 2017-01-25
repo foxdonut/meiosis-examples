@@ -10,8 +10,9 @@ export const view = model => {
   const onSave = _evt => propose(Action.Validate(model));
 
   return (<div>
-    {entryView(model)}
-    {dateView(model)}
+    <div>JSX version</div>
+    {entryView(model.store.entry)}
+    {dateView(model.store.date)}
     {/*temperatureView(model)*/}
     {/*temperatureView(model)*/}
     <button className="btn btn-md btn-primary" onClick={onSave}>Save</button>

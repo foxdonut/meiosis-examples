@@ -8,13 +8,13 @@ import { Action } from "./actions";
 const h = jsnox(preact);
 
 export const dateView = model => {
-  const onChange = evt => propose(Action.EditDateValue(evt.target.value));
+  const onInput = evt => propose(Action.EditDateValue(evt.target.value));
 
   const error = objectPath.get(model, "errors.value.0");
 
   return h("span",
     h("span", "Date:"),
-    h("input:text[size=10]", { value: model.value, onChange: onChange }),
+    h("input:text[size=10]", { value: model.value, onInput: onInput }),
     h("span.has-error", h("span.help-block", error))
   );
 };

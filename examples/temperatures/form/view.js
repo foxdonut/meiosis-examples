@@ -13,6 +13,7 @@ export const view = model => {
   const onSave = _evt => propose(Action.Validate(model));
 
   return h("div",
+    h("div", "h version"),
     entryView(model),
     dateView(model),
     //temperatureView(model),
