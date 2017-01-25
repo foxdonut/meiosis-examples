@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./main.js",
+  entry: "./index.js",
   output: {
     path: ".",
     filename: "generated-app.js"

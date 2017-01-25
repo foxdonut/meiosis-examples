@@ -1,4 +1,4 @@
-const receive = (model, proposal) => {
+export const receive = (model, proposal) => {
   proposal.case({
     Save: save => {
       const air = save.store.temperature.air;
@@ -15,5 +15,3 @@ const receive = (model, proposal) => {
 
   return model;
 };
-
-export default receive;

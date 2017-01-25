@@ -1,8 +1,9 @@
-import React from "react";
+import { propose } from "meiosis";
+import { h } from "preact";
 
 import Action from "./actions";
 
-const view = (id, label) => (model, propose) => {
+export const temperatureView = (id, label) => model => {
   const withId = (id, obj) => { obj.id = id; return obj; };
   const onChangeUnits = _evt => propose(withId(id, Action.ChangeUnits()));
   const onIncrease = _evt => propose(withId(id, Action.Increase(1)));
@@ -18,5 +19,3 @@ const view = (id, label) => (model, propose) => {
     </div>
   </div>);
 };
-
-export default view;

@@ -14,9 +14,6 @@
 ./examples/rocket-launcher/react/index.html
 ./examples/rocket-launcher/react/main.jsx
 ./examples/rocket-launcher/react/view.jsx
-./examples/rocket-launcher/snabbdom/index.html
-./examples/rocket-launcher/snabbdom/main.js
-./examples/rocket-launcher/snabbdom/view.js
 ./examples/rocket-launcher/vanillajs/index.html
 ./examples/rocket-launcher/vanillajs/main.js
 ./examples/rocket-launcher/vanillajs/view.js

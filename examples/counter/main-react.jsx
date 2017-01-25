@@ -1,8 +1,6 @@
-/*global window, meiosis, meiosisReact*/
+/*global window, meiosis, ReactDOM*/
 (function() {
   var initialModel = { counter: 0 };
-
-  var view = window.reactView;
 
   var receive = function(model, proposal) {
     return { counter: model.counter + proposal.add };
@@ -10,11 +8,12 @@
 
   var Meiosis = meiosis.newInstance();
 
-  var Main = Meiosis.createComponent({
-    view: view,
-    receive: receive
-  });
+  var view = window.reactView(Meiosis.propose);
 
-  Meiosis.run({ renderer: meiosisReact.renderer().intoId(document, "reactApp"),
-    initialModel: initialModel, rootComponent: Main });
+  var app = Meiosis.run({ initialModel: initialModel, scanner: receive });
+  var element = document.getElementById("reactApp");
+
+  meiosis.on(function(model) {
+    ReactDOM.render(view(model), element);
+  }, app.render);
 })();

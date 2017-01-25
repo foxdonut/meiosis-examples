@@ -1,6 +1,7 @@
-import Action from "./actions";
+import { propose } from "meiosis";
+import { Action } from "./actions";
 
-const nextAction = ({model, proposal, propose}) => {
+export const nextAction = (model, proposal) => {
   proposal.case({
     Validate: () => {
       if (!model.store.entry.errors && !model.store.date.errors) {
@@ -10,5 +11,3 @@ const nextAction = ({model, proposal, propose}) => {
     _: () => {}
   });
 };
-
-export default nextAction;

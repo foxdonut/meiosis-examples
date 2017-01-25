@@ -1,7 +1,4 @@
-const initialModel = model => {
-  model.value = 21;
-  model.units = "C";
-  return model;
-};
-
-export default initialModel;
+export const initialModel = () => ({
+  value: 21,
+  units: "C"
+});

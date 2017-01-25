@@ -1,7 +1,5 @@
 import Type from "union-type";
 
-const Action = Type({
+export const Action = Type({
   EditEntryValue: [String]
 });
-
-export default Action;

@@ -1,9 +1,10 @@
-import React from "react";
+import { propose } from "meiosis";
+import { h } from "preact";
 import objectPath from "object-path";
 
-import Action from "./actions";
+import { Action } from "./actions";
 
-const view = (model, propose) => {
+export const dateView = model => {
   const onChange = evt => propose(Action.EditDateValue(evt.target.value));
 
   const error = objectPath.get(model, "errors.value.0");
@@ -14,5 +15,3 @@ const view = (model, propose) => {
     <span className="has-error"><span className="help-block">{error}</span></span>
   </span>);
 };
-
-export default view;

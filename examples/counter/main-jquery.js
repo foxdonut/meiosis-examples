@@ -1,4 +1,4 @@
-/*global meiosis, meiosisVanillaJs, $*/
+/*global meiosis, $*/
 (function() {
   var initialModel = { counter: 0 };
 
@@ -12,23 +12,20 @@
     return { counter: model.counter + proposal.add };
   };
 
-  var ready = function(propose) {
-    var $root = $(document.getElementById("app"));
+  var app = meiosis.run({ initialModel: initialModel, scanner: receive });
+  var element = document.getElementById("app");
 
-    $root.on("click", "button#inc", function(_evt) {
-      propose({ add: 1 });
-    });
-    $root.on("click", "button#decr", function(_evt) {
-      propose({ add: -1 });
-    });
-  };
+  meiosis.on(function(model) {
+    element.innerHTML = view(model);
+  }, app.render);
 
-  var Main = meiosis.createComponent({
-    view: view,
-    ready: ready,
-    receive: receive
+  var $root = $(document.getElementById("app"));
+
+  $root.on("click", "button#inc", function(_evt) {
+    meiosis.propose({ add: 1 });
+  });
+  $root.on("click", "button#decr", function(_evt) {
+    meiosis.propose({ add: -1 });
   });
 
-  meiosis.run({ renderer: meiosisVanillaJs.renderer().intoId(document, "app"),
-    initialModel: initialModel, rootComponent: Main });
 })();

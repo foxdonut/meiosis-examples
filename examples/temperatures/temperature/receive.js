@@ -1,4 +1,4 @@
-const receive = id => (model, proposal) => {
+export const receive = id => (model, proposal) => {
   if (proposal.id === id) {
     proposal.case({
       Increase: amount => {
@@ -22,5 +22,3 @@ const receive = id => (model, proposal) => {
 
   return model;
 };
-
-export default receive;

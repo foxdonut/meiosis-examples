@@ -1,18 +1,20 @@
-import React from "react";
+import { propose } from "meiosis";
+import { h } from "preact";
 
-import Action from "./actions";
+import { Action } from "./actions";
+import { dateView } from "../date/view.jsx";
+import { entryView } from "../entry/view.jsx";
+//import { temperatureView } from "../temperature/view.jsx";
 
-const view = (entryComponent, dateComponent, airTemperature, waterTemperature) => (model, propose) => {
+export const view = model => {
   const onSave = _evt => propose(Action.Validate(model));
 
   return (<div>
-    {entryComponent(model)}
-    {dateComponent(model)}
-    {airTemperature(model)}
-    {waterTemperature(model)}
+    {entryView(model)}
+    {dateView(model)}
+    {/*temperatureView(model)*/}
+    {/*temperatureView(model)*/}
     <button className="btn btn-md btn-primary" onClick={onSave}>Save</button>
     <span>Saved: {model.store.saved}</span>
   </div>);
 };
-
-export default view;

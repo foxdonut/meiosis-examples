@@ -1,12 +1,13 @@
-import React from "react";
+import { propose } from "meiosis";
+import preact from "preact";
 import jsnox from "jsnox";
 import objectPath from "object-path";
 
-import Action from "./actions";
+import { Action } from "./actions";
 
-const h = jsnox(React);
+const h = jsnox(preact);
 
-const view = (model, propose) => {
+export const entryView = model => {
   const onChange = evt => propose(Action.EditEntryValue(evt.target.value));
 
   const error = objectPath.get(model, "errors.value.0");
@@ -17,5 +18,3 @@ const view = (model, propose) => {
     h("span.has-error", h("span.help-block", error))
   );
 };
-
-export default view;

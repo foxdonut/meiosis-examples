@@ -1,12 +1,9 @@
-/*global meiosis, meiosisVanillaJs, meiosisTracer, window*/
+/*global meiosis, meiosisTracer, window*/
 (function(ref) {
-  var Main = meiosis.createComponent({
-    view: ref.display(ref.state, ref.view),
-    actions: ref.actions,
-    ready: ref.ready,
-    receive: ref.receive(ref.state),
-    nextAction: ref.nextAction(ref.state)
-  });
+  var actions = ref.actions(meiosis.propose);
+  var view = ref.display(ref.state, ref.view);
+  var receive = ref.receive(ref.state);
+  var nextAction = ref.nextAction(ref.state, actions);
 
   var state = function(model) {
     var appState = Object.assign({}, model);
@@ -15,8 +12,18 @@
     return appState;
   };
 
-  var renderRoot = meiosis.run({ renderer: meiosisVanillaJs.renderer().intoId(document, "app"),
-    initialModel: ref.initialModel, state: state, rootComponent: Main });
+  var element = document.getElementById("app");
+  var streams = meiosis.run({
+    initialModel: ref.initialModel,
+    scanner: receive,
+    mappers: [ state ],
+    nextAction: nextAction
+  });
+  meiosis.on(function(state) {
+    element.innerHTML = view(state);
+  }, streams.render);
 
-  meiosisTracer(meiosis.createComponent, renderRoot, "#tracer");
+  ref.ready(actions);
+
+  meiosisTracer({ selector: "#tracer" });
 })(window);

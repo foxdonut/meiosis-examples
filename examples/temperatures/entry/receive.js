@@ -11,7 +11,7 @@ const validation = {
   }
 };
 
-const receive = (model, proposal) => {
+export const receive = (model, proposal) => {
   proposal.case({
     EditEntryValue: value => model.value = value,
     Validate: () => model.errors = validate(model, validation)
@@ -19,5 +19,3 @@ const receive = (model, proposal) => {
 
   return model;
 };
-
-export default receive;

@@ -6,7 +6,6 @@ node node_modules/swig/bin/swig.js render ./examples/library/react/index.swig > 
 node node_modules/swig/bin/swig.js render ./examples/random-gif/index-mithril.swig > ./examples/random-gif/index-mithril.html
 node node_modules/swig/bin/swig.js render ./examples/random-gif/index-react.swig > ./examples/random-gif/index-react.html
 node node_modules/swig/bin/swig.js render ./examples/rocket-launcher/react/index.swig > ./examples/rocket-launcher/react/index.html
-node node_modules/swig/bin/swig.js render ./examples/rocket-launcher/snabbdom/index.swig > ./examples/rocket-launcher/snabbdom/index.html
 node node_modules/swig/bin/swig.js render ./examples/rocket-launcher/vanillajs/index.swig > ./examples/rocket-launcher/vanillajs/index.html
 node node_modules/swig/bin/swig.js render ./examples/temperatures/index.swig > ./examples/temperatures/index.html
 node node_modules/swig/bin/swig.js render ./examples/todo-list/index-inferno.swig > ./examples/todo-list/index-inferno.html
