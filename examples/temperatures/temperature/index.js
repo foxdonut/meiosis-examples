@@ -1,7 +1,7 @@
 import { initialModel } from "./model";
 import { receive } from "./receive";
 
-export const temperature = (id, label) => ({
+export const temperature = {
   initialModel,
-  receive: receive(id)
-});
+  receive
+};

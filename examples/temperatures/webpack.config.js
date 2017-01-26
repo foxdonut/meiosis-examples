@@ -1,8 +1,11 @@
+/*global process*/
+var variant = process.env.VARIANT;
+
 module.exports = {
-  entry: "./index.js",
+  entry: "./index-" + variant + ".js",
   output: {
     path: ".",
-    filename: "generated-app.js"
+    filename: "generated-" + variant + "-app.js"
   },
   module: {
     loaders: [

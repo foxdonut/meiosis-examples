@@ -9,7 +9,7 @@ export const view = model => {
   const onRemoveMeasurement = id => _evt => propose(Action.RemoveMeasurement(id));
 
   const renderSlider = id => h("div", { key: id, style: { border: "1px solid gray" } }, [
-    sliderView({ id, model: model.slidersById[id] }),
+    sliderView(model.slidersById[id]),
     h("div", [
       h("button.btn.btn-danger.btn-sm",
         { on: { click: onRemoveMeasurement(id) } }, "Remove Measurement")

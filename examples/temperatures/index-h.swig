@@ -4,5 +4,5 @@
 {% block example %}temperatures{% endblock %}
 
 {% block content %}
-  <script src="/examples/temperatures/generated-app.js"></script>
+  <script src="/examples/temperatures/generated-h-app.js"></script>
 {% endblock %}

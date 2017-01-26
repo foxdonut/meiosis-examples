@@ -1,4 +1,4 @@
-import React from "react";
+import m from "mithril";
 import { randomGifPairView } from "./random-gif-pair.jsx";
 
 export const randomGifPairPairView = model => (

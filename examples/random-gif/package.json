@@ -4,7 +4,7 @@
   "description": "meiosis-examples random-gif",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env VARIANT=mithril webpack && cross-env VARIANT=react webpack",
+    "start": "cross-env VARIANT=mithril webpack && cross-env VARIANT=jsx webpack",
     "watch": "webpack --progress --colors --watch",
     "test": "ava"
   },
@@ -24,9 +24,9 @@
   },
   "keywords": [
     "example",
+    "jsx",
     "meiosis",
     "mithril",
-    "react",
     "reactive"
   ],
   "author": "foxdonut",
@@ -39,10 +39,8 @@
     "axios": "^0.15.3",
     "classnames": "^2.2.5",
     "meiosis": "^0.10.0",
-    "mithril": "^1.0.0-rc.6",
+    "mithril": "^1.0.0-rc.8",
     "object-path": "^0.11.3",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
@@ -50,7 +48,6 @@
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.7",
-    "babel-preset-react": "^6.16.0",
     "browser-env": "^2.0.19",
     "cross-env": "^3.1.3",
     "jquery": "^3.1.1",

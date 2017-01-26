@@ -4,6 +4,7 @@
 {% block example %}library{% endblock %}
 
 {% block top %}
+  React + Material UI version |
   <a href="/examples/library/mithril">Mithril + Bootstrap version</a>
 {% endblock %}
 

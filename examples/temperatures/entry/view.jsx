@@ -1,5 +1,5 @@
 import { propose } from "meiosis";
-import { h } from "preact";
+import preact from "preact";
 import objectPath from "object-path";
 
 import { Action } from "./actions";

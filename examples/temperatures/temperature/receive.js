@@ -1,5 +1,5 @@
-export const receive = id => (model, proposal) => {
-  if (proposal.id === id) {
+export const receive = (model, proposal) => {
+  if (proposal.id === model.id) {
     proposal.case({
       Increase: amount => {
         model.value = model.value + amount;

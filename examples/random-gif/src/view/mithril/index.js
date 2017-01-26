@@ -8,7 +8,7 @@ import { randomGifListView } from "./random-gif-list";
 
 export const view = model =>
   m("div",
-    m("div", "Mithril"),
+    m("div", m("span", "Mithril + m | "), m("a", { href: "index-jsx.html"}, "Mithril + JSX")),
     counterView(model.counter),
     m("div", "Button:"),
     buttonView(model.button),

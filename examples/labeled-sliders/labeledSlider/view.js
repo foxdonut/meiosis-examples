@@ -3,9 +3,9 @@ import h from "snabbdom/h";
 
 import { Action } from "./actions";
 
-export const view = ({ id, model }) => {
+export const view = model => {
   const getValue = evt => parseInt(evt.target.value, 10);
-  const onChangeValue = evt => propose(Action.UpdateMeasurement(id, getValue(evt)));
+  const onChangeValue = evt => propose(Action.UpdateMeasurement(model.id, getValue(evt)));
   const attrs = Object.assign({type: "range"}, model);
 
   return (

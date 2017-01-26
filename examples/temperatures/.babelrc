@@ -1,6 +1,6 @@
 {
   "presets": ["env"],
   "plugins": [
-    ["transform-react-jsx", { "pragma": "h" }]
+    ["transform-react-jsx", { "pragma": "preact.h" }]
   ]
 }

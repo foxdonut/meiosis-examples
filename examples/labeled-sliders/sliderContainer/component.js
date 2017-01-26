@@ -1,4 +1,3 @@
-import uuid from "uuid";
 import { Action } from "./actions";
 import { Action as SliderAction } from "../labeledSlider";
 import { component as sliderComponent } from "../labeledSlider";
@@ -11,9 +10,9 @@ const initialModel = {
 const receive = (model, proposal) => {
   Action.case({
     AddMeasurement: () => {
-      const id = uuid.v1();
-      model.sliderIds.push(id);
-      model.slidersById[id] = sliderComponent.initialModel({});
+      const sliderModel = sliderComponent.initialModel();
+      model.sliderIds.push(sliderModel.id);
+      model.slidersById[sliderModel.id] = sliderModel;
     },
     RemoveMeasurement: id => {
       delete model.slidersById[id];
@@ -23,7 +22,7 @@ const receive = (model, proposal) => {
 
   SliderAction.case({
     UpdateMeasurement: () => {
-      model.sliderIds.forEach(id => sliderComponent.receive({ id, model: model.slidersById[id], proposal}));
+      model.sliderIds.forEach(id => sliderComponent.receive(model.slidersById[id], proposal));
     }
   }, proposal);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import m from "mithril";
 import { counterView } from "./counter.jsx";
 import { buttonView } from "./button.jsx";
 import { randomGifView } from "./random-gif.jsx";
@@ -8,7 +8,7 @@ import { randomGifListView } from "./random-gif-list.jsx";
 
 export const view = model => (
   <div>
-    <div>React</div>
+    <div>Mithril + JSX | <a href="index-mithril.html">Mithril + m</a></div>
     { counterView(model.counter) }
     <div>Button:</div>
     { buttonView(model.button) }

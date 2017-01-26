@@ -1,24 +1,21 @@
 import { propose } from "meiosis";
-import preact from "preact";
-import jsnox from "jsnox";
+import { h } from "preact";
 
-import Action from "./actions";
+import { Action } from "./actions";
 
-const h = jsnox(preact);
-
-export const temperatureView = (id, label) => model => {
+export const temperatureView = model => {
   const withId = (id, obj) => { obj.id = id; return obj; };
-  const onChangeUnits = _evt => propose(withId(id, Action.ChangeUnits()));
-  const onIncrease = _evt => propose(withId(id, Action.Increase(1)));
-  const onDecrease = _evt => propose(withId(id, Action.Decrease(1)));
+  const onChangeUnits = _evt => propose(withId(model.id, Action.ChangeUnits()));
+  const onIncrease = _evt => propose(withId(model.id, Action.Increase(1)));
+  const onDecrease = _evt => propose(withId(model.id, Action.Decrease(1)));
 
-  return h("div",
-    h("div",
-      h("span", label),
-      h("span", model.value),
-      h("button.btn.btn-sm.btn-primary", { onClick: onChangeUnits }, "\xB0" + model.units),
-      h("button.btn.btn-sm.btn-default", { onClick: onIncrease }, "+"),
-      h("button.btn.btn-sm.btn-default", { onClick: onDecrease }, "-")
+  return h("div", {},
+    h("div", {},
+      h("span", {}, model.label),
+      h("span", {}, model.value),
+      h("button", { class: "btn btn-sm btn-primary", onClick: onChangeUnits }, "\xB0" + model.units),
+      h("button", { class: "btn btn-sm btn-default", onClick: onIncrease }, "+"),
+      h("button", { class: "btn btn-sm btn-default", onClick: onDecrease }, "-")
     )
   );
 };

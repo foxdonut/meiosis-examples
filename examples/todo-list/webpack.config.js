@@ -5,7 +5,7 @@ var webpack = require("webpack");
 
 module.exports = {
   entry: "./app-" + variant + ".js",
-  devtool: "source-map",
+  devtool: isProduction ? "source-map" : "eval",
   output: {
     path: ".",
     filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"

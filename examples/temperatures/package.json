@@ -4,7 +4,7 @@
   "description": "meiosis-examples temperatures",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env VARIANT=react webpack",
+    "start": "cross-env VARIANT=h webpack && cross-env VARIANT=jsx webpack",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
