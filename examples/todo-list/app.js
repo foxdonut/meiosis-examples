@@ -7,7 +7,19 @@ export function createApp() {
 
   createServer();
 
-  const initialModel = {};
+  const initialModel = {
+    form: {
+      todo: {
+        id: "",
+        priority: "",
+        description: ""
+      },
+      validationErrors: { }
+    },
+    list: {
+      todos: []
+    }
+  };
   const receive = (model, proposal) => model;
 
   return run({ initialModel, scanner: receive });

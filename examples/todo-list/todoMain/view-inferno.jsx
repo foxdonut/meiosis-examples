@@ -6,9 +6,9 @@ export const view = model => (
   <div>
     <div className="row">
       <div className="col-md-4">
-        {todoFormView(model)}
+        {todoFormView(model.form)}
       </div>
     </div>
-    {todoListView(model)}
+    {todoListView(model.list)}
   </div>
 );
