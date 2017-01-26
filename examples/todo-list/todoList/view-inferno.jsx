@@ -1,8 +1,8 @@
 import Inferno from "inferno";
-import todoItem from "../todoItem/view-inferno.jsx";
+import { todoItemView } from "../todoItem/view-inferno.jsx";
 
-const view = (model, actions) => {
-  const renderTodo = todoItem(actions);
+export const todoListView = (model, actions) => {
+  const renderTodo = todoItemView(actions);
 
   return (
     <div className="row">
@@ -24,5 +24,3 @@ const view = (model, actions) => {
     </div>
   );
 };
-
-export default view;

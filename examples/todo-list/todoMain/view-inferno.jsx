@@ -1,14 +1,14 @@
 import Inferno from "inferno";
+import { todoFormView } from "../todoForm/view-inferno.jsx";
+import { todoListView } from "../todoList/view-inferno.jsx";
 
-const view = (todoForm, todoList) => model => (
+export const view = model => (
   <div>
     <div className="row">
       <div className="col-md-4">
-        {todoForm(model)}
+        {todoFormView(model)}
       </div>
     </div>
-    {todoList(model)}
+    {todoListView(model)}
   </div>
 );
-
-export default view;

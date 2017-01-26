@@ -1,7 +1,7 @@
 import Inferno from "inferno";
 import serialize from "form-serialize";
 
-const view = (model, actions) => {
+export const todoFormView = (model, actions) => {
   const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
 
   const onChangeText = evt => actions.editingTodo(getTodo(evt));
@@ -41,5 +41,3 @@ const view = (model, actions) => {
     </form>
   );
 };
-
-export default view;

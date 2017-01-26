@@ -1,12 +1,10 @@
-import app from "./app";
-import { createComponent, run } from "meiosis";
-import { renderer } from "meiosis-inferno";
+import { on } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
-import todoMainComponent from "./todoMain/component-inferno";
+import { render } from "inferno";
+import { createApp } from "./app";
+import { view } from "./todoMain/view-inferno.jsx";
 
-const runapp = () => {
-  const renderRoot = run({ renderer: renderer().intoId(document, "app"), rootComponent: todoMainComponent() });
-  meiosisTracer(createComponent, renderRoot, "#tracer");
-};
-
-app(runapp);
+const app = createApp();
+const element = document.getElementById("app");
+on(model => render(view(model), element), app.render);
+meiosisTracer({ selector: "#tracer" });

@@ -1,9 +1,14 @@
+import { run } from "meiosis";
 import Type from "union-type";
 import createServer from "./sinonServer";
 
-export default function(runapp) {
+export function createApp() {
   Type.check = false;
 
   createServer();
-  runapp();
+
+  const initialModel = {};
+  const receive = (model, proposal) => model;
+
+  return run({ initialModel, scanner: receive });
 }
