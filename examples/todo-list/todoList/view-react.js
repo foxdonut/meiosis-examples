@@ -1,8 +1,8 @@
 import h from "../util/jsnox-react";
-import todoItem from "../todoItem/view-react";
+import { todoItemView } from "../todoItem/view-react";
 
-const view = (model, actions) => {
-  const renderTodo = todoItem(actions);
+export const todoListView = (model, actions) => {
+  const renderTodo = todoItemView(actions);
 
   return h("div.row",
     h("div.col-md-8",
@@ -20,5 +20,3 @@ const view = (model, actions) => {
     )
   );
 };
-
-export default view;

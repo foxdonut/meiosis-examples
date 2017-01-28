@@ -17,7 +17,8 @@ export function createApp() {
       validationErrors: { }
     },
     list: {
-      todos: []
+      todos: [],
+      message: ""
     }
   };
   const receive = (model, proposal) => model;

@@ -1,13 +1,14 @@
 import h from "../util/jsnox-react";
+import { todoFormView } from "../todoForm/view-react";
+import { todoListView } from "../todoList/view-react";
 
-const view = (todoForm, todoList) => model =>
+export const view = model =>
   h("div",
+    h("div", h("span", "React + JSnoX | "), h("a", { href: "index-inferno.html" }, "Inferno + JSX")),
     h("div.row",
       h("div.col-md-4",
-        todoForm(model)
+        todoFormView(model.form)
       )
     ),
-    todoList(model)
+    todoListView(model.list)
   );
-
-export default view;

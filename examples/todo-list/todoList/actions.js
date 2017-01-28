@@ -1,13 +1,13 @@
 import Type from "union-type";
 
-const Action = Type({
+export const Action = Type({
   RequestLoadList: [],
   LoadedList: [Object],
   RequestDeleteTodo: [],
   DeletedTodo: [Object]
 });
 
-const createActions = (ActionForm, services) => propose => ({
+export const createActions = (ActionForm, services) => propose => ({
   loadList: () => {
     propose(Action.RequestLoadList());
     services.loadTodos.then(model => propose(Action.LoadedList(model)));
@@ -20,5 +20,3 @@ const createActions = (ActionForm, services) => propose => ({
     services.deleteTodo(id).then(maybeTodoId => propose(Action.DeletedTodo(maybeTodoId)));
   }
 });
-
-export { Action, createActions };

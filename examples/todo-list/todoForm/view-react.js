@@ -1,7 +1,7 @@
 import h from "../util/jsnox-react";
 import serialize from "form-serialize";
 
-const view = (model, actions) => {
+export const todoFormView = (model, actions) => {
   const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
 
   const onChangeText = evt => actions.editingTodo(getTodo(evt));
@@ -39,5 +39,3 @@ const view = (model, actions) => {
     )
   );
 };
-
-export default view;

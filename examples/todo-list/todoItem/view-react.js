@@ -1,6 +1,6 @@
 import h from "../util/jsnox-react";
 
-const view = actions => todo => {
+export const todoItemView = actions => todo => {
   const onEdit = todo => evt => {
     evt.preventDefault();
     actions.editTodo(todo);
@@ -20,5 +20,3 @@ const view = actions => todo => {
     )
   );
 };
-
-export default view;
