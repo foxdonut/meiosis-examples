@@ -39,7 +39,7 @@
     "axios": "^0.15.3",
     "classnames": "^2.2.5",
     "meiosis": "^0.10.0",
-    "mithril": "^1.0.0-rc.8",
+    "mithril": "^1.0.0",
     "object-path": "^0.11.3",
     "uuid": "^3.0.1"
   },
