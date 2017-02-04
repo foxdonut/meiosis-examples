@@ -1,12 +1,11 @@
 import { initialModel } from "./model";
 import { receive } from "./receive";
-import { createActions, intents } from "./actions";
+import { createActions } from "./actions";
 
 export const randomGif = {
   initialModel,
   receive,
-  createActions,
-  intents
+  createActions
 };
 
 export * from "./constants";

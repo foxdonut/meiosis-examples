@@ -1,10 +1,6 @@
-import { on, stream } from "meiosis";
+import { on } from "meiosis";
 import * as C from "./constants";
-
-export const intents = {
-  editTag: stream(),
-  newGif: stream()
-};
+import { intents } from "../view/common/random-gif";
 
 export const createActions = ({ ajax, propose }) => {
   on(({ id, tag }) => propose({ type: C.GIF_TAG_EDIT, id, tag }), intents.editTag);
