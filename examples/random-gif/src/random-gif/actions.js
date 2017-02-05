@@ -1,8 +1,7 @@
 import { on } from "meiosis";
 import * as C from "./constants";
-import { intents } from "../view/common/random-gif";
 
-export const createActions = ({ ajax, propose }) => {
+export const createActions = ({ ajax, intents, propose }) => {
   on(({ id, tag }) => propose({ type: C.GIF_TAG_EDIT, id, tag }), intents.editTag);
 
   on(({ id, tag }) => {

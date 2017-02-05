@@ -9,6 +9,7 @@ import { randomGif } from "../random-gif";
 import { randomGifPair } from "../random-gif-pair";
 import { randomGifPairPair } from "../random-gif-pair-pair";
 import { randomGifList } from "../random-gif-list";
+import { intents } from "../view/common/random-gif";
 
 export function startApp() {
   const initialModel = {
@@ -34,7 +35,7 @@ export function startApp() {
   };
 
   button.createActions({ propose });
-  randomGif.createActions({ propose, ajax });
+  randomGif.createActions({ propose, ajax, intents });
   randomGifList.createActions({ propose });
 
   return run({ initialModel, scanner: { model: receive } });
