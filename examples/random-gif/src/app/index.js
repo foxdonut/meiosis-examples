@@ -1,4 +1,4 @@
-import { propose, run } from "meiosis";
+import { run } from "meiosis";
 import { ajax } from "../util";
 
 import { app } from "./app";
@@ -34,9 +34,11 @@ export function startApp() {
     return model;
   };
 
+  const modelChanges = null;
+
   button.createActions({ propose });
   randomGif.createActions({ propose, ajax, randomGifIntents });
   randomGifList.createActions({ propose });
 
-  return run({ initialModel, scanner: { model: receive } });
+  return run({ initialModel, modelChanges });
 }
