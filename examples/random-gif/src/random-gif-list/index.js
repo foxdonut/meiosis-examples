@@ -1,10 +1,6 @@
-import { initialModel } from "./model";
-import { receive } from "./receive";
-import { createActions, intents } from "./actions";
+import { initialModel, modelChanges } from "./model";
 
 export const randomGifList = {
   initialModel,
-  receive,
-  createActions,
-  intents
+  modelChanges
 };

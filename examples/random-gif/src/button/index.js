@@ -1,10 +1,6 @@
-import { initialModel } from "./model";
-import { receive } from "./receive";
-import { createActions, intents } from "./actions";
+import { initialModel, modelChange } from "./model";
 
 export const button = ({
   initialModel,
-  receive,
-  createActions,
-  intents
+  modelChange
 });
