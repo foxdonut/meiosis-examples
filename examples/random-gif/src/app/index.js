@@ -10,7 +10,6 @@ import { randomGif } from "../random-gif";
 import { randomGifPair } from "../random-gif-pair";
 import { randomGifPairPair } from "../random-gif-pair-pair";
 import { randomGifList } from "../random-gif-list";
-import { randomGifIntents } from "../view/common/random-gif";
 
 export function startApp() {
   const initialModel = {
@@ -47,9 +46,11 @@ export function startApp() {
   };
 
   const modelChanges = merge(
-    map(() => nest("button", button.modelChange), buttonActions.toggle),
-    map(modelChange => nest("randomGifList", modelChange), randomGifList.modelChanges)
-  );
+    map(() => nest("button", button.modelChange), buttonActions.toggle), merge(
+    map(modelChange => nest("randomGifList", modelChange), randomGifList.modelChanges), merge(
+    map(modelChange => nest("randomGif1", modelChange), randomGif.modelChanges),
+    map(modelChange => nest("randomGif2", modelChange), randomGif.modelChanges)
+  )));
 
   return run({ initialModel, modelChanges });
 }
