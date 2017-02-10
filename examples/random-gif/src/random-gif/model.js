@@ -1,6 +1,10 @@
-import { map } from "meiosis";
+import { map, on, stream } from "meiosis";
+import { ajax, mergeAll } from "../util";
 import uuid from "uuid";
-import { randomGifActions } from "../view/common/random-gif";
+import { randomGifActions } from "../view/events/random-gif";
+
+const GIF_NEW_URL = "https://api.giphy.com/v1/gifs/random";
+const api_key = "dc6zaTOxFJmzC";
 
 export const initialModel = id => {
   id = id || uuid.v1();
@@ -21,39 +25,45 @@ const editTag = map(({ id, tag }) => model => {
   return model;
 }, randomGifActions.editTag);
 
-/*
-export const createActions = ({ ajax, randomGifIntents, propose }) => {
-  on(({ id, tag }) => propose({ type: C.GIF_TAG_EDIT, id, tag }), randomGifIntents.editTag);
+const newGifStartAction = stream();
+const newGifSuccessAction = stream();
+const newGifErrorAction = stream();
 
-  on(({ id, tag }) => {
-    propose({ type: C.GIF_NEW_START, id, tag });
-    ajax.getJSON({ url: C.GIF_NEW_URL, params: { api_key: "dc6zaTOxFJmzC", tag }}).
-      then(response => propose({ type: C.GIF_NEW_SUCCESS, id, data: response.data })).
-      catch(error => propose({ type: C.GIF_NEW_ERROR, id, error }));
-  }, randomGifIntents.newGif);
-};
+on(({ id, tag }) => {
+  newGifStartAction({ id, tag });
+  ajax.getJSON({ url: GIF_NEW_URL, params: { api_key, tag }}).
+    then(response => newGifSuccessAction({ id, data: response.data })).
+    catch(error => newGifErrorAction({ id, error }));
+}, randomGifActions.newGif);
 
-export function receive(model, proposal) {
-  if (proposal.id === model.id) {
-    if (proposal.type === C.GIF_TAG_EDIT) {
-      model.tag = proposal.tag;
-    }
-    else if (proposal.type === C.GIF_NEW_START) {
-      model.isLoading = true;
-      model.isError = false;
-    }
-    else if (proposal.type === C.GIF_NEW_SUCCESS) {
-      model.isLoading = false;
-      model.isError = false;
-      model.image_url = proposal.data.image_url;
-    }
-    else if (proposal.type === C.GIF_NEW_ERROR) {
-      model.isLoading = false;
-      model.isError = true;
-    }
+const newGifStart = map(({ id }) => model => {
+  if (id === model.id) {
+    model.isLoading = true;
+    model.isError = false;
   }
   return model;
-}
-*/
+}, newGifStartAction);
 
-export const modelChanges = editTag;
+const newGifSuccess = map(({ id, data }) => model => {
+  if (id === model.id) {
+    model.isLoading = false;
+    model.isError = false;
+    model.image_url = data.image_url;
+  }
+  return model;
+}, newGifSuccessAction);
+
+const newGifError = map(({ id }) => model => {
+  if (id === model.id) {
+    model.isLoading = false;
+    model.isError = true;
+  }
+  return model;
+}, newGifErrorAction);
+
+export const modelChanges = mergeAll([
+  editTag,
+  newGifStart,
+  newGifSuccess,
+  newGifError
+]);

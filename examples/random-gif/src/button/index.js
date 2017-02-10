@@ -1,6 +1,6 @@
-import { initialModel, modelChange } from "./model";
+import { initialModel, modelChanges } from "./model";
 
 export const button = ({
   initialModel,
-  modelChange
+  modelChanges
 });

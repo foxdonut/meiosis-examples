@@ -1,6 +1,7 @@
-import { map, merge } from "meiosis";
+import { map } from "meiosis";
+import { mergeAll } from "../util";
 import { randomGif } from "../random-gif";
-import { randomGifListActions } from "../view/common/random-gif-list";
+import { randomGifListActions } from "../view/events/random-gif-list";
 
 export const initialModel = () => ({
   randomGifIds: [],
@@ -20,6 +21,9 @@ const remove = map(id => model => {
   return model;
 }, randomGifListActions.remove);
 
-//model.randomGifIds.forEach(id => randomGif.receive(model.randomGifsById[id], proposal));
+const update = map(modelChange => model => {
+  model.randomGifIds.forEach(id => modelChange(model.randomGifsById[id]));
+  return model;
+}, randomGif.modelChanges);
 
-export const modelChanges = merge(add, remove);
+export const modelChanges = mergeAll([add, remove, update]);

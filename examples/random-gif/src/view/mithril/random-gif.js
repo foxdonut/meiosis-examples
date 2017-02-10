@@ -1,5 +1,5 @@
 import m from "mithril";
-import { randomGifIntents } from "../common/random-gif";
+import { randomGifIntents } from "../events/random-gif";
 import { imgsrc } from "../../random-gif";
 
 export const randomGifView = model =>

@@ -1,6 +1,6 @@
 import m from "mithril";
 import classnames from "classnames";
-import { buttonIntents } from "../common/button";
+import { buttonIntents } from "../events/button";
 
 export const buttonView = model => {
   const classes = classnames({ "btn-primary": model.active, "btn-danger": !model.active });

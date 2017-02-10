@@ -38,6 +38,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "classnames": "^2.2.5",
+    "flyd": "^0.2.4",
     "meiosis": "^0.10.0",
     "mithril": "^1.0.0",
     "object-path": "^0.11.3",

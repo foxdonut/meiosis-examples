@@ -1,8 +1,11 @@
+import { map } from "meiosis";
+import { buttonActions } from "../view/events/button";
+
 export const initialModel = () => ({
   active: false
 });
 
-export function modelChange(model) {
+export const modelChanges = map(() => model => {
   model.active = !model.active;
   return model;
-}
+}, buttonActions.toggle);

@@ -1,11 +1,10 @@
-import { map, merge, run } from "meiosis";
-import { ajax } from "../util";
+import { map, run } from "meiosis";
+import { ajax, mergeAll, nest } from "../util";
 
 import { app } from "./app";
 
 import { counter } from "../counter";
 import { button } from "../button";
-import { buttonActions } from "../view/common/button";
 import { randomGif } from "../random-gif";
 import { randomGifPair } from "../random-gif-pair";
 import { randomGifPairPair } from "../random-gif-pair-pair";
@@ -39,18 +38,14 @@ export function startApp() {
   randomGif.createActions({ propose, ajax, randomGifIntents });
   randomGifList.createActions({ propose });
 */
-  // util
-  const nest = (path, fn) => model => {
-    model[path] = fn(model[path]);
-    return model;
-  };
-
-  const modelChanges = merge(
-    map(() => nest("button", button.modelChange), buttonActions.toggle), merge(
-    map(modelChange => nest("randomGifList", modelChange), randomGifList.modelChanges), merge(
-    map(modelChange => nest("randomGif1", modelChange), randomGif.modelChanges),
-    map(modelChange => nest("randomGif2", modelChange), randomGif.modelChanges)
-  )));
+  const modelChanges = mergeAll([
+    map(nest("button"), button.modelChanges),
+    map(nest("randomGif1"), randomGif.modelChanges),
+    map(nest("randomGif2"), randomGif.modelChanges),
+    map(nest("randomGifPair"), randomGifPair.modelChanges),
+    map(nest("randomGifPairPair"), randomGifPairPair.modelChanges),
+    map(nest("randomGifList"), randomGifList.modelChanges)
+  ]);
 
   return run({ initialModel, modelChanges });
 }
