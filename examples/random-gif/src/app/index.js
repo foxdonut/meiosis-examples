@@ -1,7 +1,5 @@
 import { map, run } from "meiosis";
-import { ajax, mergeAll, nest } from "../util";
-
-import { app } from "./app";
+import { mergeAll, nest } from "../util";
 
 import { counter } from "../counter";
 import { button } from "../button";
@@ -21,24 +19,14 @@ export function startApp() {
     randomGifList: randomGifList.initialModel()
   };
 
-/*
-  const receive = (model, proposal) => {
-    model = app.receive(model, proposal);
-    model.button = button.receive(model.button, proposal);
-    model.randomGif1 = randomGif.receive(model.randomGif1, proposal);
-    model.randomGif2 = randomGif.receive(model.randomGif2, proposal);
-    model.randomGifPair = randomGifPair.receive(model.randomGifPair, proposal);
-    model.randomGifPairPair = randomGifPairPair.receive(model.randomGifPairPair, proposal);
-    model.randomGifList = randomGifList.receive(model.randomGifList, proposal);
-
+  const counterModelChanges = map(() => model => {
+    const increment = model.counter.value >= 10 && model.button.active ? 2 : 1;
+    model.counter.value = model.counter.value + increment;
     return model;
-  };
+  }, randomGif.newGifSuccessAction);
 
-  button.createActions({ propose });
-  randomGif.createActions({ propose, ajax, randomGifIntents });
-  randomGifList.createActions({ propose });
-*/
   const modelChanges = mergeAll([
+    counterModelChanges,
     map(nest("button"), button.modelChanges),
     map(nest("randomGif1"), randomGif.modelChanges),
     map(nest("randomGif2"), randomGif.modelChanges),

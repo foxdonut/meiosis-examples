@@ -1,8 +1,9 @@
-import { initialModel, modelChanges } from "./model";
+import { initialModel, modelChanges, newGifSuccessAction } from "./model";
 
 export const randomGif = {
   initialModel,
-  modelChanges
+  modelChanges,
+  newGifSuccessAction
 };
 
 export const imgsrc = model => model.isLoading ? "/examples/random-gif/images/loading.gif" : (

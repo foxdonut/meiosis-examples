@@ -26,7 +26,7 @@ const editTag = map(({ id, tag }) => model => {
 }, randomGifActions.editTag);
 
 const newGifStartAction = stream();
-const newGifSuccessAction = stream();
+export const newGifSuccessAction = stream();
 const newGifErrorAction = stream();
 
 on(({ id, tag }) => {
