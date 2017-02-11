@@ -5,7 +5,7 @@
     counter: meiosis.stream(),
     decrement: function(counterValue) {
       setTimeout(function() {
-        ref.actions.counter(counterValue);
+        ref.actions.counter(counterValue - 1);
       }, 1000);
     },
     launch: meiosis.stream(),

@@ -1,7 +1,6 @@
 /*global meiosis, meiosisTracer, window*/
 (function(ref) {
   var view = ref.display(ref.state, ref.view);
-  var receive = ref.receive(ref.state);
   var nextAction = ref.nextAction(ref.state, ref.actions);
 
   var modelChanges = ref.modelChanges(ref.state, ref.actions);
@@ -16,15 +15,15 @@
   var element = document.getElementById("app");
   var streams = meiosis.run({
     initialModel: ref.initialModel,
-    scanner: receive,
-    mappers: [ state ],
-    nextAction: nextAction
+    modelChanges: modelChanges,
+    mappers: [ state ]
   });
   meiosis.on(function(state) {
     element.innerHTML = view(state);
+    nextAction(state);
   }, streams.render);
 
-  ref.ready(actions);
+  ref.ready(ref.actions);
 
   meiosisTracer({ selector: "#tracer" });
 })(window);

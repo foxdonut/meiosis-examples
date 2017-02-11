@@ -26,12 +26,12 @@
   ref.ready = function(actions) {
     delegate(root, "form.start", "submit", function(evt) {
       evt.preventDefault();
-      actions.start();
+      actions.start(true);
     });
 
     delegate(root, "form.counting", "submit", function(evt) {
       evt.preventDefault();
-      actions.abort();
+      actions.abort(true);
     });
   };
 })(window);

@@ -6,7 +6,7 @@
           actions.decrement(model.counter);
         }
         else if (model.counter === 0) {
-          actions.launch();
+          actions.launch(true);
         }
       }
     };

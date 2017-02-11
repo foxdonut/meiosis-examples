@@ -10,15 +10,33 @@
   };
 
   ref.modelChanges = function(state, actions) {
-    var start = meiosis.map(function(model) {
-      model.started = true;
-      return model;
+    var start = meiosis.map(function() {
+      return function(model) {
+        model.started = true;
+        return model;
+      };
     }, actions.start);
 
-    var launch = meiosis.map(function(model) {
-      model.launched = true;
-      return model;
+    var counter = meiosis.map(function(counterValue) {
+      return function(model) {
+        model.counter = counterValue;
+        return model;
+      };
+    }, actions.counter);
+
+    var launch = meiosis.map(function() {
+      return function(model) {
+        model.launched = true;
+        return model;
+      };
     }, actions.launch);
+
+    var abort = meiosis.map(function() {
+      return function(model) {
+        model.aborted = true;
+        return model;
+      };
+    }, actions.abort);
 
 /*
     return function(model) {
@@ -42,7 +60,9 @@
 */
     return meiosis.mergeAll([
       start,
-      launch
+      counter,
+      launch,
+      abort
     ]);
   };
 })(window);
