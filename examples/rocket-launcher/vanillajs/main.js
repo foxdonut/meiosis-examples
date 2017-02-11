@@ -1,9 +1,10 @@
 /*global meiosis, meiosisTracer, window*/
 (function(ref) {
-  var actions = ref.actions(meiosis.propose);
   var view = ref.display(ref.state, ref.view);
   var receive = ref.receive(ref.state);
-  var nextAction = ref.nextAction(ref.state, actions);
+  var nextAction = ref.nextAction(ref.state, ref.actions);
+
+  var modelChanges = ref.modelChanges(ref.state, ref.actions);
 
   var state = function(model) {
     var appState = Object.assign({}, model);

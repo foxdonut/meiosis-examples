@@ -8,11 +8,15 @@
       "<button id='decr' class='btn btn-sm btn-default'>- 1</button></div>";
   };
 
-  var receive = function(model, proposal) {
-    return { counter: model.counter + proposal.add };
-  };
+  var addAction = meiosis.stream();
 
-  var app = meiosis.run({ initialModel: initialModel, scanner: receive });
+  var modelChanges = meiosis.map(function(add) {
+    return function(model) {
+      return { counter: model.counter + add };
+    };
+  }, addAction);
+
+  var app = meiosis.run({ initialModel: initialModel, modelChanges: modelChanges });
   var element = document.getElementById("app");
 
   meiosis.on(function(model) {
@@ -22,10 +26,10 @@
   var $root = $(document.getElementById("app"));
 
   $root.on("click", "button#inc", function(_evt) {
-    meiosis.propose({ add: 1 });
+    addAction(1);
   });
   $root.on("click", "button#decr", function(_evt) {
-    meiosis.propose({ add: -1 });
+    addAction(-1);
   });
 
 })();

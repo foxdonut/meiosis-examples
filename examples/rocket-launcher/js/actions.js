@@ -1,21 +1,14 @@
-/*global window*/
+/*global meiosis, window*/
 (function(ref) {
-  ref.actions = function(propose) {
-    return {
-      start: function() {
-        propose({ started: true });
-      },
-      decrement: function(counter) {
-        setTimeout(function() {
-          propose({ counter: counter - 1 });
-        }, 1000);
-      },
-      launch: function() {
-        propose({ launched: true });
-      },
-      abort: function() {
-        propose({ aborted: true });
-      }
-    };
+  ref.actions = {
+    start: meiosis.stream(),
+    counter: meiosis.stream(),
+    decrement: function(counterValue) {
+      setTimeout(function() {
+        ref.actions.counter(counterValue);
+      }, 1000);
+    },
+    launch: meiosis.stream(),
+    abort: meiosis.stream()
   };
 })(window);

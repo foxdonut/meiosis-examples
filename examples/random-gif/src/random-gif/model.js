@@ -1,5 +1,5 @@
-import { map, on, stream } from "meiosis";
-import { ajax, mergeAll } from "../util";
+import { map, mergeAll, on, stream } from "meiosis";
+import { ajax } from "../util";
 import uuid from "uuid";
 import { randomGifActions } from "../view/events/random-gif";
 

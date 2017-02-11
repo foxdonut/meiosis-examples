@@ -1,5 +1,5 @@
-import { map, run } from "meiosis";
-import { mergeAll, nest } from "../util";
+import { map, mergeAll, run } from "meiosis";
+import { nest } from "../util";
 
 import { counter } from "../counter";
 import { button } from "../button";

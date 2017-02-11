@@ -5,7 +5,7 @@
 
 {% block content %}
   <script src="/public/lib/meiosis.min.js"></script>
-  <script src="/public/lib/jquery-2.2.3.min.js"></script>
+  <script src="/public/lib/jquery.min.js"></script>
 
   <script src="/examples/counter/main-jquery.js"></script>
 

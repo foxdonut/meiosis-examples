@@ -1,5 +1,4 @@
-import { map } from "meiosis";
-import { mergeAll } from "../util";
+import { map, mergeAll } from "meiosis";
 import { randomGif } from "../random-gif";
 import { randomGifListActions } from "../view/events/random-gif-list";
 
