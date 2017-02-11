@@ -5,7 +5,7 @@
     ready: model => {
       const onStart = function(evt) {
         evt.preventDefault();
-        actions.start();
+        actions.start(true);
       };
       return (<div>
         <p>Counter: {model.counter}</p>
@@ -19,7 +19,7 @@
     counting: model => {
       const onAbort = function(evt) {
         evt.preventDefault();
-        actions.abort();
+        actions.abort(true);
       };
       return (<div>
         <p>
