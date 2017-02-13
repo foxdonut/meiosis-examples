@@ -1,6 +1,8 @@
-import { map, mergeAll, run } from "meiosis";
-import { nest } from "../util";
+import m from "mithril";
+import { trace } from "meiosis";
+import meiosisTracer from "meiosis-tracer";
 
+import { mergeIntoOne, nest, scan, streamLibrary } from "../util";
 import { counter } from "../counter";
 import { button } from "../button";
 import { randomGif } from "../random-gif";
@@ -8,7 +10,7 @@ import { randomGifPair } from "../random-gif-pair";
 import { randomGifPairPair } from "../random-gif-pair-pair";
 import { randomGifList } from "../random-gif-list";
 
-export function startApp() {
+export function startApp(view) {
   const initialModel = {
     counter: counter.initialModel(),
     button: button.initialModel(),
@@ -19,21 +21,21 @@ export function startApp() {
     randomGifList: randomGifList.initialModel()
   };
 
-  const counterModelChanges = map(() => model => {
-    const increment = model.counter.value >= 10 && model.button.active ? 2 : 1;
-    model.counter.value = model.counter.value + increment;
-    return model;
-  }, randomGif.newGifSuccessAction);
-
-  const modelChanges = mergeAll([
-    counterModelChanges,
-    map(nest("button"), button.modelChanges),
-    map(nest("randomGif1"), randomGif.modelChanges),
-    map(nest("randomGif2"), randomGif.modelChanges),
-    map(nest("randomGifPair"), randomGifPair.modelChanges),
-    map(nest("randomGifPairPair"), randomGifPairPair.modelChanges),
-    map(nest("randomGifList"), randomGifList.modelChanges)
+  const modelChanges = mergeIntoOne([
+    counter.modelChanges,
+    button.modelChanges.map(nest("button")),
+    randomGif.modelChanges.map(nest("randomGif1")),
+    randomGif.modelChanges.map(nest("randomGif2")),
+    randomGifPair.modelChanges.map(nest("randomGifPair")),
+    randomGifPairPair.modelChanges.map(nest("randomGifPairPair")),
+    randomGifList.modelChanges.map(nest("randomGifList"))
   ]);
 
-  return run({ initialModel, modelChanges });
+  const model = scan((model, change) => change(model), initialModel, modelChanges);
+
+  const element = document.getElementById("app");
+  const render = model => m.render(element, view(model));
+  model.map(render);
+  trace({ streamLibrary, modelChanges, streams: [ model ] });
+  meiosisTracer({ selector: "#tracer" });
 }

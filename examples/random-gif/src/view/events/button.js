@@ -1,4 +1,4 @@
-import { stream } from "meiosis";
+import stream from "mithril/stream";
 import prevDef from "prevent-default";
 
 export const buttonActions = {

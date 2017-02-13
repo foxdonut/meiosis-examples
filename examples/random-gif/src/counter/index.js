@@ -1,5 +1,6 @@
-import { initialModel } from "./model";
+import { initialModel, modelChanges } from "./model";
 
 export const counter = {
-  initialModel
+  initialModel,
+  modelChanges
 };
