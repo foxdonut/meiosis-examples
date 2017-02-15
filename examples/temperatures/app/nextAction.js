@@ -4,7 +4,7 @@ import { Action } from "./actions";
 export const nextAction = (model, proposal) => {
   proposal.case({
     Validate: () => {
-      if (!model.store.entry.errors && !model.store.date.errors) {
+      if (!model.entry.errors && !model.date.errors) {
         propose(Action.Save(model));
       }
     },

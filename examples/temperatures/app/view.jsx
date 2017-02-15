@@ -11,11 +11,11 @@ export const view = model => {
 
   return (<div>
     <div>JSX version | <a href="index-h.html">h version</a></div>
-    {entryView(model.store.entry)}
-    {dateView(model.store.date)}
-    {temperatureView(model.store.temperature.air)}
-    {temperatureView(model.store.temperature.water)}
+    {entryView(model.entry)}
+    {dateView(model.date)}
+    {temperatureView(model.temperature.air)}
+    {temperatureView(model.temperature.water)}
     <button className="btn btn-md btn-primary" onClick={onSave}>Save</button>
-    <span>Saved: {model.store.saved}</span>
+    <span>Saved: {model.saved}</span>
   </div>);
 };

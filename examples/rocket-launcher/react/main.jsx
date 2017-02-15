@@ -1,28 +1,29 @@
-/*global meiosis, meiosisTracer, ReactDOM, window*/
+/*global flyd, meiosis, meiosisTracer, ReactDOM, window*/
 (function(ref) {
+  var scan = meiosis.createScan(flyd);
+
   var view = ref.display(ref.state, ref.view(ref.actions));
   var nextAction = ref.nextAction(ref.state, ref.actions);
 
   var modelChanges = ref.modelChanges(ref.state, ref.actions);
 
-  var state = function(model) {
+  var stateFn = function(model) {
     var appState = Object.assign({}, model);
     appState.even = model.counter % 2 === 0;
     appState.closeToLaunch = model.counter < 4;
     return appState;
   };
 
+  var model = scan(meiosis.applyModelChange, ref.initialModel, modelChanges);
+  var state = model.map(stateFn);
   var element = document.getElementById("app");
-  var streams = meiosis.run({
-    initialModel: ref.initialModel,
-    modelChanges: modelChanges,
-    mappers: [ state ]
-  });
-  meiosis.on(function(state) {
+
+  state.map(function(state) {
     ReactDOM.render(view(state), element, function() {
       nextAction(state);
     });
-  }, streams.render);
+  });
 
+  meiosis.trace({ streamLibrary: flyd, modelChanges: modelChanges, streams: [ model, state ]});
   meiosisTracer({ selector: "#tracer" });
 })(window);

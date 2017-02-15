@@ -1,4 +1,4 @@
 import { app } from "./app";
-import { view } from "./form/view";
+import { view } from "./app/view";
 
 app(view);

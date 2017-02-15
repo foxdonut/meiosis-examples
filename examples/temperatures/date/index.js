@@ -1,7 +1,6 @@
-import { initialModel } from "./model";
-import { receive } from "./receive";
+import { initialModel, modelChanges } from "./model";
 
 export const date = {
   initialModel,
-  receive
+  modelChanges
 };

@@ -4,6 +4,7 @@
 {% block example %}rocket-launcher{% endblock %}
 
 {% block content %}
+  <script src="/public/lib/flyd.js"></script>
   <script src="/public/lib/meiosis.min.js"></script>
   <script src="/public/lib/meiosis-tracer.min.js"></script> <!-- development only -->
   <script src="/examples/rocket-launcher/js/actions.js"></script>

@@ -1,5 +1,9 @@
-import Type from "union-type";
+import flyd from "flyd";
 
-export const Action = Type({
-  EditDateValue: [String]
-});
+export const dateActions = {
+  editDateValue: flyd.stream()
+};
+
+export const dateIntents = {
+  editDateValue: evt => dateActions.editDateValue(evt.target.value)
+};

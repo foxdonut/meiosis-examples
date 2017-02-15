@@ -1,4 +1,4 @@
 import { app } from "./app";
-import { view } from "./form/view.jsx";
+import { view } from "./app/view.jsx";
 
 app(view);

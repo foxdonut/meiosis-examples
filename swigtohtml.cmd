@@ -1,5 +1,5 @@
-node node_modules\swig\bin\swig.js render .\examples\counter\index.swig > .\examples\counter\index.html
-node node_modules\swig\bin\swig.js render .\examples\labeled-sliders\index.swig > .\examples\labeled-sliders\index.html
+node node_modules\swig\bin\swig.js render .\examples\counter\jquery\index.swig > .\examples\counter\jquery\index.html
+node node_modules\swig\bin\swig.js render .\examples\counter\react\index.swig > .\examples\counter\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\library\mithril\index.swig > .\examples\library\mithril\index.html
 node node_modules\swig\bin\swig.js render .\examples\library\react\index.swig > .\examples\library\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\random-gif\index-mithril.swig > .\examples\random-gif\index-mithril.html

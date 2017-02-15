@@ -1,5 +1,8 @@
-/*global meiosis, $*/
+/*global flyd, meiosis, $*/
 (function() {
+  var streamLibrary = flyd;
+  var scan = meiosis.createScan(streamLibrary);
+
   var initialModel = { counter: 0 };
 
   var view = function(model) {
@@ -8,28 +11,28 @@
       "<button id='decr' class='btn btn-sm btn-default'>- 1</button></div>";
   };
 
-  var addAction = meiosis.stream();
+  var addToCounter = flyd.stream();
 
-  var modelChanges = meiosis.map(function(add) {
+  var modelChanges = addToCounter.map(function(value) {
     return function(model) {
-      return { counter: model.counter + add };
+      return { counter: model.counter + value };
     };
-  }, addAction);
+  });
 
-  var app = meiosis.run({ initialModel: initialModel, modelChanges: modelChanges });
+  var model = scan(meiosis.applyModelChange, initialModel, modelChanges);
   var element = document.getElementById("app");
 
-  meiosis.on(function(model) {
+  model.map(function(model) {
     element.innerHTML = view(model);
-  }, app.render);
+  });
 
   var $root = $(document.getElementById("app"));
 
   $root.on("click", "button#inc", function(_evt) {
-    addAction(1);
+    addToCounter(1);
   });
   $root.on("click", "button#decr", function(_evt) {
-    addAction(-1);
+    addToCounter(-1);
   });
 
 })();

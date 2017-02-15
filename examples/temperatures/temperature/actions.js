@@ -1,7 +1,7 @@
-import Type from "union-type";
+import flyd from "flyd";
 
-export const Action = Type({
-  Increase: [Number],
-  Decrease: [Number],
-  ChangeUnits: []
-});
+export const temperatureActions = {
+  increase: flyd.stream(),
+  decrease: flyd.stream(),
+  changeUnits: flyd.stream()
+};

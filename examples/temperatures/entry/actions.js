@@ -1,5 +1,5 @@
-import Type from "union-type";
+import flyd from "flyd";
 
-export const Action = Type({
-  EditEntryValue: [String]
-});
+export const entryActions = {
+  editEntryValue: flyd.stream()
+};

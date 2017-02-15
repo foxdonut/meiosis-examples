@@ -4,13 +4,12 @@
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
-    "labeled-sliders": "(cd examples/labeled-sliders && npm i && npm start)",
     "library": "(cd examples/library && npm i && npm start)",
     "random-gif": "(cd examples/random-gif && npm i && npm start)",
     "temperatures": "(cd examples/temperatures && npm i && npm start)",
     "todo-list": "(cd examples/todo-list && npm i && npm start)",
     "todomvc": "(cd examples/todomvc && npm i && npm start)",
-    "examples": "npm run labeled-sliders && npm run library && npm run random-gif && npm run temperatures && npm run todo-list && npm run todomvc",
+    "examples": "npm run library && npm run random-gif && npm run temperatures && npm run todo-list && npm run todomvc",
     "prestart": "npm i && npm run examples",
     "start": "node --harmony server/todo-list/main"
   },
@@ -31,13 +30,13 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "co-body": "^4.2.0",
-    "koa": "^1.2.4",
+    "koa": "^1.2.5",
     "koa-route": "^2.4.2",
-    "koa-static": "^2.0.0"
+    "koa-static": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^3.5.0",
-    "eslint-plugin-react": "^6.2.1",
+    "eslint": "^3.15.0",
+    "eslint-plugin-react": "^6.9.0",
     "swig": "^1.4.2"
   }
 }
