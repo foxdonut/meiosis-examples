@@ -1,6 +1,3 @@
-import { initialModel, modelChanges } from "./model";
+import * as dateModel from "./model";
 
-export const date = {
-  initialModel,
-  modelChanges
-};
+export const date = dateModel;

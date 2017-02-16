@@ -1,11 +1,10 @@
 import flyd from "flyd";
 import { render } from "preact";
 import { applyModelChange, trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
 import { mergeIntoOne, nest, scan } from "../util";
-import { nextAction } from "./nextAction";
-import { receive as formReceive } from "./receive";
+import meiosisTracer from "meiosis-tracer";
 
+import { modelChanges as appModelChanges } from "./model";
 import { entry } from "../entry";
 import { date } from "../date";
 import { temperature } from "../temperature";
@@ -21,19 +20,12 @@ export const app = view => {
     }
   };
 
-  const receive = (model, proposal) => {
-    model = formReceive(model, proposal);
-
-    model.entry = entry.receive(model.entry, proposal);
-    model.date = date.receive(model.date, proposal);
-    model.temperature.air = temperature.receive(model.temperature.air, proposal);
-    model.temperature.water = temperature.receive(model.temperature.water, proposal);
-
-    return model;
-  };
-
   const modelChanges = mergeIntoOne([
-    nest("date", date.modelChanges)
+    appModelChanges,
+    nest("date", date.modelChanges),
+    nest("entry", entry.modelChanges),
+    nest("temperature.air", temperature.modelChanges),
+    nest("temperature.water", temperature.modelChanges)
   ]);
 
   const model = scan(applyModelChange, initialModel, modelChanges);

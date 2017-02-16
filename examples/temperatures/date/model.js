@@ -23,7 +23,7 @@ const editDateValue = dateActions.editDateValue.map(value => model => {
   return model;
 });
 
-//  Validate: () => model.errors = validate(model, validation)
+export const validateModel = model => validate(model, validation);
 
 export const modelChanges = mergeIntoOne([
   editDateValue

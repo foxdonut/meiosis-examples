@@ -1,7 +1,3 @@
-import { initialModel } from "./model";
-import { receive } from "./receive";
+import * as entryModel from "./model";
 
-export const entry = {
-  initialModel,
-  receive
-};
+export const entry = entryModel;
