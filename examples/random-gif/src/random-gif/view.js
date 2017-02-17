@@ -1,6 +1,6 @@
 import m from "mithril";
-import { randomGifIntents } from "../events/random-gif";
-import { imgsrc } from "../../random-gif";
+import { randomGifIntents } from "./actions";
+import { imgsrc } from "./index";
 
 export const randomGifView = model =>
   m("div", [

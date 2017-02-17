@@ -3,5 +3,4 @@
 {% block subcontent %}
   <script src="/public/lib/jquery.min.js"></script>
   <script src="/examples/counter/jquery/main.js"></script>
-  <a href="/examples/counter/react/index.html">React version</a>
 {% endblock %}

@@ -7,7 +7,14 @@ import { temperatureView } from "../temperature/view.jsx";
 
 export const view = model => {
   return (<div>
-    <div>JSX version | <a href="index-h.html">h version</a></div>
+    <ul className="nav nav-pills">
+      <li role="presentation" className="active">
+        <a className="btn btn-xs btn-default" href="index-jsx.html">Preact + JSX version</a>
+      </li>
+      <li role="presentation">
+        <a className="btn btn-xs btn-default" href="index-h.html">Preact + h version</a>
+      </li>
+    </ul>
     {entryView(model.entry)}
     {dateView(model.date)}
     {temperatureView(model.temperature.air)}

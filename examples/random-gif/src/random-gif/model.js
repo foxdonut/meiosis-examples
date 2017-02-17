@@ -2,7 +2,7 @@ import m from "mithril";
 import stream from "mithril/stream";
 import { mergeIntoOne } from "../util";
 import uuid from "uuid";
-import { randomGifActions } from "../view/events/random-gif";
+import { randomGifActions } from "./actions";
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";

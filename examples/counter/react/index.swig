@@ -7,6 +7,4 @@
 
   <script src="/examples/counter/react/view.jsx" type="text/babel"></script>
   <script src="/examples/counter/react/main.jsx" type="text/babel"></script>
-
-  <a href="/examples/counter/jquery/index.html">jQuery version</a>
 {% endblock %}

@@ -9,16 +9,13 @@ export const appActions = {
 
 export const appIntents = {
   save: model => () => {
-    const dateErrors = date.validateModel(model.date);
-    const entryErrors = entry.validateModel(model.entry);
+    const validationErrors = {
+      date: { errors: date.validateModel(model.date) },
+      entry: { errors: entry.validateModel(model.entry) }
+    };
+    appActions.validationErrors(validationErrors);
 
-    if (dateErrors || entryErrors) {
-      appActions.validationErrors({
-        date: dateErrors,
-        entry: entryErrors
-      });
-    }
-    else {
+    if (!(validationErrors.date.errors || validationErrors.entry.errors)) {
       appActions.save(true);
     }
   }

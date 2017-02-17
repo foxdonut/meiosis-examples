@@ -1,4 +1,4 @@
 import { startApp } from "./app";
-import { view } from "./view/mithril";
+import { view } from "./app/view";
 
 startApp(view);

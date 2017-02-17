@@ -7,7 +7,14 @@ import { temperatureView } from "../temperature/view";
 
 export const view = model => {
   return h("div", {},
-    h("div", {}, h("span", {}, "h version | "), h("a", { href: "index-jsx.html" }, "JSX version")),
+    h("ul", { class: "nav nav-pills" },
+      h("li", { role: "presentation" },
+        h("a", { class: "btn btn-xs btn-default", href: "index-jsx.html" }, "Preact + JSX version")
+      ),
+      h("li", { class: "active", role: "presentation" },
+        h("a", { class: "btn btn-xs btn-default", href: "index-h.html" }, "Preact + h version")
+      ),
+    ),
     entryView(model.entry),
     dateView(model.date),
     temperatureView(model.temperature.air),

@@ -1,6 +1,6 @@
 import { mergeIntoOne } from "../util";
 import { randomGif } from "../random-gif";
-import { randomGifListActions } from "../view/events/random-gif-list";
+import { randomGifListActions } from "./actions";
 
 export const initialModel = () => ({
   randomGifIds: [],

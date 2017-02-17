@@ -1,4 +1,4 @@
-import { buttonActions } from "../view/events/button";
+import { buttonActions } from "./actions";
 
 export const initialModel = () => ({
   active: false

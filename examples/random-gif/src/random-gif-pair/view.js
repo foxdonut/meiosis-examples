@@ -1,5 +1,5 @@
 import m from "mithril";
-import { randomGifView } from "./random-gif";
+import { randomGifView } from "../random-gif/view";
 
 export const randomGifPairView = model =>
   m("div",
