@@ -39,19 +39,18 @@
     "classnames": "^2.2.5",
     "meiosis": "^0.10.0",
     "mithril": "^1.0.1",
-    "object-path": "^0.11.3",
     "prevent-default": "^1.0.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "ava": "^0.17.0",
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-preset-env": "^1.1.7",
-    "browser-env": "^2.0.19",
-    "cross-env": "^3.1.3",
+    "ava": "^0.18.1",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.1.8",
+    "browser-env": "^2.0.21",
+    "cross-env": "^3.1.4",
     "jquery": "^3.1.1",
     "meiosis-tracer": "^0.10.0",
-    "webpack": "^1.14.0"
+    "webpack": "^2.2.1"
   }
 }

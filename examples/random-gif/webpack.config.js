@@ -10,10 +10,10 @@ module.exports = {
     filename: "generated-" + variant + "-app.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
-        loader: "babel-loader",
         test: /\.jsx?$/,
+        loader: "babel-loader",
         exclude: /node_modules/
       }
     ]
