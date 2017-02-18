@@ -1,5 +1,6 @@
 import flyd from "flyd";
 import createServer from "../sinonServer";
+import services from "../todoMain/services";
 import { mergeIntoOne, nest, scan } from "../util/stream-util";
 import { todoList } from "../todoList";
 import { applyModelChange, trace } from "meiosis";
@@ -25,9 +26,12 @@ export function startApp(view, render) {
   ]);
   const model = scan(applyModelChange, initialModel, modelChanges);
 
+  trace({ streamLibrary: flyd, modelChanges, streams: [ model ]});
+  meiosisTracer({ selector: "#tracer" });
+
   const element = document.getElementById("app");
   model.map(model => render(view(model), element));
 
-  trace({ streamLibrary: flyd, modelChanges, streams: [ model ]});
-  meiosisTracer({ selector: "#tracer" });
+  todoList.actions.requestLoadList(true);
+  services.loadTodos.then(todoList.actions.loadedList);
 }

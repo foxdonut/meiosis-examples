@@ -1,3 +1,3 @@
-import * as entryModel from "./model";
+import * as model from "./model";
 
-export const entry = entryModel;
+export const entry = model;

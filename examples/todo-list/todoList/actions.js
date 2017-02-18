@@ -14,9 +14,6 @@ todoItem.actions.deleteTodo.map(id => {
   services.deleteTodo(id).then(actions.deletedTodo);
 });
 
-actions.requestLoadList();
-services.loadTodos.then(actions.loadedList);
-
 /*
 export const createActions = (ActionForm, services) => propose => ({
   loadList: () => {

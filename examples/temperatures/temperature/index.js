@@ -1,6 +1,3 @@
-import { initialModel, modelChanges } from "./model";
+import * as model from "./model";
 
-export const temperature = {
-  initialModel,
-  modelChanges
-};
+export const temperature = model;

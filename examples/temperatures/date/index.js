@@ -1,3 +1,3 @@
-import * as dateModel from "./model";
+import * as model from "./model";
 
-export const date = dateModel;
+export const date = model;
