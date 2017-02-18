@@ -3,6 +3,7 @@ import createServer from "../sinonServer";
 import services from "../todoMain/services";
 import { mergeIntoOne, nest, scan } from "../util/stream-util";
 import { todoList } from "../todoList";
+import { todoForm } from "../todoForm";
 import { applyModelChange, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
@@ -10,19 +11,13 @@ export function startApp(view, render) {
   createServer();
 
   const initialModel = {
-    form: {
-      todo: {
-        id: "",
-        priority: "",
-        description: ""
-      },
-      validationErrors: { }
-    },
+    form: todoForm.initialModel(),
     list: todoList.initialModel()
   };
 
   const modelChanges = mergeIntoOne([
-    nest("list", todoList.modelChanges)
+    nest("list", todoList.modelChanges),
+    nest("form", todoForm.modelChanges)
   ]);
   const model = scan(applyModelChange, initialModel, modelChanges);
 

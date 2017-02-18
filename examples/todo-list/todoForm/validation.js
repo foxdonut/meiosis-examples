@@ -23,6 +23,6 @@ let validationSpec = {
   }
 };
 
-export default function(model) {
+export function validateModel(model) {
   return validate(model, validationSpec) || {};
 }
