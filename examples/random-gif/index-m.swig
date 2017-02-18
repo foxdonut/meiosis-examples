@@ -4,5 +4,5 @@
 {% block example %}random-gif{% endblock %}
 
 {% block content %}
-  <script src="/examples/random-gif/generated-mithril-app.js"></script>
+  <script src="/examples/random-gif/generated-m-app.js"></script>
 {% endblock %}

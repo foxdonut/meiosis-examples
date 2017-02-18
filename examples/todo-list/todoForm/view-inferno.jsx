@@ -1,9 +1,6 @@
 import Inferno from "inferno";
-import serialize from "form-serialize";
 
 export const todoFormView = (model, actions) => {
-  const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
-
   const onChangeText = evt => actions.editingTodo(getTodo(evt));
 
   const onSave = evt => {

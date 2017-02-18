@@ -10,11 +10,11 @@ export const view = model =>
   m("div",
     m("ul.nav.nav-pills",
       m("li.active", { role: "presentation" },
-        m("a.btn.btn-xs.btn-default", { href: "index-mithril.html" }, "Mithril + m version")
+        m("a.btn.btn-xs.btn-default", { href: "index-m.html" }, "Mithril + m version")
       ),
       m("li", { role: "presentation" },
         m("a.btn.btn-xs.btn-default", { href: "index-jsx.html" }, "Mithril + JSX version")
-      ),
+      )
     ),
     counterView(model.counter),
     m("div", "Button:"),

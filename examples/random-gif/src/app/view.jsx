@@ -10,7 +10,7 @@ export const view = model => (
   <div>
     <ul className="nav nav-pills">
       <li role="presentation">
-        <a className="btn btn-xs btn-default" href="index-mithril.html">Mithril + m version</a>
+        <a className="btn btn-xs btn-default" href="index-m.html">Mithril + m version</a>
       </li>
       <li role="presentation" className="active">
         <a className="btn btn-xs btn-default" href="index-jsx.html">Mithril + JSX version</a>

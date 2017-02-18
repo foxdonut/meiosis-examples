@@ -1,22 +1,13 @@
 import h from "../util/jsnox-react";
+import { intents } from "./actions";
 
-export const todoItemView = actions => todo => {
-  const onEdit = todo => evt => {
-    evt.preventDefault();
-    actions.editTodo(todo);
-  };
-
-  const onDelete = todo => evt => {
-    evt.preventDefault();
-    actions.deleteTodo(todo.id);
-  };
-
+export const todoItemView = todo => {
   return h("tr", { key: todo.id },
     h("td", String(todo.priority)),
     h("td", todo.description),
     h("td",
-      h("button.btn.btn-primary.btn-xs", { onClick: onEdit(todo) }, "Edit"),
-      h("button.btn.btn-danger.btn-xs", { onClick: onDelete(todo) }, "Delete")
+      h("button.btn.btn-primary.btn-xs", { onClick: intents.editTodo(todo) }, "Edit"),
+      h("button.btn.btn-danger.btn-xs", { onClick: intents.deleteTodo(todo) }, "Delete")
     )
   );
 };

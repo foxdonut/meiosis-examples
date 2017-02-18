@@ -4,7 +4,7 @@ node node_modules/swig/bin/swig.js render ./examples/counter/react/index.swig > 
 node node_modules/swig/bin/swig.js render ./examples/library/mithril/index.swig > ./examples/library/mithril/index.html
 node node_modules/swig/bin/swig.js render ./examples/library/react/index.swig > ./examples/library/react/index.html
 node node_modules/swig/bin/swig.js render ./examples/random-gif/index-jsx.swig > ./examples/random-gif/index-jsx.html
-node node_modules/swig/bin/swig.js render ./examples/random-gif/index-mithril.swig > ./examples/random-gif/index-mithril.html
+node node_modules/swig/bin/swig.js render ./examples/random-gif/index-m.swig > ./examples/random-gif/index-m.html
 node node_modules/swig/bin/swig.js render ./examples/rocket-launcher/react/index.swig > ./examples/rocket-launcher/react/index.html
 node node_modules/swig/bin/swig.js render ./examples/rocket-launcher/vanillajs/index.swig > ./examples/rocket-launcher/vanillajs/index.html
 node node_modules/swig/bin/swig.js render ./examples/temperatures/index-h.swig > ./examples/temperatures/index-h.html

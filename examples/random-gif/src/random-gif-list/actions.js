@@ -1,12 +1,11 @@
 import stream from "mithril/stream";
-import prevDef from "prevent-default";
 
-export const randomGifListActions = {
+export const actions = {
   add: stream(),
   remove: stream()
 };
 
-export const randomGifListIntents = {
-  add: prevDef(() => randomGifListActions.add(true)),
-  remove: id => prevDef(() => randomGifListActions.remove(id))
+export const intents = {
+  add: () => actions.add(true),
+  remove: id => () => actions.remove(id)
 };

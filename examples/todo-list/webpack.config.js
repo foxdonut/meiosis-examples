@@ -4,7 +4,7 @@ var variant = process.env.VARIANT;
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./app-" + variant + ".js",
+  entry: "./index-" + variant + ".js",
   devtool: isProduction ? "source-map" : "eval",
   output: {
     path: ".",
@@ -14,7 +14,7 @@ module.exports = {
     noParse: [
       /node_modules\/sinon/
     ],
-    loaders: [
+    rules: [
       {
         loader: "babel-loader",
         test: /\.jsx?$/,

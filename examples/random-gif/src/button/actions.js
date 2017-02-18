@@ -1,10 +1,9 @@
 import stream from "mithril/stream";
-import prevDef from "prevent-default";
 
-export const buttonActions = {
+export const actions = {
   toggle: stream()
 };
 
-export const buttonIntents = {
-  toggle: prevDef(() => buttonActions.toggle(true))
+export const intents = {
+  toggle: () => actions.toggle(true)
 };

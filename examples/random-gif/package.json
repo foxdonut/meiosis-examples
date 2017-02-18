@@ -4,7 +4,7 @@
   "description": "meiosis-examples random-gif",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env VARIANT=mithril webpack && cross-env VARIANT=jsx webpack",
+    "start": "cross-env VARIANT=m webpack && cross-env VARIANT=jsx webpack",
     "watch": "webpack --progress --colors --watch",
     "test": "ava"
   },
@@ -39,13 +39,14 @@
     "classnames": "^2.2.5",
     "meiosis": "^0.10.0",
     "mithril": "^1.0.1",
-    "prevent-default": "^1.0.0",
+    "ramda": "^0.23.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
     "ava": "^0.18.1",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.1.8",
     "browser-env": "^2.0.21",
     "cross-env": "^3.1.4",

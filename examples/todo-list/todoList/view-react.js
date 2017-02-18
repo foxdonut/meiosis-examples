@@ -1,9 +1,7 @@
 import h from "../util/jsnox-react";
 import { todoItemView } from "../todoItem/view-react";
 
-export const todoListView = (model, actions) => {
-  const renderTodo = todoItemView(actions);
-
+export const todoListView = model => {
   return h("div.row",
     h("div.col-md-8",
       h("div", "Todo List: " + model.message),
@@ -15,7 +13,7 @@ export const todoListView = (model, actions) => {
             h("th", "Action")
           )
         ),
-        h("tbody", model.todos.map(renderTodo))
+        h("tbody", model.todos.map(todoItemView))
       )
     )
   );

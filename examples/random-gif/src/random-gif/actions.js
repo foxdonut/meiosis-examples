@@ -1,12 +1,14 @@
 import stream from "mithril/stream";
-import prevDef from "prevent-default";
 
-export const randomGifActions = {
+export const actions = {
   editTag: stream(),
-  newGif: stream()
+  newGif: stream(),
+  newGifStart: stream(),
+  newGifSuccess: stream(),
+  newGifError: stream()
 };
 
-export const randomGifIntents = {
-  editTag: id => prevDef(evt => randomGifActions.editTag({ id, tag: evt.target.value })),
-  newGif: (id, tag) => prevDef(() => randomGifActions.newGif({ id, tag }))
+export const intents = {
+  editTag: id => evt => actions.editTag({ id, tag: evt.target.value }),
+  newGif: (id, tag) => () => actions.newGif({ id, tag })
 };

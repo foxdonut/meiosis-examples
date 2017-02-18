@@ -4,7 +4,14 @@ import { todoListView } from "../todoList/view-react";
 
 export const view = model =>
   h("div",
-    h("div", h("span", "React + JSnoX | "), h("a", { href: "index-inferno.html" }, "Inferno + JSX")),
+    h("ul.nav.nav-pills",
+      h("li[role=presentation]",
+        h("a.btn.btn-xs.btn-default[href=index-inferno.html]", "Inferno + JSX version")
+      ),
+      h("li.active[role=presentation]",
+        h("a.btn.btn-xs.btn-default[href=index-react.html", "React + JSnoX version")
+      )
+    ),
     h("div.row",
       h("div.col-md-4",
         todoFormView(model.form)

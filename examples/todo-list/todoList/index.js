@@ -1,7 +1,7 @@
-import initialModel from "./model";
-import { createActions } from "./actions";
-import receive from "./receive";
+import * as model from "./model";
+import * as actions from "./actions";
 
+/*
 const todoListConfig = ({ActionForm, services, view, setup}) => ({
   initialModel,
   actions: createActions(ActionForm, services),
@@ -10,5 +10,9 @@ const todoListConfig = ({ActionForm, services, view, setup}) => ({
   setup,
   ready: actions => actions.loadList()
 });
+*/
 
-export default todoListConfig;
+export const todoList = ({
+  ...model,
+  ...actions
+});

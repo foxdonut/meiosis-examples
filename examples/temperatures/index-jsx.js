@@ -1,4 +1,4 @@
-import { app } from "./app";
+import { startApp } from "./app";
 import { view } from "./app/view.jsx";
 
-app(view);
+startApp(view);

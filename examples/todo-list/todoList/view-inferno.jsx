@@ -1,9 +1,7 @@
 import Inferno from "inferno";
 import { todoItemView } from "../todoItem/view-inferno.jsx";
 
-export const todoListView = (model, actions) => {
-  const renderTodo = todoItemView(actions);
-
+export const todoListView = model => {
   return (
     <div className="row">
       <div className="col-md-8">
@@ -17,7 +15,7 @@ export const todoListView = (model, actions) => {
             </tr>
           </thead>
           <tbody>
-            {model.todos.map(renderTodo)}
+            {model.todos.map(todoItemView)}
           </tbody>
         </table>
       </div>

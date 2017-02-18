@@ -1,9 +1,6 @@
 import h from "../util/jsnox-react";
-import serialize from "form-serialize";
 
 export const todoFormView = (model, actions) => {
-  const getTodo = evt => serialize(evt.target.form, { hash: true, empty: true });
-
   const onChangeText = evt => actions.editingTodo(getTodo(evt));
 
   const onSave = evt => {
@@ -17,14 +14,14 @@ export const todoFormView = (model, actions) => {
   };
 
   const inputField = (name, value) =>
-    h("input:text#" + name + ".form-control[name=" + name + "]", { value, onChange: onChangeText });
+    h(`input:text#${name}.form-control[name=${name}]`, { value, onChange: onChangeText });
 
   const errorMessage = error => error ?
     h("span.has-error", h("span.help-block", error)) : null;
 
   const inputDiv = (field, label) =>
     h("div.form-group",
-      h("label[htmlFor=" + field +"]", label),
+      h(`label[htmlFor=${field}]`, label),
       inputField(field, model.todo[field]),
       errorMessage(model.validationErrors[field])
     );

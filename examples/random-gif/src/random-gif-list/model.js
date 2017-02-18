@@ -1,20 +1,20 @@
 import { mergeIntoOne } from "../util";
 import { randomGif } from "../random-gif";
-import { randomGifListActions } from "./actions";
+import { actions } from "./actions";
 
 export const initialModel = () => ({
   randomGifIds: [],
   randomGifsById: {}
 });
 
-const add = randomGifListActions.add.map(() => model => {
+const add = actions.add.map(() => model => {
   const randomGifModel = randomGif.initialModel();
   model.randomGifIds.push(randomGifModel.id);
   model.randomGifsById[randomGifModel.id] = randomGifModel;
   return model;
 });
 
-const remove = randomGifListActions.remove.map(id => model => {
+const remove = actions.remove.map(id => model => {
   delete model.randomGifsById[id];
   model.randomGifIds.splice(model.randomGifIds.indexOf(id), 1);
   return model;

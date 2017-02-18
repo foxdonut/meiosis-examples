@@ -9,7 +9,7 @@ import { entry } from "../entry";
 import { date } from "../date";
 import { temperature } from "../temperature";
 
-export const app = view => {
+export const startApp = view => {
   const initialModel = {
     saved: "",
     entry: entry.initialModel(),

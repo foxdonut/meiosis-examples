@@ -1,6 +1,5 @@
-import { initialModel, modelChanges } from "./model";
+import * as model from "./model";
 
 export const randomGifPair = {
-  initialModel,
-  modelChanges
+  ...model
 };

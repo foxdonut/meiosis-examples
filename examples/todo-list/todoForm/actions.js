@@ -1,5 +1,4 @@
-import Type from "union-type";
-
+/*
 const Action = Type({
   EditTodo: [Object],
   EditingTodo: [Object],
@@ -27,3 +26,4 @@ const createActions = services => propose => ({
 });
 
 export { Action, createActions };
+*/

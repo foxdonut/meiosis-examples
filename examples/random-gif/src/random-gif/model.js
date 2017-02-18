@@ -1,8 +1,7 @@
 import m from "mithril";
-import stream from "mithril/stream";
 import { mergeIntoOne } from "../util";
 import uuid from "uuid";
-import { randomGifActions } from "./actions";
+import { actions } from "./actions";
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";
@@ -19,25 +18,21 @@ export const initialModel = id => {
   };
 };
 
-const editTag = randomGifActions.editTag.map(({ id, tag }) => model => {
+const editTag = actions.editTag.map(({ id, tag }) => model => {
   if (id === model.id) {
     model.tag = tag;
   }
   return model;
 });
 
-const newGifStartAction = stream();
-export const newGifSuccessAction = stream();
-const newGifErrorAction = stream();
-
-randomGifActions.newGif.map(({ id, tag }) => {
-  newGifStartAction({ id, tag });
+actions.newGif.map(({ id, tag }) => {
+  actions.newGifStart({ id, tag });
   m.request({ url: gif_new_url, data: { api_key, tag }}).
-    then(response => newGifSuccessAction({ id, data: response.data })).
-    catch(error => newGifErrorAction({ id, error }));
+    then(response => actions.newGifSuccess({ id, data: response.data })).
+    catch(error => actions.newGifError({ id, error }));
 });
 
-const newGifStart = newGifStartAction.map(({ id }) => model => {
+const newGifStart = actions.newGifStart.map(({ id }) => model => {
   if (id === model.id) {
     model.isLoading = true;
     model.isError = false;
@@ -45,7 +40,7 @@ const newGifStart = newGifStartAction.map(({ id }) => model => {
   return model;
 });
 
-const newGifSuccess = newGifSuccessAction.map(({ id, data }) => model => {
+const newGifSuccess = actions.newGifSuccess.map(({ id, data }) => model => {
   if (id === model.id) {
     model.isLoading = false;
     model.isError = false;
@@ -54,7 +49,7 @@ const newGifSuccess = newGifSuccessAction.map(({ id, data }) => model => {
   return model;
 });
 
-const newGifError = newGifErrorAction.map(({ id }) => model => {
+const newGifError = actions.newGifError.map(({ id }) => model => {
   if (id === model.id) {
     model.isLoading = false;
     model.isError = true;

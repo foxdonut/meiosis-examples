@@ -1,5 +1,5 @@
 import m from "mithril";
-import { trace } from "meiosis";
+import { applyModelChange, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 import { mergeIntoOne, nest, scan, streamLibrary } from "../util";
@@ -23,15 +23,15 @@ export function startApp(view) {
 
   const modelChanges = mergeIntoOne([
     counter.modelChanges,
-    button.modelChanges.map(nest("button")),
-    randomGif.modelChanges.map(nest("randomGif1")),
-    randomGif.modelChanges.map(nest("randomGif2")),
-    randomGifPair.modelChanges.map(nest("randomGifPair")),
-    randomGifPairPair.modelChanges.map(nest("randomGifPairPair")),
-    randomGifList.modelChanges.map(nest("randomGifList"))
+    nest("button", button.modelChanges),
+    nest("randomGif1", randomGif.modelChanges),
+    nest("randomGif2", randomGif.modelChanges),
+    nest("randomGifPair", randomGifPair.modelChanges),
+    nest("randomGifPairPair", randomGifPairPair.modelChanges),
+    nest("randomGifList", randomGifList.modelChanges)
   ]);
 
-  const model = scan((model, change) => change(model), initialModel, modelChanges);
+  const model = scan(applyModelChange, initialModel, modelChanges);
 
   const element = document.getElementById("app");
   const render = model => m.render(element, view(model));

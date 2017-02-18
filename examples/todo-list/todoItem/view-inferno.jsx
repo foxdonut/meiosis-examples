@@ -1,23 +1,14 @@
 import Inferno from "inferno";
+import { intents } from "./actions";
 
-export const todoItemView = actions => todo => {
-  const onEdit = todo => evt => {
-    evt.preventDefault();
-    actions.editTodo(todo);
-  };
-
-  const onDelete = todo => evt => {
-    evt.preventDefault();
-    actions.deleteTodo(todo.id);
-  };
-
+export const todoItemView = todo => {
   return (
     <tr key={todo.id}>
       <td>{todo.priority}</td>
       <td>{todo.description}</td>
       <td>
-        <button className="btn btn-primary btn-xs" onClick={onEdit(todo)}>Edit</button>
-        <button className="btn btn-danger btn-xs" onClick={onDelete(todo)}>Delete</button>
+        <button className="btn btn-primary btn-xs" onClick={intents.editTodo(todo)}>Edit</button>
+        <button className="btn btn-danger btn-xs" onClick={intents.deleteTodo(todo)}>Delete</button>
       </td>
     </tr>
   );
