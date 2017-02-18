@@ -1,20 +1,9 @@
 import h from "../util/jsnox-react";
+import { intents } from "./actions";
 
-export const todoFormView = (model, actions) => {
-  const onChangeText = evt => actions.editingTodo(getTodo(evt));
-
-  const onSave = evt => {
-    evt.preventDefault();
-    actions.saveTodo(model.todo);
-  };
-
-  const onCancel = function(evt) {
-    evt.preventDefault();
-    actions.clearForm();
-  };
-
+export const todoFormView = model => {
   const inputField = (name, value) =>
-    h(`input:text#${name}.form-control[name=${name}]`, { value, onChange: onChangeText });
+    h(`input:text#${name}.form-control[name=${name}]`, { value, onChange: intents.editingTodo(name) });
 
   const errorMessage = error => error ?
     h("span.has-error", h("span.help-block", error)) : null;
@@ -31,8 +20,8 @@ export const todoFormView = (model, actions) => {
     inputDiv("priority", "Priority:"),
     inputDiv("description", "Description:"),
     h("div",
-      h("button.btn.btn-primary.btn-xs", { onClick: onSave }, "Save"),
-      h("button.btn.btn-danger.btn-xs", { onClick: onCancel }, "Cancel")
+      h("button.btn.btn-primary.btn-xs", { onClick: intents.saveTodo(model.todo) }, "Save"),
+      h("button.btn.btn-danger.btn-xs", { onClick: intents.clearForm }, "Cancel")
     )
   );
 };

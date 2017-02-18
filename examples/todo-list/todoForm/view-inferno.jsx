@@ -1,20 +1,10 @@
 import Inferno from "inferno";
+import { intents } from "./actions";
 
-export const todoFormView = (model, actions) => {
-  const onChangeText = evt => actions.editingTodo(getTodo(evt));
-
-  const onSave = evt => {
-    evt.preventDefault();
-    actions.saveTodo(model.todo);
-  };
-
-  const onCancel = function(evt) {
-    evt.preventDefault();
-    actions.clearForm();
-  };
-
+export const todoFormView = model => {
   const inputField = (name, value) =>
-    <input type="text" id={name} name={name} className="form-control" value={value} onKeyUp={onChangeText}/>;
+    <input type="text" id={name} name={name} className="form-control" value={value}
+      onInput={intents.editingTodo(name)}/>;
 
   const errorMessage = error => error ?
     <span className="has-error"><span className="help-block">{error}</span></span> : null;
@@ -32,8 +22,8 @@ export const todoFormView = (model, actions) => {
       {inputDiv("priority", "Priority:")}
       {inputDiv("description", "Description:")}
       <div>
-        <button className="btn btn-primary btn-xs" onClick={onSave}>Save</button>
-        <button className="btn btn-danger btn-xs" onClick={onCancel}>Cancel</button>
+        <button className="btn btn-primary btn-xs" onClick={intents.saveTodo(model.todo)}>Save</button>
+        <button className="btn btn-danger btn-xs" onClick={intents.clearForm}>Cancel</button>
       </div>
     </form>
   );

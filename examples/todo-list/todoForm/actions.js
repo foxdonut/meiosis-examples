@@ -1,3 +1,18 @@
+import flyd from "flyd";
+import preventDefault from "prevent-default";
+
+export const actions = {
+  editingTodo: flyd.stream(),
+  saveTodo: flyd.stream(),
+  clearForm: flyd.stream()
+};
+
+export const intents = {
+  editingTodo: field => evt => actions.editingTodo({ field, value: evt.target.value }),
+  saveTodo: todo => preventDefault(() => actions.saveTodo(todo)),
+  clearForm: preventDefault(() => actions.clearForm(true))
+};
+
 /*
 const Action = Type({
   EditTodo: [Object],
