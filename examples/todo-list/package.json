@@ -37,7 +37,6 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "axios": "^0.15.3",
-    "data.maybe": "^1.2.2",
     "flyd": "^0.2.4",
     "inferno": "^1.2.2",
     "inferno-dom": "^1.0.7",

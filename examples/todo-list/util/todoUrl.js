@@ -1,7 +1,7 @@
 const todoUrl = {
-  get: "/todoList",
-  save: "/api/saveTodo",
-  delete: function(todoId) {
+  urlForList: "/todoList",
+  urlForSave: "/api/saveTodo",
+  urlForDelete: function(todoId) {
     return "/api/deleteTodo/" + String(todoId);
   }
 };

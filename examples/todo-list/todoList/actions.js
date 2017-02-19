@@ -5,11 +5,11 @@ import services from "../app/services";
 export const actions = {
   requestLoadList: flyd.stream(),
   loadedList: flyd.stream(),
-  requestDeleteTodo: flyd.stream(),
-  deletedTodo: flyd.stream()
+  deleteTodoStart: flyd.stream(),
+  deleteTodoSuccess: flyd.stream()
 };
 
 todoItem.actions.deleteTodo.map(id => {
-  actions.requestDeleteTodo();
-  services.deleteTodo(id).then(actions.deletedTodo);
+  actions.deleteTodoStart(true);
+  services.deleteTodo(id).then(() => actions.deleteTodoSuccess(id));
 });
