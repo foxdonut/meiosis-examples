@@ -25,16 +25,18 @@ const deleteTodoSuccess = actions.deleteTodoSuccess.map(todoId => model =>
   ({ todos: filter(complement(propEq("id", todoId)), model.todos), message: "" }));
     //.getOrElse({ todos: model.todos, message: "An error occured when deleting a Todo." }));
 
-const saveTodoFinish = todoForm.actions.saveTodoFinish.map(maybeTodo => model =>
-  merge(model, maybeTodo
-    .map(todo => updateTodos(model.todos, todo))
-    .map(todos => ({ todos, message: "" }))
-    .getOrElse({ message: "An error occurred when saving a Todo." })));
+const saveTodoStart = todoForm.actions.saveTodoStart.map(() => model =>
+  assoc("message", "Saving, please wait...", model));
+
+const saveTodoSuccess = todoForm.actions.saveTodoSuccess.map(todo => model =>
+  merge(model, {todos: updateTodos(model.todos, todo), message: "" }));
+    //.getOrElse({ message: "An error occurred when saving a Todo." })));
 
 export const modelChanges = mergeIntoOne([
   requestLoadList,
   loadedList,
   deleteTodoStart,
   deleteTodoSuccess,
-  saveTodoFinish
+  saveTodoStart,
+  saveTodoSuccess
 ]);
