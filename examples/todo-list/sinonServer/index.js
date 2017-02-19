@@ -5,6 +5,21 @@ module.exports = function() {
   server.autoRespond = true;
   var headers = {"Content-Type": "application/json"};
 
+  // Counter to fake/simulate errors every N requests.
+  var counter = 0;
+  var failureRate = 4;
+
+  var requestShouldSucceed = function(request) {
+    counter++;
+
+    if (counter % failureRate === 0) {
+      counter = 0;
+      request.respond(500, headers, "The request failed.");
+      return false;
+    }
+    return true;
+  };
+
   var createTodoList = function() {
     return [
       {id: 1, priority: 1, description: "Buy more beer"},
@@ -26,7 +41,9 @@ module.exports = function() {
   };
 
   server.respondWith("GET", "/todoList", function(request) {
-    request.respond(200, headers, JSON.stringify(getTodoList()));
+    if (requestShouldSucceed(request)) {
+      request.respond(200, headers, JSON.stringify(getTodoList()));
+    }
   });
 
   var deleteTodo = function(todoId) {
@@ -39,8 +56,10 @@ module.exports = function() {
   };
 
   server.respondWith("DELETE", /\/api\/deleteTodo\/(\d+)/, function(request, todoId) {
-    deleteTodo(parseInt(todoId, 10));
-    request.respond(204);
+    if (requestShouldSucceed(request)) {
+      deleteTodo(parseInt(todoId, 10));
+      request.respond(204);
+    }
   });
 
   var saveTodo = function(todo) {
@@ -64,7 +83,9 @@ module.exports = function() {
   };
 
   server.respondWith("POST", "/api/saveTodo", function(request) {
-    const todo = JSON.parse(request.requestBody);
-    request.respond(200, headers, JSON.stringify(saveTodo(todo)));
+    if (requestShouldSucceed(request)) {
+      const todo = JSON.parse(request.requestBody);
+      request.respond(200, headers, JSON.stringify(saveTodo(todo)));
+    }
   });
 };

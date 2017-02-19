@@ -6,10 +6,13 @@ export const actions = {
   requestLoadList: flyd.stream(),
   loadedList: flyd.stream(),
   deleteTodoStart: flyd.stream(),
-  deleteTodoSuccess: flyd.stream()
+  deleteTodoSuccess: flyd.stream(),
+  deleteTodoFailure: flyd.stream()
 };
 
 todoItem.actions.deleteTodo.map(id => {
   actions.deleteTodoStart(true);
-  services.deleteTodo(id).then(() => actions.deleteTodoSuccess(id));
+  services.deleteTodo(id).
+    then(() => actions.deleteTodoSuccess(id)).
+    catch(actions.deleteTodoFailure);
 });
