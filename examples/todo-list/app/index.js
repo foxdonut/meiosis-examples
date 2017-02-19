@@ -1,6 +1,6 @@
 import flyd from "flyd";
 import createServer from "../sinonServer";
-import services from "../todoMain/services";
+import services from "./services";
 import { mergeIntoOne, nest, scan } from "../util/stream-util";
 import { todoList } from "../todoList";
 import { todoForm } from "../todoForm";

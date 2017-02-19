@@ -1,6 +1,6 @@
 import flyd from "flyd";
 import { todoItem } from "../todoItem";
-import services from "../todoMain/services";
+import services from "../app/services";
 
 export const actions = {
   requestLoadList: flyd.stream(),
