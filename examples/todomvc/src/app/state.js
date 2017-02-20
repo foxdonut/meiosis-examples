@@ -10,7 +10,7 @@ const allCompleted = function(filteredTodos) {
   return result;
 };
 
-export const rootState = model => {
+export const appState = model => {
   const state = JSON.parse(JSON.stringify(model));
   const by = model.filter;
   const completed = by === "completed";

@@ -28,5 +28,5 @@ export function startApp(view, render) {
   model.map(model => render(view(model), element));
 
   todoList.actions.requestLoadList(true);
-  services.loadTodos.then(todoList.actions.loadedList);
+  services.loadTodos().then(todoList.actions.loadedList);
 }

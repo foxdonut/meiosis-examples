@@ -2,14 +2,14 @@
 var variant = process.env.VARIANT;
 
 module.exports = {
-  entry: "./" + variant + "/index.js" + (variant === "react" ? "x" : ""),
+  entry: "./src/index-" + variant + ".js",
   devtool: "source-map",
   output: {
-    path: "./" + variant + "/",
-    filename: "generated-app.js"
+    path: ".",
+    filename: "generated-" + variant + "-app.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
         loader: "babel-loader",
         test: /\.jsx?$/,

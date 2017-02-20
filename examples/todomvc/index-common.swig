@@ -5,12 +5,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="/examples/todomvc/css/index.css">
 
-    <title>Meiosis Example - {% block title %}Title{% endblock %}</title>
+    <title>Meiosis Example - {% block title %}{% endblock %}</title>
   </head>
   <body class="container">
     <div>
       <a href="http://meiosis.js.org"><img src="/public/images/meiosis.png" style="margin-right: 8px" width="53px"></a>
-      <h2 style="display: inline">Meiosis TodoMVC - {% block title %}Title{% endblock %}</h2>
+      <h2 style="display: inline">Meiosis TodoMVC - {% block title %}{% endblock %}</h2>
       <div><a href="/index.html">Back to list of examples</a></div>
       <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/todomvc">Source code</a></div>
       <hr>
@@ -22,53 +22,6 @@
     <hr/><div>Todo MVC example idea credit: <a href="http://todomvc.com">todomvc.com</a></div>
   </body>
 
-  <script src="/public/lib/meiosis.min.js"></script>
-  <script src="/public/lib/meiosis-tracer.min.js"></script> <!-- development only -->
-  <script src="/public/lib/history.min.js"></script>
-  <script src="/public/lib/classnames.min.js"></script>
-  <script src="/public/lib/union-type.js"></script>
+  <script src="/examples/todomvc/generated-{% block variant %}{% endblock %}-app.js"></script>
 
-  <script src="/examples/todomvc/common/store.js"></script>
-
-  {% block content %}Content{% endblock %}
-
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/header/view.{% block ext %}{% endblock %}"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoEdit/view.{% block ext %}{% endblock %}"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoItem/view.{% block ext %}{% endblock %}"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/main/view.{% block ext %}{% endblock %}"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/footer/view.{% block ext %}{% endblock %}"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoapp/view.{% block ext %}{% endblock %}"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/root/view.{% block ext %}{% endblock %}"></script>
-
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/header/actionTypes.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/header/actions.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/header/receive.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/header/component.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/footer/actionTypes.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/footer/actions.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/footer/receive.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/footer/ready.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/footer/component.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoItem/state.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/actionTypes.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/actions.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/display.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoEdit/receive.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoEdit/component.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoItem/actionTypes.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoItem/actions.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoItem/display.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/todoItem/receive.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoItem/component.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/actionTypes.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/actions.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/main/receive.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/main/component.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/todoapp/component.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/root/model.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/common/root/state.js"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/root/component.js"></script>
-
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/runapp.{% block ext %}{% endblock %}"></script>
-  <script {% block type %}{% endblock %}src="/examples/todomvc/{% block variant %}{% endblock %}/app.{% block ext %}{% endblock %}"></script>
 </html>
