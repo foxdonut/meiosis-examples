@@ -1,44 +1,30 @@
-import Type from "union-type";
+import flyd from "flyd";
 
-export const HeaderAction = Type({
-  NewTodo: [ String ],
-  SaveNewTodo: [ String ],
-  ClearNewTodo: []
-});
+const ENTER_KEY = 13;
 
-export const createHeaderActions = propose => {
-  const actions = {
-    newTodo: function(title) {
-      propose(HeaderAction.NewTodo(title));
-    },
-    saveTodo: function(title) {
-      propose(HeaderAction.SaveNewTodo(title));
-    },
-    clearNewTodo: function() {
-      propose(HeaderAction.ClearNewTodo());
+export const actions = {
+  newTodo: flyd.stream(),
+  saveNewTodo: flyd.stream()
+};
+
+export const intents = {
+  newTodoKeyUp: evt => {
+    if (evt.keyCode === ENTER_KEY) {
+      actions.saveNewTodo(evt.target.value);
     }
-  };
-
-  const ENTER_KEY = 13;
-
-  actions.events = {
-    onNewTodoKeyUp: function(evt) {
-      if (evt.keyCode === ENTER_KEY) {
-        actions.saveTodo(evt.target.value);
-      }
-      else {
-        actions.newTodo(evt.target.value);
-      }
-    },
-    onNewTodoKeyUpEnterOnly: function(evt) {
-      if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-        actions.saveTodo(evt.target.value);
-      }
-    },
-    onNewTodoChange: function(evt) {
+    else {
       actions.newTodo(evt.target.value);
     }
-  };
-
-  return actions;
+  }
 };
+
+/*
+onNewTodoKeyUpEnterOnly: function(evt) {
+  if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
+    actions.saveTodo(evt.target.value);
+  }
+},
+onNewTodoChange: function(evt) {
+  actions.newTodo(evt.target.value);
+}
+*/

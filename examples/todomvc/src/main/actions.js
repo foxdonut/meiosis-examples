@@ -1,21 +1,9 @@
-import Type from "union-type";
+import flyd from "flyd";
 
-export const MainAction = Type({
-  SetAllCompleted: [ Boolean ]
-});
+export const actions = {
+  setAllCompleted: flyd.stream()
+};
 
-export const createMainActions = propose => {
-  const actions = {
-    setAllCompleted: function(completed) {
-      propose(MainAction.SetAllCompleted(completed));
-    }
-  };
-
-  actions.events = {
-    onToggleAllTodos: function(evt) {
-      actions.setAllCompleted(evt.target.checked);
-    }
-  };
-
-  return actions;
+export const intents = {
+  toggleAllTodos: evt => actions.setAllCompleted(evt.target.checked)
 };

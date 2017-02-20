@@ -1,41 +1,13 @@
-import Type from "union-type";
+import flyd from "flyd";
 
-export const ItemAction = Type({
-  SetCompleted: [ Number, Boolean ],
-  EditTodo: [ Object ],
-  DeleteTodo: [ Number ]
-});
+export const actions = {
+  deleteTodo: flyd.stream(),
+  editTodo: flyd.stream(),
+  setCompleted: flyd.stream()
+};
 
-export const createItemActions = propose => {
-  const actions = {
-    setCompleted: function(todoId, completed) {
-      propose(ItemAction.SetCompleted(todoId, completed));
-    },
-    editTodo: function(todo) {
-      propose(ItemAction.EditTodo(todo));
-    },
-    deleteTodoId: function(todoId) {
-      propose(ItemAction.DeleteTodo(todoId));
-    }
-  };
-
-  actions.events = {
-    onToggleTodo: function(todoId) {
-      return function(evt) {
-        actions.setCompleted(todoId, evt.target.checked);
-      };
-    },
-    onEditTodo: function(todo) {
-      return function(_evt) {
-        actions.editTodo(todo);
-      };
-    },
-    onDestroyTodo: function(todoId) {
-      return function(_evt) {
-        actions.deleteTodoId(todoId);
-      };
-    }
-  };
-
-  return actions;
+export const intents = {
+  deleteTodo: todoId => () => actions.deleteTodo(todoId),
+  editTodo: todo => () => actions.editTodo(todo),
+  toggleTodo: todoId => evt => actions.setCompleted({ todoId, completed: evt.target.checked })
 };

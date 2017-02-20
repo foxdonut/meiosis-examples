@@ -10,6 +10,5 @@ node node_modules\swig\bin\swig.js render .\examples\temperatures\index-h.swig >
 node node_modules\swig\bin\swig.js render .\examples\temperatures\index-jsx.swig > .\examples\temperatures\index-jsx.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-inferno.swig > .\examples\todo-list\index-inferno.html
 node node_modules\swig\bin\swig.js render .\examples\todo-list\index-react.swig > .\examples\todo-list\index-react.html
-node node_modules\swig\bin\swig.js render .\examples\todomvc\index-mithril.swig > .\examples\todomvc\index-mithril.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\index-react.swig > .\examples\todomvc\index-react.html
 node node_modules\swig\bin\swig.js render .\examples\todomvc\index-snabbdom.swig > .\examples\todomvc\index-snabbdom.html

@@ -1,9 +1,15 @@
 import flyd from "flyd";
 import { applyModelChange, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
-import { scan } from "../util";
-import { todoStorage } from "./store";
+
 import { appState } from "./state";
+import { footer } from "../footer";
+import { header } from "../header";
+import { main } from "../main";
+import { mergeIntoOne, scan } from "../util";
+import { todoEdit } from "../todoEdit";
+import { todoItem } from "../todoItem";
+import { todoStorage } from "./store";
 
 export function startApp(view, render) {
   const initialModel = {
@@ -13,7 +19,13 @@ export function startApp(view, render) {
     todos: todoStorage.loadAll()
   };
 
-  const modelChanges = flyd.stream();
+  const modelChanges = mergeIntoOne([
+    footer.modelChanges,
+    header.modelChanges,
+    main.modelChanges,
+    todoEdit.modelChanges,
+    todoItem.modelChanges
+  ]);
 
   const model = scan(applyModelChange, initialModel, modelChanges);
   const state = model.map(appState);

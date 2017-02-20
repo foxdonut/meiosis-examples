@@ -1,25 +1,10 @@
-import Type from "union-type";
+import flyd from "flyd";
 
-export const FooterAction = Type({
-  ClearCompleted: [ ],
-  Filter: [ String ]
-});
+export const actions = {
+  clearCompleted: flyd.stream(),
+  filter: flyd.stream()
+};
 
-export const createFooterActions = propose => {
-  const actions = {
-    clearCompleted: function() {
-      propose(FooterAction.ClearCompleted());
-    },
-    filter: function(by) {
-      propose(FooterAction.Filter(by));
-    }
-  };
-
-  actions.events = {
-    onClearCompleted: function(_evt) {
-      actions.clearCompleted();
-    }
-  };
-
-  return actions;
+export const intents = {
+  clearCompleted: () => actions.clearCompleted(true)
 };
