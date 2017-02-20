@@ -6,8 +6,8 @@ export const todoFormView = model => {
     <input type="text" id={name} name={name} className="form-control" value={value}
       onInput={intents.editingTodo(name)}/>;
 
-  const errorMessage = error => error ?
-    <span className="has-error"><span className="help-block">{error}</span></span> : null;
+  const errorMessage = errors => errors ?
+    <span className="has-error"><span className="help-block">{errors[0]}</span></span> : null;
 
   const inputDiv = (field, label) =>
     <div className="form-group">

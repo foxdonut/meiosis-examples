@@ -1,12 +1,6 @@
 import validate from "validate.js";
 
 let validationSpec = {
-  id: {
-    numericality: {
-      onlyInteger: true,
-      greaterThan: 0
-    }
-  },
   description: {
     presence: true,
     length: {
