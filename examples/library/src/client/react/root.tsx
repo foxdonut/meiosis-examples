@@ -3,16 +3,16 @@ import { EventHandler, SyntheticEvent } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { Tabs, Tab } from "material-ui/Tabs";
 
-import { BookListModel, Model, propose } from "../root";
+import { BookListModel, Model } from "../app";
 import { VDom } from "./types";
 import { circulationView } from "./circulation";
 
 export const rootView = (model: Model): VDom => {
   function onTabsChange(tab: string) {
-    propose({ type: "Root.LocationChange", url: "/" + tab });
+    //propose({ type: "Root.LocationChange", url: "/" + tab });
   }
 
-  const goToRepairs: EventHandler<SyntheticEvent> = (evt: SyntheticEvent): void => {
+  const goToRepairs: EventHandler<any> = (evt: any): void => {
     evt.preventDefault();
     //propose({ type: "Root.LocationChange", url: "/repairs" });
   }

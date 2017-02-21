@@ -11,31 +11,31 @@ module.exports = {
     filename: "./" + variant + "/generated-app" + (isProduction ? ".min" : "") + ".js"
   },
   resolve: {
-    extensions: ["", ".js", ".ts", ".tsx"]
-  },
-  ts: {
-    compilerOptions: {
-      declaration: false
-    }
+    extensions: [".js", ".ts", ".tsx"]
   },
   module: {
     noParse: [
       /node_modules\/sinon/
     ],
-    loaders: [
+    rules: [
       {
-        loader: "ts",
         test: /\.tsx?$/,
-        exclude: /node_modules/
+        loader: "ts-loader",
+        exclude: /node_modules/,
+        options: {
+          compilerOptions: {
+            declaration: false
+          }
+        },
       }
-    ],
+    ]/*,
     preloaders: [
       {
         loader: "source-map",
         test: /\.js$/,
         exclude: /node_modules/
       }
-    ]
+    ]*/
   },
   node: {
     fs: "empty"

@@ -1,8 +1,7 @@
 import * as m from "mithril";
-import { Model } from "../root/types";
-import { VDom } from "./types";
+import { Model } from "../app";
 
-const view: any = function(model: Model): VDom {
+const view: any = function(model: Model): any {
   return m("#inProgress.modal", [
     m(".modal-dialog", [
       m(".modal-content", [

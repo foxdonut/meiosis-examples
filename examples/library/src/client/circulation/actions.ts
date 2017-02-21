@@ -1,5 +1,4 @@
 import { Book } from "../../persistence";
-import { propose } from "../root";
 import { BookServices } from "../services/book";
 
 export interface CirculationActions {
@@ -9,9 +8,9 @@ export interface CirculationActions {
 export function createActions(services: BookServices): CirculationActions {
   return {
     loadBookList: () => {
-      propose({ type: "Server.LoadBookList", section: "circulation" });
+      //propose({ type: "Server.LoadBookList", section: "circulation" });
       services.loadBooks().then((books: Array<Book>) => {
-        propose({ type: "Server.LoadedBookList", section: "circulation", books });
+        //propose({ type: "Server.LoadedBookList", section: "circulation", books });
       });
     }
   };

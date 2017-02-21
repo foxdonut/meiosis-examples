@@ -22,6 +22,6 @@ export const view = model =>
       headerView(model),
       mainView(model),
       footerView(model),
-      info
-    ])
+    ]),
+    info
   ]);

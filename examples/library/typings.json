@@ -3,20 +3,13 @@
     "axios": "registry:dt/axios#0.9.1+20161016142654",
     "bootstrap": "registry:dt/bootstrap#3.3.5+20160619023404",
     "classnames": "registry:dt/classnames#0.0.0+20161113184211",
-    "crossroads": "registry:dt/crossroads#0.0.0+20160317120654",
-    "hapi": "registry:dt/hapi#13.0.0+20161019130714",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "js-signals": "registry:dt/js-signals#0.0.0+20160316155526",
-    "material-ui": "registry:dt/material-ui#0.16.0+20161019174653",
     "mithril": "registry:dt/mithril#0.0.0+20160725212620",
-    "node": "registry:dt/node#7.0.0+20170110233017",
     "object-path": "registry:dt/object-path#0.9.0+20160510002910",
-    "react": "registry:dt/react#0.14.0+20161117000655",
-    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "sinon": "registry:dt/sinon#1.16.1+20161208163514",
     "sql.js": "registry:dt/sql.js#0.0.0+20160906140629"
   },
   "dependencies": {
-    "ramda": "registry:dt/ramda#0.0.0+20161005184000"
+    "ramda": "registry:dt/ramda#0.0.0+20170118060728"
   }
 }

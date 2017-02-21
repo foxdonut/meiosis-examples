@@ -1,6 +1,6 @@
 import * as React from "react";
 import Dialog from "material-ui/Dialog";
-import { Model } from "../root/types";
+import { Model } from "../app";
 import { VDom } from "./types";
 
 export const progressDialogView = function(model: Model): VDom {
