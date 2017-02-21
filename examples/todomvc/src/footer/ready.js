@@ -1,13 +1,11 @@
 import createHistory from "history/createBrowserHistory";
-import { createFooterActions } from "./actions";
+import { actions } from "./actions";
 
-export const footerReady = propose => {
-  const footerActions = createFooterActions(propose);
-
+export const ready = () => {
   const history = createHistory();
 
   history.listen(function(location) {
     const route = location.hash.split("/")[1] || "all";
-    footerActions.filter(route);
+    actions.filter(route);
   });
 };

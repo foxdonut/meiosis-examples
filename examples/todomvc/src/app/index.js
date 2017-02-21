@@ -30,9 +30,11 @@ export function startApp(view, render) {
   const model = scan(applyModelChange, initialModel, modelChanges);
   const state = model.map(appState);
 
-  //footerReady(propose);
   const element = document.getElementById("app");
   state.map(state => render(element, view(state)));
+
+  //FIXME
+  footer.ready();
 
   trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
   meiosisTracer({ selector: "#tracer" });

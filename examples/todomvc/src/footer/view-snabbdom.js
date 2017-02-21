@@ -9,9 +9,9 @@ export const footerView = model => {
   return h("footer.footer", [
     h("span.todo-count", model.itemsLeftText),
     h("ul.filters", [
-      h("li", h("a", { href: "#/", class: { selected: model.allSelected } }, "All")),
-      h("li", h("a", { href: "#/active", class: { selected: model.activeSelected } }, "Active")),
-      h("li", h("a", { href: "#/completed", class: { selected: model.completedSelected } }, "Completed"))
+      h("li", h("a", { attrs: { href: "#/" }, class: { selected: model.allSelected } }, "All")),
+      h("li", h("a", { attrs: { href: "#/active"}, class: { selected: model.activeSelected } }, "Active")),
+      h("li", h("a", { attrs: { href: "#/completed" } , class: { selected: model.completedSelected } }, "Completed"))
     ]),
     clearCompleted(model)
   ]);
