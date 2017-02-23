@@ -7,7 +7,7 @@ import { initialModel } from "./model";
 import { mergeIntoOne, scan, streamLibrary } from "../util";
 import { Model } from "./types";
 import { rootReceive } from "./receive";
-import { urlHandler } from "../util";
+import { createUrlHandler } from "../util";
 
 export * from "./types";
 

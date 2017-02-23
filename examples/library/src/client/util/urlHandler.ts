@@ -1,8 +1,8 @@
+import createHistory from "history/createBrowserHistory";
+import * as crossroads from "crossroads";
 import { Stream } from "meiosis";
 
 import { Model } from "../app";
-import createHistory from "history/createBrowserHistory";
-import * as crossroads from "crossroads";
 
 export interface LibraryUrl {
   get: string,
@@ -30,7 +30,7 @@ function initRoutes(history: any, rootPath: string): void {
   //propose({ type: "Root.UrlChanged", url: initialUrl });
 }
 
-export function urlHandler(variant: string): any {
+export function createUrlHandler(variant: string): any {
   const rootPath = "/examples/library/" + variant;
 
   const history = createHistory({
@@ -80,6 +80,10 @@ export function urlHandler(variant: string): any {
           break;
       }
       return model;
-    }
+    },
+    postRender: (model: Model): void => {
+      history.replace(model.url);
+    },
+    ready: initRoutes(history, rootPath)
   };
 }
