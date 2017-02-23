@@ -12,9 +12,11 @@ import { todoItem } from "../todoItem";
 import { todoStorage } from "./store";
 
 export function startApp(view, render) {
+  const initialRoute = window.location.hash || "#/";
+
   const initialModel = {
     editTodo: {},
-    filter: "all",
+    route: initialRoute,
     newTodo: "",
     todos: todoStorage.loadAll()
   };
@@ -27,14 +29,14 @@ export function startApp(view, render) {
     todoItem.modelChanges
   ]);
 
+  //FIXME
+  const routing = footer.ready();
+
   const model = scan(applyModelChange, initialModel, modelChanges);
-  const state = model.map(appState);
+  const state = model.map(appState).map(routing);
 
   const element = document.getElementById("app");
   state.map(state => render(element, view(state)));
-
-  //FIXME
-  footer.ready();
 
   trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
   meiosisTracer({ selector: "#tracer" });

@@ -8,10 +8,7 @@ const clearCompleted = actions.clearCompleted.map(() => model => {
 });
 
 const filter = actions.filter.map(by => model => {
-  if (by !== model.filter) {
-    model.todos = todoStorage.loadAll();
-    model.filter = by;
-  }
+  model.route = "#/" + by;
   return model;
 });
 

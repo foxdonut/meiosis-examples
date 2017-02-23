@@ -6,5 +6,9 @@ export const actions = {
 };
 
 export const intents = {
-  clearCompleted: () => actions.clearCompleted(true)
+  clearCompleted: () => actions.clearCompleted(true),
+  filter: by => evt => {
+    evt.preventDefault();
+    actions.filter(by);
+  }
 };

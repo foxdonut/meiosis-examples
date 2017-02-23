@@ -12,11 +12,14 @@ const allCompleted = function(filteredTodos) {
 
 export const appState = model => {
   const state = JSON.parse(JSON.stringify(model));
-  const by = model.filter;
-  const completed = by === "completed";
 
-  const filterBy = (by && by !== "all") ?
-    todo => (!!todo.completed) === completed
+  state.filter = model.route.substring(2);
+  state.allSelected = state.filter === "";
+  state.activeSelected = state.filter === "active";
+  state.completedSelected = state.filter === "completed";
+
+  const filterBy = (state.filter !== "") ?
+    todo => (!!todo.completed) === state.completedSelected
     : () => true;
 
   state.filteredTodos = model.todos.filter(filterBy);
@@ -27,10 +30,6 @@ export const appState = model => {
   state.itemsLeftText = state.filteredTodos.length > 0 ?
     (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
   state.clearCompleted = (state.filteredTodos.length - itemsLeft) > 0;
-
-  state.allSelected = model.filter === "all";
-  state.activeSelected = model.filter === "active";
-  state.completedSelected = model.filter === "completed";
 
   return state;
 };
