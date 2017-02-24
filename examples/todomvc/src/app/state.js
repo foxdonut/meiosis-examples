@@ -13,7 +13,7 @@ const allCompleted = function(filteredTodos) {
 export const appState = model => {
   const state = JSON.parse(JSON.stringify(model));
 
-  state.filter = model.route.substring(2);
+  state.filter = model.route;
   state.allSelected = state.filter === "";
   state.activeSelected = state.filter === "active";
   state.completedSelected = state.filter === "completed";

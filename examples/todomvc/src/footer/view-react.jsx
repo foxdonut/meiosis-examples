@@ -11,18 +11,9 @@ export const footerView = model => {
     <footer className="footer">
       <span className="todo-count">{model.itemsLeftText}</span>
       <ul className="filters">
-        <li>
-          <a href="#" onClick={intents.filter("")}
-            className={classnames({selected: model.allSelected})}>All</a>
-        </li>
-        <li>
-          <a href="#" onClick={intents.filter("active")}
-            className={classnames({selected: model.activeSelected})}>Active</a>
-        </li>
-        <li>
-          <a href="#" onClick={intents.filter("completed")}
-            className={classnames({selected: model.completedSelected})}>Completed</a>
-        </li>
+        <li><a href="#/" className={classnames({selected: model.allSelected})}>All</a></li>
+        <li><a href="#/active" className={classnames({selected: model.activeSelected})}>Active</a></li>
+        <li><a href="#/completed" className={classnames({selected: model.completedSelected})}>Completed</a></li>
       </ul>
       {clearCompleted(model)}
     </footer>

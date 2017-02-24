@@ -3,6 +3,7 @@ import { applyModelChange, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 import { appState } from "./state";
+import { createRouter } from "../router";
 import { footer } from "../footer";
 import { header } from "../header";
 import { main } from "../main";
@@ -12,7 +13,9 @@ import { todoItem } from "../todoItem";
 import { todoStorage } from "./store";
 
 export function startApp(view, render) {
-  const initialRoute = window.location.hash || "#/";
+  const router = createRouter();
+
+  const initialRoute = router.extractRoute(window.location.hash);
 
   const initialModel = {
     editTodo: {},
@@ -25,15 +28,13 @@ export function startApp(view, render) {
     footer.modelChanges,
     header.modelChanges,
     main.modelChanges,
+    router.modelChanges,
     todoEdit.modelChanges,
     todoItem.modelChanges
   ]);
 
-  //FIXME
-  const routing = footer.ready();
-
   const model = scan(applyModelChange, initialModel, modelChanges);
-  const state = model.map(appState).map(routing);
+  const state = model.map(appState).map(router.state);
 
   const element = document.getElementById("app");
   state.map(state => render(element, view(state)));
