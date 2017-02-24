@@ -19,6 +19,12 @@ module.exports = {
     ],
     rules: [
       {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map",
+        exclude: /node_modules/
+      },
+      {
         test: /\.tsx?$/,
         loader: "ts-loader",
         exclude: /node_modules/,
@@ -28,14 +34,7 @@ module.exports = {
           }
         },
       }
-    ]/*,
-    preloaders: [
-      {
-        loader: "source-map",
-        test: /\.js$/,
-        exclude: /node_modules/
-      }
-    ]*/
+    ]
   },
   node: {
     fs: "empty"
