@@ -8,9 +8,8 @@ export const createRouter = () => {
   const history = createHistory();
 
   history.listen(function(location) {
-    console.log("history.listen:", location.hash)
-    if (!location.state || !location.state.sync) {
-      const route = (location.hash && location.hash.substring(2)) || "";
+    if (!(location.state && location.state.sync)) {
+      const route = extractRoute(location.hash);
       actions.actions.route(route);
     }
   });
@@ -18,7 +17,7 @@ export const createRouter = () => {
   const state = state => {
     const route = extractRoute(window.location.hash);
     if (state.route !== route) {
-      history.replace("#/" + state.route, { sync: true });
+      history.push("#/" + state.route, { sync: true });
     }
     return state;
   };
