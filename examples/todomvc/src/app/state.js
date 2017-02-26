@@ -13,6 +13,10 @@ const allCompleted = function(state) {
 export const appState = model => {
   const state = JSON.parse(JSON.stringify(model));
 
+  state.allSelected = state.route === "";
+  state.activeSelected = state.route === "active";
+  state.completedSelected = state.route === "completed";
+
   state.allCompleted = allCompleted(state);
 
   const notCompleted = todoId => !state.todosById[todoId].completed;

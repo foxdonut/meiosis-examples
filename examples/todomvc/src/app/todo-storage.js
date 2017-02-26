@@ -109,5 +109,15 @@ export const todoStorage = {
         }
         saveAll(updatedTodos).then(() => resolve(updatedTodos));
       }));
+  },
+  filter: function(by) {
+    const completedSelected = by === "completed";
+    const filterBy = todo => (!!todo.completed) === completedSelected;
+
+    return new Promise(resolve =>
+      loadAll().then(todos => {
+        const filteredTodos = todos.filter(filterBy);
+        resolve(filteredTodos);
+      }));
   }
 };

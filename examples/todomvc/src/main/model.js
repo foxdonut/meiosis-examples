@@ -1,6 +1,6 @@
 import { actions } from "./actions";
 
-const loadAllTodos = actions.loadAllTodos.map(todos => model => {
+const displayTodos = actions.displayTodos.map(todos => model => {
   model.todoIds = [];
   model.todosById = {};
 
@@ -12,4 +12,4 @@ const loadAllTodos = actions.loadAllTodos.map(todos => model => {
   return model;
 });
 
-export const modelChanges = loadAllTodos;
+export const modelChanges = displayTodos;
