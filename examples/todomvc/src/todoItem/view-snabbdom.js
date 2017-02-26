@@ -5,7 +5,8 @@ import { intents } from "./actions";
 import { state } from "./state";
 import { todoEditView } from "../todoEdit/view-snabbdom";
 
-export const todoItemView = model => todo => {
+export const todoItemView = model => todoId => {
+  const todo = model.todosById[todoId];
   const editing = state.editing(model, todo);
 
   return h("li", { class: getTodoClassMap(model, todo) }, [

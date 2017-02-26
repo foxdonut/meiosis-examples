@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { intents } from "./actions";
 
 export const footerView = model => {
-  const clearCompleted = model => model.clearCompleted ?
+  const clearCompleted = model => model.clearCompletedVisible ?
     <button className="clear-completed" onClick={intents.clearCompleted}>Clear completed</button> : null;
 
   return (

@@ -10,22 +10,22 @@ import { main } from "../main";
 import { mergeIntoOne, scan } from "../util";
 import { todoEdit } from "../todoEdit";
 import { todoItem } from "../todoItem";
-import { todoStorage } from "./store";
 
 export function startApp(view, render) {
   const router = createRouter();
+  footer.addRoutes();
 
   const initialRoute = router.extractRoute(window.location.hash);
 
   const initialModel = {
     editTodo: {},
-    route: initialRoute,
     newTodo: "",
-    todos: todoStorage.loadAll()
+    route: initialRoute,
+    todoIds: [],
+    todosById: {}
   };
 
   const modelChanges = mergeIntoOne([
-    footer.modelChanges,
     header.modelChanges,
     main.modelChanges,
     router.modelChanges,
@@ -41,4 +41,6 @@ export function startApp(view, render) {
 
   trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
   meiosisTracer({ selector: "#tracer" });
+
+  main.intents.loadAllTodos();
 }

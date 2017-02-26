@@ -5,7 +5,8 @@ import { intents } from "./actions";
 import { state } from "./state";
 import { todoEditView } from "../todoEdit/view-react.jsx";
 
-export const todoItemView = model => todo => {
+export const todoItemView = model => todoId => {
+  const todo = model.todosById[todoId];
   const editing = state.editing(model, todo);
 
   return (

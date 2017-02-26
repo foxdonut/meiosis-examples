@@ -3,7 +3,7 @@ import h from "snabbdom/h";
 import { intents } from "./actions";
 
 export const footerView = model => {
-  const clearCompleted = model => model.clearCompleted ?
+  const clearCompleted = model => model.clearCompletedVisible ?
     h("button.clear-completed", { on: { click: intents.clearCompleted } }, "Clear completed") : h("span");
 
   return h("footer.footer", [

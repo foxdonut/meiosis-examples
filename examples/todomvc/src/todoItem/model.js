@@ -1,9 +1,8 @@
 import { actions } from "./actions";
 import { mergeIntoOne } from "../util";
-import { todoStorage } from "../app/store";
 
 const setCompleted = actions.setCompleted.map(({ todoId, completed }) => model => {
-  model.todos = todoStorage.setCompleted(todoId, completed);
+  model.todosById[todoId].completed = completed;
   return model;
 });
 
@@ -13,7 +12,8 @@ const editTodo = actions.editTodo.map(todo => model => {
 });
 
 const deleteTodo = actions.deleteTodo.map(todoId => model => {
-  model.todos = todoStorage.deleteTodoId(todoId);
+  delete model.todosById[todoId];
+  model.todoIds.splice(model.todoIds.indexOf(todoId), 1);
   return model;
 });
 

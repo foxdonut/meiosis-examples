@@ -1,9 +1,11 @@
 import flyd from "flyd";
+import { todoStorage } from "../app/todo-storage";
 
 export const actions = {
-  setAllCompleted: flyd.stream()
+  loadAllTodos: flyd.stream()
 };
 
 export const intents = {
-  toggleAllTodos: evt => actions.setAllCompleted(evt.target.checked)
+  loadAllTodos: () => todoStorage.loadAll().then(actions.loadAllTodos),
+  toggleAllTodos: evt => todoStorage.setAllCompleted(evt.target.checked).then(intents.loadAllTodos)
 };

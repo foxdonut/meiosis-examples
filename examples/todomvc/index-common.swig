@@ -14,6 +14,10 @@
       <div><a href="/index.html">Back to list of examples</a></div>
       <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/todomvc">Source code</a></div>
       <hr>
+      <div>
+        <strong>{% block variant %}{% endblock %} version | </strong>
+        <a href="index-{% block otherVariant %}{% endblock %}.html">{% block otherVariant %}{% endblock %} version</a>
+      </div>
 
       <div id="app"></div>
       <div id="tracer" style="position: fixed; top: 0px; right: 0px;"></div>

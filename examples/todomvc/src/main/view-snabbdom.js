@@ -11,5 +11,5 @@ export const mainView = model =>
       on: { change: intents.toggleAllTodos }
     }),
     h("label", { attrs: { for: "toggle-all"} }, "Mark all as complete"),
-    h("ul.todo-list", model.filteredTodos.map(todoItemView(model)))
+    h("ul.todo-list", model.todoIds.map(todoItemView(model)))
   ]);

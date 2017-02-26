@@ -1,8 +1,8 @@
-const allCompleted = function(filteredTodos) {
+const allCompleted = function(state) {
   let result = true;
 
-  for (let i = 0, t = filteredTodos.length; i < t; i++) {
-    if (!filteredTodos[i].completed) {
+  for (let i = 0, t = state.todoIds.length; i < t; i++) {
+    if (!state.todosById[state.todoIds[i]].completed) {
       result = false;
       break;
     }
@@ -13,23 +13,15 @@ const allCompleted = function(filteredTodos) {
 export const appState = model => {
   const state = JSON.parse(JSON.stringify(model));
 
-  state.filter = model.route;
-  state.allSelected = state.filter === "";
-  state.activeSelected = state.filter === "active";
-  state.completedSelected = state.filter === "completed";
+  state.allCompleted = allCompleted(state);
 
-  const filterBy = (state.filter !== "") ?
-    todo => (!!todo.completed) === state.completedSelected
-    : () => true;
+  const notCompleted = todoId => !state.todosById[todoId].completed;
+  const itemsLeft = state.todoIds.filter(notCompleted).length;
 
-  state.filteredTodos = model.todos.filter(filterBy);
-  state.allCompleted = allCompleted(state.filteredTodos);
-
-  const notCompleted = function(todo) { return !todo.completed; };
-  const itemsLeft = state.filteredTodos.filter(notCompleted).length;
-  state.itemsLeftText = state.filteredTodos.length > 0 ?
+  state.itemsLeftText = state.todoIds.length > 0 ?
     (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
-  state.clearCompleted = (state.filteredTodos.length - itemsLeft) > 0;
+
+  state.clearCompletedVisible = (state.todoIds.length - itemsLeft) > 0;
 
   return state;
 };

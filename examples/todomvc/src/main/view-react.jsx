@@ -9,7 +9,7 @@ export const mainView = model => (
       onChange={intents.toggleAllTodos}/>
     <label htmlFor="toggle-all">Mark all as complete</label>
     <ul className="todo-list">
-      {model.filteredTodos.map(todoItemView(model))}
+      {model.todoIds.map(todoItemView(model))}
     </ul>
   </section>
 );

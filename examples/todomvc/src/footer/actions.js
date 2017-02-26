@@ -1,9 +1,6 @@
-import flyd from "flyd";
-
-export const actions = {
-  clearCompleted: flyd.stream()
-};
+import { todoStorage } from "../app/todo-storage";
+import { main } from "../main";
 
 export const intents = {
-  clearCompleted: () => actions.clearCompleted(true)
+  clearCompleted: () => todoStorage.clearCompleted().then(main.actions.loadAllTodos)
 };
