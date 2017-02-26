@@ -13,7 +13,7 @@ export const intents = {
 
   editTodo: todo => () => actions.editTodo(todo),
 
-  toggleTodo: todoId => evt =>
-    todoStorage.setCompleted(todoId, evt.target.checked).then(
-      () => actions.setCompleted({ todoId, completed: evt.target.checked }))
+  toggleTodo: todoId => evt => (checked =>
+    todoStorage.setCompleted(todoId, checked).then(
+      () => actions.setCompleted({ todoId, completed: checked })))(evt.target.checked)
 };
