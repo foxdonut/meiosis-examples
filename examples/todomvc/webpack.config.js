@@ -5,7 +5,7 @@ module.exports = {
   entry: "./src/index-" + variant + ".js",
   devtool: "source-map",
   output: {
-    path: ".",
+    path: "./build",
     filename: "generated-" + variant + "-app.js"
   },
   module: {

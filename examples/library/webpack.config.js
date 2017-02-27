@@ -7,8 +7,8 @@ module.exports = {
   entry: "./src/client/index-" + variant + ".ts",
   devtool: "source-map",
   output: {
-    path: ".",
-    filename: "./" + variant + "/generated-app" + (isProduction ? ".min" : "") + ".js"
+    path: "./build",
+    filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
   },
   resolve: {
     extensions: [".js", ".ts", ".tsx"]

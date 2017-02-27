@@ -7,11 +7,11 @@
   <script src="/public/lib/flyd.js"></script>
   <script src="/public/lib/meiosis.min.js"></script>
   <script src="/public/lib/meiosis-tracer.min.js"></script> <!-- development only -->
-  <script src="/examples/rocket-launcher/js/actions.js"></script>
-  <script src="/examples/rocket-launcher/js/model.js"></script>
-  <script src="/examples/rocket-launcher/js/state.js"></script>
-  <script src="/examples/rocket-launcher/js/display.js"></script>
-  <script src="/examples/rocket-launcher/js/nextAction.js"></script>
+  <script src="/examples/rocket-launcher/common/actions.js"></script>
+  <script src="/examples/rocket-launcher/common/model.js"></script>
+  <script src="/examples/rocket-launcher/common/state.js"></script>
+  <script src="/examples/rocket-launcher/common/display.js"></script>
+  <script src="/examples/rocket-launcher/common/nextAction.js"></script>
 {% block subcontent %}{% endblock %}
 <hr/>
 <div>Rocket launcher example idea credit: <a href="http://www.ebpml.org/about">Jean-Jacques Dubray</a></div>

@@ -3,8 +3,8 @@ import $ from "jquery";
 
 import { render } from "react-dom";
 
-import { todoListView } from "../../todoList/view-react";
-import { todoList } from "../../todoList";
+import { todoListView } from "../../src/todoList/view-react";
+import { todoList } from "../../src/todoList";
 
 const id = "test";
 const sel = "#" + id;

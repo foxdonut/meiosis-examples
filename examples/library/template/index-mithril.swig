@@ -5,9 +5,9 @@
 
 {% block top %}
   Mithril + Bootstrap version |
-  <a href="/examples/library/react">React + Material UI version</a>
+  <a href="/examples/library/index-react.html">React + Material UI version</a>
 {% endblock %}
 
 {% block content %}
-  <script src="/examples/library/mithril/generated-app.js"></script>
+  <script src="/examples/library/build/generated-mithril-app.js"></script>
 {% endblock %}

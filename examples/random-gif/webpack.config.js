@@ -6,7 +6,7 @@ var webpack = require("webpack");
 module.exports = {
   entry: "./src/index-" + variant + ".js",
   output: {
-    path: ".",
+    path: "./build",
     filename: "generated-" + variant + "-app.js"
   },
   module: {

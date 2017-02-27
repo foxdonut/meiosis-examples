@@ -4,10 +4,10 @@ var variant = process.env.VARIANT;
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./index-" + variant + ".js",
+  entry: "./src/index-" + variant + ".js",
   devtool: isProduction ? "source-map" : "eval",
   output: {
-    path: ".",
+    path: "./build",
     filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
   },
   module: {

@@ -5,11 +5,11 @@
 
 {% block top %}
   React + Material UI version |
-  <a href="/examples/library/mithril">Mithril + Bootstrap version</a>
+  <a href="/examples/library/index-mithril.html">Mithril + Bootstrap version</a>
 {% endblock %}
 
 {% block content %}
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <style>body { font-family: "Roboto", sans-serif; }</style>
-  <script src="/examples/library/react/generated-app.js"></script>
+  <script src="/examples/library/build/generated-react-app.js"></script>
 {% endblock %}

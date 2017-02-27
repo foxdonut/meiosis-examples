@@ -26,6 +26,6 @@
     <hr/><div>Todo MVC example idea credit: <a href="http://todomvc.com">todomvc.com</a></div>
   </body>
 
-  <script src="/examples/todomvc/generated-{% block variant %}{% endblock %}-app.js"></script>
+  <script src="/examples/todomvc/build/generated-{% block variant %}{% endblock %}-app.js"></script>
 
 </html>

@@ -2,9 +2,9 @@
 var variant = process.env.VARIANT;
 
 module.exports = {
-  entry: "./index-" + variant + ".js",
+  entry: "./src/index-" + variant + ".js",
   output: {
-    path: ".",
+    path: "./build",
     filename: "generated-" + variant + "-app.js"
   },
   module: {
