@@ -4,10 +4,9 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { Tabs, Tab } from "material-ui/Tabs";
 
 import { BookListModel, Model } from "../app";
-import { VDom } from "./types";
-import { circulationView } from "./circulation";
+import { circulationView } from "../circulation/view-react";
 
-export const rootView = (model: Model): VDom => {
+export const view = (model: Model): any => {
   function onTabsChange(tab: string) {
     //propose({ type: "Root.LocationChange", url: "/" + tab });
   }
