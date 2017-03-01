@@ -28,7 +28,7 @@ export const view = (model: Model): any => (
         </Tab>
         <Tab value="other" label="Something Else">
           <div>Coming soon</div>
-          <div><a href="#/repairs" onClick={goToRepairs}>Repairs</a></div>
+          <div><a href="#/repairs">Repairs</a></div>
         </Tab>
       </Tabs>
       {/*views.progressDialog(model)*/}

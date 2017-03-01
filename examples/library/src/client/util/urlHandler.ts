@@ -74,15 +74,15 @@ export function createUrlHandler(variant: string): any {
         case "Root.LocationChange":
           history.push(proposal.url);
         case "Root.UrlChanged":
-          model.url = proposal.url;
-          history.replace(model.url);
+          model.route = proposal.url;
+          history.replace(model.route);
           crossroads.parse(proposal.url, [model]);
           break;
       }
       return model;
     },
     postRender: (model: Model): void => {
-      history.replace(model.url);
+      history.replace(model.route);
     },
     ready: initRoutes(history, rootPath)
   };

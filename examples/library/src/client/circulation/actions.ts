@@ -1,17 +1,14 @@
+import { Stream } from "meiosis";
+import { streamLibrary } from "../util";
 import { Book } from "../../persistence";
-import { BookServices } from "../services/book";
+import { bookServices } from "../services/book";
 
-export interface CirculationActions {
-  loadBookList: () => void;
+export const actions = {
+  loadBookList: streamLibrary.stream<Array<Book>>()
 };
 
-export function createActions(services: BookServices): CirculationActions {
-  return {
-    loadBookList: () => {
-      //propose({ type: "Server.LoadBookList", section: "circulation" });
-      services.loadBooks().then((books: Array<Book>) => {
-        //propose({ type: "Server.LoadedBookList", section: "circulation", books });
-      });
-    }
-  };
-}
+export const intents = {
+  loadBookList: () => {
+    bookServices.loadBooks().then(actions.loadBookList)
+  }
+};

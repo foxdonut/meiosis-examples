@@ -20,8 +20,8 @@ function loadDatabase(): Promise<Database> {
   });
 }
 
-export function createServer(): void {
-  loadDatabase().then((db: Database) => {
+export function createServer(): Promise<void> {
+  return loadDatabase().then((db: Database) => {
     const server: Sinon.SinonFakeServer = sinon.fakeServer.create();
     server.autoRespond = true;
     const headers: any = {"Content-Type": "application/json"};

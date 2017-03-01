@@ -1,7 +1,6 @@
 import { applyModelChange, Mapper, Scanner, Stream, trace } from "meiosis";
 
-import { ajax, createBookServices } from "../services";
-import { createCirculation } from "../circulation";
+import { circulation } from "../circulation";
 import { createRouter } from "../router";
 import { createServer } from "../sinonServer";
 import { initialModel } from "./model";
@@ -13,21 +12,21 @@ import { createUrlHandler } from "../util";
 export * from "./types";
 
 export function startApp(view: Function, render: Function): void {
-  createServer();
-  const router = createRouter();
+  createServer().then(() => {
+    const router = createRouter();
 
-  const modelChanges: Stream<Mapper<Model, Model>> = mergeIntoOne([
-    router.modelChanges
-  ]);
-  const model: Stream<Model> = scan(applyModelChange, initialModel, modelChanges);
+    const modelChanges: Stream<Mapper<Model, Model>> = mergeIntoOne([
+      circulation.modelChanges,
+      router.modelChanges
+    ]);
+    const model: Stream<Model> = scan(applyModelChange, initialModel, modelChanges);
 
-  trace({ streamLibrary, modelChanges, streams: [ model ] });
+    trace({ streamLibrary, modelChanges, streams: [ model ] });
 
-  const element: Element = document.getElementById("app");
-  model.map(model => render(element, view(model)));
+    const element: Element = document.getElementById("app");
+    model.map(model => render(element, view(model)));
+
+    circulation.intents.loadBookList();
+  }
+  );
 }
-
-/*
-const bookServices = createBookServices(ajax);
-const circulation = createCirculation(bookServices);
-*/
