@@ -6,10 +6,10 @@ export interface BookListModel {
 }
 
 export interface Model {
-  url?: string;
-  tab?: string;
-  inProgress?: boolean;
   circulation?: BookListModel;
+  inProgress?: boolean;
+  route?: string;
+  tab?: string;
 }
 
 export type Section = "circulation";

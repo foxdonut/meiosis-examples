@@ -7,4 +7,4 @@ const injectTapEventPlugin = require("react-tap-event-plugin");
 
 injectTapEventPlugin();
 
-startApp("react", view, (element: Element, view: any) => render(view, element));
+startApp(view, (element: Element, view: any) => render(view, element));

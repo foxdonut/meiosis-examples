@@ -14,20 +14,10 @@ function activeClass(model: Model, tab: string): string {
   return classnames({ active: model.tab === tab });
 }
 
-function onTabChange(tab: string) {
-  return function(evt: Event): void {
-    evt.preventDefault();
-    //propose({ type: "Root.LocationChange", url: "/" + tab });
-  }
-}
-
-function tabHeader(model: Model) {
-  return function(tabSpec: TabSpec): any {
-    return m("li", { class: activeClass(model, tabSpec.tab) }, [
-      m("a", { href: "#", onclick: onTabChange(tabSpec.tab) }, tabSpec.label)
-    ]);
-  };
-}
+const tabHeader = (model: Model) => (tabSpec: TabSpec) =>
+  m("li", { class: activeClass(model, tabSpec.tab) }, [
+    m("a", { href: "#/" + tabSpec.tab }, tabSpec.label)
+  ]);
 
 function tabContent(model: Model) {
   return function (tabSpec: TabSpec): any {
