@@ -1,20 +1,15 @@
+import { Table } from "antd";
 import h from "../util/jsnox-react";
-import { todoItemView } from "../todoItem/view-react";
+
+const columns = [
+  { title: "Priority", dataIndex: "priority", key: "priority" },
+  { title: "Description", dataIndex: "description", key: "description" }
+  // Action
+];
 
 export const todoListView = model => {
-  return h("div.row",
-    h("div.col-md-8",
-      h("div", "Todo List: " + model.message),
-      h("table.table.table-bordered.table-striped.table-hover",
-        h("thead",
-          h("tr",
-            h("th", "Priority"),
-            h("th", "Description"),
-            h("th", "Action")
-          )
-        ),
-        h("tbody", model.todos.map(todoItemView))
-      )
-    )
+  return h("div",
+    h("div", "Todo List: " + model.message),
+    h(Table, { dataSource: model.todos, columns })
   );
 };

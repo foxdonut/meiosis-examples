@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
+    "antd": "^2.7.4",
     "axios": "^0.15.3",
     "flyd": "^0.2.4",
     "inferno": "^1.2.2",
@@ -46,6 +47,7 @@
     "ramda": "^0.23.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "semantic-ui": "^2.2.9",
     "sinon": "^1.17.7",
     "validate.js": "^0.11.1"
   },
@@ -53,11 +55,13 @@
     "ava": "^0.18.2",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
+    "babel-plugin-import": "^1.1.1",
     "babel-plugin-inferno": "^1.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.1.8",
     "browser-env": "^2.0.21",
     "cross-env": "^3.1.4",
+    "gulp": "^3.9.1",
     "jquery": "^3.1.1",
     "meiosis-tracer": "^0.10.0",
     "webpack": "^2.2.1"

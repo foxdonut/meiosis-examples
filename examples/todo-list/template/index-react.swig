@@ -1,8 +1,5 @@
-{% extends '../../layout.swig' %}
+{% extends 'index-common.swig' %}
 
-{% block title %}Todo List{% endblock %}
-{% block example %}todo-list{% endblock %}
-
-{% block content %}
-  <script src="/examples/todo-list/build/generated-react-app.js"></script>
-{% endblock %}
+{% block head %}<link rel="stylesheet" href="/public/css/antd.min.css">{% endblock %}
+{% block variant %}react{% endblock %}
+{% block otherVariant %}inferno{% endblock %}

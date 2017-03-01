@@ -3,7 +3,7 @@
   <head>
     <link rel="shortcut icon" size="16x16, 32x32, 48x48, 64x64, 128x128, 256x256" href="/favicon.ico">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/public/css/antd.min.css">
+    {% block head %}{% endblock %}
 
     <title>Meiosis Example - Todo List</title>
   </head>
@@ -15,8 +15,8 @@
       <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/todo-list" target="_blank">Source code</a></div>
       <hr>
       <div>
-        <strong>react version | </strong>
-        <a href="index-inferno.html">inferno version</a>
+        <strong>{% block variant %}{% endblock %} version | </strong>
+        <a href="index-{% block otherVariant %}{% endblock %}.html">{% block otherVariant %}{% endblock %} version</a>
       </div>
 
       <div id="app"></div>
@@ -24,7 +24,6 @@
     </div>
   </body>
 
-  <script src="/examples/todo-list/build/generated-react-app.js"></script>
+  <script src="/examples/todo-list/build/generated-{% block variant %}{% endblock %}-app.js"></script>
 
 </html>
-
