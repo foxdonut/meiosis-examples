@@ -31,7 +31,6 @@ export const view = (model: Model): any => {
 
   const tabSpecs: Array<TabSpec> = [
     { tab: "circulation", label: "Circulation", content: circulationView(model.circulation) },
-    { tab: "members", label: "Members", content: m("span", "Members") },
     { tab: "orders", label: "Orders", content: m("span", "Orders") },
     { tab: "repairs", label: "Repairs", content: m("span", "Repairs") },
     { tab: "books", label: "All Books", content: m("span", "") },

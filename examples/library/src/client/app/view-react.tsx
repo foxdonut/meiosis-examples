@@ -15,9 +15,6 @@ export const view = (model: Model): any => (
           <div>Circulation</div>
           {circulationView(model.circulation)}
         </Tab>
-        <Tab value="members" label="Members">
-          <div>Members</div>
-        </Tab>
         <Tab value="orders" label="Orders">
           <div>Orders</div>
         </Tab>
