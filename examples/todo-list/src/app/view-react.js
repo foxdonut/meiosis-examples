@@ -8,7 +8,7 @@ const { Item } = Menu;
 
 export const view = model =>
   h("div",
-    h(Layout,
+    h(Layout, { className: "layout" },
       h(Header,
         h(Menu, { mode: "horizontal" },
           h(Item, { key: "inferno" },
@@ -19,7 +19,7 @@ export const view = model =>
           )
         )
       ),
-      h(Content, [
+      h(Content, { style: { padding: "0 50px" } }, [
         todoFormView(model.form),
         todoListView(model.list)
       ])

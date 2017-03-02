@@ -8,7 +8,7 @@
     <title>Meiosis Example - Todo List</title>
   </head>
   <body>
-    <div>
+    <div style="padding: 0 50px;">
       <a href="http://meiosis.js.org"><img src="/public/images/meiosis.png" style="margin-right: 8px" width="53px"></a>
       <h2 style="display: inline">Meiosis Todo List</h2>
       <div><a href="/index.html">Back to list of examples</a></div>
