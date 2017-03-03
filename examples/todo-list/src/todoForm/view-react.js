@@ -1,28 +1,30 @@
-import { Button, Form, Input } from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
 import h from "../util/jsnox-react";
 import { intents } from "./actions";
 
 const { Item } = Form;
 
-export const todoFormView = model => {
-  const inputField = (name, value) =>
-    h(Input, { value, onChange: intents.editingTodo(name) });
+const inputField = (name, value) =>
+  h(Input, { value, onChange: intents.editingTodo(name) });
 
-  const errorMessage = errors => errors ?
-    h("span.has-error", h("span.help-block", errors[0])) : null;
+const inputDiv = (model, field, label) => {
+  const errors = model.validationErrors[field];
+  const error = errors && errors[0];
 
-  const inputDiv = (field, label) =>
-    h(Item, { label },
-      inputField(field, model.todo[field]),
-      errorMessage(model.validationErrors[field])
-    );
+  return h(Item, { label, help: error, validateStatus: error ? "error" : "" },
+    inputField(field, model.todo[field]));
+};
 
-  return h(Form,
-    inputDiv("priority", "Priority:"),
-    inputDiv("description", "Description:"),
-    h("div",
-      h(Button, { type: "primary", onClick: intents.saveTodo(model.todo) }, "Save"),
-      h(Button, { onClick: intents.clearForm }, "Cancel")
+export const todoFormView = model =>
+  h(Row, { key: "form" },
+    h(Col, { span: 12 },
+      h(Form, {},
+        inputDiv(model, "priority", "Priority:"),
+        inputDiv(model, "description", "Description:"),
+        h("div",
+          h(Button, { type: "primary", onClick: intents.saveTodo(model.todo) }, "Save"),
+          h(Button, { onClick: intents.clearForm }, "Cancel")
+        )
+      )
     )
   );
-};
