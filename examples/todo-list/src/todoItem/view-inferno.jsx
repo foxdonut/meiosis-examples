@@ -6,8 +6,8 @@ export const todoItemView = todo => (
     <td>{todo.priority}</td>
     <td>{todo.description}</td>
     <td>
-      <button className="btn btn-primary btn-xs" onClick={intents.editTodo(todo)}>Edit</button>
-      <button className="btn btn-danger btn-xs" onClick={intents.deleteTodo(todo)}>Delete</button>
+      <button className="ui primary basic tiny button" onClick={intents.editTodo(todo)}>Edit</button>
+      <button className="ui negative basic tiny button" onClick={intents.deleteTodo(todo)}>Delete</button>
     </td>
   </tr>
 );

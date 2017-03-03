@@ -6,7 +6,7 @@ export const todoListView = model => {
     <div className="row">
       <div className="col-md-8">
         <div>Todo List: {model.message}</div>
-        <table className="table table-bordered table-striped table-hover">
+        <table className="ui celled striped table">
           <thead>
             <tr>
               <th>Priority</th>

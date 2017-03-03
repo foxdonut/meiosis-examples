@@ -7,23 +7,23 @@ export const todoFormView = model => {
       onInput={intents.editingTodo(name)}/>;
 
   const errorMessage = errors => errors ?
-    <span className="has-error"><span className="help-block">{errors[0]}</span></span> : null;
+    <span className="error">{errors[0]}</span> : null;
 
   const inputDiv = (field, label) =>
-    <div className="form-group">
+    <div className={'field' + (model.validationErrors[field] && model.validationErrors[field].length > 0) ? ' error' : ''}>
       <label htmlFor={field}>{label}</label>
       {inputField(field, model.todo[field])}
       {errorMessage(model.validationErrors[field])}
     </div>;
 
   return (
-    <form>
+    <form className="ui form">
       <input type="hidden" name="id" value={model.todo.id}/>
       {inputDiv("priority", "Priority:")}
       {inputDiv("description", "Description:")}
       <div>
-        <button className="btn btn-primary btn-xs" onClick={intents.saveTodo(model.todo)}>Save</button>
-        <button className="btn btn-danger btn-xs" onClick={intents.clearForm}>Cancel</button>
+        <button className="ui primary basic small button" onClick={intents.saveTodo(model.todo)}>Save</button>
+        <button className="ui basic small button" onClick={intents.clearForm}>Cancel</button>
       </div>
     </form>
   );
