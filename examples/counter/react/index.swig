@@ -6,5 +6,5 @@
   <script src="/public/lib/browser.min.js"></script>
 
   <script src="/examples/counter/react/view.jsx" type="text/babel"></script>
-  <script src="/examples/counter/react/main.jsx" type="text/babel"></script>
+  <script src="/examples/counter/react/main.js" type="text/babel"></script>
 {% endblock %}

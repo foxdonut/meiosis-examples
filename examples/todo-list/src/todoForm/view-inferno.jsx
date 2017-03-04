@@ -7,10 +7,11 @@ export const todoFormView = model => {
       onInput={intents.editingTodo(name)}/>;
 
   const errorMessage = errors => errors ?
-    <span className="error">{errors[0]}</span> : null;
+    <div className="ui red label pointing">{errors[0]}</div> : null;
+    //<label>{errors[0]}</label> : null;
 
   const inputDiv = (field, label) =>
-    <div className={'field' + (model.validationErrors[field] && model.validationErrors[field].length > 0) ? ' error' : ''}>
+    <div className={'field' + (model.validationErrors[field] && model.validationErrors[field].length > 0 ? ' error' : '')}>
       <label htmlFor={field}>{label}</label>
       {inputField(field, model.todo[field])}
       {errorMessage(model.validationErrors[field])}
