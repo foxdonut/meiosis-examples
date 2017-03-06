@@ -38,6 +38,14 @@ export const view = (model: Model): any => {
   ];
 
   return m("div",
+    m("ul.nav.nav-pills", { style: "margin-bottom: 8px" },
+      m("li.active", { role: "presentation" },
+        m("a.btn.btn-xs.btn-default", { href: "index-mithril.html" }, "Mithril + Bootstrap version")
+      ),
+      m("li", { role: "presentation" },
+        m("a.btn.btn-xs.btn-default", { href: "index-react.html" }, "React + Material-UI version")
+      )
+    ),
     m("ul.nav.nav-tabs", tabSpecs.map(tabHeader(model))),
     m(".tab-content", tabSpecs.map(tabContent(model)))
     //views.progressDialog(model)

@@ -12,7 +12,6 @@
       <h2 style="display: inline;">Meiosis Example - {% block title %}Title{% endblock %}</h2>
       <div><a href="/index.html">Back to list of examples</a></div>
       <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/{% block example %}{% endblock %}" target="_blank">Source code</a></div>
-      {% block top %}{% endblock %}
       <hr>
 
       <div id="app"></div>

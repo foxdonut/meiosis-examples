@@ -8,7 +8,6 @@ export const todoFormView = model => {
 
   const errorMessage = errors => errors ?
     <div className="ui red label pointing">{errors[0]}</div> : null;
-    //<label>{errors[0]}</label> : null;
 
   const inputDiv = (field, label) =>
     <div className={'field' + (model.validationErrors[field] && model.validationErrors[field].length > 0 ? ' error' : '')}>

@@ -3,11 +3,6 @@
 {% block title %}Library{% endblock %}
 {% block example %}library{% endblock %}
 
-{% block top %}
-  React + Material UI version |
-  <a href="/examples/library/index-mithril.html">Mithril + Bootstrap version</a>
-{% endblock %}
-
 {% block content %}
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <style>body { font-family: "Roboto", sans-serif; }</style>

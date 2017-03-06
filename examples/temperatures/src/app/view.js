@@ -13,7 +13,7 @@ export const view = model => {
       ),
       h("li", { class: "active", role: "presentation" },
         h("a", { class: "btn btn-xs btn-default", href: "index-h.html" }, "Preact + h version")
-      ),
+      )
     ),
     entryView(model.entry),
     dateView(model.date),

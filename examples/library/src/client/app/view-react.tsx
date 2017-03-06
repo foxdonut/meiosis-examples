@@ -10,6 +10,10 @@ import { intents } from "./actions";
 export const view = (model: Model): any => (
   <MuiThemeProvider>
     <div>
+      <Tabs value="react" onChange={() => window.location.href="index-mithril.html"}>
+        <Tab value="react" label="React + Material-UI version"/>
+        <Tab value="mithril" label="Mithril + Bootstrap version"/>
+      </Tabs>
       <Tabs value={model.tab} onChange={intents.tabChange}>
         <Tab value="circulation" label="Circulation">
           <div>Circulation</div>
