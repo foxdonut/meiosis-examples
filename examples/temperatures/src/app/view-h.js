@@ -1,9 +1,9 @@
 import { h } from "preact";
 
-import { appIntents }  from "./actions";
-import { dateView } from "../date/view";
-import { entryView } from "../entry/view";
-import { temperatureView } from "../temperature/view";
+import { intents }  from "./actions";
+import { dateView } from "../date/view-h";
+import { entryView } from "../entry/view-h";
+import { temperatureView } from "../temperature/view-h";
 
 export const view = model => {
   return h("div", {},
@@ -19,7 +19,7 @@ export const view = model => {
     dateView(model.date),
     temperatureView(model.temperature.air),
     temperatureView(model.temperature.water),
-    h("button", { class: "btn btn-md btn-primary", onClick: appIntents.save(model) }, "Save"),
+    h("button", { class: "btn btn-md btn-primary", onClick: intents.save(model) }, "Save"),
     h("span", {}, "Saved: " + model.saved)
   );
 };

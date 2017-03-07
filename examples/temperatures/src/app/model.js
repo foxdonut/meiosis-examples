@@ -1,7 +1,7 @@
-import { appActions } from "./actions";
+import { actions } from "./actions";
 import { mergeIntoOne } from "../util";
 
-const save = appActions.save.map(() => model => {
+const save = actions.save.map(() => model => {
   const air = model.temperature.air;
   const water = model.temperature.water;
 
@@ -15,7 +15,7 @@ const save = appActions.save.map(() => model => {
   return model;
 });
 
-const validationErrors = appActions.validationErrors.map(errors => model => {
+const validationErrors = actions.validationErrors.map(errors => model => {
   Object.keys(errors).forEach(key => model[key].errors = errors[key].errors);
   return model;
 });

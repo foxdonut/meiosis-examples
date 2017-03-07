@@ -1,5 +1,5 @@
 import snabbdom from "snabbdom";
-import { startApp } from "./app";
+import { startApp } from "./index";
 import { view } from "./app/view-snabbdom";
 
 const patch = snabbdom.init([

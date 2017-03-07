@@ -1,4 +1,4 @@
-import { startApp } from "./app";
-import { view } from "./app/view";
+import { startApp } from "./index";
+import { view } from "./app/view-h";
 
 startApp(view);

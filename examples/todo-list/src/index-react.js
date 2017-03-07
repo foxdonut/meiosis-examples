@@ -1,5 +1,5 @@
 import { render } from "react-dom";
+import { startApp } from "./index";
 import { view } from "./app/view-react";
-import { startApp } from "./app";
 
 startApp(view, render);

@@ -2,13 +2,13 @@ import m from "mithril";
 import { applyModelChange, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
-import { mergeIntoOne, nest, scan, streamLibrary } from "../util";
-import { counter } from "../counter";
-import { button } from "../button";
-import { randomGif } from "../random-gif";
-import { randomGifPair } from "../random-gif-pair";
-import { randomGifPairPair } from "../random-gif-pair-pair";
-import { randomGifList } from "../random-gif-list";
+import { mergeIntoOne, nest, scan, streamLibrary } from "./util";
+import { counter } from "./counter";
+import { button } from "./button";
+import { randomGif } from "./random-gif";
+import { randomGifPair } from "./random-gif-pair";
+import { randomGifPairPair } from "./random-gif-pair-pair";
+import { randomGifList } from "./random-gif-list";
 
 export function startApp(view) {
   const initialModel = {

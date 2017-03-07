@@ -1,9 +1,9 @@
 import flyd from "flyd";
-import createServer from "../sinonServer";
-import services from "./services";
-import { mergeIntoOne, nest, scan } from "../util/stream-util";
-import { todoList } from "../todoList";
-import { todoForm } from "../todoForm";
+import createServer from "./sinonServer";
+import services from "./app/services";
+import { mergeIntoOne, nest, scan } from "./util/stream-util";
+import { todoList } from "./todoList";
+import { todoForm } from "./todoForm";
 import { applyModelChange, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 

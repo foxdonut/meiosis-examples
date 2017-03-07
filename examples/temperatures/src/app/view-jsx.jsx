@@ -1,9 +1,9 @@
 import preact from "preact";
 
-import { appIntents } from "./actions";
-import { dateView } from "../date/view.jsx";
-import { entryView } from "../entry/view.jsx";
-import { temperatureView } from "../temperature/view.jsx";
+import { intents } from "./actions";
+import { dateView } from "../date/view-jsx.jsx";
+import { entryView } from "../entry/view-jsx.jsx";
+import { temperatureView } from "../temperature/view-jsx.jsx";
 
 export const view = model => {
   return (<div>
@@ -19,7 +19,7 @@ export const view = model => {
     {dateView(model.date)}
     {temperatureView(model.temperature.air)}
     {temperatureView(model.temperature.water)}
-    <button className="btn btn-md btn-primary" onClick={appIntents.save(model)}>Save</button>
+    <button className="btn btn-md btn-primary" onClick={intents.save(model)}>Save</button>
     <span>Saved: {model.saved}</span>
   </div>);
 };

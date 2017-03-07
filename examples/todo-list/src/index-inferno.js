@@ -1,5 +1,5 @@
 import { render } from "inferno";
+import { startApp } from "./index";
 import { view } from "./app/view-inferno.jsx";
-import { startApp } from "./app";
 
 startApp(view, render);

@@ -2,21 +2,21 @@ import flyd from "flyd";
 import { date } from "../date";
 import { entry } from "../entry";
 
-export const appActions = {
+export const actions = {
   validationErrors: flyd.stream(),
   save: flyd.stream()
 };
 
-export const appIntents = {
+export const intents = {
   save: model => () => {
     const validationErrors = {
       date: { errors: date.validateModel(model.date) },
       entry: { errors: entry.validateModel(model.entry) }
     };
-    appActions.validationErrors(validationErrors);
+    actions.validationErrors(validationErrors);
 
     if (!(validationErrors.date.errors || validationErrors.entry.errors)) {
-      appActions.save(true);
+      actions.save(true);
     }
   }
 };
