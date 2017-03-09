@@ -10,7 +10,7 @@ const allCompleted = function(state) {
   return result;
 };
 
-export const appState = model => {
+export const state = model => {
   const state = JSON.parse(JSON.stringify(model));
 
   state.allSelected = state.route === "";
