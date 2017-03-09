@@ -1,12 +1,12 @@
 import { h } from "preact";
 
-import { intents }  from "./actions";
+import { save }  from "./index";
 import { dateView } from "../date/view-h";
 import { entryView } from "../entry/view-h";
 import { temperatureView } from "../temperature/view-h";
 
-export const view = model => {
-  return h("div", {},
+export const view = (model, actions) =>
+  h("div", {},
     h("ul", { class: "nav nav-pills" },
       h("li", { role: "presentation" },
         h("a", { class: "btn btn-xs btn-default", href: "index-jsx.html" }, "Preact + JSX version")
@@ -15,11 +15,10 @@ export const view = model => {
         h("a", { class: "btn btn-xs btn-default", href: "index-h.html" }, "Preact + h version")
       )
     ),
-    entryView(model.entry),
-    dateView(model.date),
-    temperatureView(model.temperature.air),
-    temperatureView(model.temperature.water),
-    h("button", { class: "btn btn-md btn-primary", onClick: intents.save(model) }, "Save"),
+    entryView(model.entry, actions.entry),
+    dateView(model.date, actions.date),
+    temperatureView(model.temperature.air, actions.temperature.air),
+    temperatureView(model.temperature.water, actions.temperature.water),
+    h("button", { class: "btn btn-md btn-primary", onClick: save(model, actions.app) }, "Save"),
     h("span", {}, "Saved: " + model.saved)
   );
-};

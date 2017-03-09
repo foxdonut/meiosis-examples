@@ -1,6 +1,4 @@
 import validate from "validate.js";
-import { dateActions } from "./actions";
-import { mergeIntoOne } from "../util";
 
 export const initialModel = () => ({
   value: ""
@@ -18,13 +16,4 @@ const validation = {
   }
 };
 
-const editDateValue = dateActions.editDateValue.map(value => model => {
-  model.value = value;
-  return model;
-});
-
 export const validateModel = model => validate(model, validation);
-
-export const modelChanges = mergeIntoOne([
-  editDateValue
-]);

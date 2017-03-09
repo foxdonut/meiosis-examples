@@ -1,6 +1,6 @@
 {
   "name": "temperatures",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "meiosis-examples temperatures",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   "dependencies": {
     "flyd": "^0.2.4",
     "jsnox": "^2.1.3",
-    "meiosis": "^0.10.0",
+    "meiosis": "^1.0.0",
     "object-path": "^0.11.3",
     "preact": "^7.2.0",
     "validate.js": "^0.11.1"

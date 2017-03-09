@@ -1,9 +1,4 @@
-import flyd from "flyd";
-
-export const entryActions = {
-  editEntryValue: flyd.stream()
-};
-
-export const entryIntents = {
-  editEntryValue: evt => entryActions.editEntryValue(evt.target.value)
+export const editEntryValue = (model, update) => evt => {
+  model.value = evt.target.value;
+  update(model);
 };
