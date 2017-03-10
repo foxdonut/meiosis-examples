@@ -1,9 +1,4 @@
-import stream from "mithril/stream";
+import { assoc } from "ramda";
 
-export const actions = {
-  toggle: stream()
-};
-
-export const intents = {
-  toggle: () => actions.toggle(true)
-};
+export const toggle = update => () => update(model =>
+  assoc("active", !model.active, model));

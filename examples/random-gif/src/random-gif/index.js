@@ -1,9 +1,17 @@
-import * as model from "./model";
-import * as actions from "./actions";
+import uuid from "uuid";
 
 export const randomGif = {
-  ...model,
-  ...actions
+  initialModel: id => {
+    id = id || uuid.v1();
+
+    return {
+      id,
+      isLoading: false,
+      isError: false,
+      tag: "",
+      image_url: ""
+    };
+  }
 };
 
 export const imgsrc = model => model.isLoading ? "/examples/random-gif/images/loading.gif" : (

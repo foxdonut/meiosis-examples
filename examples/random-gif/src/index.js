@@ -1,8 +1,10 @@
 import m from "mithril";
-import { applyModelChange, trace } from "meiosis";
+import stream from "mithril/stream";
+import scan from "mithril/stream/scan";
+import { lensProp, over } from "ramda";
+import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
-import { mergeIntoOne, nest, scan, streamLibrary } from "./util";
 import { counter } from "./counter";
 import { button } from "./button";
 import { randomGif } from "./random-gif";
@@ -21,21 +23,29 @@ export function startApp(view) {
     randomGifList: randomGifList.initialModel()
   };
 
-  const modelChanges = mergeIntoOne([
-    counter.modelChanges,
-    nest("button", button.modelChanges),
-    nest("randomGif1", randomGif.modelChanges),
-    nest("randomGif2", randomGif.modelChanges),
-    nest("randomGifPair", randomGifPair.modelChanges),
-    nest("randomGifPairPair", randomGifPairPair.modelChanges),
-    nest("randomGifList", randomGifList.modelChanges)
-  ]);
+  const modelChanges = stream();
 
-  const model = scan(applyModelChange, initialModel, modelChanges);
+  const nestModelChange = path => modelChange => modelChanges(model => over(lensProp(path), modelChange, model));
+
+  const actions = {
+    counter: nestModelChange("counter"),
+    button: nestModelChange("button"),
+    randomGif1: nestModelChange("randomGif1"),
+    randomGif2: nestModelChange("randomGif2"),
+    randomGifPair: nestModelChange("randomGifPair"),
+    randomGifPairPair: nestModelChange("randomGifPairPair"),
+    randomGifList: nestModelChange("randomGifList")
+  };
+
+  const updateModel = (model, modelChange) => modelChange(model);
+
+  const model = scan(updateModel, initialModel, modelChanges);
 
   const element = document.getElementById("app");
-  const render = model => m.render(element, view(model));
+  const render = model => m.render(element, view(model, actions));
   model.map(render);
+
+  const streamLibrary = { stream: stream, combine: stream.combine };
   trace({ streamLibrary, modelChanges, streams: [ model ] });
   meiosisTracer({ selector: "#tracer" });
 }

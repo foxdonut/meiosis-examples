@@ -7,6 +7,9 @@ module.exports = {
     "react/display-name": [
       0
     ],
+    "react/no-deprecated": [
+      0
+    ],
     "react/no-unknown-property": [
       0
     ],

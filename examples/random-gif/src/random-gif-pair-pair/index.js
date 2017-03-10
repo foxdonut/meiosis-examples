@@ -1,5 +1,16 @@
-import * as model from "./model";
+import { randomGifPair } from "../random-gif-pair";
 
 export const randomGifPairPair = {
-  ...model
+  initialModel: () => ({
+    randomGifPairOne: randomGifPair.initialModel(),
+    randomGifPairTwo: randomGifPair.initialModel()
+  })
 };
+
+/*
+export const modelChanges = randomGifPair.modelChanges.map(modelChange => model => {
+  model.randomGifPairOne = modelChange(model.randomGifPairOne);
+  model.randomGifPairTwo = modelChange(model.randomGifPairTwo);
+  return model;
+});
+*/
