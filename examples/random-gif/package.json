@@ -1,6 +1,6 @@
 {
   "name": "random-gif",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "meiosis-examples random-gif",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "meiosis": "^0.10.0",
+    "meiosis": "^1.0.0",
     "mithril": "^1.0.1",
     "ramda": "^0.23.0",
     "uuid": "^3.0.1"
