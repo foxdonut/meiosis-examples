@@ -1,13 +1,12 @@
 /*global process*/
 var isProduction = process.env.NODE_ENV === "production";
-var variant = process.env.VARIANT;
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/index-" + variant + ".js",
+  entry: "./src/index.js",
   output: {
     path: "./build",
-    filename: "generated-" + variant + "-app.js"
+    filename: "generated-app.js"
   },
   module: {
     rules: [

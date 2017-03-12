@@ -5,6 +5,7 @@ import { lensProp, over } from "ramda";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
+import { app } from "./app";
 import { counter } from "./counter";
 import { button } from "./button";
 import { randomGif } from "./random-gif";
@@ -14,7 +15,7 @@ import { randomGifPairPair } from "./random-gif-pair-pair";
 import { randomGifList } from "./random-gif-list";
 */
 
-export function startApp(view) {
+function startApp() {
   const initialModel = {
     counter: counter.model(),
     button: button.model(),
@@ -31,7 +32,7 @@ export function startApp(view) {
     modelChanges(model => over(lensProp(path), modelChange, model));
 
   const actions = {
-    counter: nestModelChange("counter"),
+    counter: modelChanges,
     button: nestModelChange("button"),
     randomGif1: nestModelChange("randomGif1"),
     randomGif2: nestModelChange("randomGif2")/*,
@@ -44,11 +45,15 @@ export function startApp(view) {
 
   const model = scan(updateModel, initialModel, modelChanges);
 
+  randomGif.events.newGifSuccess.map(counter.listeners.newGifSuccess(actions.counter));
+
   const element = document.getElementById("app");
-  const render = model => m.render(element, view(model, actions));
+  const render = model => m.render(element, app.view(model, actions));
   model.map(render);
 
   const streamLibrary = { stream: stream, combine: stream.combine };
   trace({ streamLibrary, modelChanges, streams: [ model ] });
   meiosisTracer({ selector: "#tracer" });
 }
+
+startApp();

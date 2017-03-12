@@ -4,7 +4,7 @@
   "description": "meiosis-examples random-gif",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env VARIANT=m webpack && cross-env VARIANT=jsx webpack",
+    "start": "webpack",
     "watch": "webpack --progress --colors --watch",
     "test": "ava"
   },

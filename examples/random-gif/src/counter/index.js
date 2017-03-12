@@ -1,13 +1,15 @@
-export const createCounter = view => ({
+import { view } from "./view";
+
+export const counter = {
   model: () => ({
     value: 0
   }),
   view,
   listeners: {
-    newGifSuccess: (topModel, update) => () => update(counterModel => {
-      const increment = counterModel.value >= 3 && topModel.button.active ? 2 : 1;
-      counterModel.value = counterModel.value + increment;
-      return counterModel;
+    newGifSuccess: update => () => update(model => {
+      const increment = model.counter.value >= 3 && model.button.active ? 2 : 1;
+      model.counter.value = model.counter.value + increment;
+      return model;
     })
   }
-});
+};

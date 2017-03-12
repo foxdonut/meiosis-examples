@@ -2,8 +2,7 @@ node node_modules\swig\bin\swig.js render .\examples\counter\jquery\index.swig >
 node node_modules\swig\bin\swig.js render .\examples\counter\react\index.swig > .\examples\counter\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\library\template\index-mithril.swig > .\examples\library\index-mithril.html
 node node_modules\swig\bin\swig.js render .\examples\library\template\index-react.swig > .\examples\library\index-react.html
-node node_modules\swig\bin\swig.js render .\examples\random-gif\template\index-m.swig > .\examples\random-gif\index-m.html
-node node_modules\swig\bin\swig.js render .\examples\random-gif\template\index-react.swig > .\examples\random-gif\index-react.html
+node node_modules\swig\bin\swig.js render .\examples\random-gif\template\index.swig > .\examples\random-gif\index.html
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\react\index.swig > .\examples\rocket-launcher\react\index.html
 node node_modules\swig\bin\swig.js render .\examples\rocket-launcher\vanillajs\index.swig > .\examples\rocket-launcher\vanillajs\index.html
 node node_modules\swig\bin\swig.js render .\examples\temperatures\template\index-h.swig > .\examples\temperatures\index-h.html

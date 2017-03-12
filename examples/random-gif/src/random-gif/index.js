@@ -1,6 +1,7 @@
 import uuid from "uuid";
 import m from "mithril";
 import stream from "mithril/stream";
+import { view } from "./view";
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";
@@ -59,7 +60,7 @@ export const imgsrc = model => model.isLoading ? "/examples/random-gif/images/lo
   model.isError ? "/examples/random-gif/images/error.png" : model.image_url
 );
 
-export const createRandomGif = view => ({
+export const randomGif = {
   model: id => {
     id = id || uuid.v1();
 
@@ -73,4 +74,4 @@ export const createRandomGif = view => ({
   },
   view: view(actions),
   events
-});
+};

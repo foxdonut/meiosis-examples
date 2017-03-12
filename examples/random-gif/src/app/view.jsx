@@ -22,9 +22,7 @@ export const view = (model, actions) => (
     <div>Button:</div>
     { button.view(model.button, actions.button) }
     <div>Random Gif:</div>
-    { randomGif.view(model.randomGif1, actions.randomGif1,
-        { newGifSuccess: counter.actions.newGifSuccess(model, actions.counter) })
-    }
+    { randomGif.view(model.randomGif1, actions.randomGif1) }
     <div>Another Random Gif:</div>
     { randomGif.view(model.randomGif2, actions.randomGif2) }
     {/*<div>Random Gif Pair:</div>
