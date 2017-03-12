@@ -8,33 +8,36 @@ import meiosisTracer from "meiosis-tracer";
 import { counter } from "./counter";
 import { button } from "./button";
 import { randomGif } from "./random-gif";
+/*
 import { randomGifPair } from "./random-gif-pair";
 import { randomGifPairPair } from "./random-gif-pair-pair";
 import { randomGifList } from "./random-gif-list";
+*/
 
 export function startApp(view) {
   const initialModel = {
-    counter: counter.initialModel(),
-    button: button.initialModel(),
-    randomGif1: randomGif.initialModel("randomGif1"), // can either assign an id...
-    randomGif2: randomGif.initialModel(),             // or use the component's generated id
+    counter: counter.model(),
+    button: button.model(),
+    randomGif1: randomGif.model("randomGif1"), // can either assign an id...
+    randomGif2: randomGif.model()/*,             // or use the component's generated id
     randomGifPair: randomGifPair.initialModel(),
     randomGifPairPair: randomGifPairPair.initialModel(),
-    randomGifList: randomGifList.initialModel()
+    randomGifList: randomGifList.initialModel()*/
   };
 
   const modelChanges = stream();
 
-  const nestModelChange = path => modelChange => modelChanges(model => over(lensProp(path), modelChange, model));
+  const nestModelChange = path => modelChange =>
+    modelChanges(model => over(lensProp(path), modelChange, model));
 
   const actions = {
     counter: nestModelChange("counter"),
     button: nestModelChange("button"),
     randomGif1: nestModelChange("randomGif1"),
-    randomGif2: nestModelChange("randomGif2"),
+    randomGif2: nestModelChange("randomGif2")/*,
     randomGifPair: nestModelChange("randomGifPair"),
     randomGifPairPair: nestModelChange("randomGifPairPair"),
-    randomGifList: nestModelChange("randomGifList")
+    randomGifList: nestModelChange("randomGifList")*/
   };
 
   const updateModel = (model, modelChange) => modelChange(model);
