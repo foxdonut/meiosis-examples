@@ -1,16 +1,10 @@
 import { randomGif } from "../random-gif";
+import { view } from "./view";
 
 export const randomGifPair = {
-  initialModel: () => ({
-    randomGifFirst: randomGif.initialModel(),
-    randomGifSecond: randomGif.initialModel()
-  })
+  model: () => ({
+    randomGifFirst: randomGif.model(),
+    randomGifSecond: randomGif.model()
+  }),
+  view
 };
-
-/*
-export const modelChanges = randomGif.modelChanges.map(modelChange => model => {
-  model.randomGifFirst = modelChange(model.randomGifFirst);
-  model.randomGifSecond = modelChange(model.randomGifSecond);
-  return model;
-});
-*/

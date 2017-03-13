@@ -1,10 +1,11 @@
 import m from "mithril";
-import { randomGifView } from "../random-gif/view";
+import { merge } from "ramda";
+import { randomGif } from "../random-gif";
 
-export const randomGifPairView = model =>
+export const view = (model, update) =>
   m("div",
     m("div", { style: "display: inline-block" },
-      randomGifView(model.randomGifFirst)),
+      randomGif.view(model.randomGifFirst, mdl => update(merge(model, { randomGifFirst: mdl })))),
     m("div", { style: "display: inline-block" },
-      randomGifView(model.randomGifSecond))
+      randomGif.view(model.randomGifSecond, mdl => update(merge(model, { randomGifSecond: mdl }))))
   );

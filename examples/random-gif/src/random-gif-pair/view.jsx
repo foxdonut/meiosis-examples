@@ -1,13 +1,13 @@
 import m from "mithril";
-import { randomGifView } from "../random-gif/view.jsx";
+import { randomGif } from "../random-gif";
 
-export const randomGifPairView = model => (
+export const view = model => (
   <div>
     <div style={ { display: "inline-block" } }>
-      { randomGifView(model.randomGifFirst) }
+      { randomGif.view(model.randomGifFirst) }
     </div>
     <div style={{display: "inline-block"}}>
-      { randomGifView(model.randomGifSecond) }
+      { randomGif.view(model.randomGifSecond) }
     </div>
   </div>
 );

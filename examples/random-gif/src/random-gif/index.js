@@ -1,6 +1,7 @@
 import uuid from "uuid";
 import m from "mithril";
 import stream from "mithril/stream";
+import { merge } from "ramda";
 import { view } from "./view";
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
@@ -10,44 +11,30 @@ const events = {
   newGifSuccess: stream()
 };
 
-const editTag = (update, id) => evt => update(model => {
-  if (id === model.id) {
-    model.tag = evt.target.value;
-  }
-  return model;
+const editTag = (model, update) => evt => update(merge(model, { tag: evt.target.value }));
+
+const newGifStart = () => ({
+  isLoading: true,
+  isError: false
 });
 
-const newGifStart = id => model => {
-  if (id === model.id) {
-    model.isLoading = true;
-    model.isError = false;
-  }
-  return model;
-};
+const newGifSuccess = data => ({
+  isLoading: false,
+  isError: false,
+  image_url: data.image_url
+});
 
-const newGifSuccess = (id, data) => model => {
-  if (id === model.id) {
-    model.isLoading = false;
-    model.isError = false;
-    model.image_url = data.image_url;
-  }
-  return model;
-};
+const newGifError = () => ({
+  isLoading: false,
+  isError: true
+});
 
-const newGifError = id => model => {
-  if (id === model.id) {
-    model.isLoading = false;
-    model.isError = true;
-  }
-  return model;
-};
-
-const newGif = (events => (update, model) => () => {
-  update(newGifStart(model.id));
+const newGif = (events => (model, update) => () => {
+  update(merge(model, newGifStart()));
   m.request({ url: gif_new_url, data: { api_key, tag: model.tag }}).
-    then(response => update(newGifSuccess(model.id, response.data))).
-    then(events.newGifSuccess).
-    catch(() => update(newGifError(model.id)));
+    then(response => update(newGifSuccess(response.data))).
+    then(() => events.newGifSuccess(model.id)).
+    catch(() => update(newGifError()));
 })(events);
 
 const actions = {
