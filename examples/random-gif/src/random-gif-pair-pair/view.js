@@ -1,8 +1,9 @@
 import m from "mithril";
-import { randomGifPairView } from "../random-gif-pair/view";
+import { merge } from "ramda";
+import { randomGifPair } from "../random-gif-pair";
 
-export const randomGifPairPairView = model =>
+export const view = (model, update) =>
   m("div",
-    randomGifPairView(model.randomGifPairOne),
-    randomGifPairView(model.randomGifPairTwo)
+    randomGifPair.view(model.randomGifPairOne, mdl => update(merge(model, { randomGifPairOne: mdl }))),
+    randomGifPair.view(model.randomGifPairTwo, mdl => update(merge(model, { randomGifPairTwo: mdl })))
   );

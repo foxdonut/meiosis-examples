@@ -10,10 +10,8 @@ import { counter } from "./counter";
 import { button } from "./button";
 import { randomGif } from "./random-gif";
 import { randomGifPair } from "./random-gif-pair";
-/*
 import { randomGifPairPair } from "./random-gif-pair-pair";
 import { randomGifList } from "./random-gif-list";
-*/
 
 function startApp() {
   const initialModel = {
@@ -21,9 +19,9 @@ function startApp() {
     button: button.model(),
     randomGif1: randomGif.model("randomGif1"), // can either assign an id...
     randomGif2: randomGif.model(),             // or use the component's generated id
-    randomGifPair: randomGifPair.model()/*,
-    randomGifPairPair: randomGifPairPair.initialModel(),
-    randomGifList: randomGifList.initialModel()*/
+    randomGifPair: randomGifPair.model(),
+    randomGifPairPair: randomGifPairPair.model(),
+    randomGifList: randomGifList.model()
   };
 
   const update = stream();
