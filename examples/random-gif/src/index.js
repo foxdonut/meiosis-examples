@@ -26,7 +26,8 @@ function startApp() {
 
   const update = stream();
   const model = scan(merge, initialModel, update);
-  //randomGif.events.newGifSuccess.map(counter.listeners.newGifSuccess(actions.counter));
+
+  randomGif.events.newGifSuccess.map(() => counter.listeners.newGifSuccess(model(), update));
 
   const element = document.getElementById("app");
   const render = model => m.render(element, app.view(model, update));
