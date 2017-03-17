@@ -1,15 +1,10 @@
 import uuid from "uuid";
 import m from "mithril";
-import stream from "mithril/stream";
 import { merge } from "ramda";
 import { view } from "./view";
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";
-
-const events = {
-  newGifSuccess: stream()
-};
 
 const editTag = (model, update) => evt => update(merge(model, { tag: evt.target.value }));
 
@@ -29,13 +24,13 @@ const newGifError = () => ({
   isError: true
 });
 
-const newGif = (events => (model, update) => () => {
+const newGif = (model, update, events) => () => {
   update(merge(model, newGifStart()));
   m.request({ url: gif_new_url, data: { api_key, tag: model.tag }}).
     then(response => update(newGifSuccess(response.data))).
     then(() => events.newGifSuccess(model.id)).
     catch(() => update(newGifError()));
-})(events);
+};
 
 const actions = {
   editTag,
@@ -59,6 +54,5 @@ export const randomGif = {
       image_url: ""
     };
   },
-  view: view(actions),
-  events
+  view: view(actions)
 };

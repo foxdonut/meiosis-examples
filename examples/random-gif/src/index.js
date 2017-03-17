@@ -12,6 +12,8 @@ import { randomGif } from "./random-gif";
 import { randomGifPair } from "./random-gif-pair";
 import { randomGifPairPair } from "./random-gif-pair-pair";
 import { randomGifList } from "./random-gif-list";
+import { randomGifCounter } from "./random-gif-counter";
+import { increment } from "./increment";
 
 function startApp() {
   const initialModel = {
@@ -21,16 +23,24 @@ function startApp() {
     randomGif2: randomGif.model(),             // or use the component's generated id
     randomGifPair: randomGifPair.model(),
     randomGifPairPair: randomGifPairPair.model(),
-    randomGifList: randomGifList.model()
+    randomGifList: randomGifList.model(),
+    randomGifCounter: randomGifCounter.model()
   };
 
   const update = stream();
   const model = scan(merge, initialModel, update);
 
-  randomGif.events.newGifSuccess.map(() => counter.listeners.newGifSuccess(model(), update));
+  const events = {
+    randomGif: {
+      newGifSuccess: () => {
+        const mdl = model();
+        increment.listeners.newGifSuccess({ counter: mdl.counter, button: mdl.button }, update);
+      }
+    }
+  };
 
   const element = document.getElementById("app");
-  const render = model => m.render(element, app.view(model, update));
+  const render = model => m.render(element, app.view(model, update, events));
   model.map(render);
 
   const streamLibrary = { stream: stream, combine: stream.combine };
