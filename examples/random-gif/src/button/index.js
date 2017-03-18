@@ -1,7 +1,8 @@
+import { lensProp, not, over } from "ramda";
 import { view } from "./view";
 
 const actions = {
-  toggle: (model, update) => () => update({ active: !model.active })
+  toggle: (model, update) => () => update(over(lensProp("active"), not))
 };
 
 export const button = {

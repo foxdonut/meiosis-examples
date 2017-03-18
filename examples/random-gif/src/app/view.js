@@ -1,4 +1,5 @@
 import m from "mithril";
+import { nest } from "../util";
 import { counter } from "../counter";
 import { button } from "../button";
 import { randomGif } from "../random-gif";
@@ -17,19 +18,19 @@ export const view = (model, update, events) =>
         m("a.btn.btn-xs.btn-default", { href: "index-jsx.html" }, "Mithril + JSX version")
       )
     ),
-    counter.view(model.counter, mdl => update({ counter: mdl })),
+    counter.view(model.counter, nest(update, "counter")),
     m("div", "Button:"),
-    button.view(model.button, mdl => update({ button: mdl })),
+    button.view(model.button, nest(update, "button")),
     m("div", "Random Gif:"),
-    randomGif.view(model.randomGif1, mdl => update({ randomGif1: mdl }), events.randomGif),
+    randomGif.view(model.randomGif1, nest(update, "randomGif1"), events.randomGif),
     m("div", "Another Random Gif:"),
-    randomGif.view(model.randomGif2, mdl => update({ randomGif2: mdl }), events.randomGif),
+    randomGif.view(model.randomGif2, nest(update, "randomGif2"), events.randomGif),
     m("div", "Random Gif Pair:"),
-    randomGifPair.view(model.randomGifPair, mdl => update({ randomGifPair: mdl }), events),
+    randomGifPair.view(model.randomGifPair, nest(update, "randomGifPair"), events),
     m("div", "Random Gif Pair Pair:"),
-    randomGifPairPair.view(model.randomGifPairPair, mdl => update({ randomGifPairPair: mdl}), events),
+    randomGifPairPair.view(model.randomGifPairPair, nest(update, "randomGifPairPair"), events),
     m("div", "Random Gif List:"),
-    randomGifList.view(model.randomGifList, mdl => update({ randomGifList: mdl })),
+    randomGifList.view(model.randomGifList, nest(update, "randomGifList"), events)/*,
     m("div", "Random Gif with Counter:"),
-    randomGifCounter.view(model.randomGifCounter, mdl => update({randomGifCounter: mdl }))
+    randomGifCounter.view(model.randomGifCounter, nest(update, "andomGifCounter"))*/
   );
