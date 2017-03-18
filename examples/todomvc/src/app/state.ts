@@ -1,4 +1,6 @@
-const allCompleted = function(state) {
+import { Model } from "../util";
+
+const allCompleted = function(state: any) {
   let result = true;
 
   for (let i = 0, t = state.todoIds.length; i < t; i++) {
@@ -10,7 +12,7 @@ const allCompleted = function(state) {
   return result;
 };
 
-export const state = model => {
+export const state = (model: Model) => {
   const state = JSON.parse(JSON.stringify(model));
 
   state.allSelected = state.route === "";
@@ -19,7 +21,7 @@ export const state = model => {
 
   state.allCompleted = allCompleted(state);
 
-  const notCompleted = todoId => !state.todosById[todoId].completed;
+  const notCompleted = (todoId: string) => !state.todosById[todoId].completed;
   const itemsLeft = state.todoIds.filter(notCompleted).length;
 
   state.itemsLeftText = state.todoIds.length > 0 ?

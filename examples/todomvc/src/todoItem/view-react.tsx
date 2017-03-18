@@ -1,11 +1,12 @@
-import React from "react";
+import * as React from "react";
 
+import { Model } from "../util";
 import { getTodoClasses } from "./display";
 import { intents } from "./actions";
 import { state } from "./state";
 import { todoEditView } from "../todoEdit/view-react.jsx";
 
-export const todoItemView = model => todoId => {
+export const todoItemView = (model: Model) => (todoId: string) => {
   const todo = model.todosById[todoId];
   const editing = state.editing(model, todo);
 

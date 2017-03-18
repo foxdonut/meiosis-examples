@@ -1,8 +1,9 @@
-import React from "react";
+import * as React from "react";
 
+import { Todo } from "../util";
 import { intents } from "./actions";
 
-export const todoEditView = todo => (
+export const todoEditView = (todo: Todo) => (
   <input type="text" className="edit" value={todo.title}
     onKeyUp={intents.editKeyUp(todo.id)}
     onChange={intents.editChange(todo.id)}

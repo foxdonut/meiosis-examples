@@ -1,6 +1,6 @@
 {
   "name": "todomvc",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "meiosis-examples todomvc",
   "main": "index.js",
   "scripts": {
@@ -27,21 +27,24 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "crossroads": "^0.12.2",
+    "es6-promise": "^4.1.0",
     "flyd": "^0.2.4",
-    "history": "^4.5.1",
-    "meiosis": "^0.10.0",
+    "history": "^4.6.1",
+    "meiosis": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "snabbdom": "^0.6.4"
+    "snabbdom": "^0.6.7"
   },
   "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-react-jsx": "^6.23.0",
-    "babel-preset-env": "^1.1.8",
-    "cross-env": "^3.1.4",
-    "meiosis-tracer": "^0.10.0",
+    "@types/node": "^7.0.8",
+    "@types/react": "^15.0.16",
+    "@types/react-dom": "^0.14.23",
+    "cross-env": "^3.2.4",
+    "meiosis-tracer": "^1.0.0",
+    "source-map-loader": "^0.2.0",
+    "ts-loader": "^2.0.2",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1",
     "webpack": "^2.2.1"
   }
 }
