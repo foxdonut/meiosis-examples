@@ -1,7 +1,6 @@
-import uuid from "uuid";
 import m from "mithril";
+import uuid from "uuid";
 import { assoc, merge } from "ramda";
-import { view } from "./view";
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";
@@ -32,13 +31,7 @@ const newGif = (update, events, id, tag) => () => {
     catch(() => update(model => merge(model, newGifError())));
 };
 
-const actions = {
-  editTag,
-  newGif
-};
-
-//FIXME: put this somewhere else
-export const imgsrc = model => model.isLoading ? "/examples/random-gif/images/loading.gif" : (
+const imgsrc = model => model.isLoading ? "/examples/random-gif/images/loading.gif" : (
   model.isError ? "/examples/random-gif/images/error.png" : model.image_url
 );
 
@@ -54,5 +47,13 @@ export const randomGif = {
       image_url: ""
     };
   },
-  view: view(actions)
+  view: (model, update, events) =>
+    m("div", [
+      m("span", "Tag:"),
+      m("input[type=text]", { value: model.tag, onkeyup: editTag(update) }),
+      m("button.btn.btn-xs.btn-default",
+        { onclick: newGif(update, events, model.id, model.tag) },
+        "Random Gif"),
+      m("div", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
+    ])
 };
