@@ -30,7 +30,9 @@ export const view = (model, update, events) =>
     m("div", "Random Gif Pair Pair:"),
     randomGifPairPair.view(model.randomGifPairPair, nest(update, "randomGifPairPair"), events),
     m("div", "Random Gif List:"),
-    randomGifList.view(model.randomGifList, nest(update, "randomGifList"), events)/*,
+    randomGifList.view(model.randomGifList, nest(update, "randomGifList"), events),
     m("div", "Random Gif with Counter:"),
-    randomGifCounter.view(model.randomGifCounter, nest(update, "andomGifCounter"))*/
+    randomGifCounter.view(model.randomGifCounter1, nest(update, "randomGifCounter1")),
+    m("div", "Another Random Gif with Counter:"),
+    randomGifCounter.view(model.randomGifCounter2, nest(update, "randomGifCounter2"))
   );

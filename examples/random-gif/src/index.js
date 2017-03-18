@@ -23,7 +23,8 @@ function startApp() {
     randomGifPair: randomGifPair.model(),
     randomGifPairPair: randomGifPairPair.model(),
     randomGifList: randomGifList.model(),
-    randomGifCounter: randomGifCounter.model()
+    randomGifCounter1: randomGifCounter.model(),
+    randomGifCounter2: randomGifCounter.model()
   };
 
   const update = stream();
