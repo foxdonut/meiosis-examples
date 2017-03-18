@@ -32,9 +32,9 @@ export const app = {
       randomGifPairPair.view(model.randomGifPairPair, nest(update, "randomGifPairPair"), events),
       m("div", "Random Gif List:"),
       randomGifList.view(model.randomGifList, nest(update, "randomGifList"), events),
-      m("div", "Random Gif with Counter:"),
+      m("div", "Random Gif with Counter (doesn't count in total):"),
       randomGifCounter.view(model.randomGifCounter1, nest(update, "randomGifCounter1")),
-      m("div", "Another Random Gif with Counter:"),
-      randomGifCounter.view(model.randomGifCounter2, nest(update, "randomGifCounter2"))
+      m("div", "Another Random Gif with Counter (counts in total):"),
+      randomGifCounter.view(model.randomGifCounter2, nest(update, "randomGifCounter2"), events.randomGif)
     )
   };
