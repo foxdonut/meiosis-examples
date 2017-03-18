@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Model } from "../util";
+import { State } from "../util";
 import { footerView } from "../footer/view-react.jsx";
 import { headerView } from "../header/view-react.jsx";
 import { mainView } from "../main/view-react.jsx";
@@ -13,7 +13,7 @@ const info = (
   </footer>
 );
 
-export const view = (model: Model) => (
+export const view = (model: State) => (
   <div>
     <section className="todoapp">
       {headerView(model)}

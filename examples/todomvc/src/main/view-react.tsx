@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Model } from "../util";
+import { State } from "../util";
 import { intents } from "./actions";
 import { todoItemView } from "../todoItem/view-react.jsx";
 
-export const mainView = (model: Model) => (
+export const view = (model: State) => (
   <section className="main">
     <input className="toggle-all" type="checkbox" checked={model.allCompleted}
       onChange={intents.toggleAllTodos}/>

@@ -1,11 +1,13 @@
 import h from "snabbdom/h";
+import { VNode } from "snabbdom/vnode";
 
+import { State } from "../util";
 import { getTodoClassMap } from "./display";
 import { intents } from "./actions";
 import { state } from "./state";
 import { todoEditView } from "../todoEdit/view-snabbdom";
 
-export const todoItemView = model => todoId => {
+export const view = (model: State) => (todoId: string) => {
   const todo = model.todosById[todoId];
   const editing = state.editing(model, todo);
 

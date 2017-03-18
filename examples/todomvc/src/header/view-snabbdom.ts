@@ -1,8 +1,10 @@
 import h from "snabbdom/h";
+import { VNode } from "snabbdom/vnode";
 
+import { State } from "../util";
 import { intents } from "./actions";
 
-export const headerView = model =>
+export const view = (model: State) =>
   h("header.header", [
     h("h1", "todos"),
     h("input.new-todo", {

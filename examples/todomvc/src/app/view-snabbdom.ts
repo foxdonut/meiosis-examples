@@ -1,7 +1,7 @@
 import h from "snabbdom/h";
 import { VNode } from "snabbdom/vnode";
 
-import { Model } from "../util";
+import { State } from "../util";
 import { footerView } from "../footer/view-snabbdom";
 import { headerView } from "../header/view-snabbdom";
 import { mainView } from "../main/view-snabbdom";
@@ -18,7 +18,7 @@ const info = h("footer.info", [
   ])
 ]);
 
-export const view = (model: Model) =>
+export const view = (model: State) =>
   h("div", [
     h("section.todoapp", [
       headerView(model),

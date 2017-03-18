@@ -1,9 +1,11 @@
 import h from "snabbdom/h";
+import { VNode } from "snabbdom/vnode";
 
+import { State } from "../util";
 import { intents } from "./actions";
 
-export const footerView = model => {
-  const clearCompleted = model => model.clearCompletedVisible ?
+export const view = (model: State) => {
+  const clearCompleted = (model: State) => model.clearCompletedVisible ?
     h("button.clear-completed", { on: { click: intents.clearCompleted } }, "Clear completed") : h("span");
 
   return h("footer.footer", [

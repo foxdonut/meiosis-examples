@@ -1,9 +1,11 @@
 import h from "snabbdom/h";
+import { VNode } from "snabbdom/vnode";
 
+import { State } from "../util";
 import { intents } from "./actions";
-import { todoItemView } from "../todoItem/view-snabbdom";
+import { view as todoItemView } from "../todoItem/view-snabbdom";
 
-export const mainView = model =>
+export const view = (model: State) =>
   h("section.main", [
     h("input.toggle-all", {
       attrs: { type: "checkbox" },
