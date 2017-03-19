@@ -13,12 +13,12 @@ const info = (
   </footer>
 );
 
-export const view = (model: State) => (
+export const view = (model: State, update: Function) => (
   <div>
     <section className="todoapp">
-      {headerView(model)}
-      {mainView(model)}
-      {footerView(model)}
+      {headerView(model, update)}
+      {mainView(model, update)}
+      {footerView(model, update)}
     </section>
     {info}
   </div>

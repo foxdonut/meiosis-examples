@@ -24,7 +24,7 @@ export function startApp(view: Function, render: Function) {
   const state = model.map(app.state);
 
   const element = document.getElementById("app");
-  state.map((state: any) => render(element, view(state)));
+  state.map((state: any) => render(element, view(state, modelChanges)));
 
   trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
   meiosisTracer({ selector: "#tracer" });
