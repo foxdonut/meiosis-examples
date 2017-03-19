@@ -1,7 +1,7 @@
+import { Model, Todo } from "../util";
 import { actions } from "./actions";
-import { mergeIntoOne } from "../util";
 
-const setCompleted = actions.setCompleted.map(({ todoId, completed }) => model => {
+const setCompleted = actions.setCompleted.map(({ todoId, completed }) => (model: Model) => {
   model.todosById[todoId].completed = completed;
   return model;
 });

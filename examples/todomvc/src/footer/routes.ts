@@ -1,4 +1,4 @@
-import crossroads from "crossroads";
+import * as crossroads from "crossroads";
 import { todoStorage } from "../app/todo-storage";
 import { main } from "../main";
 

@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/public/css/bootstrap.yeti.min.css">
     <link rel="stylesheet" href="/public/css/style.css">
 
+    <style type="text/css">
+      td { white-space: nowrap; }
+      td.desc { white-space: normal; }
+    </style>
+
     <title>Meiosis Examples</title>
   </head>
   <body class="container">
@@ -16,110 +21,130 @@
 
       <div class="row">
         <div class="col-md-8">
-          <div>
-            <a href="http://meiosis.js.org">Meiosis</a> examples using
-            <a href="https://infernojs.org" target="_blank">Inferno</a>,
-            <a href="http://jquery.com" target="_blank">jQuery</a>,
-            <a href="http://mithriljs.org" target="_blank">Mithril</a>,
-            <a href="https://preactjs.com" target="_blank">Preact</a>,
-            <a href="https://facebook.github.io/react/" target="_blank">React</a>,
-            <a href="https://github.com/paldepind/snabbdom" target="_blank">Snabbdom</a>, and
-            <a href="http://vanilla-js.com" target="_blank">Vanilla JS</a>.
-          </div>
           <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr>
-                <th>example &darr; / environment &rarr;</th>
-                <th>browser</th>
-                <th>node modules</th>
+                <th>example</th>
+                <th>run</th>
+                <th nowrap>view library</th>
+                <th>syntax</th>
+                <th>UI library</th>
                 <th>codepen</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Counter</strong> : the basics.</td>
-                <td>
-                  <div><a href="/examples/counter/jquery/index.html">jQuery</a></div>
-                  <div><a href="/examples/counter/react/index.html">React</a></div>
-                </td>
-                <td></td>
-                <td>
-                  <div><a target="_blank" href="http://codepen.io/foxdonut/pen/ezYgNo?editors=1010">jQuery</a></div>
-                  <div><a target="_blank" href="http://codepen.io/foxdonut/pen/OXJXmv?editors=1010">React</a></div>
-                </td>
+                <td class="desc" rowspan="2"><strong>1. Counter</strong> : the basics.</td>
+                <td><a href="/examples/counter/jquery/index.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="http://jquery.com" target="_blank">jQuery</a></td>
+                <td>plain strings</td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
+                <td><a target="_blank" href="http://codepen.io/foxdonut/pen/ezYgNo?editors=1010">run on codepen</a></td>
               </tr>
               <tr>
-                <td>
-                  <strong>Rocket Launcher</strong><sup>1</sup> : the basic SAM pattern example.
+                <td><a href="/examples/counter/react/index.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://facebook.github.io/react/" target="_blank">React</a></td>
+                <td><a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX</a></td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
+                <td><a target="_blank" href="http://codepen.io/foxdonut/pen/OXJXmv?editors=1010">run on codepen</a></td>
+              </tr>
+              <tr>
+                <td class="desc" rowspan="2">
+                  <strong>2. Rocket Launcher</strong><sup>1</sup> : the basic SAM pattern example.
                   Uses state, display, actions, nextAction.
                 </td>
-                <td>
-                  <div><a href="/examples/rocket-launcher/react/index.html">React</a></div>
-                  <div><a href="/examples/rocket-launcher/vanillajs/index.html">VanillaJS</a></div>
-                </td>
-                <td></td>
-                <td>
-                  <div><a target="_blank" href="http://codepen.io/foxdonut/pen/PzqOGG?editors=1010">React</a></div>
-                  <div><a target="_blank" href="http://codepen.io/foxdonut/pen/pbJRrK?editors=1010">VanillaJS</a></div>
-                </td>
+                <td><a href="/examples/rocket-launcher/react/index.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://facebook.github.io/react/" target="_blank">React</a></td>
+                <td><a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX</a></td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
+                <td><a target="_blank" href="http://codepen.io/foxdonut/pen/PzqOGG?editors=1010">run on codepen</a></td>
               </tr>
               <tr>
-                <td>
-                  <strong>Temperatures</strong> : reusable components, self-contained and managing
-                  their own state, nested within the single-state tree.
+                <td><a href="/examples/rocket-launcher/vanillajs/index.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="http://vanilla-js.com" target="_blank">Vanilla JS</a></td>
+                <td>plain strings</td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
+                <td><a target="_blank" href="http://codepen.io/foxdonut/pen/pbJRrK?editors=1010">run on codepen</a></td>
+              </tr>
+              <tr>
+                <td class="desc" rowspan="2">
+                  <strong>3. Temperatures</strong> : components managing their own state,
+                  nested within the single-state tree.
                 </td>
-                <td></td>
-                <td>
-                  <div><a href="/examples/temperatures/index-jsx.html">Preact + JSX</a></div>
-                  <div><a href="/examples/temperatures/index-h.html">Preact + h</a></div>
-                </td>
+                <td><a href="/examples/temperatures/index-jsx.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://preactjs.com" target="_blank">Preact</a></td>
+                <td><a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX</a></td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
                 <td></td>
               </tr>
               <tr>
-                <td>
-                  <strong>Random-Gif</strong> : <a href="https://github.com/slorber/scalable-frontend-with-elm-or-redux"
+                <td><a href="/examples/temperatures/index-h.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://preactjs.com" target="_blank">Preact</a></td>
+                <td><a href="https://github.com/hyperhype/hyperscript" target="_blank">hyperscript</a></td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="desc">
+                  <strong>4. Random-Gif</strong> : <a href="https://github.com/slorber/scalable-frontend-with-elm-or-redux"
                     target="_blank">scalable front-end architecture</a>.
                 </td>
-                <td></td>
-                <td>
-                  <div><a href="/examples/random-gif/index.html">Mithril</a></div>
-                </td>
-                <td nowrap>
-                  <div><a target="_blank" href="http://codepen.io/foxdonut/pen/YNdPXm">Mithril + m</a></div>
-                </td>
+                <td><a href="/examples/random-gif/index.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="http://mithriljs.org" target="_blank">Mithril</a></td>
+                <td><a href="http://mithril.js.org/hyperscript.html" target="_blank">hyperscript</a></td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
+                <td><a target="_blank" href="http://codepen.io/foxdonut/pen/YNdPXm">run on codepen</a></td>
               </tr>
               <tr>
-                <td><strong>TodoMVC</strong><sup>2</sup> : the canonical TodoMVC example.</td>
-                <td></td>
-                <td>
-                  <div><a href="/examples/todomvc/index-react.html">React</a></div>
-                  <div><a href="/examples/todomvc/index-snabbdom.html">Snabbdom</a></div>
+                <td class="desc" rowspan="2">
+                  <strong>5. TodoMVC</strong><sup>2</sup> : the canonical TodoMVC example.
                 </td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Todo List With Server</strong> : demonstrates making AJAX calls to the server.
-                </td>
-                <td></td>
-                <td nowrap>
-                  <div><a href="/examples/todo-list/index-inferno.html">Inferno + JSX + semantic ui</a></div>
-                  <div><a href="/examples/todo-list/index-react.html">React + JSnoX + ant design</a></div>
-                </td>
+                <td><a href="/examples/todomvc/index-react.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://facebook.github.io/react/" target="_blank">React</a></td>
+                <td><a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX</a></td>
+                <td><a href="https://www.npmjs.com/package/todomvc-app-css" target="_blank">TodoMVC CSS</a></td>
                 <td></td>
               </tr>
               <tr>
-                <td>
-                  <strong>Library</strong> : larger example written in TypeScript, demonstrating many features, with
-                  two implementations: <a href="http://material-ui.com" target="_blank">Material-UI</a>
-                  and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a> +
-                  <a href="http://ui.jquery.com" target="_blank">jQuery UI</a>.
-                </td>
+                <td><a href="/examples/todomvc/index-snabbdom.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://github.com/paldepind/snabbdom" target="_blank">Snabbdom</a></td>
+                <td><a href="https://github.com/snabbdom/snabbdom#snabbdomh" target="_blank">hyperscript</a></td>
+                <td><a href="https://www.npmjs.com/package/todomvc-app-css" target="_blank">TodoMVC CSS</a></td>
                 <td></td>
-                <td>
-                  <div><a href="/examples/library/index-mithril.html">Mithril + Bootstrap</a></div>
-                  <div><a href="/examples/library/index-react.html">React + MaterialUI</a></div>
+              </tr>
+              <tr>
+                <td class="desc" rowspan="2">
+                  <strong>6. Todo List With Server</strong> : demonstrates making AJAX calls to the server.
                 </td>
+                <td><a href="/examples/todo-list/index-inferno.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://infernojs.org" target="_blank">Inferno</a></td>
+                <td><a href="https://infernojs.org/docs/guides/what-is-jsx" target="_blank">JSX</a></td>
+                <td><a href="https://semantic-ui.com/" target="_blank">Semantic UI</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><a href="/examples/todo-list/index-react.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://facebook.github.io/react/" target="_blank">React</a></td>
+                <td><a href="https://github.com/af/jsnox" target="_blank">JSnoX</a></td>
+                <td><a href="http://ant.design" target="_blank">Ant Design</a></td>
+                <td></td>
+              </tr>
+              </tr>
+              <tr>
+                <td class="desc" rowspan="2">
+                  <strong>7. Library</strong> : larger example demonstrating many features.
+                </td>
+                <td><a href="/examples/library/index-mithril.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="http://mithriljs.org" target="_blank">Mithril</a></td>
+                <td><a href="http://mithril.js.org/hyperscript.html" target="_blank">hyperscript</a></td>
+                <td><a href="http://getbootstrap.com" target="_blank">Bootstrap</a></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><a href="/examples/library/index-react.html" class="btn btn-primary btn-xs">run example</a></td>
+                <td><a href="https://facebook.github.io/react/" target="_blank">React</a></td>
+                <td><a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank">JSX</a></td>
+                <td><a href="http://www.material-ui.com" target="_blank">Material-UI</a></td>
                 <td></td>
               </tr>
             </tbody>

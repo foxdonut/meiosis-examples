@@ -2,9 +2,9 @@ import h from "snabbdom/h";
 import { VNode } from "snabbdom/vnode";
 
 import { State } from "../util";
-import { footerView } from "../footer/view-snabbdom";
-import { headerView } from "../header/view-snabbdom";
-import { mainView } from "../main/view-snabbdom";
+import { view as footerView } from "../footer/view-snabbdom";
+import { view as headerView } from "../header/view-snabbdom";
+import { view as mainView } from "../main/view-snabbdom";
 
 const info = h("footer.info", [
   h("p", "Double-click to edit a todo"),
