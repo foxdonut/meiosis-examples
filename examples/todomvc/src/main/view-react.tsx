@@ -4,13 +4,13 @@ import { State } from "../util";
 import { intents } from "./actions";
 import { view as todoItemView } from "../todoItem/view-react";
 
-export const view = (model: State) => (
+export const view = (model: State, update: Function) => (
   <section className="main">
     <input className="toggle-all" type="checkbox" checked={model.allCompleted}
       onChange={intents.toggleAllTodos}/>
     <label htmlFor="toggle-all">Mark all as complete</label>
     <ul className="todo-list">
-      {model.todoIds.map(todoItemView(model))}
+      {model.todoIds.map(todoItemView(model, update))}
     </ul>
   </section>
 );

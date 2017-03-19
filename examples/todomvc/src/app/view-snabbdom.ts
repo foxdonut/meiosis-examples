@@ -22,7 +22,7 @@ export const view = (model: State, update: Function) =>
   h("div", [
     h("section.todoapp", [
       headerView(model, update),
-      mainView(model),
+      mainView(model, update),
       footerView(model),
     ]),
     info

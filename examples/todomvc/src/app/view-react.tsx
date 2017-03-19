@@ -17,7 +17,7 @@ export const view = (model: State, update: Function) => (
   <div>
     <section className="todoapp">
       {headerView(model, update)}
-      {mainView(model)}
+      {mainView(model, update)}
       {footerView(model)}
     </section>
     {info}
