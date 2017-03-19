@@ -1,3 +1,4 @@
+import { ChangeEvent, EventHandler, KeyboardEvent } from "react";
 const flyd = require("flyd");
 import { todoStorage } from "../app/todo-storage";
 
@@ -16,19 +17,26 @@ const saveNewTodo = (title: string) => {
   }
 };
 
+const newTodoKeyUp: EventHandler<KeyboardEvent<HTMLInputElement>> = (evt: KeyboardEvent<HTMLInputElement>) => {
+  if (evt.keyCode === ENTER_KEY) {
+    saveNewTodo(evt.currentTarget.value);
+  }
+  else {
+    actions.newTodo(evt.currentTarget.value);
+  }
+};
+
+const newTodoKeyUpEnterOnly: EventHandler<KeyboardEvent<HTMLInputElement>> = (evt: KeyboardEvent<HTMLInputElement>) => {
+  if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
+    saveNewTodo(evt.currentTarget.value);
+  }
+};
+
+const newTodoChange: EventHandler<ChangeEvent<HTMLInputElement>> = (evt: ChangeEvent<HTMLInputElement>) =>
+  actions.newTodo(evt.currentTarget.value);
+
 export const intents = {
-  newTodoKeyUp: evt => {
-    if (evt.keyCode === ENTER_KEY) {
-      saveNewTodo(evt.target.value);
-    }
-    else {
-      actions.newTodo(evt.target.value);
-    }
-  },
-  newTodoKeyUpEnterOnly: evt => {
-    if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-      saveNewTodo(evt.target.value);
-    }
-  },
-  newTodoChange: evt => actions.newTodo(evt.target.value)
+  newTodoKeyUp,
+  newTodoKeyUpEnterOnly,
+  newTodoChange
 };

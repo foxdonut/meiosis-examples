@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { State } from "../util";
 import { intents } from "./actions";
-import { view as todoItemView } from "../todoItem/view-react.jsx";
+import { view as todoItemView } from "../todoItem/view-react.tsx";
 
 export const view = (model: State) => (
   <section className="main">

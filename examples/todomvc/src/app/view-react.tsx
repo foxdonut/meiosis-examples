@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import { State } from "../util";
-import { view as footerView } from "../footer/view-react.jsx";
-import { view as headerView } from "../header/view-react.jsx";
-import { view as mainView } from "../main/view-react.jsx";
+import { view as footerView } from "../footer/view-react.tsx";
+import { view as headerView } from "../header/view-react.tsx";
+import { view as mainView } from "../main/view-react.tsx";
 
 const info = (
   <footer className="info">

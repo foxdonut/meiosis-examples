@@ -11,8 +11,9 @@ export const view = (todo: Todo) =>
     on: { keyup: intents.editKeyUp(todo.id), blur: intents.editBlur(todo.id) },
     hook: {
       insert: function(vnode: VNode) {
-        vnode.elm.focus();
-        vnode.elm.selectionStart = vnode.elm.value.length;
+        const elm: HTMLInputElement = (<HTMLInputElement> vnode.elm);
+        elm.focus();
+        elm.selectionStart = elm.value.length;
       }
     }
   });

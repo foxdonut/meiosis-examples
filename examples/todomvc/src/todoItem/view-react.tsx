@@ -4,7 +4,7 @@ import { State } from "../util";
 import { getTodoClasses } from "./display";
 import { intents } from "./actions";
 import { state } from "./state";
-import { view as todoEditView } from "../todoEdit/view-react.jsx";
+import { view as todoEditView } from "../todoEdit/view-react.tsx";
 
 export const view = (model: State) => (todoId: string) => {
   const todo = model.todosById[todoId];
