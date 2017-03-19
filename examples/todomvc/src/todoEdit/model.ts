@@ -1,24 +1,18 @@
+import { Model, Todo } from "../util";
 import { actions } from "./actions";
-import { mergeIntoOne } from "../util";
 
-const clearEdit = actions.clearEdit.map(() => model => {
+const clearEdit = actions.clearEdit.map(() => (model: Model) => {
   model.editTodo = { };
   return model;
 });
 
-const editingTodo = actions.editingTodo.map(todo => model => {
+const editingTodo = actions.editingTodo.map((todo: Todo) => (model: Model) => {
   model.editTodo = todo;
   return model;
 });
 
-const saveTodo = actions.saveTodo.map(todo => model => {
+const saveTodo = actions.saveTodo.map((todo: Todo) => (model: Model) => {
   model.todosById[todo.id] = todo;
   model.editTodo = { };
   return model;
 });
-
-export const modelChanges = mergeIntoOne([
-  clearEdit,
-  editingTodo,
-  saveTodo
-]);

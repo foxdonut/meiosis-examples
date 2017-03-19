@@ -1,7 +1,7 @@
 import createHistory from "history/createBrowserHistory";
-import crossroads from "crossroads";
+import * as crossroads from "crossroads";
 
-const extractRoute = hash => (hash && hash.substring(2)) || "";
+const extractRoute = (hash: string) => (hash && hash.substring(2)) || "";
 
 export const createRouter = () => {
   const history = createHistory();

@@ -1,4 +1,5 @@
-import flyd from "flyd";
+const flyd = require("flyd");
+import { Promise } from "es6-promise";
 import { todoStorage } from "../app/todo-storage";
 
 export const actions = {

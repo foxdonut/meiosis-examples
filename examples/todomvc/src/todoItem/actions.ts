@@ -1,4 +1,6 @@
-import flyd from "flyd";
+const flyd = require("flyd");
+import { Promise } from "es6-promise";
+import { Todo } from "../util";
 import { todoStorage } from "../app/todo-storage";
 
 export const actions = {
@@ -8,12 +10,12 @@ export const actions = {
 };
 
 export const intents = {
-  deleteTodo: todoId => () => todoStorage.deleteTodoId(todoId).then(
+  deleteTodo: (todoId: string) => () => todoStorage.deleteTodoId(todoId).then(
     () => actions.deleteTodo(todoId)),
 
-  editTodo: todo => () => actions.editTodo(todo),
+  editTodo: (todo: Todo) => () => actions.editTodo(todo),
 
-  toggleTodo: todoId => evt => (checked =>
+  toggleTodo: (todoId: string) => evt => (checked =>
     todoStorage.setCompleted(todoId, checked).then(
       () => actions.setCompleted({ todoId, completed: checked })))(evt.target.checked)
 };

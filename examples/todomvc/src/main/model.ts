@@ -1,6 +1,7 @@
+import { Model, Todo } from "../util";
 import { actions } from "./actions";
 
-const displayTodos = actions.displayTodos.map(todos => model => {
+const displayTodos = actions.displayTodos.map((todos: Array<Todo>) => (model: Model) => {
   model.todoIds = [];
   model.todosById = {};
 

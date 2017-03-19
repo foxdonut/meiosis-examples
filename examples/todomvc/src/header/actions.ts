@@ -1,4 +1,4 @@
-import flyd from "flyd";
+const flyd = require("flyd");
 import { todoStorage } from "../app/todo-storage";
 
 const ENTER_KEY = 13;
@@ -8,7 +8,7 @@ export const actions = {
   saveNewTodo: flyd.stream()
 };
 
-const saveNewTodo = title => {
+const saveNewTodo = (title: string) => {
   title = title.trim();
 
   if (title) {
