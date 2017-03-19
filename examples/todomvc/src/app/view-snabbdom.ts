@@ -18,10 +18,10 @@ const info = h("footer.info", [
   ])
 ]);
 
-export const view = (model: State) =>
+export const view = (model: State, update: Function) =>
   h("div", [
     h("section.todoapp", [
-      headerView(model),
+      headerView(model, update),
       mainView(model),
       footerView(model),
     ]),

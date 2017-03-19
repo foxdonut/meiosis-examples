@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import { State } from "../util";
-import { view as footerView } from "../footer/view-react.tsx";
-import { view as headerView } from "../header/view-react.tsx";
-import { view as mainView } from "../main/view-react.tsx";
+import { view as footerView } from "../footer/view-react";
+import { view as headerView } from "../header/view-react";
+import { view as mainView } from "../main/view-react";
 
 const info = (
   <footer className="info">
@@ -17,8 +17,8 @@ export const view = (model: State, update: Function) => (
   <div>
     <section className="todoapp">
       {headerView(model, update)}
-      {mainView(model, update)}
-      {footerView(model, update)}
+      {mainView(model)}
+      {footerView(model)}
     </section>
     {info}
   </div>
