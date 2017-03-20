@@ -1,4 +1,3 @@
-const flyd = require("flyd");
 import { ChangeEvent, EventHandler } from "react";
 import { Promise } from "es6-promise";
 import { Model, Todo } from "../util";

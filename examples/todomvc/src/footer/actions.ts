@@ -1,7 +1,8 @@
 import { Promise } from "es6-promise";
+import { Todo } from "../util";
 import { todoStorage } from "../app/todo-storage";
-import { main } from "../main";
+import { actions as mainActions } from "../main/actions";
 
-export const intents = {
-  clearCompleted: () => todoStorage.clearCompleted().then(main.actions.displayTodos)
+export const actions = {
+  clearCompleted: (update: Function) => () => todoStorage.clearCompleted().then(mainActions.displayTodos)
 };

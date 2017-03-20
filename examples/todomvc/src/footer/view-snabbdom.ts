@@ -2,11 +2,11 @@ import h from "snabbdom/h";
 import { VNode } from "snabbdom/vnode";
 
 import { State } from "../util";
-import { intents } from "./actions";
+import { actions } from "./actions";
 
-export const view = (model: State) => {
+export const view = (model: State, update: Function) => {
   const clearCompleted = (model: State) => model.clearCompletedVisible ?
-    h("button.clear-completed", { on: { click: intents.clearCompleted } }, "Clear completed") : h("span");
+    h("button.clear-completed", { on: { click: actions.clearCompleted(update) } }, "Clear completed") : h("span");
 
   return h("footer.footer", [
     h("span.todo-count", model.itemsLeftText),

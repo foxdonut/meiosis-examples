@@ -18,7 +18,7 @@ export const view = (model: State, update: Function) => (todoId: string) => {
         <label onDoubleClick={actions.editTodo(update, todo)}>{todo.title}</label>
         <button className="destroy" onClick={actions.deleteTodo(update, todo.id)}></button>
       </div>
-      {editing ? todoEditView(model.editTodo) : null}
+      {editing ? todoEditView(model.editTodo, update) : null}
     </li>
   );
 };

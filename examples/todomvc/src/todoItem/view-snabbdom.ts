@@ -21,6 +21,6 @@ export const view = (model: State, update: Function) => (todoId: string) => {
       h("label", { on: { dblclick: actions.editTodo(update, todo) } }, todo.title),
       h("button.destroy", { on: { click: actions.deleteTodo(update, todo.id) } })
     ]),
-    editing ? todoEditView(model.editTodo) : null
+    editing ? todoEditView(model.editTodo, update) : null
   ]);
 };

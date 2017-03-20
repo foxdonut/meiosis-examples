@@ -2,11 +2,11 @@ import * as React from "react";
 import * as classnames from "classnames";
 
 import { State } from "../util";
-import { intents } from "./actions";
+import { actions } from "./actions";
 
-export const view = (model: State) => {
+export const view = (model: State, update: Function) => {
   const clearCompleted = (model: State) => model.clearCompletedVisible ?
-    <button className="clear-completed" onClick={intents.clearCompleted}>Clear completed</button> : null;
+    <button className="clear-completed" onClick={actions.clearCompleted(update)}>Clear completed</button> : null;
 
   return (
     <footer className="footer">

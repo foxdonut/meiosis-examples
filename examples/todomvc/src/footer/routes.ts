@@ -1,14 +1,14 @@
 import * as crossroads from "crossroads";
 import { todoStorage } from "../app/todo-storage";
-import { main } from "../main";
+import { actions } from "../main/actions";
 
 export const addRoutes = () => {
   crossroads.addRoute("/", () =>
-    todoStorage.loadAll().then(main.actions.displayTodos), 1);
+    todoStorage.loadAll().then(actions.displayTodos), 1);
 
   crossroads.addRoute("/active", () =>
-    todoStorage.filter("active").then(main.actions.displayTodos), 1);
+    todoStorage.filter("active").then(actions.displayTodos), 1);
 
   crossroads.addRoute("/completed", () =>
-    todoStorage.filter("completed").then(main.actions.displayTodos), 1);
+    todoStorage.filter("completed").then(actions.displayTodos), 1);
 };
