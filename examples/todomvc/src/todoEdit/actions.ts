@@ -8,11 +8,11 @@ const ESCAPE_KEY = 27;
 
 const editBlur: (update: Function, id: string) => EventHandler<FocusEvent<HTMLInputElement>> =
   (update: Function, id: string) => (evt: FocusEvent<HTMLInputElement>) =>
-    todoStorage.saveTodo({ id, title: evt.currentTarget.value }).then((todo: Todo) => (model: Model) => {
+    todoStorage.saveTodo({ id, title: evt.currentTarget.value }).then((todo: Todo) => update((model: Model) => {
       model.todosById[todo.id] = todo;
       model.editTodo = { };
       return model;
-    });
+    }));
 
 const editChange: (update: Function, id: string) => EventHandler<ChangeEvent<HTMLInputElement>> =
   (update: Function, id: string) => (evt: ChangeEvent<HTMLInputElement>) =>

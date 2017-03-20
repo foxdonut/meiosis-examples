@@ -17,7 +17,9 @@ export function startApp(view: Function, render: Function) {
       todosById: todos.reduce((acc: { [id: string] : Todo }, todo: Todo) => {
         acc[todo.id] = todo;
         return acc;
-      }, {})
+      }, {}),
+      filter: "all",
+      route: "/"
     };
 
     const modelChanges: Stream<Function> = flyd.stream();
@@ -30,7 +32,7 @@ export function startApp(view: Function, render: Function) {
     trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
     meiosisTracer({ selector: "#tracer" });
 
-    footer.addRoutes();
-    createRouter();
+    footer.addRoutes(modelChanges);
+    createRouter(modelChanges);
   });
 }

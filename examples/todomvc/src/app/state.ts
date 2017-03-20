@@ -15,9 +15,9 @@ const allCompleted = function(state: any) {
 export const state = (model: Model) => {
   const state = JSON.parse(JSON.stringify(model));
 
-  state.allSelected = state.route === "";
-  state.activeSelected = state.route === "active";
-  state.completedSelected = state.route === "completed";
+  state.allSelected = model.filter === "all";
+  state.activeSelected = model.filter === "active";
+  state.completedSelected = model.filter === "completed";
 
   state.allCompleted = allCompleted(state);
 

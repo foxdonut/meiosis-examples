@@ -9,6 +9,8 @@ export interface Model {
   newTodo: string;
   todoIds: Array<string>;
   todosById: { [id: string]: Todo };
+  filter: string;
+  route: string;
 }
 
 export interface State extends Model {

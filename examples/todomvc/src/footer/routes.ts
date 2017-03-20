@@ -1,14 +1,28 @@
 import * as crossroads from "crossroads";
+import { Model } from "../util";
 import { todoStorage } from "../app/todo-storage";
 import { actions } from "../main/actions";
 
-export const addRoutes = () => {
-  crossroads.addRoute("/", () =>
-    todoStorage.loadAll().then(actions.displayTodos), 1);
+const updateModelFilter = (update: Function, filter: string) => {
+  update((model: Model) => {
+    model.filter = filter;
+    return model;
+  });
+};
 
-  crossroads.addRoute("/active", () =>
-    todoStorage.filter("active").then(actions.displayTodos), 1);
+export const addRoutes = (update: Function) => {
+  crossroads.addRoute("/", () => {
+    updateModelFilter(update, "all");
+    todoStorage.loadAll().then(actions.displayTodos(update));
+  }, 1);
 
-  crossroads.addRoute("/completed", () =>
-    todoStorage.filter("completed").then(actions.displayTodos), 1);
+  crossroads.addRoute("/active", () => {
+    updateModelFilter(update, "active");
+    todoStorage.filter("active").then(actions.displayTodos(update));
+  }, 1);
+
+  crossroads.addRoute("/completed", () => {
+    updateModelFilter(update, "completed");
+    todoStorage.filter("completed").then(actions.displayTodos(update));
+  }, 1);
 };
