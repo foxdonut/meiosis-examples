@@ -11,9 +11,12 @@ export const view = (model: State, update: Function) => {
   return h("footer.footer", [
     h("span.todo-count", model.itemsLeftText),
     h("ul.filters", [
+      // These links use hrefs.
       h("li", h("a", { attrs: { href: "#/" }, class: { selected: model.allSelected } }, "All")),
       h("li", h("a", { attrs: { href: "#/active" }, class: { selected: model.activeSelected } }, "Active")),
-      h("li", h("a", { attrs: { href: "#/completed" }, class: { selected: model.completedSelected } }, "Completed"))
+      // This link sets the route on the model. The result should be the same.
+      h("li", h("a", { attrs: { href: "javascript://" }, on: { click: actions.filterBy(update, "completed") },
+        class: { selected: model.completedSelected } }, "Completed"))
     ]),
     clearCompleted(model)
   ]);

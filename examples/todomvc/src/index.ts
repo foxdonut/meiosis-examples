@@ -10,6 +10,11 @@ import { todoStorage } from "./app/todo-storage";
 
 export function startApp(view: Function, render: Function) {
   todoStorage.loadAll().then((todos: Array<Todo>) => {
+    const modelChanges: Stream<Function> = flyd.stream();
+
+    footer.addRoutes(modelChanges);
+    const router = createRouter(modelChanges);
+
     const initialModel: Model = {
       editTodo: {},
       newTodo: "",
@@ -18,21 +23,16 @@ export function startApp(view: Function, render: Function) {
         acc[todo.id] = todo;
         return acc;
       }, {}),
-      filter: "all",
-      route: "/"
+      route: router.extractRoute(window.location.hash)
     };
 
-    const modelChanges: Stream<Function> = flyd.stream();
     const model = flyd.scan(applyModelChange, initialModel, modelChanges);
-    const state = model.map(app.state);
+    const state = model.map(app.state).map(router.state);
 
     const element = document.getElementById("app");
     state.map((state: any) => render(element, view(state, modelChanges)));
 
     trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
     meiosisTracer({ selector: "#tracer" });
-
-    footer.addRoutes(modelChanges);
-    createRouter(modelChanges);
   });
 }
