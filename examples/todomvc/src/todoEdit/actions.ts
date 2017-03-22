@@ -8,6 +8,7 @@ const ESCAPE_KEY = 27;
 
 const editBlur: (update: Function, id: string) => EventHandler<FocusEvent<HTMLInputElement>> =
   (update: Function, id: string) => (evt: FocusEvent<HTMLInputElement>) =>
+    //FIXME: const editing = todo.id && (todo.id === model.editTodo.id);
     todoStorage.saveTodo({ id, title: evt.currentTarget.value }).then((todo: Todo) => update((model: Model) => {
       model.todosById[todo.id] = todo;
       model.editTodo = { };
