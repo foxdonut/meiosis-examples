@@ -38,17 +38,15 @@ export function startApp(view: Function) {
     };
 
     const element = document.getElementById("app");
-    // workaround until TS support for Mithril 1.0 is available.
-    const mRoute: any = m.route;
 
-    mRoute.prefix(prefix);
+    m.route.prefix(prefix);
     const render = () => view(state(), modelChanges, events);
     const setRoute = (update: Function, path: string) => update((model: Model) => {
       model.route = path;
       return model;
     });
 
-    mRoute(element, "/", {
+    m.route(element, "/", {
       "/": {
         onmatch: (args: any, path: string) => {
           setRoute(modelChanges, path);

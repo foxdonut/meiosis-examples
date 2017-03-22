@@ -9,9 +9,7 @@ const triggerRouteChange = (update: Function, route: string) => {
     model.route = route;
     return model;
   });
-  // workaround until TS support for Mithril 1.0 is available.
-  const mRoute: any = m.route;
-  mRoute.set(route);
+  m.route.set(route);
 };
 
 const actions = {

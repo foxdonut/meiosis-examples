@@ -44,7 +44,7 @@
     "@types/classnames": "0.0.32",
     "@types/crossroads": "0.0.29",
     "@types/history": "^4.5.0",
-    "@types/mithril": "0.0.31",
+    "@types/mithril": "github:spacejack/mithril.d.ts#1.0.2",
     "@types/node": "^7.0.8",
     "@types/react": "^15.0.16",
     "@types/react-dom": "^0.14.23",
