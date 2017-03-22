@@ -27,7 +27,7 @@ export function startApp(view: Function, render: Function) {
     };
 
     const model = flyd.scan(applyModelChange, initialModel, modelChanges);
-    const state = model.map(app.state).map(router.state);
+    const state = model.map(app.state);//.map(router.state);
 
     const element = document.getElementById("app");
     state.map((state: any) => render(element, view(state, modelChanges)));
