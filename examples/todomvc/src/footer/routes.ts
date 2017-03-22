@@ -1,3 +1,5 @@
+// NOTE: this is not used in the Mithril version.
+
 import * as crossroads from "crossroads";
 import { Model } from "../util";
 import { todoStorage } from "../app/todo-storage";

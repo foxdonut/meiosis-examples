@@ -1,3 +1,5 @@
+// NOTE: this is not used in the Mithril version.
+
 import { Promise } from "es6-promise";
 import { todoStorage } from "../app/todo-storage";
 import { actions as mainActions } from "../main/actions";

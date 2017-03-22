@@ -8,7 +8,6 @@ const meiosisTracer = require("meiosis-tracer");
 
 import { Model, Todo } from "./util";
 import { app } from "./app";
-import { extractRoute } from "./router";
 import { todoStorage } from "./app/todo-storage";
 import { actions } from "./main/actions";
 
@@ -16,7 +15,7 @@ export function startApp(view: Function) {
   todoStorage.loadAll().then((todos: Array<Todo>) => {
     const modelChanges: Stream<Function> = stream();
 
-    //const router = createRouter(modelChanges);
+    const extractRoute = (hash: string) => (hash && hash.substring(2)) || "";
 
     const initialModel: Model = {
       editTodo: {},
@@ -36,30 +35,29 @@ export function startApp(view: Function) {
     // workaround until TS support for Mithril 1.0 is available.
     const mRoute: any = m.route;
 
+    mRoute.prefix("#");
+    const render = () => view(state(), modelChanges);
+    const displayTodos = actions.displayTodos(modelChanges);
+    const setRoute = (update: Function, path: string) => update((model: Model) => {
+      model.route = path;
+      return model;
+    });
+
     mRoute(element, "/", {
       "/": {
-        render: () => {
-          console.log("render /")
-          todoStorage.loadAll().then(actions.displayTodos(modelChanges));
-          return view(state(), modelChanges);
-        }
+        onmatch: (args: any, path: string) => setRoute(modelChanges, path) && todoStorage.loadAll().then(displayTodos),
+        render
       },
       "/active": {
-        render: () => {
-          console.log("render /active")
-          todoStorage.filter("active").then(actions.displayTodos(modelChanges));
-          return view(state(), modelChanges);
-        }
+        onmatch: (args: any, path: string) => setRoute(modelChanges, path) && todoStorage.filter("active").then(displayTodos),
+        render
       },
       "/completed": {
-        render: () => {
-          console.log("render /completed")
-          todoStorage.filter("completed").then(actions.displayTodos(modelChanges));
-          return view(state(), modelChanges);
-        }
+        onmatch: (args: any, path: string) => setRoute(modelChanges, path) && todoStorage.filter("completed").then(displayTodos),
+        render
       }
     });
-    // state.map(m.redraw);
+    state.map(m.redraw);
 
     trace({ streamLibrary: { stream }, modelChanges, streams: [ model, state ]});
     meiosisTracer({ selector: "#tracer" });

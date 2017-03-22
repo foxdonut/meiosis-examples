@@ -1,3 +1,5 @@
+// NOTE: this is not used in the Mithril version.
+
 import createHistory from "history/createBrowserHistory";
 import * as crossroads from "crossroads";
 import { Model, State } from "../util";
