@@ -17,12 +17,12 @@ const info = m("footer.info", [
   ])
 ]);
 
-export const view = (model: State, update: Function) =>
+export const view = (model: State, update: Function, events: any) =>
   m("div", [
     m("section.todoapp", [
       headerView(model, update),
       mainView(model, update),
-      footerView(model, update),
+      footerView(model, update, events),
     ]),
     info
   ]);

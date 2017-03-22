@@ -4,6 +4,7 @@ const meiosisTracer = require("meiosis-tracer");
 
 import { Model, Todo } from "./util";
 import { app } from "./app";
+import { main } from "./main";
 import { createRouter } from "./router";
 import { footer } from "./footer";
 import { todoStorage } from "./app/todo-storage";
@@ -12,7 +13,11 @@ export function startApp(view: Function, render: Function) {
   todoStorage.loadAll().then((todos: Array<Todo>) => {
     const modelChanges: Stream<Function> = flyd.stream();
 
-    footer.addRoutes(modelChanges);
+    const events: any = {
+      todosToDisplay: main.listeners.displayTodos(modelChanges)
+    };
+
+    footer.addRoutes(modelChanges, events);
     const router = createRouter(modelChanges);
 
     const initialModel: Model = {
@@ -30,7 +35,8 @@ export function startApp(view: Function, render: Function) {
     const state = model.map(app.state);//.map(router.state);
 
     const element = document.getElementById("app");
-    state.map((state: any) => render(element, view(state, modelChanges)));
+
+    state.map((state: any) => render(element, view(state, modelChanges, events)));
 
     trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
     meiosisTracer({ selector: "#tracer" });

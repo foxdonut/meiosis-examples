@@ -4,7 +4,7 @@ import createHistory from "history/createBrowserHistory";
 import * as crossroads from "crossroads";
 import { Model, State } from "../util";
 
-export const extractRoute = (hash: string) => (hash && hash.substring(2)) || "";
+export const extractRoute = (hash: string) => (hash && hash.substring(1)) || "/";
 
 // Function to trigger a route change. Set the route on the model, and parse the route
 // to trigger route handling.

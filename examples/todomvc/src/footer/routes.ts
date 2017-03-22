@@ -3,18 +3,17 @@
 import * as crossroads from "crossroads";
 import { Model } from "../util";
 import { todoStorage } from "../app/todo-storage";
-import { actions } from "../main/actions";
 
-export const addRoutes = (update: Function) => {
+export const addRoutes = (update: Function, events: any) => {
   crossroads.addRoute("/", () => {
-    todoStorage.loadAll().then(actions.displayTodos(update));
+    todoStorage.loadAll().then(events.todosToDisplay);
   }, 1);
 
   crossroads.addRoute("/active", () => {
-    todoStorage.filter("active").then(actions.displayTodos(update));
+    todoStorage.filter("active").then(events.todosToDisplay);
   }, 1);
 
   crossroads.addRoute("/completed", () => {
-    todoStorage.filter("completed").then(actions.displayTodos(update));
+    todoStorage.filter("completed").then(events.todosToDisplay);
   }, 1);
 };
