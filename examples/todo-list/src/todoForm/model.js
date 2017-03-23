@@ -1,6 +1,5 @@
 import { assoc, merge } from "ramda";
 import { actions } from "./actions";
-import { todoItem } from "../todoItem";
 
 const emptyTodo = () => ({
   id: "",
@@ -8,7 +7,7 @@ const emptyTodo = () => ({
   description: ""
 });
 
-export const initialModel = () => ({
+export const model = () => ({
   todo: emptyTodo(),
   validationErrors: {}
 });

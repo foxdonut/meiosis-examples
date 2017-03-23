@@ -1,6 +1,5 @@
 import { append, assoc, complement, filter, findIndex, lensIndex, merge, propEq, set } from "ramda";
 import { actions } from "./actions";
-import { todoForm } from "../todoForm";
 
 export const model = () => ({
   todos: [],
