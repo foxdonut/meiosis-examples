@@ -15,10 +15,6 @@ export function startApp(view, render) {
     list: todoList.initialModel()
   };
 
-  const modelChanges = mergeIntoOne([
-    nest("list", todoList.modelChanges),
-    nest("form", todoForm.modelChanges)
-  ]);
   const model = scan(applyModelChange, initialModel, modelChanges);
 
   trace({ streamLibrary: flyd, modelChanges, streams: [ model ]});
