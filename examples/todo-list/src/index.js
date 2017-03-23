@@ -1,7 +1,7 @@
 import flyd from "flyd";
 import createServer from "./sinonServer";
 import services from "./app/services";
-import { mergeIntoOne, nest, scan } from "./util/stream-util";
+import { nest } from "./util/nest";
 import { todoList } from "./todoList";
 import { todoForm } from "./todoForm";
 import { applyModelChange, trace } from "meiosis";
@@ -15,14 +15,19 @@ export function startApp(view, render) {
     list: todoList.initialModel()
   };
 
-  const model = scan(applyModelChange, initialModel, modelChanges);
+  const modelChanges = flyd.stream();
+  const model = flyd.scan(applyModelChange, initialModel, modelChanges);
+
+  const events = {
+  };
 
   trace({ streamLibrary: flyd, modelChanges, streams: [ model ]});
   meiosisTracer({ selector: "#tracer" });
 
   const element = document.getElementById("app");
-  model.map(model => render(view(model), element));
+  model.map(model => render(view(model, modelChanges, events), element));
 
-  todoList.actions.requestLoadList(true);
-  services.loadTodos().then(todoList.actions.loadedList);
+  const todoListListeners = todoList.listeners(nest(modelChanges, "list"));
+  todoListListeners.loadingPleaseWait();
+  services.loadTodos().then(todoListListeners.todoList);
 }

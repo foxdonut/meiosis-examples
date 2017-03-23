@@ -1,20 +1,11 @@
-import flyd from "flyd";
 import preventDefault from "prevent-default";
 import services from "../app/services";
 import { validateModel } from "./validation";
 
 export const actions = {
-  editingTodo: flyd.stream(),
-  validationErrors: flyd.stream(),
-  saveTodoStart: flyd.stream(),
-  saveTodoSuccess: flyd.stream(),
-  saveTodoFailure: flyd.stream(),
-  clearForm: flyd.stream()
-};
+  editingTodo: (update, field) => evt => actions.editingTodo({ field, value: evt.target.value }),
 
-export const intents = {
-  editingTodo: field => evt => actions.editingTodo({ field, value: evt.target.value }),
-  saveTodo: todo => preventDefault(() => {
+  saveTodo: (update, todo) => preventDefault(() => {
     const validationErrors = validateModel(todo);
     actions.validationErrors(validationErrors);
 
@@ -25,7 +16,8 @@ export const intents = {
         catch(actions.saveTodoFailure);
     }
   }),
-  clearForm: preventDefault(() => actions.clearForm(true))
+
+  clearForm: update => preventDefault(() => actions.clearForm(true))
 };
 
-actions.saveTodoSuccess.map(actions.clearForm);
+//actions.saveTodoSuccess.map(actions.clearForm);

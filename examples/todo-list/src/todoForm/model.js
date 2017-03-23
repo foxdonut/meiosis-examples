@@ -1,5 +1,4 @@
 import { assoc, merge } from "ramda";
-import { mergeIntoOne } from "../util/stream-util";
 import { actions } from "./actions";
 import { todoItem } from "../todoItem";
 
@@ -14,6 +13,7 @@ export const initialModel = () => ({
   validationErrors: {}
 });
 
+/*
 const editTodo = todoItem.actions.editTodo.map(todo => model =>
   merge(model, { todo, validationErrors: { } }));
 
@@ -25,10 +25,4 @@ const validationErrors = actions.validationErrors.map(validationErrors => model 
 
 const clearForm = actions.clearForm.map(() => model =>
   merge(model, { todo: emptyTodo(), validationErrors: { } }));
-
-export const modelChanges = mergeIntoOne([
-  editTodo,
-  editingTodo,
-  validationErrors,
-  clearForm
-]);
+*/

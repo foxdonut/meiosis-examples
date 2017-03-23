@@ -7,7 +7,7 @@ module.exports = {
   entry: "./src/index-" + variant + ".js",
   devtool: isProduction ? "source-map" : "eval",
   output: {
-    path: "./build",
+    path: __dirname + "/build",
     filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
   },
   module: {

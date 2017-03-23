@@ -1,9 +1,9 @@
 import { Button } from "antd";
 import h from "../util/jsnox-react";
-import { intents } from "./actions";
+import { actions } from "./actions";
 
-export const todoItemActionsView = todo =>
+export const view = (update, events) => todo =>
   h("span",
-    h(Button, { type: "primary", onClick: intents.editTodo(todo) }, "Edit"),
-    h(Button, { type: "danger", onClick: intents.deleteTodo(todo) }, "Delete")
+    h(Button, { type: "primary", onClick: actions.editTodo(update, todo) }, "Edit"),
+    h(Button, { type: "danger", onClick: actions.deleteTodo(update, todo) }, "Delete")
   );

@@ -1,8 +1,9 @@
 import Inferno from "inferno";
-import { todoFormView } from "../todoForm/view-inferno.jsx";
-import { todoListView } from "../todoList/view-inferno.jsx";
+import { nest } from "../util/nest";
+import { todoForm } from "../todoForm/index-inferno";
+import { todoList } from "../todoList/index-inferno";
 
-export const view = model => (
+export const view = (model, update, events) => (
   <div>
     <div className="ui two item menu">
       <a className="item active">Inferno + JSX + Semantic</a>
@@ -10,9 +11,9 @@ export const view = model => (
     </div>
     <div className="row">
       <div className="col-md-4">
-        {todoFormView(model.form)}
+        {todoForm.view(model.form, nest(update, "form"), events)}
       </div>
     </div>
-    {todoListView(model.list)}
+    {todoList.view(model.list, nest(update, "list"), events)}
   </div>
 );
