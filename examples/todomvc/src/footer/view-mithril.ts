@@ -25,8 +25,8 @@ export const view = (model: State, update: Function, events: any) => {
     m("span.todo-count", model.itemsLeftText),
     m("ul.filters", [
       // These links use hrefs.
-      m("li", m("a", { href: "#/", class: classnames({ selected: model.allSelected }) }, "All")),
-      m("li", m("a", { href: "#/active", class: classnames({ selected: model.activeSelected }) }, "Active")),
+      m("li", m("a[href=/]", { oncreate: m.route.link, class: classnames({ selected: model.allSelected }) }, "All")),
+      m("li", m("a[href=/active]", { oncreate: m.route.link, class: classnames({ selected: model.activeSelected }) }, "Active")),
       // This link triggers a route change. The result should be the same.
       m("li", m("a", { href: "javascript://", onclick: actions.filterBy(update, "completed"),
         class: classnames({ selected: model.completedSelected }) }, "Completed"))

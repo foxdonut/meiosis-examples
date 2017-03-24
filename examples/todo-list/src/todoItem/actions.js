@@ -1,15 +1,15 @@
 import { assoc, complement, filter, propEq } from "ramda";
 
-export const createActions = services => {
-  const editTodo = (update, todo) => () => null;
+export const actions = ({ update, events, services }) => {
+  const editTodo = todo => () => events.list.editTodo(todo);
 
-  const deleteTodoSuccess = (update, todoId) => () => update(model =>
+  const deleteTodoSuccess = todoId => () => update(model =>
     ({ todos: filter(complement(propEq("id", todoId)), model.todos), message: "" }));
 
-  const deleteTodoFailure = update => () => update(model =>
+  const deleteTodoFailure = () => update(model =>
     ({ todos: model.todos, message: "An error occured when deleting a Todo." }));
 
-  const deleteTodo = (update, todo) => () => {
+  const deleteTodo = todo => () => {
     update(model => assoc("message", "Deleting, please wait...", model));
 
     services.deleteTodo(todo.id).

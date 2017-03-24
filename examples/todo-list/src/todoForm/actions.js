@@ -1,23 +1,22 @@
+import { assoc, merge } from "ramda";
 import preventDefault from "prevent-default";
-import services from "../app/services";
+import { updates } from "./updates";
 import { validateModel } from "./validation";
 
-export const actions = {
-  editingTodo: (update, field) => evt => actions.editingTodo({ field, value: evt.target.value }),
+export const actions = services => ({
+  editingTodo: (update, field) => evt => updates.editingTodo(update, field, evt.target.value),
 
-  saveTodo: (update, todo) => preventDefault(() => {
+  saveTodo: (update, events, todo) => preventDefault(() => {
     const validationErrors = validateModel(todo);
-    actions.validationErrors(validationErrors);
+    updates.validationErrors(update, validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      actions.saveTodoStart(true);
+      events.saveTodoStart();
       services.saveTodo(todo).
-        then(actions.saveTodoSuccess).
-        catch(actions.saveTodoFailure);
+        then(events.saveTodoSuccess).
+        catch(events.saveTodoFailure);
     }
   }),
 
-  clearForm: update => preventDefault(() => actions.clearForm(true))
-};
-
-//actions.saveTodoSuccess.map(actions.clearForm);
+  clearForm: update => preventDefault(() => updates.clearForm(update))
+});

@@ -1,7 +1,6 @@
 import services from "../app/services";
-import { createActions } from "./actions";
+import { actions } from "./actions";
 import { view } from "./view-react";
 
-export const todoItem = {
-  view: view(createActions(services))
-};
+export const todoItem = (update, events) =>
+  view({ actions: actions({ update, events, services}) });

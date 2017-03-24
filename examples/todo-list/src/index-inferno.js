@@ -3,7 +3,7 @@ import flyd from "flyd";
 import createServer from "./sinonServer";
 import services from "./app/services";
 import { nest } from "./util/nest";
-import { view } from "./app/view-inferno.jsx";
+import { app } from "./app/index-inferno.js";
 import { todoList } from "./todoList/index-inferno";
 import { todoForm } from "./todoForm/index-inferno";
 import { applyModelChange, trace } from "meiosis";
@@ -26,7 +26,8 @@ trace({ streamLibrary: flyd, modelChanges, streams: [ model ]});
 meiosisTracer({ selector: "#tracer" });
 
 const element = document.getElementById("app");
-model.map(model => render(view(model, modelChanges, events), element));
+const view = app(modelChanges, events).view;
+model.map(model => render(view(model), element));
 
 const todoListListeners = todoList.listeners(nest(modelChanges, "list"));
 todoListListeners.loadingPleaseWait();

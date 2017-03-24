@@ -1,7 +1,7 @@
 import { assoc, merge } from "ramda";
 
-export const listeners = update => ({
-  loadingPleaseWait: () => update(model => assoc("message", "Loading, please wait...", model)),
+export const listeners = (update, events) => {
+  events.list.loadingPleaseWait.map(() => update(model => assoc("message", "Loading, please wait...", model)));
 
-  todoList: todos => update(model => merge(model, { todos, message: "" }))
-});
+  events.list.todoList.map(todos => update(model => merge(model, { todos, message: "" })));
+};
