@@ -1,7 +1,6 @@
 import Inferno from "inferno";
-import { actions } from "./actions";
 
-export const view = (update, events) => todo => (
+export const view = actions => (update, events) => todo => (
   <tr key={todo.id}>
     <td>{todo.priority}</td>
     <td>{todo.description}</td>
