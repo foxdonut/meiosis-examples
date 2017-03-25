@@ -1,5 +1,4 @@
 import { append, assoc, complement, filter, findIndex, lensIndex, merge, propEq, set } from "ramda";
-import { actions } from "./actions";
 
 export const model = () => ({
   todos: [],

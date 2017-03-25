@@ -1,7 +1,7 @@
 import { updates } from "./updates";
 
-export const listeners = update => ({
-  editTodo: todo => updates.editTodo(update, todo),
+export const listeners = (update, events) => {
+  events.list.editTodo.map(todo => updates.editTodo(update, todo));
 
-  saveTodoSuccess: () => updates.clearForm(update)
-});
+  events.form.saveTodoSuccess.map(() => updates.clearForm(update));
+};

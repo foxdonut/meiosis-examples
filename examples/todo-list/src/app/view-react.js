@@ -8,8 +8,8 @@ const { Item } = Menu;
 
 export const view = (update, events) => {
   // FIXME: events should be scoped
-  const todoFormView = todoForm(nest(update, "form"), events);
-  const todoListView = todoList(nest(update, "list"), events);
+  const todoFormView = todoForm.createView(nest(update, "form"), events);
+  const todoListView = todoList.createView(nest(update, "list"), events);
 
   return model => h("div",
     h(Menu, { mode: "horizontal", selectedKeys: ["react"] },

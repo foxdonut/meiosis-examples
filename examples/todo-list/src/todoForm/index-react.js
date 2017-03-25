@@ -4,9 +4,10 @@ import { model } from "./model";
 import { view } from "./view-react";
 import { listeners } from "./listeners";
 
-//FIXME
-export const todoForm = (update, events) => ({
-  view: view(update, events, actions(services))
-});
-
-todoForm.model = model;
+export const todoForm = {
+  model,
+  createView: (update, events) => {
+    listeners(update, events);
+    return view(update, events, actions(services));
+  }
+};

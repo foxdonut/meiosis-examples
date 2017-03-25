@@ -21,14 +21,14 @@ const modelChanges = flyd.stream();
 const model = flyd.scan(applyModelChange, initialModel, modelChanges);
 
 // This function would go into Meiosis.
-const createEvents = evts => {
+const createEvents = (strm, evts) => {
   const createEventFor = (section, eventStream, created, prefix) => {
     Object.keys(section).forEach(key => {
       created[key] = {};
 
       if (section[key].length) {
         section[key].forEach(sectionKey => {
-          const type = prefix + sectionKey;
+          const type = prefix + key + "." + sectionKey;
 
           const fn = data => eventStream({ type, data });
 
@@ -49,10 +49,11 @@ const createEvents = evts => {
     return created;
   };
 
-  return createEventFor(evts, flyd.stream(), {}, "");
+  return createEventFor(evts, strm, {}, "");
 };
 
-const events = createEvents({
+const eventStream = flyd.stream();
+const events = createEvents(eventStream, {
   form: [
     "saveTodoStart",
     "saveTodoSuccess",
@@ -65,11 +66,11 @@ const events = createEvents({
   ]
 });
 
-trace({ streamLibrary: flyd, modelChanges, streams: [ model ]});
+trace({ streamLibrary: flyd, modelChanges, streams: [ model, eventStream ]});
 meiosisTracer({ selector: "#tracer" });
 
 const element = document.getElementById("app");
-const view = app(modelChanges, events).view;
+const view = app.createView(modelChanges, events);
 model.map(model => render(view(model), element));
 
 events.list.loadingPleaseWait(true);

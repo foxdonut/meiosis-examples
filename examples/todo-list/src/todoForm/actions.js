@@ -11,10 +11,10 @@ export const actions = services => ({
     updates.validationErrors(update, validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      events.saveTodoStart();
+      events.form.saveTodoStart(true);
       services.saveTodo(todo).
-        then(events.saveTodoSuccess).
-        catch(events.saveTodoFailure);
+        then(events.form.saveTodoSuccess).
+        catch(events.form.saveTodoFailure);
     }
   }),
 
