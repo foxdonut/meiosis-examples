@@ -21,7 +21,7 @@ const modelChanges = flyd.stream();
 const model = flyd.scan(applyModelChange, initialModel, modelChanges);
 
 // This function would go into Meiosis.
-const createEvents = (strm, evts) => {
+const createEvents = (strm, evts, connections) => {
   const createEventFor = (section, eventStream, created, prefix) => {
     Object.keys(section).forEach(key => {
       created[key] = {};
@@ -39,12 +39,21 @@ const createEvents = (strm, evts) => {
           });
 
           created[key][sectionKey] = fn;
+          created[type] = fn;
         });
       }
       else {
         createEventFor(section[key], eventStream, created[key], prefix + key + ".");
       }
     });
+
+    if (connections) {
+      Object.keys(connections).forEach(type =>
+        connections[type].forEach(listener =>
+          created[type].map(data => created[listener](data))
+        )
+      );
+    }
 
     return created;
   };
@@ -55,15 +64,23 @@ const createEvents = (strm, evts) => {
 const eventStream = flyd.stream();
 const events = createEvents(eventStream, {
   form: [
+    "editTodo",
+    "saveTodoFailure",
     "saveTodoStart",
     "saveTodoSuccess",
-    "saveTodoFailure"
   ],
   list: [
-    "loadingPleaseWait",
+    "editTodo",
+    "error",
+    "pleaseWait",
     "todoList",
-    "editTodo"
+    "updateTodo"
   ]
+}, {
+  "form.saveTodoFailure": ["list.error"],
+  "form.saveTodoStart": ["list.pleaseWait"],
+  "form.saveTodoSuccess": ["list.updateTodo"],
+  "list.editTodo": ["form.editTodo"]
 });
 
 trace({ streamLibrary: flyd, modelChanges, streams: [ model, eventStream ]});
@@ -73,5 +90,5 @@ const element = document.getElementById("app");
 const view = app.createView(modelChanges, events);
 model.map(model => render(view(model), element));
 
-events.list.loadingPleaseWait(true);
+events.list.pleaseWait(true);
 services.loadTodos().then(events.list.todoList);

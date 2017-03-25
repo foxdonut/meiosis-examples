@@ -7,9 +7,8 @@ import { todoList } from "../todoList/index-react";
 const { Item } = Menu;
 
 export const view = (update, events) => {
-  // FIXME: events should be scoped
-  const todoFormView = todoForm.createView(nest(update, "form"), events);
-  const todoListView = todoList.createView(nest(update, "list"), events);
+  const todoFormView = todoForm.createView(nest(update, "form"), events.form);
+  const todoListView = todoList.createView(nest(update, "list"), events.list);
 
   return model => h("div",
     h(Menu, { mode: "horizontal", selectedKeys: ["react"] },
