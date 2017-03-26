@@ -33,6 +33,7 @@ function startApp() {
 
   const eventStream = stream();
   const events = createEvents(eventStream, {
+    increment: randomGif.events,
     randomGif: randomGif.events,
     randomGifCounter1: {
       randomGif: randomGif.events
@@ -40,9 +41,12 @@ function startApp() {
     randomGifCounter2: {
       randomGif: randomGif.events
     }
+  }, {
+    "randomGif.newGifSuccess": ["increment.newGifSuccess"],
+    "randomGifCounter2.randomGif.newGifSuccess": ["increment.newGifSuccess"]
   });
 
-  increment.create(update, events.randomGif);
+  increment.create(update, events.increment);
   const view = app.create(update, events);
 
   const element = document.getElementById("app");
