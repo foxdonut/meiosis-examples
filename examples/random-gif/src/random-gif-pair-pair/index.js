@@ -7,9 +7,13 @@ export const randomGifPairPair = {
     randomGifPairOne: randomGifPair.model(),
     randomGifPairTwo: randomGifPair.model()
   }),
-  view: (model, update, events) =>
-    m("div",
-      randomGifPair.view(model.randomGifPairOne, nest(update, "randomGifPairOne"), events),
-      randomGifPair.view(model.randomGifPairTwo, nest(update, "randomGifPairTwo"), events)
+  create: (update, events) => {
+    const randomGifPairOne = randomGifPair.create(nest(update, "randomGifPairOne"), events);
+    const randomGifPairTwo = randomGifPair.create(nest(update, "randomGifPairTwo"), events);
+
+    return model => m("div",
+      randomGifPairOne(model.randomGifPairOne),
+      randomGifPairTwo(model.randomGifPairTwo)
     )
+  }
 };

@@ -1,7 +1,7 @@
 import m from "mithril";
 import stream from "mithril/stream";
 import scan from "mithril/stream/scan";
-import { trace } from "meiosis";
+import { createEvents, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 import { app } from "./app";
@@ -31,14 +31,16 @@ function startApp() {
   const applyModelChange = (model, modelChange) => modelChange(model);
   const model = scan(applyModelChange, initialModel, update);
 
-  const events = {
-    randomGif: {
-      newGifSuccess: increment.listeners.newGifSuccess(update)
-    }
-  };
+  const eventStream = stream();
+  const events = createEvents(eventStream, {
+    randomGif: randomGif.events
+  });
+
+  increment.create(update, events.randomGif);
+  const view = app.create(update, events);
 
   const element = document.getElementById("app");
-  const render = model => m.render(element, app.view(model, update, events));
+  const render = model => m.render(element, view(model));
   model.map(render);
 
   const streamLibrary = { stream: stream, combine: stream.combine };

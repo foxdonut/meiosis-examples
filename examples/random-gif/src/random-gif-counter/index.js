@@ -1,6 +1,6 @@
 import m from "mithril";
 import { add, lensPath, over } from "ramda";
-import { mergeEvents, nest } from "../util";
+import { nest } from "../util";
 import { randomGif } from "../random-gif";
 import { counter } from "../counter";
 
@@ -9,10 +9,15 @@ export const randomGifCounter = {
     randomGif: randomGif.model(),
     counter: counter.model()
   }),
-  view: (model, update, events) => m("div.panel.panel-default",
-    randomGif.view(model.randomGif, nest(update, "randomGif"), mergeEvents(events, {
-      newGifSuccess: () => update(over(lensPath(["counter", "value"]), add(1)))
-    })),
-    counter.view(model.counter, nest(update, "counter"))
-  )
+  create: (update, events) => {
+    const randomGifView = randomGif.create(nest(update, "randomGif"), events);
+    const counterView = counter.create(nest(update, "randomGif"), events);
+
+    events.newGifSuccess.map(() => update(over(lensPath(["counter", "value"]), add(1))));
+
+    return model => m("div.panel.panel-default",
+      randomGifView(model.randomGif),
+      counterView(model.counter)
+    );
+  }
 };

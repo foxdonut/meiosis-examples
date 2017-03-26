@@ -4,5 +4,5 @@ export const counter = {
   model: () => ({
     value: 0
   }),
-  view: model => m("div", "Counter: " + model.value)
+  create: () => model => m("div", "Counter: " + model.value)
 };

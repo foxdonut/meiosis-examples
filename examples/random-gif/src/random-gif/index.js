@@ -47,7 +47,8 @@ export const randomGif = {
       image_url: ""
     };
   },
-  view: (model, update, events) =>
+
+  create: (update, events) => model =>
     m("div", [
       m("span", "Tag:"),
       m("input[type=text]", { value: model.tag, onkeyup: editTag(update) }),
@@ -55,5 +56,7 @@ export const randomGif = {
         { onclick: newGif(update, events, model.id, model.tag) },
         "Random Gif"),
       m("div", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
-    ])
+    ]),
+
+  events: ["newGifSuccess"]
 };

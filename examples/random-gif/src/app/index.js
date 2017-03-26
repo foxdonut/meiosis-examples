@@ -9,32 +9,52 @@ import { randomGifList } from "../random-gif-list";
 import { randomGifCounter } from "../random-gif-counter";
 
 export const app = {
-  view: (model, update, events) =>
-    m("div",
-      m("ul.nav.nav-pills",
-        m("li.active", { role: "presentation" },
-          m("a.btn.btn-xs.btn-default", { href: "index-m.html" }, "Mithril + m version")
+  create: (update, events) => {
+    const counterView = counter.create(nest(update, "counter"), events);
+    const buttonView = button.create(nest(update, "button"), events);
+    const randomGif1View = randomGif.create(nest(update, "randomGif1"), events.randomGif);
+    const randomGif2View = randomGif.create(nest(update, "randomGif2"), events.randomGif);
+    const randomGifPairView = randomGifPair.create(nest(update, "randomGifPair"), events.randomGif);
+    const randomGifPairPairView = randomGifPairPair.create(nest(update, "randomGifPairPair"), events.randomGif);
+    const randomGifListView = randomGifList.create(nest(update, "randomGifList"), events.randomGif);
+    const randomGifCounter1View = randomGifCounter.create(nest(update, "randomGifCounter1"), events.randomGif);
+    const randomGifCounter2View = randomGifCounter.create(nest(update, "randomGifCounter2"), events.randomGif);
+
+    return model =>
+      m("div",
+        m("ul.nav.nav-pills",
+          m("li.active", { role: "presentation" },
+            m("a.btn.btn-xs.btn-default", { href: "index-m.html" }, "Mithril + m version")
+          ),
+          m("li", { role: "presentation" },
+            m("a.btn.btn-xs.btn-default", { href: "index-jsx.html" }, "Mithril + JSX version")
+          )
         ),
-        m("li", { role: "presentation" },
-          m("a.btn.btn-xs.btn-default", { href: "index-jsx.html" }, "Mithril + JSX version")
-        )
-      ),
-      counter.view(model.counter, nest(update, "counter")),
-      m("div", "Button:"),
-      button.view(model.button, nest(update, "button")),
-      m("div", "Random Gif:"),
-      randomGif.view(model.randomGif1, nest(update, "randomGif1"), events.randomGif),
-      m("div", "Another Random Gif:"),
-      randomGif.view(model.randomGif2, nest(update, "randomGif2"), events.randomGif),
-      m("div", "Random Gif Pair:"),
-      randomGifPair.view(model.randomGifPair, nest(update, "randomGifPair"), events),
-      m("div", "Random Gif Pair Pair:"),
-      randomGifPairPair.view(model.randomGifPairPair, nest(update, "randomGifPairPair"), events),
-      m("div", "Random Gif List:"),
-      randomGifList.view(model.randomGifList, nest(update, "randomGifList"), events),
-      m("div", "Random Gif with Counter (doesn't count in total):"),
-      randomGifCounter.view(model.randomGifCounter1, nest(update, "randomGifCounter1")),
-      m("div", "Another Random Gif with Counter (counts in total):"),
-      randomGifCounter.view(model.randomGifCounter2, nest(update, "randomGifCounter2"), events.randomGif)
-    )
-  };
+        counterView(model.counter),
+
+        m("div", "Button:"),
+        buttonView(model.button),
+
+        m("div", "Random Gif:"),
+        randomGif1View(model.randomGif1),
+
+        m("div", "Another Random Gif:"),
+        randomGif2View(model.randomGif2),
+
+        m("div", "Random Gif Pair:"),
+        randomGifPairView(model.randomGifPair),
+
+        m("div", "Random Gif Pair Pair:"),
+        randomGifPairPairView(model.randomGifPairPair),
+
+        m("div", "Random Gif List:"),
+        randomGifListView(model.randomGifList),
+
+        m("div", "Random Gif with Counter (doesn't count in total):"),
+        randomGifCounter1View(model.randomGifCounter1),
+
+        m("div", "Another Random Gif with Counter (counts in total):"),
+        randomGifCounter2View(model.randomGifCounter2)
+      );
+  }
+};
