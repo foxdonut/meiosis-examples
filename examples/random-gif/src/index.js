@@ -32,18 +32,24 @@ function startApp() {
   const model = scan(applyModelChange, initialModel, update);
 
   const eventStream = stream();
-  const events = createEvents(eventStream, {
-    increment: randomGif.events,
-    randomGif: randomGif.events,
-    randomGifCounter1: {
-      randomGif: randomGif.events
+  const events = createEvents({
+    eventStream,
+    emit: {
+      randomGif: randomGif.events,
+      randomGifCounter1: {
+        randomGif: randomGif.events
+      },
+      randomGifCounter2: {
+        randomGif: randomGif.events
+      }
     },
-    randomGifCounter2: {
-      randomGif: randomGif.events
+    listen: {
+      increment: randomGif.events
+    },
+    connect: {
+      "randomGif.newGifSuccess": ["increment.newGifSuccess"],
+      "randomGifCounter2.randomGif.newGifSuccess": ["increment.newGifSuccess"]
     }
-  }, {
-    "randomGif.newGifSuccess": ["increment.newGifSuccess"],
-    "randomGifCounter2.randomGif.newGifSuccess": ["increment.newGifSuccess"]
   });
 
   increment.create(update, events.increment);
