@@ -7,6 +7,6 @@ export const todoList = {
   createView: (update, events) => {
     listeners(update, events);
 
-    return view({ update, events });
+    return view(update, events);
   }
 };

@@ -1,6 +1,3 @@
-import { assoc, merge } from "ramda";
-import { actions } from "./actions";
-
 export const emptyTodo = () => ({
   id: "",
   priority: "",

@@ -1,6 +1,6 @@
 import { assoc, complement, filter, propEq } from "ramda";
 
-export const actions = ({ update, events, services }) => {
+export const actions = (update, events, services) => {
   const editTodo = todo => () => events.editTodo(todo);
 
   const deleteTodoSuccess = (update, todoId) => () => update(model =>

@@ -4,5 +4,5 @@ import { view } from "./view-react";
 
 export const todoItem = {
   createView: (update, events) =>
-    view({ actions: actions({ update, events, services}) })
+    view(actions(update, events, services))
 };

@@ -2,7 +2,6 @@ import { render } from "react-dom";
 import flyd from "flyd";
 import createServer from "./sinonServer";
 import services from "./app/services";
-import { nest } from "./util/nest";
 import { app } from "./app/index-react";
 import { todoList } from "./todoList/index-react";
 import { todoForm } from "./todoForm/index-react";

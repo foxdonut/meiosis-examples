@@ -15,7 +15,7 @@ const columns = (update, events) => {
 
 const rowClassName = (_record, index) => index % 2 === 0 ? "even" : "odd";
 
-export const view = ({ update, events }) => model =>
+export const view = (update, events) => model =>
   h(Row, { key: "list" },
     h(Col, { span: 24 },
       h("div", "Todo List: " + model.message),

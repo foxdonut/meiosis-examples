@@ -1,22 +1,43 @@
 import { assoc, merge } from "ramda";
 import preventDefault from "prevent-default";
-import { updates } from "./updates";
+import { emptyTodo } from "./model";
 import { validateModel } from "./validation";
 
-export const actions = services => ({
-  editingTodo: (update, field) => evt => updates.editingTodo(update, field, evt.target.value),
+const updates = {
+  editTodo: (update, todo) => update(model =>
+    merge(model, { todo, validationErrors: { } })),
 
-  saveTodo: (update, events, todo) => preventDefault(() => {
-    const validationErrors = validateModel(todo);
-    updates.validationErrors(update, validationErrors);
+  editingTodo: (update, field, value) => update(model =>
+    assoc("todo", assoc(field, value, model.todo), model)),
 
-    if (Object.keys(validationErrors).length === 0) {
-      events.saveTodoStart(true);
-      services.saveTodo(todo).
-        then(events.saveTodoSuccess).
-        catch(events.saveTodoFailure);
-    }
-  }),
+  validationErrors: (update, validationErrors) => update(model =>
+    assoc("validationErrors", validationErrors, model)),
 
-  clearForm: update => preventDefault(() => updates.clearForm(update))
-});
+  clearForm: update => update(model =>
+    merge(model, { todo: emptyTodo(), validationErrors: { } })
+  )
+};
+
+export const actions = (update, events, services) => {
+  events.editTodo.map(todo => updates.editTodo(update, todo));
+
+  events.saveTodoSuccess.map(() => updates.clearForm(update));
+
+  return {
+    editingTodo: (field) => evt => updates.editingTodo(update, field, evt.target.value),
+
+    saveTodo: todo => preventDefault(() => {
+      const validationErrors = validateModel(todo);
+      updates.validationErrors(update, validationErrors);
+
+      if (Object.keys(validationErrors).length === 0) {
+        events.saveTodoStart(true);
+        services.saveTodo(todo).
+          then(events.saveTodoSuccess).
+          catch(events.saveTodoFailure);
+      }
+    }),
+
+    clearForm: () => preventDefault(() => updates.clearForm(update))
+  };
+};
