@@ -10,10 +10,10 @@ export const randomGifCounter = {
     counter: counter.model()
   }),
   create: (update, events) => {
-    const randomGifView = randomGif.create(nest(update, "randomGif"), events);
-    const counterView = counter.create(nest(update, "randomGif"), events);
+    const randomGifView = randomGif.create(nest(update, "randomGif"), events.randomGif);
+    const counterView = counter.create(nest(update, "randomGif"));
 
-    events.newGifSuccess.map(() => update(over(lensPath(["counter", "value"]), add(1))));
+    events.randomGif.newGifSuccess.map(() => update(over(lensPath(["counter", "value"]), add(1))));
 
     return model => m("div.panel.panel-default",
       randomGifView(model.randomGif),

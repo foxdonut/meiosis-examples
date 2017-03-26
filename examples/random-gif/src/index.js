@@ -33,7 +33,13 @@ function startApp() {
 
   const eventStream = stream();
   const events = createEvents(eventStream, {
-    randomGif: randomGif.events
+    randomGif: randomGif.events,
+    randomGifCounter1: {
+      randomGif: randomGif.events
+    },
+    randomGifCounter2: {
+      randomGif: randomGif.events
+    }
   });
 
   increment.create(update, events.randomGif);

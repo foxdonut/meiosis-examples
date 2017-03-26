@@ -10,15 +10,15 @@ import { randomGifCounter } from "../random-gif-counter";
 
 export const app = {
   create: (update, events) => {
-    const counterView = counter.create(nest(update, "counter"), events);
-    const buttonView = button.create(nest(update, "button"), events);
+    const counterView = counter.create(nest(update, "counter"));
+    const buttonView = button.create(nest(update, "button"));
     const randomGif1View = randomGif.create(nest(update, "randomGif1"), events.randomGif);
     const randomGif2View = randomGif.create(nest(update, "randomGif2"), events.randomGif);
     const randomGifPairView = randomGifPair.create(nest(update, "randomGifPair"), events.randomGif);
     const randomGifPairPairView = randomGifPairPair.create(nest(update, "randomGifPairPair"), events.randomGif);
     const randomGifListView = randomGifList.create(nest(update, "randomGifList"), events.randomGif);
-    const randomGifCounter1View = randomGifCounter.create(nest(update, "randomGifCounter1"), events.randomGif);
-    const randomGifCounter2View = randomGifCounter.create(nest(update, "randomGifCounter2"), events.randomGif);
+    const randomGifCounter1View = randomGifCounter.create(nest(update, "randomGifCounter1"), events.randomGifCounter1);
+    const randomGifCounter2View = randomGifCounter.create(nest(update, "randomGifCounter2"), events.randomGifCounter2);
 
     return model =>
       m("div",
