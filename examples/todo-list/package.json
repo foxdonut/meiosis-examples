@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env VARIANT=react webpack && cross-env VARIANT=inferno webpack",
+    "build": "webpack",
     "watch": "webpack --progress --colors --watch",
     "test": "ava"
   },
