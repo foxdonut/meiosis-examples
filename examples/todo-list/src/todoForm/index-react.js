@@ -7,5 +7,15 @@ export const todoForm = {
   model,
   createView: (update, events) => {
     return view(actions(update, events, services));
+  },
+  events: {
+    emit: [
+      "saveTodoFailure",
+      "saveTodoStart",
+      "saveTodoSuccess",
+    ],
+    listen: [
+      "editTodo"
+    ]
   }
 };

@@ -21,26 +21,9 @@ const model = flyd.scan(applyModelChange, initialModel, modelChanges);
 const eventStream = flyd.stream();
 const events = createEvents({
   eventStream,
-  emit: {
-    form: [
-      "saveTodoFailure",
-      "saveTodoStart",
-      "saveTodoSuccess",
-    ],
-    list: [
-      "editTodo"
-    ]
-  },
-  listen: {
-    form: [
-      "editTodo"
-    ],
-    list: [
-      "error",
-      "pleaseWait",
-      "todoList",
-      "updateTodo"
-    ]
+  events: {
+    form: todoForm.events,
+    list: todoList.events
   },
   connect: {
     "form.saveTodoFailure": ["list.error"],

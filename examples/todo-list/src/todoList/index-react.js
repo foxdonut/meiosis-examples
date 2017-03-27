@@ -8,5 +8,16 @@ export const todoList = {
     listeners(update, events);
 
     return view(update, events);
+  },
+  events: {
+    emit: [
+      "editTodo"
+    ],
+    listen: [
+      "error",
+      "pleaseWait",
+      "todoList",
+      "updateTodo"
+    ]
   }
 };

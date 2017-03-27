@@ -58,5 +58,7 @@ export const randomGif = {
       m("div", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
     ]),
 
-  events: ["newGifSuccess"]
+  events: {
+    emit: ["newGifSuccess"]
+  }
 };
