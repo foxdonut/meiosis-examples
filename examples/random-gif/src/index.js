@@ -57,8 +57,7 @@ function startApp() {
   const render = model => m.render(element, view(model));
   model.map(render);
 
-  const streamLibrary = { stream: stream, combine: stream.combine };
-  trace({ streamLibrary, modelChanges: update, streams: [ model ] });
+  trace({ modelChanges: update, dataStreams: [ model ], otherStreams: [ eventStream ] });
   meiosisTracer({ selector: "#tracer" });
 }
 

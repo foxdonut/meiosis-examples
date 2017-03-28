@@ -33,7 +33,7 @@ const events = createEvents({
   }
 });
 
-trace({ streamLibrary: flyd, modelChanges, dataStreams: [ model ], otherStreams: [ eventStream ]});
+trace({ modelChanges, dataStreams: [ model ], otherStreams: [ eventStream ]});
 meiosisTracer({ selector: "#tracer" });
 
 const element = document.getElementById("app");
