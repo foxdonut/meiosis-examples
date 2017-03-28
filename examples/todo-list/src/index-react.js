@@ -5,7 +5,7 @@ import services from "./app/services";
 import { app } from "./app/index-react";
 import { todoList } from "./todoList/index-react";
 import { todoForm } from "./todoForm/index-react";
-import { applyModelChange, createEvents, trace } from "meiosis";
+import { applyUpdate, createEvents, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 createServer();
@@ -15,8 +15,8 @@ const initialModel = {
   list: todoList.model()
 };
 
-const modelChanges = flyd.stream();
-const model = flyd.scan(applyModelChange, initialModel, modelChanges);
+const update = flyd.stream();
+const model = flyd.scan(applyUpdate, initialModel, update);
 
 const eventStream = flyd.stream();
 const events = createEvents({
@@ -33,11 +33,11 @@ const events = createEvents({
   }
 });
 
-trace({ modelChanges, dataStreams: [ model ], otherStreams: [ eventStream ]});
+trace({ update, dataStreams: [ model ], otherStreams: [ eventStream ]});
 meiosisTracer({ selector: "#tracer" });
 
 const element = document.getElementById("app");
-const view = app.createView(modelChanges, events);
+const view = app.createView(update, events);
 model.map(model => render(view(model), element));
 
 events.list.pleaseWait(true);

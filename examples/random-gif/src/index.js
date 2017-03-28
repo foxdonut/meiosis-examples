@@ -1,7 +1,7 @@
 import m from "mithril";
 import stream from "mithril/stream";
 import scan from "mithril/stream/scan";
-import { createEvents, trace } from "meiosis";
+import { applyUpdate, createEvents, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 import { app } from "./app";
@@ -28,8 +28,7 @@ function startApp() {
   };
 
   const update = stream();
-  const applyModelChange = (model, modelChange) => modelChange(model);
-  const model = scan(applyModelChange, initialModel, update);
+  const model = scan(applyUpdate, initialModel, update);
 
   const eventStream = stream();
   const events = createEvents({
@@ -57,7 +56,7 @@ function startApp() {
   const render = model => m.render(element, view(model));
   model.map(render);
 
-  trace({ modelChanges: update, dataStreams: [ model ], otherStreams: [ eventStream ] });
+  trace({ update, dataStreams: [ model ], otherStreams: [ eventStream ] });
   meiosisTracer({ selector: "#tracer" });
 }
 

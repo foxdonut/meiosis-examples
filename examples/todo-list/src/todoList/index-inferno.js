@@ -2,8 +2,22 @@ import { model } from "./model";
 import { view } from "./view-inferno.jsx";
 import { listeners } from "./listeners";
 
-export const todoList = ({
+export const todoList = {
   model,
-  view,
-  listeners,
-});
+  createView: (update, events) => {
+    listeners(update, events);
+
+    return view(update, events);
+  },
+  events: {
+    emit: [
+      "editTodo"
+    ],
+    listen: [
+      "error",
+      "pleaseWait",
+      "todoList",
+      "updateTodo"
+    ]
+  }
+};
