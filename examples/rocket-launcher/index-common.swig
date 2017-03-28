@@ -1,4 +1,8 @@
-{% extends '../layout.swig' %}
+{% extends '../base-layout.swig' %}
+
+{% block head %}    <link rel="stylesheet" href="/public/css/pure-min.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+{% endblock %}
 
 {% block title %}Rocket Launcher - {% block variant %}{% endblock %}{% endblock %}
 {% block example %}rocket-launcher{% endblock %}

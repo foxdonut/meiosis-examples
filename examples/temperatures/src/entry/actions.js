@@ -1,4 +1,3 @@
-export const editEntryValue = (model, update) => evt => {
-  model.value = evt.target.value;
-  update(model);
-};
+export const createActions = update => ({
+  editEntryValue: evt => update(model => model.set("value", evt.target.value))
+});

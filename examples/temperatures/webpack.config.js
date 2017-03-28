@@ -1,10 +1,10 @@
-/*global process*/
+/*global process, __dirname*/
 var variant = process.env.VARIANT;
 
 module.exports = {
   entry: "./src/index-" + variant + ".js",
   output: {
-    path: "./build",
+    path: __dirname + "/build",
     filename: "generated-" + variant + "-app.js"
   },
   module: {

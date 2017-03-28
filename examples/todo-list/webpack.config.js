@@ -1,4 +1,4 @@
-/*global process*/
+/*global process, __dirname*/
 var isProduction = process.env.NODE_ENV === "production";
 var variant = process.env.VARIANT;
 var webpack = require("webpack");

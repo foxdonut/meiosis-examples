@@ -1,14 +1,16 @@
 /*global React*/
 (function(ref) {
   var heading = (
-    <ul className="nav nav-pills">
-      <li role="presentation">
-        <a className="btn btn-xs btn-default" href="/examples/rocket-launcher/vanillajs/index.html">Vanilla JS version</a>
-      </li>
-      <li role="presentation" className="active">
-        <a className="btn btn-xs btn-default" href="/examples/rocket-launcher/react/index.html">React version</a>
-      </li>
-    </ul>
+    <div className="pure-menu pure-menu-horizontal">
+      <ul className="pure-menu-list">
+        <li className="pure-menu-item">
+          <a className="pure-menu-link" href="/examples/rocket-launcher/vanillajs/index.html">Vanilla JS version</a>
+        </li>
+        <li className="pure-menu-item pure-menu-selected">
+          <a className="pure-menu-link" href="/examples/rocket-launcher/react/index.html">React version</a>
+        </li>
+      </ul>
+    </div>
   );
 
   ref.view = actions => ({
@@ -21,7 +23,7 @@
       return (<div>{heading}
         <p>Counter: {model.counter}</p>
         <form>
-          <input type="submit" className="btn btn-primary" value="Start" onClick={onStart}/>
+          <input type="submit" className="pure-button pure-button-primary" value="Start" onClick={onStart}/>
         </form>
       </div>);
     },
@@ -38,7 +40,7 @@
           {model.closeToLaunch ? " CLOSE TO LAUNCH!" : ""}
         </p>
         <form>
-          <input type="submit" className="btn btn-danger" value="Abort" onClick={onAbort}/>
+          <input type="submit" className="pure-button" value="Abort" onClick={onAbort}/>
         </form>
       </div>);
     },

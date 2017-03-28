@@ -1,12 +1,14 @@
 (function(ref) {
-  var heading = "<ul class='nav nav-pills'>" +
-    "<li role='presentation' class='active'>" +
-      "<a class='btn btn-xs btn-default' href='/examples/rocket-launcher/vanillajs/index.html'>Vanilla JS version</a>" +
-    "</li>" +
-    "<li role='presentation'>" +
-      "<a class='btn btn-xs btn-default' href='/examples/rocket-launcher/react/index.html'>React version</a>" +
-    "</li>" +
-  "</ul>";
+  var heading = "<div class='pure-menu pure-menu-horizontal'>" +
+    "<ul class='pure-menu-list'>" +
+      "<li class='pure-menu-item pure-menu-selected'>" +
+        "<a class='pure-menu-link' href='/examples/rocket-launcher/vanillajs/index.html'>Vanilla JS version</a>" +
+      "</li>" +
+      "<li class='pure-menu-item'>" +
+        "<a class='pure-menu-link' href='/examples/rocket-launcher/react/index.html'>React version</a>" +
+      "</li>" +
+    "</ul>" +
+  "</div>";
 
   ref.view = {
     // State representation of the ready state
@@ -15,7 +17,7 @@
         heading +
         "<p>Counter: "+model.counter+"</p>\n\
           <form class=\"start\">\n\
-            <input type=\"submit\" class=\"btn btn-primary\" value=\"Start\">\n\
+            <input type=\"submit\" class=\"pure-button pure-button-primary\" value=\"Start\">\n\
           </form>"
       );
     },
@@ -29,7 +31,7 @@
           (model.closeToLaunch ? " CLOSE TO LAUNCH!" : "") +
         "</p>\n\
         <form class=\"counting\">\n\
-          <input type=\"submit\" class=\"btn btn-danger\" value=\"Abort\">\n\
+          <input type=\"submit\" class=\"pure-button\" value=\"Abort\">\n\
         </form>"
       );
     },

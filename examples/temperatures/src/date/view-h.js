@@ -1,14 +1,16 @@
 import { h } from "preact";
-import objectPath from "object-path";
+import { createActions } from "./actions";
 
-import { editDateValue } from "./actions";
+export const createDateView = update => {
+  const actions = createActions(update);
 
-export const dateView = (model, update) => {
-  const error = objectPath.get(model, "errors.value.0");
+  return model => {
+    const error = model.errors && model.errors.value[0];
 
-  return h("span", {},
-    h("span", {}, "Date:"),
-    h("input", { type: "text", size: "10", value: model.value, onInput: editDateValue(model, update) }),
-    h("span", { class: "has-error" }, h("span", { class: "help-block" }, error))
-  );
+    return h("div", {},
+      h("span", {}, "Date:"),
+      h("input", { type: "text", size: "10", value: model.value, onInput: actions.editDateValue }),
+      h("span", { class: "has-error" }, h("span", { class: "help-block" }, error))
+    );
+  };
 };

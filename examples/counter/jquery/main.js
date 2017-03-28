@@ -6,18 +6,18 @@
   var initialModel = { counter: 0 };
 
   var view = function(model) {
-    return "<ul class='nav nav-pills'>" +
-        "<li role='presentation' class='active'>" +
-          "<a class='btn btn-xs btn-default' href='/examples/counter/jquery/index.html'>jQuery version</a>" +
-        "</li>" +
-        "<li role='presentation'>" +
-          "<a class='btn btn-xs btn-default' href='/examples/counter/react/index.html'>React version</a>" +
-        "</li>" +
-      "</ul>" +
+    return "<div class='row'>" +
+        "<div class='three columns'>" +
+          "<a class='button button-primary' href='/examples/counter/jquery/index.html'>jQuery version</a>" +
+        "</div>" +
+        "<div class='three columns'>" +
+          "<a class='button' href='/examples/counter/react/index.html'>React version</a>" +
+        "</div>" +
+      "</div>" +
       "<div><span>Counter: " + model.counter + "</span></div>" +
       "<div>" +
-        "<button id='inc' class='btn btn-sm btn-primary'>+ 1</button>" +
-        "<button id='decr' class='btn btn-sm btn-default'>- 1</button>" +
+        "<button id='inc' class='button-primary'>+ 1</button>" +
+        "<button id='decr'>- 1</button>" +
       "</div>";
   };
 

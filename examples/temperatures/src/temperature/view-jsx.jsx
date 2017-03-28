@@ -1,15 +1,18 @@
 import preact from "preact";
+import { createActions } from "./actions";
 
-import { changeUnits, increase } from "./actions";
+export const createTemperatureView = update => {
+  const actions = createActions(update);
 
-export const temperatureView = (model, update) => {
-  return (<div>
+  return model => (
     <div>
-      <span>{model.label}</span>
-      <span>{model.value}</span>
-      <button className="btn btn-sm btn-primary" onClick={changeUnits(model, update)}>{"\xB0" + model.units}</button>
-      <button className="btn btn-sm btn-default" onClick={increase(model, update, 1)}>+</button>
-      <button className="btn btn-sm btn-default" onClick={increase(model, update,-1)}>-</button>
+      <div>
+        <span>{model.label}</span>
+        <span>{model.value}</span>
+        <button onClick={actions.changeUnits}>{"\xB0" + model.units}</button>
+        <button className="button-outline" onClick={actions.increase( 1)}>+</button>
+        <button className="button-outline" onClick={actions.increase(-1)}>-</button>
+      </div>
     </div>
-  </div>);
+  );
 };

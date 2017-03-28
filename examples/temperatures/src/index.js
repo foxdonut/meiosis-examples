@@ -1,16 +1,15 @@
 import flyd from "flyd";
 import { render } from "preact";
-import objectPath from "object-path";
-import { trace } from "meiosis";
-import { scan } from "./util";
+import { fromJS } from "immutable";
+import { applyUpdate, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 import { entry } from "./entry";
 import { date } from "./date";
 import { temperature } from "./temperature";
 
-export const startApp = view => {
-  const initialModel = {
+export const startApp = createView => {
+  const initialModel = fromJS({
     saved: "",
     entry: entry.initialModel(),
     date: date.initialModel(),
@@ -18,30 +17,16 @@ export const startApp = view => {
       air: temperature.initialModel("Air temperature:"),
       water: temperature.initialModel("Water temperature:")
     }
-  };
+  });
 
-  const modelChanges = flyd.stream();
-
-  const actions = {
-    app: modelChanges,
-    date: model => modelChanges({ path: "date", model }),
-    entry: model => modelChanges({ path: "entry", model }),
-    temperature: {
-      air: model => modelChanges({ path: "temperature.air", model }),
-      water: model => modelChanges({ path: "temperature.water", model })
-    }
-  };
-
-  const updateModel = (model, modelChange) => {
-    objectPath.set(model, modelChange.path, modelChange.model);
-    return model;
-  };
-
-  const model = scan(updateModel, initialModel, modelChanges);
+  const update = flyd.stream();
+  const model = flyd.scan(applyUpdate, initialModel, update);
+  const view = createView(update);
 
   const element = document.getElementById("app");
-  model.map(model => render(view(model, actions), element, element.lastElementChild));
+  const modeljs = model.map(model => model.toJS());
+  modeljs.map(modeljs => render(view(modeljs), element, element.lastElementChild));
 
-  trace({ streamLibrary: flyd, modelChanges, streams: [ model ] });
+  trace({ update, dataStreams: [ modeljs ] });
   meiosisTracer({ selector: "#tracer" });
 };

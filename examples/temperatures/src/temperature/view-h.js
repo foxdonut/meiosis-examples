@@ -1,14 +1,17 @@
 import { h } from "preact";
+import { createActions } from "./actions";
 
-import { changeUnits, increase } from "./actions";
+export const createTemperatureView = update => {
+  const actions = createActions(update);
 
-export const temperatureView = (model, update) =>
-  h("div", {},
+  return model =>
     h("div", {},
-      h("span", {}, model.label),
-      h("span", {}, model.value),
-      h("button", { class: "btn btn-sm btn-primary", onClick: changeUnits(model, update) }, "\xB0" + model.units),
-      h("button", { class: "btn btn-sm btn-default", onClick: increase(model, update, 1) }, "+"),
-      h("button", { class: "btn btn-sm btn-default", onClick: increase(model, update,-1) }, "-")
-    )
-  );
+      h("div", {},
+        h("span", {}, model.label),
+        h("span", {}, model.value),
+        h("button", { onClick: actions.changeUnits }, "\xB0" + model.units),
+        h("button", { class: "button-outline", onClick: actions.increase( 1) }, "+"),
+        h("button", { class: "button-outline", onClick: actions.increase(-1) }, "-")
+      )
+    );
+};
