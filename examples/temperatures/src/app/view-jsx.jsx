@@ -15,10 +15,10 @@ export const view = update => {
     <div>
       <div className="row">
         <div className="column column-25">
-          <a className="button" href="index-jsx.html">Preact + JSX version</a>
+          <a className="button" href="index-jsx.html">Preact + JSX + Milligram</a>
         </div>
         <div className="column column-25">
-          <a className="button button-outline" href="index-h.html">Preact + h version</a>
+          <a className="button button-outline" href="index-h.html">Preact + h + Basscss</a>
         </div>
       </div>
       <form>

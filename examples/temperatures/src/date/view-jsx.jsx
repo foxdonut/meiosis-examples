@@ -8,9 +8,9 @@ export const createDateView = update => {
     const error = model.errors && model.errors.value[0];
 
     return (<div>
-      <span>Date:</span>
+      <label>Date:</label>
       <input type="text" size="10" value={model.value} onInput={actions.editDateValue} />
-      <span className="has-error"><span className="help-block">{error}</span></span>
+      <span>{error}</span>
     </div>);
   };
 };

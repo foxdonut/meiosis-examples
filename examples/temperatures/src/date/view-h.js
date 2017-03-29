@@ -7,10 +7,10 @@ export const createDateView = update => {
   return model => {
     const error = model.errors && model.errors.value[0];
 
-    return h("div", {},
-      h("span", {}, "Date:"),
-      h("input", { type: "text", size: "10", value: model.value, onInput: actions.editDateValue }),
-      h("span", { class: "has-error" }, h("span", { class: "help-block" }, error))
+    return h("div", { class: "clearfix mb1" },
+      h("label", { class: "right col col-2" }, "Date:"),
+      h("input", { class: "field", type: "text", size: "10", value: model.value, onInput: actions.editDateValue }),
+      h("div", { class: "col-right col-10 red" }, error)
     );
   };
 };

@@ -1,8 +1,6 @@
 {% extends '../../base-layout.swig' %}
 
-{% block head %}    <link rel="stylesheet" href="/public/css/normalize.css">
-    <link rel="stylesheet" href="/public/css/milligram.min.css">
-    <link rel="stylesheet" href="/public/css/style.css">
+{% block head %}    <link rel="stylesheet" href="/public/css/ace.min.css">
 {% endblock %}
 
 {% block title %}Temperatures{% endblock %}

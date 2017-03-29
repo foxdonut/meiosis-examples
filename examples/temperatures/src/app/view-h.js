@@ -12,13 +12,13 @@ export const view = update => {
   const waterTemperatureView = createTemperatureView(nest(update, ["temperature", "water"]));
 
   return model =>
-    h("div", {},
-      h("div", { class: "row" },
-        h("div", { class: "column column-25" },
-          h("a", { class: "button button-outline", href: "index-jsx.html" }, "Preact + JSX version")
+    h("div", { class: "max-width-4" },
+      h("div", { class: "clearfix" },
+        h("div", { class: "col px2" },
+          h("a", { class: "btn", href: "index-jsx.html" }, "Preact + JSX + Milligram")
         ),
-        h("div", { class: "column column-25" },
-          h("a", { class: "button", href: "index-h.html" }, "Preact + h version")
+        h("div", { class: "col" },
+          h("a", { class: "btn white bg-blue", href: "index-h.html" }, "Preact + h + Basscss")
         )
       ),
       h("form", {},
@@ -27,7 +27,7 @@ export const view = update => {
           dateView(model.date),
           airTemperatureView(model.temperature.air),
           waterTemperatureView(model.temperature.water),
-          h("button", { onClick: save(model, update) }, "Save"),
+          h("button", { class: "btn btn-primary mr1", onClick: save(model, update) }, "Save"),
           h("span", {}, "Saved: " + model.saved)
         )
       )

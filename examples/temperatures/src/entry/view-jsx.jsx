@@ -8,9 +8,9 @@ export const createEntryView = update => {
     const error = model.errors && model.errors.value[0];
 
     return (<div>
-      <span>Entry number:</span>
+      <label>Entry number:</label>
       <input type="text" size="2" value={model.value} onInput={actions.editEntryValue} />
-      <span className="has-error"><span className="help-block">{error}</span></span>
+      <span>{error}</span>
     </div>);
   };
 };
