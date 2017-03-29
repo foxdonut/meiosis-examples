@@ -4,7 +4,7 @@ import { todoItem } from "../todoItem/index-react";
 
 const columns = (update, events) => {
   // FIXME: what about events and multiple instances of a component?
-  const todoItemView = todoItem.createView(update, events);
+  const todoItemView = todoItem.create(update, events);
 
   return [
     { title: "Priority", key: "priority", dataIndex: "priority" },

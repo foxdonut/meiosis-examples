@@ -7,8 +7,9 @@
     <title>Meiosis Example - {% block title %}Title{% endblock %}</title>
   </head>
   <body class="container">
+  {% block startwrap %}{% endblock %}
     <div>
-      <a href="http://meiosis.js.org"><img src="/public/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px"></a>
+      <a href="http://meiosis.js.org" target="_blank"><img src="/public/images/meiosis.png" style="padding-bottom: 20px; margin-right: 8px" width="53px"></a>
       <h2 style="display: inline;">Meiosis Example - {% block title %}Title{% endblock %}</h2>
       <div><a href="/index.html">Back to list of examples</a></div>
       <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/{% block example %}{% endblock %}" target="_blank">Source code</a></div>
@@ -19,5 +20,6 @@
     </div>
 
     {% block content %}Content{% endblock %}
+  {% block endwrap %}{% endblock %}
   </body>
 </html>

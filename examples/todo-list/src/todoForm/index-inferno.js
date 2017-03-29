@@ -1,21 +1,18 @@
-import services from "../app/services";
+import { compose } from "ramda";
 import { actions } from "./actions";
 import { model } from "./model";
 import { view } from "./view-inferno.jsx";
 
 export const todoForm = {
   model,
-  createView: (update, events) => {
-    return view(actions(update, events, services));
-  },
+  create: compose(view, actions),
   events: {
     emit: [
-      "saveTodoFailure",
-      "saveTodoStart",
-      "saveTodoSuccess",
+      "saveTodo"
     ],
     listen: [
-      "editTodo"
+      "editTodo",
+      "saveTodoSuccess"
     ]
   }
 };

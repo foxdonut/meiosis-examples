@@ -11,10 +11,10 @@ export const randomGifPair = {
     const randomGifFirst = randomGif.create(nest(update, "randomGifFirst"), events);
     const randomGifSecond = randomGif.create(nest(update, "randomGifSecond"), events);
 
-    return model => m("div",
-      m("div", { style: "display: inline-block" },
+    return model => m("div.br2.ba.b--purple.pa2.mb2",
+      m("div.dib",
         randomGifFirst(model.randomGifFirst)),
-      m("div", { style: "display: inline-block" },
+      m("div.dib",
         randomGifSecond(model.randomGifSecond))
     );
   }

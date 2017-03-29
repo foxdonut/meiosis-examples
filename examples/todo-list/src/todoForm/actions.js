@@ -18,7 +18,7 @@ const updates = {
   )
 };
 
-export const actions = (update, events, services) => {
+export const actions = (update, events) => {
   events.editTodo.map(todo => updates.editTodo(update, todo));
 
   events.saveTodoSuccess.map(() => updates.clearForm(update));
@@ -31,10 +31,7 @@ export const actions = (update, events, services) => {
       updates.validationErrors(update, validationErrors);
 
       if (Object.keys(validationErrors).length === 0) {
-        events.saveTodoStart(true);
-        services.saveTodo(todo).
-          then(events.saveTodoSuccess).
-          catch(events.saveTodoFailure);
+        events.saveTodo(todo);
       }
     }),
 

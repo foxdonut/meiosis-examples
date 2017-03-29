@@ -1,8 +1,8 @@
 import { render } from "react-dom";
 import flyd from "flyd";
 import createServer from "./sinonServer";
-import services from "./app/services";
 import { app } from "./app/index-react";
+import { services } from "./services";
 import { todoList } from "./todoList/index-react";
 import { todoForm } from "./todoForm/index-react";
 import { applyUpdate, createEvents, trace } from "meiosis";
@@ -22,23 +22,29 @@ const eventStream = flyd.stream();
 const events = createEvents({
   eventStream,
   events: {
+    services: services.events,
     form: todoForm.events,
     list: todoList.events
   },
   connect: {
-    "form.saveTodoFailure": ["list.error"],
-    "form.saveTodoStart": ["list.pleaseWait"],
-    "form.saveTodoSuccess": ["list.updateTodo"],
-    "list.editTodo": ["form.editTodo"]
+    "form.saveTodo": ["services.saveTodo"],
+    "list.editTodo": ["form.editTodo"],
+    "services.loadTodosFailure": ["list.error"],
+    "services.loadTodosStart": ["list.pleaseWait"],
+    "services.loadTodosSuccess": ["list.updateTodoList"],
+    "services.saveTodoFailure": ["list.error"],
+    "services.saveTodoStart": ["list.pleaseWait"],
+    "services.saveTodoSuccess": ["form.saveTodoSuccess", "list.updateTodo"]
   }
 });
+
+services.create(update, events.services);
 
 trace({ update, dataStreams: [ model ], otherStreams: [ eventStream ]});
 meiosisTracer({ selector: "#tracer" });
 
 const element = document.getElementById("app");
-const view = app.createView(update, events);
+const view = app.create(update, events);
 model.map(model => render(view(model), element));
 
-events.list.pleaseWait(true);
-services.loadTodos().then(events.list.todoList);
+events.services.loadTodos(true);

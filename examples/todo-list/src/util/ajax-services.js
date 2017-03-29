@@ -1,5 +1,5 @@
-import ajax from "../util/ajax-axios";
-import todoUrl from "../util/todoUrl";
+import ajax from "./ajax-axios";
+import todoUrl from "./todoUrl";
 
 const loadTodos = () => ajax.getJSON(todoUrl.urlForList);
 
@@ -7,6 +7,6 @@ const deleteTodo = todoId => ajax.deleteJSON(todoUrl.urlForDelete(todoId));
 
 const saveTodo = todo => ajax.postJSON(todoUrl.urlForSave, todo);
 
-const services = { loadTodos, deleteTodo, saveTodo };
+const ajaxServices = { loadTodos, deleteTodo, saveTodo };
 
-export default services;
+export default ajaxServices;

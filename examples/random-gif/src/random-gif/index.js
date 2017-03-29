@@ -49,13 +49,13 @@ export const randomGif = {
   },
 
   create: (update, events) => model =>
-    m("div", [
-      m("span", "Tag:"),
-      m("input[type=text]", { value: model.tag, onkeyup: editTag(update) }),
-      m("button.btn.btn-xs.btn-default",
+    m("div.ma2.ba.b--green.pa2", [
+      m("span.mr2", "Tag:"),
+      m("input.mr2[type=text]", { value: model.tag, onkeyup: editTag(update) }),
+      m("button.white.bg-blue.b--blue.ba.br2.pv1.ph2.link.w4",
         { onclick: newGif(update, events, model.id, model.tag) },
         "Random Gif"),
-      m("div", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
+      m("div.mt2", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
     ]),
 
   events: {

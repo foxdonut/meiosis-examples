@@ -8,7 +8,7 @@ const updateTodos = (todos, todo) => {
 export const listeners = (update, events) => {
   events.pleaseWait.map(() => update(model => assoc("message", "Processing, please wait...", model)));
 
-  events.todoList.map(todos => update(model => merge(model, { todos, message: "" })));
+  events.updateTodoList.map(todos => update(model => merge(model, { todos, message: "" })));
 
   events.updateTodo.map(todo => update(model =>
     merge(model, { todos: updateTodos(model.todos, todo), message: "" })

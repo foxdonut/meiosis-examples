@@ -1,8 +1,7 @@
-import services from "../app/services";
+import { compose } from "ramda";
 import { actions } from "./actions";
 import { view } from "./view-react";
 
 export const todoItem = {
-  createView: (update, events) =>
-    view(actions(update, events, services))
+  create: compose(view, actions)
 };

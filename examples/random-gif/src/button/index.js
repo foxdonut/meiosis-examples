@@ -9,8 +9,8 @@ export const button = {
     active: false
   }),
   create: update => model => {
-    const classes = classnames({ "btn-primary": model.active, "btn-danger": !model.active });
+    const classes = classnames({ "bg-green": model.active, "bg-gray": !model.active });
     const label = model.active ? "Active" : "Inactive";
-    return m("button.btn", { class: classes, onclick: toggle(update) }, label);
+    return m("button.white.ba.b--white.br2.pv1.ph2.link.w4", { class: classes, onclick: toggle(update) }, label);
   }
 };

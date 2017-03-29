@@ -11,7 +11,7 @@ export const randomGifPairPair = {
     const randomGifPairOne = randomGifPair.create(nest(update, "randomGifPairOne"), events);
     const randomGifPairTwo = randomGifPair.create(nest(update, "randomGifPairTwo"), events);
 
-    return model => m("div",
+    return model => m("div.ba.br2.b--orange.pa2",
       randomGifPairOne(model.randomGifPairOne),
       randomGifPairTwo(model.randomGifPairTwo)
     )

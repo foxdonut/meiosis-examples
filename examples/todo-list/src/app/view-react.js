@@ -7,8 +7,8 @@ import { todoList } from "../todoList/index-react";
 const { Item } = Menu;
 
 export const view = (update, events) => {
-  const todoFormView = todoForm.createView(nest(update, "form"), events.form);
-  const todoListView = todoList.createView(nest(update, "list"), events.list);
+  const todoFormView = todoForm.create(nest(update, "form"), events.form);
+  const todoListView = todoList.create(nest(update, "list"), events.list);
 
   return model => h("div",
     h(Menu, { mode: "horizontal", selectedKeys: ["react"] },

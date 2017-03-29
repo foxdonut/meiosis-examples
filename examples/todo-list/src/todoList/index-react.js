@@ -4,19 +4,20 @@ import { listeners } from "./listeners";
 
 export const todoList = {
   model,
-  createView: (update, events) => {
+  create: (update, events) => {
     listeners(update, events);
 
     return view(update, events);
   },
   events: {
     emit: [
+      "deleteTodo",
       "editTodo"
     ],
     listen: [
       "error",
       "pleaseWait",
-      "todoList",
+      "updateTodoList",
       "updateTodo"
     ]
   }

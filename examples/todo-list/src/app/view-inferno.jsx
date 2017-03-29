@@ -4,8 +4,8 @@ import { todoForm } from "../todoForm/index-inferno";
 import { todoList } from "../todoList/index-inferno";
 
 export const view = (update, events) => {
-  const todoFormView = todoForm.createView(nest(update, "form"), events.form);
-  const todoListView = todoList.createView(nest(update, "list"), events.list);
+  const todoFormView = todoForm.create(nest(update, "form"), events.form);
+  const todoListView = todoList.create(nest(update, "list"), events.list);
 
   return model => (
     <div>

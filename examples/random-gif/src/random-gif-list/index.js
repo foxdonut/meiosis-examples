@@ -22,17 +22,17 @@ export const randomGifList = {
   }),
   create: (update, events) => {
     const renderRandomGif = model => id =>
-      m("div", { key: id, style: "display: inline-block" }, [
+      m("div.dib", { key: id }, [
         randomGif.create(
           modelChange => update(over(lensPath(["randomGifsById", id]), modelChange)),
           events
         )(model.randomGifsById[id]),
-        m("button.btn.btn-default.btn-xs", { onclick: remove(update, id) }, "Remove")
+        m("button.f8.link.dim.ph2.br2.ba.red.b--red.bg-white", { onclick: remove(update, id) }, "Remove")
       ]);
 
-    return model => m("div", [
+    return model => m("div.ba.br2.b--orange.pa2", [
       m("div", [
-        m("button.btn.btn-default.btn-xs", { onclick: add(update) }, "Add")
+        m("button.f8.link.dim.ph2.br2.ba.blue.b--blue.bg-white", { onclick: add(update) }, "Add")
       ]),
       m("div", model.randomGifIds.map(renderRandomGif(model)))
     ]);

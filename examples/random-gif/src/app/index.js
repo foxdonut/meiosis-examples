@@ -10,7 +10,7 @@ import { randomGifCounter } from "../random-gif-counter";
 
 export const app = {
   create: (update, events) => {
-    const counterView = counter.create(nest(update, "counter"));
+    const counterView = counter.create("Total Counter: ");
     const buttonView = button.create(nest(update, "button"));
     const randomGif1View = randomGif.create(nest(update, "randomGif1"), events.randomGif);
     const randomGif2View = randomGif.create(nest(update, "randomGif2"), events.randomGif);
@@ -21,40 +21,34 @@ export const app = {
     const randomGifCounter2View = randomGifCounter.create(nest(update, "randomGifCounter2"), events.randomGifCounter2);
 
     return model =>
-      m("div",
-        m("ul.nav.nav-pills",
-          m("li.active", { role: "presentation" },
-            m("a.btn.btn-xs.btn-default", { href: "index-m.html" }, "Mithril + m version")
-          ),
-          m("li", { role: "presentation" },
-            m("a.btn.btn-xs.btn-default", { href: "index-jsx.html" }, "Mithril + JSX version")
-          )
-        ),
+      [
         counterView(model.counter),
 
-        m("div", "Button:"),
+        m("div.mt2", "Button:"),
         buttonView(model.button),
 
-        m("div", "Random Gif:"),
+        m("div.mt2", "Random Gif:"),
         randomGif1View(model.randomGif1),
 
-        m("div", "Another Random Gif:"),
+        m("div.mt2", "Another Random Gif:"),
         randomGif2View(model.randomGif2),
 
-        m("div", "Random Gif Pair:"),
+        m("div.mt2", "Random Gif Pair:"),
         randomGifPairView(model.randomGifPair),
 
-        m("div", "Random Gif Pair Pair:"),
+        m("div.mt2", "Random Gif Pair Pair:"),
         randomGifPairPairView(model.randomGifPairPair),
 
-        m("div", "Random Gif List:"),
+        m("div.mt2", "Random Gif List:"),
         randomGifListView(model.randomGifList),
 
-        m("div", "Random Gif with Counter (doesn't count in total):"),
+        m("div.mt2", "Random Gif with Counter (doesn't count in total):"),
         randomGifCounter1View(model.randomGifCounter1),
 
-        m("div", "Another Random Gif with Counter (counts in total):"),
-        randomGifCounter2View(model.randomGifCounter2)
-      );
+        m("div.mt2", "Another Random Gif with Counter (counts in total):"),
+        randomGifCounter2View(model.randomGifCounter2),
+
+        counterView(model.counter)
+    ];
   }
 };
