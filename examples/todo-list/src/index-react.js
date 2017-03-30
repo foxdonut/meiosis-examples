@@ -28,7 +28,11 @@ const events = createEvents({
   },
   connect: {
     "form.saveTodo": ["services.saveTodo"],
+    "form.deleteTodo": ["services.deleteTodo"],
     "list.editTodo": ["form.editTodo"],
+    "services.deleteTodoFailure": ["list.error"],
+    "services.deleteTodoStart": ["list.pleaseWait"],
+    "services.deleteTodoSuccess": ["list.updateDeletedTodo"],
     "services.loadTodosFailure": ["list.error"],
     "services.loadTodosStart": ["list.pleaseWait"],
     "services.loadTodosSuccess": ["list.updateTodoList"],

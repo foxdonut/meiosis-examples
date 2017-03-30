@@ -7,7 +7,7 @@ export const services = {
 
       ajaxServices.loadTodos().
         then(events.loadTodosSuccess).
-        catch(events.loadTodosFailure);
+        catch(() => events.loadTodosFailure(true));
     });
 
     events.saveTodo.map(todo => {
@@ -15,11 +15,22 @@ export const services = {
 
       ajaxServices.saveTodo(todo).
         then(events.saveTodoSuccess).
-        catch(events.saveTodoFailure);
+        catch(() => events.saveTodoFailure(true));
+    });
+
+    events.deleteTodo.map(id => {
+      events.deleteTodoStart(true);
+
+      ajaxServices.deleteTodo(id).
+        then(() => events.deleteTodoSuccess(id)).
+        catch(() => events.deleteTodoFailure(true));
     });
   },
   events: {
     emit: [
+      "deleteTodoFailure",
+      "deleteTodoStart",
+      "deleteTodoSuccess",
       "loadTodosFailure",
       "loadTodosStart",
       "loadTodosSuccess",
@@ -28,6 +39,7 @@ export const services = {
       "saveTodoSuccess"
     ],
     listen: [
+      "deleteTodo",
       "loadTodos",
       "saveTodo"
     ]

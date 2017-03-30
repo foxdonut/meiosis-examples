@@ -28,7 +28,11 @@ const events = createEvents({
   },
   connect: {
     "form.saveTodo": ["services.saveTodo"],
+    "list.deleteTodo": ["services.deleteTodo"],
     "list.editTodo": ["form.editTodo"],
+    "services.deleteTodoFailure": ["list.error"],
+    "services.deleteTodoStart": ["list.pleaseWait"],
+    "services.deleteTodoSuccess": ["list.updateDeletedTodo"],
     "services.loadTodosFailure": ["list.error"],
     "services.loadTodosStart": ["list.pleaseWait"],
     "services.loadTodosSuccess": ["list.updateTodoList"],
@@ -47,5 +51,4 @@ const element = document.getElementById("app");
 const view = app.create(update, events);
 model.map(model => render(view(model), element));
 
-events.list.pleaseWait(true);
-services.loadTodos().then(events.list.todoList);
+events.services.loadTodos(true);

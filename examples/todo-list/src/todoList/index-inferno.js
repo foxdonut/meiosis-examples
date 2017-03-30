@@ -17,6 +17,7 @@ export const todoList = {
     listen: [
       "error",
       "pleaseWait",
+      "updateDeletedTodo",
       "updateTodoList",
       "updateTodo"
     ]
