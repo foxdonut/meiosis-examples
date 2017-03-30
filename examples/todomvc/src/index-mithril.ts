@@ -1,23 +1,21 @@
 import * as m from "mithril";
 const stream = require("mithril/stream");
 const scan = require("mithril/stream/scan");
-import { view } from "./app/view-mithril";
 
-import { Stream, applyModelChange, trace } from "meiosis";
+import { EventType, Stream, applyUpdate, createEvents, trace } from "meiosis";
 const meiosisTracer = require("meiosis-tracer");
 
 import { Model, Todo } from "./util";
-import { app } from "./app";
+import { app } from "./app/index-mithril";
 import { main } from "./main";
 import { todoStorage } from "./app/todo-storage";
 
-export function startApp(view: Function) {
+function startApp() {
   todoStorage.loadAll().then((todos: Array<Todo>) => {
-    const modelChanges: Stream<Function> = stream();
-
     const prefix = "#";
     const prefixLength = prefix.length;
     const extractRoute = (hash: string) => (hash && hash.substring(prefixLength)) || "/";
+    m.route.prefix(prefix);
 
     const initialModel: Model = {
       editTodo: {},
@@ -30,18 +28,26 @@ export function startApp(view: Function) {
       route: extractRoute(window.location.hash)
     };
 
-    const model = scan(applyModelChange, initialModel, modelChanges);
+    const update: Stream<Function> = stream();
+    const model = scan(applyUpdate, initialModel, update);
     const state = model.map(app.state);//.map(router.state);
 
-    const events = {
-      todosToDisplay: main.listeners.displayTodos(modelChanges)
-    };
+    const eventStream: Stream<EventType> = stream();
+    const events: any = createEvents({
+      eventStream,
+      events: {
+        emit: ["todosToDisplay"],
+        listen: ["displayTodos"]
+      },
+      connect: {
+        "todosToDisplay": ["displayTodos"]
+      }
+    });
 
     const element = document.getElementById("app");
-
-    m.route.prefix(prefix);
-    const render = () => view(state(), modelChanges, events);
-    const setRoute = (update: Function, path: string) => update((model: Model) => {
+    const view = app.create(update, events);
+    const render = () => view(state());
+    const setRoute = (path: string) => update((model: Model) => {
       model.route = path;
       return model;
     });
@@ -49,21 +55,21 @@ export function startApp(view: Function) {
     m.route(element, "/", {
       "/": {
         onmatch: (args: any, path: string) => {
-          setRoute(modelChanges, path);
+          setRoute(path);
           todoStorage.loadAll().then(events.todosToDisplay);
         },
         render
       },
       "/active": {
         onmatch: (args: any, path: string) => {
-          setRoute(modelChanges, path);
+          setRoute(path);
           todoStorage.filter("active").then(events.todosToDisplay);
         },
         render
       },
       "/completed": {
         onmatch: (args: any, path: string) => {
-          setRoute(modelChanges, path);
+          setRoute(path);
           todoStorage.filter("completed").then(events.todosToDisplay);
         },
         render
@@ -71,9 +77,9 @@ export function startApp(view: Function) {
     });
     state.map(m.redraw);
 
-    trace({ streamLibrary: { stream }, modelChanges, streams: [ model, state ]});
+    trace({ update, dataStreams: [ model, state ], otherStreams: [ eventStream ]});
     meiosisTracer({ selector: "#tracer" });
   });
 }
 
-startApp(view);
+startApp();

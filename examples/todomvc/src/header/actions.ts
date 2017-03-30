@@ -4,50 +4,36 @@ import { todoStorage } from "../app/todo-storage";
 
 const ENTER_KEY = 13;
 
-const updateNewTodo = (update: Function, title: string) => update(
-  (model: Model) => {
-    model.newTodo = title;
-    return model;
-  }
-);
+export const createActions = (updates: any, events: any) => {
+  const saveNewTodo = (rawTitle: string) => {
+    const title: string = rawTitle.trim();
 
-const saveNewTodo = (update: Function, rawTitle: string) => {
-  const title: string = rawTitle.trim();
+    if (title) {
+      todoStorage.saveTodo({title: title}).then(updates.updateSavedTodo);
+    }
+  };
 
-  if (title) {
-    todoStorage.saveTodo({title: title}).then((todo: Todo) =>
-      update((model: Model) => {
-        model.todosById[todo.id] = todo;
-        model.todoIds.push(todo.id);
-        model.newTodo = "";
-        return model;
-      })
-    );
-  }
-};
-
-const newTodoKeyUp: (update: Function) => EventHandler<KeyboardEvent<HTMLInputElement>> =
-  (update: Function) => (evt: KeyboardEvent<HTMLInputElement>) => {
+  const newTodoKeyUp: EventHandler<KeyboardEvent<HTMLInputElement>> = (evt: KeyboardEvent<HTMLInputElement>) => {
     if (evt.keyCode === ENTER_KEY) {
-      saveNewTodo(update, evt.currentTarget.value);
+      saveNewTodo(evt.currentTarget.value);
     }
     else {
-      updateNewTodo(update, evt.currentTarget.value);
+      updates.updateNewTodo(evt.currentTarget.value);
     }
   };
 
-const newTodoKeyUpEnterOnly: (update: Function) => EventHandler<KeyboardEvent<HTMLInputElement>> =
-  (update: Function) => (evt: KeyboardEvent<HTMLInputElement>) => {
+  const newTodoKeyUpEnterOnly: EventHandler<KeyboardEvent<HTMLInputElement>> = (evt: KeyboardEvent<HTMLInputElement>) => {
     if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-      saveNewTodo(update, evt.currentTarget.value);
+      saveNewTodo(evt.currentTarget.value);
     }
   };
 
-const newTodoChange: (update: Function) => EventHandler<ChangeEvent<HTMLInputElement>> =
-  (update: Function) => (evt: ChangeEvent<HTMLInputElement>) => updateNewTodo(update, evt.currentTarget.value);
+  const newTodoChange: EventHandler<ChangeEvent<HTMLInputElement>> = (evt: ChangeEvent<HTMLInputElement>) =>
+    updates.updateNewTodo(evt.currentTarget.value);
 
-export const actions = {
-  newTodoKeyUp,
-  newTodoKeyUpEnterOnly,
-  newTodoChange
+  return {
+    newTodoKeyUp,
+    newTodoKeyUpEnterOnly,
+    newTodoChange
+  };
 };

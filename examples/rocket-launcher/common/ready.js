@@ -24,14 +24,7 @@
   }
 
   ref.ready = function(actions) {
-    delegate(root, "form.start", "submit", function(evt) {
-      evt.preventDefault();
-      actions.start(true);
-    });
-
-    delegate(root, "form.counting", "submit", function(evt) {
-      evt.preventDefault();
-      actions.abort(true);
-    });
+    delegate(root, "form.start", "submit", actions.start);
+    delegate(root, "form.counting", "submit", actions.abort);
   };
 })(window);

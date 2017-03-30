@@ -15,11 +15,11 @@ export const todoList = {
       "editTodo"
     ],
     listen: [
-      "error",
-      "pleaseWait",
-      "updateDeletedTodo",
-      "updateTodoList",
-      "updateTodo"
+      "onError",
+      "onPleaseWait",
+      "onDeleteTodo",
+      "onUpdateTodoList",
+      "onUpdateTodo"
     ]
   }
 };

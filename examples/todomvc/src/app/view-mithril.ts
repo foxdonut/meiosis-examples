@@ -1,9 +1,6 @@
 import * as m from "mithril";
 
 import { State } from "../util";
-import { view as footerView } from "../footer/view-mithril";
-import { view as headerView } from "../header/view-mithril";
-import { view as mainView } from "../main/view-mithril";
 
 const info = m("footer.info", [
   m("p", "Double-click to edit a todo"),
@@ -17,12 +14,12 @@ const info = m("footer.info", [
   ])
 ]);
 
-export const view = (model: State, update: Function, events: any) =>
-  m("div", [
-    m("section.todoapp", [
-      headerView(model, update),
-      mainView(model, update),
-      footerView(model, update, events),
-    ]),
+export const createView = (components: any) =>
+  (model: State) => m("div",
+    m("section.todoapp",
+      components.header(model)/*,
+      components.main(model),
+      components.footer(model),*/
+    ),
     info
-  ]);
+  );

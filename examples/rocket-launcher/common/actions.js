@@ -1,14 +1,21 @@
-/*global flyd, window*/
+/*global window*/
 (function(ref) {
-  ref.actions = {
-    start: flyd.stream(),
-    updateCounter: flyd.stream(),
-    decrement: function(counterValue) {
-      setTimeout(function() {
-        ref.actions.updateCounter(counterValue - 1);
-      }, 1000);
-    },
-    launch: flyd.stream(),
-    abort: flyd.stream()
+  ref.actions = function(updates) {
+    return {
+      start: function(evt) {
+        evt.preventDefault();
+        updates.start();
+      },
+      decrement: function() {
+        setTimeout(function() {
+          updates.addToCounter(-1);
+        }, 1000);
+      },
+      abort: function(evt) {
+        evt.preventDefault();
+        updates.abort();
+      },
+      launch: updates.launch
+    };
   };
 })(window);

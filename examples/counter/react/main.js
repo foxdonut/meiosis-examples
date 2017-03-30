@@ -1,19 +1,15 @@
-/*global window, flyd, meiosis, ReactDOM*/
+/*global window, flyd, ReactDOM*/
 (function(ref) {
-  var streamLibrary = flyd;
-  var scan = meiosis.createScan(streamLibrary);
-
   var initialModel = { counter: 0 };
 
-  var view = ref.reactView;
+  var update = flyd.stream();
+  var applyUpdate = function(model, modelChange) {
+    return modelChange(model);
+  };
 
-  var modelChanges = ref.addToCounter.map(function(value) {
-    return function(model) {
-      return { counter: model.counter + value };
-    };
-  });
+  var view = ref.reactView(update);
 
-  var model = scan(meiosis.applyModelChange, initialModel, modelChanges);
+  var model = flyd.scan(applyUpdate, initialModel, update);
   var element = document.getElementById("app");
 
   model.map(function(model) {

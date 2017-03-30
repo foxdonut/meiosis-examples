@@ -1,4 +1,4 @@
-import { Stream, applyModelChange, trace } from "meiosis";
+import { Stream, applyUpdate, createEvents, trace } from "meiosis";
 const flyd = require("flyd");
 const meiosisTracer = require("meiosis-tracer");
 
@@ -11,14 +11,14 @@ import { todoStorage } from "./app/todo-storage";
 
 export function startApp(view: Function, render: Function) {
   todoStorage.loadAll().then((todos: Array<Todo>) => {
-    const modelChanges: Stream<Function> = flyd.stream();
+    const update: Stream<Function> = flyd.stream();
 
     const events: any = {
-      todosToDisplay: main.listeners.displayTodos(modelChanges)
+      //todosToDisplay: main.listeners.displayTodos(modelChanges)
     };
 
-    footer.addRoutes(modelChanges, events);
-    const router = createRouter(modelChanges);
+    //footer.addRoutes(update, events);
+    const router = createRouter(update);
 
     const initialModel: Model = {
       editTodo: {},
@@ -31,14 +31,14 @@ export function startApp(view: Function, render: Function) {
       route: router.extractRoute(window.location.hash)
     };
 
-    const model = flyd.scan(applyModelChange, initialModel, modelChanges);
-    const state = model.map(app.state);//.map(router.state);
+    const model = flyd.scan(applyUpdate, initialModel, update);
+    const state = model.map(app.state);
 
     const element = document.getElementById("app");
 
-    state.map((state: any) => render(element, view(state, modelChanges, events)));
+    state.map((state: any) => render(element, view(state, update, events)));
 
-    trace({ streamLibrary: flyd, modelChanges, streams: [ model, state ]});
+    trace({ update, dataStreams: [ model, state ]});
     meiosisTracer({ selector: "#tracer" });
   });
 }

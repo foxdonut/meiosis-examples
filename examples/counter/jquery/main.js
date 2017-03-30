@@ -1,9 +1,17 @@
-/*global flyd, meiosis, $*/
+/*global flyd, $*/
 (function() {
-  var streamLibrary = flyd;
-  var scan = meiosis.createScan(streamLibrary);
-
   var initialModel = { counter: 0 };
+
+  var update = flyd.stream();
+  var applyUpdate = function(model, modelChange) {
+    return modelChange(model);
+  };
+
+  var addToCounter = function(value) {
+    update(function(model) {
+      return { counter: model.counter + value };
+    });
+  };
 
   var view = function(model) {
     return "<div class='row'>" +
@@ -21,28 +29,19 @@
       "</div>";
   };
 
-  var addToCounter = flyd.stream();
+  var $root = $(document.getElementById("app"));
 
-  var modelChanges = addToCounter.map(function(value) {
-    return function(model) {
-      return { counter: model.counter + value };
-    };
+  $root.on("click", "button#inc", function() {
+    addToCounter(1);
+  });
+  $root.on("click", "button#decr", function() {
+    addToCounter(-1);
   });
 
-  var model = scan(meiosis.applyModelChange, initialModel, modelChanges);
+  var model = flyd.scan(applyUpdate, initialModel, update);
   var element = document.getElementById("app");
 
   model.map(function(model) {
     element.innerHTML = view(model);
   });
-
-  var $root = $(document.getElementById("app"));
-
-  $root.on("click", "button#inc", function(_evt) {
-    addToCounter(1);
-  });
-  $root.on("click", "button#decr", function(_evt) {
-    addToCounter(-1);
-  });
-
 })();

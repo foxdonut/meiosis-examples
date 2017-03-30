@@ -2,11 +2,10 @@ import * as React from "react";
 import * as classnames from "classnames";
 
 import { State } from "../util";
-import { actions } from "./actions";
 
-export const view = (model: State, update: Function, events: any) => {
+export const view = (actions: any) => (model: State) => {
   const clearCompleted = (model: State) => model.clearCompletedVisible ?
-    <button className="clear-completed" onClick={actions.clearCompleted(update, events)}>Clear completed</button> : null;
+    <button className="clear-completed" onClick={actions.clearCompleted}>Clear completed</button> : null;
 
   return (
     <footer className="footer">
@@ -17,7 +16,7 @@ export const view = (model: State, update: Function, events: any) => {
         <li><a href="#/active" className={classnames({selected: model.activeSelected})}>Active</a></li>
         {/* This link triggers a route change. The result should be the same. */}
         <li>
-          <a href="javascript://" onClick={actions.filterBy(update, "completed")}
+          <a href="javascript://" onClick={actions.filterBy("completed")}
             className={classnames({selected: model.completedSelected})}>Completed</a>
         </li>
       </ul>

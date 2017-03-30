@@ -4,7 +4,7 @@ import * as crossroads from "crossroads";
 import { Model } from "../util";
 import { todoStorage } from "../app/todo-storage";
 
-export const addRoutes = (update: Function, events: any) => {
+export const createRoutes = (updates: any, events: any) => {
   crossroads.addRoute("/", () => {
     todoStorage.loadAll().then(events.todosToDisplay);
   }, 1);

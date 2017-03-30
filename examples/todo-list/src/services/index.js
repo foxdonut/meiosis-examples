@@ -2,7 +2,7 @@ import ajaxServices from "../util/ajax-services";
 
 export const services = {
   create: (_update, events) => {
-    events.loadTodos.map(() => {
+    events.onLoadTodos.map(() => {
       events.loadTodosStart(true);
 
       ajaxServices.loadTodos().
@@ -10,7 +10,7 @@ export const services = {
         catch(() => events.loadTodosFailure(true));
     });
 
-    events.saveTodo.map(todo => {
+    events.onSaveTodo.map(todo => {
       events.saveTodoStart(true);
 
       ajaxServices.saveTodo(todo).
@@ -18,7 +18,7 @@ export const services = {
         catch(() => events.saveTodoFailure(true));
     });
 
-    events.deleteTodo.map(id => {
+    events.onDeleteTodo.map(id => {
       events.deleteTodoStart(true);
 
       ajaxServices.deleteTodo(id).
@@ -39,9 +39,9 @@ export const services = {
       "saveTodoSuccess"
     ],
     listen: [
-      "deleteTodo",
-      "loadTodos",
-      "saveTodo"
+      "onDeleteTodo",
+      "onLoadTodos",
+      "onSaveTodo"
     ]
   }
 };

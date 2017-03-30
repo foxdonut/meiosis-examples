@@ -27,18 +27,18 @@ const events = createEvents({
     list: todoList.events
   },
   connect: {
-    "form.saveTodo": ["services.saveTodo"],
-    "form.deleteTodo": ["services.deleteTodo"],
-    "list.editTodo": ["form.editTodo"],
-    "services.deleteTodoFailure": ["list.error"],
-    "services.deleteTodoStart": ["list.pleaseWait"],
-    "services.deleteTodoSuccess": ["list.updateDeletedTodo"],
-    "services.loadTodosFailure": ["list.error"],
-    "services.loadTodosStart": ["list.pleaseWait"],
-    "services.loadTodosSuccess": ["list.updateTodoList"],
-    "services.saveTodoFailure": ["list.error"],
-    "services.saveTodoStart": ["list.pleaseWait"],
-    "services.saveTodoSuccess": ["form.saveTodoSuccess", "list.updateTodo"]
+    "form.saveTodo": ["services.onSaveTodo"],
+    "list.deleteTodo": ["services.onDeleteTodo"],
+    "list.editTodo": ["form.onEditTodo"],
+    "services.deleteTodoFailure": ["list.onError"],
+    "services.deleteTodoStart": ["list.onPleaseWait"],
+    "services.deleteTodoSuccess": ["list.onDeleteTodo"],
+    "services.loadTodosFailure": ["list.onError"],
+    "services.loadTodosStart": ["list.onPleaseWait"],
+    "services.loadTodosSuccess": ["list.onUpdateTodoList"],
+    "services.saveTodoFailure": ["list.onError"],
+    "services.saveTodoStart": ["list.onPleaseWait"],
+    "services.saveTodoSuccess": ["form.onSaveTodoSuccess", "list.onUpdateTodo"]
   }
 });
 
@@ -51,4 +51,4 @@ const element = document.getElementById("app");
 const view = app.create(update, events);
 model.map(model => render(view(model), element));
 
-events.services.loadTodos(true);
+events.services.onLoadTodos(true);

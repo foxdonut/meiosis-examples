@@ -3,7 +3,7 @@ import * as m from "mithril";
 import { Todo } from "../util";
 import { actions } from "./actions";
 
-export const view = (todo: Todo, update: Function) =>
+export const createView = (update: Function) => (todo: Todo) =>
   m("input.edit", {
     type: "text",
     value: todo.title,

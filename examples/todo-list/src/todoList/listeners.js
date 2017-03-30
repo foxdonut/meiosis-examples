@@ -6,15 +6,15 @@ const updateTodos = (todos, todo) => {
 };
 
 export const listeners = (update, events) => {
-  events.pleaseWait.map(() => update(model => assoc("message", "Processing, please wait...", model)));
-  events.error.map(() => update(model => assoc("message", "Sorry, an error occurred.", model)));
+  events.onPleaseWait.map(() => update(model => assoc("message", "Processing, please wait...", model)));
+  events.onError.map(() => update(model => assoc("message", "Sorry, an error occurred.", model)));
 
-  events.updateTodoList.map(todos => update(model => merge(model, { todos, message: "" })));
+  events.onUpdateTodoList.map(todos => update(model => merge(model, { todos, message: "" })));
 
-  events.updateTodo.map(todo => update(model =>
+  events.onUpdateTodo.map(todo => update(model =>
     merge(model, { todos: updateTodos(model.todos, todo), message: "" })
   ));
 
-  events.updateDeletedTodo.map(todoId => update(model =>
+  events.onDeleteTodo.map(todoId => update(model =>
     merge(model, { todos: filter(complement(propEq("id", todoId)), model.todos), message: "" })));
 };

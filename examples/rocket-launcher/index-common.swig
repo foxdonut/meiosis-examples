@@ -9,8 +9,6 @@
 
 {% block content %}
   <script src="/public/lib/flyd.js"></script>
-  <script src="/public/lib/meiosis.min.js"></script>
-  <script src="/public/lib/meiosis-tracer.min.js"></script> <!-- development only -->
   <script src="/examples/rocket-launcher/common/actions.js"></script>
   <script src="/examples/rocket-launcher/common/model.js"></script>
   <script src="/examples/rocket-launcher/common/state.js"></script>

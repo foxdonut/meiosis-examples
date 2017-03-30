@@ -5,7 +5,6 @@
     "classnames": "registry:dt/classnames#0.0.0+20161113184211",
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "mithril": "registry:dt/mithril#0.0.0+20160725212620",
-    "object-path": "registry:dt/object-path#0.9.0+20160510002910",
     "sinon": "registry:dt/sinon#1.16.1+20161208163514",
     "sql.js": "registry:dt/sql.js#0.0.0+20160906140629"
   },

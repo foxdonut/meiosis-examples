@@ -1,7 +1,5 @@
-/*global flyd, meiosis, window*/
+/*global window*/
 (function(ref) {
-  ref.mergeIntoOne = meiosis.createMergeIntoOne(flyd);
-
   ref.COUNTER_MAX = 10;
 
   ref.initialModel = {
@@ -11,42 +9,42 @@
     aborted: false
   };
 
-  ref.modelChanges = function(state, actions) {
-    var start = actions.start.map(function() {
-      return function(model) {
+  ref.updates = function(update, state) {
+    var start = function() {
+      update(function(model) {
         model.started = true;
         return model;
-      };
-    });
+      });
+    };
 
-    var counter = actions.updateCounter.map(function(counterValue) {
-      return function(model) {
+    var addToCounter = function(amount) {
+      update(function(model) {
         if (state.counting(model)) {
-          model.counter = counterValue;
+          model.counter = model.counter + amount;
         }
         return model;
-      };
-    });
+      });
+    };
 
-    var launch = actions.launch.map(function() {
-      return function(model) {
+    var launch = function() {
+      update(function(model) {
         model.launched = true;
         return model;
-      };
-    });
+      });
+    };
 
-    var abort = actions.abort.map(function() {
-      return function(model) {
+    var abort = function() {
+      update(function(model) {
         model.aborted = true;
         return model;
-      };
-    });
+      });
+    };
 
-    return ref.mergeIntoOne([
-      start,
-      counter,
-      launch,
-      abort
-    ]);
+    return {
+      start: start,
+      addToCounter: addToCounter,
+      launch: launch,
+      abort: abort
+    };
   };
 })(window);

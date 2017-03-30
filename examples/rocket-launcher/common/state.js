@@ -14,6 +14,12 @@
         (model.counter <= ref.COUNTER_MAX) && (model.counter >= 0)
         && model.started && !model.launched && model.aborted
       );
+    },
+    compute: function(model) {
+      var appState = Object.assign({}, model);
+      appState.even = model.counter % 2 === 0;
+      appState.closeToLaunch = model.counter < 4;
+      return appState;
     }
   };
 })(window);

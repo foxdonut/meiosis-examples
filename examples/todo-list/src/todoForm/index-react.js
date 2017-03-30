@@ -11,8 +11,8 @@ export const todoForm = {
       "saveTodo"
     ],
     listen: [
-      "editTodo",
-      "saveTodoSuccess"
+      "onEditTodo",
+      "onSaveTodoSuccess"
     ]
   }
 };

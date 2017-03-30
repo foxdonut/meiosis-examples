@@ -1,9 +1,11 @@
 import * as React from "react";
 
 import { State } from "../util";
+/*
 import { view as footerView } from "../footer/view-react";
 import { view as headerView } from "../header/view-react";
 import { view as mainView } from "../main/view-react";
+*/
 
 const info = (
   <footer className="info">
@@ -16,9 +18,9 @@ const info = (
 export const view = (model: State, update: Function, events: any) => (
   <div>
     <section className="todoapp">
-      {headerView(model, update)}
-      {mainView(model, update)}
-      {footerView(model, update, events)}
+      {/* headerView(model, update) */}
+      {/* mainView(model, update) */}
+      {/* footerView(model, update, events) */}
     </section>
     {info}
   </div>

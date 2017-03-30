@@ -16,31 +16,23 @@
   ref.view = actions => ({
     // State representation of the ready state
     ready: model => {
-      const onStart = function(evt) {
-        evt.preventDefault();
-        actions.start(true);
-      };
       return (<div>{heading}
         <p>Counter: {model.counter}</p>
         <form>
-          <input type="submit" className="pure-button pure-button-primary" value="Start" onClick={onStart}/>
+          <input type="submit" className="pure-button pure-button-primary" value="Start" onClick={actions.start}/>
         </form>
       </div>);
     },
 
     // State representation of the counting state
     counting: model => {
-      const onAbort = function(evt) {
-        evt.preventDefault();
-        actions.abort(true);
-      };
       return (<div>{heading}
         <p>
           Count down: {model.counter} {model.even ? "(Even)" : "(Odd)"}
           {model.closeToLaunch ? " CLOSE TO LAUNCH!" : ""}
         </p>
         <form>
-          <input type="submit" className="pure-button" value="Abort" onClick={onAbort}/>
+          <input type="submit" className="pure-button" value="Abort" onClick={actions.abort}/>
         </form>
       </div>);
     },

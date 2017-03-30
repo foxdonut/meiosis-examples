@@ -2,9 +2,11 @@ import h from "snabbdom/h";
 import { VNode } from "snabbdom/vnode";
 
 import { State } from "../util";
+/*
 import { view as footerView } from "../footer/view-snabbdom";
 import { view as headerView } from "../header/view-snabbdom";
 import { view as mainView } from "../main/view-snabbdom";
+*/
 
 const info = h("footer.info", [
   h("p", "Double-click to edit a todo"),
@@ -21,9 +23,11 @@ const info = h("footer.info", [
 export const view = (model: State, update: Function, events: any) =>
   h("div", [
     h("section.todoapp", [
+      /*
       headerView(model, update),
       mainView(model, update),
       footerView(model, update, events),
+      */
     ]),
     info
   ]);
