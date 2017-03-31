@@ -1,12 +1,9 @@
-/*global process*/
-var variant = process.env.VARIANT;
-
 module.exports = {
-  entry: "./src/index-" + variant + ".ts",
+  entry: "./src/index.ts",
   devtool: "source-map",
   output: {
     path: "./build",
-    filename: "generated-" + variant + "-app.js"
+    filename: "generated-app.js"
   },
   resolve: {
     extensions: [".js", ".ts", ".tsx"]
@@ -31,12 +28,6 @@ module.exports = {
       }
     ]
   },
-  /*
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
-  },
-  */
   node: {
     fs: "empty"
   },

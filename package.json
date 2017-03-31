@@ -1,6 +1,6 @@
 {
   "name": "meiosis-examples",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,6 @@
   "devDependencies": {
     "eslint": "^3.16.1",
     "eslint-plugin-inferno": "^6.10.2",
-    "eslint-plugin-react": "^6.9.0",
-    "swig": "^1.4.2"
+    "eslint-plugin-react": "^6.9.0"
   }
 }

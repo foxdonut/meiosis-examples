@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "typings i && tsc",
-    "start": "cross-env VARIANT=react webpack && cross-env VARIANT=mithril webpack",
+    "start": "webpack",
     "watch": "webpack --progress --colors --watch",
     "pretest": "npm start && tsc -p test/src",
     "test": "ava -v test/build/*-tests.js",

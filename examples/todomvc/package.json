@@ -4,8 +4,7 @@
   "description": "meiosis-examples todomvc",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env VARIANT=mithril webpack && cross-env VARIANT=react webpack && cross-env VARIANT=snabbdom webpack",
-    "build": "webpack",
+    "start": "webpack",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
@@ -15,9 +14,7 @@
   "keywords": [
     "example",
     "meiosis",
-    "mithril",
     "reactive",
-    "react",
     "routing",
     "snabbdom",
     "todomvc"
@@ -36,9 +33,6 @@
     "history": "^4.6.1",
     "lodash": "^4.17.4",
     "meiosis": "^1.0.0",
-    "mithril": "^1.0.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
     "snabbdom": "^0.6.7"
   },
   "devDependencies": {
@@ -46,10 +40,7 @@
     "@types/crossroads": "0.0.29",
     "@types/history": "^4.5.0",
     "@types/lodash": "^4.14.60",
-    "@types/mithril": "github:spacejack/mithril.d.ts#1.0.2",
     "@types/node": "^7.0.8",
-    "@types/react": "^15.0.16",
-    "@types/react-dom": "^0.14.23",
     "cross-env": "^3.2.4",
     "meiosis-tracer": "^1.0.0",
     "source-map-loader": "^0.2.0",

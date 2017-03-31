@@ -1,11 +1,9 @@
-/*global process, __dirname*/
-var variant = process.env.VARIANT;
-
+/*global __dirname*/
 module.exports = {
-  entry: "./src/index-" + variant + ".js",
+  entry: "./src/index.js",
   output: {
     path: __dirname + "/build",
-    filename: "generated-" + variant + "-app.js"
+    filename: "generated-app.js"
   },
   module: {
     rules: [
