@@ -1,44 +1,74 @@
-import { Stream, applyUpdate, createEvents, trace } from "meiosis";
+import { applyUpdate, createEvents, EventType, Stream, trace, UpdateFunction, ViewFunction } from "meiosis";
 const flyd = require("flyd");
 const meiosisTracer = require("meiosis-tracer");
 
-import { Model, Todo } from "./util";
 import { app } from "./app";
-import { main } from "./main";
+// import { footer } from "./footer";
 import { createRouter } from "./router";
-import { footer } from "./footer";
-import { todoStorage } from "./app/todo-storage";
+import { Model, Todo } from "./util";
+import { todoStorage } from "./util/todo-storage";
 
-export function startApp(view: Function, render: Function) {
-  todoStorage.loadAll().then((todos: Array<Todo>) => {
-    const update: Stream<Function> = flyd.stream();
+import { init } from "snabbdom";
+import attributes from "snabbdom/modules/attributes";
+import classModule from "snabbdom/modules/class";
+import eventlisteners from "snabbdom/modules/eventlisteners";
+import props from "snabbdom/modules/props";
+import { VNode } from "snabbdom/vnode";
 
-    const events: any = {
-      //todosToDisplay: main.listeners.displayTodos(modelChanges)
-    };
+const patch = init([
+  attributes,
+  classModule,
+  eventlisteners,
+  props
+]);
 
-    //footer.addRoutes(update, events);
-    const router = createRouter(update);
+let currentView: VNode = null;
 
-    const initialModel: Model = {
-      editTodo: {},
-      newTodo: "",
-      todoIds: todos.map((todo: Todo) => todo.id),
-      todosById: todos.reduce((acc: { [id: string] : Todo }, todo: Todo) => {
-        acc[todo.id] = todo;
-        return acc;
-      }, {}),
-      route: router.extractRoute(window.location.hash)
-    };
+const render = (element: Element, nextView: VNode) => {
+  if (currentView === null) {
+    patch(element, nextView);
+  }
+  else {
+    patch(currentView, nextView);
+  }
+  currentView = nextView;
+};
 
-    const model = flyd.scan(applyUpdate, initialModel, update);
-    const state = model.map(app.state);
 
-    const element = document.getElementById("app");
+todoStorage.loadAll().then((todos: Todo[]) => {
+  const update: Stream<UpdateFunction> = flyd.stream();
 
-    state.map((state: any) => render(element, view(state, update, events)));
-
-    trace({ update, dataStreams: [ model, state ]});
-    meiosisTracer({ selector: "#tracer" });
+  const eventStream: Stream<EventType> = flyd.stream();
+  const events: any = createEvents({
+    eventStream,
+    events: app.events,
+    connect: {
+      "*.storage.setCompleted": "*.todoItem.onSetCompleted",
+      "*.todoItem.setCompleted": "*.storage.onSetCompleted"
+    }
   });
-}
+
+  // footer.addRoutes(update, events);
+  const router = createRouter(update);
+
+  const initialModel: Model = {
+    editTodo: {},
+    newTodo: "",
+    route: router.extractRoute(window.location.hash),
+    todoIds: todos.map((todo: Todo) => todo.id),
+    todosById: todos.reduce((acc: { [id: string] : Todo }, todo: Todo) => {
+      acc[todo.id] = todo;
+      return acc;
+    }, {})
+  };
+
+  const model = flyd.scan(applyUpdate, initialModel, update);
+  const viewModel = model.map(app.state);
+  const view = app.create(update, events);
+  const element = document.getElementById("app");
+
+  viewModel.map((state: any) => render(element, view(state)));
+
+  trace({ update, dataStreams: [ model, viewModel ], otherStreams: [ eventStream ]});
+  meiosisTracer({ selector: "#tracer" });
+});

@@ -4,6 +4,6 @@ module.exports = {
     "inferno"
   ],
   "rules": {
-    "display-name": [false]
+    "display-name": [0]
   }
 };

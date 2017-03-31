@@ -1,11 +1,7 @@
 import Inferno from "inferno";
-import { todoItem } from "../todoItem/index-inferno";
 
-export const view = (update, events) => {
-  // FIXME: what about events and multiple instances of a component?
-  const todoItemView = todoItem.create(update, events);
-
-  return model => (
+export const createView = components =>
+  model => (
     <div className="row">
       <div className="col-md-8">
         <div>Todo List: {model.message}</div>
@@ -18,10 +14,9 @@ export const view = (update, events) => {
             </tr>
           </thead>
           <tbody>
-            {model.todos.map(todoItemView)}
+            {model.todos.map(components.todoItem)}
           </tbody>
         </table>
       </div>
     </div>
   );
-};

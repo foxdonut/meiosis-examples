@@ -1,8 +1,9 @@
+/* global __dirname */
 module.exports = {
   entry: "./src/index.ts",
   devtool: "source-map",
   output: {
-    path: "./build",
+    path: __dirname + "/build",
     filename: "generated-app.js"
   },
   resolve: {

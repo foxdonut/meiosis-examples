@@ -1,6 +1,6 @@
 import Inferno from "inferno";
 
-export const view = actions => todo => (
+export const createView = actions => todo => (
   <tr key={todo.id}>
     <td>{todo.priority}</td>
     <td>{todo.description}</td>

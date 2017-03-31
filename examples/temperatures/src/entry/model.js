@@ -1,6 +1,6 @@
 import validate from "validate.js";
 
-export const initialModel = () => ({
+export const model = () => ({
   value: ""
 });
 

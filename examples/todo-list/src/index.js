@@ -1,20 +1,16 @@
 import { render } from "inferno";
 import flyd from "flyd";
 import createServer from "./sinonServer";
-import { app } from "./app/index-inferno";
+import { app } from "./app/index";
 import { services } from "./services";
-import { todoList } from "./todoList/index-inferno";
-import { todoForm } from "./todoForm/index-inferno";
+import { todoList } from "./todoList";
+import { todoForm } from "./todoForm";
 import { applyUpdate, createEvents, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 createServer();
 
-const initialModel = {
-  form: todoForm.model(),
-  list: todoList.model()
-};
-
+const initialModel = app.model();
 const update = flyd.stream();
 const model = flyd.scan(applyUpdate, initialModel, update);
 

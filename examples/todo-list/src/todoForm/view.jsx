@@ -1,6 +1,6 @@
 import Inferno from "inferno";
 
-export const view = actions => model => {
+export const createView = actions => model => {
   const inputField = (name, value) =>
     <input type="text" id={name} name={name} className="form-control" value={value}
       onInput={actions.editingTodo(name)}/>;

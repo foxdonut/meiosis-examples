@@ -7,7 +7,7 @@ export interface Todo {
 export interface Model {
   editTodo: Todo;
   newTodo: string;
-  todoIds: Array<string>;
+  todoIds: string[];
   todosById: { [id: string]: Todo };
   route: string;
 }

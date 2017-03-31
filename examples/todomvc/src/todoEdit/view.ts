@@ -2,18 +2,17 @@ import h from "snabbdom/h";
 import { VNode } from "snabbdom/vnode";
 
 import { Todo } from "../util";
-import { actions } from "./actions";
 
-export const view = (todo: Todo, update: Function) =>
+export const createView = (actions: any) => (todo: Todo) =>
   h("input.edit", {
     attrs: { type: "text" },
-    props: { value: todo.title },
-    on: { keyup: actions.editKeyUp(update, todo.id), blur: actions.editBlur(update, todo.id) },
     hook: {
-      insert: function(vnode: VNode) {
-        const elm: HTMLInputElement = (<HTMLInputElement> vnode.elm);
+      insert: (vnode: VNode) => {
+        const elm: HTMLInputElement = (vnode.elm as HTMLInputElement);
         elm.focus();
         elm.selectionStart = elm.value.length;
       }
-    }
+    },
+    on: { keyup: actions.editKeyUp(todo.id), blur: actions.editBlur(todo.id) },
+    props: { value: todo.title }
   });

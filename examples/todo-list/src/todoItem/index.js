@@ -1,7 +1,7 @@
 import { compose } from "ramda";
-import { actions } from "./actions";
-import { view } from "./view-inferno.jsx";
+import { createActions } from "./actions";
+import { createView } from "./view.jsx";
 
 export const todoItem = {
-  create: compose(view, actions)
+  create: compose(createView, createActions)
 };

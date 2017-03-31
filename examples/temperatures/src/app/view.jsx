@@ -1,36 +1,17 @@
 import preact from "preact";
 
-import { nest, save }  from "./index";
-import { createDateView } from "../date/view-jsx.jsx";
-import { createEntryView } from "../entry/view-jsx.jsx";
-import { createTemperatureView } from "../temperature/view-jsx.jsx";
+export const createView = (actions, components) =>
+  model => (
+    <form className="pure-form pure-form-aligned">
+      <fieldset>
+        {components.entry(model.entry)}
+        {components.date(model.date)}
+        {components.airTemperature(model.temperature.air)}
+        {components.waterTemperature(model.temperature.water)}
 
-export const view = update => {
-  const dateView = createDateView(nest(update, ["date"]));
-  const entryView = createEntryView(nest(update, ["entry"]));
-  const airTemperatureView = createTemperatureView(nest(update, ["temperature", "air"]));
-  const waterTemperatureView = createTemperatureView(nest(update, ["temperature", "water"]));
+        <button className="pure-button pure-button-primary" onClick={actions.save}>Save</button>
+      </fieldset>
 
-  return model => (
-    <div>
-      <div className="row">
-        <div className="column column-25">
-          <a className="button" href="index-jsx.html">Preact + JSX + Milligram</a>
-        </div>
-        <div className="column column-25">
-          <a className="button button-outline" href="index-h.html">Preact + h + Basscss</a>
-        </div>
-      </div>
-      <form>
-        <fieldset>
-          {entryView(model.entry)}
-          {dateView(model.date)}
-          {airTemperatureView(model.temperature.air)}
-          {waterTemperatureView(model.temperature.water)}
-          <button onClick={save(model, update)}>Save</button>
-          <span>Saved: {model.saved}</span>
-        </fieldset>
-      </form>
-    </div>
+      <span>Saved: {model.saved}</span>
+    </form>
   );
-};

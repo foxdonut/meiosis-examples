@@ -5,7 +5,7 @@ const updateTodos = (todos, todo) => {
   return index >= 0 ? set(lensIndex(index), todo, todos) : append(todo, todos);
 };
 
-export const listeners = (update, events) => {
+export const createListeners = (update, events) => {
   events.onPleaseWait.map(() => update(model => assoc("message", "Processing, please wait...", model)));
   events.onError.map(() => update(model => assoc("message", "Sorry, an error occurred.", model)));
 

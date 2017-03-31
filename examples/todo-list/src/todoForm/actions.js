@@ -18,7 +18,7 @@ const updates = {
   )
 };
 
-export const actions = (update, events) => {
+export const createActions = (update, events) => {
   events.onEditTodo.map(todo => updates.editTodo(update, todo));
 
   events.onSaveTodoSuccess.map(() => updates.clearForm(update));

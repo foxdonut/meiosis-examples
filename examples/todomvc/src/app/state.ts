@@ -1,10 +1,10 @@
 import { Model } from "../util";
 
-const allCompleted = function(state: any) {
+const allCompleted = (viewModel: any) => {
   let result = true;
 
-  for (let i = 0, t = state.todoIds.length; i < t; i++) {
-    if (!state.todosById[state.todoIds[i]].completed) {
+  for (let i = 0, t = viewModel.todoIds.length; i < t; i++) {
+    if (!viewModel.todosById[viewModel.todoIds[i]].completed) {
       result = false;
       break;
     }
@@ -13,21 +13,21 @@ const allCompleted = function(state: any) {
 };
 
 export const state = (model: Model) => {
-  const state = JSON.parse(JSON.stringify(model));
+  const viewModel = JSON.parse(JSON.stringify(model));
 
-  state.allSelected = model.route === "/";
-  state.activeSelected = model.route === "/active";
-  state.completedSelected = model.route === "/completed";
+  viewModel.allSelected = model.route === "/";
+  viewModel.activeSelected = model.route === "/active";
+  viewModel.completedSelected = model.route === "/completed";
 
-  state.allCompleted = allCompleted(state);
+  viewModel.allCompleted = allCompleted(viewModel);
 
-  const notCompleted = (todoId: string) => !state.todosById[todoId].completed;
-  const itemsLeft = state.todoIds.filter(notCompleted).length;
+  const notCompleted = (todoId: string) => !viewModel.todosById[todoId].completed;
+  const itemsLeft = viewModel.todoIds.filter(notCompleted).length;
 
-  state.itemsLeftText = state.todoIds.length > 0 ?
+  viewModel.itemsLeftText = viewModel.todoIds.length > 0 ?
     (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
 
-  state.clearCompletedVisible = (state.todoIds.length - itemsLeft) > 0;
+  viewModel.clearCompletedVisible = (viewModel.todoIds.length - itemsLeft) > 0;
 
-  return state;
+  return viewModel;
 };

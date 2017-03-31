@@ -2,16 +2,14 @@ import h from "snabbdom/h";
 import { VNode } from "snabbdom/vnode";
 
 import { State } from "../util";
-import { actions } from "./actions";
-import { view as todoItemView } from "../todoItem/view-snabbdom";
 
-export const view = (model: State, update: Function) =>
+export const createView = (actions: any, components: any) => (model: State) =>
   h("section.main", [
     h("input.toggle-all", {
       attrs: { type: "checkbox" },
-      props: { checked: model.allCompleted },
-      on: { change: actions.toggleAllTodos(update) }
+      on: { change: actions.toggleAllTodos },
+      props: { checked: model.allCompleted }
     }),
     h("label", { attrs: { for: "toggle-all"} }, "Mark all as complete"),
-    h("ul.todo-list", model.todoIds.map(todoItemView(model, update)))
+    h("ul.todo-list", model.todoIds.map(components.todoItem(model)))
   ]);

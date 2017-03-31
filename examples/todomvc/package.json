@@ -39,14 +39,13 @@
     "@types/classnames": "0.0.32",
     "@types/crossroads": "0.0.29",
     "@types/history": "^4.5.0",
-    "@types/lodash": "^4.14.60",
-    "@types/node": "^7.0.8",
-    "cross-env": "^3.2.4",
+    "@types/lodash": "^4.14.61",
+    "@types/node": "^7.0.12",
     "meiosis-tracer": "^1.0.0",
-    "source-map-loader": "^0.2.0",
-    "ts-loader": "^2.0.2",
-    "tslint": "^4.5.1",
-    "typescript": "^2.2.1",
-    "webpack": "^2.2.1"
+    "source-map-loader": "^0.2.1",
+    "ts-loader": "^2.0.3",
+    "tslint": "^5.0.0",
+    "typescript": "^2.2.2",
+    "webpack": "^2.3.2"
   }
 }

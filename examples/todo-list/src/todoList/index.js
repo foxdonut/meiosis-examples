@@ -1,13 +1,16 @@
 import { model } from "./model";
-import { view } from "./view-inferno.jsx";
-import { listeners } from "./listeners";
+import { createView } from "./view.jsx";
+import { createListeners } from "./listeners";
+import { todoItem } from "../todoItem";
 
 export const todoList = {
   model,
   create: (update, events) => {
-    listeners(update, events);
-
-    return view(update, events);
+    createListeners(update, events);
+    const components = {
+      todoItem: todoItem.create(update, events)
+    }
+    return createView(components);
   },
   events: {
     emit: [
