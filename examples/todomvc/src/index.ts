@@ -43,11 +43,15 @@ todoStorage.loadAll().then((todos: Todo[]) => {
     connect: {
       "*.footer.filter": "*.storage.onFilter",
       "*.footer.loadAll": "*.storage.onLoadAll",
+      "*.header.saveNewTodo": "*.storage.onSaveNewTodo",
       "*.routeChange": "*.router.onRouteChange",
+      "*.storage.deleteTodoId": "*.todoItem.onDeleteTodoId",
       "*.storage.displayTodos": "*.main.onDisplayTodos",
       "*.storage.setCompleted": "*.todoItem.onSetCompleted",
+      "*.storage.saveNewTodo": "*.header.onSaveNewTodo",
       "*.storage.saveTodo": "*.main.onUpdateTodo",
       "*.todoEdit.saveTodo": "*.storage.onSaveTodo",
+      "*.todoItem.deleteTodoId": "*.storage.onDeleteTodoId",
       "*.todoItem.setCompleted": "*.storage.onSetCompleted"
     }
   });

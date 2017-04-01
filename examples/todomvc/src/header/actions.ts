@@ -8,7 +8,7 @@ export const createActions = (updates: any, events: any) => {
     const title: string = rawTitle.trim();
 
     if (title) {
-      events.saveTodo({ title });
+      events.saveNewTodo({ title });
     }
   };
 
@@ -17,7 +17,7 @@ export const createActions = (updates: any, events: any) => {
       saveNewTodo(evt.currentTarget.value);
     }
     else {
-      updates.updateNewTodo(evt.currentTarget.value);
+      updates.editingNewTodo(evt.currentTarget.value);
     }
   };
 
@@ -29,7 +29,7 @@ export const createActions = (updates: any, events: any) => {
     };
 
   const newTodoChange: EventHandler<ChangeEvent<HTMLInputElement>> = (evt: ChangeEvent<HTMLInputElement>) =>
-    updates.updateNewTodo(evt.currentTarget.value);
+    updates.editingNewTodo(evt.currentTarget.value);
 
   return {
     newTodoKeyUp,

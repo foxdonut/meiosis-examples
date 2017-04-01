@@ -4,10 +4,10 @@ import { ChangeEvent, EventHandler, KeyboardEvent } from "react";
 import { Model, Todo } from "../util";
 
 export const createUpdates = (update: UpdateFunction) => ({
-  updateNewTodo: (title: string) =>
+  editingNewTodo: (title: string) =>
     update((model: Model) => _.set(model, "newTodo", title)),
 
-  updateSavedTodo: (todo: Todo) =>
+  saveNewTodo: (todo: Todo) =>
     update((model: Model) => {
       model.todosById[todo.id] = todo;
       model.todoIds.push(todo.id);

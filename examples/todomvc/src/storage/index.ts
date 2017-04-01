@@ -6,7 +6,7 @@ export const storage = {
     createListeners(events);
   },
   events: {
-    emit: ["displayTodos", "saveTodo", "setCompleted"],
-    listen: ["onFilter", "onLoadAll", "onSaveTodo", "onSetCompleted"]
+    emit: ["deleteTodoId", "displayTodos", "saveTodo", "saveNewTodo", "setCompleted"],
+    listen: ["onDeleteTodoId", "onFilter", "onLoadAll", "onSaveNewTodo", "onSaveTodo", "onSetCompleted"]
   }
 };
