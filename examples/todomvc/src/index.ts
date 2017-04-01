@@ -3,8 +3,6 @@ const flyd = require("flyd");
 const meiosisTracer = require("meiosis-tracer");
 
 import { app } from "./app";
-// import { footer } from "./footer";
-import { createRouter } from "./router";
 import { Model, Todo } from "./util";
 import { todoStorage } from "./util/todo-storage";
 
@@ -43,18 +41,21 @@ todoStorage.loadAll().then((todos: Todo[]) => {
     eventStream,
     events: app.events,
     connect: {
+      "*.footer.filter": "*.storage.onFilter",
+      "*.footer.loadAll": "*.storage.onLoadAll",
+      "*.routeChange": "*.router.onRouteChange",
+      "*.storage.displayTodos": "*.main.onDisplayTodos",
       "*.storage.setCompleted": "*.todoItem.onSetCompleted",
+      "*.storage.saveTodo": "*.main.onUpdateTodo",
+      "*.todoEdit.saveTodo": "*.storage.onSaveTodo",
       "*.todoItem.setCompleted": "*.storage.onSetCompleted"
     }
   });
 
-  // footer.addRoutes(update, events);
-  const router = createRouter(update);
-
   const initialModel: Model = {
     editTodo: {},
     newTodo: "",
-    route: router.extractRoute(window.location.hash),
+    route: "",
     todoIds: todos.map((todo: Todo) => todo.id),
     todosById: todos.reduce((acc: { [id: string] : Todo }, todo: Todo) => {
       acc[todo.id] = todo;

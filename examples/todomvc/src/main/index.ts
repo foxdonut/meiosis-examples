@@ -18,7 +18,7 @@ export const main = {
   },
   events: {
     emit: ["toggleAllTodos"],
-    listen: ["onDisplayTodos"],
+    listen: ["onDisplayTodos", "onUpdateTodo"],
     todoItem: todoItem.events
   }
 };

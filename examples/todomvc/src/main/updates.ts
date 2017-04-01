@@ -12,5 +12,10 @@ export const createUpdates = (update: UpdateFunction) => ({
     });
 
     return model;
+  }),
+  updateTodo: (todo: Todo) => update((model: Model) => {
+    model.todosById[todo.id] = todo;
+    model.editTodo = { };
+    return model;
   })
 });

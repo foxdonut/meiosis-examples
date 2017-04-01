@@ -25,7 +25,7 @@ export const createActions = (updates: any, events: any) => ({
       }
     }
     else {
-      updates.editingTodo({ id, title });
+      updates.editingTodo(id, title);
     }
   }
 });

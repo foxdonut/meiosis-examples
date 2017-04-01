@@ -1,3 +1,4 @@
+import * as _ from "lodash";
 import { UpdateFunction } from "meiosis";
 import { Model, Todo } from "../util";
 
@@ -8,13 +9,9 @@ export const createUpdates = (update: UpdateFunction) => ({
     return model;
   }),
 
-  editTodo: (todo: Todo) => update((model: Model) => {
-    model.editTodo = todo;
-    return model;
-  }),
+  editTodo: (todo: Todo) => update((model: Model) =>
+    _.set(model, "editTodo", todo)),
 
-  setCompleted: (todoId: string, completed: boolean) => update((model: Model) => {
-    model.todosById[todoId].completed = completed;
-    return model;
-  })
+  setCompleted: (todoId: string, completed: boolean) => update((model: Model) =>
+    _.set(model, ["todosById", todoId, "completed"], completed))
 });

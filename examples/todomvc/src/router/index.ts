@@ -1,35 +1,41 @@
-import createHistory from "history/createBrowserHistory";
 import * as crossroads from "crossroads";
+import { Location } from "history";
+import createHistory from "history/createBrowserHistory";
 import * as _ from "lodash";
+import { UpdateFunction } from "meiosis";
 import { Model, State } from "../util";
 
-export const extractRoute = (hash: string) => (hash && hash.substring(1)) || "/";
+const extractRoute = (hash: string) => (hash && hash.substring(1)) || "/";
 
 // Function to trigger a route change. Set the route on the model, and parse the route
 // to trigger route handling.
-export const triggerRouteChange = (update: Function, route: string) => {
+const triggerRouteChange = (update: UpdateFunction, route: string) => {
   update((model: Model) => _.set(model, "route", route));
   crossroads.parse(route);
 };
 
-export const createRouter = (update: Function) => {
-  const history = createHistory();
+export const router = {
+  create: (update: UpdateFunction, events: any) => {
+    const history = createHistory();
 
-  // Unmatched route. Redirect to #/.
-  crossroads.addRoute(/^.*$/, () => {
-    window.location.replace("#/");
-  }, 0);
+    // Unmatched route. Redirect to #/.
+    crossroads.addRoute(/^.*$/, () => {
+      window.location.replace("#/");
+    }, 0);
 
-  // Listen for route changes.
-  history.listen(location => {
-    const route: string = extractRoute(location.hash);
-    triggerRouteChange(update, route);
-  });
+    // Listen for route changes.
+    history.listen((location: Location) => {
+      const route: string = extractRoute(location.hash);
+      triggerRouteChange(update, route);
+    });
 
-  // Initial route.
-  crossroads.parse(extractRoute(window.location.hash));
+    // Initial route.
+    crossroads.parse(extractRoute(window.location.hash));
 
-  return {
-    extractRoute
+    // Listen for components triggering route changes.
+    events.onRouteChange.map((route: string) => triggerRouteChange(update, route));
+  },
+  events: {
+    listen: ["onRouteChange"]
   }
 };

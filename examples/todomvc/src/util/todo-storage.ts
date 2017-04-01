@@ -29,12 +29,12 @@ const deleteTodoAtIndex = (todos: Todo[], index: number) => {
 };
 
 const loadAll = () => {
-  return new Promise(resolve =>
+  return new Promise((resolve) =>
     setTimeout(() => resolve(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")), 10));
 };
 
 const saveAll = (todos: Todo[]) => {
-  return new Promise(resolve =>
+  return new Promise((resolve) =>
     setTimeout(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
       resolve();
@@ -82,7 +82,7 @@ export const todoStorage = {
   loadAll,
   saveAll,
   saveTodo: (todo: Todo) => {
-    return new Promise(resolve =>
+    return new Promise((resolve) =>
       loadAll().then((todos: Todo[]) => {
         const id: string = todo.id;
 

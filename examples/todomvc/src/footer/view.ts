@@ -3,11 +3,8 @@ import { VNode } from "snabbdom/vnode";
 
 import { State } from "../util";
 
-export const view = (actions: any) => (model: State) => {
-  const clearCompleted = (model: State) => model.clearCompletedVisible ?
-    h("button.clear-completed", { on: { click: actions.clearCompleted } }, "Clear completed") : h("span");
-
-  return h("footer.footer", [
+export const createView = (actions: any) => (model: State) =>
+  h("footer.footer", [
     h("span.todo-count", model.itemsLeftText),
     h("ul.filters", [
       // These links use hrefs.
@@ -17,6 +14,7 @@ export const view = (actions: any) => (model: State) => {
       h("li", h("a", { attrs: { href: "javascript://" }, on: { click: actions.filterBy("completed") },
         class: { selected: model.completedSelected } }, "Completed"))
     ]),
-    clearCompleted(model)
+    model.clearCompletedVisible ?
+        h("button.clear-completed", { on: { click: actions.clearCompleted } }, "Clear completed")
+      : h("span")
   ]);
-};

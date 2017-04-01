@@ -24,7 +24,7 @@ export const state = (model: Model) => {
   const notCompleted = (todoId: string) => !viewModel.todosById[todoId].completed;
   const itemsLeft = viewModel.todoIds.filter(notCompleted).length;
 
-  viewModel.itemsLeftText = viewModel.todoIds.length > 0 ?
+  viewModel.itemsLeftText = itemsLeft > 0 ?
     (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
 
   viewModel.clearCompletedVisible = (viewModel.todoIds.length - itemsLeft) > 0;

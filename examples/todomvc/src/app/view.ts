@@ -21,8 +21,8 @@ export const createView = (components: any): ViewFunction =>
     h("div", [
       h("section.todoapp", [
         components.header(model),
-        components.main(model)
-        // footerView(model, update, events)
+        components.main(model),
+        components.footer(model)
       ]),
       info
     ]);
