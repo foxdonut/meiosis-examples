@@ -32,7 +32,6 @@ const render = (element: Element, nextView: VNode) => {
   currentView = nextView;
 };
 
-
 todoStorage.loadAll().then((todos: Todo[]) => {
   const update: Stream<UpdateFunction> = flyd.stream();
 
@@ -41,6 +40,7 @@ todoStorage.loadAll().then((todos: Todo[]) => {
     eventStream,
     events: app.events,
     connect: {
+      "*.footer.clearCompleted": "*.storage.onClearCompleted",
       "*.footer.filter": "*.storage.onFilter",
       "*.footer.loadAll": "*.storage.onLoadAll",
       "*.header.saveNewTodo": "*.storage.onSaveNewTodo",
@@ -61,7 +61,7 @@ todoStorage.loadAll().then((todos: Todo[]) => {
     newTodo: "",
     route: "",
     todoIds: todos.map((todo: Todo) => todo.id),
-    todosById: todos.reduce((acc: { [id: string] : Todo }, todo: Todo) => {
+    todosById: todos.reduce((acc: { [id: string]: Todo }, todo: Todo) => {
       acc[todo.id] = todo;
       return acc;
     }, {})

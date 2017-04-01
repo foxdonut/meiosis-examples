@@ -6,7 +6,6 @@ const ESCAPE_KEY = 27;
 
 export const createActions = (updates: any, events: any) => ({
   editBlur: (id: string) => (evt: FocusEvent<HTMLInputElement>) =>
-    // FIXME: const editing = todo.id && (todo.id === model.editTodo.id);
     events.saveTodo({ id, title: evt.currentTarget.value }),
 
   editKeyUp: (id: string) => (evt: KeyboardEvent<HTMLInputElement>) => {

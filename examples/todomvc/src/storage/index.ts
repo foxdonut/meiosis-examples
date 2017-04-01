@@ -7,6 +7,7 @@ export const storage = {
   },
   events: {
     emit: ["deleteTodoId", "displayTodos", "saveTodo", "saveNewTodo", "setCompleted"],
-    listen: ["onDeleteTodoId", "onFilter", "onLoadAll", "onSaveNewTodo", "onSaveTodo", "onSetCompleted"]
+    listen: ["onClearCompleted", "onDeleteTodoId", "onFilter", "onLoadAll",
+      "onSaveNewTodo", "onSaveTodo", "onSetCompleted"]
   }
 };

@@ -1,6 +1,10 @@
 import { Todo, todoStorage } from "../util";
 
 export const createListeners = (events: any) => {
+  events.onClearCompleted.map(() => {
+    todoStorage.clearCompleted().then(events.displayTodos);
+  });
+
   events.onDeleteTodoId.map((todoId: string) => {
     todoStorage.deleteTodoId(todoId).then(() => events.deleteTodoId(todoId));
   });
