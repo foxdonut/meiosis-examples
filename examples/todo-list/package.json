@@ -59,7 +59,7 @@
     "eslint-plugin-inferno": "^6.10.4",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
-    "meiosis-tracer": "^1.0.0",
+    "meiosis-tracer": "^1.0.1",
     "webpack": "^2.3.1"
   }
 }

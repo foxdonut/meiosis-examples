@@ -41,7 +41,7 @@
     "@types/history": "^4.5.0",
     "@types/lodash": "^4.14.61",
     "@types/node": "^7.0.12",
-    "meiosis-tracer": "^1.0.0",
+    "meiosis-tracer": "^1.0.1",
     "source-map-loader": "^0.2.1",
     "ts-loader": "^2.0.3",
     "tslint": "^5.0.0",

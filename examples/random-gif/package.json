@@ -50,7 +50,7 @@
     "babel-preset-env": "^1.1.8",
     "browser-env": "^2.0.21",
     "jquery": "^3.1.1",
-    "meiosis-tracer": "^1.0.0",
+    "meiosis-tracer": "^1.0.1",
     "webpack": "^2.2.1"
   }
 }
