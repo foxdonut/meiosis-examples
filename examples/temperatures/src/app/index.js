@@ -26,8 +26,8 @@ const createActions = update => ({
         model.saved =
           "Entry #" + model.entry.value +
            " on " + model.date.value + ":" +
-           " Air: " + air.value + " \xB0" + air.units +
-           " Water: " + water.value + " \xB0" + water.units;
+           " Air: " + air.value + "\xB0" + air.units +
+           " Water: " + water.value + "\xB0" + water.units;
 
         model.entry.value = "";
         model.date.value = "";
