@@ -1,0 +1,40 @@
+{
+  "name": "wiki",
+  "version": "1.0.0",
+  "description": "meiosis-examples wiki",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive",
+    "react"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "flyd": "^0.2.4",
+    "meiosis": "^1.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.3.2",
+    "meiosis-tracer": "^1.0.1",
+    "react-jsx": "^1.0.0",
+    "webpack": "^2.3.3"
+  }
+}
