@@ -44,7 +44,10 @@ const createUpdates = update => ({
 const createActions = updates => ({
   editEntryValue: evt => updates.editEntryValue(evt.target.value),
   editDateValue: evt => updates.editDateValue(evt.target.value),
-  increase: value => () => updates.increase(value),
+  increase: value => evt => {
+    evt.preventDefault();
+    updates.increase(value);
+  },
   save: evt => {
     evt.preventDefault();
     updates.save();
