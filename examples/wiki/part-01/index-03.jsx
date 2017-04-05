@@ -48,48 +48,40 @@ const createActions = update => ({
 });
 
 const entry = (model, actions) => (
-  <div className="form-group">
-    <label className="col-md-2 control-label">Entry number:</label>
-    <div className="col-sm-1">
-      <input className="form-control" type="text" size="2" value={model.entry.value}
-        onChange={actions.editEntryValue}/>
-    </div>
+  <div>
+    <span>Entry number:</span>
+    <input type="text" size="2" value={model.entry.value}
+      onChange={actions.editEntryValue}/>
   </div>
 );
 
 const date = (model, actions) => (
-  <div className="form-group">
-    <label className="col-md-2 control-label">Date:</label>
-    <div className="col-sm-2">
-      <input className="form-control" type="text" size="10" value={model.date.value}
-        onChange={actions.editDateValue}/>
-    </div>
+  <div>
+    <span>Date:</span>
+    <input type="text" size="10" value={model.date.value}
+      onChange={actions.editDateValue}/>
   </div>
 );
 
 const temperature = (model, actions) => (
-  <div className="form-group">
-    <label className="col-md-2 control-label">Temperature: {model.temperature.value}&deg;C </label>
-    <div className="col-md-4">
-      <button className="btn btn-default"
-        onClick={actions.increase(1)}>Increase</button>{" "}
-      <button className="btn btn-default"
-        onClick={actions.increase(-1)}>Decrease</button>
-    </div>
+  <div>
+    <span>Temperature: {model.temperature.value}&deg;C </span>
+    <button className="btn btn-default"
+      onClick={actions.increase(1)}>Increase</button>{" "}
+    <button className="btn btn-default"
+      onClick={actions.increase(-1)}>Decrease</button>
   </div>
 );
 
 const app = (model, actions) => (
-  <form className="form-horizontal">
+  <form>
     {entry(model, actions)}
     {date(model, actions)}
     {temperature(model, actions)}
-    <div className="form-group">
-      <div className="col-md-6 col-md-offset-2">
-        <button className="btn btn-primary"
-          onClick={actions.save}>Save</button>{" "}
-        <span>{model.saved}</span>
-      </div>
+    <div>
+      <button className="btn btn-primary"
+        onClick={actions.save}>Save</button>
+      <span>{model.saved}</span>
     </div>
   </form>
 );

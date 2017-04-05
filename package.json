@@ -8,6 +8,7 @@
     "temperatures": "(cd examples/temperatures && npm i && npm start)",
     "todo-list": "(cd examples/todo-list && npm i && npm start)",
     "todomvc": "(cd examples/todomvc && npm i && npm start)",
+    "wiki": "(cd examples/wiki && npm i && npm start)",
     "examples": "npm run random-gif && npm run temperatures && npm run todo-list && npm run todomvc",
     "prestart": "npm i && npm run examples",
     "start": "node --harmony server/todo-list/main"
