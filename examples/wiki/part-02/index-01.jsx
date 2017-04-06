@@ -4,9 +4,9 @@ import ReactDOM from "react-dom";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
-const nest = (update, path) => modelChange =>
+const nest = (update, path) => modelUpdate =>
   update(model => {
-    model[path] = modelChange(model[path]);
+    model[path] = modelUpdate(model[path]);
     return model;
   });
 
@@ -58,16 +58,32 @@ const temperature = (model, update) => {
         model.value = model.value + value;
         return model;
       });
+    },
+    changeUnits: evt => {
+      evt.preventDefault();
+      update(model => {
+        if (model.units === "C") {
+          model.units = "F";
+          model.value = Math.round( model.value * 9 / 5 + 32 );
+        }
+        else {
+          model.units = "C";
+          model.value = Math.round( (model.value - 32) / 9 * 5 );
+        }
+        return model;
+      })
     }
   };
 
   return (
     <div>
       <span>Temperature: {model.value}&deg;{model.units} </span>
-      <button className="btn btn-default"
+      <button className="btn btn-sm btn-default"
         onClick={actions.increase(1)}>Increase</button>{" "}
-      <button className="btn btn-default"
-        onClick={actions.increase(-1)}>Decrease</button>
+      <button className="btn btn-sm btn-default"
+        onClick={actions.increase(-1)}>Decrease</button>{" "}
+      <button className="btn btn-sm btn-info"
+        onClick={actions.changeUnits}>Change Units</button>
     </div>
   );
 };
@@ -116,7 +132,7 @@ const initialModel = {
 };
 
 const update = flyd.stream();
-const applyUpdate = (model, modelChange) => modelChange(model);
+const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const element = document.getElementById("app");

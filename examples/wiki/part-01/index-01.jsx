@@ -1,45 +1,52 @@
 import flyd from "flyd";
 
-const log = value => {
-  const element = document.getElementById("app");
-  element.innerHTML = element.innerHTML + " " + value;
-};
+const element = document.getElementById("app");
 
-const s1 = flyd.stream();
+const total = 3;
 
-//s1.map(log);
-
-//s1(5);
-//s1(2);
-
-//log(s1());
-
-//const add = (total, next) => total + next;
-const applyOp = (total, nextOp) => {
-  if (nextOp.oper === "add") {
-    return total + nextOp.value;
-  }
-  else if (nextOp.oper === "sub") {
-    return total - nextOp.value;
-  }
-  else {
-    return total;
-  }
+for (let n = 1; n <= total; n++) {
+  element.innerHTML = element.innerHTML +
+  "<div id='stream" + n + "'>Stream " + n + " values:</div>";
 }
 
-const s2 = flyd.scan(applyOp, 0, s1);
+const log = number => value => {
+  const streamElement = document.getElementById("stream" + number);
+  streamElement.innerHTML = streamElement.innerHTML + " " + value;
+};
 
-s2.map(log);
+const stream1 = flyd.stream();
+stream1.map(log(1));
+stream1(5);
+stream1("2 pancakes");
+log(1)(stream1());
 
-/*
-s1(4);
-s1(10);
-s1(3)
-s1(2);
-s1(5);
-s1(3);
-*/
-s1({ oper: "add", value: 4 });
-s1({ oper: "sub", value: 6 });
-s1({ oper: "add", value: 10 });
-s1({ oper: "add", value: 5 });
+
+const amounts = flyd.stream();
+const add = (total, next) => total + next;
+
+const stream2 = flyd.scan(add, 0, amounts);
+stream2.map(log(2));
+
+amounts(2);
+amounts(3);
+amounts(4);
+
+const operations = flyd.stream();
+
+const applyOperation = (total, nextOperation) => {
+  if (nextOperation.operation === "add") {
+    total = total + nextOperation.value;
+  }
+  else if (nextOperation.operation === "sub") {
+    total = total - nextOperation.value;
+  }
+  return total;
+};
+
+const stream3 = flyd.scan(applyOperation, 0, operations);
+stream3.map(log(3));
+
+operations({ operation: "add", value: 4 });
+operations({ operation: "sub", value: 6 });
+operations({ operation: "add", value: 10 });
+operations({ operation: "add", value: 5 });

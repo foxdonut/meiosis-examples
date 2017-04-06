@@ -35,9 +35,9 @@
     "koa-static": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^3.16.1",
-    "eslint-plugin-inferno": "^6.10.2",
-    "eslint-plugin-react": "^6.9.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-inferno": "^6.10.4",
+    "eslint-plugin-react": "^6.10.3",
     "tslint": "^5.0.0",
     "typescript": "^2.2.2"
   }

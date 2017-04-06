@@ -1,11 +1,12 @@
 import flyd from "flyd";
 import React from "react";
 import ReactDOM from "react-dom";
+import _ from "lodash";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
-const nest = (update, path) => modelChange =>
-  update(model => _.set(model, path, modelChange(_.get(model, path))));
+const nest = (update, path) => modelUpdate =>
+  update(model => _.set(model, path, modelUpdate(_.get(model, path))));
 
 const entry = (model, update) => {
   const actions = {
@@ -48,16 +49,32 @@ const temperature = (model, update) => {
     increase: value => evt => {
       evt.preventDefault();
       update(model => _.set(model, "value", model.value + value));
+    },
+    changeUnits: evt => {
+      evt.preventDefault();
+      update(model => {
+        if (model.units === "C") {
+          model.units = "F";
+          model.value = Math.round( model.value * 9 / 5 + 32 );
+        }
+        else {
+          model.units = "C";
+          model.value = Math.round( (model.value - 32) / 9 * 5 );
+        }
+        return model;
+      })
     }
   };
 
   return (
     <div>
       <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
-      <button className="btn btn-default"
+      <button className="btn btn-sm btn-default"
         onClick={actions.increase(1)}>Increase</button>{" "}
-      <button className="btn btn-default"
-        onClick={actions.increase(-1)}>Decrease</button>
+      <button className="btn btn-sm btn-default"
+        onClick={actions.increase(-1)}>Decrease</button>{" "}
+      <button className="btn btn-sm btn-info"
+        onClick={actions.changeUnits}>Change Units</button>
     </div>
   );
 };
@@ -113,7 +130,7 @@ const initialModel = {
 };
 
 const update = flyd.stream();
-const applyUpdate = (model, modelChange) => modelChange(model);
+const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const element = document.getElementById("app");

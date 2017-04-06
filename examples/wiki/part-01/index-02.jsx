@@ -22,7 +22,7 @@ const view = (model, update) => {
 };
 
 const update = flyd.stream();
-const applyUpdate = (model, modelChange) => modelChange(model);
+const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const element = document.getElementById("app");
