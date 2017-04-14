@@ -16,11 +16,15 @@ const entry = {
   }),
 
   view: (model, update) => {
-    const actions = {
-      editEntryValue: evt => update(model => {
-        model.value = evt.target.value;
+    const updates = {
+      editEntryValue: value => update(model => {
+        model.value = value;
         return model;
       })
+    };
+
+    const actions = {
+      editEntryValue: evt => updates.editEntryValue(evt.target.value)
     };
 
     return (
@@ -39,11 +43,15 @@ const date = {
   }),
 
   view: (model, update) => {
-    const actions = {
-      editDateValue: evt => update(model => {
-        model.value = evt.target.value;
+    const updates = {
+      editDateValue: value => update(model => {
+        model.value = value;
         return model;
       })
+    };
+
+    const actions = {
+      editDateValue: evt => updates.editDateValue(evt.target.value)
     };
 
     return (
@@ -63,27 +71,32 @@ const temperature = {
   }),
 
   view: (model, update) => {
+    const updates = {
+      increase: value => update(model => {
+        model.value = model.value + value;
+        return model;
+      }),
+      changeUnits: () => update(model => {
+        if (model.units === "C") {
+          model.units = "F";
+          model.value = Math.round( model.value * 9 / 5 + 32 );
+        }
+        else {
+          model.units = "C";
+          model.value = Math.round( (model.value - 32) / 9 * 5 );
+        }
+        return model;
+      })
+    };
+
     const actions = {
       increase: value => evt => {
         evt.preventDefault();
-        update(model => {
-          model.value = model.value + value;
-          return model;
-        });
+        updates.increase(value);
       },
       changeUnits: evt => {
         evt.preventDefault();
-        update(model => {
-          if (model.units === "C") {
-            model.units = "F";
-            model.value = Math.round( model.value * 9 / 5 + 32 );
-          }
-          else {
-            model.units = "C";
-            model.value = Math.round( (model.value - 32) / 9 * 5 );
-          }
-          return model;
-        })
+        updates.changeUnits();
       }
     };
 
@@ -110,20 +123,24 @@ const app = {
   }),
 
   view: (model, update) => {
+    const updates = {
+      save: () => update(model => {
+        model.saved = " Entry #" + model.entry.value +
+          " on " + model.date.value + ":" +
+          " Temperature: " + model.temperature.value + "\xB0" +
+          model.temperature.units;
+
+        model.entry.value = "";
+        model.date.value = "";
+
+        return model;
+      })
+    };
+
     const actions = {
       save: evt => {
         evt.preventDefault();
-        update(model => {
-          model.saved = " Entry #" + model.entry.value +
-            " on " + model.date.value + ":" +
-            " Temperature: " + model.temperature.value + "\xB0" +
-            model.temperature.units;
-
-          model.entry.value = "";
-          model.date.value = "";
-
-          return model;
-        });
+        updates.save();
       }
     };
 

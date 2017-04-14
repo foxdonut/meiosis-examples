@@ -12,10 +12,14 @@ const entry = {
   model: () => ({
     value: ""
   }),
+
   create: update => {
+    const updates = {
+      editEntryValue: value => update(model => _.set(model, "value", value))
+    };
+
     const actions = {
-      editEntryValue: evt =>
-        update(model => _.set(model, "value", evt.target.value))
+      editEntryValue: evt => updates.editEntryValue(evt.target.value)
     };
 
     return model => (
@@ -32,10 +36,14 @@ const date = {
   model: () => ({
     value: ""
   }),
+
   create: update => {
+    const updates = {
+      editDateValue: value => update(model => _.set(model, "value", value))
+    };
+
     const actions = {
-      editDateValue: evt =>
-        update(model => _.set(model, "value", evt.target.value))
+      editDateValue: evt => updates.editDateValue(evt.target.value)
     };
 
     return model => (
@@ -54,37 +62,49 @@ const temperature = {
     value: 20,
     units: "C"
   }),
+
   create: update => {
+    const updates = {
+      increase: value => update(model =>
+        _.set(model, "value", model.value + value)),
+
+      changeUnits: () => update(model => {
+        if (model.units === "C") {
+          model.units = "F";
+          model.value = Math.round( model.value * 9 / 5 + 32 );
+        }
+        else {
+          model.units = "C";
+          model.value = Math.round( (model.value - 32) / 9 * 5 );
+        }
+        return model;
+      })
+    };
+
     const actions = {
       increase: value => evt => {
         evt.preventDefault();
-        update(model => _.set(model, "value", model.value + value));
+        updates.increase(value);
       },
       changeUnits: evt => {
         evt.preventDefault();
-        update(model => {
-          if (model.units === "C") {
-            model.units = "F";
-            model.value = Math.round( model.value * 9 / 5 + 32 );
-          }
-          else {
-            model.units = "C";
-            model.value = Math.round( (model.value - 32) / 9 * 5 );
-          }
-          return model;
-        })
+        updates.changeUnits();
       }
     };
 
     return model => (
-      <div>
-        <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
-        <button className="btn btn-sm btn-default"
-          onClick={actions.increase(1)}>Increase</button>{" "}
-        <button className="btn btn-sm btn-default"
-          onClick={actions.increase(-1)}>Decrease</button>{" "}
-        <button className="btn btn-sm btn-info"
-          onClick={actions.changeUnits}>Change Units</button>
+      <div className="row">
+        <div className="col-md-3">
+          <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
+        </div>
+        <div className="col-md-3">
+          <button className="btn btn-sm btn-default"
+            onClick={actions.increase(1)}>Increase</button>{" "}
+          <button className="btn btn-sm btn-default"
+            onClick={actions.increase(-1)}>Decrease</button>{" "}
+          <button className="btn btn-sm btn-info"
+            onClick={actions.changeUnits}>Change Units</button>
+        </div>
       </div>
     );
   }
@@ -100,23 +120,30 @@ const app = {
     },
     saved: ""
   }),
+
   create: update => {
+    const displayTemperature = temperature => temperature.label + ": " +
+      temperature.value + "\xB0" + temperature.units;
+
+    const updates = {
+      save: () => update(model => {
+        model.saved = " Entry #" + model.entry.value +
+          " on " + model.date.value + ":" +
+          " Temperatures: " +
+          displayTemperature(model.temperature.air) + " " +
+          displayTemperature(model.temperature.water);
+
+        model.entry.value = "";
+        model.date.value = "";
+
+        return model;
+      })
+    };
+
     const actions = {
       save: evt => {
         evt.preventDefault();
-        update(model => {
-          model.saved = " Entry #" + model.entry.value +
-            " on " + model.date.value + ":" +
-            " Temperature: Air: " + model.temperature.air.value + "\xB0" +
-            model.temperature.air.units +
-            " Water: " + model.temperature.water.value + "\xB0" +
-            model.temperature.water.units;
-
-          model.entry.value = "";
-          model.date.value = "";
-
-          return model;
-        });
+        updates.save();
       }
     };
 
@@ -127,7 +154,7 @@ const app = {
         air: temperature.create(nest(update, "temperature.air")),
         water: temperature.create(nest(update, "temperature.water"))
       }
-    }
+    };
 
     return model => (
       <form>
@@ -146,13 +173,12 @@ const app = {
 };
 
 const initialModel = app.model();
-
 const update = flyd.stream();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
-const view = app.create(update);
 const element = document.getElementById("app");
+const view = app.create(update);
 models.map(model => ReactDOM.render(view(model), element));
 
 
