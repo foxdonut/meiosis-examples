@@ -25,8 +25,10 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "flyd": "^0.2.4",
+    "immutable": "^3.8.1",
     "lodash": "^4.17.4",
-    "meiosis": "^1.0.0",
+    "meiosis": "^1.0.1",
+    "mithril": "^1.1.1",
     "ramda": "^0.23.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"

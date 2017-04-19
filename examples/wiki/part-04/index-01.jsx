@@ -6,23 +6,27 @@ import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 const nest = (update, path) => modelUpdate =>
-  update(model => _.set(model, path, modelUpdate(_.get(model, path))));
+  update(model => _.update(model, path, modelUpdate));
 
-const entry = {
-  model: () => ({
-    value: ""
-  }),
+class Entry extends React.Component {
+  componentWillMount() {
+    const update = this.props.update;
 
-  create: update => {
     const updates = {
       editEntryValue: value => update(model => _.set(model, "value", value))
     };
 
-    const actions = {
+    this.actions = {
       editEntryValue: evt => updates.editEntryValue(evt.target.value)
     };
+  }
 
-    return model => (
+  render() {
+    console.log("render Entry");
+    const model = this.props.model;
+    const actions = this.actions;
+
+    return (
       <div>
         <span>Entry number:</span>
         <input type="text" size="2" value={model.value}
@@ -30,23 +34,30 @@ const entry = {
       </div>
     );
   }
-};
+}
+Entry.model = () => ({
+  value: ""
+});
 
-const date = {
-  model: () => ({
-    value: ""
-  }),
+class Date extends React.Component {
+  componentWillMount() {
+    const update = this.props.update;
 
-  create: update => {
     const updates = {
       editDateValue: value => update(model => _.set(model, "value", value))
     };
 
-    const actions = {
+    this.actions = {
       editDateValue: evt => updates.editDateValue(evt.target.value)
     };
+  }
 
-    return model => (
+  render() {
+    console.log("render Date");
+    const model = this.props.model;
+    const actions = this.actions;
+
+    return (
       <div>
         <span>Date:</span>
         <input type="text" size="10" value={model.value}
@@ -54,19 +65,18 @@ const date = {
       </div>
     );
   }
-};
+}
+Date.model = () => ({
+  value: ""
+});
 
-const temperature = {
-  model: label => ({
-    label,
-    value: 20,
-    units: "C"
-  }),
+class Temperature extends React.Component {
+  componentWillMount() {
+    const update = this.props.update;
 
-  create: update => {
     const updates = {
       increase: value => update(model =>
-        _.set(model, "value", model.value + value)),
+        _.update(model, "value", v => v + value)),
 
       changeUnits: () => update(model => {
         if (model.units === "C") {
@@ -81,7 +91,7 @@ const temperature = {
       })
     };
 
-    const actions = {
+    this.actions = {
       increase: value => evt => {
         evt.preventDefault();
         updates.increase(value);
@@ -91,11 +101,20 @@ const temperature = {
         updates.changeUnits();
       }
     };
+  }
 
-    return model => (
+  render() {
+    console.log("render Temperature", this.props.model.label);
+    const model = this.props.model;
+    const actions = this.actions;
+
+    return (
       <div className="row">
         <div className="col-md-3">
-          <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
+          <span>
+            {model.label} Temperature:
+            {model.value}&deg;{model.units}
+          </span>
         </div>
         <div className="col-md-6">
           <button className="btn btn-sm btn-default"
@@ -108,79 +127,95 @@ const temperature = {
       </div>
     );
   }
-};
+}
+Temperature.model = label => ({
+  label,
+  value: 20,
+  units: "C"
+});
 
-const app = {
-  model: () => ({
-    entry: entry.model(),
-    date: date.model(),
-    temperature: {
-      air: temperature.model("Air"),
-      water: temperature.model("Water")
-    },
-    saved: ""
-  }),
+class App extends React.Component {
+  componentWillMount() {
+    this.props.models.map(model => this.setState({model}));
 
-  create: update => {
-    const displayTemperature = temperature => temperature.label + ": " +
+    const update = this.props.update;
+
+    const displayTemperature = temperature =>
+      temperature.label + ": " +
       temperature.value + "\xB0" + temperature.units;
 
     const updates = {
       save: () => update(model => {
-        model.saved = " Entry #" + model.entry.value +
-          " on " + model.date.value + ":" +
-          " Temperatures: " +
-          displayTemperature(model.temperature.air) + " " +
-          displayTemperature(model.temperature.water);
-
+        model.saved =
+          "Entry #" + model.entry.value +
+            " on " + model.date.value + ":" +
+            " Temperatures: " +
+            displayTemperature(model.temperature.air) + " " +
+            displayTemperature(model.temperature.water);
         model.entry.value = "";
         model.date.value = "";
-
         return model;
       })
     };
 
-    const actions = {
+    this.actions = {
       save: evt => {
         evt.preventDefault();
         updates.save();
       }
     };
 
-    const components = {
-      entry: entry.create(nest(update, "entry")),
-      date: date.create(nest(update, "date")),
+    this.nests = {
+      entry: nest(update, ["entry"]),
+      date: nest(update, ["date"]),
       temperature: {
-        air: temperature.create(nest(update, "temperature.air")),
-        water: temperature.create(nest(update, "temperature.water"))
+        air: nest(update, ["temperature", "air"]),
+        water: nest(update, ["temperature", "water"])
       }
     };
+  }
 
-    return model => (
+  render() {
+    console.log("render App");
+    const model = this.state.model;
+    const actions = this.actions;
+    const nests = this.nests;
+
+    return (
       <form>
-        {components.entry(model.entry)}
-        {components.date(model.date)}
-        {components.temperature.air(model.temperature.air)}
-        {components.temperature.water(model.temperature.water)}
+        <Entry model={model.entry} update={nests.entry} />
+        <Date model={model.date} update={nests.date} />
+        <Temperature model={model.temperature.air}
+          update={nests.temperature.air} />
+        <Temperature model={model.temperature.water}
+          update={nests.temperature.water} />
         <div>
           <button className="btn btn-primary"
-            onClick={actions.save}>Save</button>
+            onClick={actions.save}>Save</button>{" "}
           <span>{model.saved}</span>
         </div>
       </form>
     );
   }
-};
+}
+App.model = () => ({
+  entry: Entry.model(),
+  date: Date.model(),
+  temperature: {
+    air: Temperature.model("Air"),
+    water: Temperature.model("Water")
+  },
+  saved: ""
+});
 
-const initialModel = app.model();
+const initialModel = App.model();
 const update = flyd.stream();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const element = document.getElementById("app");
-const view = app.create(update);
-models.map(model => ReactDOM.render(view(model), element));
+ReactDOM.render(<App models={models} update={update} />, element);
 
 
-trace({ update, dataStreams: [ models ]});
+trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

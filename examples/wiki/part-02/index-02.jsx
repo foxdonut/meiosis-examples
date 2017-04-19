@@ -97,7 +97,7 @@ const temperature = {
         <div className="col-md-3">
           <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-6">
           <button className="btn btn-sm btn-default"
             onClick={actions.increase(1)}>Increase</button>{" "}
           <button className="btn btn-sm btn-default"
