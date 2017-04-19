@@ -30,8 +30,7 @@ const entry = {
     return (
       <div>
         <span>Entry number:</span>
-        <input type="text" size="2" value={model.value}
-          onChange={actions.editEntryValue}/>
+        <input type="text" size="2" value={model.value} onChange={actions.editEntryValue}/>
       </div>
     );
   }
@@ -57,8 +56,7 @@ const date = {
     return (
       <div>
         <span>Date:</span>
-        <input type="text" size="10" value={model.value}
-          onChange={actions.editDateValue}/>
+        <input type="text" size="10" value={model.value} onChange={actions.editDateValue}/>
       </div>
     );
   }
@@ -103,12 +101,9 @@ const temperature = {
     return (
       <div>
         <span>Temperature: {model.value}&deg;{model.units} </span>
-        <button className="btn btn-sm btn-default"
-          onClick={actions.increase(1)}>Increase</button>{" "}
-        <button className="btn btn-sm btn-default"
-          onClick={actions.increase(-1)}>Decrease</button>{" "}
-        <button className="btn btn-sm btn-info"
-          onClick={actions.changeUnits}>Change Units</button>
+        <button className="btn btn-sm btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
+        <button className="btn btn-sm btn-default" onClick={actions.increase(-1)}>Decrease</button>{" "}
+        <button className="btn btn-sm btn-info" onClick={actions.changeUnits}>Change Units</button>
       </div>
     );
   }
@@ -150,8 +145,7 @@ const app = {
         {date.view(model.date, nest(update, "date"))}
         {temperature.view(model.temperature, nest(update, "temperature"))}
         <div>
-          <button className="btn btn-primary"
-            onClick={actions.save}>Save</button>
+          <button className="btn btn-primary" onClick={actions.save}>Save</button>
           <span>{model.saved}</span>
         </div>
       </form>

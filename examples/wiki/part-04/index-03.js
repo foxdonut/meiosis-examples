@@ -28,8 +28,7 @@ const EntryNumber = {
         return (
           m("div",
             m("span", "Entry number:"),
-            m("input[type=text][size=2]",
-              {value: model.value, oninput: actions.editEntryValue})
+            m("input[type=text][size=2]", {value: model.value, oninput: actions.editEntryValue})
           )
         );
       }
@@ -59,8 +58,7 @@ const EntryDate = {
         return (
           m("div",
             m("span", "Date:"),
-            m("input[type=text][size=10]",
-              {value: model.value, oninput: actions.editDateValue})
+            m("input[type=text][size=10]", {value: model.value, oninput: actions.editDateValue})
           )
         );
       }
@@ -110,17 +108,12 @@ const Temperature = {
         return (
           m(".row",
             m(".col-md-3",
-              m("span",
-                model.label + " Temperature: " +
-                model.value + "\xB0" + model.units)
+              m("span", model.label + " Temperature: " + model.value + "\xB0" + model.units)
             ),
             m(".col-md-6",
-              m("button.btn.btn-sm.btn-default",
-                {onclick: actions.increase(1)}, "Increase"),
-              m("button.btn.btn-sm.btn-default",
-                {onclick: actions.increase(-1)}, "Decrease"),
-              m("button.btn.btn-sm.btn-info",
-                {onclick: actions.changeUnits}, "Change Units")
+              m("button.btn.btn-sm.btn-default", {onclick: actions.increase(1)}, "Increase"),
+              m("button.btn.btn-sm.btn-default", {onclick: actions.increase(-1)}, "Decrease"),
+              m("button.btn.btn-sm.btn-info", {onclick: actions.changeUnits}, "Change Units")
             )
           )
         );
@@ -189,8 +182,7 @@ const App = {
             m(components.temperature.air, {model: model.temperature.air}),
             m(components.temperature.water, {model: model.temperature.water}),
             m("div",
-              m("button.btn.btn-primary",
-                {onclick: actions.save}, "Save"),
+              m("button.btn.btn-primary", {onclick: actions.save}, "Save"),
               m("span", " "),
               m("span", model.saved)
             )

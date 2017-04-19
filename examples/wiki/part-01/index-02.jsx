@@ -15,8 +15,7 @@ const view = (model, update) => {
   return (
     <div>
       <span>Temperature: {model.value}&deg;C </span>
-      <button className="btn btn-default"
-        onClick={increase}>Increase</button>
+      <button className="btn btn-default" onClick={increase}>Increase</button>
     </div>
   );
 };

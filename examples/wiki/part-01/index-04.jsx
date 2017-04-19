@@ -57,26 +57,22 @@ const createActions = updates => ({
 const entry = (model, actions) => (
   <div>
     <span>Entry number:</span>
-    <input type="text" size="2" value={model.entry.value}
-      onChange={actions.editEntryValue}/>
+    <input type="text" size="2" value={model.entry.value} onChange={actions.editEntryValue}/>
   </div>
 );
 
 const date = (model, actions) => (
   <div>
     <span>Date:</span>
-    <input type="text" size="10" value={model.date.value}
-      onChange={actions.editDateValue}/>
+    <input type="text" size="10" value={model.date.value} onChange={actions.editDateValue}/>
   </div>
 );
 
 const temperature = (model, actions) => (
   <div>
     <span>Temperature: {model.temperature.value}&deg;C </span>
-    <button className="btn btn-default"
-      onClick={actions.increase(1)}>Increase</button>{" "}
-    <button className="btn btn-default"
-      onClick={actions.increase(-1)}>Decrease</button>
+    <button className="btn btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
+    <button className="btn btn-default" onClick={actions.increase(-1)}>Decrease</button>
   </div>
 );
 
@@ -86,8 +82,7 @@ const app = (model, actions) => (
     {date(model, actions)}
     {temperature(model, actions)}
     <div>
-      <button className="btn btn-primary"
-        onClick={actions.save}>Save</button>
+      <button className="btn btn-primary" onClick={actions.save}>Save</button>
       <span>{model.saved}</span>
     </div>
   </form>

@@ -25,8 +25,7 @@ const entry = {
     return model => (
       <div>
         <span>Entry number:</span>
-        <input type="text" size="2" value={model.get("value")}
-          onChange={actions.editEntryValue}/>
+        <input type="text" size="2" value={model.get("value")} onChange={actions.editEntryValue}/>
       </div>
     );
   }
@@ -49,8 +48,7 @@ const date = {
     return model => (
       <div>
         <span>Date:</span>
-        <input type="text" size="10" value={model.get("value")}
-          onChange={actions.editDateValue}/>
+        <input type="text" size="10" value={model.get("value")} onChange={actions.editDateValue}/>
       </div>
     );
   }
@@ -100,12 +98,9 @@ const temperature = {
           </span>
         </div>
         <div className="col-md-6">
-          <button className="btn btn-sm btn-default"
-            onClick={actions.increase(1)}>Increase</button>{" "}
-          <button className="btn btn-sm btn-default"
-            onClick={actions.increase(-1)}>Decrease</button>{" "}
-          <button className="btn btn-sm btn-info"
-            onClick={actions.changeUnits}>Change Units</button>
+          <button className="btn btn-sm btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
+          <button className="btn btn-sm btn-default" onClick={actions.increase(-1)}>Decrease</button>{" "}
+          <button className="btn btn-sm btn-info" onClick={actions.changeUnits}>Change Units</button>
         </div>
       </div>
     );
@@ -161,13 +156,10 @@ const app = {
       <form>
         {components.entry(model.get("entry"))}
         {components.date(model.get("date"))}
-        {components.temperature.air(
-          model.getIn(["temperature", "air"]))}
-        {components.temperature.water(
-          model.getIn(["temperature", "water"]))}
+        {components.temperature.air(model.getIn(["temperature", "air"]))}
+        {components.temperature.water(model.getIn(["temperature", "water"]))}
         <div>
-          <button className="btn btn-primary"
-            onClick={actions.save}>Save</button>{" "}
+          <button className="btn btn-primary" onClick={actions.save}>Save</button>{" "}
           <span>{model.get("saved")}</span>
         </div>
       </form>

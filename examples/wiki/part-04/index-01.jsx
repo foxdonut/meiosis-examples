@@ -8,7 +8,7 @@ import meiosisTracer from "meiosis-tracer";
 const nest = (update, path) => modelUpdate =>
   update(model => _.update(model, path, modelUpdate));
 
-class Entry extends React.Component {
+class EntryNumber extends React.Component {
   componentWillMount() {
     const update = this.props.update;
 
@@ -29,17 +29,16 @@ class Entry extends React.Component {
     return (
       <div>
         <span>Entry number:</span>
-        <input type="text" size="2" value={model.value}
-          onChange={actions.editEntryValue}/>
+        <input type="text" size="2" value={model.value} onChange={actions.editEntryValue}/>
       </div>
     );
   }
 }
-Entry.model = () => ({
+EntryNumber.model = () => ({
   value: ""
 });
 
-class Date extends React.Component {
+class EntryDate extends React.Component {
   componentWillMount() {
     const update = this.props.update;
 
@@ -60,13 +59,12 @@ class Date extends React.Component {
     return (
       <div>
         <span>Date:</span>
-        <input type="text" size="10" value={model.value}
-          onChange={actions.editDateValue}/>
+        <input type="text" size="10" value={model.value} onChange={actions.editDateValue}/>
       </div>
     );
   }
 }
-Date.model = () => ({
+EntryDate.model = () => ({
   value: ""
 });
 
@@ -117,12 +115,9 @@ class Temperature extends React.Component {
           </span>
         </div>
         <div className="col-md-6">
-          <button className="btn btn-sm btn-default"
-            onClick={actions.increase(1)}>Increase</button>{" "}
-          <button className="btn btn-sm btn-default"
-            onClick={actions.increase(-1)}>Decrease</button>{" "}
-          <button className="btn btn-sm btn-info"
-            onClick={actions.changeUnits}>Change Units</button>
+          <button className="btn btn-sm btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
+          <button className="btn btn-sm btn-default" onClick={actions.increase(-1)}>Decrease</button>{" "}
+          <button className="btn btn-sm btn-info" onClick={actions.changeUnits}>Change Units</button>
         </div>
       </div>
     );
@@ -183,15 +178,12 @@ class App extends React.Component {
 
     return (
       <form>
-        <Entry model={model.entry} update={nests.entry} />
-        <Date model={model.date} update={nests.date} />
-        <Temperature model={model.temperature.air}
-          update={nests.temperature.air} />
-        <Temperature model={model.temperature.water}
-          update={nests.temperature.water} />
+        <EntryNumber model={model.entry} update={nests.entry} />
+        <EntryDate model={model.date} update={nests.date} />
+        <Temperature model={model.temperature.air} update={nests.temperature.air} />
+        <Temperature model={model.temperature.water} update={nests.temperature.water} />
         <div>
-          <button className="btn btn-primary"
-            onClick={actions.save}>Save</button>{" "}
+          <button className="btn btn-primary" onClick={actions.save}>Save</button>{" "}
           <span>{model.saved}</span>
         </div>
       </form>
@@ -199,8 +191,8 @@ class App extends React.Component {
   }
 }
 App.model = () => ({
-  entry: Entry.model(),
-  date: Date.model(),
+  entry: EntryNumber.model(),
+  date: EntryDate.model(),
   temperature: {
     air: Temperature.model("Air"),
     water: Temperature.model("Water")
