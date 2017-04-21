@@ -64,7 +64,7 @@ const temperature = {
   view: (model, update) => {
     const updates = {
       increase: value => update(model =>
-        _.set(model, "value", model.value + value)),
+        _.update(model, "value", _.partial(_.add, value))),
 
       changeUnits: () => update(model => {
         if (model.units === "C") {
