@@ -147,7 +147,7 @@ const app = {
       date: date.create(nest(update, "date")),
       temperature: {
         air: temperature.create(nest(update, "temperature.air")),
-        water: temperature.create(nest(update, "temperature.water"))
+        water: temperature.create(nest(update, ["temperature", "water"]))
       }
     };
 

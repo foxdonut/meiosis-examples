@@ -8,12 +8,17 @@ import meiosisTracer from "meiosis-tracer";
 const nest = (update, path) => modelUpdate =>
   update(model => _.set(model, path, modelUpdate(_.get(model, path))));
 
+const nestComponent = (create, update, path) => {
+  const view = create(nest(update, path));
+  return model => view(_.get(model, path));
+};
+
 const entry = {
   model: () => ({
     value: ""
   }),
 
-  view: (model, update) => {
+  create: update => {
     const updates = {
       editEntryValue: value => update(model => _.set(model, "value", value))
     };
@@ -22,7 +27,7 @@ const entry = {
       editEntryValue: evt => updates.editEntryValue(evt.target.value)
     };
 
-    return (
+    return model => (
       <div>
         <span>Entry number:</span>
         <input type="text" size="2" value={model.value} onChange={actions.editEntryValue}/>
@@ -36,7 +41,7 @@ const date = {
     value: ""
   }),
 
-  view: (model, update) => {
+  create: update => {
     const updates = {
       editDateValue: value => update(model => _.set(model, "value", value))
     };
@@ -45,7 +50,7 @@ const date = {
       editDateValue: evt => updates.editDateValue(evt.target.value)
     };
 
-    return (
+    return model => (
       <div>
         <span>Date:</span>
         <input type="text" size="10" value={model.value} onChange={actions.editDateValue}/>
@@ -61,7 +66,7 @@ const temperature = {
     units: "C"
   }),
 
-  view: (model, update) => {
+  create: update => {
     const updates = {
       increase: value => update(model =>
         _.set(model, "value", model.value + value)),
@@ -90,7 +95,7 @@ const temperature = {
       }
     };
 
-    return (
+    return model => (
       <div className="row">
         <div className="col-md-3">
           <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
@@ -116,7 +121,7 @@ const app = {
     saved: ""
   }),
 
-  view: (model, update) => {
+  create: update => {
     const displayTemperature = temperature => temperature.label + ": " +
       temperature.value + "\xB0" + temperature.units;
 
@@ -142,12 +147,21 @@ const app = {
       }
     };
 
-    return (
+    const components = {
+      entry: nestComponent(entry.create, update, "entry"),
+      date: nestComponent(date.create, update, "date"),
+      temperature: {
+        air: nestComponent(temperature.create, update, "temperature.air"),
+        water: nestComponent(temperature.create, update, ["temperature", "water"])
+      }
+    };
+
+    return model => (
       <form>
-        {entry.view(model.entry, nest(update, "entry"))}
-        {date.view(model.date, nest(update, "date"))}
-        {temperature.view(model.temperature.air, nest(update, "temperature.air"))}
-        {temperature.view(model.temperature.water, nest(update, ["temperature", "water"]))}
+        {components.entry(model)}
+        {components.date(model)}
+        {components.temperature.air(model)}
+        {components.temperature.water(model)}
         <div>
           <button className="btn btn-primary" onClick={actions.save}>Save</button>
           <span>{model.saved}</span>
@@ -163,7 +177,8 @@ const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const element = document.getElementById("app");
-models.map(model => ReactDOM.render(app.view(model, update), element));
+const view = app.create(update);
+models.map(model => ReactDOM.render(view(model), element));
 
 
 trace({ update, dataStreams: [ models ]});
