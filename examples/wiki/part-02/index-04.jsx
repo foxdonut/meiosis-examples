@@ -6,7 +6,7 @@ import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 const nest = (update, path) => modelUpdate =>
-  update(model => _.set(model, path, modelUpdate(_.get(model, path))));
+  update(model => _.update(model, path, modelUpdate));
 
 const nestComponent = (create, update, path) => {
   const view = create(nest(update, path));
