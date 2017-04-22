@@ -1,31 +1,32 @@
 import flyd from "flyd";
 import React from "react";
 import ReactDOM from "react-dom";
-import Immutable from "immutable";
+import _ from "lodash/fp";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 const nest = (update, path) => modelUpdate =>
-  update(model => model.updateIn(path, modelUpdate));
+  update(_.update(path, modelUpdate));
 
 const entry = {
   model: () => ({
     value: ""
   }),
 
-  create: update => {
+  view: (model, update) => {
     const updates = {
-      editEntryValue: value => update(model => model.set("value", value))
+      editEntryValue: value => update(_.set("value", value))
     };
 
     const actions = {
       editEntryValue: evt => updates.editEntryValue(evt.target.value)
     };
 
-    return model => (
+    return (
       <div>
         <span>Entry number:</span>
-        <input type="text" size="2" value={model.get("value")} onChange={actions.editEntryValue}/>
+        <input type="text" size="2" value={model.value}
+          onChange={actions.editEntryValue}/>
       </div>
     );
   }
@@ -36,19 +37,20 @@ const date = {
     value: ""
   }),
 
-  create: update => {
+  view: (model, update) => {
     const updates = {
-      editDateValue: value => update(model => model.set("value", value))
+      editDateValue: value => update(_.set("value", value))
     };
 
     const actions = {
       editDateValue: evt => updates.editDateValue(evt.target.value)
     };
 
-    return model => (
+    return (
       <div>
         <span>Date:</span>
-        <input type="text" size="10" value={model.get("value")} onChange={actions.editDateValue}/>
+        <input type="text" size="10" value={model.value}
+          onChange={actions.editDateValue}/>
       </div>
     );
   }
@@ -61,20 +63,20 @@ const temperature = {
     units: "C"
   }),
 
-  create: update => {
+  view: (model, update) => {
     const updates = {
-      increase: value => update(model =>
-        model.update("value", v => v + value)),
+      increase: value => update(_.update("value", _.add(value))),
 
       changeUnits: () => update(model => {
-        if (model.get("units") === "C") {
-          return model.set("units", "F").
-            set("value", Math.round( model.get("value") * 9 / 5 + 32 ));
+        if (model.units === "C") {
+          model.units = "F";
+          model.value = Math.round( model.value * 9 / 5 + 32 );
         }
         else {
-          return model.set("units", "C").
-            set("value", Math.round( (model.get("value") - 32) / 9 * 5 ));
+          model.units = "C";
+          model.value = Math.round( (model.value - 32) / 9 * 5 );
         }
+        return model;
       })
     };
 
@@ -89,18 +91,18 @@ const temperature = {
       }
     };
 
-    return model => (
+    return (
       <div className="row">
         <div className="col-md-3">
-          <span>
-            {model.get("label")} Temperature:
-            {model.get("value")}&deg;{model.get("units")}
-          </span>
+          <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
         </div>
         <div className="col-md-6">
-          <button className="btn btn-sm btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
-          <button className="btn btn-sm btn-default" onClick={actions.increase(-1)}>Decrease</button>{" "}
-          <button className="btn btn-sm btn-info" onClick={actions.changeUnits}>Change Units</button>
+          <button className="btn btn-sm btn-default"
+            onClick={actions.increase(1)}>Increase</button>{" "}
+          <button className="btn btn-sm btn-default"
+            onClick={actions.increase(-1)}>Decrease</button>{" "}
+          <button className="btn btn-sm btn-info"
+            onClick={actions.changeUnits}>Change Units</button>
         </div>
       </div>
     );
@@ -118,21 +120,22 @@ const app = {
     saved: ""
   }),
 
-  create: update => {
-    const displayTemperature = temperature =>
-      temperature.get("label") + ": " +
-      temperature.get("value") + "\xB0" + temperature.get("units");
+  view: (model, update) => {
+    const displayTemperature = temperature => temperature.label + ": " +
+      temperature.value + "\xB0" + temperature.units;
 
     const updates = {
       save: () => update(model => {
-        return model.
-          set("saved", "Entry #" + model.getIn(["entry", "value"]) +
-            " on " + model.getIn(["date", "value"]) + ":" +
-            " Temperatures: " +
-            displayTemperature(model.getIn(["temperature", "air"])) + " " +
-            displayTemperature(model.getIn(["temperature", "water"]))).
-          setIn(["entry", "value"], "").
-          setIn(["date", "value"], "");
+        model.saved = " Entry #" + model.entry.value +
+          " on " + model.date.value + ":" +
+          " Temperatures: " +
+          displayTemperature(model.temperature.air) + " " +
+          displayTemperature(model.temperature.water);
+
+        model.entry.value = "";
+        model.date.value = "";
+
+        return model;
       })
     };
 
@@ -143,39 +146,30 @@ const app = {
       }
     };
 
-    const components = {
-      entry: entry.create(nest(update, ["entry"])),
-      date: date.create(nest(update, ["date"])),
-      temperature: {
-        air: temperature.create(nest(update, ["temperature", "air"])),
-        water: temperature.create(nest(update, ["temperature", "water"]))
-      }
-    };
-
-    return model => (
+    return (
       <form>
-        {components.entry(model.get("entry"))}
-        {components.date(model.get("date"))}
-        {components.temperature.air(model.getIn(["temperature", "air"]))}
-        {components.temperature.water(model.getIn(["temperature", "water"]))}
+        {entry.view(model.entry, nest(update, "entry"))}
+        {date.view(model.date, nest(update, "date"))}
+        {temperature.view(model.temperature.air, nest(update, "temperature.air"))}
+        {temperature.view(model.temperature.water, nest(update, ["temperature", "water"]))}
         <div>
-          <button className="btn btn-primary" onClick={actions.save}>Save</button>{" "}
-          <span>{model.get("saved")}</span>
+          <button className="btn btn-primary"
+            onClick={actions.save}>Save</button>
+          <span>{model.saved}</span>
         </div>
       </form>
     );
   }
 };
 
-const initialModel = Immutable.fromJS(app.model());
+const initialModel = app.model();
 const update = flyd.stream();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const element = document.getElementById("app");
-const view = app.create(update);
-models.map(model => ReactDOM.render(view(model), element));
+models.map(model => ReactDOM.render(app.view(model, update), element));
 
 
-trace({ update, dataStreams: [ models ], fromJS: Immutable.fromJS, toJS: Immutable.toJS });
+trace({ update, dataStreams: [ models ]});
 meiosisTracer({ selector: "#tracer" });
