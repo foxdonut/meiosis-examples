@@ -14,50 +14,35 @@ import { randomGifList } from "./random-gif-list";
 import { randomGifCounter } from "./random-gif-counter";
 import { increment } from "./increment";
 
-function startApp() {
-  const initialModel = {
-    counter: counter.model(),
-    button: button.model(),
-    randomGif1: randomGif.model("randomGif1"), // can either assign an id...
-    randomGif2: randomGif.model(),             // or use the component's generated id
-    randomGifPair: randomGifPair.model(),
-    randomGifPairPair: randomGifPairPair.model(),
-    randomGifList: randomGifList.model(),
-    randomGifCounter1: randomGifCounter.model(),
-    randomGifCounter2: randomGifCounter.model()
-  };
+const initialModel = app.model();
 
-  const update = stream();
-  const model = scan(applyUpdate, initialModel, update);
+const update = stream();
+const model = scan(applyUpdate, initialModel, update);
 
-  const eventStream = stream();
-  const events = createEvents({
-    eventStream,
-    events: {
-      randomGif: randomGif.events,
-      randomGifCounter1: {
-        randomGif: randomGif.events
-      },
-      randomGifCounter2: {
-        randomGif: randomGif.events
-      },
-      increment: increment.events
+const eventStream = stream();
+const events = createEvents({
+  eventStream,
+  events: {
+    randomGif: randomGif.events,
+    randomGifCounter1: {
+      randomGif: randomGif.events
     },
-    connect: {
-      "randomGif.newGifSuccess": ["increment.newGifSuccess"],
-      "randomGifCounter2.randomGif.newGifSuccess": ["increment.newGifSuccess"]
-    }
-  });
+    randomGifCounter2: {
+      randomGif: randomGif.events
+    },
+    increment: increment.events
+  },
+  connect: {
+    "randomGif.newGifSuccess": ["increment.newGifSuccess"],
+    "randomGifCounter2.randomGif.newGifSuccess": ["increment.newGifSuccess"]
+  }
+});
 
-  increment.create(update, events.increment);
-  const view = app.create(update, events);
+increment.create(update, events.increment);
+const view = app.create(update, events);
 
-  const element = document.getElementById("app");
-  const render = model => m.render(element, view(model));
-  model.map(render);
+const element = document.getElementById("app");
+model.map(model => m.render(element, view(model)));
 
-  trace({ update, dataStreams: [ model ], otherStreams: [ eventStream ] });
-  meiosisTracer({ selector: "#tracer" });
-}
-
-startApp();
+trace({ update, dataStreams: [ model ], otherStreams: [ eventStream ] });
+meiosisTracer({ selector: "#tracer" });

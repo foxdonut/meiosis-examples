@@ -9,46 +9,59 @@ import { randomGifList } from "../random-gif-list";
 import { randomGifCounter } from "../random-gif-counter";
 
 export const app = {
+  model: () => ({
+    counter: counter.model(),
+    button: button.model(),
+    randomGif1: randomGif.model("randomGif1"), // can either assign an id...
+    randomGif2: randomGif.model(),             // or use the component's generated id
+    randomGifPair: randomGifPair.model(),
+    randomGifPairPair: randomGifPairPair.model(),
+    randomGifList: randomGifList.model(),
+    randomGifCounter1: randomGifCounter.model(),
+    randomGifCounter2: randomGifCounter.model()
+  }),
   create: (update, events) => {
-    const counterView = counter.create("Total Counter: ");
-    const buttonView = button.create(nest(update, "button"));
-    const randomGif1View = randomGif.create(nest(update, "randomGif1"), events.randomGif);
-    const randomGif2View = randomGif.create(nest(update, "randomGif2"), events.randomGif);
-    const randomGifPairView = randomGifPair.create(nest(update, "randomGifPair"), events.randomGif);
-    const randomGifPairPairView = randomGifPairPair.create(nest(update, "randomGifPairPair"), events.randomGif);
-    const randomGifListView = randomGifList.create(nest(update, "randomGifList"), events.randomGif);
-    const randomGifCounter1View = randomGifCounter.create(nest(update, "randomGifCounter1"), events.randomGifCounter1);
-    const randomGifCounter2View = randomGifCounter.create(nest(update, "randomGifCounter2"), events.randomGifCounter2);
+    const components = {
+      counter: counter.create("Total Counter: "),
+      button: button.create(nest(update, "button")),
+      randomGif1: randomGif.create(nest(update, "randomGif1"), events.randomGif),
+      randomGif2: randomGif.create(nest(update, "randomGif2"), events.randomGif),
+      randomGifPair: randomGifPair.create(nest(update, "randomGifPair"), events.randomGif),
+      randomGifPairPair: randomGifPairPair.create(nest(update, "randomGifPairPair"), events.randomGif),
+      randomGifList: randomGifList.create(nest(update, "randomGifList"), events.randomGif),
+      randomGifCounter1: randomGifCounter.create(nest(update, "randomGifCounter1"), events.randomGifCounter1),
+      randomGifCounter2: randomGifCounter.create(nest(update, "randomGifCounter2"), events.randomGifCounter2)
+    };
 
     return model =>
       [
-        counterView(model.counter),
+        components.counter(model.counter),
 
         m("div.mt2", "Button:"),
-        buttonView(model.button),
+        components.button(model.button),
 
         m("div.mt2", "Random Gif:"),
-        randomGif1View(model.randomGif1),
+        components.randomGif1(model.randomGif1),
 
         m("div.mt2", "Another Random Gif:"),
-        randomGif2View(model.randomGif2),
+        components.randomGif2(model.randomGif2),
 
         m("div.mt2", "Random Gif Pair:"),
-        randomGifPairView(model.randomGifPair),
+        components.randomGifPair(model.randomGifPair),
 
         m("div.mt2", "Random Gif Pair Pair:"),
-        randomGifPairPairView(model.randomGifPairPair),
+        components.randomGifPairPair(model.randomGifPairPair),
 
         m("div.mt2", "Random Gif List:"),
-        randomGifListView(model.randomGifList),
+        components.randomGifList(model.randomGifList),
 
         m("div.mt2", "Random Gif with Counter (doesn't count in total):"),
-        randomGifCounter1View(model.randomGifCounter1),
+        components.randomGifCounter1(model.randomGifCounter1),
 
         m("div.mt2", "Another Random Gif with Counter (counts in total):"),
-        randomGifCounter2View(model.randomGifCounter2),
+        components.randomGifCounter2(model.randomGifCounter2),
 
-        counterView(model.counter)
+        components.counter(model.counter)
     ];
   }
 };
