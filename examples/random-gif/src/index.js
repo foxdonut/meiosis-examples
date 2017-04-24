@@ -5,13 +5,7 @@ import { applyUpdate, createEvents, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 import { app } from "./app";
-import { counter } from "./counter";
-import { button } from "./button";
 import { randomGif } from "./random-gif";
-import { randomGifPair } from "./random-gif-pair";
-import { randomGifPairPair } from "./random-gif-pair-pair";
-import { randomGifList } from "./random-gif-list";
-import { randomGifCounter } from "./random-gif-counter";
 import { increment } from "./increment";
 
 const initialModel = app.model();
