@@ -1,6 +1,6 @@
 import m from "mithril";
-import { lensPath, over } from "ramda";
 import { randomGif } from "../random-gif";
+import { nestComponent } from "../util";
 
 const add = update => () => update(model => {
   const randomGifModel = randomGif.model();
@@ -23,10 +23,7 @@ export const randomGifList = {
   create: (update, events) => {
     const renderRandomGif = model => id =>
       m("div.dib", { key: id }, [
-        randomGif.create(
-          modelChange => update(over(lensPath(["randomGifsById", id]), modelChange)),
-          events
-        )(model.randomGifsById[id]),
+        nestComponent(randomGif.create, update, ["randomGifsById", id], events)(model),
         m("button.f8.link.dim.ph2.br2.ba.red.b--red.bg-white", { onclick: remove(update, id) }, "Remove")
       ]);
 

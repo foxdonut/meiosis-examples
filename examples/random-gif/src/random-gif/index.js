@@ -5,8 +5,6 @@ import { assoc, merge } from "ramda";
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";
 
-const editTag = update => evt => update(assoc("tag", evt.target.value));
-
 const newGifStart = () => ({
   isLoading: true,
   isError: false
@@ -22,14 +20,6 @@ const newGifError = () => ({
   isLoading: false,
   isError: true
 });
-
-const newGif = (update, events, id, tag) => () => {
-  update(model => merge(model, newGifStart()));
-  m.request({ url: gif_new_url, data: { api_key, tag }}).
-    then(response => update(model => merge(model, newGifSuccess(response.data)))).
-    then(() => events.newGifSuccess(id)).
-    catch(() => update(model => merge(model, newGifError())));
-};
 
 const imgsrc = model => model.isLoading ? "/examples/random-gif/images/loading.gif" : (
   model.isError ? "/examples/random-gif/images/error.png" : model.image_url
@@ -48,15 +38,27 @@ export const randomGif = {
     };
   },
 
-  create: (update, events) => model =>
-    m("div.ma2.ba.b--green.pa2", [
-      m("span.mr2", "Tag:"),
-      m("input.mr2[type=text]", { value: model.tag, onkeyup: editTag(update) }),
-      m("button.white.bg-blue.b--blue.ba.br2.pv1.ph2.link.w4",
-        { onclick: newGif(update, events, model.id, model.tag) },
-        "Random Gif"),
-      m("div.mt2", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
-    ]),
+  create: (update, events) => {
+    const editTag = evt => update(assoc("tag", evt.target.value));
+
+    const newGif = (id, tag) => () => {
+      update(model => merge(model, newGifStart()));
+      m.request({ url: gif_new_url, data: { api_key, tag }}).
+        then(response => update(model => merge(model, newGifSuccess(response.data)))).
+        then(() => events.newGifSuccess(id)).
+        catch(() => update(model => merge(model, newGifError())));
+    };
+
+    return model =>
+      m("div.ma2.ba.b--green.pa2", [
+        m("span.mr2", "Tag:"),
+        m("input.mr2[type=text]", { value: model.tag, onkeyup: editTag }),
+        m("button.db.mt2.white.bg-blue.b--blue.ba.br2.pv1.ph2.link.w4",
+          { onclick: newGif(model.id, model.tag) },
+          "Random Gif"),
+        m("div.mt2", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
+      ]);
+  },
 
   events: {
     emit: ["newGifSuccess"]

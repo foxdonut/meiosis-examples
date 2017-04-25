@@ -1,8 +1,9 @@
 import m from "mithril";
 import classnames from "classnames";
-import { lensProp, not, over } from "ramda";
+import { not } from "ramda";
+import { modify } from "../util";
 
-const toggle = update => () => update(over(lensProp("active"), not));
+const toggle = update => () => update(modify("active", not));
 
 export const button = {
   model: () => ({
