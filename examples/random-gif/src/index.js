@@ -11,7 +11,7 @@ import { increment } from "./increment";
 const initialModel = app.model();
 
 const update = stream();
-const model = scan(applyUpdate, initialModel, update);
+const models = scan(applyUpdate, initialModel, update);
 
 const eventStream = stream();
 const events = createEvents({
@@ -36,7 +36,7 @@ increment.create(update, events.increment);
 const view = app.create(update, events);
 
 const element = document.getElementById("app");
-model.map(model => m.render(element, view(model)));
+models.map(model => m.render(element, view(model)));
 
-trace({ update, dataStreams: [ model ], otherStreams: [ eventStream ] });
+trace({ update, dataStreams: [ models ], otherStreams: [ eventStream ] });
 meiosisTracer({ selector: "#tracer" });

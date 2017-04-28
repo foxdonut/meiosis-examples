@@ -6,6 +6,13 @@ import meiosisTracer from "meiosis-tracer";
 
 const nest = (update, path) => R.compose(update, R.over(R.lensPath(path)));
 
+const nestComponent = (create, update, path) => {
+  const component = create(nest(update, path));
+  return {
+    view: vnode => m(component, { model: R.path(path, vnode.attrs.model) })
+  };
+};
+
 const EntryNumber = {
   model: () => ({
     value: ""
@@ -159,11 +166,11 @@ const App = {
     };
 
     const components = {
-      entry: EntryNumber.create(nest(update, ["entry"])),
-      date: EntryDate.create(nest(update, ["date"])),
+      entry: nestComponent(EntryNumber.create, update, ["entry"]),
+      date: nestComponent(EntryDate.create, update, ["date"]),
       temperature: {
-        air: Temperature.create(nest(update, ["temperature", "air"])),
-        water: Temperature.create(nest(update, ["temperature", "water"]))
+        air: nestComponent(Temperature.create, update, ["temperature", "air"]),
+        water: nestComponent(Temperature.create, update, ["temperature", "water"])
       }
     };
 
@@ -177,10 +184,10 @@ const App = {
 
         return (
           m("form",
-            m(components.entry, {model: model.entry}),
-            m(components.date, {model: model.date}),
-            m(components.temperature.air, {model: model.temperature.air}),
-            m(components.temperature.water, {model: model.temperature.water}),
+            m(components.entry, { model }),
+            m(components.date, { model }),
+            m(components.temperature.air, { model }),
+            m(components.temperature.water, { model }),
             m("div",
               m("button.btn.btn-primary", {onclick: actions.save}, "Save"),
               m("span", " "),
