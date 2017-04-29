@@ -1,9 +1,12 @@
 export const app = {
   model: () => ({
+    article: null,
     articles: [],
     articlesCount: 0,
-    profile: {
-    },
+    comments: [],
+    login: {},
+    profile: {},
+    register: {},
     tagFilter: "",
     tags: []
   })

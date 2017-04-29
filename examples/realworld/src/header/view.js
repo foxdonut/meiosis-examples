@@ -23,7 +23,7 @@ export const createView = update => ({
             )
           ),
           m("li.nav-item",
-            m("a.nav-link[href='']", "Sign up")
+            m("a.nav-link[href='/register']", { oncreate: m.route.link }, "Sign up")
           )
         )
       )

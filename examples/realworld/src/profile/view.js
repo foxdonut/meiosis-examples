@@ -1,12 +1,21 @@
 import m from "mithril";
 
+const profileHref = (username, isFavorites) => (
+  { href: "/profile/" + username + (isFavorites ? "/favorites" : ""),
+    oncreate: m.route.link, onupdate: m.route.link }
+);
+
 export const createView = (actions, components) => ({
-  oninit: vnode => {
-    actions.loadProfile(vnode.attrs.username);
-    actions.loadArticles(vnode.attrs.username);
+  init: (username, isFavorites) => {
+    actions.loadProfile(username);
+    actions.loadArticles(username, isFavorites);
   },
   view: vnode => {
     const model = vnode.attrs.model;
+    const username = model.profile.username;
+    const isFavorites = vnode.attrs.favorites;
+    const myActive = isFavorites ? "" : ".active";
+    const favActive = isFavorites ? ".active" : "";
 
     return m(".profile-page",
       m(".user-info",
@@ -14,12 +23,12 @@ export const createView = (actions, components) => ({
           m(".row",
             m(".col-xs-12.col-md-10.offset-md-1",
               m("img.user-img", { src: model.profile.image }),
-              m("h4", model.profile.username ),
+              m("h4", username ),
               m("p", model.profile.bio),
               m("button.btn.btn-sm.btn-outline-secondary.action-btn",
                 m("i.ion-plus-round"),
                 m.trust("&nbsp;"),
-                "Follow " + model.profile.username
+                "Follow " + username
               )
             )
           )
@@ -31,10 +40,10 @@ export const createView = (actions, components) => ({
             m(".articles-toggle",
               m("ul.nav.nav-pills.outline-active",
                 m("li.nav-item",
-                  m("a.nav-link.active[href='']", "My Articles")
+                  m("a.nav-link" + myActive, profileHref(username, false), "My Articles")
                 ),
                 m("li.nav-item",
-                  m("a.nav-link[href='']", "Favorited Articles")
+                  m("a.nav-link" + favActive, profileHref(username, true), "Favorited Articles")
                 )
               )
             ),
