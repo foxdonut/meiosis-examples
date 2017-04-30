@@ -1,0 +1,43 @@
+{
+  "name": "realworld",
+  "version": "1.0.0",
+  "description": "meiosis-examples realworld",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "mithril",
+    "reactive",
+    "realworld"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "crossroads": "^0.12.2",
+    "flyd": "^0.2.4",
+    "history": "^4.6.1",
+    "ramda": "^0.23.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "meiosis": "^1.0.1",
+    "react-jsx": "^1.0.0",
+    "webpack": "^2.4.1"
+  }
+}
