@@ -8,19 +8,19 @@ export const createView = update => model => (
           <form>
             <fieldset>
               <fieldset className="form-group">
-                  <input type="text" className="form-control form-control-lg" placeholder="Article Title" />
+                <input type="text" className="form-control form-control-lg" placeholder="Article Title" />
               </fieldset>
               <fieldset className="form-group">
-                  <input type="text" className="form-control" placeholder="What's this article about?" />
+                <input type="text" className="form-control" placeholder="What's this article about?" />
               </fieldset>
               <fieldset className="form-group">
-                  <textarea className="form-control" rows="8" placeholder="Write your article (in markdown)"></textarea>
+                <textarea className="form-control" rows="8" placeholder="Write your article (in markdown)"></textarea>
               </fieldset>
               <fieldset className="form-group">
-                  <input type="text" className="form-control" placeholder="Enter tags" /><div className="tag-list"></div>
+                <input type="text" className="form-control" placeholder="Enter tags" /><div className="tag-list"></div>
               </fieldset>
               <button className="btn btn-lg pull-xs-right btn-primary" type="button">
-                  Publish Article
+                Publish Article
               </button>
             </fieldset>
           </form>
