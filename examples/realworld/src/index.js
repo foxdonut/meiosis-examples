@@ -52,3 +52,8 @@ m.route(element, "/", {
     render: () => m(Layout, { component: Register })
   }
 });
+
+// Only for development, to use the Meiosis Tracer as a Chrome extension.
+import { trace } from "meiosis";
+trace({ update, dataStreams: [ models ] });
+models.map(m.redraw);

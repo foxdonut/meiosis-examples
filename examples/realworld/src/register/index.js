@@ -1,8 +1,12 @@
-import { compose } from "ramda";
-
-import { createActions } from "./actions";
-import { createView } from "./view";
+import { credentials } from "../credentials";
 
 export const register = {
-  create: compose(createView, createActions)
+  create: update => credentials.create(update, {
+    path: ["register"],
+    method: "register",
+    alternativeLink: "/login",
+    alternativeLabel: "Already have an account?",
+    label: "Sign up",
+    showUsername: true
+  })
 };

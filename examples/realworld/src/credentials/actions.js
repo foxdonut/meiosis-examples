@@ -1,15 +1,15 @@
-import { assoc, assocPath, merge } from "ramda";
+import { assoc, merge } from "ramda";
 
 import { credentialsApi } from "../services";
 
-export const createActions = update => ({
+export const createActions = (update, method) => ({
   updateForm: field => evt => update(
-    assocPath(["login", field], evt.target.value)
+    assoc(field, evt.target.value)
   ),
 
-  login: model => evt => {
+  sendCredentials: model => evt => {
     evt.preventDefault();
-    credentialsApi.login({ user: model.login }).
+    credentialsApi[method]({ user: model }).
       then(user => update(model => merge(model, user))).
       catch(err => update(model => assoc("errors", err.errors, model)));
   }
