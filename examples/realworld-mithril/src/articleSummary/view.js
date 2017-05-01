@@ -1,10 +1,10 @@
 import m from "mithril";
+import { merge } from "ramda";
 
-const profileHref = model =>
-  ({ href: "/profile/" + model.author.username, oncreate: m.route.link, onupdate: m.route.link });
+import { mlink } from "../util";
 
-const articleHref = model =>
-  ({ href: "/article/" + model.slug, oncreate: m.route.link, onupdate: m.route.link })
+const profileHref = model => merge({ href: "/profile/" + model.author.username }, mlink());
+const articleHref = model => merge({ href: "/article/" + model.slug }, mlink());
 
 export const createView = update => ({
   view: vnode => {

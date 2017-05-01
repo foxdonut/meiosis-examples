@@ -1,7 +1,7 @@
 import m from "mithril";
 
 export const createView = (actions, components) => ({
-  oninit: () => actions.globalFeed(),
+  init: actions.globalFeed,
 
   view: vnode => {
     const model = vnode.attrs.model;
@@ -27,8 +27,8 @@ export const createView = (actions, components) => ({
           m(".col-md-9",
             m(".feed-toggle",
               m("ul.nav.nav-pills.outline-active",
-                m("li.nav-item",
-                  m("a.nav-link.disabled[href='']", "Your Feed")
+                model.signedIn && m("li.nav-item",
+                  m("a.nav-link[href='']", "Your Feed")
                 ),
                 m("li.nav-item",
                   m("a.nav-link" + content.globalFeedClass + "[href='']",

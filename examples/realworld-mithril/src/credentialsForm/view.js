@@ -1,6 +1,8 @@
 import m from "mithril";
 import { assoc, defaultTo, path } from "ramda";
 
+import { mlink } from "../util";
+
 export const createView = (actions, options) => ({
   view: vnode => {
     const model = vnode.attrs.model;
@@ -17,8 +19,7 @@ export const createView = (actions, options) => ({
           m(".col-md-6.offset-md-3.col-xs-12",
             m("h1.text-xs-center", options.label),
             m("p.text-xs-center",
-              m("a[href='" + options.alternativeLink + "']",
-                { oncreate: m.route.link }, options.alternativeLabel)
+              m("a[href='" + options.alternativeLink + "']", mlink(), options.alternativeLabel)
             ),
             m("form",
               options.showUsername &&
@@ -44,7 +45,7 @@ export const createView = (actions, options) => ({
                 )
               ),
               m("button.btn.btn-lg.btn-primary.pull-xs-right",
-                { onclick: actions.sendCredentials(model) }, options.label)
+                { onclick: actions.callback(model) }, options.label)
             )
           )
         )

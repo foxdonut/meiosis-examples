@@ -1,8 +1,10 @@
 import m from "mithril";
+import { merge } from "ramda";
 
-const profileHref = (username, isFavorites) => (
-  { href: "/profile/" + username + (isFavorites ? "/favorites" : ""),
-    oncreate: m.route.link, onupdate: m.route.link }
+import { mlink } from "../util";
+
+const profileHref = (username, isFavorites) => merge(
+  { href: "/profile/" + username + (isFavorites ? "/favorites" : "") }, mlink()
 );
 
 export const createView = (actions, components) => ({

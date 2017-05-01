@@ -1,7 +1,9 @@
 import m from "mithril";
+import { merge } from "ramda";
 
-const profileHref = model =>
-  ({ href: "/profile/" + model.author.username, oncreate: m.route.link, onupdate: m.route.link });
+import { mlink } from "../util";
+
+const profileHref = model => merge({ href: "/profile/" + model.author.username }, mlink());
 
 const articleMeta = article =>
   m(".article-meta",

@@ -1,7 +1,14 @@
-import { apply, compose, lensPath, over, pipe, tail } from "ramda";
-
-export const thru = (...args) => apply(pipe, tail(args))(args[0]);
-
-// export const nest = (update, path) => pipe(thru(path, lensPath, over), update);
+import m from "mithril";
+import { compose, lensPath, merge, over, path } from "ramda";
 
 export const nest = (update, path) => compose(update, over(lensPath(path)));
+
+export const mlink = () => ({
+  oncreate: m.route.link,
+  onupdate: m.route.link
+});
+
+export const viewModel = model =>
+  merge({
+    signedIn: !!path(["user", "token"], model)
+  }, model);
