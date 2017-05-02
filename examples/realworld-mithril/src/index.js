@@ -13,6 +13,8 @@ const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 
 const initialModel = {
   articles: [],
+  articlesFilter: {
+  },
   login: {},
   pager: {
     limit: 10,

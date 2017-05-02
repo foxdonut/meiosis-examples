@@ -10,10 +10,10 @@ export const createView = actions => ({
 
     return m("nav",
       m("ul.pagination",
-        m("li.page-item",
-          pageList.map(pageNumber =>
-            m("a.page-link" + (pageNumber === currentPageNumber ? ".active" : "") + "[href='']",
-              { onclick: actions.page(pageNumber) },
+        pageList.map(pageNumber =>
+          m("li.page-item" + (pageNumber === currentPageNumber ? ".active" : ""),
+            m("a.page-link[href='']",
+              { onclick: actions.page(model, pageNumber) },
               String(pageNumber)
             )
           )
