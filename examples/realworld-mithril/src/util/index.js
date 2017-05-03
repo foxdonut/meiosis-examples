@@ -8,6 +8,9 @@ export const mlink = () => ({
   onupdate: m.route.link
 });
 
+export const profileLink = (username, isFavorites) =>
+  merge({ href: "/profile/" + username + (isFavorites ? "/favorites" : "") }, mlink());
+
 export const viewModel = model =>
   merge({
     signedIn: !!path(["user", "token"], model)

@@ -13,13 +13,9 @@ const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 
 const initialModel = {
   articles: [],
-  articlesFilter: {
-  },
+  articlesFilter: {},
   login: {},
-  pager: {
-    limit: 10,
-    offset: 0
-  },
+  profile: {},
   register: {},
   tags: []
 };

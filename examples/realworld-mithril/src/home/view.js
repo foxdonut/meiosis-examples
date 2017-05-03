@@ -1,5 +1,7 @@
 import m from "mithril";
 
+import { mlink } from "../util";
+
 export const createView = (actions, components) => ({
   init: actions.globalFeed,
 
@@ -31,8 +33,7 @@ export const createView = (actions, components) => ({
                   m("a.nav-link[href='']", "Your Feed")
                 ),
                 m("li.nav-item",
-                  m("a.nav-link" + content.globalFeedClass + "[href='']",
-                    { onclick: actions.globalFeed }, "Global Feed")
+                  m("a.nav-link" + content.globalFeedClass + "[href='/']", mlink(), "Global Feed")
                 ),
                 content.tagFeedComponent
               )

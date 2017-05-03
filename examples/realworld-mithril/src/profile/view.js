@@ -1,11 +1,6 @@
 import m from "mithril";
-import { merge } from "ramda";
 
-import { mlink } from "../util";
-
-const profileHref = (username, isFavorites) => merge(
-  { href: "/profile/" + username + (isFavorites ? "/favorites" : "") }, mlink()
-);
+import { profileLink } from "../util";
 
 export const createView = (actions, components) => ({
   init: (username, isFavorites) => {
@@ -42,10 +37,10 @@ export const createView = (actions, components) => ({
             m(".articles-toggle",
               m("ul.nav.nav-pills.outline-active",
                 m("li.nav-item",
-                  m("a.nav-link" + myActive, profileHref(username, false), "My Articles")
+                  m("a.nav-link" + myActive, profileLink(username, false), "My Articles")
                 ),
                 m("li.nav-item",
-                  m("a.nav-link" + favActive, profileHref(username, true), "Favorited Articles")
+                  m("a.nav-link" + favActive, profileLink(username, true), "Favorited Articles")
                 )
               )
             ),

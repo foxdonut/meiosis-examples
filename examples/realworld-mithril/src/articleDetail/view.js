@@ -1,15 +1,12 @@
 import m from "mithril";
-import { merge } from "ramda";
 
-import { mlink } from "../util";
-
-const profileHref = model => merge({ href: "/profile/" + model.author.username }, mlink());
+import { profileLink } from "../util";
 
 const articleMeta = article =>
   m(".article-meta",
-    m("a[href='']", m("img", { src: article.author.image })),
+    m("a", profileLink(article.author.username), m("img", { src: article.author.image })),
     m(".info",
-      m("a.author[href='']", article.author.username),
+      m("a.author", profileLink(article.author.username), article.author.username),
       m("span.date", new Date(article.createdAt).toDateString())
     ),
     m("button.btn.btn-sm.btn-outline-secondary",
