@@ -7,10 +7,11 @@ export const createView = (actions, options) => ({
   view: vnode => {
     const model = vnode.attrs.model;
 
-    const orEmpty = defaultTo([]);
+    //const orEmpty = defaultTo([]);
     const errors = ["username", "email", "password"].reduce(
       (acc, field) =>
-        assoc(field, orEmpty(path(["errors", field], model)), acc),
+        //assoc(field, orEmpty(path(["errors", field], model)), acc),
+        assoc(field, path(["errors", field], model), acc),
       {});
 
     return m(".auth-page",
@@ -26,22 +27,28 @@ export const createView = (actions, options) => ({
                 m("fieldset.form-group",
                   m("input.form-control.form-control-lg[type='text'][placeholder='Username']",
                     { value: model.username, oninput: actions.updateForm("username") }),
-                  m("ul.error-messages",
-                    errors.username.map(message => m("li", "username " + message))
+                  //m("ul.error-messages",
+                  errors.username && m("ul.error-messages",
+                    //errors.username.map(message => m("li", "username " + message))
+                    m("li", "username " + errors.username)
                   )
                 ),
               m("fieldset.form-group",
                 m("input.form-control.form-control-lg[type='text'][placeholder='Email']",
                   { value: model.email, oninput: actions.updateForm("email") }),
-                m("ul.error-messages",
-                  errors.email.map(message => m("li", "email " + message))
+                //m("ul.error-messages",
+                errors.email && m("ul.error-messages",
+                  //errors.email.map(message => m("li", "email " + message))
+                  m("li", "email " + errors.email)
                 )
               ),
               m("fieldset.form-group",
                 m("input.form-control.form-control-lg[type='password'][placeholder='Password']",
                   { value: model.password, oninput: actions.updateForm("password") }),
-                m("ul.error-messages",
-                  errors.password.map(message => m("li", "password " + message))
+                //m("ul.error-messages",
+                errors.password && m("ul.error-messages",
+                  //errors.password.map(message => m("li", "password " + message))
+                  m("li", "password " + errors.password)
                 )
               ),
               m("button.btn.btn-lg.btn-primary.pull-xs-right",

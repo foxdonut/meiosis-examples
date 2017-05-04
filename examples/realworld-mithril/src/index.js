@@ -13,7 +13,11 @@ const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 
 const initialModel = {
   articles: [],
-  articlesFilter: {},
+  articlesFilter: {
+    limit: 10,
+    offset: 0,
+    tagFilter: ""
+  },
   login: {},
   profile: {},
   register: {},
@@ -36,7 +40,7 @@ m.route.prefix("#");
 const element = document.getElementById("app");
 m.route(element, "/", {
   "/": {
-    onmatch: () => Home.init(),
+    onmatch: () => Home.init(models().articlesFilter),
     render: () => m(Layout, { component: Home, page: "home" })
   },
   "/article/:slug": {
