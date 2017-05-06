@@ -1,18 +1,12 @@
 import m from "mithril";
-import { assoc, defaultTo, path } from "ramda";
+import { defaultTo } from "ramda";
 
 import { mlink } from "../util";
 
 export const createView = (actions, options) => ({
   view: vnode => {
     const model = vnode.attrs.model;
-
-    //const orEmpty = defaultTo([]);
-    const errors = ["username", "email", "password"].reduce(
-      (acc, field) =>
-        //assoc(field, orEmpty(path(["errors", field], model)), acc),
-        assoc(field, path(["errors", field], model), acc),
-      {});
+    const errors = Object.keys(defaultTo({}, model.errors)).map(key => key + " " + model.errors[key]);
 
     return m(".auth-page",
       m(".container page",
@@ -22,34 +16,21 @@ export const createView = (actions, options) => ({
             m("p.text-xs-center",
               m("a[href='" + options.alternativeLink + "']", mlink(), options.alternativeLabel)
             ),
+
+            m("ul.error-messages", errors.map(error => m("li", error))),
             m("form",
               options.showUsername &&
                 m("fieldset.form-group",
                   m("input.form-control.form-control-lg[type='text'][placeholder='Username']",
-                    { value: model.username, oninput: actions.updateForm("username") }),
-                  //m("ul.error-messages",
-                  errors.username && m("ul.error-messages",
-                    //errors.username.map(message => m("li", "username " + message))
-                    m("li", "username " + errors.username)
-                  )
+                    { value: model.username, oninput: actions.updateForm("username") })
                 ),
               m("fieldset.form-group",
                 m("input.form-control.form-control-lg[type='text'][placeholder='Email']",
-                  { value: model.email, oninput: actions.updateForm("email") }),
-                //m("ul.error-messages",
-                errors.email && m("ul.error-messages",
-                  //errors.email.map(message => m("li", "email " + message))
-                  m("li", "email " + errors.email)
-                )
+                  { value: model.email, oninput: actions.updateForm("email") })
               ),
               m("fieldset.form-group",
                 m("input.form-control.form-control-lg[type='password'][placeholder='Password']",
-                  { value: model.password, oninput: actions.updateForm("password") }),
-                //m("ul.error-messages",
-                errors.password && m("ul.error-messages",
-                  //errors.password.map(message => m("li", "password " + message))
-                  m("li", "password " + errors.password)
-                )
+                  { value: model.password, oninput: actions.updateForm("password") })
               ),
               m("button.btn.btn-lg.btn-primary.pull-xs-right",
                 { onclick: actions.callback(model) }, options.label)

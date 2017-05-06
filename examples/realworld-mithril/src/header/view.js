@@ -16,13 +16,13 @@ export const createView = update => ({
           ),
           model.signedIn ? [
             m("li.nav-item",
-              m("a.nav-link[href='/editor']", mlink(),
-                m("i.ion-compose", m.trust("&nbsp;New Post"))
+              m("a.nav-link.ion-compose[href='/editor']", mlink(),
+                m.trust("&nbsp;New Post")
               )
             ),
             m("li.nav-item",
-              m("a.nav-link[href='/settings']", mlink(),
-                m("i.ion-gear-a", m.trust("&nbsp;Settings"))
+              m("a.nav-link.ion-gear-a[href='/settings']", mlink(),
+                m.trust("&nbsp;Settings")
               )
             )
           ] : [
