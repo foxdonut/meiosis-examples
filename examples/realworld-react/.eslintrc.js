@@ -4,11 +4,8 @@ module.exports = {
     "react"
   ],
   "rules": {
-    "react/display-name": [
-      0
-    ],
-    "react/prop-types": [
-      0
-    ]
+    "react/display-name": [ 0 ],
+    "react/no-render-return-value": [ 0 ],
+    "react/prop-types": [ 0 ]
   }
 };
