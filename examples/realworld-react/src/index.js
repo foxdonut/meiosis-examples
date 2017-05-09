@@ -18,7 +18,7 @@ const initialModel = {
     tagFilter: ""
   },
   login: {},
-  page: "Login",
+  page: "",
   profile: {},
   register: {},
   tags: []

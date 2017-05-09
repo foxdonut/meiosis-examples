@@ -1,28 +1,37 @@
 import React from "react";
 
-export const createView = update => model => (
-  <nav className="navbar navbar-light">
-    <div className="container">
-      <a className="navbar-brand" href="index.html">conduit</a>
-      <ul className="nav navbar-nav pull-xs-right">
-        <li className="nav-item">
-          {/* Add "active" className when you're on that page" */}
-          <a className="nav-link active" href="">Home</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="">
-            <i className="ion-compose"></i>&nbsp;New Post
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="">
-            <i className="ion-gear-a"></i>&nbsp;Settings
-          </a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="">Sign up</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-);
+export const createView = update => model => {
+  const active = page => model.page === page ? ".active" : "";
+
+  return (
+    <nav className="navbar navbar-light">
+      <div className="container">
+        <a className="navbar-brand" href="#/">conduit</a>
+        <ul className="nav navbar-nav pull-xs-right">
+          <li className="nav-item {active('Home')}">
+            <a className="nav-link" href="#/">Home</a>
+          </li>
+          {model.signedIn ? [(
+          <li key="newPost" className="nav-item">
+            <a className="nav-link" href="#/editor">
+              <i className="ion-compose"></i>&nbsp;New Post
+            </a>
+          </li>), (
+          <li key="settings" className="nav-item">
+            <a className="nav-link" href="#/settings">
+              <i className="ion-gear-a"></i>&nbsp;Settings
+            </a>
+          </li>
+          )] : [(
+          <li key="register" className="nav-item {active('Register')}">
+            <a className="nav-link" href="#/register">Sign up</a>
+          </li>), (
+          <li key="login" className="nav-item {active('Login')}">
+            <a className="nav-link" href="#/login">Sign in</a>
+          </li>
+          )]}
+        </ul>
+      </div>
+    </nav>
+  );
+};
