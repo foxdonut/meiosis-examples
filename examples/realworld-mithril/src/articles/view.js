@@ -1,7 +1,7 @@
 import m from "mithril";
 import { merge } from "ramda";
 
-export const createView = (update, components) => ({
+export const createView = components => ({
   view: vnode => {
     const model = vnode.attrs.model;
 

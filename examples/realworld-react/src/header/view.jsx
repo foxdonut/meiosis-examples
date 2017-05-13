@@ -1,6 +1,6 @@
 import React from "react";
 
-export const createView = update => model => {
+export const createView = () => model => {
   const active = page => model.page === page ? ".active" : "";
 
   return (

@@ -1,5 +1,6 @@
 import m from "mithril";
 import stream from "mithril/stream";
+import { assoc, assocPath } from "ramda";
 
 import { articleDetail } from "./articleDetail";
 import { articleEdit } from "./articleEdit";
@@ -59,6 +60,13 @@ credentialsApi.getUser().then(user => {
       render: () => m(Layout, { component: ArticleDetail })
     },
     "/editor": {
+      onmatch: () => update(model => assoc("article", articleEdit.model(), model)),
+      render: () => m(Layout, { component: ArticleEdit, page: "articleEdit" })
+    },
+    "/editor/:slug": {
+      onmatch: params => ArticleDetail.init(params.slug).then(() => update(
+        model => assocPath(["article", "tags"], model.article.tagList.join(" "), model)
+      )),
       render: () => m(Layout, { component: ArticleEdit, page: "articleEdit" })
     },
     "/login": {

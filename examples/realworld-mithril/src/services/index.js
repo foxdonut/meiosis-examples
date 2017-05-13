@@ -17,7 +17,12 @@ export const articlesApi = {
   getList: data => m.request(API_ROOT + "/articles", { data }),
   getSingle: slug => m.request(API_ROOT + "/articles/" + slug),
   getComments: slug => m.request(API_ROOT + "/articles/" + slug + "/comments"),
-  publish: data => m.request(API_ROOT + "/articles", merge(authHeader(), { data, method: "POST" }))
+  addComment: (slug, data) => m.request(API_ROOT + "/articles/" + slug + "/comments",
+    merge(authHeader(), { data, method: "POST" })),
+  deleteComment: (slug, id) => m.request(API_ROOT + "/articles/" + slug + "/comments/" + id,
+    merge(authHeader(), { method: "DELETE" })),
+  publish: data => m.request(API_ROOT + "/articles" + (data.article.slug ? "/" + data.article.slug : ""),
+    merge(authHeader(), { data, method: (data.article.slug ? "PUT" : "POST") }))
 };
 
 export const credentialsApi = {

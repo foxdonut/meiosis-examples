@@ -2,7 +2,7 @@ import m from "mithril";
 
 import { mlink } from "../util";
 
-export const createView = update => ({
+export const createView = () => ({
   view: vnode => {
     const model = vnode.attrs.model;
     const active = page => vnode.attrs.page === page ? ".active" : "";

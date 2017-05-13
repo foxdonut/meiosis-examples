@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
+    "axios": "^0.15.3",
     "crossroads": "^0.12.2",
     "flyd": "^0.2.4",
     "history": "^4.6.1",

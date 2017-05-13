@@ -8,9 +8,9 @@ export const createView = update => ({
       m(".container",
         m("a.logo-font[href='/']", "conduit"),
         m("span.attribution",
-          m("span", "An interactive learning project from "),
+          "An interactive learning project from ",
           m("a[href='https://thinkster.io']", "Thinkster"),
-          m("span", ". Code &amp; design licensed under MIT.")
+          m.trust(". Code &amp; design licensed under MIT.")
         )
       )
     );

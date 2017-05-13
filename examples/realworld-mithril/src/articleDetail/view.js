@@ -80,11 +80,13 @@ export const createView = actions => ({
           m(".col-xs-12.col-md-8.offset-md-2",
             m("form.card.comment-form",
               m(".card-block",
-                m("textarea.form-control", { placeholder: "Write a comment...", rows: "3" })
+                m("textarea.form-control", { placeholder: "Write a comment...", rows: "3",
+                  oninput: actions.updateCommentField, value: model.comment })
               ),
               m(".card-footer",
                 m("img.comment-author-img", { src: "http://i.imgur.com/Qr71crq.jpg" }),
-                m("button.btn.btn-sm.btn-primary", "Post Comment")
+                m("button.btn.btn-sm.btn-primary",
+                { onclick: actions.addComment(article.slug, model.comment) }, "Post Comment")
               )
             ),
             model.comments.map(comment =>
@@ -101,7 +103,7 @@ export const createView = actions => ({
                   m("span.date-posted", new Date(comment.createdAt).toDateString()),
                   m("span.mod-options",
                     m("i.ion-edit"),
-                    m("i.ion-trash-a")
+                    m("i.ion-trash-a", { onclick: actions.deleteComment(article.slug, comment.id) } )
                   )
                 )
               )

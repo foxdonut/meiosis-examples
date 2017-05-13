@@ -16,7 +16,7 @@ export const mlink = () => ({
 export const profileLink = (username, isFavorites) =>
   merge({ href: "/profile/" + username + (isFavorites ? "/favorites" : "") }, mlink());
 
-const getTags = article => (typeof article.tags === "string") ?
+const getTags = article => (article.tags && (typeof article.tags === "string")) ?
   (article.tags.replace(/,/g, " ").replace(/ {2,}/g, " ").replace(/ *$/, "").split(" "))
   : article.tagList;
 

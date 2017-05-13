@@ -6,3 +6,9 @@ export const viewModel = model =>
   merge({
     signedIn: !!path(["user", "token"], model)
   }, model);
+
+export const profileLink = (username, isFavorites) =>
+  "#/profile/" + username + (isFavorites ? "/favorites" : "");
+
+// Thrush combinator
+export const T = (x, f) => f(x);

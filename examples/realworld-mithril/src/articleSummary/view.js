@@ -5,7 +5,7 @@ import { mlink, profileLink } from "../util";
 
 const articleLink = slug => merge({ href: "/article/" + slug }, mlink());
 
-export const createView = update => ({
+export const createView = () => ({
   view: vnode => {
     const model = vnode.attrs.model;
     const username = model.author.username;
