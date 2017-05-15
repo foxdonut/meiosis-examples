@@ -1,6 +1,8 @@
 import React from "react";
 
-export const createView = () => model => {
+import { toLogin } from "../page";
+
+export const createView = actions => model => {
   const active = page => model.page === page ? ".active" : "";
 
   return (
@@ -27,7 +29,7 @@ export const createView = () => model => {
             <a className="nav-link" href="#/register">Sign up</a>
           </li>), (
           <li key="login" className="nav-item {active('Login')}">
-            <a className="nav-link" href="#/login">Sign in</a>
+            <a className="nav-link" href="" onClick={actions.goToLoginPage}>Sign in</a>
           </li>
           )]}
         </ul>

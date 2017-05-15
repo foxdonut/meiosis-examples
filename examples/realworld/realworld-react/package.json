@@ -29,6 +29,7 @@
     "crossroads": "^0.12.2",
     "flyd": "^0.2.4",
     "history": "^4.6.1",
+    "marked": "^0.3.6",
     "ramda": "^0.23.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"

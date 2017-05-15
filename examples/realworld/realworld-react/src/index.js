@@ -28,10 +28,10 @@ credentialsApi.getUser().then(user => {
   };
 
   const update = flyd.stream();
-  const models = flyd.scan(applyUpdate, initialModel, update);
-  const viewModels = models.map(viewModel);
+  const Router = router.create(update);
 
-  router.create(update);
+  const models = flyd.scan(applyUpdate, initialModel, update);
+  const viewModels = models.map(viewModel).map(Router.syncRoute);
 
   const element = document.getElementById("app");
   const view = page.create(update);

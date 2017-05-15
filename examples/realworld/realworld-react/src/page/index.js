@@ -1,3 +1,5 @@
+import { defaultTo } from "ramda";
+
 import { layout } from "../layout";
 import { home } from "../home";
 import { login } from "../login";
@@ -12,10 +14,6 @@ export const page = {
       Register: register.create(update),
       ArticleDetail: articleDetail.create(update)
     };
-
-    const Layout = layout.create(update);
-
-    return model =>
-      Layout({ model, Component: pages[model.page] || pages.Home });
+    return layout.create(update, pages, defaultTo(pages.Home))
   }
 };
