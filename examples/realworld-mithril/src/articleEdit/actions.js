@@ -18,7 +18,7 @@ export const createActions = update => ({
   publish: article => evt => {
     evt.preventDefault();
     const validationErrors = validate(article, validationSpec);
-    update(model => assoc("validationErrors", validationErrors, model));
+    update(assoc("validationErrors", validationErrors));
     if (!validationErrors) {
       articlesApi.publish({ article }).then(() => m.route.set("/"));
     }
