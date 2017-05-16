@@ -21,6 +21,7 @@ credentialsApi.getUser().then(user => {
       tagFilter: ""
     },
     login: {},
+    page: "Home",
     profile: {},
     register: {},
     user,

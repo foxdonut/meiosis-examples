@@ -1,6 +1,6 @@
 import crossroads from "crossroads";
 import createHistory from "history/createBrowserHistory";
-import { assoc, compose, flip, merge, mergeAll, path } from "ramda";
+import { assoc, compose, flip, merge, mergeAll, path, prop, unless } from "ramda";
 
 import { articlesApi, popularTagsApi } from "../services";
 
@@ -21,11 +21,10 @@ export const router = {
     const history = createHistory();
 
     crossroads.addRoute("#/", () => {
-      console.log("route: #/")
       articlesApi.getList(articlesFilter).
-        then(articles => update(model => mergeAll([model, articles, { articlesFilter }]))).
+        then(articles => update(model => mergeAll([model, articles, { articlesFilter, page: "Home" }]))).
         then(() => popularTagsApi.get()).
-        then(popularTags => update(compose(assoc("page", "Home"), assoc("tags", popularTags.tags))));
+        then(popularTags => update(assoc("tags", popularTags.tags)));
       });
 
     crossroads.addRoute("#/login", () => update(assoc("page", "Login")));
@@ -39,31 +38,16 @@ export const router = {
     });
 
     // Unmatched route. Redirect to #/.
-    crossroads.addRoute(/^.*$/, () => {
-      console.log("unmatched route")
-      history.replace("#/");
-    });
+    crossroads.addRoute(/^.*$/, () => history.replace("#/"));
 
     // Listen for route changes.
-    history.listen(location => {
-      console.log("change:", location);
-      if (!path(["state", "sync"], location)) {
-        console.log("parse:", location.hash);
-        crossroads.parse(location.hash);
-      }
-      else {
-        console.log("sync only")
-      }
-    });
+    history.listen(unless(path(["state", "sync"]), location => crossroads.parse(location.hash)));
 
     // Sync route with page.
     const syncRoute = model => {
       const page = model.page;
-      console.log("page:", page);
       const route = routeMap[page];
-      console.log("route:", route, "hash:", window.location.hash);
       if (window.location.hash !== route) {
-        console.log("sync route")
         history.replace(route, { sync: true });
       }
       return model;
