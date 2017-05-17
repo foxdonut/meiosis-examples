@@ -1,14 +1,8 @@
 import crossroads from "crossroads";
 import createHistory from "history/createBrowserHistory";
-import { assoc, compose, flip, merge, mergeAll, path, prop, unless } from "ramda";
+import { assoc, path, unless } from "ramda";
 
-import { articlesApi, popularTagsApi } from "../services";
-
-const articlesFilter = {
-  limit: 10,
-  offset: 0,
-  tagFilter: ""
-};
+import { page } from "../page";
 
 const routeMap = {
   Home: "#/",
@@ -19,23 +13,12 @@ const routeMap = {
 export const router = {
   create: update => {
     const history = createHistory();
+    const pageActions = page.createActions(update);
 
-    crossroads.addRoute("#/", () => {
-      articlesApi.getList(articlesFilter).
-        then(articles => update(model => mergeAll([model, articles, { articlesFilter, page: "Home" }]))).
-        then(() => popularTagsApi.get()).
-        then(popularTags => update(assoc("tags", popularTags.tags)));
-      });
-
-    crossroads.addRoute("#/login", () => update(assoc("page", "Login")));
+    crossroads.addRoute("#/", pageActions.homePage);
     crossroads.addRoute("#/register", () => update(assoc("page", "Register")));
-
-    crossroads.addRoute("#/article/{slug}", slug => {
-      articlesApi.getSingle(slug).
-        then(compose(update, flip(merge))).
-        then(() => articlesApi.getComments(slug).then(compose(update, flip(merge)))).
-        then(() => update(assoc("page", "ArticleDetail")));
-    });
+    crossroads.addRoute("#/login", () => update(assoc("page", "Login")));
+    crossroads.addRoute("#/article/{slug}", pageActions.articleDetailPage)
 
     // Unmatched route. Redirect to #/.
     crossroads.addRoute(/^.*$/, () => history.replace("#/"));

@@ -1,12 +1,12 @@
-import { createActions as createPageActions } from "../page/actions";
+import { page } from "../page";
 
 export const createActions = update => {
-  const pageActions = createPageActions(update);
+  const pageActions = page.createActions(update);
 
   return {
-    goToLoginPage: evt => {
+    loginPage: evt => {
       evt.preventDefault();
-      pageActions.goToLoginPage();
+      pageActions.loginPage();
     }
   };
 };

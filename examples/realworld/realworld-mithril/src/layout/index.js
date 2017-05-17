@@ -3,12 +3,12 @@ import { footer } from "../footer";
 import { header } from "../header";
 
 export const layout = {
-  create: (models, update) => {
+  create: (update, pages, getOrDefault) => {
     const components = {
       Footer: footer.create(update),
       Header: header.create(update)
     };
 
-    return createView(models, components);
+    return createView(components, pages, getOrDefault);
   }
 };

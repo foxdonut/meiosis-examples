@@ -1,18 +1,11 @@
 import m from "mithril";
-import { merge } from "ramda";
 
-export const createView = (models, components) => ({
-  oninit: vnode => models.map(model => vnode.state.model = model),
+export const createView = (components, pages, getOrDefault) => model => {
+  const Page = getOrDefault(pages[model.page]);
 
-  view: vnode => {
-    const model = vnode.state.model;
-    const Component = vnode.attrs.component;
-    const attrs = merge({ model }, vnode.attrs);
-
-    return [
-      m(components.Header, attrs),
-      m(Component, attrs),
-      m(components.Footer, attrs)
-    ];
-  }
-});
+  return [
+    components.Header(model),
+    Page(model),
+    components.Footer(model)
+  ];
+};

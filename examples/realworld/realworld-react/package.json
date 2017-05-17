@@ -32,7 +32,8 @@
     "marked": "^0.3.6",
     "ramda": "^0.23.0",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "realworld-common": "file:../realworld-common"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

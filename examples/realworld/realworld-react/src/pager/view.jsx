@@ -9,7 +9,7 @@ export const createView = actions => model => {
     <nav>
       <ul className="pagination">
         {pageList.map(pageNumber => (
-          <li key={'page' + pageNumber} className="page-item{(pageNumber === currentPageNumber ? ' active' : '')}">
+          <li key={'page' + pageNumber} className={'page-item' + (pageNumber === currentPageNumber ? ' active' : '')}>
             <a className="page-link" href="" onClick={actions.page(model, pageNumber)}>
               {String(pageNumber)}
             </a>
