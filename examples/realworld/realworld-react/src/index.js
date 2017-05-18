@@ -3,11 +3,14 @@ import ReactDOM from "react-dom";
 
 import { page } from "./page";
 import { router } from "./router";
-import { credentialsApi } from "./services";
+import { initServices } from "./services";
+import { credentialsApi } from "realworld-common/src/services";
 import { viewModel } from "./util";
 
 // Only for development, to use the Meiosis Tracer as a Chrome extension.
 import { trace } from "meiosis";
+
+initServices();
 
 credentialsApi.getUser().then(user => {
   const applyUpdate = (model, modelUpdate) => modelUpdate(model);

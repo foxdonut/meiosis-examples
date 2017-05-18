@@ -1,7 +1,6 @@
 import { defaultTo } from "ramda";
 
-import { createActions } from "./actions";
-
+import { createActions } from "realworld-common/src/page/actions";
 import { layout } from "../layout";
 import { home } from "../home";
 import { login } from "../login";
@@ -18,6 +17,5 @@ export const page = {
     };
     return layout.create(update, pages, defaultTo(pages.Home));
   },
-
   createActions
 };

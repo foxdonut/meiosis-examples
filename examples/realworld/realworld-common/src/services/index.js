@@ -1,11 +1,13 @@
-import axios from "axios";
 import { assoc, defaultTo, merge, prop } from "ramda";
 
 //const API_ROOT = "https://conduit.productionready.io/api";
 const API_ROOT = "http://localhost:4000/api";
 
+let ajax = null;
+export const setAjax = _ajax => ajax = _ajax;
+
 const request = (url, options) =>
-  axios(assoc("url", url, defaultTo({}, options))).then(prop("data"));
+  ajax(assoc("url", url, defaultTo({}, options))).then(prop("data"));
 
 const getToken = () => window.localStorage.getItem("jwt");
 export const setToken = token => window.localStorage.setItem("jwt", token);

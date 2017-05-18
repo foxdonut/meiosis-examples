@@ -5,17 +5,19 @@ import { assoc, assocPath, merge } from "ramda";
 import { articleDetail } from "./articleDetail";
 import { articleEdit } from "./articleEdit";
 import { page } from "./page";
-import { home } from "./home";
 import { layout } from "./layout";
 import { login } from "./login";
 import { profile } from "./profile";
 import { register } from "./register";
 import { settings } from "./settings";
-import { credentialsApi } from "./services";
+import { initServices } from "./services";
+import { credentialsApi } from "realworld-common/src/services";
 import { nestComponent, viewModel } from "./util";
 
 // Only for development, to use the Meiosis Tracer as a Chrome extension.
 import { trace } from "meiosis";
+
+initServices();
 
 credentialsApi.getUser().then(user => {
   const applyUpdate = (model, modelUpdate) => modelUpdate(model);

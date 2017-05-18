@@ -1,7 +1,7 @@
 import m from "mithril";
 import * as R from "ramda";
 
-import { createActions } from "./actions";
+import { createActions } from "realworld-common/src/credentials/actions";
 import { credentialsForm } from "../credentialsForm";
 import { nest } from "../util";
 

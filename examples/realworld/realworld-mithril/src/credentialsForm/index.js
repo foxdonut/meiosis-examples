@@ -1,4 +1,4 @@
-import { createActions } from "./actions";
+import { createActions } from "realworld-common/src/credentialsForm/actions";
 import { createView } from "./view";
 
 export const credentialsForm = {

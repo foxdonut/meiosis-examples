@@ -1,4 +1,4 @@
-import { createActions } from "./actions";
+import { createActions } from "realworld-common/src/home/actions";
 import { createView } from "./view";
 
 import { articles } from "../articles";

@@ -2,11 +2,6 @@
   "name": "realworld-common",
   "version": "1.0.0",
   "description": "meiosis-examples realworld",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack",
-    "watch": "webpack --progress --colors --watch"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/foxdonut/meiosis-examples.git"

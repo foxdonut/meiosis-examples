@@ -28,7 +28,7 @@
     "marked": "^0.3.6",
     "mithril": "^1.1.1",
     "ramda": "^0.23.0",
-    "validate.js": "^0.11.1"
+    "realworld-common": "file:../realworld-common"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
