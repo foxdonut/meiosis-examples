@@ -10,12 +10,12 @@ const articlesFilter = {
 };
 
 export const createActions = update => ({
-  homePage: () => {
-    articlesApi.getList(articlesFilter).
-      then(articles => update(model => mergeAll([model, articles, { articlesFilter, page: "Home" }]))).
-      then(() => popularTagsApi.get()).
-      then(popularTags => update(assoc("tags", popularTags.tags)));
-  },
+  homePage: () => Promise.all([
+    articlesApi.getList(articlesFilter),
+    popularTagsApi.get()
+  ]).then(results => update(
+    model => mergeAll([model, results[0], { tags: results[1].tags, articlesFilter, page: "Home" }])
+  )),
 
   loginPage: () => update(assoc("page", "Login")),
 

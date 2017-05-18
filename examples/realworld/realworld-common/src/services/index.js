@@ -7,7 +7,7 @@ let ajax = null;
 export const setAjax = _ajax => ajax = _ajax;
 
 const request = (url, options) =>
-  ajax(assoc("url", url, defaultTo({}, options))).then(prop("data"));
+  ajax(assoc("url", url, defaultTo({}, options))).then(response => response.data || response);
 
 const getToken = () => window.localStorage.getItem("jwt");
 export const setToken = token => window.localStorage.setItem("jwt", token);

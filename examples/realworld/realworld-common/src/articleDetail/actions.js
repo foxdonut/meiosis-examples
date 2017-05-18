@@ -3,6 +3,8 @@ import { assoc, compose, not, propEq } from "ramda";
 import { articlesApi } from "../services";
 
 export const createActions = update => ({
+  loadArticle: articlesApi.getSingle,
+
   updateCommentField: evt => update(assoc("comment", evt.target.value)),
 
   addComment: (slug, body) => evt => {
