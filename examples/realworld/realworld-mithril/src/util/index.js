@@ -4,8 +4,8 @@ import { assoc, compose, lensPath, merge, over, path as Rpath } from "ramda";
 export const nest = (update, path) => compose(update, over(lensPath(path)));
 
 export const nestComponent = (create, update, path) => {
-  const Component = create(nest(update, path));
-  return { view: vnode => m(Component, { model: Rpath(path, vnode.attrs.model) })};
+  const view = create(nest(update, path));
+  return compose(view, Rpath(path));
 };
 
 export const mlink = () => ({

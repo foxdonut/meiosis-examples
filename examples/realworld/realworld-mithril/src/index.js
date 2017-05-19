@@ -43,11 +43,7 @@ credentialsApi.getUser().then(user => {
   const viewModels = models.map(viewModel);
 
   const Layout = layout.create(viewModels, update);
-  //const Home = home.create(update);
-  const Register = register.create(update);
-  const Login = login.create(update);
   const Profile = profile.create(update);
-  const Settings = settings.create(update);
   const ArticleDetail = articleDetail.create(update);
   const ArticleEdit = nestComponent(articleEdit.create, update, ["article"]);
 
@@ -65,19 +61,18 @@ credentialsApi.getUser().then(user => {
     "/article/:slug": merge({
       onmatch: params => pageActions.articleDetailPage(params.slug)
     }, noRender),
-    "/editor": {
-      onmatch: () => update(model => assoc("article", articleEdit.model(), model)),
-      render: () => m(Layout, { component: ArticleEdit, page: "articleEdit" })
-    },
+    "/editor": merge({
+      onmatch: pageActions.articleEditPage
+    }, noRender),
     "/editor/:slug": {
       onmatch: params => ArticleDetail.init(params.slug).then(() => update(
         model => assocPath(["article", "tags"], model.article.tagList.join(" "), model)
       )),
       render: () => m(Layout, { component: ArticleEdit, page: "articleEdit" })
     },
-    "/login": {
-      render: () => m(Layout, { component: Login, page: "login" })
-    },
+    "/login": merge({
+      onmatch: pageActions.loginPage
+    }, noRender),
     "/profile/:username": {
       onmatch: params => Profile.init(params.username, false),
       render: () => m(Layout, { component: Profile, favorites: false })
@@ -86,9 +81,9 @@ credentialsApi.getUser().then(user => {
       onmatch: params => Profile.init(params.username, true),
       render: () => m(Layout, { component: Profile, favorites: true })
     },
-    "/register": {
-      render: () => m(Layout, { component: Register, page: "register" })
-    },
+    "/register": merge({
+      onmatch: pageActions.registerPage
+    }, noRender),
     "/settings": merge({
       onmatch: pageActions.settingsPage
     }, noRender)

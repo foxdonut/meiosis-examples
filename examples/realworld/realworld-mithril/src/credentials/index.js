@@ -10,10 +10,7 @@ export const credentials = {
     const { path, method } = options;
     const actions = createActions(update, path, method);
     const callback = actions.sendCredentials;
-    const Component = credentialsForm.create(nest(update, path), options, callback);
-
-    return {
-      view: vnode => m(Component, { model: R.path(path, vnode.attrs.model) })
-    };
+    const view = credentialsForm.create(nest(update, path), options, callback);
+    return R.compose(view, R.path(path));
   }
 };
