@@ -68,8 +68,7 @@ const temperature = {
 
   create: update => {
     const updates = {
-      increase: value => update(model =>
-        _.set(model, "value", model.value + value)),
+      increase: value => update(model => _.update(model, "value", _.partial(_.add, value))),
 
       changeUnits: () => update(model => {
         if (model.units === "C") {
@@ -181,5 +180,5 @@ const view = app.create(update);
 models.map(model => ReactDOM.render(view(model), element));
 
 
-trace({ update, dataStreams: [ models ]});
+trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

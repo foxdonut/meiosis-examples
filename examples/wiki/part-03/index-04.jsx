@@ -8,6 +8,11 @@ import meiosisTracer from "meiosis-tracer";
 const nest = (update, path) => modelUpdate =>
   update(model => model.updateIn(path, modelUpdate));
 
+const nestComponent = (create, update, path) => {
+  const view = create(nest(update, path));
+  return model => view(model.getIn(path));
+};
+
 const entry = {
   model: () => ({
     value: ""
@@ -144,20 +149,20 @@ const app = {
     };
 
     const components = {
-      entry: entry.create(nest(update, ["entry"])),
-      date: date.create(nest(update, ["date"])),
+      entry: nestComponent(entry.create, update, ["entry"]),
+      date: nestComponent(date.create, update, ["date"]),
       temperature: {
-        air: temperature.create(nest(update, ["temperature", "air"])),
-        water: temperature.create(nest(update, ["temperature", "water"]))
+        air: nestComponent(temperature.create, update, ["temperature", "air"]),
+        water: nestComponent(temperature.create, update, ["temperature", "water"])
       }
     };
 
     return model => (
       <form>
-        {components.entry(model.get("entry"))}
-        {components.date(model.get("date"))}
-        {components.temperature.air(model.getIn(["temperature", "air"]))}
-        {components.temperature.water(model.getIn(["temperature", "water"]))}
+        {components.entry(model)}
+        {components.date(model)}
+        {components.temperature.air(model)}
+        {components.temperature.water(model)}
         <div>
           <button className="btn btn-primary" onClick={actions.save}>Save</button>{" "}
           <span>{model.get("saved")}</span>

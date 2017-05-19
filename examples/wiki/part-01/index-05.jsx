@@ -99,5 +99,5 @@ const element = document.getElementById("app");
 models.map(model => ReactDOM.render(app(model, actions), element));
 
 
-trace({ update, dataStreams: [ models ]});
+trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

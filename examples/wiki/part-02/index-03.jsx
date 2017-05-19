@@ -176,5 +176,5 @@ const view = app.create(update);
 models.map(model => ReactDOM.render(view(model), element));
 
 
-trace({ update, dataStreams: [ models ]});
+trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

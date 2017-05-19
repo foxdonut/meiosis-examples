@@ -166,5 +166,5 @@ const element = document.getElementById("app");
 models.map(model => ReactDOM.render(app.view(model, update), element));
 
 
-trace({ update, dataStreams: [ models ]});
+trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

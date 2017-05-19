@@ -7,6 +7,14 @@ import meiosisTracer from "meiosis-tracer";
 
 const nest = (update, path) => R.compose(update, R.over(R.lensPath(path)));
 
+const nestComponent = (create, update, path) => {
+  const view = create(nest(update, path));
+
+  // This is equivalent to:
+  // return model => view(R.path(path, model));
+  return R.compose(view, R.path(path));
+};
+
 const entry = {
   model: () => ({
     value: ""
@@ -37,7 +45,7 @@ const date = {
 
   create: update => {
     const updates = {
-      editDateValue: value => update(R.assoc("value", value))
+      editDateValue: R.compose(update, R.assoc("value"))
     };
 
     const actions = {
@@ -61,17 +69,22 @@ const temperature = {
   }),
 
   create: update => {
-    const toFahrenheit = value => Math.round( value * 9 / 5 + 32 );
-    const toCelsius = value => Math.round( (value - 32) / 9 * 5 );
-
     const updates = {
-      increase: value => update(R.over(R.lensProp("value"), R.add(value))),
+      //increase: value => update(model => R.over(R.lensProp("value"), R.add(value), model)),
+      //increase: value => update(R.over(R.lensProp("value"), R.add(value))),
+      increase: R.compose(update, R.over(R.lensProp("value")), R.add),
 
-      changeUnits: () => update(R.ifElse(
-        R.propEq("units", "C"),
-        R.compose(R.assoc("units", "F"), R.over(R.lensProp("value"), toFahrenheit)),
-        R.compose(R.assoc("units", "C"), R.over(R.lensProp("value"), toCelsius))
-      ))
+      changeUnits: () => update(model => {
+        if (model.units === "C") {
+          model.units = "F";
+          model.value = Math.round( model.value * 9 / 5 + 32 );
+        }
+        else {
+          model.units = "C";
+          model.value = Math.round( (model.value - 32) / 9 * 5 );
+        }
+        return model;
+      })
     };
 
     const actions = {
@@ -88,10 +101,7 @@ const temperature = {
     return model => (
       <div className="row">
         <div className="col-md-3">
-          <span>
-            {model.label} Temperature:
-            {model.value}&deg;{model.units}
-          </span>
+          <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
         </div>
         <div className="col-md-6">
           <button className="btn btn-sm btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
@@ -115,20 +125,22 @@ const app = {
   }),
 
   create: update => {
-    const displayTemperature = temperature =>
-      temperature.label + ": " +
+    const displayTemperature = temperature => temperature.label + ": " +
       temperature.value + "\xB0" + temperature.units;
 
     const updates = {
-      save: () => update(model =>
-        R.assoc(
-          "saved", "Entry #" + model.entry.value +
-            " on " + model.date.value + ":" +
-            " Temperatures: " +
-            displayTemperature(model.temperature.air) + " " +
-            displayTemperature(model.temperature.water),
-          R.assocPath(["entry", "value"], "",
-          R.assocPath(["date", "value"], "", model))))
+      save: () => update(model => {
+        model.saved = " Entry #" + model.entry.value +
+          " on " + model.date.value + ":" +
+          " Temperatures: " +
+          displayTemperature(model.temperature.air) + " " +
+          displayTemperature(model.temperature.water);
+
+        model.entry.value = "";
+        model.date.value = "";
+
+        return model;
+      })
     };
 
     const actions = {
@@ -139,22 +151,22 @@ const app = {
     };
 
     const components = {
-      entry: entry.create(nest(update, ["entry"])),
-      date: date.create(nest(update, ["date"])),
+      entry: nestComponent(entry.create, update, ["entry"]),
+      date: nestComponent(date.create, update, ["date"]),
       temperature: {
-        air: temperature.create(nest(update, ["temperature", "air"])),
-        water: temperature.create(nest(update, ["temperature", "water"]))
+        air: nestComponent(temperature.create, update, ["temperature", "air"]),
+        water: nestComponent(temperature.create, update, ["temperature", "water"])
       }
     };
 
     return model => (
       <form>
-        {components.entry(model.entry)}
-        {components.date(model.date)}
-        {components.temperature.air(model.temperature.air)}
-        {components.temperature.water(model.temperature.water)}
+        {components.entry(model)}
+        {components.date(model)}
+        {components.temperature.air(model)}
+        {components.temperature.water(model)}
         <div>
-          <button className="btn btn-primary" onClick={actions.save}>Save</button>{" "}
+          <button className="btn btn-primary" onClick={actions.save}>Save</button>
           <span>{model.saved}</span>
         </div>
       </form>
