@@ -1,5 +1,3 @@
-import m from "mithril";
-
 export const createView = (components, pages, getOrDefault) => model => {
   const Page = getOrDefault(pages[model.page]);
 

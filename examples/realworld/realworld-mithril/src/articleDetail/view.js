@@ -43,74 +43,65 @@ const articleMeta = (article, username) =>
     T(article, ifElse(isAuthor(username), authorMeta, nonAuthorMeta))
   );
 
-export const createView = actions => ({
-  init: slug => {
-    return actions.loadArticle(slug).then(() =>
-      actions.loadComments(slug)
-    );
-  },
+export const createView = actions => model => {
+  const article = model.article;
+  const username = path(["user", "username"], model);
 
-  view: vnode => {
-    const model = vnode.attrs.model;
-    const article = model.article;
-    const username = path(["user", "username"], model);
-
-    return m(".article-page",
-      m(".banner",
-        m(".container",
-          m("h1", article.title),
-          articleMeta(article, username)
+  return m(".article-page",
+    m(".banner",
+      m(".container",
+        m("h1", article.title),
+        articleMeta(article, username)
+      )
+    ),
+    m(".container page",
+      m(".row.article-content",
+        m(".col-md-12",
+          m("h2", article.description),
+          m(".tag-list",
+            article.tagList.map(tag => m("span.tag-pill.tag-default", tag))
+          ),
+          m("p", m.trust(marked(article.body, { sanitize: true })))
         )
       ),
-      m(".container page",
-        m(".row.article-content",
-          m(".col-md-12",
-            m("h2", article.description),
-            m(".tag-list",
-              article.tagList.map(tag => m("span.tag-pill.tag-default", tag))
+      m("hr"),
+      m(".article-actions",
+        articleMeta(article, username)
+      ),
+      m(".row",
+        m(".col-xs-12.col-md-8.offset-md-2",
+          m("form.card.comment-form",
+            m(".card-block",
+              m("textarea.form-control", { placeholder: "Write a comment...", rows: "3",
+                oninput: actions.updateCommentField, value: model.comment })
             ),
-            m("p", m.trust(marked(article.body, { sanitize: true })))
-          )
-        ),
-        m("hr"),
-        m(".article-actions",
-          articleMeta(article, username)
-        ),
-        m(".row",
-          m(".col-xs-12.col-md-8.offset-md-2",
-            m("form.card.comment-form",
+            m(".card-footer",
+              m("img.comment-author-img", { src: "http://i.imgur.com/Qr71crq.jpg" }),
+              m("button.btn.btn-sm.btn-primary",
+              { onclick: actions.addComment(article.slug, model.comment) }, "Post Comment")
+            )
+          ),
+          model.comments.map(comment =>
+            m(".card",
               m(".card-block",
-                m("textarea.form-control", { placeholder: "Write a comment...", rows: "3",
-                  oninput: actions.updateCommentField, value: model.comment })
+                m("p.card-text", comment.body)
               ),
               m(".card-footer",
-                m("img.comment-author-img", { src: "http://i.imgur.com/Qr71crq.jpg" }),
-                m("button.btn.btn-sm.btn-primary",
-                { onclick: actions.addComment(article.slug, model.comment) }, "Post Comment")
-              )
-            ),
-            model.comments.map(comment =>
-              m(".card",
-                m(".card-block",
-                  m("p.card-text", comment.body)
+                m("a.comment-author[href='']",
+                  m("img.comment-author-img", { src: comment.author.image })
                 ),
-                m(".card-footer",
-                  m("a.comment-author[href='']",
-                    m("img.comment-author-img", { src: comment.author.image })
-                  ),
-                  m.trust("&nbsp;"),
-                  m("a.comment-author[href='']", comment.author.username),
-                  m("span.date-posted", new Date(comment.createdAt).toDateString()),
-                  m("span.mod-options",
-                    m("i.ion-edit"),
-                    m("i.ion-trash-a", { onclick: actions.deleteComment(article.slug, comment.id) } )
-                  )
+                m.trust("&nbsp;"),
+                m("a.comment-author[href='']", comment.author.username),
+                m("span.date-posted", new Date(comment.createdAt).toDateString()),
+                m("span.mod-options",
+                  m("i.ion-edit"),
+                  m("i.ion-trash-a", { onclick: actions.deleteComment(article.slug, comment.id) } )
                 )
               )
             )
           )
         )
       )
-    );
-  }
-});
+    )
+  );
+};

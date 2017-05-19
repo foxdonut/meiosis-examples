@@ -63,7 +63,7 @@ credentialsApi.getUser().then(user => {
       onmatch: pageActions.homePage
     }, noRender),
     "/article/:slug": merge({
-      onmatch: params => ArticleDetail.init(params.slug)
+      onmatch: params => pageActions.articleDetailPage(params.slug)
     }, noRender),
     "/editor": {
       onmatch: () => update(model => assoc("article", articleEdit.model(), model)),
@@ -89,9 +89,9 @@ credentialsApi.getUser().then(user => {
     "/register": {
       render: () => m(Layout, { component: Register, page: "register" })
     },
-    "/settings": {
-      render: () => m(Layout, { component: Settings, page: "settings" })
-    }
+    "/settings": merge({
+      onmatch: pageActions.settingsPage
+    }, noRender)
   });
 
   const element = document.getElementById("app");
@@ -100,5 +100,4 @@ credentialsApi.getUser().then(user => {
 
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   trace({ update, dataStreams: [ models, viewModels ] });
-  //viewModels.map(m.redraw);
 });

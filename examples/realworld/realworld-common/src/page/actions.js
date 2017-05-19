@@ -1,4 +1,4 @@
-import { assoc, compose, flip, merge, mergeAll } from "ramda";
+import { assoc, mergeAll } from "ramda";
 
 import { articlesApi, popularTagsApi } from "../services";
 
@@ -19,10 +19,12 @@ export const createActions = update => ({
 
   loginPage: () => update(assoc("page", "Login")),
 
-  articleDetailPage: slug => {
-    articlesApi.getSingle(slug).
-      then(compose(update, flip(merge))).
-      then(() => articlesApi.getComments(slug).then(compose(update, flip(merge)))).
-      then(() => update(assoc("page", "ArticleDetail")));
-  }
+  articleDetailPage: slug => Promise.all([
+    articlesApi.getSingle(slug),
+    articlesApi.getComments(slug)
+  ]).then(results => update(
+    model => mergeAll([model, { page: "ArticleDetail" }, results[0], results[1]])
+  )),
+
+  settingsPage: () => update(assoc("page", "Settings"))
 });

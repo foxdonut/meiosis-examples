@@ -5,6 +5,7 @@ import { layout } from "../layout";
 import { home } from "../home";
 import { login } from "../login";
 import { register } from "../register";
+import { settings } from "../settings";
 import { articleDetail } from "../articleDetail";
 
 export const page = {
@@ -13,6 +14,7 @@ export const page = {
       Home: home.create(update),
       Login: login.create(update),
       Register: register.create(update),
+      Settings: settings.create(update),
       ArticleDetail: articleDetail.create(update)
     };
     return layout.create(update, pages, defaultTo(pages.Home));

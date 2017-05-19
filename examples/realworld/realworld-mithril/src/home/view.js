@@ -37,7 +37,7 @@ export const createView = (actions, components) => model => {
         ),
         m(".col-md-3",
           m(".sidebar",
-            m(components.PopularTags, { model })
+            components.popularTags(model)
           )
         )
       )

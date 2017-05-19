@@ -8,7 +8,7 @@ export const home = {
   create: update => {
     const components = {
       Articles: articles.create(update),
-      PopularTags: popularTags.create(update)
+      popularTags: popularTags.create(update)
     };
     return createView(createActions(update), components);
   }
