@@ -17,8 +17,10 @@ module.exports = {
     "part-03-ex-04": "./part-03/index-04.jsx",
     "part-04-ex-01": "./part-04/index-01.jsx",
     "part-04-ex-02": "./part-04/index-02.jsx",
-    "part-04-ex-03": "./part-04/index-03.js",
-    "part-04-ex-04": "./part-04/index-04.js"
+    "part-06-ex-01": "./part-06/index-01.jsx",
+    "part-06-ex-02": "./part-06/index-02.jsx",
+    "part-06-ex-03": "./part-06/index-03.js",
+    "part-06-ex-04": "./part-06/index-04.js"
   },
   output: {
     path: __dirname + "/build",

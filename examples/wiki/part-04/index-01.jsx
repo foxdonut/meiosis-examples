@@ -1,212 +1,92 @@
 import flyd from "flyd";
 import React from "react";
 import ReactDOM from "react-dom";
-import _ from "lodash";
+import R from "ramda";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
-const nest = (update, path) => modelUpdate =>
-  update(model => _.update(model, path, modelUpdate));
+const home = {
+  create: update => model => (
+    <div>Home Page</div>
+  )
+};
 
-class EntryNumber extends React.Component {
-  componentWillMount() {
-    const update = this.props.update;
+const login = {
+  create: update => model => (
+    <div>Login Page</div>
+  )
+};
 
-    const updates = {
-      editEntryValue: value => update(model => _.set(model, "value", value))
-    };
+const item = {
+  create: update => model => (
+    <div>Item Page - viewing item {model.params.id}</div>
+  )
+};
 
-    this.actions = {
-      editEntryValue: evt => updates.editEntryValue(evt.target.value)
-    };
-  }
+const app = {
+  model: () => ({
+    page: "Home"
+  }),
 
-  render() {
-    console.log("render Entry");
-    const model = this.props.model;
-    const actions = this.actions;
-
-    return (
-      <div>
-        <span>Entry number:</span>
-        <input type="text" size="2" value={model.value} onChange={actions.editEntryValue}/>
-      </div>
-    );
-  }
-}
-EntryNumber.model = () => ({
-  value: ""
-});
-
-class EntryDate extends React.Component {
-  componentWillMount() {
-    const update = this.props.update;
-
-    const updates = {
-      editDateValue: value => update(model => _.set(model, "value", value))
-    };
-
-    this.actions = {
-      editDateValue: evt => updates.editDateValue(evt.target.value)
-    };
-  }
-
-  render() {
-    console.log("render Date");
-    const model = this.props.model;
-    const actions = this.actions;
-
-    return (
-      <div>
-        <span>Date:</span>
-        <input type="text" size="10" value={model.value} onChange={actions.editDateValue}/>
-      </div>
-    );
-  }
-}
-EntryDate.model = () => ({
-  value: ""
-});
-
-class Temperature extends React.Component {
-  componentWillMount() {
-    const update = this.props.update;
-
-    const updates = {
-      increase: value => update(model =>
-        _.update(model, "value", v => v + value)),
-
-      changeUnits: () => update(model => {
-        if (model.units === "C") {
-          model.units = "F";
-          model.value = Math.round( model.value * 9 / 5 + 32 );
-        }
-        else {
-          model.units = "C";
-          model.value = Math.round( (model.value - 32) / 9 * 5 );
-        }
-        return model;
-      })
-    };
-
-    this.actions = {
-      increase: value => evt => {
-        evt.preventDefault();
-        updates.increase(value);
+  create: update => {
+    const pages = {
+      Home: {
+        view: home.create(update),
+        handler: () => update(R.assoc("page", "Home"))
       },
-      changeUnits: evt => {
-        evt.preventDefault();
-        updates.changeUnits();
-      }
-    };
-  }
-
-  render() {
-    console.log("render Temperature", this.props.model.label);
-    const model = this.props.model;
-    const actions = this.actions;
-
-    return (
-      <div className="row">
-        <div className="col-md-3">
-          <span>
-            {model.label} Temperature:
-            {model.value}&deg;{model.units}
-          </span>
-        </div>
-        <div className="col-md-6">
-          <button className="btn btn-sm btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
-          <button className="btn btn-sm btn-default" onClick={actions.increase(-1)}>Decrease</button>{" "}
-          <button className="btn btn-sm btn-info" onClick={actions.changeUnits}>Change Units</button>
-        </div>
-      </div>
-    );
-  }
-}
-Temperature.model = label => ({
-  label,
-  value: 20,
-  units: "C"
-});
-
-class App extends React.Component {
-  componentWillMount() {
-    this.props.models.map(model => this.setState({model}));
-
-    const update = this.props.update;
-
-    const displayTemperature = temperature =>
-      temperature.label + ": " +
-      temperature.value + "\xB0" + temperature.units;
-
-    const updates = {
-      save: () => update(model => {
-        model.saved =
-          "Entry #" + model.entry.value +
-            " on " + model.date.value + ":" +
-            " Temperatures: " +
-            displayTemperature(model.temperature.air) + " " +
-            displayTemperature(model.temperature.water);
-        model.entry.value = "";
-        model.date.value = "";
-        return model;
-      })
-    };
-
-    this.actions = {
-      save: evt => {
-        evt.preventDefault();
-        updates.save();
+      Login: {
+        view: login.create(update),
+        handler: () => update(R.assoc("page", "Login"))
+      },
+      Item: {
+        view: item.create(update),
+        handler: params => update(model => R.merge(model, { page: "Item", params }))
       }
     };
 
-    this.nests = {
-      entry: nest(update, ["entry"]),
-      date: nest(update, ["date"]),
-      temperature: {
-        air: nest(update, ["temperature", "air"]),
-        water: nest(update, ["temperature", "water"])
-      }
-    };
-  }
+    return model => {
+      const page = pages[model.page] || pages.Home;
+      const isActive = pageName => model.page === pageName ? "active" : "";
 
-  render() {
-    console.log("render App");
-    const model = this.state.model;
-    const actions = this.actions;
-    const nests = this.nests;
-
-    return (
-      <form>
-        <EntryNumber model={model.entry} update={nests.entry} />
-        <EntryDate model={model.date} update={nests.date} />
-        <Temperature model={model.temperature.air} update={nests.temperature.air} />
-        <Temperature model={model.temperature.water} update={nests.temperature.water} />
+      return (
         <div>
-          <button className="btn btn-primary" onClick={actions.save}>Save</button>{" "}
-          <span>{model.saved}</span>
+          <nav className="navbar navbar-default">
+            <ul className="nav navbar-nav">
+              <li className={isActive("Home")}>
+                <a href="#" onClick={pages.Home.handler}>Home</a>
+              </li>
+              <li className={isActive("Login")}>
+                <a href="#" onClick={pages.Login.handler}>Login</a>
+              </li>
+              <li className={isActive("Item")}>
+                <a href="#" onClick={() => pages.Item.handler({ id: 42 })}>Item 42</a>
+              </li>
+              <li className="btn">
+                <button className="btn btn-default" onClick={pages.Home.handler}>Home</button>
+              </li>
+              <li className="btn">
+                <button className="btn btn-default" onClick={pages.Login.handler}>Login</button>
+              </li>
+              <li className="btn">
+                <button className="btn btn-default" onClick={() => pages.Item.handler({ id: 42 })}>Item 42</button>
+              </li>
+            </ul>
+          </nav>
+          {page.view(model)}
         </div>
-      </form>
-    );
+      );
+    };
   }
-}
-App.model = () => ({
-  entry: EntryNumber.model(),
-  date: EntryDate.model(),
-  temperature: {
-    air: Temperature.model("Air"),
-    water: Temperature.model("Water")
-  },
-  saved: ""
-});
+};
 
-const initialModel = App.model();
+const initialModel = app.model();
 const update = flyd.stream();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const element = document.getElementById("app");
-ReactDOM.render(<App models={models} update={update} />, element);
+const view = app.create(update);
+models.map(model => ReactDOM.render(view(model), element));
 
 
 trace({ update, dataStreams: [ models ] });
