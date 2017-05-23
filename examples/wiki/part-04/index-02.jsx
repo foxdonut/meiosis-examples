@@ -72,7 +72,7 @@ const app = {
                 <button className="btn btn-default" onClick={pages.Login.handler}>Login</button>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={() => pages.Item.handler({ id: 42 })}>Item 42</button>
+                <button className="btn btn-default" onClick={() => pages.Item.handler({ id: "42" })}>Item 42</button>
               </li>
             </ul>
           </nav>
@@ -99,15 +99,15 @@ const routes = {
 };
 
 addressbar.addEventListener("change", evt => {
-  evt.preventDefault();
   const value = evt.target.value;
-  addressbar.value = value;
-  const hash = value.substring(value.indexOf("#") + 1);
-  console.log("hash:", hash);
-  const matchedRoute = urlMapper.map(hash, routes);
-  console.log("matchedRoute:", matchedRoute);
-  if (matchedRoute) {
-    pages[matchedRoute.match].handler(matchedRoute.values);
+  if (value.indexOf("#") > 0) {
+    evt.preventDefault();
+    addressbar.value = value;
+    const hash = value.substring(value.indexOf("#") + 1);
+    const matchedRoute = urlMapper.map(hash, routes);
+    if (matchedRoute) {
+      pages[matchedRoute.match].handler(matchedRoute.values);
+    }
   }
 });
 
