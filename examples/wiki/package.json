@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack",
+    "minify": "webpack --optimize-minimize",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
@@ -24,7 +25,6 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "addressbar": "^1.0.3",
     "flyd": "^0.2.4",
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",

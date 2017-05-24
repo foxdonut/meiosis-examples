@@ -1,9 +1,15 @@
 import flyd from "flyd";
 import React from "react";
 import ReactDOM from "react-dom";
-import R from "ramda";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
+
+const assoc = (prop, value) => model => {
+  model[prop] = value;
+  return model;
+};
+
+const merge = source => target => Object.assign(target, source);
 
 const home = {
   create: update => model => (
@@ -32,15 +38,15 @@ const app = {
     const pages = {
       Home: {
         view: home.create(update),
-        handler: () => update(R.assoc("page", "Home"))
+        handler: () => update(assoc("page", "Home"))
       },
       Login: {
         view: login.create(update),
-        handler: () => update(R.assoc("page", "Login"))
+        handler: () => update(assoc("page", "Login"))
       },
       Item: {
         view: item.create(update),
-        handler: params => update(model => R.merge(model, { page: "Item", params }))
+        handler: params => update(merge({ page: "Item", params }))
       }
     };
 

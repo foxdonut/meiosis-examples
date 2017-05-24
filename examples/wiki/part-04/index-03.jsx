@@ -1,25 +1,33 @@
 import flyd from "flyd";
 import React from "react";
 import ReactDOM from "react-dom";
-import R from "ramda";
 import Mapper from "url-mapper";
-import addressbar from "addressbar";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
+const assoc = (prop, value) => model => {
+  model[prop] = value;
+  return model;
+};
+
+const merge = source => target => Object.assign(target, source);
+
 const home = {
+  name: "Home",
   create: update => model => (
     <div>Home Page</div>
   )
 };
 
 const login = {
+  name: "Login",
   create: update => model => (
     <div>Login Page</div>
   )
 };
 
 const item = {
+  name: "Item",
   create: update => model => (
     <div>Item Page - viewing item {model.params.id}</div>
   )
@@ -27,43 +35,43 @@ const item = {
 
 const pageDefs = {
   create: update => ({
-    Home: {
+    [home.name]: {
       view: home.create(update),
-      handler: () => update(R.assoc("page", "Home"))
+      handler: () => update(assoc("page", home.name))
     },
-    Login: {
+    [login.name]: {
       view: login.create(update),
-      handler: () => update(R.assoc("page", "Login"))
+      handler: () => update(assoc("page", login.name))
     },
-    Item: {
+    [item.name]: {
       view: item.create(update),
-      handler: params => update(model => R.merge(model, { page: "Item", params }))
-    }
+      handler: params => update(merge({ page: item.name, params }))
+    },
+    defaultPage: home.name
   })
 };
 
 const app = {
   model: () => ({
-    page: "Home",
-    params: {}
   }),
 
   create: pages => {
     return model => {
-      const page = pages[model.page] || pages.Home;
-      const isActive = pageName => model.page === pageName ? "active" : "";
+      const currentPage = pages[model.page] ? model.page : pages.defaultPage;
+      const page = pages[currentPage];
+      const isActive = pageName => pageName === currentPage ? "active" : "";
 
       return (
         <div>
           <nav className="navbar navbar-default">
             <ul className="nav navbar-nav">
-              <li className={isActive("Home")}>
+              <li className={isActive(home.name)}>
                 <a href="#/">Home</a>
               </li>
-              <li className={isActive("Login")}>
+              <li className={isActive(login.name)}>
                 <a href="#/login">Login</a>
               </li>
-              <li className={isActive("Item")}>
+              <li className={isActive(item.name)}>
                 <a href="#/item/42">Item 42</a>
               </li>
               <li className="btn">
@@ -94,36 +102,19 @@ const pages = pageDefs.create(update);
 
 const urlMapper = Mapper();
 const routes = {
-  "/": "Home",
-  "/login": "Login",
-  "/item/:id": "Item"
+  "/": home.name,
+  "/login": login.name,
+  "/item/:id": item.name
 };
-const routeMap = Object.keys(routes).reduce((acc, next) => {
-  acc[routes[next]] = next;
-  return acc;
-}, {});
 
-addressbar.addEventListener("change", evt => {
-  const value = evt.target.value;
-  if (value.indexOf("#") > 0) {
-    evt.preventDefault();
-    addressbar.value = value;
-    const hash = value.substring(value.indexOf("#") + 1);
-    const matchedRoute = urlMapper.map(hash, routes);
-    if (matchedRoute) {
-      pages[matchedRoute.match].handler(matchedRoute.values);
-    }
+
+window.onpopstate = evt => {
+  const route = document.location.hash.substring(1);
+  const resolved = urlMapper.map(route, routes);
+  if (resolved) {
+    pages[resolved.match].handler(resolved.values);
   }
-});
-
-
-const routeSync = model => {
-  const segment = routeMap[model.page] || "/";
-  const route = urlMapper.stringify(segment, model.params);
-  const value = addressbar.value;
-  addressbar.value = value.substring(0, value.indexOf("#") + 1) + route;
 };
-models.map(routeSync);
 
 
 const element = document.getElementById("app");

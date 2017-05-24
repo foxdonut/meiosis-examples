@@ -1,60 +1,69 @@
 import m from "mithril";
 import stream from "mithril/stream";
-import R from "ramda";
 import pathToRegexp from "path-to-regexp";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
+const assoc = (prop, value) => model => {
+  model[prop] = value;
+  return model;
+};
+
+const merge = source => target => Object.assign(target, source);
+
 const home = {
+  name: "Home",
   create: update => model => m("div", "Home Page")
 };
 
 const login = {
+  name: "Login",
   create: update => model => m("div", "Login Page")
 };
 
 const item = {
+  name: "Item",
   create: update => model => m("div", "Item Page - viewing item " + model.params.id)
 };
 
 const pageDefs = {
   create: update => ({
-    Home: {
+    [home.name]: {
       view: home.create(update),
-      handler: () => update(R.assoc("page", "Home"))
+      handler: () => update(assoc("page", home.name))
     },
-    Login: {
+    [login.name]: {
       view: login.create(update),
-      handler: () => update(R.assoc("page", "Login"))
+      handler: () => update(assoc("page", login.name))
     },
-    Item: {
+    [item.name]: {
       view: item.create(update),
-      handler: params => update(model => R.merge(model, { page: "Item", params }))
-    }
+      handler: params => update(merge({ page: item.name, params }))
+    },
+    defaultPage: home.name
   })
 };
 
 const app = {
   model: () => ({
-    page: "Home",
-    params: {}
   }),
 
   create: pages => {
     return model => {
-      const page = pages[model.page] || pages.Home;
-      const isActive = pageName => model.page === pageName ? ".active" : "";
+      const currentPage = pages[model.page] ? model.page : pages.defaultPage;
+      const page = pages[currentPage];
+      const isActive = pageName => pageName === currentPage ? ".active" : "";
 
       return m("div",
         m("nav.navbar.navbar-default",
           m("ul.nav.navbar-nav",
-            m("li" + isActive("Home"),
+            m("li" + isActive(home.name),
               m("a[href='#/']", "Home")
             ),
-            m("li" + isActive("Login"),
+            m("li" + isActive(login.name),
               m("a[href='#/login']", "Login")
             ),
-            m("li" + isActive("Item"),
+            m("li" + isActive(item.name),
               m("a[href='#/item/42']", "Item 42")
             ),
             m("li.btn",
@@ -83,31 +92,40 @@ const pages = pageDefs.create(update);
 
 
 const routes = {
-  "/": "Home",
-  "/login": "Login",
-  "/item/:id": "Item"
+  "/": home.name,
+  "/login": login.name,
+  "/item/:id": item.name
 };
+
 const routeMap = Object.keys(routes).reduce((acc, next) => {
   acc[routes[next]] = next;
   return acc;
 }, {});
 
+const routeCompile = Object.keys(routes).reduce((acc, next) => {
+  acc[next] = pathToRegexp.compile(next);
+  return acc;
+}, {});
+
+
 
 m.route.prefix("#");
 
 const stub = document.createElement("div");
-const noRender = { render: () => null };
+const noRender = () => null;
 
 m.route(stub, "/", Object.keys(routes).reduce((acc, next) => {
-  acc[next] = R.merge({ onmatch: pages[routes[next]].handler }, noRender);
+  acc[next] = { onmatch: pages[routes[next]].handler, render: noRender };
   return acc;
 }, {}));
 
 
 const routeSync = model => {
   const segment = routeMap[model.page] || "/";
-  const route = pathToRegexp.compile(segment)(model.params);
-  window.history.pushState({}, "", "#" + route);
+  const route = routeCompile[segment](model.params);
+  if (document.location.hash.substring(1) !== route) {
+    window.history.pushState({}, "", "#" + route);
+  }
 };
 models.map(routeSync);
 
