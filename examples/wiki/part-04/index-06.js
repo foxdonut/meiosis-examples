@@ -1,5 +1,5 @@
 import flyd from "flyd";
-import { h, createRender } from "./turbodom";
+import { h, patch } from "turbodom";
 import pathToRegexp from "path-to-regexp";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
@@ -156,6 +156,12 @@ const routeSync = model => {
 };
 models.map(routeSync);
 
+const createRender = element => {
+  let root = null;
+  let node = null;
+
+  return view => root = patch(element, root, node, node=view);
+};
 
 const element = document.getElementById("app");
 const render = createRender(element);

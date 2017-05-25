@@ -23,15 +23,43 @@ const login = {
   )
 };
 
-const item = {
-  create: update => model => (
-    <div>Item Page - viewing item {model.params.id}</div>
-  )
+const itemDetails = {
+  create: update => model => model.id ?
+    (<p>Details of item {model.id}</p>)
+    : null
+};
+
+const items = {
+  create: update => {
+    const components = {
+      itemDetails: itemDetails.create(update)
+    };
+
+    const actions = {
+      viewItem: id => () => update(merge({ page: "Items", params: { id } }))
+    };
+
+    return model => (
+      <div>
+        <p>Items Page</p>
+        <ul>
+          <li>
+            <a href="#" onClick={actions.viewItem(1)}>Item 1</a>
+          </li>
+          <li>
+            <a href="#" onClick={actions.viewItem(2)}>Item 2</a>
+          </li>
+        </ul>
+        {components.itemDetails(model.params)}
+      </div>
+    );
+  }
 };
 
 const app = {
   model: () => ({
-    page: "Home"
+    page: "Home",
+    params: {}
   }),
 
   create: update => {
@@ -44,9 +72,9 @@ const app = {
         view: login.create(update),
         handler: () => update(assoc("page", "Login"))
       },
-      Item: {
-        view: item.create(update),
-        handler: params => update(merge({ page: "Item", params }))
+      Items: {
+        view: items.create(update),
+        handler: () => update(merge({ page: "Items", params: {} }))
       }
     };
 
@@ -64,8 +92,8 @@ const app = {
               <li className={isActive("Login")}>
                 <a href="#" onClick={pages.Login.handler}>Login</a>
               </li>
-              <li className={isActive("Item")}>
-                <a href="#" onClick={() => pages.Item.handler({ id: "42" })}>Item 42</a>
+              <li className={isActive("Items")}>
+                <a href="#" onClick={pages.Items.handler}>Items</a>
               </li>
               <li className="btn">
                 <button className="btn btn-default" onClick={pages.Home.handler}>Home</button>
@@ -74,7 +102,7 @@ const app = {
                 <button className="btn btn-default" onClick={pages.Login.handler}>Login</button>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={() => pages.Item.handler({ id: 42 })}>Item 42</button>
+                <button className="btn btn-default" onClick={pages.Items.handler}>Items</button>
               </li>
             </ul>
           </nav>
