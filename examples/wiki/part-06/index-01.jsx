@@ -9,6 +9,12 @@ const nest = (update, path) => modelUpdate =>
   update(model => _.update(model, path, modelUpdate));
 
 class EntryNumber extends React.Component {
+  static model() {
+    return {
+      value: ""
+    };
+  }
+
   componentWillMount() {
     const update = this.props.update;
 
@@ -34,11 +40,14 @@ class EntryNumber extends React.Component {
     );
   }
 }
-EntryNumber.model = () => ({
-  value: ""
-});
 
 class EntryDate extends React.Component {
+  static model() {
+    return {
+      value: ""
+    };
+  }
+
   componentWillMount() {
     const update = this.props.update;
 
@@ -64,11 +73,16 @@ class EntryDate extends React.Component {
     );
   }
 }
-EntryDate.model = () => ({
-  value: ""
-});
 
 class Temperature extends React.Component {
+  static model(label) {
+    return {
+      label,
+      value: 20,
+      units: "C"
+    };
+  }
+
   componentWillMount() {
     const update = this.props.update;
 
@@ -123,13 +137,20 @@ class Temperature extends React.Component {
     );
   }
 }
-Temperature.model = label => ({
-  label,
-  value: 20,
-  units: "C"
-});
 
 class App extends React.Component {
+  static model() {
+    return {
+      entry: EntryNumber.model(),
+      date: EntryDate.model(),
+      temperature: {
+        air: Temperature.model("Air"),
+        water: Temperature.model("Water")
+      },
+      saved: ""
+    };
+  }
+
   componentWillMount() {
     this.props.models.map(model => this.setState({model}));
 
@@ -190,15 +211,6 @@ class App extends React.Component {
     );
   }
 }
-App.model = () => ({
-  entry: EntryNumber.model(),
-  date: EntryDate.model(),
-  temperature: {
-    air: Temperature.model("Air"),
-    water: Temperature.model("Water")
-  },
-  saved: ""
-});
 
 const initialModel = App.model();
 const update = flyd.stream();
