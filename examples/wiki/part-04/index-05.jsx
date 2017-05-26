@@ -136,6 +136,21 @@ window.onpopstate = () => {
 };
 
 
+const routeMap = Object.keys(routes).reduce((acc, next) => {
+  acc[routes[next]] = next;
+  return acc;
+}, {});
+
+const routeSync = model => {
+  const segment = routeMap[model.page] || "/";
+  const route = urlMapper.stringify(segment, model.params || {});
+  if (document.location.hash.substring(1) !== route) {
+    window.history.pushState({}, "", "#" + route);
+  }
+};
+models.map(routeSync);
+
+
 const element = document.getElementById("app");
 const view = app.create(pages);
 models.map(model => ReactDOM.render(view(model), element));
