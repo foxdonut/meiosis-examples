@@ -12,21 +12,16 @@ const assoc = (prop, value) => model => {
 const merge = source => target => Object.assign(target, source);
 
 const home = {
-  create: update => model => (
-    <div>Home Page</div>
-  )
+  create: update => model => (<div>Home Page</div>)
 };
 
 const login = {
-  create: update => model => (
-    <div>Login Page</div>
-  )
+  create: update => model => (<div>Login Page</div>)
 };
 
 const itemDetails = {
   create: update => model => model.id ?
-    (<p>Details of item {model.id}</p>)
-    : null
+    (<p>Details of item {model.id}</p>) : null
 };
 
 const items = {
@@ -43,12 +38,8 @@ const items = {
       <div>
         <p>Items Page</p>
         <ul>
-          <li>
-            <a href="#" onClick={actions.viewItem(1)}>Item 1</a>
-          </li>
-          <li>
-            <a href="#" onClick={actions.viewItem(2)}>Item 2</a>
-          </li>
+          <li><a href="#" onClick={actions.viewItem(1)}>Item 1</a></li>
+          <li><a href="#" onClick={actions.viewItem(2)}>Item 2</a></li>
         </ul>
         {components.itemDetails(model.params)}
       </div>
@@ -96,13 +87,16 @@ const app = {
                 <a href="#" onClick={pages.Items.handler}>Items</a>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={pages.Home.handler}>Home</button>
+                <button className="btn btn-default"
+                  onClick={pages.Home.handler}>Home</button>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={pages.Login.handler}>Login</button>
+                <button className="btn btn-default"
+                  onClick={pages.Login.handler}>Login</button>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={pages.Items.handler}>Items</button>
+                <button className="btn btn-default"
+                  onClick={pages.Items.handler}>Items</button>
               </li>
             </ul>
           </nav>

@@ -14,23 +14,37 @@ const merge = source => target => Object.assign(target, source);
 
 const home = {
   name: "Home",
-  create: update => model => (
-    <div>Home Page</div>
-  )
+  create: update => model => (<div>Home Page</div>)
 };
 
 const login = {
   name: "Login",
-  create: update => model => (
-    <div>Login Page</div>
-  )
+  create: update => model => (<div>Login Page</div>)
 };
 
-const item = {
-  name: "Item",
-  create: update => model => (
-    <div>Item Page - viewing item {model.params.id}</div>
-  )
+const itemDetails = {
+  create: update => model => model.id ?
+    (<p>Details of item {model.id}</p>) : null
+};
+
+const items = {
+  name: "Items",
+  create: update => {
+    const components = {
+      itemDetails: itemDetails.create(update)
+    };
+
+    return model => (
+      <div>
+        <p>Items Page</p>
+        <ul>
+          <li><a href="#/items/1">Item 1</a></li>
+          <li><a href="#/items/2">Item 2</a></li>
+        </ul>
+        {components.itemDetails(model.params)}
+      </div>
+    );
+  }
 };
 
 const pageDefs = {
@@ -43,9 +57,9 @@ const pageDefs = {
       view: login.create(update),
       handler: () => update(assoc("page", login.name))
     },
-    [item.name]: {
-      view: item.create(update),
-      handler: params => update(merge({ page: item.name, params }))
+    [items.name]: {
+      view: items.create(update),
+      handler: params => update(merge({ page: items.name, params }))
     },
     defaultPage: home.name
   })
@@ -53,6 +67,8 @@ const pageDefs = {
 
 const app = {
   model: () => ({
+    page: "Home",
+    params: {}
   }),
 
   create: pages => {
@@ -71,17 +87,20 @@ const app = {
               <li className={isActive(login.name)}>
                 <a href="#/login">Login</a>
               </li>
-              <li className={isActive(item.name)}>
-                <a href="#/item/42">Item 42</a>
+              <li className={isActive(items.name)}>
+                <a href="#/items">Items</a>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={pages.Home.handler}>Home</button>
+                <button className="btn btn-default"
+                  onClick={pages[home.name].handler}>Home</button>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={pages.Login.handler}>Login</button>
+                <button className="btn btn-default"
+                  onClick={pages[login.name].handler}>Login</button>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={() => pages.Item.handler({ id: "42" })}>Item 42</button>
+                <button className="btn btn-default"
+                  onClick={() => pages[items.name].handler({})}>Items</button>
               </li>
             </ul>
           </nav>
@@ -104,7 +123,7 @@ const urlMapper = Mapper();
 const routes = {
   "/": home.name,
   "/login": login.name,
-  "/item/:id": item.name
+  "/items/:id?": items.name
 };
 
 

@@ -21,9 +21,27 @@ const login = {
   create: update => model => m("div", "Login Page")
 };
 
-const item = {
-  name: "Item",
-  create: update => model => m("div", "Item Page - viewing item " + model.params.id)
+const itemDetails = {
+  create: update => model => model.id ?
+    m("p", "Details of item " + model.id) : null
+};
+
+const items = {
+  name: "Items",
+  create: update => {
+    const components = {
+      itemDetails: itemDetails.create(update)
+    };
+
+    return model => m("div",
+      m("p", "Items Page"),
+      m("ul",
+        m("li", m("a[href='#/items/1']", "Item 1")),
+        m("li", m("a[href='#/items/2']", "Item 2"))
+      ),
+      components.itemDetails(model.params)
+    );
+  }
 };
 
 const pageDefs = {
@@ -36,9 +54,9 @@ const pageDefs = {
       view: login.create(update),
       handler: () => update(assoc("page", login.name))
     },
-    [item.name]: {
-      view: item.create(update),
-      handler: params => update(merge({ page: item.name, params }))
+    [items.name]: {
+      view: items.create(update),
+      handler: params => update(merge({ page: items.name, params }))
     },
     defaultPage: home.name
   })
@@ -46,6 +64,8 @@ const pageDefs = {
 
 const app = {
   model: () => ({
+    page: "Home",
+    params: {}
   }),
 
   create: pages => {
@@ -63,17 +83,20 @@ const app = {
             m("li" + isActive(login.name),
               m("a[href='#/login']", "Login")
             ),
-            m("li" + isActive(item.name),
-              m("a[href='#/item/42']", "Item 42")
+            m("li" + isActive(items.name),
+              m("a[href='#/items']", "Items")
             ),
             m("li.btn",
-              m("button.btn.btn-default", { onclick: pages.Home.handler }, "Home")
+              m("button.btn.btn-default",
+                { onclick: pages[home.name].handler }, "Home")
             ),
             m("li.btn",
-              m("button.btn.btn-default", { onclick: pages.Login.handler }, "Login")
+              m("button.btn.btn-default",
+                { onclick: pages[login.name].handler }, "Login")
             ),
             m("li.btn",
-              m("button.btn.btn-default", { onclick: () => pages.Item.handler({ id: "42" }) }, "Item 42")
+              m("button.btn.btn-default",
+                { onclick: () => pages[items.name].handler({}) }, "Items")
             )
           )
         ),
@@ -94,7 +117,8 @@ const pages = pageDefs.create(update);
 const routes = {
   "/": home.name,
   "/login": login.name,
-  "/item/:id": item.name
+  "/items": items.name,
+  "/items/:id": items.name
 };
 
 const routeMap = Object.keys(routes).reduce((acc, next) => {

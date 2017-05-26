@@ -13,27 +13,47 @@ const merge = source => target => Object.assign(target, source);
 
 const home = {
   name: "Home",
-  create: update => model => (
-    <div>Home Page</div>
-  )
+  create: update => model => (<div>Home Page</div>)
 };
 
 const login = {
   name: "Login",
-  create: update => model => (
-    <div>Login Page</div>
-  )
+  create: update => model => (<div>Login Page</div>)
 };
 
-const item = {
-  name: "Item",
-  create: update => model => (
-    <div>Item Page - viewing item {model.params.id}</div>
-  )
+const itemDetails = {
+  create: update => model => model.id ?
+    (<p>Details of item {model.id}</p>) : null
+};
+
+const items = {
+  name: "Items",
+  create: update => {
+    const components = {
+      itemDetails: itemDetails.create(update)
+    };
+
+    const actions = {
+      viewItem: id => () => update(merge({ page: "Items", params: { id } }))
+    };
+
+    return model => (
+      <div>
+        <p>Items Page</p>
+        <ul>
+          <li><a href="#" onClick={actions.viewItem(1)}>Item 1</a></li>
+          <li><a href="#" onClick={actions.viewItem(2)}>Item 2</a></li>
+        </ul>
+        {components.itemDetails(model.params)}
+      </div>
+    );
+  }
 };
 
 const app = {
   model: () => ({
+    page: "Home",
+    params: {}
   }),
 
   create: update => {
@@ -46,9 +66,9 @@ const app = {
         view: login.create(update),
         handler: () => update(assoc("page", login.name))
       },
-      [item.name]: {
-        view: item.create(update),
-        handler: params => update(merge({ page: item.name, params }))
+      [items.name]: {
+        view: items.create(update),
+        handler: () => update(merge({ page: items.name, params: {} }))
       },
       defaultPage: home.name
     };
@@ -62,23 +82,26 @@ const app = {
         <div>
           <nav className="navbar navbar-default">
             <ul className="nav navbar-nav">
-              <li className={isActive("Home")}>
-                <a href="#" onClick={pages.Home.handler}>Home</a>
+              <li className={isActive(home.name)}>
+                <a href="#" onClick={pages[home.name].handler}>Home</a>
               </li>
-              <li className={isActive("Login")}>
-                <a href="#" onClick={pages.Login.handler}>Login</a>
+              <li className={isActive(login.name)}>
+                <a href="#" onClick={pages[login.name].handler}>Login</a>
               </li>
-              <li className={isActive("Item")}>
-                <a href="#" onClick={() => pages.Item.handler({ id: "42" })}>Item 42</a>
-              </li>
-              <li className="btn">
-                <button className="btn btn-default" onClick={pages.Home.handler}>Home</button>
+              <li className={isActive(items.name)}>
+                <a href="#" onClick={pages[items.name].handler}>Items</a>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={pages.Login.handler}>Login</button>
+                <button className="btn btn-default"
+                  onClick={pages[home.name].handler}>Home</button>
               </li>
               <li className="btn">
-                <button className="btn btn-default" onClick={() => pages.Item.handler({ id: 42 })}>Item 42</button>
+                <button className="btn btn-default"
+                  onClick={pages[login.name].handler}>Login</button>
+              </li>
+              <li className="btn">
+                <button className="btn btn-default"
+                  onClick={pages[items.name].handler}>Items</button>
               </li>
             </ul>
           </nav>
