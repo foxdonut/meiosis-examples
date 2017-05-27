@@ -34,8 +34,13 @@
       Using
         <a href="http://mithril.js.org" target="_blank">Mithril</a>
         &bullet;
-        <a href="https://github.com/tildeio/router.js" target="_blank">router.js</a>
+        <a href="https://www.npmjs.com/package/router_js" target="_blank">router_js</a>
     </footer>
   </body>
+  <!-- router_js does not seem to provide a proper npm module. -->
+  <!-- so, it (and its dependencies) are loaded with <script> tags here. -->
+  <script src="https://unpkg.com/rsvp@3.5.0/dist/rsvp.js"></script>
+  <script src="https://unpkg.com/route-recognizer@0.3.3/dist/route-recognizer.js"></script>
+  <script src="https://unpkg.com/router_js@1.2.8/dist/router.js"></script>
   <script src="/examples/wiki/build/generated-part-04-ex-07.js"></script>
 </html>

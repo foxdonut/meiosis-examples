@@ -1,7 +1,12 @@
+/*global window*/
 import m from "mithril";
 import stream from "mithril/stream";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
+
+// router_js does not seem to provide a proper npm module.
+// so, it (and its dependencies) are loaded with <script> tags in index-07.html.
+const Router = window.Router.default;
 
 const assoc = (prop, value) => model => {
   model[prop] = value;
@@ -113,23 +118,28 @@ const models = stream.scan(applyUpdate, initialModel, update);
 const pages = pageDefs.create(update);
 
 
-m.route.prefix("#");
-
-const noRender = () => null;
-
-const createRouteResolver = pageName => ({
-  onmatch: pages[pageName].handler,
-  render: noRender
+const router = new Router({
+  getHandler: name => ({
+    model: params => params,
+    setup: pages[name].handler
+  }),
+  updateURL: url => {
+    console.log("update url:", url);
+    window.location.hash = url;
+  }
 });
 
-const stub = document.createElement("div");
-
-m.route(stub, "/", {
-  "/": createRouteResolver(home.name),
-  "/login": createRouteResolver(login.name),
-  "/items": createRouteResolver(items.name),
-  "/items/:id": createRouteResolver(items.name)
+router.map(match => {
+  match("/").to(home.name);
+  match("/login").to(login.name);
+  match("/items").to(items.name);
+  match("/items/:id").to(items.name);
 });
+
+window.onpopstate = () => {
+  const route = document.location.hash.substring(1);
+  router.handleURL(route);
+};
 
 
 const element = document.getElementById("app");

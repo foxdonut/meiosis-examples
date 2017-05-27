@@ -1,5 +1,6 @@
 import m from "mithril";
 import stream from "mithril/stream";
+import UniversalRouter from "universal-router";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
@@ -113,23 +114,19 @@ const models = stream.scan(applyUpdate, initialModel, update);
 const pages = pageDefs.create(update);
 
 
-m.route.prefix("#");
+const routes = [
+  { path: "/", action: pages[home.name].handler },
+  { path: "/login", action: pages[login.name].handler },
+  { path: "/items", action: pages[items.name].handler },
+  { path: "/items/:id", action: ctx => pages[items.name].handler(ctx.params) }
+];
 
-const noRender = () => null;
+const router = new UniversalRouter(routes);
 
-const createRouteResolver = pageName => ({
-  onmatch: pages[pageName].handler,
-  render: noRender
-});
-
-const stub = document.createElement("div");
-
-m.route(stub, "/", {
-  "/": createRouteResolver(home.name),
-  "/login": createRouteResolver(login.name),
-  "/items": createRouteResolver(items.name),
-  "/items/:id": createRouteResolver(items.name)
-});
+window.onpopstate = () => {
+  const route = document.location.hash.substring(1);
+  router.resolve(route);
+};
 
 
 const element = document.getElementById("app");
