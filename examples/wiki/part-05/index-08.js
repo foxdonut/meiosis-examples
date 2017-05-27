@@ -117,8 +117,10 @@ const pages = pageDefs.create(update);
 const routes = [
   { path: "/", action: pages[home.name].handler },
   { path: "/login", action: pages[login.name].handler },
-  { path: "/items", action: pages[items.name].handler },
-  { path: "/items/:id", action: ctx => pages[items.name].handler(ctx.params) }
+  { path: "/items", children: [
+    { path: "/", action: pages[items.name].handler },
+    { path: "/:id", action: ctx => pages[items.name].handler(ctx.params) }
+  ]}
 ];
 
 const router = new UniversalRouter(routes);

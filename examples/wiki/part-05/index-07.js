@@ -132,8 +132,10 @@ const router = new Router({
 router.map(match => {
   match("/").to(home.name);
   match("/login").to(login.name);
-  match("/items").to(items.name);
-  match("/items/:id").to(items.name);
+  match("/items", match => {
+    match("/").to(items.name);
+    match("/:id").to(items.name);
+  })
 });
 
 window.onpopstate = () => {
