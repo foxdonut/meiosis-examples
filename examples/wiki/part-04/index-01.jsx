@@ -19,37 +19,58 @@ const login = {
   create: update => model => (<div>Login Page</div>)
 };
 
-const itemDetails = {
-  create: update => model => model.id ?
-    (<p>Details of item {model.id}</p>) : null
+const itemSummary = {
+  create: update => {
+    const actions = {
+      itemDetails: id => () => update(
+        merge({ page: { id: "ItemDetails", tab: "Items" }, params: { id } })
+      )
+    };
+
+    return model => model.params.id ? (
+      <p>
+        Summary of item {model.params.id}.
+        <a href="#" onClick={actions.itemDetails(model.params.id)}>View details</a>
+      </p>
+    ) : null
+  }
 };
 
 const items = {
   create: update => {
     const components = {
-      itemDetails: itemDetails.create(update)
+      itemSummary: itemSummary.create(update)
     };
 
     const actions = {
-      viewItem: id => () => update(merge({ page: "Items", params: { id } }))
+      itemSummary: id => () => update(
+        merge({ page: { id: "Items", tab: "Items" }, params: { id } })
+      )
     };
 
     return model => (
       <div>
         <p>Items Page</p>
         <ul>
-          <li><a href="#" onClick={actions.viewItem(1)}>Item 1</a></li>
-          <li><a href="#" onClick={actions.viewItem(2)}>Item 2</a></li>
+          <li><a href="#" onClick={actions.itemSummary(1)}>Item 1</a></li>
+          <li><a href="#" onClick={actions.itemSummary(2)}>Item 2</a></li>
         </ul>
-        {components.itemDetails(model.params)}
+        {components.itemSummary(model)}
       </div>
     );
   }
 };
 
+const itemDetails = {
+  create: update => model => (<p>Details of item {model.params.id}</p>)
+};
+
 const app = {
   model: () => ({
-    page: "Home",
+    page: {
+      id: "Home",
+      tab: "Home"
+    },
     params: {}
   }),
 
@@ -57,21 +78,25 @@ const app = {
     const pages = {
       Home: {
         view: home.create(update),
-        handler: () => update(assoc("page", "Home"))
+        handler: () => update(assoc("page", { id: "Home", tab: "Home" }))
       },
       Login: {
         view: login.create(update),
-        handler: () => update(assoc("page", "Login"))
+        handler: () => update(assoc("page", { id: "Login", tab: "Login" }))
       },
       Items: {
         view: items.create(update),
-        handler: () => update(merge({ page: "Items", params: {} }))
+        handler: () => update(merge({ page: { id: "Items", tab: "Items" }, params: {} }))
+      },
+      ItemDetails: {
+        view: itemDetails.create(update),
+        handler: () => update(assoc("page", { id: "ItemDetails", tab: "Items" }))
       }
     };
 
     return model => {
-      const page = pages[model.page] || pages.Home;
-      const isActive = pageName => model.page === pageName ? "active" : "";
+      const page = pages[model.page.id] || pages.Home;
+      const isActive = pageName => model.page.tab === pageName ? "active" : "";
 
       return (
         <div>
