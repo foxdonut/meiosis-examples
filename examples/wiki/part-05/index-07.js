@@ -1,12 +1,9 @@
-/*global window*/
 import m from "mithril";
 import stream from "mithril/stream";
+import UniversalRouter from "universal-router";
+import generateUrls from "universal-router/generateUrls";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
-
-// router_js does not seem to provide a proper npm module.
-// so, it (and its dependencies) are loaded with <script> tags in index-07.html.
-const Router = window.Router.default;
 
 const assoc = (prop, value) => model => {
   model[prop] = value;
@@ -16,91 +13,131 @@ const assoc = (prop, value) => model => {
 const merge = source => target => Object.assign(target, source);
 
 const home = {
-  name: "Home",
-  create: update => model => m("div", "Home Page")
+  page: {
+    id: "Home",
+    tab: "Home"
+  },
+  create: _update => _model => m("div", "Home Page")
 };
 
 const login = {
-  name: "Login",
-  create: update => model => m("div", "Login Page")
+  page: {
+    id: "Login",
+    tab: "Login"
+  },
+  create: _update => _model => m("div", "Login Page")
 };
 
-const itemDetails = {
-  create: update => model => model.id ?
-    m("p", "Details of item " + model.id) : null
+const itemSummary = {
+  create: _update => model => model.params.id ? [
+    m("p",
+      "Summary of item " + model.params.id
+    ),
+    m("a[href='#/items/" + model.params.id + "/details']", "View details"),
+    m("span", " "),
+    m("button.btn.btn-default.btn-xs", "View details")
+  ] : null
 };
 
 const items = {
-  name: "Items",
+  page: {
+    id: "Items",
+    tab: "Items"
+  },
   create: update => {
     const components = {
-      itemDetails: itemDetails.create(update)
+      itemSummary: itemSummary.create(update)
     };
 
     return model => m("div",
       m("p", "Items Page"),
       m("ul",
-        m("li", m("a[href='#/items/1']", "Item 1")),
-        m("li", m("a[href='#/items/2']", "Item 2"))
+        m("li",
+          m("a[href='#/items/1']", "Item 1"),
+          m("span", " "),
+          m("button.btn.btn-default.btn-xs", "Item 1")
+        ),
+        m("li",
+          m("a[href='#/items/2']", "Item 2"),
+          m("span", " "),
+          m("button.btn.btn-default.btn-xs", "Item 2")
+        )
       ),
-      components.itemDetails(model.params)
+      components.itemSummary(model)
     );
   }
 };
 
+const itemDetails = {
+  page: {
+    id: "ItemDetails",
+    tab: "Items"
+  },
+  create: _update => model => model.params.id ?
+    m("p", "Details of item " + model.params.id) : null
+};
+
 const pageDefs = {
   create: update => ({
-    [home.name]: {
+    [home.page.id]: {
       view: home.create(update),
-      handler: () => update(assoc("page", home.name))
+      handler: () => update(assoc("page", home.page))
     },
-    [login.name]: {
+    [login.page.id]: {
       view: login.create(update),
-      handler: () => update(assoc("page", login.name))
+      handler: () => update(assoc("page", login.page))
     },
-    [items.name]: {
+    [items.page.id]: {
       view: items.create(update),
-      handler: params => update(merge({ page: items.name, params }))
+      handler: params => update(merge({ page: items.page, params }))
     },
-    defaultPage: home.name
+    [itemDetails.page.id]: {
+      view: itemDetails.create(update),
+      handler: params => update(merge({ page: itemDetails.page, params }))
+    },
+    defaultPageId: home.page.id
   })
 };
 
 const app = {
   model: () => ({
-    page: "Home",
+    page: {
+      id: "Home",
+      tab: "Home"
+    },
     params: {}
   }),
 
   create: pages => {
     return model => {
-      const currentPage = pages[model.page] ? model.page : pages.defaultPage;
-      const page = pages[currentPage];
-      const isActive = pageName => pageName === currentPage ? ".active" : "";
+      const currentPageId = pages[model.page.id] ? model.page.id : pages.defaultPageId;
+      const currentTab = model.page.tab;
+      const page = pages[currentPageId];
+      const isActive = tab => tab === currentTab ? ".active" : "";
 
       return m("div",
         m("nav.navbar.navbar-default",
           m("ul.nav.navbar-nav",
-            m("li" + isActive(home.name),
+            m("li" + isActive(home.page.id),
               m("a[href='#/']", "Home")
             ),
-            m("li" + isActive(login.name),
+            m("li" + isActive(login.page.id),
               m("a[href='#/login']", "Login")
             ),
-            m("li" + isActive(items.name),
+            m("li" + isActive(items.page.id),
               m("a[href='#/items']", "Items")
             ),
             m("li.btn",
               m("button.btn.btn-default",
-                { onclick: pages[home.name].handler }, "Home")
+                { onclick: pages[home.page.id].handler }, "Home")
             ),
             m("li.btn",
               m("button.btn.btn-default",
-                { onclick: pages[login.name].handler }, "Login")
+                { onclick: pages[login.page.id].handler }, "Login")
             ),
             m("li.btn",
               m("button.btn.btn-default",
-                { onclick: () => pages[items.name].handler({}) }, "Items")
+                { onclick: () => pages[items.page.id].handler({}) }, "Items")
             )
           )
         ),
@@ -118,35 +155,46 @@ const models = stream.scan(applyUpdate, initialModel, update);
 const pages = pageDefs.create(update);
 
 
-const router = new Router({
-  getHandler: name => ({
-    model: params => params,
-    setup: pages[name].handler
-  }),
-  updateURL: url => {
-    console.log("update url:", url);
-    window.location.hash = url;
-  }
-});
+const routes = [
+  { path: "/", name: home.page.id, action: pages[home.page.id].handler },
+  { path: "/login", name: login.page.id, action: pages[login.page.id].handler },
+  { path: "/items", children: [
+    { path: "/", action: ctx => pages[items.page.id].handler(ctx.params) },
+    { path: "/:id?", name: items.page.id, action: ctx => pages[items.page.id].handler(ctx.params) },
+    { path: "/:id/details", name: itemDetails.page.id,
+      action: ctx => pages[itemDetails.page.id].handler(ctx.params)
+    }
+  ]}
+];
 
-router.map(match => {
-  match("/").to(home.name);
-  match("/login").to(login.name);
-  match("/items", match => {
-    match("/").to(items.name);
-    match("/:id").to(items.name);
-  })
-});
+const router = new UniversalRouter(routes);
 
-window.onpopstate = () => {
+const resolveRoute = () => {
   const route = document.location.hash.substring(1);
-  router.handleURL(route);
+  router.resolve(route);
 };
+
+window.onpopstate = resolveRoute;
+
+
+const urlGenerator = generateUrls(router);
+
+const routeSync = model => {
+  const route = urlGenerator(model.page.id, model.params || {});
+  if (document.location.hash.substring(1) !== route) {
+    window.history.pushState({}, "", "#" + route);
+  }
+};
+models.map(routeSync);
 
 
 const element = document.getElementById("app");
 const view = app.create(pages);
 models.map(model => m.render(element, view(model)));
+
+
+// resolve initial route
+resolveRoute();
 
 
 trace({ update, dataStreams: [ models ] });

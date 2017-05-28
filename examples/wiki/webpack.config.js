@@ -22,7 +22,6 @@ module.exports = {
     "part-05-ex-05": "./part-05/index-05.jsx",
     "part-05-ex-06": "./part-05/index-06.js",
     "part-05-ex-07": "./part-05/index-07.js",
-    "part-05-ex-08": "./part-05/index-08.js",
     "part-06-ex-01": "./part-06/index-01.jsx",
     "part-06-ex-02": "./part-06/index-02.jsx",
     "part-06-ex-03": "./part-06/index-03.js",
