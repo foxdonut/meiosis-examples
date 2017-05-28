@@ -28,10 +28,12 @@ const itemSummary = {
     };
 
     return model => model.params.id ? (
-      <p>
-        Summary of item {model.params.id}.
+      <div>
+        <p>
+          Summary of item {model.params.id}.
+        </p>
         <a href="#" onClick={actions.itemDetails(model.params.id)}>View details</a>
-      </p>
+      </div>
     ) : null
   }
 };
