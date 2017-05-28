@@ -17,7 +17,7 @@ const home = {
     id: "Home",
     tab: "Home"
   },
-  create: update => model => m("div", "Home Page")
+  create: _update => _model => m("div", "Home Page")
 };
 
 const login = {
@@ -25,15 +25,17 @@ const login = {
     id: "Login",
     tab: "Login"
   },
-  create: update => model => m("div", "Login Page")
+  create: _update => _model => m("div", "Login Page")
 };
 
 const itemSummary = {
-  create: update => model => model.params.id ? [
+  create: _update => model => model.params.id ? [
     m("p",
-      "Summary of item " + model.params.id,
+      "Summary of item " + model.params.id
     ),
-    m("a[href='#/items/" + model.params.id + "/details']", "View details")
+    m("a[href='#/items/" + model.params.id + "/details']", "View details"),
+    m("span", " "),
+    m("button.btn.btn-default.btn-xs", "View details")
   ] : null
 };
 
@@ -50,8 +52,16 @@ const items = {
     return model => m("div",
       m("p", "Items Page"),
       m("ul",
-        m("li", m("a[href='#/items/1']", "Item 1")),
-        m("li", m("a[href='#/items/2']", "Item 2"))
+        m("li",
+          m("a[href='#/items/1']", "Item 1"),
+          m("span", " "),
+          m("button.btn.btn-default.btn-xs", "Item 1")
+        ),
+        m("li",
+          m("a[href='#/items/2']", "Item 2"),
+          m("span", " "),
+          m("button.btn.btn-default.btn-xs", "Item 2")
+        )
       ),
       components.itemSummary(model)
     );
@@ -63,7 +73,7 @@ const itemDetails = {
     id: "ItemDetails",
     tab: "Items"
   },
-  create: update => model => model.params.id ?
+  create: _update => model => model.params.id ?
     m("p", "Details of item " + model.params.id) : null
 };
 
@@ -146,33 +156,45 @@ const pages = pageDefs.create(update);
 
 
 const routes = [
-  { path: "/", action: pages[home.page.id].handler },
-  { path: "/login", action: pages[login.page.id].handler },
+  { path: "/", name: home.page.id, action: pages[home.page.id].handler },
+  { path: "/login", name: login.page.id, action: pages[login.page.id].handler },
   { path: "/items", children: [
     { path: "/", action: ctx => pages[items.page.id].handler(ctx.params) },
-    { path: "/:id/details", action: ctx => pages[itemDetails.page.id].handler(ctx.params) },
-    { path: "/:id", action: ctx => pages[items.page.id].handler(ctx.params) }
-    /*
-    { path: "/:id", action: ctx => pages[items.page.id].handler(ctx.params), children: [
-      { path: "/details", action: ctx => pages[itemDetails.page.id].handler(ctx.params) }
-    ]}
-    */
+    { path: "/:id?", name: items.page.id, action: ctx => pages[items.page.id].handler(ctx.params) },
+    { path: "/:id/details", name: itemDetails.page.id,
+      action: ctx => pages[itemDetails.page.id].handler(ctx.params)
+    }
   ]}
 ];
 
 const router = new UniversalRouter(routes);
 
-window.onpopstate = () => {
+const resolveRoute = () => {
   const route = document.location.hash.substring(1);
   router.resolve(route);
 };
 
+window.onpopstate = resolveRoute;
+
+
 const urlGenerator = generateUrls(router);
+
+const routeSync = model => {
+  const route = urlGenerator(model.page.id, model.params || {});
+  if (document.location.hash.substring(1) !== route) {
+    window.history.pushState({}, "", "#" + route);
+  }
+};
+models.map(routeSync);
 
 
 const element = document.getElementById("app");
 const view = app.create(pages);
 models.map(model => m.render(element, view(model)));
+
+
+// resolve initial route
+resolveRoute();
 
 
 trace({ update, dataStreams: [ models ] });

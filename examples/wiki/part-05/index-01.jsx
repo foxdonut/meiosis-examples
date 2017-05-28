@@ -12,11 +12,11 @@ const assoc = (prop, value) => model => {
 const merge = source => target => Object.assign(target, source);
 
 const home = {
-  create: update => model => (<div>Home Page</div>)
+  create: _update => _model => (<div>Home Page</div>)
 };
 
 const login = {
-  create: update => model => (<div>Login Page</div>)
+  create: _update => _model => (<div>Login Page</div>)
 };
 
 const itemSummary = {
@@ -64,7 +64,7 @@ const items = {
 };
 
 const itemDetails = {
-  create: update => model => (<p>Details of item {model.params.id}</p>)
+  create: _update => model => (<p>Details of item {model.params.id}</p>)
 };
 
 const app = {
