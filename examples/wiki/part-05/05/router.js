@@ -1,4 +1,5 @@
-import Mapper from "url-mapper";
+import m from "mithril";
+import pathToRegexp from "path-to-regexp";
 
 import { home } from "./home";
 import { coffee } from "./coffee";
@@ -7,26 +8,32 @@ import { bookSummary } from "./bookSummary";
 import { bookDetails } from "./bookDetails";
 
 export const createRouter = update => {
-  const urlMapper = Mapper();
+  m.route.prefix("#");
+
+  const noRender = () => null;
+
+  const createRouteResolver = component => ({
+    onmatch: params => component.display(update, params),
+    render: noRender
+  });
+
+  const stub = document.createElement("div");
 
   const routes = {
     "/": home,
-    "/coffee/:id?": coffee,
+    "/coffee": coffee,
+    "/coffee/:id": coffee,
     "/books": books,
     "/books/:id": bookSummary,
     "/books/:id/details": bookDetails
   };
 
-  const resolveRoute = () => {
-    const route = document.location.hash.substring(1);
-    const resolved = urlMapper.map(route, routes);
-    if (resolved) {
-      const page = resolved.match;
-      page.display(update, resolved.values);
-    }
-  };
+  const routeResolvers = Object.keys(routes).reduce((acc, next) => {
+    acc[next] = createRouteResolver(routes[next]);
+    return acc;
+  }, {});
 
-  window.onpopstate = resolveRoute;
+  m.route(stub, "/", routeResolvers);
 
   const routeMap = Object.keys(routes).reduce((acc, next) => {
     acc[routes[next].page.id] = next;
@@ -35,11 +42,11 @@ export const createRouter = update => {
 
   const routeSync = model => {
     const segment = routeMap[model.page.id] || "/";
-    const route = urlMapper.stringify(segment, model.params || {});
+    const route = pathToRegexp.compile(segment)(model.params || {});
     if (document.location.hash.substring(1) !== route) {
       window.history.pushState({}, "", "#" + route);
     }
   };
 
-  return { resolveRoute, routeSync };
+  return { routeSync };
 };

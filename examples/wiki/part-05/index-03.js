@@ -23,6 +23,8 @@ models.map(model => ReactDOM.render(view(model), element));
 const router = createRouter(update);
 // Resolve initial route
 router.resolveRoute();
+// Route sync
+models.map(router.routeSync);
 
 // Only for using Meiosis Tracer in development.
 trace({ update, dataStreams: [ models ] });

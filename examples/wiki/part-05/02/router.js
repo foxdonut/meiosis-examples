@@ -28,18 +28,5 @@ export const createRouter = update => {
 
   window.onpopstate = resolveRoute;
 
-  const routeMap = Object.keys(routes).reduce((acc, next) => {
-    acc[routes[next].page.id] = next;
-    return acc;
-  }, {});
-
-  const routeSync = model => {
-    const segment = routeMap[model.page.id] || "/";
-    const route = urlMapper.stringify(segment, model.params || {});
-    if (document.location.hash.substring(1) !== route) {
-      window.history.pushState({}, "", "#" + route);
-    }
-  };
-
-  return { resolveRoute, routeSync };
+  return { resolveRoute };
 };

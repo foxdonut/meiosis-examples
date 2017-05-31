@@ -1,4 +1,5 @@
-import Mapper from "url-mapper";
+import UniversalRouter from "universal-router";
+import generateUrls from "universal-router/generateUrls";
 
 import { home } from "./home";
 import { coffee } from "./coffee";
@@ -7,35 +8,40 @@ import { bookSummary } from "./bookSummary";
 import { bookDetails } from "./bookDetails";
 
 export const createRouter = update => {
-  const urlMapper = Mapper();
+  const routes = [
+    { path: "/", name: home.page.id,
+      action: () => home.display(update)
+    },
+    { path: "/coffee/:id?", name: coffee.page.id,
+      action: ctx => coffee.display(update, ctx.params)
+    },
+    { path: "/books", children: [
+      { path: "/", name: books.page.id,
+        action: ctx => books.display(update, ctx.params)
+      },
+      { path: "/:id", name: bookSummary.page.id,
+        action: ctx => bookSummary.display(update, ctx.params)
+      },
+      { path: "/:id/details", name: bookDetails.page.id,
+        action: ctx => bookDetails.display(update, ctx.params)
+      }
+    ]}
+  ];
 
-  const routes = {
-    "/": home,
-    "/coffee/:id?": coffee,
-    "/books": books,
-    "/books/:id": bookSummary,
-    "/books/:id/details": bookDetails
-  };
+  const router = new UniversalRouter(routes);
 
   const resolveRoute = () => {
     const route = document.location.hash.substring(1);
-    const resolved = urlMapper.map(route, routes);
-    if (resolved) {
-      const page = resolved.match;
-      page.display(update, resolved.values);
-    }
+    router.resolve(route);
   };
 
   window.onpopstate = resolveRoute;
 
-  const routeMap = Object.keys(routes).reduce((acc, next) => {
-    acc[routes[next].page.id] = next;
-    return acc;
-  }, {});
+
+  const urlGenerator = generateUrls(router);
 
   const routeSync = model => {
-    const segment = routeMap[model.page.id] || "/";
-    const route = urlMapper.stringify(segment, model.params || {});
+    const route = urlGenerator(model.page.id, model.params || {});
     if (document.location.hash.substring(1) !== route) {
       window.history.pushState({}, "", "#" + route);
     }

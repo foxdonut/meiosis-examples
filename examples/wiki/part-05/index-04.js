@@ -1,5 +1,5 @@
-import flyd from "flyd";
-import ReactDOM from "react-dom";
+import m from "mithril";
+import stream from "mithril/stream";
 
 import { app } from "./04/app";
 import { createRouter } from "./04/router";
@@ -10,14 +10,14 @@ import meiosisTracer from "meiosis-tracer";
 
 // Meiosis Setup
 const initialModel = app.model();
-const update = flyd.stream();
+const update = stream();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = stream.scan(applyUpdate, initialModel, update);
 
 // Rendering
 const element = document.getElementById("app");
 const view = app.create(update);
-models.map(model => ReactDOM.render(view(model), element));
+models.map(model => m.render(element, view(model)));
 
 // Router
 const router = createRouter(update);
