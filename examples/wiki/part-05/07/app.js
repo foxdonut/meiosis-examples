@@ -3,6 +3,7 @@ import m from "mithril";
 import { home } from "./home";
 import { coffee } from "./coffee";
 import { books } from "./books";
+import { bookSummary } from "./bookSummary";
 import { bookDetails } from "./bookDetails";
 
 export const app = {
@@ -12,7 +13,7 @@ export const app = {
   }),
 
   create: update => {
-    const pageMap = [home, coffee, books, bookDetails].reduce(
+    const pageMap = [home, coffee, books, bookSummary, bookDetails].reduce(
       (acc, next) => {
         acc[next.page.id] = next.create(update);
         return acc;

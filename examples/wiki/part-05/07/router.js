@@ -4,18 +4,23 @@ import generateUrls from "universal-router/generateUrls";
 import { home } from "./home";
 import { coffee } from "./coffee";
 import { books } from "./books";
+import { bookSummary } from "./bookSummary";
 import { bookDetails } from "./bookDetails";
 
 export const createRouter = update => {
   const routes = [
-    { path: "/", name: home.page.id, action: () => home.display(update) },
+    { path: "/", name: home.page.id,
+      action: () => home.display(update)
+    },
     { path: "/coffee/:id?", name: coffee.page.id,
       action: ctx => coffee.display(update, ctx.params)
     },
     { path: "/books", children: [
-      { path: "/", action: ctx => books.display(update, ctx.params) },
-      { path: "/:id", name: books.page.id,
+      { path: "/", name: books.page.id,
         action: ctx => books.display(update, ctx.params)
+      },
+      { path: "/:id", name: bookSummary.page.id,
+        action: ctx => bookSummary.display(update, ctx.params)
       },
       { path: "/:id/details", name: bookDetails.page.id,
         action: ctx => bookDetails.display(update, ctx.params)
