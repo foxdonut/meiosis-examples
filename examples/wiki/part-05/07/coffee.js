@@ -14,17 +14,13 @@ export const coffee = {
 
     return model => m("p", "Coffee Page",
       m("ul",
-        m("li",
-          m("a[href='#/coffee/1']", "Coffee 1"),
-          m("span", " "),
-          m("button.btn.btn-default.btn-xs",
-            { onclick: actions.coffeeDescription(1) }, "Coffee 1")
-        ),
-        m("li",
-          m("a[href='#/coffee/2']", "Coffee 2"),
-          m("span", " "),
-          m("button.btn.btn-default.btn-xs",
-            { onclick: actions.coffeeDescription(2) }, "Coffee 2")
+        model.coffees.map(coffee =>
+          m("li", { key: coffee.id },
+            m("a[href='#/coffee/" + coffee.id + "']", coffee.description),
+            m("span", " "),
+            m("button.btn.btn-default.btn-xs",
+              { onclick: actions.coffeeDescription(coffee.id) }, coffee.description)
+          )
         )
       ),
       model.params.id ? m("div", "Description of coffee " + model.params.id) : null

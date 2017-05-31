@@ -17,7 +17,7 @@ export const books = {
       m("p", "Book Page"),
       m("ul",
         model.books.map(book =>
-          m("li",
+          m("li", { key: book.id },
             m("a[href='#/books/" + book.id + "']", book.title),
             m("span", " "),
             m("button.btn.btn-default.btn-xs",

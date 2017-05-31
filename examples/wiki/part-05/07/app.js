@@ -10,9 +10,13 @@ export const app = {
   model: () => ({
     page: home.page,
     params: {},
+    coffees: [
+      { id: "c1", description: "Coffee 1" },
+      { id: "c2", description: "Coffee 2" }
+    ],
     books: [
-      { id: "i1", title: "Book 1" },
-      { id: "i2", title: "Book 2" }
+      { id: "b1", title: "Book 1" },
+      { id: "b2", title: "Book 2" }
     ]
   }),
 
