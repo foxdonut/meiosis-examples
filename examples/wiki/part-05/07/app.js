@@ -1,9 +1,9 @@
 import m from "mithril";
 
 import { home } from "./home";
-import { login } from "./login";
-import { items } from "./items";
-import { itemDetails } from "./itemDetails";
+import { coffee } from "./coffee";
+import { books } from "./books";
+import { bookDetails } from "./bookDetails";
 
 export const app = {
   model: () => ({
@@ -12,7 +12,7 @@ export const app = {
   }),
 
   create: update => {
-    const pageMap = [home, login, items, itemDetails].reduce(
+    const pageMap = [home, coffee, books, bookDetails].reduce(
       (acc, next) => {
         acc[next.page.id] = next.create(update);
         return acc;
@@ -31,11 +31,11 @@ export const app = {
             m("li" + isActive(home.page.id),
               m("a[href='#/']", "Home")
             ),
-            m("li" + isActive(login.page.id),
-              m("a[href='#/login']", "Login")
+            m("li" + isActive(coffee.page.id),
+              m("a[href='#/coffee']", "Coffee")
             ),
-            m("li" + isActive(items.page.id),
-              m("a[href='#/items']", "Items")
+            m("li" + isActive(books.page.id),
+              m("a[href='#/books']", "Books")
             ),
             m("li.btn",
               m("button.btn.btn-default",
@@ -43,11 +43,11 @@ export const app = {
             ),
             m("li.btn",
               m("button.btn.btn-default",
-                { onclick: () => login.display(update) }, "Login")
+                { onclick: () => coffee.display(update) }, "Coffee")
             ),
             m("li.btn",
               m("button.btn.btn-default",
-                { onclick: () => items.display(update, {}) }, "Items")
+                { onclick: () => books.display(update, {}) }, "Books")
             )
           )
         ),

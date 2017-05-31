@@ -2,21 +2,23 @@ import UniversalRouter from "universal-router";
 import generateUrls from "universal-router/generateUrls";
 
 import { home } from "./home";
-import { login } from "./login";
-import { items } from "./items";
-import { itemDetails } from "./itemDetails";
+import { coffee } from "./coffee";
+import { books } from "./books";
+import { bookDetails } from "./bookDetails";
 
 export const createRouter = update => {
   const routes = [
     { path: "/", name: home.page.id, action: () => home.display(update) },
-    { path: "/login", name: login.page.id, action: () => login.display(update) },
-    { path: "/items", children: [
-      { path: "/", action: ctx => items.display(update, ctx.params) },
-      { path: "/:id?", name: items.page.id,
-        action: ctx => items.display(update, ctx.params)
+    { path: "/coffee/:id?", name: coffee.page.id,
+      action: ctx => coffee.display(update, ctx.params)
+    },
+    { path: "/books", children: [
+      { path: "/", action: ctx => books.display(update, ctx.params) },
+      { path: "/:id", name: books.page.id,
+        action: ctx => books.display(update, ctx.params)
       },
-      { path: "/:id/details", name: itemDetails.page.id,
-        action: ctx => itemDetails.display(update, ctx.params)
+      { path: "/:id/details", name: bookDetails.page.id,
+        action: ctx => bookDetails.display(update, ctx.params)
       }
     ]}
   ];
