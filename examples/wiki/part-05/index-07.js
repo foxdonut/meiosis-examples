@@ -14,17 +14,16 @@ const update = stream();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = stream.scan(applyUpdate, initialModel, update);
 
+// Rendering
 const element = document.getElementById("app");
 const view = app.create(update);
 models.map(model => m.render(element, view(model)));
-
 
 // Router
 const router = createRouter(update);
 models.map(router.routeSync);
 // Resolve initial route
 router.resolveRoute();
-
 
 // Only for using Meiosis Tracer in development.
 trace({ update, dataStreams: [ models ] });

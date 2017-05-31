@@ -9,7 +9,11 @@ import { bookDetails } from "./bookDetails";
 export const app = {
   model: () => ({
     page: home.page,
-    params: {}
+    params: {},
+    books: [
+      { id: "i1", title: "Book 1" },
+      { id: "i2", title: "Book 2" }
+    ]
   }),
 
   create: update => {
@@ -44,7 +48,7 @@ export const app = {
             ),
             m("li.btn",
               m("button.btn.btn-default",
-                { onclick: () => coffee.display(update) }, "Coffee")
+                { onclick: () => coffee.display(update, {}) }, "Coffee")
             ),
             m("li.btn",
               m("button.btn.btn-default",

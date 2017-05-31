@@ -13,20 +13,16 @@ export const books = {
       bookSummary: id => () => bookSummary.display(update, { id }),
     };
 
-    return _model => m("div",
+    return model => m("div",
       m("p", "Book Page"),
       m("ul",
-        m("li",
-          m("a[href='#/books/1']", "Book 1"),
-          m("span", " "),
-          m("button.btn.btn-default.btn-xs",
-            { onclick: actions.bookSummary(1) }, "Book 1")
-        ),
-        m("li",
-          m("a[href='#/books/2']", "Book 2"),
-          m("span", " "),
-          m("button.btn.btn-default.btn-xs",
-            { onclick: actions.bookSummary(2) }, "Book 2")
+        model.books.map(book =>
+          m("li",
+            m("a[href='#/books/" + book.id + "']", book.title),
+            m("span", " "),
+            m("button.btn.btn-default.btn-xs",
+              { onclick: actions.bookSummary(book.id) }, book.title)
+          )
         )
       )
     );
