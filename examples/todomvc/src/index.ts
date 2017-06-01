@@ -1,5 +1,6 @@
 import { applyUpdate, createEvents, EventType, Stream, trace, UpdateFunction, ViewFunction } from "meiosis";
 const flyd = require("flyd");
+// Only for using Meiosis Tracer in development.
 const meiosisTracer = require("meiosis-tracer");
 
 import { app } from "./app";
@@ -74,6 +75,7 @@ todoStorage.loadAll().then((todos: Todo[]) => {
 
   viewModel.map((state: any) => render(element, view(state)));
 
+  // Only for using Meiosis Tracer in development.
   trace({ update, dataStreams: [ model, viewModel ], otherStreams: [ eventStream ]});
   meiosisTracer({ selector: "#tracer" });
 });

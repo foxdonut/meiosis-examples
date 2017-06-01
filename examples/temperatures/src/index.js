@@ -1,5 +1,7 @@
 import flyd from "flyd";
 import { render } from "preact";
+
+// Only for using Meiosis Tracer in development.
 import { applyUpdate, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
@@ -25,5 +27,6 @@ const view = app.create(update);
 const element = document.getElementById("app");
 model.map(model => render(view(model), element, element.lastElementChild));
 
+// Only for using Meiosis Tracer in development.
 trace({ update, dataStreams: [ model ] });
 meiosisTracer({ selector: "#tracer" });

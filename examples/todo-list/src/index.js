@@ -5,6 +5,8 @@ import { app } from "./app/index";
 import { services } from "./services";
 import { todoList } from "./todoList";
 import { todoForm } from "./todoForm";
+
+// Only for using Meiosis Tracer in development.
 import { applyUpdate, createEvents, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
@@ -40,6 +42,7 @@ const events = createEvents({
 
 services.create(update, events.services);
 
+// Only for using Meiosis Tracer in development.
 trace({ update, dataStreams: [ model ], otherStreams: [ eventStream ]});
 meiosisTracer({ selector: "#tracer" });
 

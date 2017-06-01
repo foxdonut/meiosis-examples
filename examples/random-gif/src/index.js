@@ -1,6 +1,8 @@
 import m from "mithril";
 import stream from "mithril/stream";
 import scan from "mithril/stream/scan";
+
+// Only for using Meiosis Tracer in development.
 import { applyUpdate, createEvents, trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
@@ -38,5 +40,6 @@ const view = app.create(update, events);
 const element = document.getElementById("app");
 models.map(model => m.render(element, view(model)));
 
+// Only for using Meiosis Tracer in development.
 trace({ update, dataStreams: [ models ], otherStreams: [ eventStream ] });
 meiosisTracer({ selector: "#tracer" });
