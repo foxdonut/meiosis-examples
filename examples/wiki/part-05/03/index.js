@@ -1,8 +1,8 @@
 import flyd from "flyd";
 import ReactDOM from "react-dom";
 
-import { app } from "./03/app";
-import { createRouter } from "./03/router";
+import { app } from "./app";
+import { createRouter } from "./router";
 
 // Only for using Meiosis Tracer in development.
 import { trace } from "meiosis";

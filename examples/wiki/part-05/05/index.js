@@ -1,8 +1,8 @@
 import m from "mithril";
 import stream from "mithril/stream";
 
-import { app } from "./04/app";
-import { createRouter } from "./04/router";
+import { app } from "./app";
+import { createRouter } from "./router";
 
 // Only for using Meiosis Tracer in development.
 import { trace } from "meiosis";
@@ -21,8 +21,6 @@ models.map(model => m.render(element, view(model)));
 
 // Router
 const router = createRouter(update);
-// Resolve initial route
-router.resolveRoute();
 // Route sync
 models.map(router.routeSync);
 

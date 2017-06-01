@@ -1,7 +1,8 @@
 import flyd from "flyd";
 import ReactDOM from "react-dom";
 
-import { app } from "./01/app";
+import { app } from "./app";
+import { createRouter } from "./router";
 
 // Only for using Meiosis Tracer in development.
 import { trace } from "meiosis";
@@ -17,6 +18,11 @@ const models = flyd.scan(applyUpdate, initialModel, update);
 const element = document.getElementById("app");
 const view = app.create(update);
 models.map(model => ReactDOM.render(view(model), element));
+
+// Router
+const router = createRouter(update);
+// Resolve initial route
+router.resolveRoute();
 
 // Only for using Meiosis Tracer in development.
 trace({ update, dataStreams: [ models ] });
