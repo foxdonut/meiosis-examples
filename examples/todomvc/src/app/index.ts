@@ -3,6 +3,7 @@ import { UpdateFunction, ViewFunction } from "meiosis";
 import { footer } from "../footer";
 import { header } from "../header";
 import { main } from "../main";
+import { createRouter } from "../router";
 import { Model } from "../util";
 import { state } from "./state";
 
@@ -22,6 +23,11 @@ export const app = {
     };
 
     return createView(components);
+  },
+  createRouter: (update: UpdateFunction) => {
+    const updates = createUpdates(update);
+    const actions = createActions(updates);
+    return createRouter(actions);
   },
   state
 };

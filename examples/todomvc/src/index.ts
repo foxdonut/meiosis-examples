@@ -4,7 +4,6 @@ const flyd = require("flyd");
 const meiosisTracer = require("meiosis-tracer");
 
 import { app } from "./app";
-import { createRouter } from "./router";
 import { Model, Todo } from "./util";
 import { todoStorage } from "./util/todo-storage";
 
@@ -55,7 +54,7 @@ todoStorage.loadAll().then((todos: Todo[]) => {
 
   viewModel.map((state: any) => render(element, view(state)));
 
-  const router = createRouter(update);
+  const router = app.createRouter(update);
   viewModel.map(router.routeSync);
 
   // Only for using Meiosis Tracer in development.

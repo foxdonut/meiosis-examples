@@ -27,17 +27,16 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "crossroads": "^0.12.2",
     "es6-promise": "^4.1.0",
     "flyd": "^0.2.4",
     "history": "^4.6.1",
     "lodash": "^4.17.4",
     "meiosis": "^1.0.1",
-    "snabbdom": "^0.6.9"
+    "snabbdom": "^0.6.9",
+    "url-mapper": "^1.1.1"
   },
   "devDependencies": {
     "@types/classnames": "0.0.32",
-    "@types/crossroads": "0.0.29",
     "@types/history": "^4.5.0",
     "@types/lodash": "^4.14.61",
     "@types/node": "^7.0.12",

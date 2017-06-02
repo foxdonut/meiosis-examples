@@ -1,33 +1,44 @@
-import * as crossroads from "crossroads";
+const Mapper = require("url-mapper");
 import { Location } from "history";
 import createHistory from "history/createBrowserHistory";
 import * as _ from "lodash";
-import { UpdateFunction } from "meiosis";
-import { Model, State } from "../util";
+import { Model } from "../util";
 
-const extractRoute = (hash: string) => (hash && hash.substring(1)) || "/";
+export const createRouter = (actions: any) => {
+  const extractRoute = (hash: string) => (hash && hash.substring(1)) || "/";
 
-export const createRouter = (update: UpdateFunction) => {
+  const urlMapper = Mapper();
   const history = createHistory();
 
-  // Unmatched route. Redirect to #/.
-  crossroads.addRoute(/^.*$/, () => {
-    window.location.replace("#/");
-  }, 0);
+  const routes = {
+    "/": () => actions.filter(""),
+    "/active": () => actions.filter("active"),
+    "/completed": () => actions.filter("completed")
+  };
+
+  const resolveRoute = (route: string) => {
+    const resolved = urlMapper.map(route, routes);
+    if (resolved) {
+      const action = resolved.match;
+      action();
+    }
+  };
 
   // Listen for route changes.
   history.listen((location: Location) => {
-    const route: string = extractRoute(location.hash);
-    crossroads.parse(route);
+    if (!_.get(location, "state.sync")) {
+      const route: string = extractRoute(location.hash);
+      resolveRoute(route);
+    }
   });
 
   // Initial route.
-  crossroads.parse(extractRoute(window.location.hash));
+  resolveRoute(extractRoute(window.location.hash));
 
   const routeSync = (model: Model) => {
     const route = "/" + model.filterBy;
     if (document.location.hash.substring(1) !== route) {
-      history.push("#" + route);
+      history.push("#" + route, { sync: true });
     }
   };
 
