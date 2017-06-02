@@ -37,7 +37,7 @@ const saveAll = (todos: Todo[]) => {
   return new Promise((resolve) =>
     setTimeout(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-      resolve();
+      resolve(todos);
     }, 10));
 };
 
@@ -52,7 +52,7 @@ export const todoStorage = {
             updatedTodos.push(todos[i]);
           }
         }
-        saveAll(updatedTodos).then(() => resolve(updatedTodos));
+        saveAll(updatedTodos).then(resolve);
       }));
   },
   deleteTodoId: (todoId: string) => {
@@ -62,7 +62,7 @@ export const todoStorage = {
 
         if (index >= 0) {
           todos = deleteTodoAtIndex(todos, index);
-          saveAll(todos).then(() => resolve());
+          saveAll(todos).then(resolve);
         }
         else {
           reject();
@@ -104,7 +104,7 @@ export const todoStorage = {
         todos.forEach((todo: Todo) => {
           todo.completed = completed;
         });
-        saveAll(todos).then(() => resolve());
+        saveAll(todos).then(resolve);
       }));
   },
   setCompleted: (id: string, completed: boolean) => {
@@ -116,7 +116,7 @@ export const todoStorage = {
           const todo = todos[index];
           todo.completed = completed;
           todos = replaceTodoAtIndex(todos, todo, index);
-          saveAll(todos).then(() => resolve());
+          saveAll(todos).then(resolve);
         }
         else {
           reject();

@@ -11,7 +11,7 @@ export const createView = (actions: any) => (model: State) =>
       h("li", h("a", { attrs: { href: "#/" }, class: { selected: model.allSelected } }, "All")),
       h("li", h("a", { attrs: { href: "#/active" }, class: { selected: model.activeSelected } }, "Active")),
       // This link triggers a route change. The result should be the same.
-      h("li", h("a", { attrs: { href: "javascript://" }, on: { click: actions.filterBy("completed") },
+      h("li", h("a", { attrs: { href: "javascript://" }, on: { click: () => actions.filter("completed") },
         class: { selected: model.completedSelected } }, "Completed"))
     ]),
     model.clearCompletedVisible ?

@@ -1,12 +1,13 @@
+import { Promise } from "es6-promise";
 import { ChangeEvent, EventHandler, FocusEvent, KeyboardEvent } from "react";
-import { Model, Todo } from "../util";
+import { Model, Todo, todoStorage } from "../util";
 
 const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
 
-export const createActions = (updates: any, events: any) => ({
+export const createActions = (updates: any) => ({
   editBlur: (id: string) => (evt: FocusEvent<HTMLInputElement>) =>
-    events.saveTodo({ id, title: evt.currentTarget.value }),
+    todoStorage.saveTodo({ id, title: evt.currentTarget.value }).then(updates.updateTodo),
 
   editKeyUp: (id: string) => (evt: KeyboardEvent<HTMLInputElement>) => {
     const title: string = evt.currentTarget.value;
@@ -20,7 +21,7 @@ export const createActions = (updates: any, events: any) => ({
       todo.title = todo.title.trim();
 
       if (editing && todo.title) {
-        events.saveTodo(todo);
+        todoStorage.saveTodo(todo).then(updates.updateTodo);
       }
     }
     else {

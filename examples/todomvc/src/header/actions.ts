@@ -1,14 +1,14 @@
 import { ChangeEvent, EventHandler, KeyboardEvent } from "react";
-import { Model, Todo } from "../util";
+import { Model, Todo, todoStorage } from "../util";
 
 const ENTER_KEY = 13;
 
-export const createActions = (updates: any, events: any) => {
+export const createActions = (updates: any) => {
   const saveNewTodo = (rawTitle: string) => {
     const title: string = rawTitle.trim();
 
     if (title) {
-      events.saveNewTodo({ title });
+      todoStorage.saveTodo({ title }).then(updates.saveNewTodo);
     }
   };
 

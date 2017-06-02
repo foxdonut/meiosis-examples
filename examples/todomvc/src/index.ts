@@ -1,4 +1,4 @@
-import { applyUpdate, createEvents, EventType, Stream, trace, UpdateFunction, ViewFunction } from "meiosis";
+import { applyUpdate, Stream, trace, UpdateFunction, ViewFunction } from "meiosis";
 const flyd = require("flyd");
 // Only for using Meiosis Tracer in development.
 const meiosisTracer = require("meiosis-tracer");
@@ -36,27 +36,6 @@ const render = (element: Element, nextView: VNode) => {
 todoStorage.loadAll().then((todos: Todo[]) => {
   const update: Stream<UpdateFunction> = flyd.stream();
 
-  const eventStream: Stream<EventType> = flyd.stream();
-  const events: any = createEvents({
-    eventStream,
-    events: app.events,
-    connect: {
-      "*.footer.clearCompleted": "*.storage.onClearCompleted",
-      "*.footer.filter": "*.storage.onFilter",
-      "*.footer.loadAll": "*.storage.onLoadAll",
-      "*.header.saveNewTodo": "*.storage.onSaveNewTodo",
-      "*.routeChange": "*.router.onRouteChange",
-      "*.storage.deleteTodoId": "*.todoItem.onDeleteTodoId",
-      "*.storage.displayTodos": "*.main.onDisplayTodos",
-      "*.storage.setCompleted": "*.todoItem.onSetCompleted",
-      "*.storage.saveNewTodo": "*.header.onSaveNewTodo",
-      "*.storage.saveTodo": "*.main.onUpdateTodo",
-      "*.todoEdit.saveTodo": "*.storage.onSaveTodo",
-      "*.todoItem.deleteTodoId": "*.storage.onDeleteTodoId",
-      "*.todoItem.setCompleted": "*.storage.onSetCompleted"
-    }
-  });
-
   const initialModel: Model = {
     editTodo: {},
     newTodo: "",
@@ -70,12 +49,12 @@ todoStorage.loadAll().then((todos: Todo[]) => {
 
   const model = flyd.scan(applyUpdate, initialModel, update);
   const viewModel = model.map(app.state);
-  const view = app.create(update, events);
+  const view = app.create(update);
   const element = document.getElementById("app");
 
   viewModel.map((state: any) => render(element, view(state)));
 
   // Only for using Meiosis Tracer in development.
-  trace({ update, dataStreams: [ model, viewModel ], otherStreams: [ eventStream ]});
+  trace({ update, dataStreams: [ model, viewModel ] });
   meiosisTracer({ selector: "#tracer" });
 });

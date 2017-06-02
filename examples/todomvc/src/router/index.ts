@@ -15,7 +15,7 @@ const triggerRouteChange = (update: UpdateFunction, route: string) => {
 };
 
 export const router = {
-  create: (update: UpdateFunction, events: any) => {
+  create: (update: UpdateFunction) => {
     const history = createHistory();
 
     // Unmatched route. Redirect to #/.
@@ -33,9 +33,6 @@ export const router = {
     crossroads.parse(extractRoute(window.location.hash));
 
     // Listen for components triggering route changes.
-    events.onRouteChange.map((route: string) => triggerRouteChange(update, route));
-  },
-  events: {
-    listen: ["onRouteChange"]
+    //events.onRouteChange.map((route: string) => triggerRouteChange(update, route));
   }
 };
