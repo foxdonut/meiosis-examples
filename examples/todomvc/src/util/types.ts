@@ -9,7 +9,7 @@ export interface Model {
   newTodo: string;
   todoIds: string[];
   todosById: { [id: string]: Todo };
-  route: string;
+  filterBy: string;
 }
 
 export interface State extends Model {

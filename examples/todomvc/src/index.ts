@@ -4,6 +4,7 @@ const flyd = require("flyd");
 const meiosisTracer = require("meiosis-tracer");
 
 import { app } from "./app";
+import { createRouter } from "./router";
 import { Model, Todo } from "./util";
 import { todoStorage } from "./util/todo-storage";
 
@@ -39,7 +40,7 @@ todoStorage.loadAll().then((todos: Todo[]) => {
   const initialModel: Model = {
     editTodo: {},
     newTodo: "",
-    route: "",
+    filterBy: "",
     todoIds: todos.map((todo: Todo) => todo.id),
     todosById: todos.reduce((acc: { [id: string]: Todo }, todo: Todo) => {
       acc[todo.id] = todo;
@@ -53,6 +54,9 @@ todoStorage.loadAll().then((todos: Todo[]) => {
   const element = document.getElementById("app");
 
   viewModel.map((state: any) => render(element, view(state)));
+
+  const router = createRouter(update);
+  viewModel.map(router.routeSync);
 
   // Only for using Meiosis Tracer in development.
   trace({ update, dataStreams: [ model, viewModel ] });

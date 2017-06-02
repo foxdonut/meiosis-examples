@@ -3,7 +3,6 @@ import { UpdateFunction, ViewFunction } from "meiosis";
 import { footer } from "../footer";
 import { header } from "../header";
 import { main } from "../main";
-import { router } from "../router";
 import { Model } from "../util";
 import { state } from "./state";
 
@@ -21,8 +20,6 @@ export const app = {
       header: header.create(update),
       main: main.create(update, updates)
     };
-
-    router.create(update);
 
     return createView(components);
   },

@@ -12,6 +12,10 @@ export const createUpdates = (update: UpdateFunction) => ({
     });
 
     return model;
+  }),
+
+  filter: (by: string) => update((model: Model) => {
+    model.filterBy = by;
+    return model;
   })
 });
-

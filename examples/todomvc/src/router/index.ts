@@ -7,32 +7,29 @@ import { Model, State } from "../util";
 
 const extractRoute = (hash: string) => (hash && hash.substring(1)) || "/";
 
-// Function to trigger a route change. Set the route on the model, and parse the route
-// to trigger route handling.
-const triggerRouteChange = (update: UpdateFunction, route: string) => {
-  update((model: Model) => _.set(model, "route", route));
-  crossroads.parse(route);
-};
+export const createRouter = (update: UpdateFunction) => {
+  const history = createHistory();
 
-export const router = {
-  create: (update: UpdateFunction) => {
-    const history = createHistory();
+  // Unmatched route. Redirect to #/.
+  crossroads.addRoute(/^.*$/, () => {
+    window.location.replace("#/");
+  }, 0);
 
-    // Unmatched route. Redirect to #/.
-    crossroads.addRoute(/^.*$/, () => {
-      window.location.replace("#/");
-    }, 0);
+  // Listen for route changes.
+  history.listen((location: Location) => {
+    const route: string = extractRoute(location.hash);
+    crossroads.parse(route);
+  });
 
-    // Listen for route changes.
-    history.listen((location: Location) => {
-      const route: string = extractRoute(location.hash);
-      triggerRouteChange(update, route);
-    });
+  // Initial route.
+  crossroads.parse(extractRoute(window.location.hash));
 
-    // Initial route.
-    crossroads.parse(extractRoute(window.location.hash));
+  const routeSync = (model: Model) => {
+    const route = "/" + model.filterBy;
+    if (document.location.hash.substring(1) !== route) {
+      history.push("#" + route);
+    }
+  };
 
-    // Listen for components triggering route changes.
-    //events.onRouteChange.map((route: string) => triggerRouteChange(update, route));
-  }
+  return { routeSync };
 };
