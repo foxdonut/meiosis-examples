@@ -8,23 +8,15 @@ import { bookSummary } from "./bookSummary";
 import { bookDetails } from "./bookDetails";
 
 export const createRouter = update => {
+  const display = page => ctx => page.display(update, ctx.params);
+
   const routes = [
-    { path: "/", name: home.page.id,
-      action: () => home.display(update)
-    },
-    { path: "/coffee/:id?", name: coffee.page.id,
-      action: ctx => coffee.display(update, ctx.params)
-    },
+    { path: "/", name: home.page.id, action: display(home) },
+    { path: "/coffee/:id?", name: coffee.page.id, action: display(coffee) },
     { path: "/books", children: [
-      { path: "/", name: books.page.id,
-        action: ctx => books.display(update, ctx.params)
-      },
-      { path: "/:id", name: bookSummary.page.id,
-        action: ctx => bookSummary.display(update, ctx.params)
-      },
-      { path: "/:id/details", name: bookDetails.page.id,
-        action: ctx => bookDetails.display(update, ctx.params)
-      }
+      { path: "/", name: books.page.id, action: display(books) },
+      { path: "/:id", name: bookSummary.page.id, action: display(bookSummary) },
+      { path: "/:id/details", name: bookDetails.page.id, action: display(bookDetails) }
     ]}
   ];
 
@@ -36,7 +28,6 @@ export const createRouter = update => {
   };
 
   window.onpopstate = resolveRoute;
-
 
   const urlGenerator = generateUrls(router);
 
