@@ -40,6 +40,9 @@ export const createRouter = update => {
     return acc;
   }, {});
 
+  // Workaround for Mithril not supporting optional parameters
+  routeMap[coffee.page.id] = "/coffee/:id?";
+
   const routeSync = model => {
     const segment = routeMap[model.page.id] || "/";
     const route = pathToRegexp.compile(segment)(model.params || {});
