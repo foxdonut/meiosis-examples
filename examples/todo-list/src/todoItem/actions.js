@@ -1,4 +1,4 @@
-export const createActions = (update, events) => ({
-  editTodo: todo => () => events.editTodo(todo),
-  deleteTodo: todo => () => events.deleteTodo(todo.id)
+export const createActions = update => ({
+  editTodo: todo => () => null,// events.editTodo(todo),
+  deleteTodo: todo => () => null// events.deleteTodo(todo.id)
 });

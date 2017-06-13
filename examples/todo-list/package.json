@@ -26,8 +26,7 @@
     "example",
     "inferno",
     "meiosis",
-    "reactive",
-    "react"
+    "reactive"
   ],
   "author": "foxdonut",
   "license": "MIT",
@@ -36,30 +35,30 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "axios": "^0.15.3",
+    "axios": "^0.16.2",
     "flyd": "^0.2.4",
-    "inferno": "^1.4.2",
+    "inferno": "^3.4.3",
     "inferno-dom": "^1.0.7",
-    "meiosis": "^1.0.0",
+    "meiosis": "^1.0.1",
     "prevent-default": "^1.0.0",
-    "ramda": "^0.23.0",
-    "semantic-ui": "^2.2.9",
-    "sinon": "^1.17.7",
+    "ramda": "^0.24.1",
+    "semantic-ui": "^2.2.10",
+    "sinon": "^2.3.4",
     "validate.js": "^0.11.1"
   },
   "devDependencies": {
-    "ava": "^0.18.2",
-    "babel-core": "^6.24.0",
-    "babel-loader": "^6.4.1",
-    "babel-plugin-import": "^1.1.1",
-    "babel-plugin-inferno": "^2.0.0",
-    "babel-preset-env": "^1.2.2",
-    "browser-env": "^2.0.25",
-    "eslint": "^3.18.0",
-    "eslint-plugin-inferno": "^6.10.4",
+    "ava": "^0.19.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-import": "^1.2.1",
+    "babel-plugin-inferno": "^3.2.0",
+    "babel-preset-env": "^1.5.2",
+    "browser-env": "^2.0.31",
+    "eslint": "^4.0.0",
+    "eslint-plugin-inferno": "^7.0.1",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
     "meiosis-tracer": "^1.0.1",
-    "webpack": "^2.3.1"
+    "webpack": "^2.6.1"
   }
 }

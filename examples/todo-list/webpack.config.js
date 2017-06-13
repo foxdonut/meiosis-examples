@@ -1,4 +1,5 @@
 /*global process, __dirname*/
+var webpack = require("webpack");
 var isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {

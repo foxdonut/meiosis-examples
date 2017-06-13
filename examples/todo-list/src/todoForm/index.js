@@ -5,14 +5,5 @@ import { createView } from "./view.jsx";
 
 export const todoForm = {
   model,
-  create: compose(createView, createActions),
-  events: {
-    emit: [
-      "saveTodo"
-    ],
-    listen: [
-      "onEditTodo",
-      "onSaveTodoSuccess"
-    ]
-  }
+  create: compose(createView, createActions)
 };

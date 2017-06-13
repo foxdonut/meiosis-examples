@@ -1,6 +1,5 @@
 import m from "mithril";
 import stream from "mithril/stream";
-import scan from "mithril/stream/scan";
 
 // Only for using Meiosis Tracer in development.
 import { applyUpdate, createEvents, trace } from "meiosis";
@@ -13,7 +12,7 @@ import { increment } from "./increment";
 const initialModel = app.model();
 
 const update = stream();
-const models = scan(applyUpdate, initialModel, update);
+const models = stream.scan(applyUpdate, initialModel, update);
 
 const eventStream = stream();
 const events = createEvents({

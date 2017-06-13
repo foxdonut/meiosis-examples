@@ -19,9 +19,9 @@ const updates = {
 };
 
 export const createActions = (update, events) => {
-  events.onEditTodo.map(todo => updates.editTodo(update, todo));
+  //events.onEditTodo.map(todo => updates.editTodo(update, todo));
 
-  events.onSaveTodoSuccess.map(() => updates.clearForm(update));
+  //events.onSaveTodoSuccess.map(() => updates.clearForm(update));
 
   return {
     editingTodo: (field) => evt => updates.editingTodo(update, field, evt.target.value),

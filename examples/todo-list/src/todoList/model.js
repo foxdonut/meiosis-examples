@@ -1,4 +1,4 @@
 export const model = () => ({
   todos: [],
-  message: "Initializing..."
+  message: ""
 });

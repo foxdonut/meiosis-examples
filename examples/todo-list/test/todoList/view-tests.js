@@ -1,7 +1,7 @@
 import test from "ava";
 import $ from "jquery";
 
-import { render } from "react-dom";
+import { render } from "inferno";
 
 import { todoList } from "../../src/todoList";
 

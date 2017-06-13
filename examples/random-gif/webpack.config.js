@@ -1,11 +1,11 @@
-/*global process*/
+/*global __dirname, process*/
 var isProduction = process.env.NODE_ENV === "production";
 var webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
   output: {
-    path: "./build",
+    path: __dirname + "/build",
     filename: "generated-app.js"
   },
   module: {
