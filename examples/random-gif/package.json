@@ -6,17 +6,7 @@
   "scripts": {
     "start": "webpack",
     "watch": "webpack --progress --colors --watch",
-    "test": "ava"
-  },
-  "ava": {
-    "require": [
-      "babel-core/register",
-      "./test/setup-browser-env.js"
-    ],
-    "files": [
-      "test/**/*-tests.js"
-    ],
-    "verbose": true
+    "test": "ospec"
   },
   "repository": {
     "type": "git",
@@ -24,7 +14,6 @@
   },
   "keywords": [
     "example",
-    "jsx",
     "meiosis",
     "mithril",
     "reactive"
@@ -37,20 +26,19 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "meiosis": "^1.0.0",
-    "mithril": "^1.0.1",
-    "ramda": "^0.23.0",
+    "meiosis": "^1.0.1",
+    "mithril": "^1.1.1",
+    "ramda": "^0.24.1",
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "ava": "^0.18.1",
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.1.8",
-    "browser-env": "^2.0.21",
-    "jquery": "^3.1.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.2",
+    "browser-env": "^2.0.31",
+    "jquery": "^3.2.1",
     "meiosis-tracer": "^1.0.1",
-    "webpack": "^2.2.1"
+    "ospec": "^1.2.3",
+    "webpack": "^2.6.1"
   }
 }

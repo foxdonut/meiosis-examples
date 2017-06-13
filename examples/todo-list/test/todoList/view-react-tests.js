@@ -3,7 +3,6 @@ import $ from "jquery";
 
 import { render } from "react-dom";
 
-import { todoListView } from "../../src/todoList/view-react";
 import { todoList } from "../../src/todoList";
 
 const id = "test";
@@ -24,12 +23,12 @@ test.beforeEach(function() {
 });
 
 test("renders the list of todos", t => {
-  const model = todoList.initialModel();
+  const model = todoList.model();
   model.todos = [
     {id: 1, priority: 1, description: "Item 1"},
     {id: 2, priority: 2, description: "Item 2"}
   ];
-  const view = todoListView(model);
+  const view = todoList.create()(model);
   render(view, element);
 
   t.is($(element).find("tbody tr").length, model.todos.length);
