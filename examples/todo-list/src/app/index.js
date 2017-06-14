@@ -1,3 +1,4 @@
+import { createActions } from "./actions";
 import { createView } from "./view.jsx";
 import { todoForm } from "../todoForm";
 import { todoList } from "../todoList";
@@ -8,10 +9,12 @@ export const app = {
     form: todoForm.model(),
     list: todoList.model()
   }),
-  create: (update) => {
+  create: update => {
+    const actions = createActions(update);
+
     const components = {
       todoForm: nestComponent(todoForm.create, update, ["form"]),
-      todoList: nestComponent(todoList.create, update, ["list"])
+      todoList: nestComponent(todoList.create(actions), update, ["list"])
     };
 
     return createView(components);
