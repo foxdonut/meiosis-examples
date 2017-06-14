@@ -72,7 +72,7 @@ const temperature = {
   create: update => {
     const updates = {
       //increase: value => update(model => L.modify("value", R.add(value), model)),
-      //increase: value => update(L.modify("value"), R.add(value)),
+      //increase: value => update(L.modify("value", R.add(value))),
       increase: R.compose(update, L.modify("value"), R.add),
 
       changeUnits: () => update(model => {
