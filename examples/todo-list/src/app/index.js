@@ -13,7 +13,7 @@ export const app = {
     const actions = createActions(update);
 
     const components = {
-      todoForm: nestComponent(todoForm.create, update, ["form"]),
+      todoForm: nestComponent(todoForm.create(actions), update, ["form"]),
       todoList: nestComponent(todoList.create(actions), update, ["list"])
     };
 
