@@ -113,7 +113,7 @@ const temperature = {
 };
 
 const app = {
-  model: () => ({
+  model: () => Immutable.fromJS({
     entry: entry.model(),
     date: date.model(),
     temperature: {
@@ -172,7 +172,7 @@ const app = {
   }
 };
 
-const initialModel = Immutable.fromJS(app.model());
+const initialModel = app.model();
 const update = flyd.stream();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
