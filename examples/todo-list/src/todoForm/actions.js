@@ -19,10 +19,12 @@ export const createActions = (update, parentActions) => ({
 
   saveTodo: todo => preventDefault(() => {
     const validationErrors = validateModel(todo);
-    updates.validationErrors(update, validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
       parentActions.saveTodo(todo);
+    }
+    else {
+      updates.validationErrors(update, validationErrors);
     }
   }),
 

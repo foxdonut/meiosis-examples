@@ -7,6 +7,14 @@ const updateTodos = (todos, todo) => {
   return index >= 0 ? set(lensIndex(index), todo, todos) : append(todo, todos);
 };
 
+const clearForm = assocPath(["form", "todo"], { });
+const clearValidationErrors = assocPath(["form", "validationErrors"], { });
+
+const updateList = todo => model => assoc("list",
+  merge(model.list, { todos: updateTodos(model.list.todos, todo), message: "" }),
+  model
+);
+
 export const createActions = update => ({
   editTodo: todo => () => update(
     compose(
@@ -21,12 +29,9 @@ export const createActions = update => ({
     ajaxServices.saveTodo(todo).
       then(todo => update(
         compose(
-          assocPath(["form", "todo"], { }),
-          assocPath(["form", "validationErrors"], { }),
-          model => assoc("list",
-            merge(model.list, { todos: updateTodos(model.list.todos, todo), message: "" }),
-            model
-          )
+          clearForm,
+          clearValidationErrors,
+          updateList(todo)
         )
       )).
       catch(() => update(assocPath(["list", "message"], "Sorry, an error occurred.")));

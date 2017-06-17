@@ -14,10 +14,9 @@ const createActions = update => ({
         date: { errors: date.validateModel(model.date) },
         entry: { errors: entry.validateModel(model.entry) }
       };
-      model = Object.keys(errors).reduce(
-        (m, key) => _.set(m, [key, "errors"], errors[key].errors),
-        model
-      );
+      Object.keys(errors).forEach(key => {
+        model[key] = _.extend(model[key], errors[key]);
+      });
 
       if (!(errors.date.errors || errors.entry.errors)) {
         const air = model.temperature.air;
