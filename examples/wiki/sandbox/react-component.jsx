@@ -43,7 +43,8 @@ const entry = {
 class DateField extends React.Component {
   static model() {
     return {
-      value: ""
+      value: "",
+      datepickerOpen: false
     };
   }
 
@@ -55,16 +56,20 @@ class DateField extends React.Component {
     };
 
     this.actions = {
-      editDateValue: evt => updates.editDateValue(evt.target.value)
+      editDateValue: evt => updates.editDateValue(evt.target.value),
+      showDatepicker: () => update(_.set("datepickerOpen", true))
     };
   }
 
   componentDidMount() {
-    const actions = this.actions;
+    const update = this.props.update;
 
-    $(this.refs.dateField).
-      datepicker({ autoclose: true }).
-      on("hide", actions.editDateValue);
+    $(this.refs.dateField).on("changeDate", evt => {
+      update(_.flow([
+        _.set("datepickerOpen", false),
+        _.set("value", evt.target.value)
+      ]));
+    });
   }
 
   render() {
@@ -74,9 +79,20 @@ class DateField extends React.Component {
     return (
       <div>
         <span>Date:</span>
-        <input ref="dateField" type="text" size="10" value={model.value} onChange={actions.editDateValue}/>
+        <input ref="dateField" type="text" size="10" value={model.value}
+          onFocus={actions.showDatepicker} onChange={actions.editDateValue}/>
       </div>
     );
+  }
+
+  componentDidUpdate() {
+    const model = this.props.model;
+    const trigger = model.datepickerOpen ? "show" : "hide";
+    $(this.refs.dateField).datepicker(trigger);
+  }
+
+  componentWillUnmount() {
+    $(this.refs.dateField).datepicker("destroy");
   }
 }
 

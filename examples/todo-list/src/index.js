@@ -7,7 +7,7 @@ import createServer from "./sinonServer";
 import { app } from "./app/index";
 
 // Only for using Meiosis Tracer in development.
-import { applyUpdate, trace } from "meiosis";
+import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 
 createServer();
@@ -15,6 +15,7 @@ createServer();
 ajaxServices.loadTodos().then(todos => {
   const initialModel = merge(app.model(), { list: { todos, message: "" } });
   const update = flyd.stream();
+  const applyUpdate = (model, modelUpdate) => modelUpdate(model);
   const model = flyd.scan(applyUpdate, initialModel, update);
 
   const element = document.getElementById("app");

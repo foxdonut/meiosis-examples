@@ -27,7 +27,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "meiosis": "^1.0.1",
+    "meiosis": "^1.0.2",
     "mithril": "^1.1.1",
     "ramda": "^0.24.1",
     "uuid": "^3.0.1"
@@ -39,7 +39,7 @@
     "browser-env": "^2.0.31",
     "glob": "^7.1.2",
     "jquery": "^3.2.1",
-    "meiosis-tracer": "^1.0.1",
+    "meiosis-tracer": "^1.0.2",
     "onchange": "^3.2.1",
     "ospec": "^1.2.3",
     "reify": "^0.11.24",
