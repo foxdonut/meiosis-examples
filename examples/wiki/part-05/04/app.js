@@ -37,13 +37,13 @@ export const app = {
       return m("div",
         m("nav.navbar.navbar-default",
           m("ul.nav.navbar-nav",
-            m("li" + isActive(home.page.id),
+            m("li" + isActive(home.page.tab),
               m("a[href='#/']", "Home")
             ),
-            m("li" + isActive(coffee.page.id),
+            m("li" + isActive(coffee.page.tab),
               m("a[href='#/coffee']", "Coffee")
             ),
-            m("li" + isActive(books.page.id),
+            m("li" + isActive(books.page.tab),
               m("a[href='#/books']", "Books")
             ),
             m("li.btn",

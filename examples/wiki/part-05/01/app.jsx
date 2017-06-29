@@ -38,13 +38,13 @@ export const app = {
         <div>
           <nav className="navbar navbar-default">
             <ul className="nav navbar-nav">
-              <li className={isActive(home.page.id)}>
+              <li className={isActive(home.page.tab)}>
                 <a href="#" onClick={() => home.display(update)}>Home</a>
               </li>
-              <li className={isActive(coffee.page.id)}>
+              <li className={isActive(coffee.page.tab)}>
                 <a href="#" onClick={() => coffee.display(update, {})}>Coffee</a>
               </li>
-              <li className={isActive(books.page.id)}>
+              <li className={isActive(books.page.tab)}>
                 <a href="#" onClick={() => books.display(update, {})}>Books</a>
               </li>
               <li className="btn">
