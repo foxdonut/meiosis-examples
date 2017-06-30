@@ -20,17 +20,17 @@ export const app = {
     randomGifCounter1: randomGifCounter.model(),
     randomGifCounter2: randomGifCounter.model()
   }),
-  create: (update, events) => {
+  create: event => update => {
     const components = {
-      counter: nestComponent(counter.create, update, "counter"),
-      button: nestComponent(button.create, update, "button"),
-      randomGif1: nestComponent(randomGif.create, update, "randomGif1", events.randomGif),
-      randomGif2: nestComponent(randomGif.create, update, "randomGif2", events.randomGif),
-      randomGifPair: nestComponent(randomGifPair.create, update, "randomGifPair", events.randomGif),
-      randomGifPairPair: nestComponent(randomGifPairPair.create, update, "randomGifPairPair", events.randomGif),
-      randomGifList: nestComponent(randomGifList.create, update, "randomGifList", events.randomGif),
-      randomGifCounter1: nestComponent(randomGifCounter.create, update, "randomGifCounter1", events.randomGifCounter1),
-      randomGifCounter2: nestComponent(randomGifCounter.create, update, "randomGifCounter2", events.randomGifCounter2)
+      counter: nestComponent(counter.create, update, ["counter"]),
+      button: nestComponent(button.create, update, ["button"]),
+      randomGif1: nestComponent(randomGif.create(event), update, ["randomGif1"]),
+      randomGif2: nestComponent(randomGif.create(event), update, ["randomGif2"]),
+      randomGifPair: nestComponent(randomGifPair.create(event), update, ["randomGifPair"]),
+      randomGifPairPair: nestComponent(randomGifPairPair.create(event), update, ["randomGifPairPair"]),
+      randomGifList: nestComponent(randomGifList.create(event), update, ["randomGifList"]),
+      randomGifCounter1: nestComponent(randomGifCounter.create({ event, localOnly: true }), update, ["randomGifCounter1"]),
+      randomGifCounter2: nestComponent(randomGifCounter.create({ event }), update, ["randomGifCounter2"])
      };
 
     return model =>

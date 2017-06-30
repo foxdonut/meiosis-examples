@@ -1,44 +1,27 @@
 import m from "mithril";
 import stream from "mithril/stream";
 
-// Only for using Meiosis Tracer in development.
-import { applyUpdate, createEvents, trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
-
 import { app } from "./app";
-import { randomGif } from "./random-gif";
 import { increment } from "./increment";
 
 const initialModel = app.model();
 
 const update = stream();
+const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = stream.scan(applyUpdate, initialModel, update);
 
-const eventStream = stream();
-const events = createEvents({
-  eventStream,
-  events: {
-    randomGif: randomGif.events,
-    randomGifCounter1: {
-      randomGif: randomGif.events
-    },
-    randomGifCounter2: {
-      randomGif: randomGif.events
-    },
-    increment: increment.events
-  },
-  connect: {
-    "randomGif.newGifSuccess": ["increment.newGifSuccess"],
-    "randomGifCounter2.randomGif.newGifSuccess": ["increment.newGifSuccess"]
-  }
-});
+const event = stream();
 
-increment.create(update, events.increment);
-const view = app.create(update, events);
+increment.create(event)(update);
+const view = app.create(event)(update);
 
 const element = document.getElementById("app");
 models.map(model => m.render(element, view(model)));
 
 // Only for using Meiosis Tracer in development.
-trace({ update, dataStreams: [ models ], otherStreams: [ eventStream ] });
+import { trace } from "meiosis";
+import meiosisTracer from "meiosis-tracer";
+
+trace({ update, dataStreams: [ models ], otherStreams: [ event ] });
+//trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

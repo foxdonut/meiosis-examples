@@ -2,6 +2,8 @@ import m from "mithril";
 import uuid from "uuid";
 import { assoc, merge } from "ramda";
 
+import { Case } from "../util";
+
 const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";
 
@@ -25,6 +27,10 @@ const imgsrc = model => model.isLoading ? "/examples/random-gif/images/loading.g
   model.isError ? "/examples/random-gif/images/error.png" : model.image_url
 );
 
+export const randomGifEvent = Case.cases([
+  "newGifSuccess"
+]);
+
 export const randomGif = {
   model: id => {
     id = id || uuid.v1();
@@ -38,14 +44,14 @@ export const randomGif = {
     };
   },
 
-  create: (update, events) => {
+  create: event => update => {
     const editTag = evt => update(assoc("tag", evt.target.value));
 
     const newGif = (id, tag) => () => {
       update(model => merge(model, newGifStart()));
       m.request({ url: gif_new_url, data: { api_key, tag }}).
         then(response => update(model => merge(model, newGifSuccess(response.data)))).
-        then(() => events.newGifSuccess(id)).
+        then(() => event(Case.of(randomGifEvent.newGifSuccess, id))).
         catch(() => update(model => merge(model, newGifError())));
     };
 
@@ -58,9 +64,5 @@ export const randomGif = {
           "Random Gif"),
         m("div.mt2", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
       ]);
-  },
-
-  events: {
-    emit: ["newGifSuccess"]
   }
 };

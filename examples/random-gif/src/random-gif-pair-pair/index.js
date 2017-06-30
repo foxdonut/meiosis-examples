@@ -1,5 +1,5 @@
 import m from "mithril";
-import { nest } from "../util";
+import { nestComponent } from "../util";
 import { randomGifPair } from "../random-gif-pair";
 
 export const randomGifPairPair = {
@@ -7,13 +7,13 @@ export const randomGifPairPair = {
     randomGifPairOne: randomGifPair.model(),
     randomGifPairTwo: randomGifPair.model()
   }),
-  create: (update, events) => {
-    const randomGifPairOne = randomGifPair.create(nest(update, "randomGifPairOne"), events);
-    const randomGifPairTwo = randomGifPair.create(nest(update, "randomGifPairTwo"), events);
+  create: event => update => {
+    const randomGifPairOne = nestComponent(randomGifPair.create(event), update, ["randomGifPairOne"]);
+    const randomGifPairTwo = nestComponent(randomGifPair.create(event), update, ["randomGifPairTwo"]);
 
     return model => m("div.ba.br2.b--orange.pa2",
-      randomGifPairOne(model.randomGifPairOne),
-      randomGifPairTwo(model.randomGifPairTwo)
+      randomGifPairOne(model),
+      randomGifPairTwo(model)
     )
   }
 };

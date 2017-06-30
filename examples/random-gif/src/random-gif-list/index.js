@@ -20,10 +20,10 @@ export const randomGifList = {
     randomGifIds: [],
     randomGifsById: {}
   }),
-  create: (update, events) => {
+  create: event => update => {
     const renderRandomGif = model => id =>
       m("div.dib", { key: id }, [
-        nestComponent(randomGif.create, update, ["randomGifsById", id], events)(model),
+        nestComponent(randomGif.create(event), update, ["randomGifsById", id])(model),
         m("button.f8.link.dim.ph2.br2.ba.red.b--red.bg-white", { onclick: remove(update, id) }, "Remove")
       ]);
 
