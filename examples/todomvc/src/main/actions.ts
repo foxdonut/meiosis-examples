@@ -1,9 +1,8 @@
 import { Promise } from "es6-promise";
-import { ChangeEvent } from "react";
 
 import { todoStorage } from "../util";
 
 export const createActions = (updates: any) => ({
-  toggleAllTodos: (evt: ChangeEvent<HTMLInputElement>) =>
+  toggleAllTodos: (evt: any) =>
     todoStorage.setAllCompleted(evt.target.checked).then(updates.displayTodos)
 });

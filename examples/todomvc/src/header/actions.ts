@@ -1,4 +1,3 @@
-import { ChangeEvent, EventHandler, KeyboardEvent } from "react";
 import { Model, Todo, todoStorage } from "../util";
 
 const ENTER_KEY = 13;
@@ -12,7 +11,7 @@ export const createActions = (updates: any) => {
     }
   };
 
-  const newTodoKeyUp: EventHandler<KeyboardEvent<HTMLInputElement>> = (evt: KeyboardEvent<HTMLInputElement>) => {
+  const newTodoKeyUp: any = (evt: any) => {
     if (evt.keyCode === ENTER_KEY) {
       saveNewTodo(evt.currentTarget.value);
     }
@@ -21,14 +20,13 @@ export const createActions = (updates: any) => {
     }
   };
 
-  const newTodoKeyUpEnterOnly: EventHandler<KeyboardEvent<HTMLInputElement>> =
-    (evt: KeyboardEvent<HTMLInputElement>) => {
-      if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-        saveNewTodo(evt.currentTarget.value);
-      }
-    };
+  const newTodoKeyUpEnterOnly: any = (evt: any) => {
+    if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
+      saveNewTodo(evt.currentTarget.value);
+    }
+  };
 
-  const newTodoChange: EventHandler<ChangeEvent<HTMLInputElement>> = (evt: ChangeEvent<HTMLInputElement>) =>
+  const newTodoChange: any = (evt: any) =>
     updates.editingNewTodo(evt.currentTarget.value);
 
   return {
