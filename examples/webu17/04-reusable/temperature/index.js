@@ -8,5 +8,5 @@ export const createTemperature = update => ({
     units: "C"
   }),
 
-  view:  createView(createActions(update))
+  view: createView(createActions(update))
 });

@@ -11,7 +11,7 @@ export const createApp = update => {
   return {
     model: () => ({
       air: components.air.model(),
-      water: components.air.model()
+      water: components.water.model()
     }),
     view: createView(components)
   };
