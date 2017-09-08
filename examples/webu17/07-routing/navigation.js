@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { createServices } from "./services";
 
 export const pages = {
@@ -23,17 +22,17 @@ export const pages = {
 export const createNavigation = update => {
   const services = createServices();
 
-  const navigate = (page, params) =>
-    update(model => _.assign(model, ({ page, params: params||{} })));
+  const navigate = (page, params = {}) =>
+    update(model => Object.assign(model, ({ page, params })));
 
   const navigateTo = page => params => navigate(page, params);
 
   const navigateToCoffee = params => {
     services.loadCoffees().then(coffees => {
-      update(model => _.set(model, "coffees", coffees));
+      update(model => Object.assign(model, { coffees }));
       if (params && params.id) {
         services.loadCoffee(params).then(coffee => {
-          update(model => _.set(model, "coffee", coffee.description));
+          update(model => Object.assign(model, { coffee: coffee.description }));
         });
       }
       navigate(pages.coffee, params);
@@ -42,7 +41,7 @@ export const createNavigation = update => {
 
   const navigateToBeer = () => {
     services.loadBeer().then(beerList => {
-      update(model => _.set(model, "beerList", beerList));
+      update(model => Object.assign(model, { beerList }));
       navigate(pages.beer);
     });
   };
