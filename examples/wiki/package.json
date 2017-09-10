@@ -41,8 +41,8 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
-    "meiosis": "^1.1.0",
-    "meiosis-tracer": "^1.0.2",
+    "meiosis": "^1.1.1",
+    "meiosis-tracer": "^1.1.1",
     "react-jsx": "^1.0.0",
     "webpack": "^3.5.6"
   }
