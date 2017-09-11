@@ -1,24 +1,21 @@
-import _ from "lodash";
 import { createView } from "./view.jsx";
-import { date } from "../date";
-import { entry } from "../entry";
-import { temperature } from "../temperature";
-import { nest }  from "../util/nest";
+import { createDate } from "../date";
+import { createEntry } from "../entry";
+import { createTemperature } from "../temperature";
+import { createComponents, combineComponents }  from "../util/nest";
 
-const createActions = update => ({
+const createActions = (update, validateModel) => ({
   save: evt => {
     evt.preventDefault();
 
     update(model => {
-      const errors = {
-        date: { errors: date.validateModel(model.date) },
-        entry: { errors: entry.validateModel(model.entry) }
-      };
+      const errors = validateModel(model);
+
       Object.keys(errors).forEach(key => {
-        model[key] = _.extend(model[key], errors[key]);
+        model[key].errors = errors[key];
       });
 
-      if (!(errors.date.errors || errors.entry.errors)) {
+      if (!(errors.date || errors.entry)) {
         const air = model.temperature.air;
         const water = model.temperature.water;
 
@@ -36,17 +33,21 @@ const createActions = update => ({
   }
 });
 
-export const app = {
-  create: update => {
-    const actions = createActions(update);
+export const createApp = update => {
+  const components = createComponents(update, {
+    date: createDate,
+    entry: createEntry,
+    temperature: {
+      air: createTemperature("Air temperature"),
+      water: createTemperature("Water temperature")
+    }
+  });
 
-    const components = {
-      date: date.create(nest(update, ["date"])),
-      entry: entry.create(nest(update, ["entry"])),
-      airTemperature: temperature.create(nest(update, ["temperature", "air"])),
-      waterTemperature: temperature.create(nest(update, ["temperature", "water"]))
-    };
+  const validateModel = combineComponents("validateModel", components);
+  const actions = createActions(update, validateModel);
 
-    return createView(actions, components);
-  }
+  return {
+    model: combineComponents("model", components),
+    view: createView(actions, components)
+  };
 };

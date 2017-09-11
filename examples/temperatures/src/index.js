@@ -1,32 +1,19 @@
 import flyd from "flyd";
 import { render } from "preact";
 
-// Only for using Meiosis Tracer in development.
-import { applyUpdate, trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
-
-import { app } from "./app";
-import { entry } from "./entry";
-import { date } from "./date";
-import { temperature } from "./temperature";
-
-const initialModel = {
-  saved: "",
-  entry: entry.model(),
-  date: date.model(),
-  temperature: {
-    air: temperature.model("Air temperature:"),
-    water: temperature.model("Water temperature:")
-  }
-};
+import { createApp } from "./app";
 
 const update = flyd.stream();
+const app = createApp(update);
+const initialModel = app.model();
+const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const model = flyd.scan(applyUpdate, initialModel, update);
 
-const view = app.create(update);
 const element = document.getElementById("app");
-model.map(model => render(view(model), element, element.lastElementChild));
+model.map(model => render(app.view(model), element, element.lastElementChild));
 
 // Only for using Meiosis Tracer in development.
+import { trace } from "meiosis";
+import meiosisTracer from "meiosis-tracer";
 trace({ update, dataStreams: [ model ] });
 meiosisTracer({ selector: "#tracer" });
