@@ -1,10 +1,7 @@
-import { applyUpdate, Stream, trace, UpdateFunction, ViewFunction } from "meiosis";
 const flyd = require("flyd");
-// Only for using Meiosis Tracer in development.
-const meiosisTracer = require("meiosis-tracer");
 
-import { app } from "./app";
-import { Model, Todo } from "./util";
+import { createApp } from "./app";
+import { Model, Todo, UpdateFunction } from "./util";
 import { todoStorage } from "./util/todo-storage";
 
 import { init } from "snabbdom";
@@ -13,6 +10,9 @@ import classModule from "snabbdom/modules/class";
 import eventlisteners from "snabbdom/modules/eventlisteners";
 import props from "snabbdom/modules/props";
 import { VNode } from "snabbdom/vnode";
+
+// Only for using Meiosis Tracer in development.
+import { trace } from "meiosis";
 
 const patch = init([
   attributes,
@@ -34,7 +34,7 @@ const render = (element: Element, nextView: VNode) => {
 };
 
 todoStorage.loadAll().then((todos: Todo[]) => {
-  const update: Stream<UpdateFunction> = flyd.stream();
+  const update: any = flyd.stream();
 
   const initialModel: Model = {
     editTodo: {},
@@ -47,17 +47,19 @@ todoStorage.loadAll().then((todos: Todo[]) => {
     }, {})
   };
 
+  const applyUpdate = (model: any, modelUpdate: UpdateFunction) => modelUpdate(model);
   const model = flyd.scan(applyUpdate, initialModel, update);
+  const app = createApp(update);
   const viewModel = model.map(app.state);
-  const view = app.create(update);
   const element = document.getElementById("app");
 
-  viewModel.map((state: any) => render(element, view(state)));
+  viewModel.map((state: any) => render(element, app.view(state)));
 
-  const router = app.createRouter(update);
+  const router = app.createRouter();
   viewModel.map(router.routeSync);
 
   // Only for using Meiosis Tracer in development.
   trace({ update, dataStreams: [ model, viewModel ] });
+  const meiosisTracer = require("meiosis-tracer");
   meiosisTracer({ selector: "#tracer" });
 });

@@ -1,27 +1,24 @@
 import m from "mithril";
 import stream from "mithril/stream";
 
-import { app } from "./app";
-import { increment } from "./increment";
-
-const initialModel = app.model();
+import { createApp } from "./app";
+import { createIncrement } from "./increment";
 
 const update = stream();
+const app = createApp(event)(update);
+const initialModel = app.model();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = stream.scan(applyUpdate, initialModel, update);
 
 const event = stream();
 
-increment.create(event)(update);
-const view = app.create(event)(update);
+createIncrement(event)(update);
 
 const element = document.getElementById("app");
-models.map(model => m.render(element, view(model)));
+models.map(model => m.render(element, app.view(model)));
 
 // Only for using Meiosis Tracer in development.
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
-
 trace({ update, dataStreams: [ models ], otherStreams: [ event ] });
-//trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

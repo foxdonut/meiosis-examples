@@ -1,5 +1,4 @@
-import { UpdateFunction } from "meiosis";
-import { Model, Todo } from "../util";
+import { Model, Todo, UpdateFunction } from "../util";
 
 const displayTodosFn = (todos: Todo[]) => (model: Model) => {
   model.todoIds = [];

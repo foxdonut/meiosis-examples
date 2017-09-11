@@ -27,22 +27,22 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "mithril": "^1.1.1",
+    "mithril": "^1.1.3",
     "ramda": "^0.24.1",
-    "uuid": "^3.0.1"
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.0.0",
-    "babel-preset-env": "^1.5.2",
-    "browser-env": "^2.0.31",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "browser-env": "^3.2.0",
     "glob": "^7.1.2",
     "jquery": "^3.2.1",
-    "meiosis": "^1.1.0",
-    "meiosis-tracer": "^1.1.0",
+    "meiosis": "^1.1.1",
+    "meiosis-tracer": "^1.1.1",
     "onchange": "^3.2.1",
-    "ospec": "^1.2.3",
-    "reify": "^0.11.24",
-    "webpack": "^2.6.1"
+    "ospec": "^1.3.1",
+    "reify": "^0.12.1",
+    "webpack": "^3.5.6"
   }
 }

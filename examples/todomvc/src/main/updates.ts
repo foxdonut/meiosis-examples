@@ -1,5 +1,4 @@
-import { UpdateFunction } from "meiosis";
-import { Model, Todo } from "../util";
+import { Model, Todo, UpdateFunction } from "../util";
 
 export const createUpdates = (update: UpdateFunction) => ({
   updateTodo: (todo: Todo) => update((model: Model) => {

@@ -4,9 +4,9 @@ export const createView = components => model => (
   <div>
     <div className="row">
       <div className="col-md-4">
-        {components.todoForm(model)}
+        {components.form.view(model)}
       </div>
     </div>
-    {components.todoList(model)}
+    {components.list.view(model)}
   </div>
 );

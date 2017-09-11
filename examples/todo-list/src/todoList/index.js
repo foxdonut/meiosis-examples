@@ -3,16 +3,17 @@ import { merge } from "ramda";
 import { model } from "./model";
 import { createActions } from "./actions";
 import { createView } from "./view.jsx";
-import { todoItem } from "../todoItem";
+import { createTodoItem } from "../todoItem";
 
-export const todoList = {
-  model,
-  create: parentActions => update => {
-    const actions = createActions(update);
+export const createTodoList = parentActions => update => {
+  const actions = createActions(update);
 
-    const components = {
-      todoItem: todoItem.create(merge(parentActions, actions))(update)
-    };
-    return createView(components);
-  }
+  const components = {
+    todoItem: createTodoItem(merge(parentActions, actions))(update)
+  };
+
+  return {
+    model,
+    view: createView(components)
+  };
 };

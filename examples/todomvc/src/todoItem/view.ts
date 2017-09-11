@@ -19,6 +19,6 @@ export const createView = (actions: any, components: any) => (model: State) => (
       h("label", { on: { dblclick: actions.editTodo(todo) } }, todo.title),
       h("button.destroy", { on: { click: actions.deleteTodo(todo.id) } })
     ]),
-    editing ? components.todoEdit(model.editTodo) : null
+    editing ? components.todoEdit.view(model.editTodo) : null
   ]);
 };

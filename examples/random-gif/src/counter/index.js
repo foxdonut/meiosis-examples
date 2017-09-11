@@ -1,9 +1,9 @@
 import m from "mithril";
 
-export const counter = {
-  model: label => ({
+export const createCounter = label => _update => ({
+  model: () => ({
     label,
     value: 0
   }),
-  create: () => model => m("div.mt2.mb2", model.label + ": " + model.value)
-};
+  view: model => m("div.mt2.mb2", model.label + ": " + model.value)
+});

@@ -1,12 +1,14 @@
-import { UpdateFunction, ViewFunction } from "meiosis";
+import { VNode } from "snabbdom/vnode";
+import { State, UpdateFunction } from "../util";
 import { createActions } from "./actions";
 import { createUpdates } from "./updates";
 import { createView } from "./view";
 
-export const header = {
-  create: (update: UpdateFunction): ViewFunction => {
-    const updates = createUpdates(update);
-    const actions = createActions(updates);
-    return createView(actions);
-  }
+export const createHeader = (update: UpdateFunction) => {
+  const updates = createUpdates(update);
+  const actions = createActions(updates);
+
+  return {
+    view: createView(actions)
+  };
 };

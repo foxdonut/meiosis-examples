@@ -1,19 +1,20 @@
 import * as _ from "lodash";
-import { UpdateFunction, ViewFunction } from "meiosis";
+import { VNode } from "snabbdom/vnode";
+import { State, UpdateFunction } from "../util";
 
-import { todoItem } from "../todoItem";
+import { createTodoItem } from "../todoItem";
 import { createActions } from "./actions";
 import { createUpdates } from "./updates";
 import { createView } from "./view";
 
-export const main = {
-  create: (update: UpdateFunction, parentUpdates: any): ViewFunction => {
-    const updates = _.extend({}, createUpdates(update), parentUpdates);
-    const actions = createActions(updates);
+export const createMain = (update: UpdateFunction, parentUpdates: any) => {
+  const updates = _.extend({}, createUpdates(update), parentUpdates);
+  const actions = createActions(updates);
 
-    const components = {
-      todoItem: todoItem.create(update, updates)
-    };
-    return createView(actions, components);
-  }
+  const components = {
+    todoItem: createTodoItem(update, updates)
+  };
+  return {
+    view: createView(actions, components)
+  };
 };

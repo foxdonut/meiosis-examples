@@ -15,23 +15,23 @@ const remove = (update, id) => () => update(model => {
   return model;
 });
 
-export const randomGifList = {
-  model: () => ({
-    randomGifIds: [],
-    randomGifsById: {}
-  }),
-  create: event => update => {
-    const renderRandomGif = model => id =>
-      m("div.dib", { key: id }, [
-        nestComponent(randomGif.create(event), update, ["randomGifsById", id])(model),
-        m("button.f8.link.dim.ph2.br2.ba.red.b--red.bg-white", { onclick: remove(update, id) }, "Remove")
-      ]);
+export const createRandomGifList = event => update => {
+  const renderRandomGif = model => id =>
+    m("div.dib", { key: id }, [
+      nestComponent(randomGif.create(event), update, ["randomGifsById", id])(model),
+      m("button.f8.link.dim.ph2.br2.ba.red.b--red.bg-white", { onclick: remove(update, id) }, "Remove")
+    ]);
 
-    return model => m("div.ba.br2.b--orange.pa2", [
+  return {
+    model: () => ({
+      randomGifIds: [],
+      randomGifsById: {}
+    }),
+    view: model => m("div.ba.br2.b--orange.pa2", [
       m("div", [
         m("button.f8.link.dim.ph2.br2.ba.blue.b--blue.bg-white", { onclick: add(update) }, "Add")
       ]),
       m("div", model.randomGifIds.map(renderRandomGif(model)))
-    ]);
+    ])
   }
 };

@@ -1,6 +1,5 @@
 import * as _ from "lodash";
-import { UpdateFunction } from "meiosis";
-import { Model, Todo } from "../util";
+import { Model, Todo, UpdateFunction } from "../util";
 
 export const createUpdates = (update: UpdateFunction) => ({
   deleteTodoId: (todoId: string) => update((model: Model) => {

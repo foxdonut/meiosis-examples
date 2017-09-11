@@ -2,7 +2,7 @@ import { model } from "./model";
 import { createActions } from "./actions";
 import { createView } from "./view.jsx";
 
-export const todoForm = {
+export const createTodoForm = parentActions => update => ({
   model,
-  create: parentActions => update => createView(createActions(update, parentActions))
-};
+  view: createView(createActions(update, parentActions))
+});

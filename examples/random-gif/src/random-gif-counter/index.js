@@ -2,34 +2,32 @@ import m from "mithril";
 import stream from "mithril/stream";
 import { add, lensPath, over } from "ramda";
 
-import { nestComponent } from "../util";
-import { randomGif } from "../random-gif";
-import { counter } from "../counter";
+import { createComponents, combineComponents } from "../util/nest";
+import { createRandomGif } from "../random-gif";
+import { createCounter } from "../counter";
 
-export const randomGifCounter = {
-  model: () => ({
-    randomGif: randomGif.model(),
-    counter: counter.model("Counter")
-  }),
-  create: ({ event, localOnly }) => update => {
-    const localEvent = stream();
+export const createRandomGifCounter = ({ event, localOnly }) => update => {
+  const localEvent = stream();
 
-    localEvent.map(evt => {
-      update(over(lensPath(["counter", "value"]), add(1)));
+  localEvent.map(evt => {
+    update(over(lensPath(["counter", "value"]), add(1)));
 
-      if (!localOnly) {
-        event(evt);
-      }
-    });
+    if (!localOnly) {
+      event(evt);
+    }
+  });
 
-    const components = {
-      randomGif: nestComponent(randomGif.create(localEvent), update, ["randomGif"]),
-      counter: nestComponent(counter.create, update, ["counter"])
-    };
+  const components = createComponents(update, {
+    randomGif: createRandomGif(localEvent),
+    counter: createCounter("Counter")
+  });
 
-    return model => m("div.ba.br2.b--orange.pa2",
-      components.randomGif(model),
-      components.counter(model)
-    );
-  }
+  return {
+    model: combineComponents("model", components),
+    view: model =>
+      m("div.ba.br2.b--orange.pa2",
+        components.randomGif(model),
+        components.counter(model)
+      )
+  };
 };

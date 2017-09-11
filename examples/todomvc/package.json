@@ -27,24 +27,24 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "classnames": "^2.2.5",
-    "es6-promise": "^4.1.0",
+    "es6-promise": "^4.1.1",
     "flyd": "^0.2.4",
-    "history": "^4.6.1",
+    "history": "^4.7.2",
     "lodash": "^4.17.4",
-    "meiosis": "^1.0.2",
-    "snabbdom": "^0.6.9",
+    "snabbdom": "^0.7.0",
     "url-mapper": "^1.1.1"
   },
   "devDependencies": {
-    "@types/classnames": "0.0.32",
-    "@types/history": "^4.5.0",
-    "@types/lodash": "^4.14.61",
-    "@types/node": "^7.0.12",
-    "meiosis-tracer": "^1.0.2",
+    "@types/classnames": "2.2.3",
+    "@types/history": "^4.6.0",
+    "@types/lodash": "^4.14.74",
+    "@types/node": "^8.0.28",
+    "meiosis": "^1.1.1",
+    "meiosis-tracer": "^1.1.1",
     "source-map-loader": "^0.2.1",
-    "ts-loader": "^2.0.3",
-    "tslint": "^5.0.0",
-    "typescript": "^2.2.2",
-    "webpack": "^2.3.2"
+    "ts-loader": "^2.3.7",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
+    "webpack": "^3.5.6"
   }
 }

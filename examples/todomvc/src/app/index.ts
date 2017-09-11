@@ -1,33 +1,33 @@
-import { UpdateFunction, ViewFunction } from "meiosis";
-
-import { footer } from "../footer";
-import { header } from "../header";
-import { main } from "../main";
+import { createFooter } from "../footer";
+import { createHeader } from "../header";
+import { createMain } from "../main";
 import { createRouter } from "../router";
-import { Model } from "../util";
+import { Model, UpdateFunction, ViewFunction } from "../util";
 import { state } from "./state";
 
 import { createActions } from "./actions";
 import { createUpdates } from "./updates";
 import { createView } from "./view";
 
-export const app = {
-  create: (update: UpdateFunction): ViewFunction => {
-    const updates = createUpdates(update);
-    const actions = createActions(updates);
+const createAppRouter = (update: UpdateFunction) => {
+  const updates = createUpdates(update);
+  const actions = createActions(updates);
+  return createRouter(actions);
+};
 
-    const components = {
-      footer: footer.create(update, actions),
-      header: header.create(update),
-      main: main.create(update, updates)
-    };
+export const createApp = (update: UpdateFunction) => {
+  const updates = createUpdates(update);
+  const actions = createActions(updates);
 
-    return createView(components);
-  },
-  createRouter: (update: UpdateFunction) => {
-    const updates = createUpdates(update);
-    const actions = createActions(updates);
-    return createRouter(actions);
-  },
-  state
+  const components = {
+    footer: createFooter(update, actions),
+    header: createHeader(update),
+    main: createMain(update, updates)
+  };
+
+  return {
+    view: createView(components),
+    state,
+    createRouter: () => createAppRouter(update)
+  };
 };

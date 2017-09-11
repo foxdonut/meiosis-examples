@@ -11,5 +11,5 @@ export const createView = (actions: any, components: any) => (model: State) =>
       props: { checked: model.allCompleted }
     }),
     h("label", { attrs: { for: "toggle-all"} }, "Mark all as complete"),
-    h("ul.todo-list", model.todoIds.map(components.todoItem(model)))
+    h("ul.todo-list", model.todoIds.map(components.todoItem.view(model)))
   ]);

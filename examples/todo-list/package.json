@@ -37,28 +37,28 @@
   "dependencies": {
     "axios": "^0.16.2",
     "flyd": "^0.2.4",
-    "inferno": "^3.4.3",
+    "inferno": "^3.9.0",
     "inferno-dom": "^1.0.7",
-    "meiosis": "^1.0.2",
     "prevent-default": "^1.0.0",
     "ramda": "^0.24.1",
-    "semantic-ui": "^2.2.10",
-    "sinon": "^2.3.4",
+    "semantic-ui": "^2.2.13",
+    "sinon": "^3.2.1",
     "validate.js": "^0.11.1"
   },
   "devDependencies": {
-    "ava": "^0.19.1",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-import": "^1.2.1",
+    "ava": "^0.22.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-import": "^1.4.0",
     "babel-plugin-inferno": "^3.2.0",
-    "babel-preset-env": "^1.5.2",
-    "browser-env": "^2.0.31",
-    "eslint": "^4.0.0",
+    "babel-preset-env": "^1.6.0",
+    "browser-env": "^3.2.0",
+    "eslint": "^4.6.1",
     "eslint-plugin-inferno": "^7.0.1",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
-    "meiosis-tracer": "^1.0.2",
-    "webpack": "^2.6.1"
+    "meiosis": "^1.1.1",
+    "meiosis-tracer": "^1.1.1",
+    "webpack": "^3.5.6"
   }
 }

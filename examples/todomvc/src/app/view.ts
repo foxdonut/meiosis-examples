@@ -1,8 +1,7 @@
-import { UpdateFunction, ViewFunction } from "meiosis";
 import h from "snabbdom/h";
 import { VNode } from "snabbdom/vnode";
 
-import { State } from "../util";
+import { State, UpdateFunction, ViewFunction } from "../util";
 
 const info = h("footer.info", [
   h("p", "Double-click to edit a todo"),
@@ -20,9 +19,9 @@ export const createView = (components: any): ViewFunction =>
   (model: State) =>
     h("div", [
       h("section.todoapp", [
-        components.header(model),
-        components.main(model),
-        components.footer(model)
+        components.header.view(model),
+        components.main.view(model),
+        components.footer.view(model)
       ]),
       info
     ]);

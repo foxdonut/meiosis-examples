@@ -13,7 +13,7 @@ export const createView = components => model => (
           </tr>
         </thead>
         <tbody>
-          {model.todos.map(components.todoItem)}
+          {model.todos.map(components.todoItem.view)}
         </tbody>
       </table>
     </div>

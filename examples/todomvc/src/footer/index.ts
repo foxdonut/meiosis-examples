@@ -1,8 +1,8 @@
-import { UpdateFunction, ViewFunction } from "meiosis";
+import { VNode } from "snabbdom/vnode";
+import { State, UpdateFunction } from "../util";
 
 import { createView } from "./view";
 
-export const footer = {
-  create: (update: UpdateFunction, parentActions: any): ViewFunction =>
-    createView(parentActions)
-};
+export const createFooter = (update: UpdateFunction, parentActions: any) => ({
+  view: createView(parentActions)
+});

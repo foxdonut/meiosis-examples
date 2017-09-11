@@ -31,31 +31,31 @@ export const randomGifEvent = Case.cases([
   "newGifSuccess"
 ]);
 
-export const randomGif = {
-  model: id => {
-    id = id || uuid.v1();
+export const createRandomGif = (event, id) => update => {
+  const editTag = evt => update(assoc("tag", evt.target.value));
 
-    return {
-      id,
-      isLoading: false,
-      isError: false,
-      tag: "",
-      image_url: ""
-    };
-  },
+  const newGif = (id, tag) => () => {
+    update(model => merge(model, newGifStart()));
+    m.request({ url: gif_new_url, data: { api_key, tag }}).
+      then(response => update(model => merge(model, newGifSuccess(response.data)))).
+      then(() => event(Case.of(randomGifEvent.newGifSuccess, id))).
+      catch(() => update(model => merge(model, newGifError())));
+  };
 
-  create: event => update => {
-    const editTag = evt => update(assoc("tag", evt.target.value));
+  return {
+    model: () => {
+      id = id || uuid.v1();
 
-    const newGif = (id, tag) => () => {
-      update(model => merge(model, newGifStart()));
-      m.request({ url: gif_new_url, data: { api_key, tag }}).
-        then(response => update(model => merge(model, newGifSuccess(response.data)))).
-        then(() => event(Case.of(randomGifEvent.newGifSuccess, id))).
-        catch(() => update(model => merge(model, newGifError())));
-    };
+      return {
+        id,
+        isLoading: false,
+        isError: false,
+        tag: "",
+        image_url: ""
+      };
+    },
 
-    return model =>
+    view: model =>
       m("div.ma2.ba.b--green.pa2", [
         m("span.mr2", "Tag:"),
         m("input.mr2[type=text]", { value: model.tag, onkeyup: editTag }),
@@ -63,6 +63,6 @@ export const randomGif = {
           { onclick: newGif(model.id, model.tag) },
           "Random Gif"),
         m("div.mt2", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
-      ]);
-  }
+      ])
+  };
 };

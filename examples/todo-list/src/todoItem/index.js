@@ -1,5 +1,5 @@
 import { createView } from "./view.jsx";
 
-export const todoItem = {
-  create: parentActions => _update => createView(parentActions)
-};
+export const createTodoItem = parentActions => _update => ({
+  view: createView(parentActions)
+});
