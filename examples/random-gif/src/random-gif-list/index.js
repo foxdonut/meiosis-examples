@@ -1,11 +1,19 @@
 import m from "mithril";
+import uuid from "uuid";
 import { createRandomGif } from "../random-gif";
-import { nestComponent } from "../util";
+import { nestComponent } from "../util/nest";
 
-const add = update => () => update(model => {
-  const randomGifModel = createRandomGif(update).model();
-  model.randomGifIds.push(randomGifModel.id);
-  model.randomGifsById[randomGifModel.id] = randomGifModel;
+const randomGifComponentsById = {};
+
+const add = (update, event) => () => update(model => {
+  const id = uuid.v1();
+
+  const randomGifComponent = nestComponent(createRandomGif(event, id), update, ["randomGifsById", id]);
+  randomGifComponentsById[id] = randomGifComponent;
+
+  model.randomGifIds.push(id);
+  model.randomGifsById[id] = randomGifComponent.model();
+
   return model;
 });
 
@@ -18,7 +26,7 @@ const remove = (update, id) => () => update(model => {
 export const createRandomGifList = event => update => {
   const renderRandomGif = model => id =>
     m("div.dib", { key: id }, [
-      nestComponent(createRandomGif(event), update, ["randomGifsById", id])(model),
+      randomGifComponentsById[id].view(model),
       m("button.f8.link.dim.ph2.br2.ba.red.b--red.bg-white", { onclick: remove(update, id) }, "Remove")
     ]);
 
@@ -29,7 +37,7 @@ export const createRandomGifList = event => update => {
     }),
     view: model => m("div.ba.br2.b--orange.pa2", [
       m("div", [
-        m("button.f8.link.dim.ph2.br2.ba.blue.b--blue.bg-white", { onclick: add(update) }, "Add")
+        m("button.f8.link.dim.ph2.br2.ba.blue.b--blue.bg-white", { onclick: add(update, event) }, "Add")
       ]),
       m("div", model.randomGifIds.map(renderRandomGif(model)))
     ])

@@ -4,7 +4,7 @@ export const createView = (actions, components) => model => (
   <form className="pure-form pure-form-aligned">
     <fieldset>
       {components.entry.view(model)}
-      {components.date.view(model)}
+      {components.entryDate.view(model)}
       {components.temperature.air.view(model)}
       {components.temperature.water.view(model)}
 
