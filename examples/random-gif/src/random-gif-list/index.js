@@ -3,7 +3,7 @@ import { createRandomGif } from "../random-gif";
 import { nestComponent } from "../util";
 
 const add = update => () => update(model => {
-  const randomGifModel = randomGif.model();
+  const randomGifModel = createRandomGif(update).model();
   model.randomGifIds.push(randomGifModel.id);
   model.randomGifsById[randomGifModel.id] = randomGifModel;
   return model;
