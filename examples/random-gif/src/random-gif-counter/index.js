@@ -23,11 +23,11 @@ export const createRandomGifCounter = ({ event, localOnly }) => update => {
   });
 
   return {
-    model: combineComponents("model", components),
+    model: combineComponents(components, "model"),
     view: model =>
       m("div.ba.br2.b--orange.pa2",
-        components.randomGif(model),
-        components.counter(model)
+        components.randomGif.view(model),
+        components.counter.view(model)
       )
   };
 };

@@ -40,7 +40,7 @@ const subCreateComponents = (update, componentStructure, parentPath, customConfi
 export const createComponents = (update, componentStructure, customConfig) =>
   subCreateComponents(update, componentStructure, [], customConfig);
 
-const subCombineComponents = (componentKey, components, parentPath) =>
+const subCombineComponents = (components, componentKey, parentPath) =>
   model => Object.keys(components).reduce((result, path) => {
     const component = components[path];
     const fn = component[componentKey];
@@ -48,10 +48,10 @@ const subCombineComponents = (componentKey, components, parentPath) =>
       result[path] = fn(_.get(model, path));
     }
     else {
-      result[path] = subCombineComponents(componentKey, component, _.concat(parentPath, path))(_.get(model, parentPath));
+      result[path] = subCombineComponents(component, componentKey, _.concat(parentPath, path))(_.get(model, parentPath));
     }
     return result;
   }, {});
 
-export const combineComponents = (componentKey, components) =>
-  subCombineComponents(componentKey, components, []);
+export const combineComponents = (components, componentKey) =>
+  subCombineComponents(components, componentKey, []);

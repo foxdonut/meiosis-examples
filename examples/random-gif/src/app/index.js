@@ -22,7 +22,7 @@ export const createApp = event => update => {
   });
 
   return {
-    model: combineComponents("model", components),
+    model: combineComponents(components, "model"),
 
     view: model => [
         components.counter.view(model),

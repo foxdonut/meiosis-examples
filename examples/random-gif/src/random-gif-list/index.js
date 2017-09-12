@@ -1,5 +1,5 @@
 import m from "mithril";
-import { randomGif } from "../random-gif";
+import { createRandomGif } from "../random-gif";
 import { nestComponent } from "../util";
 
 const add = update => () => update(model => {
@@ -18,7 +18,7 @@ const remove = (update, id) => () => update(model => {
 export const createRandomGifList = event => update => {
   const renderRandomGif = model => id =>
     m("div.dib", { key: id }, [
-      nestComponent(randomGif.create(event), update, ["randomGifsById", id])(model),
+      nestComponent(createRandomGif(event), update, ["randomGifsById", id])(model),
       m("button.f8.link.dim.ph2.br2.ba.red.b--red.bg-white", { onclick: remove(update, id) }, "Remove")
     ]);
 

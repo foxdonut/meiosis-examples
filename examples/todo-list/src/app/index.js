@@ -13,7 +13,7 @@ export const createApp = update => {
   });
 
   return {
-    model: combineComponents("model", components),
+    model: combineComponents(components, "model"),
     view: createView(components)
   };
 };

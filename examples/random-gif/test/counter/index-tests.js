@@ -3,7 +3,7 @@ import $ from "jquery";
 
 import m from "mithril";
 
-import { counter } from "../../src/counter";
+import { createCounter } from "../../src/counter";
 
 const id = "test";
 const sel = "#" + id;
@@ -18,10 +18,10 @@ o.spec("counter", () => {
   });
 
   o("renders the tag in the text input", () => {
-    const model = counter.model("Pizza");
-    const view = counter.create();
+    const counter = createCounter("Pizza")();
+    const model = counter.model();
 
-    m.render(element, view(model));
+    m.render(element, counter.view(model));
 
     o($(sel).find("div").html()).equals("Pizza: 0");
   });

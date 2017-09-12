@@ -43,11 +43,11 @@ export const createApp = update => {
     }
   });
 
-  const validateModel = combineComponents("validateModel", components);
+  const validateModel = combineComponents(components, "validateModel");
   const actions = createActions(update, validateModel);
 
   return {
-    model: combineComponents("model", components),
+    model: combineComponents(components, "model"),
     view: createView(actions, components)
   };
 };

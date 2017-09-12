@@ -33,7 +33,7 @@ export const createComponents = (update, componentStructure, customConfig) =>
     return result;
   }, {});
 
-export const combineComponents = (componentKey, components) =>
+export const combineComponents = (components, componentKey) =>
   model => Object.keys(components).reduce((result, key) => {
     const target = components[key][componentKey];
     if (target) {
