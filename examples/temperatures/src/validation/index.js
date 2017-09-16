@@ -1,23 +1,21 @@
-import validate from "validate.js";
+import Joi from "joi";
+import _ from "lodash";
 
-validate.extend(validate.validators.datetime, {
-  parse: value => new Date(value),
-  format: date => date.toISOString().substring(0, 10)
+const schema = Joi.object().required().keys({
+  entryDate: Joi.object().required().keys({
+    value: Joi.date().required()
+  }),
+  entry: Joi.object().required().keys({
+    value: Joi.number().integer().min(0)
+  })
 });
 
-export const validation = {
-  "entryDate.value": {
-    presence: { message: "^Date is required." },
-    date: { message: "^Invalid date." }
-  },
-  "entry.value": {
-    presence: { message: "^Entry number is required." },
-    numericality: {
-      onlyInteger: true,
-      greaterThan: 0,
-      message: "^Invalid entry number. Must be an integer greater than zero."
-    }
-  }
+const options = {
+  abortEarly: false,
+  allowUnknown: true
 };
 
-export const validateModel = model => validate(model, validation);
+export const validateModel = model => {
+  const result = Joi.validate(model, schema, options);
+  return _.get(result, ["error", "details"], []);
+};

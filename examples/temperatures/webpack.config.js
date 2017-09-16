@@ -13,5 +13,10 @@ module.exports = {
         exclude: /node_modules/
       }
     ]
+  },
+  resolve: {
+    alias: {
+      joi: "joi-browser"
+    }
   }
 };

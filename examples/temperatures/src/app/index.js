@@ -3,7 +3,7 @@ import { createView } from "./view.jsx";
 import { createDate } from "../date";
 import { createEntry } from "../entry";
 import { createTemperature } from "../temperature";
-import { validation, validateModel } from "../validation";
+import { validateModel } from "../validation";
 import { createComponents, combineComponents }  from "../util/nest";
 
 const createActions = update => ({
@@ -11,14 +11,18 @@ const createActions = update => ({
     evt.preventDefault();
 
     update(model => {
+      _.set(model, "entry.errors", {});
+      _.set(model, "entryDate.errors", {});
+
       const errors = validateModel(model);
 
-      Object.keys(validation).forEach(key => {
-        const path = key.split(".");
-        _.set(model, [path[0], "errors", path[1]], _.get(errors, key, []));
+      _.each(errors, error => {
+        let path = error.path.split(".");
+        path = [path[0], "errors", path[1]];
+        _.set(model, path, error.message);
       });
 
-      if (!errors) {
+      if (_.isEmpty(errors)) {
         const air = model.temperature.air;
         const water = model.temperature.water;
 
