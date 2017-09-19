@@ -1,45 +1,50 @@
-import Mapper from "url-mapper";
+import m from "mithril";
+import pathToRegexp from "path-to-regexp";
 
-import { home } from "./home";
-import { coffee } from "./coffee";
-import { books } from "./books";
-import { bookSummary } from "./bookSummary";
-import { bookDetails } from "./bookDetails";
+import { pages } from "./navigation";
 
-export const createRouter = update => {
-  const urlMapper = Mapper();
+export const createRouter = navigation => {
+  m.route.prefix("#");
+
+  const noRender = () => null;
+
+  const createRouteResolver = resolved => ({
+    onmatch: params => resolved.action(params),
+    render: noRender
+  });
+
+  const stub = document.createElement("div");
 
   const routes = {
-    "/": home,
-    "/coffee/:id?": coffee,
-    "/books": books,
-    "/books/:id": bookSummary,
-    "/books/:id/details": bookDetails
+    "/": { id: pages.home.id, action: navigation.navigateToHome },
+    "/coffee": { id: pages.coffee.id, action: navigation.navigateToCoffee },
+    "/coffee/:id": { id: pages.coffee.id, action: navigation.navigateToCoffee },
+    "/beer": { id: pages.beer.id, action: navigation.navigateToBeer },
+    "/beer/:id": { id: pages.beerDetails.id, action: navigation.navigateToBeerDetails }
   };
 
-  const resolveRoute = () => {
-    const route = document.location.hash.substring(1);
-    const resolved = urlMapper.map(route, routes);
-    if (resolved) {
-      const page = resolved.match;
-      page.display(update, resolved.values);
-    }
-  };
-
-  window.onpopstate = resolveRoute;
-
-  const routeMap = Object.keys(routes).reduce((acc, next) => {
-    acc[routes[next].page.id] = next;
-    return acc;
+  const routeResolvers = Object.keys(routes).reduce((result, next) => {
+    result[next] = createRouteResolver(routes[next]);
+    return result;
   }, {});
+
+  m.route(stub, "/", routeResolvers);
+
+  const routeMap = Object.keys(routes).reduce((result, next) => {
+    result[routes[next].id] = next;
+    return result;
+  }, {});
+
+  // Workaround for Mithril not supporting optional parameters
+  routeMap[pages.coffee.id] = "/coffee/:id?";
 
   const routeSync = model => {
     const segment = routeMap[model.page.id] || "/";
-    const route = urlMapper.stringify(segment, model.params || {});
+    const route = pathToRegexp.compile(segment)(model.params || {});
     if (document.location.hash.substring(1) !== route) {
       window.history.pushState({}, "", "#" + route);
     }
   };
 
-  return { resolveRoute, routeSync };
+  return { routeSync };
 };

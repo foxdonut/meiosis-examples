@@ -1,12 +1,6 @@
-import React from "react";
+/** @jsx m */
+import m from "mithril";
 
-import { assoc } from "./util";
-
-export const home = {
-  page: {
-    id: "Home",
-    tab: "Home"
-  },
-  create: _update => _model => (<div>Home Page</div>),
-  display: update => update(assoc("page", home.page))
-};
+export const createHome = update => ({
+  view: model => (<div>Home Page</div>)
+});
