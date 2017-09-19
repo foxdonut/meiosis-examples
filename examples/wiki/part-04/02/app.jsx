@@ -1,69 +1,63 @@
-import React from "react";
+import { pages } from "./navigation";
+import { createHome } from "./home";
+import { createCoffee } from "./coffee";
+import { createBeer } from "./beer";
+import { createBeerDetails } from "./beerDetails";
 
-import { home } from "./home";
-import { coffee } from "./coffee";
-import { books } from "./books";
-import { bookSummary } from "./bookSummary";
-import { bookDetails } from "./bookDetails";
+export const createApp = (update, navigation) => {
+  const homeComponent = createHome(update);
+  const coffeeComponent = createCoffee(update);
+  const beerComponent = createBeer(update, navigation);
+  const beerDetailsComponent = createBeerDetails(update);
 
-export const app = {
-  model: () => ({
-    page: home.page,
-    params: {},
-    coffees: [
-      { id: "c1", description: "Coffee 1" },
-      { id: "c2", description: "Coffee 2" }
-    ],
-    books: [
-      { id: "b1", title: "Book 1" },
-      { id: "b2", title: "Book 2" }
-    ]
-  }),
+  const pageMap = {
+    [pages.home.id]: homeComponent,
+    [pages.coffee.id]: coffeeComponent,
+    [pages.beer.id]: beerComponent,
+    [pages.beerDetails.id]: beerDetailsComponent
+  };
 
-  create: update => {
-    const pageMap = [home, coffee, books, bookSummary, bookDetails].reduce(
-      (acc, next) => {
-        acc[next.page.id] = next.create(update);
-        return acc;
-      }, {}
-    );
-
-    return model => {
-      const currentPageId = pageMap[model.page.id] ? model.page.id : home.page.id;
+  return {
+    model: () => ({
+      page: pages.home,
+      params: {}
+    }),
+    view: model => {
+      const currentPageId = pageMap[model.page.id] ? model.page.id : pages.home.id;
+      const component = pageMap[currentPageId];
       const currentTab = model.page.tab;
-      const page = pageMap[currentPageId];
       const isActive = tab => tab === currentTab ? "active" : "";
 
       return (
         <div>
           <nav className="navbar navbar-default">
             <ul className="nav navbar-nav">
-              <li className={isActive(home.page.tab)}>
+              <li className={isActive(pages.home.tab)}>
                 <a href="#/">Home</a>
               </li>
-              <li className={isActive(coffee.page.tab)}>
+              <li className={isActive(pages.coffee.tab)}>
                 <a href="#/coffee">Coffee</a>
               </li>
-              <li className={isActive(books.page.tab)}>
-                <a href="#/books">Books</a>
+              <li className={isActive(pages.beer.tab)}>
+                <a href="#/beer">Beer</a>
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={() => home.display(update)}>Home</button>
+                  onClick={evt => navigation.navigateToHome()}>Home</button>
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={() => coffee.display(update, {})}>Coffee</button>
+                  onClick={evt => navigation.navigateToCoffee()}>Coffee</button>
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={() => books.display(update, {})}>Books</button>
+                  onClick={evt => navigation.navigateToBeer()}>Beer</button>
               </li>
             </ul>
           </nav>
-          {page(model)}
+          {component.view(model)}
         </div>
       );
-    };
-  }
+    }
+  };
 };

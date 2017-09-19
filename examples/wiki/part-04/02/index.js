@@ -1,29 +1,31 @@
 import flyd from "flyd";
 import ReactDOM from "react-dom";
 
-import { app } from "./app";
+import { createNavigation } from "./navigation";
+import { createApp } from "./app";
 import { createRouter } from "./router";
 
-// Only for using Meiosis Tracer in development.
-import { trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
-
 // Meiosis Setup
-const initialModel = app.model();
 const update = flyd.stream();
+const navigation = createNavigation(update);
+const app = createApp(update, navigation);
+const initialModel = app.model();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 // Rendering
 const element = document.getElementById("app");
-const view = app.create(update);
-models.map(model => ReactDOM.render(view(model), element));
+models.map(model => ReactDOM.render(app.view(model), element));
 
 // Router
-const router = createRouter(update);
+const router = createRouter(navigation);
 // Resolve initial route
 router.resolveRoute();
+// Route sync
+models.map(router.routeSync);
 
 // Only for using Meiosis Tracer in development.
+import { trace } from "meiosis";
+import meiosisTracer from "meiosis-tracer";
 trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

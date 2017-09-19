@@ -1,32 +1,39 @@
-import Mapper from "url-mapper";
+import UniversalRouter from "universal-router";
+import generateUrls from "universal-router/generateUrls";
+import { pages } from "./navigation";
 
-import { home } from "./home";
-import { coffee } from "./coffee";
-import { books } from "./books";
-import { bookSummary } from "./bookSummary";
-import { bookDetails } from "./bookDetails";
-
-export const createRouter = update => {
-  const urlMapper = Mapper();
-
-  const routes = {
-    "/": home,
-    "/coffee/:id?": coffee,
-    "/books": books,
-    "/books/:id": bookSummary,
-    "/books/:id/details": bookDetails
+export const createRouter = navigation => {
+  const wrap = action => ctx => {
+    action(ctx.params);
+    return true;
   };
+
+  const routes = [
+    { path: "/", name: pages.home.id, action: wrap(navigation.navigateToHome) },
+    { path: "/coffee/:id?", name: pages.coffee.id, action: wrap(navigation.navigateToCoffee) },
+    { path: "/beer", children: [
+      { path: "/", name: pages.beer.id, action: wrap(navigation.navigateToBeer) },
+      { path: "/:id", name: pages.beerDetails.id, action: wrap(navigation.navigateToBeerDetails) }
+    ]}
+  ];
+
+  const router = new UniversalRouter(routes);
 
   const resolveRoute = () => {
     const route = document.location.hash.substring(1);
-    const resolved = urlMapper.map(route, routes);
-    if (resolved) {
-      const page = resolved.match;
-      page.display(update, resolved.values);
-    }
+    router.resolve(route);
   };
 
   window.onpopstate = resolveRoute;
 
-  return { resolveRoute };
+  const urlGenerator = generateUrls(router);
+
+  const routeSync = model => {
+    const route = urlGenerator(model.page.id, model.params || {});
+    if (document.location.hash.substring(1) !== route) {
+      window.history.pushState({}, "", "#" + route);
+    }
+  };
+
+  return { resolveRoute, routeSync };
 };
