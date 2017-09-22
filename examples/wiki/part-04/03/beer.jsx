@@ -7,7 +7,6 @@ export const createBeer = (update, navigation) => {
   };
 
   return {
-    actions,
     view: model => (
       <div>
         <p>Beer Page</p>
