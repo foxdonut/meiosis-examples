@@ -6,7 +6,9 @@ export const createBrewery = (update, navigation) => {
     breweryDetails: params => evt => navigation.navigateToBrewery(params),
   };
 
-  const beerList = createBeer(update, navigation);
+  const beerList = createBeer({
+    beerDetails: id => evt => navigation.navigateToBreweryBeerDetails({ id })
+  });
 
   const breweryDetails = createBreweryDetails({
     beerList

@@ -59,6 +59,7 @@ export const createNavigation = update => {
     navigateToBeer,
     navigateToBeerDetails: navigateTo(pages.beerDetails),
     navigateToBrewery,
-    navigateToBreweryBeerList
+    navigateToBreweryBeerList,
+    navigateToBreweryBeerDetails: navigateTo(pages.breweryDetails)
   };
 };

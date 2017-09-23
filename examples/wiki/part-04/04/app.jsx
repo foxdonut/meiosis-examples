@@ -6,7 +6,9 @@ import { createBrewery } from "./brewery";
 
 export const createApp = (update, navigation) => {
   const homeComponent = createHome(update);
-  const beerComponent = createBeer(update, navigation);
+  const beerComponent = createBeer({
+    beerDetails: id => evt => navigation.navigateToBeerDetails({ id })
+  });
   const beerDetailsComponent = createBeerDetails(update, navigation);
   const breweryComponent = createBrewery(update, navigation);
 
