@@ -37,14 +37,14 @@ export const createNavigation = update => {
   const navigateToBrewery = params => {
     services.loadBreweryList().then(breweryList => {
       update(model => Object.assign(model, {
-        breweryList, breweryId: params.breweryId, breweryBeerList: null }));
+        breweryList, brewery: { id: params.breweryId }, breweryBeerList: null }));
       navigate(pages.brewery, params);
     });
   };
 
   const navigateToBreweryBeerList = params => {
-    services.loadBeerList(params.breweryId).then(breweryBeerList => {
-      update(model => Object.assign(model, { breweryBeerList }));
+    services.loadBeerList(params.breweryId).then(beerList => {
+      update(model => Object.assign(model, { brewery: { id: params.breweryId, beerList } }));
       navigate(pages.brewery, params);
     });
   };

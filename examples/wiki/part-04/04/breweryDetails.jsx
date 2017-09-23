@@ -1,8 +1,9 @@
 const createLoadBeerListView = actions => model => (
   <div>
     <a href="#">Load beer list</a>
+    {" "}
     <button className="btn btn-default btn-xs"
-      onClick={actions.loadBeerList({ breweryId: model.breweryId })}>Load beer list</button>
+      onClick={actions.loadBeerList({ breweryId: model.brewery.id })}>Load beer list</button>
   </div>
 );
 
@@ -12,8 +13,11 @@ export const createBreweryDetails = (components, actions) => {
   return {
     view: model => (
       <div>
-        <p>Details of brewery {model.breweryId}</p>
-        {model.breweryBeerList ? components.beerList.view(model) : loadBeerList(model)}
+        <p>Details of brewery {model.brewery.id}</p>
+        { model.brewery.beerList
+        ? components.beerList.view(model.brewery)
+        : loadBeerList(model)
+        }
       </div>
     )
   };

@@ -31,7 +31,7 @@ export const createBrewery = (update, navigation) => {
               </li>
             )}
           </ul>
-          {model.breweryId ? breweryDetails.view(model) : null}
+          {model.brewery ? breweryDetails.view(model) : null}
         </div>
       );
     }
