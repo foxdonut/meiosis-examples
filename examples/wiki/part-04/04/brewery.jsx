@@ -1,11 +1,16 @@
 import { createBreweryDetails } from "./breweryDetails";
+import { createBeer } from "./beer";
 
 export const createBrewery = (update, navigation) => {
   const actions = {
     breweryDetails: params => evt => navigation.navigateToBrewery(params),
   };
 
+  const beerList = createBeer(update, navigation);
+
   const breweryDetails = createBreweryDetails({
+    beerList
+  }, {
     loadBeerList: params => evt => navigation.navigateToBreweryBeerList(params)
   });
 

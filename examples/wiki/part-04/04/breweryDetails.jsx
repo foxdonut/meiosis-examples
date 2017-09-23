@@ -6,18 +6,14 @@ const createLoadBeerListView = actions => model => (
   </div>
 );
 
-const beerList = model => (
-  <div>Beer list here</div>
-);
-
-export const createBreweryDetails = actions => {
+export const createBreweryDetails = (components, actions) => {
   const loadBeerList = createLoadBeerListView(actions);
 
   return {
     view: model => (
       <div>
         <p>Details of brewery {model.breweryId}</p>
-        {model.breweryBeerList ? beerList(model) : loadBeerList(model)}
+        {model.breweryBeerList ? components.beerList.view(model) : loadBeerList(model)}
       </div>
     )
   };
