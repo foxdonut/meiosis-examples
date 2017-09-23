@@ -28,15 +28,22 @@ export const createNavigation = update => {
   const navigateTo = page => params => navigate(page, params);
 
   const navigateToBeer = () => {
-    services.loadBeer().then(beerList => {
+    services.loadBeerList().then(beerList => {
       update(model => Object.assign(model, { beerList }));
       navigate(pages.beer);
     });
   };
 
   const navigateToBrewery = params => {
-    services.loadBrewery().then(breweryList => {
-      update(model => Object.assign(model, { breweryList }));
+    services.loadBreweryList().then(breweryList => {
+      update(model => Object.assign(model, { breweryList, breweryId: params.breweryId }));
+      navigate(pages.brewery, params);
+    });
+  };
+
+  const navigateToBreweryBeerList = params => {
+    services.loadBeerList(params).then(breweryBeerList => {
+      update(model => Object.assign(model, { breweryBeerList }));
       navigate(pages.brewery, params);
     });
   };
@@ -45,6 +52,7 @@ export const createNavigation = update => {
     navigateToHome: navigateTo(pages.home),
     navigateToBeer,
     navigateToBeerDetails: navigateTo(pages.beerDetails),
-    navigateToBrewery
+    navigateToBrewery,
+    navigateToBreweryBeerList
   };
 };

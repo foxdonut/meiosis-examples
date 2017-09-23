@@ -12,11 +12,18 @@ const breweryList = [
   { id: "brw2", title: "Brewery 2" }
 ];
 
+const breweryBeerList = {
+  brw1: [beerList[0], beerList[1]],
+  brw2: [beerList[2], beerList[3]]
+};
+
 export const createServices = () => ({
-  loadBeer: () => new Promise(resolve =>
-    setTimeout(() => resolve(beerList), 1)
+  loadBeerList: breweryId => new Promise(resolve =>
+    setTimeout(() => {
+      resolve(breweryId ? breweryBeerList[breweryId] : beerList);
+    }, 1)
   ),
-  loadBrewery: () => new Promise(resolve =>
+  loadBreweryList: () => new Promise(resolve =>
     setTimeout(() => resolve(breweryList), 1)
   )
 });

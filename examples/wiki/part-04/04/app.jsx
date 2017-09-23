@@ -38,6 +38,9 @@ export const createApp = (update, navigation) => {
               <li className={isActive(pages.beer.tab)}>
                 <a href="#/beer">Beer</a>
               </li>
+              <li className={isActive(pages.brewery.tab)}>
+                <a href="#/brewery">Brewery</a>
+              </li>
               <li className="btn">
                 <button className="btn btn-default"
                   onClick={evt => navigation.navigateToHome()}>Home</button>

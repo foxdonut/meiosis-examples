@@ -1,3 +1,3 @@
 export const createHome = update => ({
-  view: model => (<div>Home Page</div>)
+  view: model => (<div>Home</div>)
 });

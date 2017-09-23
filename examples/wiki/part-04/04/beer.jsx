@@ -6,7 +6,7 @@ export const createBeer = (update, navigation) => {
   return {
     view: model => (
       <div>
-        <p>Beer Page</p>
+        <p>Beer List</p>
         <ul>
           {model.beerList.map(beer =>
             <li key={beer.id}>

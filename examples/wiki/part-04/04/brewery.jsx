@@ -2,29 +2,31 @@ import { createBreweryDetails } from "./breweryDetails";
 
 export const createBrewery = (update, navigation) => {
   const actions = {
-    breweryDetails: id => evt => navigation.navigateToBrewery({ id }),
+    breweryDetails: params => evt => navigation.navigateToBrewery(params),
   };
 
-  const breweryDetails = createBreweryDetails(update, navigation);
+  const breweryDetails = createBreweryDetails({
+    loadBeerList: params => evt => navigation.navigateToBreweryBeerList(params)
+  });
 
   return {
     view: model => {
       return (
         <div>
-          <p>Brewery Page</p>
+          <p>Brewery</p>
           <ul>
             {model.breweryList.map(brewery =>
               <li key={brewery.id}>
                 <a href={"#/brewery/" + brewery.id}>{brewery.title}</a>
                 {" "}
                 <button className="btn btn-default btn-xs"
-                  onClick={actions.breweryDetails(brewery.id)}>
+                  onClick={actions.breweryDetails({breweryId: brewery.id})}>
                   {brewery.title}
                 </button>
               </li>
             )}
           </ul>
-          {model.params.id ? breweryDetails.view(model) : null}
+          {model.breweryId ? breweryDetails.view(model) : null}
         </div>
       );
     }
