@@ -2,7 +2,7 @@ import R from "ramda";
 import * as L from "partial.lenses";
 
 export const createActions = update => ({
-  editDate: evt => update(L.set("date", evt.target.value)),
+  editDate: R.compose(update, L.set("date"), L.get(["target", "value"])),
 
   increase: amount => () => update(L.modify("value", R.add(amount))),
 
