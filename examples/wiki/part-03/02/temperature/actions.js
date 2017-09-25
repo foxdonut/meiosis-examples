@@ -1,7 +1,7 @@
 import R from "ramda";
 
 export const createActions = update => ({
-  editDate: evt => update(R.assoc("date", evt.target.value)),
+  editDate: R.compose(update, R.assoc("date"), R.path(["target", "value"])),
 
   increase: amount => () => update(R.over(R.lensProp("value"), R.add(amount))),
 
