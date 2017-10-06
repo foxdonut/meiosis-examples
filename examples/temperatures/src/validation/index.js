@@ -3,10 +3,14 @@ import _ from "lodash";
 
 const schema = Joi.object().required().keys({
   entryDate: Joi.object().required().keys({
-    value: Joi.date().required()
+    value: Joi.date().required().options({
+      language: { key: "Date ", date: { base: "must be a valid date" } }
+    })
   }),
-  entry: Joi.object().required().keys({
-    value: Joi.number().integer().min(0)
+  entryNumber: Joi.object().required().keys({
+    value: Joi.number().required().integer().min(0).options({
+      language: { key: "Entry number " }
+    })
   })
 });
 

@@ -1,3 +1,4 @@
 export const model = () => ({
-  value: ""
+  value: "",
+  errors: { }
 });
