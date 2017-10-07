@@ -15,8 +15,8 @@ const createActions = update => ({
       const errorMap = errors.reduce((result, next) =>
         _.set(result, next.path, next.message), {});
 
-      ["entryNumber", "entryDate"].forEach(path =>
-        _.set(model, [path, "errors"], _.get(errorMap, path, {})));
+      [["entryNumber"], ["entryDate", "from"], ["entryDate", "to"]].forEach(path =>
+        _.set(model, path.concat(["errors"]), _.get(errorMap, path, {})));
 
       if (_.isEmpty(errors)) {
         const air = model.temperature.air;
@@ -39,7 +39,10 @@ const createActions = update => ({
 export const createApp = update => {
   const components = createComponents(update, {
     entryNumber: createEntryNumber,
-    entryDate: createEntryDate,
+    entryDate: {
+      from: createEntryDate("From Date:"),
+      to: createEntryDate("To Date:")
+    },
     temperature: {
       air: createTemperature("Air temperature"),
       water: createTemperature("Water temperature")

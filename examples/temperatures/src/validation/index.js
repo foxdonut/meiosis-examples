@@ -3,8 +3,15 @@ import _ from "lodash";
 
 const schema = Joi.object().required().keys({
   entryDate: Joi.object().required().keys({
-    value: Joi.date().required().options({
-      language: { key: "Date ", date: { base: "must be a valid date" } }
+    from: Joi.object().required().keys({
+      value: Joi.date().required().options({
+        language: { key: "Date ", date: { base: "must be a valid date" } }
+      })
+    }),
+    to: Joi.object().required().keys({
+      value: Joi.date().required().options({
+        language: { key: "Date ", date: { base: "must be a valid date" } }
+      })
     })
   }),
   entryNumber: Joi.object().required().keys({
