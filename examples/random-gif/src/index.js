@@ -16,6 +16,8 @@ createIncrement(event)(update);
 const element = document.getElementById("app");
 models.map(model => m.render(element, app.view(model)));
 
+window.render = () => m.render(element, app.view(models()));
+
 // Only for using Meiosis Tracer in development.
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
