@@ -31,44 +31,44 @@ export const randomGifEvent = Case.cases([
   "newGifSuccess"
 ]);
 
-export const model = id => {
-  id = id || uuid.v1();
+const editTag = update => evt => update(assoc("tag", evt.target.value));
 
-  return {
-    id,
-    isLoading: false,
-    isError: false,
-    tag: "",
-    image_url: ""
-  };
+const newGif = ({update, event, id, tag}) => () => {
+  update(model => merge(model, newGifStart()));
+  m.request({ url: gif_new_url, data: { api_key, tag }}).
+    then(response => update(model => merge(model, newGifSuccess(response.data)))).
+    then(() => event(Case.of(randomGifEvent.newGifSuccess, id))).
+    catch(() => update(model => merge(model, newGifError())));
 };
 
-export const viewRandomGif = ({event, update}) => {
-  const editTag = evt => update(assoc("tag", evt.target.value));
+export const randomGif = {
+  model: id => {
+    id = id || uuid.v1();
 
-  const newGif = (id, tag) => () => {
-    update(model => merge(model, newGifStart()));
-    m.request({ url: gif_new_url, data: { api_key, tag }}).
-      then(response => update(model => merge(model, newGifSuccess(response.data)))).
-      then(() => event(Case.of(randomGifEvent.newGifSuccess, id))).
-      catch(() => update(model => merge(model, newGifError())));
-  };
+    return {
+      id,
+      isLoading: false,
+      isError: false,
+      tag: "",
+      image_url: ""
+    };
+  },
 
-  return model =>
+  view: ({event, update}) => model =>
     m("div.ma2.ba.b--green.pa2", [
       m("span.mr2", "Tag:"),
-      m("input.mr2[type=text]", { value: model.tag, onkeyup: editTag }),
+      m("input.mr2[type=text]", { value: model.tag, onkeyup: editTag(update) }),
       m("button.db.mt2.white.bg-blue.b--blue.ba.br2.pv1.ph2.link.w4",
-        { onclick: newGif(model.id, model.tag) },
+        { onclick: newGif({update, event, id: model.id, tag: model.tag}) },
         "Random Gif"),
       m("div.mt2", [ m("img", { width: 200, height: 200, src: imgsrc(model) }) ])
-    ]);
+    ])
 };
 
 export const createRandomGif = (event, id) => update => {
   return {
-    model: () => model(id),
+    model: () => randomGif.model(id),
 
-    view: viewRandomGif({event, update})
+    view: randomGif.view({event, update})
   };
 };

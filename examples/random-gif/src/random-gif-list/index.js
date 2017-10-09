@@ -1,13 +1,13 @@
 import m from "mithril";
 import uuid from "uuid";
-import { model as randomGifModel, viewRandomGif } from "../random-gif";
+import { randomGif } from "../random-gif";
 import { nestUpdate } from "../util/nest";
 
 const add = update => () => update(model => {
   const id = uuid.v1();
 
   model.randomGifIds.push(id);
-  model.randomGifsById[id] = randomGifModel(id);
+  model.randomGifsById[id] = randomGif.model(id);
 
   return model;
 });
@@ -21,7 +21,7 @@ const remove = (update, id) => () => update(model => {
 export const createRandomGifList = event => update => {
   const renderRandomGif = model => id =>
     m("div.dib", { key: id }, [
-      viewRandomGif({
+      randomGif.view({
         event,
         update: nestUpdate(update, ["randomGifsById", id])
       })(model.randomGifsById[id]),
