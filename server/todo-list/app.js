@@ -1,7 +1,7 @@
 // app.js
-var koa = require("koa");
+var Koa = require("koa");
 
-var app = koa();
+var app = new Koa();
 
 var routes = require("koa-route");
 var parse = require("co-body");

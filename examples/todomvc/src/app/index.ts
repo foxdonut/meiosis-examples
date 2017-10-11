@@ -3,7 +3,7 @@ import { createHeader } from "../header";
 import { createMain } from "../main";
 import { createRouter } from "../router";
 import { Model, UpdateFunction, ViewFunction } from "../util";
-import { state } from "./state";
+import { computeState } from "./state";
 
 import { createActions } from "./actions";
 import { createUpdates } from "./updates";
@@ -27,7 +27,7 @@ export const createApp = (update: UpdateFunction) => {
 
   return {
     view: createView(components),
-    state,
+    computeState,
     createRouter: () => createAppRouter(update)
   };
 };

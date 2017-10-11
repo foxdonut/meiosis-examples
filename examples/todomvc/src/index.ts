@@ -48,18 +48,18 @@ todoStorage.loadAll().then((todos: Todo[]) => {
   };
 
   const applyUpdate = (model: any, modelUpdate: UpdateFunction) => modelUpdate(model);
-  const model = flyd.scan(applyUpdate, initialModel, update);
+  const models = flyd.scan(applyUpdate, initialModel, update);
   const app = createApp(update);
-  const viewModel = model.map(app.state);
+  const states = models.map(app.computeState);
   const element = document.getElementById("app");
 
-  viewModel.map((state: any) => render(element, app.view(state)));
+  states.map((state: any) => render(element, app.view(state)));
 
   const router = app.createRouter();
-  viewModel.map(router.routeSync);
+  states.map(router.routeSync);
 
   // Only for using Meiosis Tracer in development.
-  trace({ update, dataStreams: [ model, viewModel ] });
+  trace({ update, dataStreams: [ models, states ] });
   const meiosisTracer = require("meiosis-tracer");
   meiosisTracer({ selector: "#tracer" });
 });

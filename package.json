@@ -29,16 +29,16 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "co-body": "^4.2.0",
-    "koa": "^1.2.5",
-    "koa-route": "^2.4.2",
-    "koa-static": "^2.1.0"
+    "co-body": "^5.1.1",
+    "koa": "^2.3.0",
+    "koa-route": "^3.2.0",
+    "koa-static": "^4.0.1"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-plugin-inferno": "^6.10.4",
-    "eslint-plugin-react": "^6.10.3",
-    "tslint": "^5.0.0",
-    "typescript": "^2.2.2"
+    "eslint": "^4.8.0",
+    "eslint-plugin-inferno": "^7.0.1",
+    "eslint-plugin-react": "^7.4.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
   }
 }

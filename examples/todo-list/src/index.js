@@ -17,12 +17,12 @@ ajaxServices.loadTodos().then(todos => {
   const app = createApp(update);
   const initialModel = merge(app.model(), { list: { todos, message: "" } });
   const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-  const model = flyd.scan(applyUpdate, initialModel, update);
+  const models = flyd.scan(applyUpdate, initialModel, update);
 
   const element = document.getElementById("app");
-  model.map(model => render(app.view(model), element));
+  models.map(model => render(app.view(model), element));
 
   // Only for using Meiosis Tracer in development.
-  trace({ update, dataStreams: [ model ]});
+  trace({ update, dataStreams: [ models ]});
   meiosisTracer({ selector: "#tracer" });
 });

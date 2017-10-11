@@ -28,22 +28,22 @@
   "dependencies": {
     "es6-promise": "^4.1.1",
     "flyd": "^0.2.4",
-    "immutable": "^3.8.1",
+    "immutable": "^3.8.2",
     "lodash": "^4.17.4",
-    "mithril": "^1.1.1",
-    "partial.lenses": "^11.20.0",
+    "mithril": "^1.1.4",
+    "partial.lenses": "^12.1.0",
     "path-to-regexp": "^2.0.0",
     "ramda": "^0.24.1",
-    "universal-router": "^3.2.0",
+    "universal-router": "^4.2.1",
     "url-mapper": "^1.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
-    "meiosis": "^1.1.1",
-    "meiosis-tracer": "^1.1.1",
+    "meiosis": "^1.2.0",
+    "meiosis-tracer": "^1.2.0",
     "react-jsx": "^1.0.0",
-    "webpack": "^3.5.6"
+    "webpack": "^3.6.0"
   }
 }
