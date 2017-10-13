@@ -3,17 +3,17 @@ import { createBeer } from "./beer";
 
 export const createBrewery = (update, navigation) => {
   const actions = {
-    breweryDetails: params => evt => navigation.navigateToBrewery(params),
+    breweryDetails: params => _evt => navigation.navigateToBrewery(params),
   };
 
   const beerList = createBeer({
-    beerDetails: id => evt => navigation.navigateToBreweryBeerDetails({ id })
+    beerDetails: id => _evt => navigation.navigateToBreweryBeerDetails({ beerId: id })
   });
 
   const breweryDetails = createBreweryDetails({
     beerList
   }, {
-    loadBeerList: params => evt => navigation.navigateToBreweryBeerList(params)
+    loadBeerList: params => _evt => navigation.navigateToBreweryBeerList(params)
   });
 
   return {

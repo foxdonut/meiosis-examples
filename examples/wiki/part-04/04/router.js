@@ -11,11 +11,14 @@ export const createRouter = navigation => {
   const routes = [
     { path: "/", name: pages.home.id, action: wrap(navigation.navigateToHome) },
     { path: "/beer", children: [
-      { path: "/", name: pages.beer.id, action: wrap(navigation.navigateToBeer) },
+      { path: "", name: pages.beer.id, action: wrap(navigation.navigateToBeer) },
       { path: "/:id", name: pages.beerDetails.id, action: wrap(navigation.navigateToBeerDetails) }
     ]},
     { path: "/brewery", children: [
-      { path: "/:breweryId?", name: pages.brewery.id, action: wrap(navigation.navigateToBrewery) }
+      { path: "/:breweryId?", children: [
+        { path: "", name: pages.brewery.id, action: wrap(navigation.navigateToBrewery) },
+        { path: "/:beerId", name: pages.breweryDetails.id, action: wrap(navigation.navigateToBreweryBeerDetails) }
+      ]}
     ]}
   ];
 

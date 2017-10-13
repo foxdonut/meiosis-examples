@@ -16,6 +16,10 @@ export const pages = {
   brewery: {
     id: "Brewery",
     tab: "Brewery"
+  },
+  breweryDetails: {
+    id: "BreweryDetails",
+    tab: "Brewery"
   }
 };
 
@@ -27,12 +31,11 @@ export const createNavigation = update => {
 
   const navigateTo = page => params => navigate(page, params);
 
-  const navigateToBeer = () => {
+  const navigateToBeer = () =>
     services.loadBeerList().then(beerList => {
       update(model => Object.assign(model, { beerList }));
       navigate(pages.beer);
     });
-  };
 
   const navigateToBrewery = params => {
     if (params && params.breweryId) {
@@ -47,12 +50,11 @@ export const createNavigation = update => {
     }
   };
 
-  const navigateToBreweryBeerList = params => {
+  const navigateToBreweryBeerList = params =>
     services.loadBeerList(params.breweryId).then(beerList => {
       update(model => Object.assign(model, { brewery: { id: params.breweryId, beerList } }));
       navigate(pages.brewery, params);
     });
-  };
 
   return {
     navigateToHome: navigateTo(pages.home),

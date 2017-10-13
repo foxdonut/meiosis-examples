@@ -7,7 +7,7 @@ import { createBrewery } from "./brewery";
 export const createApp = (update, navigation) => {
   const homeComponent = createHome(update);
   const beerComponent = createBeer({
-    beerDetails: id => evt => navigation.navigateToBeerDetails({ id })
+    beerDetails: id => _evt => navigation.navigateToBeerDetails({ id })
   });
   const beerDetailsComponent = createBeerDetails(update, navigation);
   const breweryComponent = createBrewery(update, navigation);
@@ -45,15 +45,15 @@ export const createApp = (update, navigation) => {
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={evt => navigation.navigateToHome()}>Home</button>
+                  onClick={_evt => navigation.navigateToHome()}>Home</button>
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={evt => navigation.navigateToBeer()}>Beer</button>
+                  onClick={_evt => navigation.navigateToBeer()}>Beer</button>
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={evt => navigation.navigateToBrewery()}>Brewery</button>
+                  onClick={_evt => navigation.navigateToBrewery()}>Brewery</button>
               </li>
             </ul>
           </nav>
