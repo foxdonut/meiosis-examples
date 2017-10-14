@@ -1,4 +1,4 @@
-import R from "ramda";
+import * as R from "ramda";
 
 export const createActions = update => ({
   editDate: R.compose(update, R.assoc("date"), R.path(["target", "value"])),

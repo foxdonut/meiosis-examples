@@ -1,4 +1,6 @@
+import * as R from "ramda";
 import { createServices } from "./services";
+import { transforms } from "./transforms";
 
 export const pages = {
   home: {
@@ -34,35 +36,48 @@ export const pages = {
 export const createNavigation = update => {
   const services = createServices();
 
-  const navigate = (page, params = {}) =>
-    update(model => Object.assign(model, ({ page, params })));
-
-  const navigateTo = page => params => navigate(page, params);
-
   const navigateToBeerList = () =>
-    services.loadBeerList().then(beerList => {
-      update(model => Object.assign(model, { beerList }));
-      navigate(pages.beerList);
-    });
+    services.loadBeerList().then(beerList =>
+      update(
+        R.pipe(
+          transforms.beerList(beerList),
+          transforms.navigate(pages.beerList)
+        )
+      )
+    );
 
   const navigateToBreweryList = params => {
     if (params && params.breweryId) {
-      update(model => Object.assign(model, { brewery: { id: params.breweryId } }));
-      navigate(pages.breweryList, params);
+      update(
+        R.pipe(
+          transforms.brewery(params),
+          transforms.navigate(pages.breweryList, params)
+        )
+      );
     }
     else {
-      services.loadBreweryList().then(breweryList => {
-        update(model => Object.assign(model, { breweryList }));
-        navigate(pages.breweryList, params);
-      });
+      services.loadBreweryList().then(breweryList =>
+        update(
+          R.pipe(
+            transforms.breweryList(breweryList),
+            transforms.navigate(pages.breweryList, params)
+          )
+        )
+      );
     }
   };
 
   const navigateToBreweryBeerList = params =>
-    services.loadBeerList(params.breweryId).then(beerList => {
-      update(model => Object.assign(model, { brewery: { id: params.breweryId, beerList } }));
-      navigate(pages.breweryList, params);
-    });
+    services.loadBeerList(params.breweryId).then(beerList =>
+      update(
+        R.pipe(
+          transforms.breweryBeerList(params, beerList),
+          transforms.navigate(pages.breweryList, params)
+        )
+      )
+    );
+
+  const navigateTo = page => params => update(transforms.navigate(page, params));
 
   return {
     navigateToHome: navigateTo(pages.home),

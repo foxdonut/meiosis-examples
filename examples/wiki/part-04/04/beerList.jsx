@@ -5,7 +5,7 @@ export const createBeerList = actions => ({
       <ul>
         {model.beerList.map(beer =>
           <li key={beer.id}>
-            <a href={"#/beer/" + beer.id}>{beer.title}</a>
+            <a href={"#/beerList/" + beer.id}>{beer.title}</a>
             {" "}
             <button className="btn btn-default btn-xs"
               onClick={actions.beerDetails(beer.id)}>

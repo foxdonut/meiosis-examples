@@ -1,6 +1,6 @@
 import m from "mithril";
 import stream from "mithril/stream";
-import R from "ramda";
+import * as R from "ramda";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 

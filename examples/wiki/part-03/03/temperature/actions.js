@@ -1,4 +1,4 @@
-import R from "ramda";
+import * as R from "ramda";
 import * as L from "partial.lenses";
 
 export const createActions = update => ({

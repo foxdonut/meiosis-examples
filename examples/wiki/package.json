@@ -33,7 +33,7 @@
     "mithril": "^1.1.4",
     "partial.lenses": "^12.1.0",
     "path-to-regexp": "^2.0.0",
-    "ramda": "^0.24.1",
+    "ramda": "^0.25.0",
     "universal-router": "^4.2.1",
     "url-mapper": "^1.1.1"
   },

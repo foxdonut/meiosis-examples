@@ -24,7 +24,7 @@ export const createBreweryList = (update, navigation) => {
           <ul>
             {model.breweryList.map(brewery =>
               <li key={brewery.id}>
-                <a href={"#/brewery/" + brewery.id}>{brewery.title}</a>
+                <a href={"#/breweryList/" + brewery.id}>{brewery.title}</a>
                 {" "}
                 <button className="btn btn-default btn-xs"
                   onClick={actions.breweryDetails({breweryId: brewery.id})}>

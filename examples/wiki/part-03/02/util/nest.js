@@ -1,4 +1,4 @@
-import R from "ramda";
+import * as R from "ramda";
 
 export const nestUpdate = (update, path) =>
   modelUpdate => update(R.over(R.lensProp(path), modelUpdate));
