@@ -1,22 +1,22 @@
 import { pages } from "./navigation";
 import { createHome } from "./home";
-import { createBeer } from "./beer";
+import { createBeerList } from "./beerList";
 import { createBeerDetails } from "./beerDetails";
-import { createBrewery } from "./brewery";
+import { createBreweryList } from "./breweryList";
 
 export const createApp = (update, navigation) => {
   const homeComponent = createHome(update);
-  const beerComponent = createBeer({
+  const beerListComponent = createBeerList({
     beerDetails: id => _evt => navigation.navigateToBeerDetails({ id })
   });
   const beerDetailsComponent = createBeerDetails(update, navigation);
-  const breweryComponent = createBrewery(update, navigation);
+  const breweryListComponent = createBreweryList(update, navigation);
 
   const pageMap = {
     [pages.home.id]: homeComponent,
-    [pages.beer.id]: beerComponent,
+    [pages.beerList.id]: beerListComponent,
     [pages.beerDetails.id]: beerDetailsComponent,
-    [pages.brewery.id]: breweryComponent
+    [pages.breweryList.id]: breweryListComponent
   };
 
   return {
@@ -37,11 +37,11 @@ export const createApp = (update, navigation) => {
               <li className={isActive(pages.home.tab)}>
                 <a href="#/">Home</a>
               </li>
-              <li className={isActive(pages.beer.tab)}>
-                <a href="#/beer">Beer</a>
+              <li className={isActive(pages.beerList.tab)}>
+                <a href="#/beerList">Beer</a>
               </li>
-              <li className={isActive(pages.brewery.tab)}>
-                <a href="#/brewery">Brewery</a>
+              <li className={isActive(pages.breweryList.tab)}>
+                <a href="#/breweryList">Brewery</a>
               </li>
               <li className="btn">
                 <button className="btn btn-default"
@@ -49,11 +49,11 @@ export const createApp = (update, navigation) => {
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={_evt => navigation.navigateToBeer()}>Beer</button>
+                  onClick={_evt => navigation.navigateToBeerList()}>Beer</button>
               </li>
               <li className="btn">
                 <button className="btn btn-default"
-                  onClick={_evt => navigation.navigateToBrewery()}>Brewery</button>
+                  onClick={_evt => navigation.navigateToBreweryList()}>Brewery</button>
               </li>
             </ul>
           </nav>

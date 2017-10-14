@@ -1,6 +1,6 @@
 export const createBeerDetails = (update, navigation) => {
   const actions = {
-    navigateToBeer: () => navigation.navigateToBeer()
+    navigateToBeerList: () => navigation.navigateToBeerList()
   };
 
   return {
@@ -8,11 +8,11 @@ export const createBeerDetails = (update, navigation) => {
       <div>
         <p>Details of beer {model.params.id}</p>
         <div>
-          <a href="#/beer">Back to beer list</a>
+          <a href="#/beerList">Back to beer list</a>
         </div>
         <div>
           <button className="btn btn-default btn-xs"
-            onClick={actions.navigateToBeer}>
+            onClick={actions.navigateToBeerList}>
             Back to beer list
           </button>
         </div>

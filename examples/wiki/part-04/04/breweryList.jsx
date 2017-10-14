@@ -1,12 +1,12 @@
 import { createBreweryDetails } from "./breweryDetails";
-import { createBeer } from "./beer";
+import { createBeerList } from "./beerList";
 
-export const createBrewery = (update, navigation) => {
+export const createBreweryList = (update, navigation) => {
   const actions = {
-    breweryDetails: params => _evt => navigation.navigateToBrewery(params),
+    breweryDetails: params => _evt => navigation.navigateToBreweryList(params),
   };
 
-  const beerList = createBeer({
+  const beerList = createBeerList({
     beerDetails: id => _evt => navigation.navigateToBreweryBeerDetails({ beerId: id })
   });
 

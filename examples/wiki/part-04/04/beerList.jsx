@@ -1,4 +1,4 @@
-export const createBeer = actions => ({
+export const createBeerList = actions => ({
   view: model => (
     <div>
       <p>Beer List</p>
