@@ -23,12 +23,12 @@ export const pages = {
     id: "BreweryDetailsPage",
     tab: "Brewery"
   },
-  breweryDetailsBeerList: {
-    id: "BreweryDetailsBeerListPage",
+  breweryBeerList: {
+    id: "BreweryBeerListPage",
     tab: "Brewery"
   },
-  breweryDetailsBeerDetails: {
-    id: "BreweryDetailsBeerDetailsPage",
+  breweryBeerDetails: {
+    id: "BreweryBeerDetailsPage",
     tab: "Brewery"
   }
 };
@@ -85,6 +85,6 @@ export const createNavigation = update => {
     navigateToBreweryList,
     navigateToBreweryDetails,
     navigateToBreweryBeerList,
-    navigateToBreweryBeerDetails: navigateTo(pages.breweryDetails)
+    navigateToBreweryBeerDetails: navigateTo(pages.breweryBeerDetails)
   };
 };

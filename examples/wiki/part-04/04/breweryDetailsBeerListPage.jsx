@@ -4,7 +4,7 @@ import { createBeerList } from "./beerList";
 export const createBreweryDetailsBeerListPage = (update, navigation) => {
   const breweryDetailsPage = createBreweryDetailsPage(update, navigation);
   const beerList = createBeerList({
-    beerDetails: beerId => _evt => null
+    beerDetails: beerId => _evt => navigation.navigateToBreweryBeerDetails({ beerId: beerId })
   });
 
   return {
