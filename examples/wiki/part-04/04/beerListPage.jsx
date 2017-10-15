@@ -1,20 +1,11 @@
-export const createBeerListPage = actions => ({
-  view: model => (
-    <div>
-      <p>Beer List</p>
-      <ul>
-        {model.beerList.map(beer =>
-          <li key={beer.id}>
-            <a href={"#/beerList/" + beer.id}>{beer.title}</a>
-            {" "}
-            <button className="btn btn-default btn-xs"
-              onClick={actions.beerDetails(beer.id)}>
-              {beer.title}
-            </button>
-          </li>
-        )}
-      </ul>
-    </div>
-  )
-});
+import { createBeerList } from "./beerList";
 
+export const createBeerListPage = actions => {
+  const beerList = createBeerList(actions);
+
+  return {
+    view: model => (
+      beerList.view(model)
+    )
+  };
+};
