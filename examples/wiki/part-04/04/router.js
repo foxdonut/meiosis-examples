@@ -20,9 +20,9 @@ export const createRouter = navigation => {
         { path: "", name: pages.breweryDetails.id,
           action: wrap(navigation.navigateToBreweryDetails) },
         { path: "/beerList", children: [
-          { path: "", name: pages.breweryDetailsBeerList.id,
-            action: wrap(navigation.navigateToBreweryDetails) },
-          { path: "/:beerId", name: pages.breweryDetailsBeerDetails.id,
+          { path: "", name: pages.breweryBeerList.id,
+            action: wrap(navigation.navigateToBreweryBeerList) },
+          { path: "/:beerId", name: pages.breweryBeerDetails.id,
             action: wrap(navigation.navigateToBreweryBeerDetails) }
         ]}
       ]}

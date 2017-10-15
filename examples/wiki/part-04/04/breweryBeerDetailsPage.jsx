@@ -1,4 +1,4 @@
-export const createBreweryDetailsBeerDetailsPage = (update, navigation) => {
+export const createBreweryBeerDetailsPage = (update, navigation) => {
   return {
     view: model => (
       <div>

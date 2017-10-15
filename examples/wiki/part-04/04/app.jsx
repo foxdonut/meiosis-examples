@@ -4,8 +4,8 @@ import { createBeerListPage } from "./beerListPage";
 import { createBeerDetailsPage } from "./beerDetailsPage";
 import { createBreweryListPage } from "./breweryListPage";
 import { createBreweryDetailsPage } from "./breweryDetailsPage";
-import { createBreweryDetailsBeerListPage } from "./breweryDetailsBeerListPage";
-import { createBreweryDetailsBeerDetailsPage } from "./breweryDetailsBeerDetailsPage";
+import { createBreweryBeerListPage } from "./breweryBeerListPage";
+import { createBreweryBeerDetailsPage } from "./breweryBeerDetailsPage";
 
 export const createApp = (update, navigation) => {
   const homePage = createHomePage(update);
@@ -15,8 +15,8 @@ export const createApp = (update, navigation) => {
   const beerDetailsPage = createBeerDetailsPage(update, navigation);
   const breweryListPage = createBreweryListPage(update, navigation);
   const breweryDetailsPage = createBreweryDetailsPage(update, navigation);
-  const breweryDetailsBeerListPage = createBreweryDetailsBeerListPage(update, navigation);
-  const breweryDetailsBeerDetailsPage = createBreweryDetailsBeerDetailsPage(update, navigation);
+  const breweryBeerListPage = createBreweryBeerListPage(update, navigation);
+  const breweryBeerDetailsPage = createBreweryBeerDetailsPage(update, navigation);
 
   const pageMap = {
     [pages.home.id]: homePage,
@@ -24,8 +24,8 @@ export const createApp = (update, navigation) => {
     [pages.beerDetails.id]: beerDetailsPage,
     [pages.breweryList.id]: breweryListPage,
     [pages.breweryDetails.id]: breweryDetailsPage,
-    [pages.breweryDetailsBeerList.id]: breweryDetailsBeerListPage,
-    [pages.breweryDetailsBeerDetails.id]: breweryDetailsBeerDetailsPage
+    [pages.breweryBeerList.id]: breweryBeerListPage,
+    [pages.breweryBeerDetails.id]: breweryBeerDetailsPage
   };
 
   return {

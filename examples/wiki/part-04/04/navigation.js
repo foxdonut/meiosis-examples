@@ -71,7 +71,7 @@ export const createNavigation = update => {
       update(
         R.pipe(
           transforms.breweryBeerList(params, beerList),
-          transforms.navigate(pages.breweryDetailsBeerList, params)
+          transforms.navigate(pages.breweryBeerList, params)
         )
       )
     );
