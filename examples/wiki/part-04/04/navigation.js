@@ -4,31 +4,31 @@ import { transforms } from "./transforms";
 
 export const pages = {
   home: {
-    id: "Home",
+    id: "HomePage",
     tab: "Home"
   },
   beerList: {
-    id: "BeerList",
+    id: "BeerListPage",
     tab: "Beer"
   },
   beerDetails: {
-    id: "BeerDetails",
+    id: "BeerDetailsPage",
     tab: "Beer"
   },
   breweryList: {
-    id: "BreweryList",
+    id: "BreweryListPage",
     tab: "Brewery"
   },
   breweryDetails: {
-    id: "BreweryDetails",
+    id: "BreweryDetailsPage",
     tab: "Brewery"
   },
   breweryDetailsBeerList: {
-    id: "BreweryDetailsBeerList",
+    id: "BreweryDetailsBeerListPage",
     tab: "Brewery"
   },
   breweryDetailsBeerDetails: {
-    id: "BreweryDetailsBeerDetails",
+    id: "BreweryDetailsBeerDetailsPage",
     tab: "Brewery"
   }
 };

@@ -9,10 +9,10 @@ export const createRouter = navigation => {
   };
 
   const routes = [
-    { path: "/", name: pages.home.id, action: wrap(navigation.navigateToHome) },
+    { path: "", name: pages.home.id, action: wrap(navigation.navigateToHome) },
     { path: "/coffee/:id?", name: pages.coffee.id, action: wrap(navigation.navigateToCoffee) },
     { path: "/beer", children: [
-      { path: "/", name: pages.beer.id, action: wrap(navigation.navigateToBeer) },
+      { path: "", name: pages.beer.id, action: wrap(navigation.navigateToBeer) },
       { path: "/:id", name: pages.beerDetails.id, action: wrap(navigation.navigateToBeerDetails) }
     ]}
   ];

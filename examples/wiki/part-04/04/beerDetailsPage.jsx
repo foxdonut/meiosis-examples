@@ -1,4 +1,4 @@
-export const createBeerDetails = (update, navigation) => {
+export const createBeerDetailsPage = (update, navigation) => {
   const actions = {
     navigateToBeerList: () => navigation.navigateToBeerList()
   };

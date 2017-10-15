@@ -1,22 +1,22 @@
 import { pages } from "./navigation";
-import { createHome } from "./home";
-import { createBeerList } from "./beerList";
-import { createBeerDetails } from "./beerDetails";
-import { createBreweryList } from "./breweryList";
+import { createHomePage } from "./homePage";
+import { createBeerListPage } from "./beerListPage";
+import { createBeerDetailsPage } from "./beerDetailsPage";
+import { createBreweryListPage } from "./breweryListPage";
 
 export const createApp = (update, navigation) => {
-  const homeComponent = createHome(update);
-  const beerListComponent = createBeerList({
+  const homePage = createHomePage(update);
+  const beerListPage = createBeerListPage({
     beerDetails: id => _evt => navigation.navigateToBeerDetails({ id })
   });
-  const beerDetailsComponent = createBeerDetails(update, navigation);
-  const breweryListComponent = createBreweryList(update, navigation);
+  const beerDetailsPage = createBeerDetailsPage(update, navigation);
+  const breweryListPage = createBreweryListPage(update, navigation);
 
   const pageMap = {
-    [pages.home.id]: homeComponent,
-    [pages.beerList.id]: beerListComponent,
-    [pages.beerDetails.id]: beerDetailsComponent,
-    [pages.breweryList.id]: breweryListComponent
+    [pages.home.id]: homePage,
+    [pages.beerList.id]: beerListPage,
+    [pages.beerDetails.id]: beerDetailsPage,
+    [pages.breweryList.id]: breweryListPage
   };
 
   return {
