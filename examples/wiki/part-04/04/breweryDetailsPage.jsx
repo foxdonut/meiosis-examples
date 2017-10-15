@@ -1,23 +1,20 @@
-const createLoadBeerListView = actions => model => (
-  <div>
-    <a href="#">Load beer list</a>
-    {" "}
-    <button className="btn btn-default btn-xs"
-      onClick={actions.loadBeerList({ breweryId: model.brewery.id })}>Load beer list</button>
-  </div>
-);
+import { createBreweryListPage } from "./breweryListPage";
+import { createBreweryDetails } from "./breweryDetails";
+import { createLoadBeerList } from "./loadBeerList";
 
-export const createBreweryDetailsPage = (components, actions) => {
-  const loadBeerList = createLoadBeerListView(actions);
+export const createBreweryDetailsPage = (update, navigation) => {
+  const breweryListPage = createBreweryListPage(update, navigation);
+  const breweryDetails = createBreweryDetails();
+  const loadBeerList = createLoadBeerList({
+    loadBeerList: params => _evt => navigation.navigateToBreweryBeerList(params)//FIXME
+  });
 
   return {
     view: model => (
       <div>
-        <p>Details of brewery {model.brewery.id}</p>
-        { model.brewery.beerList
-        ? components.beerList.view(model.brewery)
-        : loadBeerList(model)
-        }
+        {breweryListPage.view(model)}
+        {breweryDetails.view(model)}
+        {loadBeerList.view(model)}
       </div>
     )
   };

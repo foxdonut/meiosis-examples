@@ -15,9 +15,16 @@ export const createRouter = navigation => {
       { path: "/:id", name: pages.beerDetails.id, action: wrap(navigation.navigateToBeerDetails) }
     ]},
     { path: "/breweryList", children: [
-      { path: "/:breweryId?", children: [
-        { path: "", name: pages.breweryList.id, action: wrap(navigation.navigateToBreweryList) },
-        { path: "/:beerId", name: pages.breweryDetails.id, action: wrap(navigation.navigateToBreweryBeerDetails) }
+      { path: "", name: pages.breweryList.id, action: wrap(navigation.navigateToBreweryList) },
+      { path: "/:breweryId", children: [
+        { path: "", name: pages.breweryDetails.id,
+          action: wrap(navigation.navigateToBreweryDetails) },
+        { path: "/beerList", children: [
+          { path: "", name: pages.breweryDetailsBeerList.id,
+            action: wrap(navigation.navigateToBreweryDetails) },
+          { path: "/:beerId", name: pages.breweryDetailsBeerDetails.id,
+            action: wrap(navigation.navigateToBreweryBeerDetails) }
+        ]}
       ]}
     ]}
   ];
@@ -34,7 +41,7 @@ export const createRouter = navigation => {
   const urlGenerator = generateUrls(router);
 
   const routeSync = model => {
-    const route = urlGenerator(model.page.id, model.params || {});
+    const route = urlGenerator(model.page.id, model.page.params || {});
     if (document.location.hash.substring(1) !== route) {
       window.history.pushState({}, "", "#" + route);
     }

@@ -47,24 +47,23 @@ export const createNavigation = update => {
     );
 
   const navigateToBreweryList = params => {
-    if (params && params.breweryId) {
+    services.loadBreweryList().then(breweryList =>
       update(
         R.pipe(
-          transforms.brewery(params),
+          transforms.breweryList(breweryList),
           transforms.navigate(pages.breweryList, params)
         )
-      );
-    }
-    else {
-      services.loadBreweryList().then(breweryList =>
-        update(
-          R.pipe(
-            transforms.breweryList(breweryList),
-            transforms.navigate(pages.breweryList, params)
-          )
-        )
-      );
-    }
+      )
+    );
+  };
+
+  const navigateToBreweryDetails = params => {
+    update(
+      R.pipe(
+        transforms.brewery(params),
+        transforms.navigate(pages.breweryDetails, params)
+      )
+    );
   };
 
   const navigateToBreweryBeerList = params =>
@@ -72,7 +71,7 @@ export const createNavigation = update => {
       update(
         R.pipe(
           transforms.breweryBeerList(params, beerList),
-          transforms.navigate(pages.breweryList, params)
+          transforms.navigate(pages.breweryDetailsBeerList, params)
         )
       )
     );
@@ -84,6 +83,7 @@ export const createNavigation = update => {
     navigateToBeerList,
     navigateToBeerDetails: navigateTo(pages.beerDetails),
     navigateToBreweryList,
+    navigateToBreweryDetails,
     navigateToBreweryBeerList,
     navigateToBreweryBeerDetails: navigateTo(pages.breweryDetails)
   };

@@ -1,5 +1,5 @@
 const navigate = (page, params = {}) =>
-  model => Object.assign(model, ({ page, params }));
+  model => Object.assign(model, ({ page: Object.assign({ params }, page) }));
 
 export const transforms = {
   navigate,

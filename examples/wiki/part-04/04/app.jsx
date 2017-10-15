@@ -3,6 +3,7 @@ import { createHomePage } from "./homePage";
 import { createBeerListPage } from "./beerListPage";
 import { createBeerDetailsPage } from "./beerDetailsPage";
 import { createBreweryListPage } from "./breweryListPage";
+import { createBreweryDetailsPage } from "./breweryDetailsPage";
 
 export const createApp = (update, navigation) => {
   const homePage = createHomePage(update);
@@ -11,18 +12,19 @@ export const createApp = (update, navigation) => {
   });
   const beerDetailsPage = createBeerDetailsPage(update, navigation);
   const breweryListPage = createBreweryListPage(update, navigation);
+  const breweryDetailsPage = createBreweryDetailsPage(update, navigation);
 
   const pageMap = {
     [pages.home.id]: homePage,
     [pages.beerList.id]: beerListPage,
     [pages.beerDetails.id]: beerDetailsPage,
-    [pages.breweryList.id]: breweryListPage
+    [pages.breweryList.id]: breweryListPage,
+    [pages.breweryDetails.id]: breweryDetailsPage
   };
 
   return {
     model: () => ({
-      page: pages.home,
-      params: {}
+      page: Object.assign({ params: {} }, pages.home)
     }),
     view: model => {
       const currentPageId = pageMap[model.page.id] ? model.page.id : pages.home.id;
