@@ -18,12 +18,16 @@ const breweryBeerList = {
 };
 
 export const createServices = () => ({
-  loadBeerList: breweryId => new Promise(resolve =>
+  loadBeerList: breweryId => new Promise(resolve => {
+    const delay = 2000
+
     setTimeout(() => {
       resolve(breweryId ? breweryBeerList[breweryId] : beerList);
-    }, 1)
-  ),
-  loadBreweryList: () => new Promise(resolve =>
-    setTimeout(() => resolve(breweryList), 1)
-  )
+    }, delay);
+  }),
+  loadBreweryList: () => new Promise(resolve => {
+    const delay = 3000;
+
+    setTimeout(() => resolve(breweryList), delay);
+  })
 });

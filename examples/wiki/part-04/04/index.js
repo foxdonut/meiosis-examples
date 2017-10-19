@@ -2,16 +2,17 @@ import flyd from "flyd";
 import ReactDOM from "react-dom";
 
 import { createNavigation } from "./navigation";
-import { createApp } from "./app";
+import { createAppModel, createApp } from "./app";
 import { createRouter } from "./router";
 
 // Meiosis Setup
 const update = flyd.stream();
-const navigation = createNavigation(update);
-const app = createApp(update, navigation);
-const initialModel = app.model();
+const initialModel = createAppModel();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
+
+const navigation = createNavigation(update, models);
+const app = createApp(update, navigation);
 
 // Rendering
 const element = document.getElementById("app");
