@@ -26,23 +26,34 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "dio.js": "^8.0.3",
+    "domvm": "^3.2.0",
     "flyd": "^0.2.4",
     "inferno": "^3.10.1",
     "inferno-create-element": "^3.10.1",
+    "ivi": "^0.8.0",
+    "ivi-core": "^0.1.0",
+    "ivi-dom": "^0.1.0",
+    "ivi-events": "^0.1.0",
+    "ivi-html": "^0.1.0",
+    "ivi-scheduler": "^0.1.0",
     "mithril": "^1.1.5",
     "petit-dom": "0.0.11",
     "picodom": "^1.0.0",
     "preact": "^8.2.5",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "snabbdom": "^0.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-ivi-jsx": "^1.1.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "meiosis": "^1.2.0",
     "meiosis-tracer": "^1.2.0",
+    "ts-loader": "^3.0.3",
+    "typescript": "^2.5.3",
     "webpack": "^3.8.1"
   }
 }

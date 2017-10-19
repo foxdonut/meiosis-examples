@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "isolatedModules": false,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "module": "es6",
+    "moduleResolution": "node",
+    "noEmitHelpers": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitUseStrict": false,
+    "noUnusedLocals": true,
+    "outDir": "build",
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "rootDir": ".",
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5"
+  },
+  "include": [
+    "ivi/*.ts"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "formatCodeOptions": {
+    "indentSize": 2,
+    "tabSize": 2
+  }
+}

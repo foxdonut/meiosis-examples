@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/bootstrap.yeti.min.css">
     <link rel="stylesheet" href="/examples/setup/style.css">
-    <title>Meiosis Setup</title>
+    <title>Meiosis Setup - Domvm</title>
   </head>
   <body class="container">
     <div class="row">
@@ -15,25 +15,27 @@
         <a href="http://meiosis.js.org" target="_blank"><img src="/public/images/meiosis.png" style="margin-right: 8px; margin-top: 8px" width="53px"></a>
       </div>
       <div class="col-md-8">
-        <h2>Meiosis Setup</h2>
+        <h2>Meiosis Setup - Domvm</h2>
       </div>
     </div>
     <div><a href="/index.html">Back to list of examples</a></div>
     <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/setup" target="_blank">Source code</a></div>
     <hr>
 
-    <ul>
-      <li><a href="diojs/index.html">DIO</a></li>
-      <li><a href="domvm/index.html">Domvm</a></li>
-      <li><a href="inferno/index.html">Inferno</a></li>
-      <li><a href="ivi/index.html">Ivi</a></li>
-      <li><a href="mithril/index.html">Mithril</a></li>
-      <li><a href="petit-dom/index.html">Petit-DOM</a></li>
-      <li><a href="picodom/index.html">Picodom</a></li>
-      <li><a href="preact/index.html">Preact</a></li>
-      <li><a href="react/index.html">React</a></li>
-      <li><a href="snabbdom/index.html">Snabbdom</a></li>
-    </ul>
+    <div>
+      <a href="/examples/setup/index.html">Setup Examples</a> &gt;
+      Domvm
+    </div>
+    <hr>
 
+    <div id="app"></div>
+    <div id="tracer"></div>
+    <footer class="footer">
+      Using
+        <a href="https://github.com/paldepind/flyd" target="_blank">Flyd</a>
+        &bullet;
+        <a href="https://github.com/leeoniya/domvm" target="_blank">Domvm</a>
+    </footer>
   </body>
+  <script src="/examples/setup/build/generated-domvm.js"></script>
 </html>
