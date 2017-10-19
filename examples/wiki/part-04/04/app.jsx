@@ -6,6 +6,11 @@ import { createBreweryListPage } from "./breweryListPage";
 import { createBreweryDetailsPage } from "./breweryDetailsPage";
 import { createBreweryBeerListPage } from "./breweryBeerListPage";
 import { createBreweryBeerDetailsPage } from "./breweryBeerDetailsPage";
+import { createPleaseWait } from "./pleaseWait";
+
+export const createAppModel =  () => ({
+  page: Object.assign({ params: {} }, pages.home)
+});
 
 export const createApp = (update, navigation) => {
   const homePage = createHomePage(update);
@@ -28,10 +33,9 @@ export const createApp = (update, navigation) => {
     [pages.breweryBeerDetails.id]: breweryBeerDetailsPage
   };
 
+  const pleaseWait = createPleaseWait();
+
   return {
-    model: () => ({
-      page: Object.assign({ params: {} }, pages.home)
-    }),
     view: model => {
       const currentPageId = pageMap[model.page.id] ? model.page.id : pages.home.id;
       const component = pageMap[currentPageId];
@@ -65,7 +69,7 @@ export const createApp = (update, navigation) => {
               </li>
             </ul>
           </nav>
-          {component.view(model)}
+          {model.operationInProgress ? pleaseWait.view() : component.view(model)}
         </div>
       );
     }

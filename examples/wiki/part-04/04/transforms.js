@@ -1,7 +1,13 @@
+import { assoc } from "ramda";
+
 const navigate = (page, params = {}) =>
   model => Object.assign(model, ({ page: Object.assign({ params }, page) }));
 
 export const transforms = {
+  pleaseWaitBegin: assoc("operationInProgress", true),
+
+  pleaseWaitEnd: assoc("operationInProgress", false),
+
   navigate,
 
   navigateTo: page => params => navigate(page, params),

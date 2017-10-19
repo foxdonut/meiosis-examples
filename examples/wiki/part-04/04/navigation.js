@@ -33,71 +33,139 @@ export const pages = {
   }
 };
 
-export const createNavigation = update => {
+export const createNavigation = (update, getLatestModel) => {
   const services = createServices();
 
-  const navigateToBeerList = () =>
-    services.loadBeerList().then(beerList =>
+  const navigateToBeerList = () => {
+    if (getLatestModel().beerList) {
       update(
-        R.pipe(
-          transforms.beerList(beerList),
-          transforms.navigate(pages.beerList)
+        transforms.navigate(pages.beerList)
+      );
+    }
+    else {
+      update(transforms.pleaseWaitBegin);
+
+      services.loadBeerList().then(beerList =>
+        update(
+          R.pipe(
+            transforms.beerList(beerList),
+            transforms.navigate(pages.beerList),
+            transforms.pleaseWaitEnd
+          )
         )
-      )
-    );
+      );
+    }
+  }
 
   const navigateToBreweryList = params => {
-    services.loadBreweryList().then(breweryList =>
+    if (getLatestModel().breweryList) {
       update(
-        R.pipe(
-          transforms.breweryList(breweryList),
-          transforms.navigate(pages.breweryList, params)
+        transforms.navigate(pages.breweryList, params)
+      );
+    }
+    else {
+      update(transforms.pleaseWaitBegin);
+
+      services.loadBreweryList().then(breweryList =>
+        update(
+          R.pipe(
+            transforms.breweryList(breweryList),
+            transforms.navigate(pages.breweryList, params),
+            transforms.pleaseWaitEnd
+          )
         )
-      )
-    );
+      );
+    }
   };
+
+  const trBreweryList = breweryList =>
+    R.pipe(
+      transforms.breweryList(breweryList),
+      transforms.pleaseWaitEnd
+    );
+
+  const trBrewery = params =>
+    R.pipe(
+      transforms.brewery(params),
+      transforms.navigate(pages.breweryDetails, params)
+    );
 
   const navigateToBreweryDetails = params => {
-    services.loadBreweryList().then(breweryList =>
-      update(
-        R.pipe(
-          transforms.breweryList(breweryList),
-          transforms.brewery(params),
-          transforms.navigate(pages.breweryDetails, params)
-        )
+    R.applyTo(
+      getLatestModel(),
+      R.ifElse(
+        R.has("breweryList"),
+        R.partial(update, [trBrewery(params)]),
+        () => {
+          update(transforms.pleaseWaitBegin);
+
+          services.loadBreweryList().then(
+            R.pipe(
+              trBreweryList,
+              R.o(trBrewery(params)),
+              update
+            )
+          );
+        }
       )
     );
   };
 
-  const navigateToBreweryBeerList = params =>
-    Promise.all([services.loadBreweryList(), services.loadBeerList(params.breweryId)]).then(values => {
-      const breweryList = values[0];
-      const beerList = values[1];
+  const navigateToBreweryBeerList = params => {
+    const latestModel = getLatestModel();
 
+    if (latestModel.breweryList && latestModel.brewery.id === params.breweryId && latestModel.brewery.beerList) {
       update(
-        R.pipe(
-          transforms.breweryList(breweryList),
-          transforms.brewery(params),
-          transforms.breweryBeerList(params, beerList),
-          transforms.navigate(pages.breweryBeerList, params)
-        )
+        transforms.navigate(pages.breweryBeerList, params)
       );
-    });
+    }
+    else {
+      update(transforms.pleaseWaitBegin);
 
-  const navigateToBreweryBeerDetails = params =>
-    Promise.all([services.loadBreweryList(), services.loadBeerList(params.breweryId)]).then(values => {
-      const breweryList = values[0];
-      const beerList = values[1];
+      Promise.all([services.loadBreweryList(), services.loadBeerList(params.breweryId)]).then(values => {
+        const breweryList = values[0];
+        const beerList = values[1];
 
+        update(
+          R.pipe(
+            transforms.breweryList(breweryList),
+            transforms.brewery(params),
+            transforms.breweryBeerList(params, beerList),
+            transforms.navigate(pages.breweryBeerList, params),
+            transforms.pleaseWaitEnd
+          )
+        );
+      });
+    }
+  };
+
+  const navigateToBreweryBeerDetails = params => {
+    const latestModel = getLatestModel();
+
+    if (latestModel.breweryList && latestModel.brewery.id === params.breweryId && latestModel.brewery.beerList) {
       update(
-        R.pipe(
-          transforms.breweryList(breweryList),
-          transforms.brewery(params),
-          transforms.breweryBeerList(params, beerList),
-          transforms.navigate(pages.breweryBeerDetails, params)
-        )
+        transforms.navigate(pages.breweryBeerDetails, params)
       );
-    });
+    }
+    else {
+      update(transforms.pleaseWaitBegin);
+
+      Promise.all([services.loadBreweryList(), services.loadBeerList(params.breweryId)]).then(values => {
+        const breweryList = values[0];
+        const beerList = values[1];
+
+        update(
+          R.pipe(
+            transforms.breweryList(breweryList),
+            transforms.brewery(params),
+            transforms.breweryBeerList(params, beerList),
+            transforms.navigate(pages.breweryBeerDetails, params),
+            transforms.pleaseWaitEnd
+          )
+        );
+      });
+    }
+  };
 
   const navigateTo = page => params => update(transforms.navigate(page, params));
 
