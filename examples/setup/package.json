@@ -1,0 +1,48 @@
+{
+  "name": "setup",
+  "version": "1.0.0",
+  "description": "meiosis-examples setup",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "minify": "webpack --optimize-minimize",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive",
+    "virtual dom"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "dio.js": "^8.0.3",
+    "flyd": "^0.2.4",
+    "inferno": "^3.10.1",
+    "inferno-create-element": "^3.10.1",
+    "mithril": "^1.1.5",
+    "petit-dom": "0.0.11",
+    "picodom": "^1.0.0",
+    "preact": "^8.2.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "meiosis": "^1.2.0",
+    "meiosis-tracer": "^1.2.0",
+    "webpack": "^3.8.1"
+  }
+}
