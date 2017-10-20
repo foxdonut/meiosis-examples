@@ -25,16 +25,19 @@ export const jsx = function(propMap, defaultProps) {
 };
 
 export const jsxDio = jsx({
-  "onChange": "onInput"
 });
 
 export const jsxDomvm = jsx({
   "className": "class",
-  "onChange": "oninput",
-  "onClick": "onclick"
+  "htmlFor": "for",
+  "onChange": "onchange",
+  "onClick": "onclick",
+  "onInput": "oninput"
 });
 
-export const jsxInferno = jsxDio;
+export const jsxInferno = jsx({
+  "htmlFor": "for"
+});
 
 export const jsxIvi = jsx({}, {
   key: null,
@@ -48,8 +51,9 @@ export const jsxIvi = jsx({}, {
 });
 
 export const jsxMithril = jsx({
-  "onChange": "oninput",
-  "onClick": "onclick"
+  "onChange": "onchange",
+  "onClick": "onclick",
+  "onInput": "oninput"
 });
 
 export const jsxPetitDom = jsxMithril;
@@ -59,6 +63,7 @@ export const jsxPicodom = jsxMithril;
 export const jsxPreact = jsxDio;
 
 export const jsxSnabbdom = jsx({
-  "onChange": "on-input",
-  "onClick": "on-click"
-})
+  "onChange": "on-change",
+  "onClick": "on-click",
+  "onInput": "on-input"
+});

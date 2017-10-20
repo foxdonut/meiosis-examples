@@ -4,14 +4,14 @@ import { jsxDomvm } from "../common/jsx";
 
 window.jsx = jsxDomvm(domvm.defineElement);
 
-let vm = null;
-setup((view, element) => {
-  const f = () => () => view;
-  if (!vm) {
-    vm = domvm.createView(f, {});
-    vm.mount(element, true);
-  }
-  else {
-    vm.update({});
-  }
-});
+const { models, view, element } = setup(() => null);
+
+function AppView() {
+  return function(vm, model) {
+    return view(model);
+  };
+}
+
+const vm = domvm.createView(AppView, models());
+vm.mount(element);
+models.map(model => vm.update(model));

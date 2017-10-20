@@ -19,4 +19,6 @@ export const setup = render => {
   // Only for using Meiosis Tracer in development.
   trace({ update, dataStreams: [ models ]});
   meiosisTracer({ selector: "#tracer" });
+
+  return { models, view: temperature.view, element };
 };

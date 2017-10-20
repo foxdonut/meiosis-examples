@@ -4,4 +4,4 @@ import { jsxPicodom } from "../common/jsx";
 
 window.jsx = jsxPicodom(h);
 let el = null;
-setup((view, element) => (el = patch(el, view, element)));
+setup((view, element) => patch(el, (el = view), element));

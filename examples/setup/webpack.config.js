@@ -13,14 +13,14 @@ module.exports = {
     "picodom": "./picodom/index.js",
     "preact": "./preact/index.js",
     "react": "./react/index.js",
-    "snabbdom": "./snabbdom/index.js",
+    "snabbdom": "./snabbdom/index.js"
   },
   output: {
     path: path.join(__dirname, "build"),
     filename: "generated-[name].js"
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts"]
+    extensions: [".js", ".jsx"]
   },
   module: {
     rules: [
@@ -35,25 +35,11 @@ module.exports = {
               ["transform-react-jsx", {
                 "pragma": "jsx"
               }]
+              //,["ivi-jsx"]
             ]
           }
         }
-      }/*,
-      {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "ts-loader",
-          options: {
-            compilerOptions: {
-              declaration: false
-            },
-            plugins: [
-              ["ivi-jsx"]
-            ]
-          }
-        }
-      }*/
+      }
     ]
   },
   plugins: [

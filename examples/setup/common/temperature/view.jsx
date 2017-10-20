@@ -7,7 +7,7 @@ export const createView = actions => model => (
     </div>
     <div>
       Date:
-      <input type="text" size="10" value={model.date} onChange={actions.editDate}/>
+      <input type="text" size="10" value={model.date} onInput={actions.editDate}/>
     </div>
     <span>Temperature: {model.value}&deg;{model.units} </span>
     <div>
