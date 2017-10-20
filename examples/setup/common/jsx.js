@@ -14,9 +14,11 @@ export const jsx = function(propMap, defaultProps) {
       if (defaultProps) {
         args[1] = Object.assign(defaultProps, props);
       }
+      const rest = [];
       for (var i = 2; i < arguments.length; i++) {
-        args.push(arguments[i])
+        rest.push(arguments[i])
       }
+      args.push(rest);
       return h.apply(null, args);
     };
   };
@@ -24,6 +26,12 @@ export const jsx = function(propMap, defaultProps) {
 
 export const jsxDio = jsx({
   "onChange": "onInput"
+});
+
+export const jsxDomvm = jsx({
+  "className": "class",
+  "onChange": "oninput",
+  "onClick": "onclick"
 });
 
 export const jsxInferno = jsxDio;
