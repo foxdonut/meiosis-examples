@@ -7,7 +7,7 @@ module.exports = {
     "diojs": "./diojs/index.js",
     "domvm": "./domvm/index.js",
     "inferno": "./inferno/index.js",
-    "ivi": "./ivi/index.ts",
+    "ivi": "./ivi/index.js",
     "mithril": "./mithril/index.js",
     "petit-dom": "./petit-dom/index.js",
     "picodom": "./picodom/index.js",
@@ -38,7 +38,7 @@ module.exports = {
             ]
           }
         }
-      },
+      }/*,
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
@@ -47,10 +47,13 @@ module.exports = {
           options: {
             compilerOptions: {
               declaration: false
-            }
+            },
+            plugins: [
+              ["ivi-jsx"]
+            ]
           }
         }
-      }
+      }*/
     ]
   },
   plugins: [

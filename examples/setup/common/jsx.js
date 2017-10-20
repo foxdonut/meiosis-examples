@@ -1,4 +1,4 @@
-export const jsx = function(propMap) {
+export const jsx = function(propMap, defaultProps) {
   return function(h) {
     return function(type, props) {
       const args = [type, props];
@@ -10,6 +10,9 @@ export const jsx = function(propMap) {
             delete props[fromProp];
           }
         });
+      }
+      if (defaultProps) {
+        args[1] = Object.assign(defaultProps, props);
       }
       for (var i = 2; i < arguments.length; i++) {
         args.push(arguments[i])
@@ -24,6 +27,17 @@ export const jsxDio = jsx({
 });
 
 export const jsxInferno = jsxDio;
+
+export const jsxIvi = jsx({}, {
+  key: null,
+  events: null,
+  props: null,
+  className: null,
+  style: null,
+  unsafeHTML: null,
+  value: null,
+  checked: null
+});
 
 export const jsxMithril = jsx({
   "onChange": "oninput",
