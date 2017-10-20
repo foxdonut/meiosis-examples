@@ -1,5 +1,15 @@
-label, .control-label {
+label {
   font-size: 12pt;
+}
+input[type=checkbox] {
+  margin-right: 4px;
+}
+input[type=text] {
+  margin-left: 4px;
+}
+button.btn {
+  margin-right: 4px;
+  margin-bottom: 4px;
 }
 .footer {
   font-size: 11pt;

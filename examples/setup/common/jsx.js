@@ -57,3 +57,8 @@ export const jsxPetitDom = jsxMithril;
 export const jsxPicodom = jsxMithril;
 
 export const jsxPreact = jsxDio;
+
+export const jsxSnabbdom = jsx({
+  "onChange": "on-input",
+  "onClick": "on-click"
+})

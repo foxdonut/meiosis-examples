@@ -1,4 +1,10 @@
 export const createActions = update => ({
+  togglePrecipitations: evt =>
+    update(model => {
+      model.precipitations = evt.target.checked;
+      return model;
+    }),
+
   editDate: evt =>
     update(model => {
       model.date = evt.target.value;
