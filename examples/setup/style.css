@@ -11,6 +11,9 @@ button.btn {
   margin-right: 4px;
   margin-bottom: 4px;
 }
+table {
+  font-size: 12pt;
+}
 .footer {
   font-size: 11pt;
   position: absolute;
