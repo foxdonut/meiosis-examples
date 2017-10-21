@@ -14,6 +14,9 @@ button.btn {
 table {
   font-size: 12pt;
 }
+li.hl {
+  background-color: #FFFFAA;
+}
 .footer {
   font-size: 11pt;
   position: absolute;
