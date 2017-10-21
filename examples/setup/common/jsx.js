@@ -24,8 +24,6 @@ export const jsx = function(propMap, defaultProps) {
   };
 };
 
-export const jsxBobril = jsx({ });
-
 export const jsxDio = jsx({ });
 
 export const jsxDomvm = jsx({
