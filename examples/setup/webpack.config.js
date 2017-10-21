@@ -1,8 +1,10 @@
 /*global __dirname*/
+var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
   entry: {
+    "bobril": "./bobril/index.js",
     "diojs": "./diojs/index.js",
     "domvm": "./domvm/index.js",
     "inferno": "./inferno/index.js",
@@ -38,5 +40,11 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  // Only needed for Bobril
+  plugins: [
+    new webpack.DefinePlugin({
+      "DEBUG": false
+    })
+  ]
 };

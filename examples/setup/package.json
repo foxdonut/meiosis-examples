@@ -4,10 +4,9 @@
   "description": "meiosis-examples setup",
   "main": "index.js",
   "scripts": {
-    "bobril": "webpack --config webpack.config.bobril.js",
     "ivi": "webpack --config webpack.config.ivi.js",
     "vidom": "webpack --config webpack.config.vidom.js",
-    "prestart": "npm run bobril && npm run ivi && npm run vidom",
+    "prestart": "npm run ivi && npm run vidom",
     "start": "webpack",
     "minify": "webpack --optimize-minimize",
     "watch": "webpack --progress --colors --watch"
