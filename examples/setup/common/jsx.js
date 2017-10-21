@@ -40,17 +40,6 @@ export const jsxInferno = jsx({
   "htmlFor": "for"
 });
 
-export const jsxIvi = jsx({}, {
-  key: null,
-  events: null,
-  props: null,
-  className: null,
-  style: null,
-  unsafeHTML: null,
-  value: null,
-  checked: null
-});
-
 export const jsxMithril = jsx({
   "onChange": "onchange",
   "onClick": "onclick",
