@@ -44,8 +44,8 @@ window.jsx = jsxBobrilAdapter;
 const { models, view, element } = setup(() => null);
 
 const View = b.createComponent({
-  render: (ctx, me) => me.children = [view(models())]
+  render: (ctx, me) => b.assign(me, view(models()))
 });
-b.init(() => [ View() ], element);
+b.init(View, element);
 
 models.map(() => b.invalidate());
