@@ -1,4 +1,4 @@
-export const jsx = function(propMap, defaultProps) {
+export const jsx = function(propMap) {
   return function(h) {
     return function(type, props) {
       const args = [type, props];
@@ -10,9 +10,6 @@ export const jsx = function(propMap, defaultProps) {
             delete props[fromProp];
           }
         });
-      }
-      if (defaultProps) {
-        args[1] = Object.assign(defaultProps, props);
       }
       const rest = [];
       for (var i = 2; i < arguments.length; i++) {
