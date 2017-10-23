@@ -12,13 +12,8 @@ const jsxMaquette = jsx({
 
 window.jsx = jsxMaquette(h);
 
-let projector = null;
-setup((view, element) => {
-  if (!projector) {
-    projector = createProjector();
-    projector.append(element, () => view);
-  }
-  else {
-    projector.scheduleRender();
-  }
-});
+const { models, view, element } = setup(() => null);
+
+const projector = createProjector();
+projector.append(element, () => view(models()));
+models.map(() => projector.scheduleRender());

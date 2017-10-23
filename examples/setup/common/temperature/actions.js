@@ -5,6 +5,12 @@ export const createActions = update => ({
       return model;
     }),
 
+  changePrecipitation: evt =>
+    update(model => {
+      model.precipitation = evt.target.value;
+      return model;
+    }),
+
   editDate: evt =>
     update(model => {
       model.date = evt.target.value;

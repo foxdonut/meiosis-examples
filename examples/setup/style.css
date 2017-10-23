@@ -1,7 +1,8 @@
 label {
   font-size: 12pt;
+  margin-right: 8px;
 }
-input[type=checkbox] {
+input[type=checkbox], input[type=radio] {
   margin-right: 4px;
 }
 input[type=text] {
