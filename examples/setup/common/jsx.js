@@ -23,35 +23,3 @@ export const jsx = function(propMap, defaultProps) {
     };
   };
 };
-
-export const jsxDio = jsx({ });
-
-export const jsxDomvm = jsx({
-  "className": "class",
-  "htmlFor": "for",
-  "onChange": "onchange",
-  "onClick": "onclick",
-  "onInput": "oninput"
-});
-
-export const jsxInferno = jsx({
-  "htmlFor": "for"
-});
-
-export const jsxMithril = jsx({
-  "onChange": "onchange",
-  "onClick": "onclick",
-  "onInput": "oninput"
-});
-
-export const jsxPetitDom = jsxMithril;
-
-export const jsxPicodom = jsxMithril;
-
-export const jsxPreact = jsxDio;
-
-export const jsxSnabbdom = jsx({
-  "onChange": "on-change",
-  "onClick": "on-click",
-  "onInput": "on-input"
-});

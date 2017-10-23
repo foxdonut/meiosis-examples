@@ -1,6 +1,12 @@
 import { h, mount, patch } from "petit-dom";
 import { setup } from "../common";
-import { jsxPetitDom } from "../common/jsx";
+import { jsx } from "../common/jsx";
+
+const jsxPetitDom = jsx({
+  "onChange": "onchange",
+  "onClick": "onclick",
+  "onInput": "oninput"
+});
 
 window.jsx = jsxPetitDom(h);
 

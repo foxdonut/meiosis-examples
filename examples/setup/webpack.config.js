@@ -5,9 +5,11 @@ var path = require("path");
 module.exports = {
   entry: {
     "bobril": "./bobril/index.js",
+    "deku": "./deku/index.js",
     "diojs": "./diojs/index.js",
     "domvm": "./domvm/index.js",
     "inferno": "./inferno/index.js",
+    "maquette": "./maquette/index.js",
     "mithril": "./mithril/index.js",
     "petit-dom": "./petit-dom/index.js",
     "picodom": "./picodom/index.js",

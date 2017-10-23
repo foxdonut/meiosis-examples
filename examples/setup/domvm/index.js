@@ -1,6 +1,14 @@
 import domvm from "domvm";
 import { setup } from "../common";
-import { jsxDomvm } from "../common/jsx";
+import { jsx } from "../common/jsx";
+
+export const jsxDomvm = jsx({
+  "className": "class",
+  "htmlFor": "for",
+  "onChange": "onchange",
+  "onClick": "onclick",
+  "onInput": "oninput"
+});
 
 window.jsx = jsxDomvm(domvm.defineElement);
 

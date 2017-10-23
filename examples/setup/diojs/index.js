@@ -1,6 +1,8 @@
 import { h, render } from "dio.js";
 import { setup } from "../common";
-import { jsxDio } from "../common/jsx";
+import { jsx } from "../common/jsx";
+
+const jsxDio = jsx({ });
 
 window.jsx = jsxDio(h);
 

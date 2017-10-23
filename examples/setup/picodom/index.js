@@ -1,6 +1,12 @@
 import { h, patch } from "picodom";
 import { setup } from "../common";
-import { jsxPicodom } from "../common/jsx";
+import { jsx } from "../common/jsx";
+
+const jsxPicodom = jsx({
+  "onChange": "onchange",
+  "onClick": "onclick",
+  "onInput": "oninput"
+});
 
 window.jsx = jsxPicodom(h);
 let el = null;
