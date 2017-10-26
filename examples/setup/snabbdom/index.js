@@ -1,5 +1,5 @@
 const snabbdom = require("snabbdom");
-import { html } from 'snabbdom-jsx';
+import { html } from "snabbdom-jsx";
 import { setup } from "../common";
 import { jsx } from "../common/jsx";
 

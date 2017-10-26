@@ -1,3 +1,12 @@
+const precipitationOption = ({ model, actions, id, value, label }) => (
+  <span>
+    <input type="radio" id={id} name="precipitation" value={value}
+      checked={model.precipitation === value}
+      onChange={actions.changePrecipitation}/>
+    <label htmlFor={id}>{label}</label>
+  </span>
+);
+
 export const createView = actions => model => (
   <div>
     <div>
@@ -6,20 +15,9 @@ export const createView = actions => model => (
       <label htmlFor="precipitations">Precipitations</label>
     </div>
     <div>
-      <input type="radio" id="rain" name="precipitation" value="RAIN"
-        checked={model.precipitation === "RAIN"}
-        onChange={actions.changePrecipitation}/>
-      <label htmlFor="rain">Rain</label>
-
-      <input type="radio" id="snow" name="precipitation" value="SNOW"
-        checked={model.precipitation === "SNOW"}
-        onChange={actions.changePrecipitation}/>
-      <label htmlFor="snow">Snow</label>
-
-      <input type="radio" id="sleet" name="precipitation" value="SLEET"
-        checked={model.precipitation === "SLEET"}
-        onChange={actions.changePrecipitation}/>
-      <label htmlFor="sleet">Sleet</label>
+      {precipitationOption({ model, actions, id: "rain", value: "RAIN", label: "Rain"})}
+      {precipitationOption({ model, actions, id: "snow", value: "SNOW", label: "Snow"})}
+      {precipitationOption({ model, actions, id: "sleet", value: "SLEET", label: "Sleet"})}
     </div>
     <div>
       Date:

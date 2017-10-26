@@ -14,11 +14,7 @@ window.jsx = jsxDomvm(domvm.defineElement);
 
 const { models, view, element } = setup(() => null);
 
-function AppView() {
-  return function(vm, model) {
-    return view(model);
-  };
-}
+const AppView = () => (vm, model) => view(model);
 
 const vm = domvm.createView(AppView, models());
 vm.mount(element);
