@@ -1,7 +1,7 @@
 import { createBeerList } from "./beerList";
 
-export const createBeerListPage = actions => {
-  const beerList = createBeerList(actions);
+export const createBeerListPage = (actions, router) => {
+  const beerList = createBeerList(actions, router);
 
   return {
     view: model => (

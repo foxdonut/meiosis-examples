@@ -8,18 +8,18 @@ import { createBreweryBeerListPage } from "./breweryBeerListPage";
 import { createBreweryBeerDetailsPage } from "./breweryBeerDetailsPage";
 import { createPleaseWait } from "./pleaseWait";
 
-export const createAppModel =  () => ({
+export const createAppModel = () => ({
   page: Object.assign({ params: {} }, pages.home)
 });
 
-export const createApp = (update, navigation) => {
+export const createApp = (update, navigation, router) => {
   const homePage = createHomePage(update);
   const beerListPage = createBeerListPage({
     beerDetails: id => _evt => navigation.navigateToBeerDetails({ id })
-  });
-  const beerDetailsPage = createBeerDetailsPage(update, navigation);
-  const breweryListPage = createBreweryListPage(update, navigation);
-  const breweryDetailsPage = createBreweryDetailsPage(update, navigation);
+  }, router);
+  const beerDetailsPage = createBeerDetailsPage(update, navigation, router);
+  const breweryListPage = createBreweryListPage(update, navigation, router);
+  const breweryDetailsPage = createBreweryDetailsPage(update, navigation, router);
   const breweryBeerListPage = createBreweryBeerListPage(update, navigation);
   const breweryBeerDetailsPage = createBreweryBeerDetailsPage(update, navigation);
 
@@ -47,13 +47,13 @@ export const createApp = (update, navigation) => {
           <nav className="navbar navbar-default">
             <ul className="nav navbar-nav">
               <li className={isActive(pages.home.tab)}>
-                <a href="#/">Home</a>
+                <a href={router.getLink(pages.home.id)}>Home</a>
               </li>
               <li className={isActive(pages.beerList.tab)}>
-                <a href="#/beerList">Beer</a>
+                <a href={router.getLink(pages.beerList.id)}>Beer</a>
               </li>
               <li className={isActive(pages.breweryList.tab)}>
-                <a href="#/breweryList">Brewery</a>
+                <a href={router.getLink(pages.breweryList.id)}>Brewery</a>
               </li>
               <li className="btn">
                 <button className="btn btn-default"

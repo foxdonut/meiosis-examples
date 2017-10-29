@@ -1,8 +1,10 @@
-export const createBackToBeerList = actions => ({
+import { pages } from "./navigation";
+
+export const createBackToBeerList = (actions, router) => ({
   view: _model => (
     <div>
       <div>
-        <a href="#/beerList">Back to beer list</a>
+        <a href={router.getLink(pages.beerList.id)}>Back to beer list</a>
       </div>
       <div>
         <button className="btn btn-default btn-xs"

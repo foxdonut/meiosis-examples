@@ -12,14 +12,13 @@ const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
 const navigation = createNavigation(update, models);
-const app = createApp(update, navigation);
+const router = createRouter(navigation);
+const app = createApp(update, navigation, router);
 
 // Rendering
 const element = document.getElementById("app");
 models.map(model => ReactDOM.render(app.view(model), element));
 
-// Router
-const router = createRouter(navigation);
 // Resolve initial route
 router.resolveRoute();
 // Route sync

@@ -2,8 +2,8 @@ import { createBreweryListPage } from "./breweryListPage";
 import { createBreweryDetails } from "./breweryDetails";
 import { createLoadBeerList } from "./loadBeerList";
 
-export const createBreweryDetailsPage = (update, navigation) => {
-  const breweryListPage = createBreweryListPage(update, navigation);
+export const createBreweryDetailsPage = (update, navigation, router) => {
+  const breweryListPage = createBreweryListPage(update, navigation, router);
   const breweryDetails = createBreweryDetails();
   const loadBeerList = createLoadBeerList({
     loadBeerList: params => _evt => navigation.navigateToBreweryBeerList(params)//FIXME

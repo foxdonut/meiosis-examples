@@ -2,12 +2,12 @@ import { createBreweryList } from "./breweryList";
 //import { createBreweryDetails } from "./breweryDetails";
 //import { createBeerList } from "./beerList";
 
-export const createBreweryListPage = (update, navigation) => {
+export const createBreweryListPage = (update, navigation, router) => {
   const actions = {
     breweryDetails: params => _evt => navigation.navigateToBreweryDetails(params),
   };
 
-  const breweryList = createBreweryList(actions);
+  const breweryList = createBreweryList(actions, router);
 
   /*
   const beerList = createBeerList({
