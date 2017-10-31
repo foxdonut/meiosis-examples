@@ -20,8 +20,8 @@ export const createApp = (update, navigation, router) => {
   const beerDetailsPage = createBeerDetailsPage(update, navigation, router);
   const breweryListPage = createBreweryListPage(update, navigation, router);
   const breweryDetailsPage = createBreweryDetailsPage(update, navigation, router);
-  const breweryBeerListPage = createBreweryBeerListPage(update, navigation);
-  const breweryBeerDetailsPage = createBreweryBeerDetailsPage(update, navigation);
+  const breweryBeerListPage = createBreweryBeerListPage(update, navigation, router);
+  const breweryBeerDetailsPage = createBreweryBeerDetailsPage(update, navigation, router);
 
   const pageMap = {
     [pages.home.id]: homePage,

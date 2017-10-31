@@ -1,8 +1,8 @@
 import { createBreweryDetailsPage } from "./breweryDetailsPage";
 import { createBeerList } from "./beerList";
 
-export const createBreweryBeerListPage = (update, navigation) => {
-  const breweryDetailsPage = createBreweryDetailsPage(update, navigation);
+export const createBreweryBeerListPage = (update, navigation, router) => {
+  const breweryDetailsPage = createBreweryDetailsPage(update, navigation, router);
 
   return {
     view: model => {
@@ -12,7 +12,7 @@ export const createBreweryBeerListPage = (update, navigation) => {
             breweryId: model.brewery.id,
             beerId: beerId
           })
-      });
+      }, router);
 
       return (
         <div>

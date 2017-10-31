@@ -7,7 +7,7 @@ export const createBreweryDetailsPage = (update, navigation, router) => {
   const breweryDetails = createBreweryDetails();
   const loadBeerList = createLoadBeerList({
     loadBeerList: params => _evt => navigation.navigateToBreweryBeerList(params)//FIXME
-  });
+  }, router);
 
   return {
     view: model => (
