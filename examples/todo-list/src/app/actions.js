@@ -16,7 +16,7 @@ const updateList = todo => model => assoc("list",
 );
 
 export const createActions = update => ({
-  editTodo: todo => () => update(
+  editTodo: todo => update(
     compose(
       assocPath(["form", "todo"], todo),
       assocPath(["form", "validationErrors"], { })

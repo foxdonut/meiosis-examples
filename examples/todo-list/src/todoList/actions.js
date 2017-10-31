@@ -3,7 +3,7 @@ import { assoc, complement, filter, merge, propEq } from "ramda";
 import ajaxServices from "../util/ajax-services";
 
 export const createActions = update => ({
-  deleteTodo: todo => () => {
+  deleteTodo: todo => {
     update(assoc("message", "Deleting, please wait..."));
 
     const id = todo.id;

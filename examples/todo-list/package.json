@@ -35,30 +35,29 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.17.0",
     "flyd": "^0.2.4",
-    "inferno": "^3.9.0",
-    "inferno-dom": "^1.0.7",
+    "inferno": "^3.10.1",
     "prevent-default": "^1.0.0",
-    "ramda": "^0.24.1",
+    "ramda": "^0.25.0",
     "semantic-ui": "^2.2.13",
-    "sinon": "^4.0.1",
-    "validate.js": "^0.11.1"
+    "sinon": "^4.0.2",
+    "validate.js": "^0.12.0"
   },
   "devDependencies": {
-    "ava": "^0.22.0",
+    "ava": "^0.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-plugin-import": "^1.6.0",
-    "babel-plugin-inferno": "^3.2.0",
-    "babel-preset-env": "^1.6.0",
+    "babel-plugin-import": "^1.6.2",
+    "babel-plugin-inferno": "^3.3.0",
+    "babel-preset-env": "^1.6.1",
     "browser-env": "^3.2.1",
-    "eslint": "^4.8.0",
-    "eslint-plugin-inferno": "^7.0.1",
+    "eslint": "^4.10.0",
+    "eslint-plugin-inferno": "^7.4.0",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
     "meiosis": "^1.2.0",
     "meiosis-tracer": "^1.2.0",
-    "webpack": "^3.6.0"
+    "webpack": "^3.8.1"
   }
 }
