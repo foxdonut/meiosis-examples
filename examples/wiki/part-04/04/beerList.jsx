@@ -1,13 +1,11 @@
-import { pages } from "./navigation";
-
-export const createBeerList = (actions, router) => ({
+export const createBeerList = (actions, beerListLink) => ({
   view: model => (
     <div>
       <p>Beer List</p>
       <ul>
         {model.beerList.map(beer =>
           <li key={beer.id}>
-            <a href={router.getLink(pages.beerDetails.id, {beerId: beer.id})}>{beer.title}</a>
+            <a href={beerListLink(beer.id)}>{beer.title}</a>
             {" "}
             <button className="btn btn-default btn-xs"
               onClick={actions.beerDetails(beer.id)}>
