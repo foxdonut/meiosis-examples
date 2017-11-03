@@ -1,4 +1,6 @@
 import * as R from "ramda";
+import uuidv1 from "uuid/v1";
+
 import { createServices } from "./services";
 import { transforms } from "./transforms";
 
@@ -43,17 +45,25 @@ export const createNavigation = (update, getLatestModel) => {
       );
     }
     else {
-      update(transforms.pleaseWaitBegin);
-
-      services.loadBeerList().then(beerList =>
-        update(
-          R.pipe(
-            transforms.beerList(beerList),
-            transforms.navigate(pages.beerList),
-            transforms.pleaseWaitEnd
-          )
+      const uuid = uuidv1();
+      update(
+        R.pipe(
+          transforms.uuid(uuid),
+          transforms.pleaseWaitBegin
         )
       );
+
+      services.loadBeerList().then(beerList => {
+        if (getLatestModel().uuid === uuid) {
+          update(
+            R.pipe(
+              transforms.beerList(beerList),
+              transforms.navigate(pages.beerList),
+              transforms.pleaseWaitEnd
+            )
+          )
+        }
+      });
     }
   }
 
@@ -64,17 +74,25 @@ export const createNavigation = (update, getLatestModel) => {
       );
     }
     else {
-      update(transforms.pleaseWaitBegin);
-
-      services.loadBreweryList().then(breweryList =>
-        update(
-          R.pipe(
-            transforms.breweryList(breweryList),
-            transforms.navigate(pages.breweryList, params),
-            transforms.pleaseWaitEnd
-          )
+      const uuid = uuidv1();
+      update(
+        R.pipe(
+          transforms.uuid(uuid),
+          transforms.pleaseWaitBegin
         )
       );
+
+      services.loadBreweryList().then(breweryList => {
+        if (getLatestModel().uuid === uuid) {
+          update(
+            R.pipe(
+              transforms.breweryList(breweryList),
+              transforms.navigate(pages.breweryList, params),
+              transforms.pleaseWaitEnd
+            )
+          )
+        }
+      });
     }
   };
 

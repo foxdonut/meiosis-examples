@@ -8,6 +8,8 @@ export const transforms = {
 
   pleaseWaitEnd: assoc("operationInProgress", false),
 
+  uuid: uuid => assoc("uuid", uuid),
+
   navigate,
 
   navigateTo: page => params => navigate(page, params),

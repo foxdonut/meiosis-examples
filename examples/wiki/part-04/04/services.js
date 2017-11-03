@@ -26,7 +26,7 @@ export const createServices = () => ({
     }, delay);
   }),
   loadBreweryList: () => new Promise(resolve => {
-    const delay = 3000;
+    const delay = 4000;
 
     setTimeout(() => resolve(breweryList), delay);
   })
