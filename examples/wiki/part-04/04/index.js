@@ -11,7 +11,10 @@ const initialModel = createAppModel();
 const applyUpdate = (model, modelUpdate) => modelUpdate(model);
 const models = flyd.scan(applyUpdate, initialModel, update);
 
-const navigation = createNavigation(update, models);
+const action = flyd.stream();
+action.map(fn => fn(models()));
+
+const navigation = createNavigation(update, action);
 const router = createRouter(navigation);
 const app = createApp(update, navigation, router);
 

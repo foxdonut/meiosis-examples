@@ -35,11 +35,11 @@ export const pages = {
   }
 };
 
-export const createNavigation = (update, getLatestModel) => {
+export const createNavigation = (update, action) => {
   const services = createServices();
 
-  const navigateToBeerList = () => {
-    if (getLatestModel().beerList) {
+  const navigateToBeerList = () => action(latestModel => {
+    if (latestModel.beerList) {
       update(
         transforms.navigate(pages.beerList)
       );
@@ -53,8 +53,8 @@ export const createNavigation = (update, getLatestModel) => {
         )
       );
 
-      services.loadBeerList().then(beerList => {
-        if (getLatestModel().uuid === uuid) {
+      services.loadBeerList().then(beerList => action(latestModel => {
+        if (latestModel.uuid === uuid) {
           update(
             R.pipe(
               transforms.beerList(beerList),
@@ -63,12 +63,12 @@ export const createNavigation = (update, getLatestModel) => {
             )
           )
         }
-      });
+      }));
     }
-  }
+  });
 
-  const navigateToBreweryList = params => {
-    if (getLatestModel().breweryList) {
+  const navigateToBreweryList = params => action(latestModel => {
+    if (latestModel.breweryList) {
       update(
         transforms.navigate(pages.breweryList, params)
       );
@@ -82,8 +82,8 @@ export const createNavigation = (update, getLatestModel) => {
         )
       );
 
-      services.loadBreweryList().then(breweryList => {
-        if (getLatestModel().uuid === uuid) {
+      services.loadBreweryList().then(breweryList => action(latestModel => {
+        if (latestModel.uuid === uuid) {
           update(
             R.pipe(
               transforms.breweryList(breweryList),
@@ -92,9 +92,9 @@ export const createNavigation = (update, getLatestModel) => {
             )
           )
         }
-      });
+      }));
     }
-  };
+  });
 
   const trBreweryList = breweryList =>
     R.pipe(
@@ -108,9 +108,9 @@ export const createNavigation = (update, getLatestModel) => {
       transforms.navigate(pages.breweryDetails, params)
     );
 
-  const navigateToBreweryDetails = params => {
+  const navigateToBreweryDetails = params => action(latestModel => {
     R.applyTo(
-      getLatestModel(),
+      latestModel,
       R.ifElse(
         R.has("breweryList"),
         R.partial(update, [trBrewery(params)]),
@@ -127,11 +127,9 @@ export const createNavigation = (update, getLatestModel) => {
         }
       )
     );
-  };
+  });
 
-  const navigateToBreweryBeerList = params => {
-    const latestModel = getLatestModel();
-
+  const navigateToBreweryBeerList = params => action(latestModel => {
     if (latestModel.breweryList && latestModel.brewery.id === params.breweryId && latestModel.brewery.beerList) {
       update(
         transforms.navigate(pages.breweryBeerList, params)
@@ -155,11 +153,9 @@ export const createNavigation = (update, getLatestModel) => {
         );
       });
     }
-  };
+  });
 
-  const navigateToBreweryBeerDetails = params => {
-    const latestModel = getLatestModel();
-
+  const navigateToBreweryBeerDetails = params => action(latestModel => {
     if (latestModel.breweryList && latestModel.brewery.id === params.breweryId && latestModel.brewery.beerList) {
       update(
         transforms.navigate(pages.breweryBeerDetails, params)
@@ -183,7 +179,7 @@ export const createNavigation = (update, getLatestModel) => {
         );
       });
     }
-  };
+  });
 
   const navigateTo = page => params => update(transforms.navigate(page, params));
 
