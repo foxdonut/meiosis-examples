@@ -8,16 +8,18 @@ const jsxPetitDom = jsx({
   "onInput": "oninput"
 });
 
-global.jsx = jsxPetitDom(h);
+export const setupApp = () => {
+  global.jsx = jsxPetitDom(h);
 
-let vnode = null;
+  let vnode = null;
 
-export const setupApp = () => setup((view, element) => {
-  if (!vnode) {
-    element.appendChild(mount(view));
-  }
-  else {
-    patch(view, vnode);
-  }
-  vnode = view;
-});
+  return setup((view, element) => {
+    if (!vnode) {
+      element.appendChild(mount(view));
+    }
+    else {
+      patch(view, vnode);
+    }
+    vnode = view;
+  });
+};

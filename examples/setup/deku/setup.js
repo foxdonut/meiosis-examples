@@ -7,12 +7,14 @@ const jsxDeku = jsx({
   "htmlFor": "for"
 });
 
-global.jsx = jsxDeku(element);
+export const setupApp = () => {
+  global.jsx = jsxDeku(element);
+  let render = null;
 
-let render = null;
-export const setupApp = () => setup((view, el) => {
-  if (!render) {
-    render = createApp(el);
-  }
-  render(view);
-});
+  return setup((view, el) => {
+    if (!render) {
+      render = createApp(el);
+    }
+    render(view);
+  });
+};

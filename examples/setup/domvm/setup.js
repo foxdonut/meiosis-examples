@@ -10,9 +10,10 @@ export const jsxDomvm = jsx({
   "onInput": "oninput"
 });
 
-global.jsx = jsxDomvm(domvm.defineElement);
 
 export const setupApp = () => {
+  global.jsx = jsxDomvm(domvm.defineElement);
+
   const app = setup(() => null);
 
   const AppView = () => (vm, model) => app.view(model);

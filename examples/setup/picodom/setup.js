@@ -8,6 +8,8 @@ const jsxPicodom = jsx({
   "onInput": "oninput"
 });
 
-global.jsx = jsxPicodom(h);
-let el = null;
-export const setupApp = () => setup((view, element) => patch(el, (el = view), element));
+export const setupApp = () => {
+  global.jsx = jsxPicodom(h);
+  let el = null;
+  return setup((view, element) => patch(el, (el = view), element));
+};

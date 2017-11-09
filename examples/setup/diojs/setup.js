@@ -1,6 +1,7 @@
 import { h, render } from "dio.js";
 import { setup } from "../common";
 
-global.jsx = h;
-
-export const setupApp = () => setup(render);
+export const setupApp = () => {
+  global.jsx = h;
+  return setup(render);
+};

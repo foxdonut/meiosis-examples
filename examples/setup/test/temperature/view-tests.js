@@ -1,5 +1,6 @@
 import test from "ava";
 import $ from "jquery";
+import { createView } from "../../common/temperature/view";
 
 const id = "app";
 const sel = "#" + id;
@@ -17,9 +18,22 @@ test.beforeEach(function() {
   element = $(sel);
 });
 
-["deku", "diojs", "domvm", "inferno", "mithril", "petit-dom", "picodom", "preact", "react", "snabbdom"].forEach(lib => {
+const libs =
+  [ "deku"
+  , "diojs"
+  , "domvm"
+  , "inferno"
+  , "mithril"
+  , "petit-dom"
+  , "picodom"
+  , "preact"
+  , "react"
+  , "snabbdom"
+  ];
 
-  test(lib, t => {
+libs.forEach(lib => {
+
+  test(lib + " integration tests", t => {
     const { setupApp } = require("../../" + lib + "/setup");
     setupApp();
 
@@ -50,6 +64,32 @@ test.beforeEach(function() {
     t.is(rb.is(":checked"), false);
     rb.click();
     t.is(rb.is(":checked"), true);
+  });
+
+});
+
+libs.forEach(lib => {
+
+  test.cb(lib + " action trigger tests", t => {
+    t.plan(2);
+
+    const { setupApp } = require("../../" + lib + "/setup");
+    const app = setupApp();
+
+    // Verify that click triggers action
+    const actions = {
+      changePrecipitation: () => {
+        t.pass();
+        t.end();
+      }
+    };
+    const view = createView(actions);
+
+    app.render(view({}), element[0]);
+
+    var rb = element.find("#snow");
+    t.is(rb.length, 1);
+    rb.click();
   });
 
 });
