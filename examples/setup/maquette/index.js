@@ -10,7 +10,7 @@ const jsxMaquette = jsx({
   "onInput": "oninput"
 });
 
-window.jsx = jsxMaquette(h);
+global.jsx = jsxMaquette(h);
 
 const { models, view, element } = setup(() => null);
 

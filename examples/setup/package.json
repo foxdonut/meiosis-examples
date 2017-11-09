@@ -6,7 +6,18 @@
   "scripts": {
     "start": "webpack",
     "minify": "webpack --optimize-minimize",
-    "watch": "webpack --progress --colors --watch"
+    "watch": "webpack --progress --colors --watch",
+    "test": "ava"
+  },
+  "ava": {
+    "require": [
+      "babel-core/register",
+      "./test/setup-browser-env.js"
+    ],
+    "files": [
+      "test/**/*-tests.js"
+    ],
+    "verbose": true
   },
   "repository": {
     "type": "git",
@@ -42,12 +53,16 @@
     "snabbdom": "^0.7.0"
   },
   "devDependencies": {
+    "ava": "^0.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
+    "browser-env": "^3.2.2",
+    "jquery": "^3.2.1",
     "meiosis": "^1.2.0",
-    "meiosis-tracer": "^1.2.0",
+    "meiosis-tracer": "file:../../../meiosis-tracer/meiosis-tracer-1.2.1.tgz",
+    "raf": "^3.4.0",
     "snabbdom-jsx": "^0.4.2",
     "webpack": "^3.8.1"
   }

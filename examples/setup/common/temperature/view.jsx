@@ -11,7 +11,7 @@ export const createView = actions => model => (
   <div>
     <div>
       <input type="checkbox" checked={model.precipitations}
-        onChange={actions.togglePrecipitations} id="precipitations"/>
+        onClick={actions.togglePrecipitations} id="precipitations"/>
       <label htmlFor="precipitations">Precipitations</label>
     </div>
     <div>
@@ -23,13 +23,16 @@ export const createView = actions => model => (
       Date:
       <input type="text" size="10" value={model.date} onInput={actions.editDate}/>
     </div>
-    <span>Temperature: {model.value}&deg;{model.units} </span>
+    <span>Temperature: </span>
+    <span className="tempValue">{model.value}</span>
+    &deg;
+    <span className="tempUnits">{model.units}</span>
     <div>
-      <button className="btn btn-default" onClick={actions.increase(1)}>Increase</button>
-      <button className="btn btn-default" onClick={actions.increase(-1)}>Decrease</button>
+      <button className="btn btn-default increase" onClick={actions.increase(1)}>Increase</button>
+      <button className="btn btn-default decrease" onClick={actions.increase(-1)}>Decrease</button>
     </div>
     <div>
-      <button className="btn btn-primary" onClick={actions.changeUnits}>Change Units</button>
+      <button className="btn btn-primary changeUnits" onClick={actions.changeUnits}>Change Units</button>
     </div>
   </div>
 );

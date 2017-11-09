@@ -20,5 +20,5 @@ export const setup = render => {
   trace({ update, dataStreams: [ models ]});
   meiosisTracer({ selector: "#tracer" });
 
-  return { models, view: temperature.view, element };
+  return { models, view: temperature.view, render, element };
 };

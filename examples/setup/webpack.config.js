@@ -30,7 +30,9 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: "babel-loader"/*,
+          // options are in .babelrc for tests to work
+          // keeping this here as a reference
           options: {
             presets: ["env"],
             plugins: [
@@ -39,6 +41,7 @@ module.exports = {
               }]
             ]
           }
+          */
         }
       }
     ]

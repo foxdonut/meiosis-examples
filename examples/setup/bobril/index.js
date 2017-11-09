@@ -67,7 +67,7 @@ function jsxBobrilAdapter(name, props) {
   }
 }
 
-window.jsx = jsxBobrilAdapter;
+global.jsx = jsxBobrilAdapter;
 
 const { models, view, element } = setup(() => null);
 
