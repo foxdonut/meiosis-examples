@@ -21,7 +21,7 @@ test.beforeEach(function() {
 
   test(lib, t => {
     const { setupApp } = require("../../" + lib + "/setup");
-    const app = setupApp();
+    setupApp();
 
     // Verify presence of elements
     t.is(element.find("input[type=checkbox]").length, 1);
