@@ -79,8 +79,6 @@ const model = {
 libs.forEach(lib => {
 
   test.serial(lib + " action trigger tests", t => {
-    t.plan(2);
-
     return new Promise(resolve => {
       const { setupRender } = require("../../" + lib + "/setup");
       const render = setupRender();

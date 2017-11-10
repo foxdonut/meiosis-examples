@@ -4,7 +4,7 @@ const precipitationOption = ({ model, actions, id, value, label }) => (
   <span>
     <input type="radio" id={id} name="precipitation" value={value}
       checked={model.precipitation === value}
-      onChange={safe(actions.changePrecipitation)}/>
+      onClick={safe(actions.changePrecipitation)}/>
     <label htmlFor={id}>{label}</label>
   </span>
 );
