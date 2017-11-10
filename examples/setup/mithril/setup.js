@@ -8,7 +8,9 @@ const jsxMithril = jsx({
   "onInput": "oninput"
 });
 
-export const setupApp = () => {
+export const setupRender = () => {
   global.jsx = jsxMithril(m);
-  return setup((view, element) => m.render(element, view));
+  return (view, element) => m.render(element, view);
 };
+
+export const setupApp = () => setup(setupRender());

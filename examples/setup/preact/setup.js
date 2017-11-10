@@ -1,7 +1,9 @@
 import preact from "preact";
 import { setup } from "../common";
 
-export const setupApp = () => {
+export const setupRender = () => {
   global.jsx = preact.h;
-  return setup((view, element) => preact.render(view, element, element.lastElementChild));
+  return (view, element) => preact.render(view, element, element.lastElementChild);
 };
+
+export const setupApp = () => setup(setupRender());

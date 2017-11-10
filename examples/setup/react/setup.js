@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { setup } from "../common";
 
-export const setupApp = () => {
+export const setupRender = () => {
   global.jsx = React.createElement;
-  return setup(ReactDOM.render);
+  return ReactDOM.render;
 };
+
+export const setupApp = () => setup(setupRender());

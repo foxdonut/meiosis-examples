@@ -7,7 +7,9 @@ const jsxInferno = jsx({
   "htmlFor": "for"
 });
 
-export const setupApp = () => {
+export const setupRender = () => {
   global.jsx = jsxInferno(createElement);
-  return setup(Inferno.render);
+  return Inferno.render;
 };
+
+export const setupApp = () => setup(setupRender());

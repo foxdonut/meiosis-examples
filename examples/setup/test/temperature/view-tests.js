@@ -33,7 +33,7 @@ const libs =
 
 libs.forEach(lib => {
 
-  test(lib + " integration tests", t => {
+  test.serial(lib + " integration tests", t => {
     const { setupApp } = require("../../" + lib + "/setup");
     setupApp();
 
@@ -68,28 +68,39 @@ libs.forEach(lib => {
 
 });
 
+const model = {
+  "precipitations": false,
+  "precipitation": null,
+  "date": "",
+  "value": 20,
+  "units": "C"
+};
+
 libs.forEach(lib => {
 
-  test.cb(lib + " action trigger tests", t => {
+  test.serial(lib + " action trigger tests", t => {
     t.plan(2);
 
-    const { setupApp } = require("../../" + lib + "/setup");
-    const app = setupApp();
+    return new Promise(resolve => {
+      const { setupRender } = require("../../" + lib + "/setup");
+      const render = setupRender();
 
-    // Verify that click triggers action
-    const actions = {
-      changePrecipitation: () => {
-        t.pass();
-        t.end();
-      }
-    };
-    const view = createView(actions);
+      // Verify that click triggers action
+      const actions = {
+        changePrecipitation: () => {
+          t.pass();
+          resolve();
+        }
+      };
+      const view = createView(actions);
 
-    app.render(view({}), element[0]);
+      render(view(model), element[0]);
 
-    var rb = element.find("#snow");
-    t.is(rb.length, 1);
-    rb.click();
+      var rb = element.find("#snow");
+      t.is(rb.length, 1);
+      rb.click();
+      rb.triggerEvent("change");
+    });
   });
 
 });

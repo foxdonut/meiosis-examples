@@ -17,16 +17,18 @@ const patch = snabbdom.init([
   require("snabbdom/modules/style").default
 ]);
 
-export const setupApp = () => {
+export const setupRender = () => {
   global.jsx = jsxSnabbdom(html);
 
   let el = null;
 
-  return setup((view, element) => {
+  return (view, element) => {
     if (!el) {
       el = document.createElement("div");
       element.appendChild(el);
     }
     el = patch(el, view);
-  });
+  };
 };
+
+export const setupApp = () => setup(setupRender());
