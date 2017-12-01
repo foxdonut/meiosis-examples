@@ -61,7 +61,7 @@
     "browser-env": "^3.2.2",
     "jquery": "^3.2.1",
     "meiosis": "^1.2.0",
-    "meiosis-tracer": "file:../../../meiosis-tracer/meiosis-tracer-1.2.1.tgz",
+    "meiosis-tracer": "^1.2.1",
     "raf": "^3.4.0",
     "snabbdom-jsx": "^0.4.2",
     "webpack": "^3.8.1"
