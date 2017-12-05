@@ -1,26 +1,26 @@
-CREATE TABLE BOOK (
-  ID INTEGER PRIMARY KEY,
-  TITLE TEXT NOT NULL,
-  GENRE TEXT,
-  ISBN TEXT,
-  DESCRIPTION TEXT
+CREATE TABLE book (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  genre TEXT,
+  isbn TEXT,
+  description TEXT
 );
 
-CREATE TABLE AUTHOR (
-  ID INTEGER PRIMARY KEY,
-  LAST_NAME TEXT,
-  FIRST_NAME TEXT
+CREATE TABLE author (
+  id INTEGER PRIMARY KEY,
+  lastName TEXT,
+  firstName TEXT
 );
 
-CREATE TABLE BOOK_AUTHOR (
-  ID INTEGER PRIMARY KEY,
-  BOOK_ID INTEGER NOT NULL,
-  AUTHOR_ID INTEGER NOT NULL
+CREATE TABLE bookAuthor (
+  id INTEGER PRIMARY KEY,
+  bookId INTEGER NOT NULL,
+  authorId INTEGER NOT NULL
 );
 
 -- sample data credit http://www.travelman.co.uk/list_of_titles.htm and https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx
 
-INSERT INTO AUTHOR (FIRST_NAME, LAST_NAME) VALUES
+INSERT INTO author (firstName, lastName) VALUES
   ('Douglas', 'Crockford'),
   ('Fred', 'Daoud'),
   ('Jack', 'Moffitt'),
@@ -73,7 +73,7 @@ INSERT INTO AUTHOR (FIRST_NAME, LAST_NAME) VALUES
   ('Mike', 'Galos')
 ;
 
-INSERT INTO BOOK (TITLE, GENRE, ISBN, DESCRIPTION) VALUES
+INSERT INTO book (title, genre, isbn, description) VALUES
 
   ('Grass is Always Greener', 'Modern Times', '1-86092-049-7', 'This ingenious tale examines the ambitions and petty jealousies of the staff at Critchley''s Bank. From the doorman to the personnel manager, to Sir William, the bank''s sorrowful chairman. Archer knits a panoply of characters with deft narrative skill in a story which is as revealing as it is observant. Taken from his anthology To Cut a Long Story Short, his other short story anthologies include A Quiver Full of Arrows, Twelve Red Herrings and A Twist in the Tale.'),
 
@@ -182,114 +182,114 @@ INSERT INTO BOOK (TITLE, GENRE, ISBN, DESCRIPTION) VALUES
   ('Seven Web Frameworks in Seven Weeks', 'Computer', '1-93778-563-7', 'Whether you need a new tool or just inspiration, Seven Web Frameworks in Seven Weeks explores modern options, giving you a taste of each with ideas that will help you create better apps. You''ll see frameworks that leverage modern programming languages, employ unique architectures, live client-side instead of server-side, or embrace type systems. You''ll see everything from familiar Ruby and JavaScript to the more exotic Erlang, Haskell, and Clojure.')
 ;
 
-INSERT INTO BOOK_AUTHOR (BOOK_ID, AUTHOR_ID) SELECT ID, 0 FROM BOOK ;
+INSERT INTO bookAuthor (bookId, authorId) SELECT id, 0 FROM book ;
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Jeffrey' AND LAST_NAME = 'Archer') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Grass is Always Greener');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Jeffrey' AND lastName = 'Archer') WHERE bookId = (SELECT id FROM book WHERE title = 'Grass is Always Greener');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Arnold' AND LAST_NAME = 'Bennett') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Murder!');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Arnold' AND lastName = 'Bennett') WHERE bookId = (SELECT id FROM book WHERE title = 'Murder!');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Ambrose' AND LAST_NAME = 'Bierce') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'An Occurrence at Owl Creek Bridge One of the Missing');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Ambrose' AND lastName = 'Bierce') WHERE bookId = (SELECT id FROM book WHERE title = 'An Occurrence at Owl Creek Bridge One of the Missing');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'John' AND LAST_NAME = 'Bidwell') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Fear and Loathing in Aspen');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'John' AND lastName = 'Bidwell') WHERE bookId = (SELECT id FROM book WHERE title = 'Fear and Loathing in Aspen');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'A. E.' AND LAST_NAME = 'Coppard') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Higgler');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'A. E.' AND lastName = 'Coppard') WHERE bookId = (SELECT id FROM book WHERE title = 'The Higgler');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Stephen' AND LAST_NAME = 'Crane') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Open Boat');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Stephen' AND lastName = 'Crane') WHERE bookId = (SELECT id FROM book WHERE title = 'The Open Boat');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Roald' AND LAST_NAME = 'Dahl') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Great Switcheroo');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Roald' AND lastName = 'Dahl') WHERE bookId = (SELECT id FROM book WHERE title = 'The Great Switcheroo');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Sir Arthur' AND LAST_NAME = 'Conan Doyle') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Speckled Band');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Sir Arthur' AND lastName = 'Conan Doyle') WHERE bookId = (SELECT id FROM book WHERE title = 'The Speckled Band');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Charles' AND LAST_NAME = 'Dickens') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Signalman');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Charles' AND lastName = 'Dickens') WHERE bookId = (SELECT id FROM book WHERE title = 'The Signalman');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Sir Arthur' AND LAST_NAME = 'Conan Doyle') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Five Orange Pips');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Sir Arthur' AND lastName = 'Conan Doyle') WHERE bookId = (SELECT id FROM book WHERE title = 'The Five Orange Pips');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Daniel' AND LAST_NAME = 'Etessami') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Cormack''s Black Monday/Gerald''s Day Off/Fat Boy Billy Rules the Middle Lane');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Daniel' AND lastName = 'Etessami') WHERE bookId = (SELECT id FROM book WHERE title = 'Cormack''s Black Monday/Gerald''s Day Off/Fat Boy Billy Rules the Middle Lane');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'F. Scott' AND LAST_NAME = 'Fitzgerald') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Diamond as Big as the Ritz');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'F. Scott' AND lastName = 'Fitzgerald') WHERE bookId = (SELECT id FROM book WHERE title = 'The Diamond as Big as the Ritz');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Ian' AND LAST_NAME = 'Fleming') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'From a View to a Kill');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Ian' AND lastName = 'Fleming') WHERE bookId = (SELECT id FROM book WHERE title = 'From a View to a Kill');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'C. S.' AND LAST_NAME = 'Forester') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Hostage');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'C. S.' AND lastName = 'Forester') WHERE bookId = (SELECT id FROM book WHERE title = 'The Hostage');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Graham' AND LAST_NAME = 'Greene') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'A Chance for Mr Lever');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Graham' AND lastName = 'Greene') WHERE bookId = (SELECT id FROM book WHERE title = 'A Chance for Mr Lever');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Thomas' AND LAST_NAME = 'Hardy') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'A Mere Interlude');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Thomas' AND lastName = 'Hardy') WHERE bookId = (SELECT id FROM book WHERE title = 'A Mere Interlude');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Jerome K.' AND LAST_NAME = 'Jerome') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Dancing Partner: Clocks');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Jerome K.' AND lastName = 'Jerome') WHERE bookId = (SELECT id FROM book WHERE title = 'The Dancing Partner: Clocks');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'D. H.' AND LAST_NAME = 'Lawrence') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Rocking-Horse Winner');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'D. H.' AND lastName = 'Lawrence') WHERE bookId = (SELECT id FROM book WHERE title = 'The Rocking-Horse Winner');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Katherine' AND LAST_NAME = 'Mansfield') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Bliss Feuille d''Album');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Katherine' AND lastName = 'Mansfield') WHERE bookId = (SELECT id FROM book WHERE title = 'Bliss Feuille d''Album');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Ngaio' AND LAST_NAME = 'Marsh') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Death on the Air');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Ngaio' AND lastName = 'Marsh') WHERE bookId = (SELECT id FROM book WHERE title = 'Death on the Air');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Guy' AND LAST_NAME = 'de Maupassant') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Mademoiselle Fifi');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Guy' AND lastName = 'de Maupassant') WHERE bookId = (SELECT id FROM book WHERE title = 'Mademoiselle Fifi');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Ivo' AND LAST_NAME = 'Mosley') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Love Poems from the Green Book of Poetry');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Ivo' AND lastName = 'Mosley') WHERE bookId = (SELECT id FROM book WHERE title = 'Love Poems from the Green Book of Poetry');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'O' AND LAST_NAME = 'Henry') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Ransom of Red Chief; Gift of the Magi');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'O' AND lastName = 'Henry') WHERE bookId = (SELECT id FROM book WHERE title = 'The Ransom of Red Chief; Gift of the Magi');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Dorothy' AND LAST_NAME = 'Parker') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'A Telephone Call');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Dorothy' AND lastName = 'Parker') WHERE bookId = (SELECT id FROM book WHERE title = 'A Telephone Call');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Edgar Allan' AND LAST_NAME = 'Poe') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Pit and the Pendulum');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Edgar Allan' AND lastName = 'Poe') WHERE bookId = (SELECT id FROM book WHERE title = 'The Pit and the Pendulum');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'John' AND LAST_NAME = 'Polidori') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Vampyre');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'John' AND lastName = 'Polidori') WHERE bookId = (SELECT id FROM book WHERE title = 'The Vampyre');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Edna' AND LAST_NAME = 'O''Brien') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Irish Revel');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Edna' AND lastName = 'O''Brien') WHERE bookId = (SELECT id FROM book WHERE title = 'Irish Revel');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Ruth' AND LAST_NAME = 'Rendell') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Thornapple');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Ruth' AND lastName = 'Rendell') WHERE bookId = (SELECT id FROM book WHERE title = 'Thornapple');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Saki' AND LAST_NAME = 'Saki') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Sredni Vashtar, The Secret Sin Septimus Brope,The Lumber Room');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Saki' AND lastName = 'Saki') WHERE bookId = (SELECT id FROM book WHERE title = 'Sredni Vashtar, The Secret Sin Septimus Brope,The Lumber Room');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Muriel' AND LAST_NAME = 'Spark') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Young Man who Discovered the Secret of Life');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Muriel' AND lastName = 'Spark') WHERE bookId = (SELECT id FROM book WHERE title = 'The Young Man who Discovered the Secret of Life');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Robert Louis' AND LAST_NAME = 'Stevenson') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Body Snatcher');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Robert Louis' AND lastName = 'Stevenson') WHERE bookId = (SELECT id FROM book WHERE title = 'The Body Snatcher');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Bram' AND LAST_NAME = 'Stoker') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Judge''s House');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Bram' AND lastName = 'Stoker') WHERE bookId = (SELECT id FROM book WHERE title = 'The Judge''s House');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'William' AND LAST_NAME = 'Trevor') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Summer Visitor');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'William' AND lastName = 'Trevor') WHERE bookId = (SELECT id FROM book WHERE title = 'The Summer Visitor');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Evelyn' AND LAST_NAME = 'Waugh') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'On Guard, Bella Fleace Gave a Party');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Evelyn' AND lastName = 'Waugh') WHERE bookId = (SELECT id FROM book WHERE title = 'On Guard, Bella Fleace Gave a Party');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Teresa' AND LAST_NAME = 'Waugh') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'A Perfect Day');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Teresa' AND lastName = 'Waugh') WHERE bookId = (SELECT id FROM book WHERE title = 'A Perfect Day');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'H.G.' AND LAST_NAME = 'Wells') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Country of the Blind');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'H.G.' AND lastName = 'Wells') WHERE bookId = (SELECT id FROM book WHERE title = 'Country of the Blind');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Oscar' AND LAST_NAME = 'Wilde') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Lord Savile''s Crime');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Oscar' AND lastName = 'Wilde') WHERE bookId = (SELECT id FROM book WHERE title = 'Lord Savile''s Crime');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Wilkie' AND LAST_NAME = 'Collins') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Traveller''s Story of a Terribly Strange Bed');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Wilkie' AND lastName = 'Collins') WHERE bookId = (SELECT id FROM book WHERE title = 'The Traveller''s Story of a Terribly Strange Bed');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'P. G.' AND LAST_NAME = 'Wodehouse') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Goodbye to all Cats');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'P. G.' AND lastName = 'Wodehouse') WHERE bookId = (SELECT id FROM book WHERE title = 'Goodbye to all Cats');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Matthew' AND LAST_NAME = 'Gambardella') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'XML Developer''s Guide');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Matthew' AND lastName = 'Gambardella') WHERE bookId = (SELECT id FROM book WHERE title = 'XML Developer''s Guide');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Kim' AND LAST_NAME = 'Ralls') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Midnight Rain');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Kim' AND lastName = 'Ralls') WHERE bookId = (SELECT id FROM book WHERE title = 'Midnight Rain');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Eva' AND LAST_NAME = 'Corets') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Maeve Ascendant');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Eva' AND lastName = 'Corets') WHERE bookId = (SELECT id FROM book WHERE title = 'Maeve Ascendant');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Eva' AND LAST_NAME = 'Corets') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Oberon''s Legacy');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Eva' AND lastName = 'Corets') WHERE bookId = (SELECT id FROM book WHERE title = 'Oberon''s Legacy');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Eva' AND LAST_NAME = 'Corets') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'The Sundered Grail');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Eva' AND lastName = 'Corets') WHERE bookId = (SELECT id FROM book WHERE title = 'The Sundered Grail');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Cynthia' AND LAST_NAME = 'Randall') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Lover Birds');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Cynthia' AND lastName = 'Randall') WHERE bookId = (SELECT id FROM book WHERE title = 'Lover Birds');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Paula' AND LAST_NAME = 'Thurman') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Splish Splash');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Paula' AND lastName = 'Thurman') WHERE bookId = (SELECT id FROM book WHERE title = 'Splish Splash');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Stefan' AND LAST_NAME = 'Knorr') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Creepy Crawlies');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Stefan' AND lastName = 'Knorr') WHERE bookId = (SELECT id FROM book WHERE title = 'Creepy Crawlies');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Peter' AND LAST_NAME = 'Kress') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Paradox Lost');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Peter' AND lastName = 'Kress') WHERE bookId = (SELECT id FROM book WHERE title = 'Paradox Lost');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Tim' AND LAST_NAME = 'O''Brien') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Microsoft .NET: The Programming Bible');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Tim' AND lastName = 'O''Brien') WHERE bookId = (SELECT id FROM book WHERE title = 'Microsoft .NET: The Programming Bible');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Tim' AND LAST_NAME = 'O''Brien') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'MSXML3: A Comprehensive Guide');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Tim' AND lastName = 'O''Brien') WHERE bookId = (SELECT id FROM book WHERE title = 'MSXML3: A Comprehensive Guide');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Mike' AND LAST_NAME = 'Galos') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Visual Studio 7: A Comprehensive Guide');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Mike' AND lastName = 'Galos') WHERE bookId = (SELECT id FROM book WHERE title = 'Visual Studio 7: A Comprehensive Guide');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Douglas' AND LAST_NAME = 'Crockford') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'JavaScript: The Good Parts');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Douglas' AND lastName = 'Crockford') WHERE bookId = (SELECT id FROM book WHERE title = 'JavaScript: The Good Parts');
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Fred' AND LAST_NAME = 'Daoud') WHERE BOOK_ID = (SELECT ID FROM BOOK WHERE TITLE = 'Seven Web Frameworks in Seven Weeks');
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Fred' AND lastName = 'Daoud') WHERE bookId = (SELECT id FROM book WHERE title = 'Seven Web Frameworks in Seven Weeks');
 
-INSERT INTO BOOK_AUTHOR (BOOK_ID, AUTHOR_ID) SELECT ID, 0 FROM BOOK WHERE TITLE = 'Seven Web Frameworks in Seven Weeks';
+INSERT INTO bookAuthor (bookId, authorId) SELECT ID, 0 FROM book WHERE title = 'Seven Web Frameworks in Seven Weeks';
 
-UPDATE BOOK_AUTHOR SET AUTHOR_ID = (SELECT ID FROM AUTHOR WHERE FIRST_NAME = 'Jack' AND LAST_NAME = 'Moffitt') WHERE ID = LAST_INSERT_ROWID() ;
+UPDATE bookAuthor SET authorId = (SELECT id FROM author WHERE firstName = 'Jack' AND lastName = 'Moffitt') WHERE id = LAST_INSERT_ROWID() ;

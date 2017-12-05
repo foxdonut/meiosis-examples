@@ -7,7 +7,8 @@
     "start": "webpack",
     "minify": "webpack --optimize-minimize",
     "watch": "webpack --progress --colors --watch",
-    "test": "ava"
+    "test": "ava",
+    "server": "node src/server/index"
   },
   "ava": {
     "require": [
@@ -39,8 +40,9 @@
     "domvm": "^3.2.4",
     "flyd": "^0.2.4",
     "hapi": "^16.6.2",
+    "inert": "^4.2.1",
     "ramda": "^0.25.0",
-    "sql.js": "^0.4.0"
+    "sqlite3": "^3.1.13"
   },
   "devDependencies": {
     "ava": "^0.24.0",
