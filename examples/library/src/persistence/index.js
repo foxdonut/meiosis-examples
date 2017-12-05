@@ -1,22 +1,4 @@
-import { Database, QueryResults } from "sql.js";
-
-export interface Author {
-  id?: string;
-  lastName?: string;
-  firstName?: string;
-  books?: Array<Book>;
-}
-
-export interface Book {
-  id?: string;
-  title: string;
-  genre?: string;
-  isbn?: string;
-  description?: string;
-  authors?: Array<Author>;
-}
-
-function toAuthor(row: Array<any>): Author {
+function toAuthor(row) {
   return {
     id: row[5],
     lastName: row[6],
@@ -24,7 +6,7 @@ function toAuthor(row: Array<any>): Author {
   };
 }
 
-function toBook(row: Array<any>): Book {
+function toBook(row) {
   return {
     id: row[0],
     title: row[1],
@@ -35,16 +17,16 @@ function toBook(row: Array<any>): Book {
   };
 }
 
-function toBooks(res: QueryResults[]): Array<Book> {
-  let books: Array<Book> = [];
+function toBooks(res) {
+  let books = [];
 
-  let lastBookId: string = null;
-  let lastBook: Book = null;
-  let rows: Array<any> = res[0].values;
+  let lastBookId = null;
+  let lastBook = null;
+  let rows = res[0].values;
 
-  for (let i: number = 0, t: number = rows.length; i < t; i++) {
-    let row: Array<any> = rows[i];
-    let book: Book = toBook(row);
+  for (let i = 0, t = rows.length; i < t; i++) {
+    let row = rows[i];
+    let book = toBook(row);
 
     if (lastBookId === book.id) {
       lastBook.authors.push(toAuthor(row));
@@ -64,15 +46,15 @@ function toBooks(res: QueryResults[]): Array<Book> {
   return books;
 }
 
-export function getAllBooks(db: Database): Array<Book> {
+export function getAllBooks(db) {
   //const query: string = "SELECT ID, TITLE, GENRE, ISBN, DESCRIPTION FROM BOOK ORDER BY TITLE";
-  const query: string = `
+  const query = `
     SELECT BK.ID, BK.TITLE, BK.GENRE, BK.ISBN, BK.DESCRIPTION, AUTH.ID AS AUTH_ID, AUTH.LAST_NAME, AUTH.FIRST_NAME
     FROM BOOK BK
     JOIN BOOK_AUTHOR BA ON (BA.BOOK_ID = BK.ID)
     JOIN AUTHOR AUTH ON (BA.AUTHOR_ID = AUTH.ID)
     ORDER BY TITLE ;
   `;
-  const res: Array<QueryResults> = db.exec(query);
+  const res = db.exec(query);
   return toBooks(res);
 }

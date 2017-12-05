@@ -5,11 +5,11 @@ import { Database } from "sql.js";
 
 import { addBookRoutes } from "./book";
 
-const server: Hapi.Server = new Hapi.Server();
+const server = new Hapi.Server();
 
-function start(port: number): void {
-  const fb: Buffer = fs.readFileSync("./library.db");
-  const db: Database = new Database(fb);
+function start(port) {
+  const fb = fs.readFileSync("./library.db");
+  const db = new Database(fb);
 
   /*
   fs.writeFileSync("./library.db", new Buffer(db.export()));
@@ -18,8 +18,8 @@ function start(port: number): void {
 
   server.connection({ port: port });
 
-  function handler(variant: String): (request: Hapi.Request, reply: Hapi.IReply) => void {
-    return function(request: Hapi.Request, reply: Hapi.IReply): void {
+  function handler(variant) {
+    return function(request, reply) {
       try {
         const file = "./" + request.params["file"];
         fs.statSync(file);

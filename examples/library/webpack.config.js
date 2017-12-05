@@ -1,51 +1,34 @@
-/*global process*/
-var isProduction = process.env.NODE_ENV === "production";
-var variant = process.env.VARIANT;
+/*global __dirname*/
 var webpack = require("webpack");
+var path = require("path");
+var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
-  entry: "./src/client/index-" + variant + ".ts",
-  devtool: "source-map",
+  entry: {
+    "domvm": "./src/domvm/index.js"
+  },
   output: {
-    path: "./build",
-    filename: "generated-" + variant + "-app" + (isProduction ? ".min" : "") + ".js"
+    path: path.join(__dirname, "public"),
+    filename: "generated-[name].js"
   },
   resolve: {
-    extensions: [".js", ".ts", ".tsx"]
+    extensions: [".js", ".jsx"]
   },
   module: {
-    noParse: [
-      /node_modules\/sinon/
-    ],
     rules: [
       {
-        enforce: "pre",
         test: /\.js$/,
-        loader: "source-map",
-        exclude: /node_modules/
-      },
-      {
-        test: /\.tsx?$/,
-        loader: "ts-loader",
         exclude: /node_modules/,
-        options: {
-          compilerOptions: {
-            declaration: false
-          }
-        },
+        use: {
+          loader: "babel-loader"
+        }
       }
     ]
   },
-  node: {
-    fs: "empty"
-  },
-  /*
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
-  },
-  */
-  plugins: isProduction ? [
-    new webpack.optimize.UglifyJsPlugin()
-  ] : []
+  plugins: [
+    new webpack.DefinePlugin({
+      "SERVICE_URL": JSON.stringify("http://localhost:3000")
+    }),
+    new UglifyJsPlugin()
+  ]
 };

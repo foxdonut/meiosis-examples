@@ -1,75 +1,56 @@
 {
   "name": "library",
-  "version": "0.10.0",
+  "version": "1.0.0",
   "description": "meiosis-examples library",
-  "main": "index.js",
+  "main": "src/domvm/index.js",
   "scripts": {
-    "prestart": "typings i && tsc",
     "start": "webpack",
+    "minify": "webpack --optimize-minimize",
     "watch": "webpack --progress --colors --watch",
-    "pretest": "npm start && tsc -p test/src",
-    "test": "ava -v test/build/*-tests.js",
-    "preserver": "tsc",
-    "server": "node build/server/main"
+    "test": "ava"
   },
   "ava": {
     "require": [
-      "./test/build/setup-browser-env.js"
-    ]
+      "babel-core/register",
+      "./test/setup-browser-env.js"
+    ],
+    "files": [
+      "test/**/*-tests.js"
+    ],
+    "verbose": true
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/foxdonut/meiosis-examples.git"
   },
   "keywords": [
+    "domvm",
     "example",
     "meiosis",
-    "reactive",
-    "react"
+    "reactive"
   ],
   "author": "foxdonut",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/foxdonut/meiosis-examples/issues"
   },
-  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "homepage": "https://github.com/foxdonut/meiosis-examples",
   "dependencies": {
-    "axios": "^0.15.3",
-    "classnames": "^2.2.5",
-    "crossroads": "^0.12.2",
-    "es6-promise": "^4.0.5",
+    "domvm": "^3.2.4",
     "flyd": "^0.2.4",
-    "hapi": "^16.1.0",
-    "history": "^4.5.1",
-    "inert": "^4.1.0",
-    "material-ui": "^0.17.0",
-    "meiosis": "^0.10.0",
-    "mithril": "^1.0.1",
-    "ramda": "^0.23.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-tap-event-plugin": "^2.0.1",
-    "sinon": "^1.17.7",
-    "sql.js": "^0.4.0",
-    "validate.js": "^0.11.1"
+    "hapi": "^16.6.2",
+    "ramda": "^0.25.0",
+    "sql.js": "^0.4.0"
   },
   "devDependencies": {
-    "@types/crossroads": "0.0.29",
-    "@types/hapi": "^16.0.0",
-    "@types/history": "^4.5.0",
-    "@types/material-ui": "^0.16.51",
-    "@types/node": "^7.0.5",
-    "@types/react": "^15.0.11",
-    "@types/react-dom": "^0.14.23",
-    "@types/signals": "0.0.17",
-    "ava": "^0.18.2",
-    "browser-env": "^2.0.21",
-    "jquery": "^3.1.1",
-    "source-map-loader": "^0.1.6",
-    "ts-loader": "^2.0.0",
-    "tslint": "^4.4.2",
-    "typescript": "^2.2.1",
-    "typings": "^2.1.0",
-    "webpack": "^2.2.1"
+    "ava": "^0.24.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "browser-env": "^3.2.4",
+    "jquery": "^3.2.1",
+    "meiosis": "^1.2.0",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^3.9.1"
   }
 }
