@@ -5,7 +5,7 @@ var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: {
-    "domvm": "./src/domvm/index.js"
+    "domvm": "./src/client/domvm/index.js"
   },
   output: {
     path: path.join(__dirname, "public"),
@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "SERVICE_URL": JSON.stringify("http://localhost:3000")
+      "SERVICE_URL": JSON.stringify("")
     }),
     new UglifyJsPlugin()
   ]
