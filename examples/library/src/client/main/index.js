@@ -30,8 +30,6 @@ export const createMain = update => new Promise(resolve => {
   resolve(main);
 
   fetchBooks().then(books => update(assoc("books", books)));
-  /*
   fetchOperations().then(operations => update(assoc("operations", operations)));
   fetchProblems().then(problems => update(assoc("problems", problems)));
-  */
 });

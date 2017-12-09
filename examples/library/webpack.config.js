@@ -1,14 +1,25 @@
 /*global __dirname*/
+var isProd = process.env.NODE_ENV === "prod";
 var webpack = require("webpack");
-var path = require("path");
+var Path = require("path");
 var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+var plugins = [
+  new webpack.DefinePlugin({
+    "SERVICE_URL": JSON.stringify("")
+  })
+];
+
+if (isProd) {
+  plugins.push(new UglifyJsPlugin());
+}
 
 module.exports = {
   entry: {
     "domvm": "./src/client/domvm/index.js"
   },
   output: {
-    path: path.join(__dirname, "public"),
+    path: Path.join(__dirname, "public"),
     filename: "generated-[name].js"
   },
   resolve: {
@@ -25,10 +36,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      "SERVICE_URL": JSON.stringify("")
-    }),
-    new UglifyJsPlugin()
-  ]
+  plugins: plugins
 };

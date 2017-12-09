@@ -13,7 +13,7 @@ export const fetchOperations = () =>
 export const fetchBooks = () =>
   fetch(SERVICE_URL + "/api/books").then(toJson);
 
-const problemKey = (result, problem) => assoc(problem.book, problem, result);
+const problemKey = (result, problem) => assoc(problem.isbn, problem, result);
 
 export const fetchProblems = () =>
   fetch(SERVICE_URL + "/api/problems").then(toJson).then(problems =>
