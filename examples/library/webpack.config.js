@@ -23,7 +23,10 @@ module.exports = {
     filename: "generated-[name].js"
   },
   resolve: {
-    extensions: [".js"]
+    extensions: [".js"],
+    alias: {
+      "domvm": isProd ? "domvm" : "domvm/dist/dev/domvm.dev"
+    }
   },
   module: {
     rules: [

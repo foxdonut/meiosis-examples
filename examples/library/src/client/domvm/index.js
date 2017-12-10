@@ -6,9 +6,8 @@ const app = createApp(() => null);
 const AppView = () => (vm, model) => app.main.view(model);
 
 const vm = domvm.createView(AppView, app.models());
-//vm.mount(app.element);
-//vm.attach(app.element);
-vm.mount(app.element, true);
+const element = document.getElementById("main");
+vm.attach(element);
 app.models.map(model => vm.update(model));
 
 app.main.initialFetch();

@@ -17,7 +17,7 @@ exports.root = function(request, reply) {
     if (err) {
       throw err;
     }
-    const document = data.replace(/<div id="app"><\/div>/,
+    const document = data.replace(/\r?\n */g, "").replace(/<div id="app"><\/div>/,
       '<div id="app">' + html() + '</div>');
     reply(document);
   });

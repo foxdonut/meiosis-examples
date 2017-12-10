@@ -25,5 +25,7 @@ export const createView = actions => model =>
         el("th", "Problem Description")
       ])
     ]),
-    el("tbody", model.books.map(bookRow(actions, model.problems, model.selectedBooks)))
+    model.books.length > 0
+      ? el("tbody", model.books.map(bookRow(actions, model.problems, model.selectedBooks)))
+      : null
   ]);

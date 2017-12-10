@@ -5,7 +5,7 @@ import { createMain } from "../main";
 // Only for using Meiosis Tracer in development.
 import { trace } from "meiosis";
 
-export const createApp = render => {
+export const createApp = (render, element) => {
   const update = flyd.stream();
 
   const main = createMain(update);
@@ -14,12 +14,11 @@ export const createApp = render => {
   const applyUpdate = (model, modelUpdate) => modelUpdate(model);
   const models = flyd.scan(applyUpdate, initialModel, update);
 
-  const element = document.getElementById("app");
   models.map(main.state);
   models.map(model => render(main.view(model), element));
 
   // Only for using Meiosis Tracer in development.
   trace({ update, dataStreams: [ models ]});
 
-  return { models, main, render, element };
+  return { models, main, render };
 };

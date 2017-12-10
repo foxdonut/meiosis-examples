@@ -4,8 +4,9 @@
   "description": "meiosis-examples library",
   "main": "src/domvm/index.js",
   "scripts": {
-    "start": "NODE_ENV=prod webpack",
+    "start": "NODE_ENV=dev webpack",
     "watch": "NODE_ENV=dev webpack --progress --colors --watch",
+    "build-prod": "NODE_ENV=prod webpack",
     "test": "ava",
     "preserver": "webpack --config webpack.server.config.js",
     "server": "node src/server/index"
