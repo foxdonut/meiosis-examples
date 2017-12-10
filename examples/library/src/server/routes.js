@@ -4,6 +4,10 @@ const Handlers = require("./handlers");
 
 module.exports = [
   { method: "GET",
+    path: "/",
+    handler: Handlers.root
+  },
+  { method: "GET",
     path: "/{filename*}",
     handler: Handlers.staticFile
   },

@@ -7,6 +7,7 @@
     "start": "NODE_ENV=prod webpack",
     "watch": "NODE_ENV=dev webpack --progress --colors --watch",
     "test": "ava",
+    "preserver": "webpack --config webpack.server.config.js",
     "server": "node src/server/index"
   },
   "ava": {

@@ -5,8 +5,10 @@ const operationOption = selectedOperation => operation =>
     { value: operation, selected: selectedOperation === operation },
     operation);
 
-export const createView = actions => model =>
+export const createView = actions => model => [
   el("select.operations-list[name=operation]", { onchange: actions.changeSelectedOperation }, [
     el("option[value='']", "-- Select an operation --"),
     model.operations.map(operationOption(model.selectedOperation))
-  ]);
+  ]),
+  el("button", "Submit")
+];

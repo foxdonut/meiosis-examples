@@ -1,8 +1,27 @@
 /* global __dirname */
 "use strict";
 
+const fs = require("fs");
 const Path = require("path");
+const domvm = require("domvm");
+
 const Persistence = require("../persistence");
+const createMain = require("../../build/generated-main").createMain;
+
+const main = createMain();
+const View = () => () => main.view(main.model());
+const html = () => domvm.createView(View).html();
+
+exports.root = function(request, reply) {
+  fs.readFile(Path.join(__dirname, "../../public/index.html"), "utf8", (err, data) => {
+    if (err) {
+      throw err;
+    }
+    const document = data.replace(/<div id="app"><\/div>/,
+      '<div id="app">' + html() + '</div>');
+    reply(document);
+  });
+};
 
 exports.staticFile = {
   directory: {
@@ -20,7 +39,6 @@ exports.findAllBooks = function(request, reply) {
 };
 
 const OPERATIONS = [
-  "Add to library",
   "Check out",
   "Return",
   "Take out of circulation"

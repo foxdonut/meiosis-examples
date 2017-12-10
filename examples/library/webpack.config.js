@@ -1,4 +1,4 @@
-/*global __dirname*/
+/*global __dirname, process*/
 var isProd = process.env.NODE_ENV === "prod";
 var webpack = require("webpack");
 var Path = require("path");
@@ -23,7 +23,7 @@ module.exports = {
     filename: "generated-[name].js"
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js"]
   },
   module: {
     rules: [

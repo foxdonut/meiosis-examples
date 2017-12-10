@@ -1,10 +1,14 @@
 import domvm from "domvm";
 import { createApp } from "../app";
 
-createApp(() => null).then(app => {
-  const AppView = () => (vm, model) => app.view(model);
+const app = createApp(() => null);
 
-  const vm = domvm.createView(AppView, app.models());
-  vm.mount(app.element);
-  app.models.map(model => vm.update(model));
-});
+const AppView = () => (vm, model) => app.main.view(model);
+
+const vm = domvm.createView(AppView, app.models());
+//vm.mount(app.element);
+//vm.attach(app.element);
+vm.mount(app.element, true);
+app.models.map(model => vm.update(model));
+
+app.main.initialFetch();

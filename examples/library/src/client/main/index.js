@@ -8,9 +8,15 @@ import { createBooks } from "../books";
 
 import { fetchOperations, fetchBooks, fetchProblems } from "../services";
 
-export const createMain = update => new Promise(resolve => {
+export const createMain = update => {
   const operations = createOperations(update);
   const books = createBooks(update);
+
+  const initialFetch = function() {
+    fetchBooks().then(books => update(assoc("books", books)));
+    fetchOperations().then(operations => update(assoc("operations", operations)));
+    fetchProblems().then(problems => update(assoc("problems", problems)));
+  };
 
   const main = {
     model: () => ({
@@ -24,12 +30,9 @@ export const createMain = update => new Promise(resolve => {
       books
     }),
 
-    state
+    state,
+    initialFetch
   };
 
-  resolve(main);
-
-  fetchBooks().then(books => update(assoc("books", books)));
-  fetchOperations().then(operations => update(assoc("operations", operations)));
-  fetchProblems().then(problems => update(assoc("problems", problems)));
-});
+  return main;
+};
