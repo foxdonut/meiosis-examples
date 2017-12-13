@@ -10,8 +10,8 @@ const bookRow = (actions, problems, selectedBooks) => book =>
     ]),
     el("td.book-title", book.title),
     el("td.book-authors", book.lastName + ", " + book.firstName),
-    el("td.book-problem", path([book.isbn, "type"], problems)),
-    el("td.book-problem", path([book.isbn, "description"], problems))
+    el("td.book-problem-type", path([book.isbn, "type"], problems)),
+    el("td.book-problem-description", path([book.isbn, "description"], problems))
   ]);
 
 export const createView = actions => model =>
@@ -25,7 +25,5 @@ export const createView = actions => model =>
         el("th", "Problem Description")
       ])
     ]),
-    model.books.length > 0
-      ? el("tbody", model.books.map(bookRow(actions, model.problems, model.selectedBooks)))
-      : null
+    el("tbody", model.books.map(bookRow(actions, model.problems, model.selectedBooks)))
   ]);

@@ -1,4 +1,4 @@
-import { assocPath, dissocPath } from "lodash";
+import { assocPath, dissocPath } from "ramda";
 
 export const setSelectedBook = (book, selected) => model => selected
   ? assocPath(["selectedBooks", book.isbn], book, model)

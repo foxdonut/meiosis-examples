@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples",
   "dependencies": {
-    "domvm": "^3.2.4",
+    "domvm": "^3.2.5",
     "flyd": "^0.2.4",
     "hapi": "^16.6.2",
     "inert": "^4.2.1",
