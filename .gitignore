@@ -36,3 +36,4 @@ build
 typings
 .reify-cache
 generated-*
+package-lock.json

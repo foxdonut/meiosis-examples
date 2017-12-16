@@ -1,23 +1,5 @@
 body {
-  margin: 20px;
-}
-.checkout-book, .message {
-  margin-left: 4px;
-}
-.error {
-  color: red;
-}
-.warning {
-  color: orange;
-}
-.success {
-  color: green;
-}
-.book-list {
-  margin-top: 8px;
-  border-collapse: collapse;
-}
-td, th {
-  border: 1px solid lightgray;
-  padding: 4px 8px;
+  font-family: "Ubuntu", "Roboto", "Helvetica", sans-serif;
+  margin: auto;
+  max-width: 960px;
 }

@@ -15,7 +15,7 @@ const bookRow = (actions, problems, selectedBooks) => book =>
   ]);
 
 export const createView = actions => model =>
-  el("table.book-list", [
+  el("table.book-list.striped", [
     el("thead", [
       el("tr", [
         el("th"),
