@@ -1,4 +1,4 @@
-import { assoc } from "ramda";
+import assoc from "crocks/helpers/assoc";
 
 import { createView } from "./view";
 import { state } from "./state";

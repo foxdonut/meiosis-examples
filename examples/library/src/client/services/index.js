@@ -1,5 +1,5 @@
 /* global SERVICE_URL */
-import { assoc, reduce } from "ramda";
+import assoc from "crocks/helpers/assoc";
 
 const verify = response => new Promise((resolve, reject) =>
   response.text().then(response.ok ? resolve : reject));
@@ -17,7 +17,7 @@ const problemKey = (result, problem) => assoc(problem.isbn, problem, result);
 
 export const fetchProblems = () =>
   fetch(SERVICE_URL + "/api/problems").then(toJson).then(problems =>
-    reduce(problemKey, {}, problems));
+    problems.reduce(problemKey, {}));
 
 export const startOperation = operation =>
   fetch(SERVICE_URL + "/api/operations", {

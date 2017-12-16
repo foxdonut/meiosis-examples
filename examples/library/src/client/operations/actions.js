@@ -1,4 +1,4 @@
-import { assoc } from "ramda";
+import assoc from "crocks/helpers/assoc";
 
 export const setSelectedOperation = selectedOperation =>
   assoc("selectedOperation", selectedOperation);
