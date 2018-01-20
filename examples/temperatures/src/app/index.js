@@ -12,11 +12,14 @@ const createActions = update => ({
 
     update(model => {
       const errors = validateModel(model);
+      console.log("errors:", JSON.stringify(errors, null, 4));
+      /*
       const errorMap = errors.reduce((result, next) =>
         _.set(result, next.path, next.message), {});
 
       [["entryNumber"], ["entryDate", "from"], ["entryDate", "to"]].forEach(path =>
         _.set(model, path.concat(["errors"]), _.get(errorMap, path, {})));
+      */
 
       if (_.isEmpty(errors)) {
         const air = model.temperature.air;
