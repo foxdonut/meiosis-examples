@@ -33,10 +33,10 @@ export const validateModel = model => {
   const details = _.get(result, ["error", "details"], []);
 
   for (let i = 0, t = details.length; i < t; i++) {
-    const path = details[i].path[0];
+    const path = details[i].path;
 
-    if (!errors.hasOwnProperty(path)) {
-      errors[path] = details[i].message;
+    if (!_.get(errors, path)) {
+      _.set(errors, path, details[i].message);
     }
   }
   return errors;
