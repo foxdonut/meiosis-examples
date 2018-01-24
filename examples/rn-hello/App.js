@@ -2,17 +2,16 @@ import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import flyd from "flyd";
 
-const update = flyd.stream();
-const initialModel = { counter: 0 };
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const initialModel = {
+  value: 20
+};
 
-const actions = {
-  incr: () => update(model => {
-    model.counter++;
+const createActions = update => ({
+  increase: () => update(model => {
+    model.value = model.value + 1;
     return model;
   })
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +22,19 @@ const styles = StyleSheet.create({
   },
 });
 
+const createView = actions => model => (
+  <View style={styles.container}>
+    <Text>Temperature: {model.value}&deg;C</Text>
+    <Button onPress={actions.increase} title="Increase"/>
+  </View>
+);
+
+const update = flyd.stream();
+const applyUpdate = (model, modelUpdate) => modelUpdate(model);
+const models = flyd.scan(applyUpdate, initialModel, update);
+
+const view = createView(createActions(update));
+
 export default class App extends React.Component {
   componentWillMount() {
     const self = this;
@@ -31,13 +43,6 @@ export default class App extends React.Component {
 
   render() {
     const model = this.state.model;
-
-    return (
-      <View style={styles.container}>
-        <Text>Counter:</Text>
-        <Text>{model.counter}</Text>
-        <Button onPress={actions.incr} title="Increment"></Button>
-      </View>
-    );
+    return view(model);
   }
 }
