@@ -1,5 +1,6 @@
 import m from "mithril";
 import uuid from "uuid";
+import { any, prop, values } from "ramda";
 import { randomGif } from "../random-gif";
 import { nestUpdate } from "../util/nest";
 
@@ -18,6 +19,13 @@ const remove = (update, id) => () => update(model => {
   return model;
 });
 
+const reloadAll = ({update, event, model}) => () =>
+  values(model.randomGifsById).forEach(
+    model => randomGif.reload({update: nestUpdate(update, ["randomGifsById", model.id]), event, model})
+  );
+
+const buttonStyle = "button.f8.link.dim.ph2.br2.ba.blue.b--blue.bg-white";
+
 export const createRandomGifList = event => update => {
   const renderRandomGif = model => id =>
     m("div.dib", { key: id }, [
@@ -34,8 +42,10 @@ export const createRandomGifList = event => update => {
       randomGifsById: {}
     }),
     view: model => m("div.ba.br2.b--orange.pa2", [
+      m("div", "Contains one or more gifs: ", String(any(prop("image_url"), values(model.randomGifsById)))),
       m("div", [
-        m("button.f8.link.dim.ph2.br2.ba.blue.b--blue.bg-white", { onclick: add(update) }, "Add")
+        m(buttonStyle, { onclick: add(update) }, "Add"),
+        m(buttonStyle + ".ml1", { onclick: reloadAll({update, event, model}) }, "Reload All")
       ]),
       m("div", model.randomGifIds.map(renderRandomGif(model)))
     ])

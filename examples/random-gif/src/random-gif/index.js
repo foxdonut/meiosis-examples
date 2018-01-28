@@ -54,6 +54,9 @@ export const randomGif = {
     };
   },
 
+  reload: ({update, event, model}) =>
+    newGif({update, event, id: model.id, tag: model.tag})(),
+
   view: ({event, update}) => model =>
     m("div.ma2.ba.b--green.pa2", [
       m("span.mr2", "Tag:"),
