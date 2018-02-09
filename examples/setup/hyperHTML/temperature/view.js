@@ -1,7 +1,7 @@
 import { wire } from "hyperhtml/esm";
 import { safe, wrap } from "../../common/handler";
 
-const precipitationOption = ({ model, actions, id, value, label }) => wire()`
+const precipitationOption = ({ model, actions, id, value, label }) => wire(model, `:precip-${id}`)`
   <span>
     <input type="radio" id="${id}" name="precipitation" value="${value}"
       checked="${model.precipitation === value}"
@@ -11,7 +11,7 @@ const precipitationOption = ({ model, actions, id, value, label }) => wire()`
 `;
 
 export const createView = actions => model => {
-    const w = wire(model);
+    const w = wire(model, ':view');
     const el = w`
       <div>
         <div>
