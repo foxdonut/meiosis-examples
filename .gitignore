@@ -33,7 +33,9 @@ node_modules
 .node_repl_history
 
 build
+dist
 typings
+.cache
 .reify-cache
 generated-*
 package-lock.json

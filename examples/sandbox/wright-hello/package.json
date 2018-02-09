@@ -1,0 +1,30 @@
+{
+  "name": "wright-hello",
+  "version": "1.0.0",
+  "description": "meiosis-examples sandbox",
+  "main": "index.js",
+  "scripts": {
+    "start": "",
+    "watch": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive",
+    "sandbox"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
