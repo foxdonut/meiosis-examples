@@ -4,8 +4,7 @@
   "description": "meiosis-examples sandbox",
   "main": "index.js",
   "scripts": {
-    "start": "",
-    "watch": ""
+    "start": "browserify index.js -t [ babelify --presets [ env ] ] -o build/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +23,17 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
+    "bss": "^1.0.5",
+    "mithril": "^1.1.6"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.0.0",
+    "meiosis": "^1.2.0",
+    "meiosis-tracer": "^1.2.1",
+    "wright": "^1.0.1"
   }
 }

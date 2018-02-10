@@ -1,0 +1,15 @@
+body {
+  font-family: sans-serif;
+}
+.footer {
+  font-size: 11pt;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+#tracer {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
