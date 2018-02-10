@@ -4,7 +4,8 @@
   "description": "meiosis-examples sandbox",
   "main": "index.js",
   "scripts": {
-    "start": "browserify index.js -t [ babelify --presets [ env ] ] -o build/bundle.js"
+    "start": "browserify src/index.js -t [ babelify --presets [ env ] ] -o build/bundle.js",
+    "wright": "node run-wright.js"
   },
   "repository": {
     "type": "git",
