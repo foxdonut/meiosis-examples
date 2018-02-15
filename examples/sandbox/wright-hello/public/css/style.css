@@ -1,6 +1,10 @@
 body {
   font-family: sans-serif;
 }
+.heading {
+  display: grid;
+  grid-template-columns: 80px auto;
+}
 .footer {
   font-size: 11pt;
   position: absolute;

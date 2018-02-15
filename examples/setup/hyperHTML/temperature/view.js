@@ -11,7 +11,7 @@ const precipitationOption = ({ model, actions, id, value, label }) => wire(model
 `;
 
 export const createView = actions => model => {
-    const w = wire(model, ':view');
+    const w = wire(model, ":view");
     const el = w`
       <div>
         <div>
