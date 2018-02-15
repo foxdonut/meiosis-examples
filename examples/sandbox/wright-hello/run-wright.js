@@ -3,7 +3,7 @@ const browserify = require("browserify");
 
 function compile() {
   return new Promise((resolve, reject) => {
-    browserify("./src/index.js")
+    browserify("./dev.js")
       .transform("babelify", { presets: ["env"] })
       .bundle((err, src) => err ? reject(err) : resolve(src.toString()));
   });
