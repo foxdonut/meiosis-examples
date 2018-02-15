@@ -1,26 +1,21 @@
-import m from "mithril";
-import stream from "mithril/stream";
+import m from 'mithril'
+import stream from 'mithril/stream'
 
-import { createTemperature } from "./temperature";
+import { createTemperature } from './temperature'
 
-// Only for using Meiosis Tracer in development.
-import { trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
+const update = stream()
 
-const update = stream();
-const temperature = createTemperature(update);
-const initialModel = temperature.model();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = stream.scan(applyUpdate, initialModel, update);
+const app = createTemperature(update)
 
-const element = document.getElementById("app");
-models.map(model => m.render(element, temperature.view(model)));
+const models = stream.scan(
+  (model, modelUpdate) => modelUpdate(model), 
+  app.model(), 
+  update
+)
 
-// Only for using Meiosis Tracer in development.
-trace({ update, dataStreams: [ models ]});
-meiosisTracer({ selector: "#tracer" });
+const render = model => 
+  m.render(document.body, app.view(model))
 
-// For hot module reloading
-window.rerender = function() {
-  m.render(element, temperature.view(models()));
-};
+models.map(render)
+
+export { update, models, render }
