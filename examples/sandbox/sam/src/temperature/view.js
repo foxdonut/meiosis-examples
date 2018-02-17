@@ -1,11 +1,10 @@
 import { html } from "lit-html/lib/lit-extended";
-import { safe, wrap } from "../../common/handler";
 
 const precipitationOption = ({ model, actions, id, value, label }) => html`
   <span>
     <input type="radio" id="${id}" name="precipitation" value="${value}"
       checked="${model.precipitation === value}"
-      onclick="${safe(actions.changePrecipitation)}"/>
+      onclick="${actions.changePrecipitation}"/>
     <label htmlFor="${id}">${label}</label>
   </span>
 `;
@@ -14,7 +13,7 @@ export const createView = actions => model => html`
   <div>
     <div>
       <input type="checkbox" checked="${model.precipitations}"
-        onclick="${safe(actions.togglePrecipitations)}" id="precipitations"/>
+        onclick="${actions.togglePrecipitations}" id="precipitations"/>
       <label for="precipitations">Precipitations</label>
     </div>
     <div>
@@ -24,16 +23,17 @@ export const createView = actions => model => html`
     </div>
     <div>
       Date:
-      <input type="text" size="10" oninput="${safe(actions.editDate)}" value="${model.date}"/>
+      <input type="text" size="10" oninput="${actions.editDate}" value="${model.date}"/>
     </div>
     <span>Temperature: </span>
     <span class="tempValue">${model.value}</span>&deg;<span class="tempUnits">${model.units}</span>
+    <span>${model.comments}</span>
     <div>
-      <button class="btn btn-default increase" onclick="${wrap(actions.increase, 1)}">Increase</button>
-      <button class="btn btn-default decrease" onclick="${wrap(actions.increase, -1)}">Decrease</button>
+      <button class="btn btn-default increase" onclick="${actions.increase(1)}">Increase</button>
+      <button class="btn btn-default decrease" onclick="${actions.increase(-1)}">Decrease</button>
     </div>
     <div>
-      <button class="btn btn-primary changeUnits" onclick="${safe(actions.changeUnits)}">Change Units</button>
+      <button class="btn btn-primary changeUnits" onclick="${actions.changeUnits}">Change Units</button>
     </div>
   </div>
 `;
