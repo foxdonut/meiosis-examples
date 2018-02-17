@@ -1,11 +1,11 @@
-export const createActions = acceptor => ({
-  togglePrecipitations: evt => acceptor.togglePrecipitations(evt.target.checked),
+export const createActions = Model => ({
+  togglePrecipitations: evt => Model.present({ precipitations: evt.target.checked }),
 
-  changePrecipitation: evt => acceptor.changePrecipitation(evt.target.value),
+  changePrecipitation: evt => Model.present({ precipitation: evt.target.value }),
 
-  editDate: evt => acceptor.editDate(evt.target.value),
+  editDate: evt => Model.present({ date: evt.target.value }),
 
-  increase: amount => () => acceptor.increase(amount),
+  increase: amount => () => Model.present({ increase: amount }),
 
-  changeUnits: () => acceptor.changeUnits(),
+  changeUnits: () => Model.present({ changeUnits: true })
 });

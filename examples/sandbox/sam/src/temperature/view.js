@@ -27,7 +27,7 @@ export const createView = actions => model => html`
     </div>
     <span>Temperature: </span>
     <span class="tempValue">${model.value}</span>&deg;<span class="tempUnits">${model.units}</span>
-    <span>${model.comments}</span>
+    <span>${model.comment}</span>
     <div>
       <button class="btn btn-default increase" onclick="${actions.increase(1)}">Increase</button>
       <button class="btn btn-default decrease" onclick="${actions.increase(-1)}">Decrease</button>
