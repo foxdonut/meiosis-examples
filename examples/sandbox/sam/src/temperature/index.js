@@ -1,4 +1,5 @@
 import { createAcceptor } from "./acceptor";
+import { createProposer } from "./proposer";
 import { createActions } from "./actions";
 import { createView } from "./view";
 import { state } from "./state";
@@ -12,7 +13,7 @@ export const createTemperature = update => ({
     units: "C"
   }),
 
-  view: createView(createActions(createAcceptor(update))),
+  view: createView(createActions(createProposer(createAcceptor(update)))),
 
   state
 });

@@ -1,11 +1,11 @@
-export const createActions = acceptor => ({
-  togglePrecipitations: evt => acceptor.togglePrecipitations(evt.target.checked),
+export const createActions = propose => ({
+  togglePrecipitations: evt => propose({ precipitations: evt.target.checked }),
 
-  changePrecipitation: evt => acceptor.changePrecipitation(evt.target.value),
+  changePrecipitation: evt => propose({ precipitation: evt.target.value }),
 
-  editDate: evt => acceptor.editDate(evt.target.value),
+  editDate: evt => propose({ date: evt.target.value }),
 
-  increase: amount => () => acceptor.increase(amount),
+  increase: amount => () => propose({ amount }),
 
-  changeUnits: () => acceptor.changeUnits(),
+  changeUnits: () => propose({ changeUnits: true }),
 });
