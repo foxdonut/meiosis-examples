@@ -1,30 +1,30 @@
-export const createModel = update => ({
-  present: proposal => {
-    if (proposal.precipitations !== undefined) {
+export const createModel = update => {
+  const acceptors = {
+    precipitations: value =>
       update(model => {
-        model.precipitations = proposal.precipitations;
+        model.precipitations = value;
         return model;
-      });
-    }
-    else if (proposal.precipitation !== undefined) {
+      }),
+
+    precipitation: value =>
       update(model => {
-        model.precipitation = proposal.precipitation;
+        model.precipitation = value;
         return model;
-      });
-    }
-    else if (proposal.date !== undefined) {
+      }),
+
+    date: value =>
       update(model => {
-        model.date = proposal.date;
+        model.date = value;
         return model;
-      });
-    }
-    else if (proposal.increase !== undefined) {
+      }),
+
+    increase: amount =>
       update(model => {
-        model.value = model.value + proposal.increase;
+        model.value = model.value + amount;
         return model;
-      });
-    }
-    else if (proposal.changeUnits !== undefined) {
+      }),
+
+    changeUnits: () =>
       update(model => {
         if (model.units === "C") {
           model.units = "F";
@@ -35,7 +35,14 @@ export const createModel = update => ({
           model.value = Math.round( (model.value - 32) / 9 * 5 );
         }
         return model;
-      });
+      })
+  };
+
+  return {
+    present: proposal => {
+      const key = Object.keys(proposal)[0];
+      const value = proposal[key];
+      acceptors[key](value);
     }
-  }
-});
+  };
+};
