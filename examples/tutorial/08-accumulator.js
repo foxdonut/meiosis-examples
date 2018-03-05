@@ -1,4 +1,13 @@
 /*global m*/
+var convert = function(value, to) {
+  if (to === "C") {
+    return Math.round( (value - 32) / 9 * 5 );
+  }
+  else {
+    return Math.round( value * 9 / 5 + 32 );
+  }
+};
+
 var createView = function(update) {
   var increase = function(model, amount) {
     return function(_event) {
@@ -7,7 +16,9 @@ var createView = function(update) {
   };
   var changeUnits = function(model) {
     return function(_event) {
-      update({ units: model.units === "C" ? "F" : "C" });
+      var newUnits = model.units === "C" ? "F" : "C";
+      var newValue = convert(model.value, newUnits);
+      update({ value: newValue, units: newUnits });
     };
   };
 
