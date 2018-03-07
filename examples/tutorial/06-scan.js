@@ -41,7 +41,7 @@ var stream = function(initial) {
 
 var scan = function(accumulator, initial, st) {
   var newStream = stream(initial);
-  let accumulated = initial;
+  var accumulated = initial;
 
   st.map(function(value) {
     accumulated = accumulator(accumulated, value);
