@@ -7,7 +7,7 @@ var createView = function(update) {
   };
   var view = function(model) {
     return [
-      m("div", "Value: " + model),
+      m("div", "Counter: " + model),
       m("button", { onclick: increase( 1) }, "+1"),
       m("button", { onclick: increase(-1) }, "-1")
     ];

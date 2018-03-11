@@ -1,6 +1,6 @@
 /*global m*/
 var view = function(model) {
-  return m("div", "Value: " + model);
+  return m("div", "Counter: " + model);
 };
 
 var initial = 0;
