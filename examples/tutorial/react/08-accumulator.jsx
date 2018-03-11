@@ -1,0 +1,56 @@
+/*global ReactDOM, flyd*/
+var convert = function(value, to) {
+  if (to === "C") {
+    return Math.round( (value - 32) / 9 * 5 );
+  }
+  else {
+    return Math.round( value * 9 / 5 + 32 );
+  }
+};
+
+var createView = function(update) {
+  var increase = function(model, amount) {
+    return function(_event) {
+      update({ value: model.value + amount });
+    };
+  };
+  var changeUnits = function(model) {
+    return function(_event) {
+      var newUnits = model.units === "C" ? "F" : "C";
+      var newValue = convert(model.value, newUnits);
+      update({ value: newValue, units: newUnits });
+    };
+  };
+
+  var view = function(model) {
+    return (<div>
+      <span>Temperature: {model.value}&deg;{model.units}</span>
+      <div>
+        <button onClick={increase(model, 1)}>Increase</button>
+        <button onClick={increase(model,-1)}>Decrease</button>
+      </div>
+      <div>
+        <button onClick={changeUnits(model)}>Change Units</button>
+      </div>
+    </div>);
+  };
+  return view;
+};
+
+var update = flyd.stream();
+var view = createView(update);
+
+var model = {
+  value: 20,
+  units: "C"
+};
+
+var models = flyd.scan(function(model, value) {
+  return Object.assign(model, value);
+}, model, update);
+
+var element = document.getElementById("app");
+
+models.map(function(model) {
+  ReactDOM.render(view(model), element);
+});

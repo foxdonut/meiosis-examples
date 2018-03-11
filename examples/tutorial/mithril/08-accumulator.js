@@ -24,8 +24,7 @@ var createView = function(update) {
 
   var view = function(model) {
     return [
-      m("span", "Temperature: "),
-      m("span", model.value),
+      m("span", "Temperature: ", model.value),
       m.trust("&deg;"),
       m("span", model.units),
       m("div",
