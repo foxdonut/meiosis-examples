@@ -1,4 +1,5 @@
 #!/bin/bash
+# need brew install graphviz
 # need npm i -g svgexport
 EXT=svg
 TEMPSVG=tempsvg.svg
