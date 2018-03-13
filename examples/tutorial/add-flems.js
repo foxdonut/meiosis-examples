@@ -43,7 +43,7 @@ filenames.forEach(source => {
       var linkString = "[" + linkContents.join(",") + "]";
 
       line = `
-  <div id="flems${flemNumber}"></div>
+  <div id="flems${flemNumber}" class="flemscode"></div>
 
   <script>
     window.Flems(flems${flemNumber}, {
@@ -58,8 +58,6 @@ filenames.forEach(source => {
     return line;
   });
 
-  lines.unshift("");
-  lines.unshift("<script src=\"https://flems.io/flems.html\" type=\"text/javascript\" charset=\"utf-8\"></script>");
-  var output = lines.join("\n");
-  fs.writeFileSync(toDir + "/" + source, output);
+  var dest = toDir + "/" + source;
+  fs.writeFileSync(dest, lines.join("\n"));
 });

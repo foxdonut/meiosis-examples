@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prestart": "mkdir -p build dist && node add-flems.js lessons build",
-    "start": "harp compile build dist"
+    "start": "harp compile build dist",
+    "poststart": "node add-struct.js dist && cp css/* dist"
   },
   "repository": {
     "type": "git",
