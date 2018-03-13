@@ -15,9 +15,9 @@ module.exports = {
     "mithril": "./mithril/index.js",
     "petit-dom": "./petit-dom/index.js",
     "preact": "./preact/index.js",
-    "ultradom": "./ultradom/index.js",
     "react": "./react/index.js",
-    "snabbdom": "./snabbdom/index.js"
+    "snabbdom": "./snabbdom/index.js",
+    "ultradom": "./ultradom/index.js"
   },
   output: {
     path: path.join(__dirname, "build"),

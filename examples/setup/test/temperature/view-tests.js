@@ -26,9 +26,9 @@ const libs =
   , "mithril"
   , "petit-dom"
   , "preact"
-  , "ultradom"
   , "react"
   , "snabbdom"
+  , "ultradom"
   ];
 
 libs.forEach(lib => {
