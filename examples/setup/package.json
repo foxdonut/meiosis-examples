@@ -48,8 +48,8 @@
     "maquette": "^3.2.0",
     "mithril": "^1.1.6",
     "petit-dom": "0.0.14",
-    "picodom": "^1.0.2",
     "preact": "^8.2.7",
+    "ultradom": "^2.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "snabbdom": "^0.7.1"

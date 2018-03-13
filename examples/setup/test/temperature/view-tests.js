@@ -25,8 +25,8 @@ const libs =
   , "inferno"
   , "mithril"
   , "petit-dom"
-  , "picodom"
   , "preact"
+  , "ultradom"
   , "react"
   , "snabbdom"
   ];

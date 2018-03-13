@@ -35,7 +35,7 @@ and other hyperscript view libraries are also easy to use with Meiosis.
 
 The best way to learn is to practice! So, all code examples for this tutorial are embedded
 into the page using [Flems](https://github.com/porsager/flems), so that you can edit the
-code and see the results right there in the page! In fact, I strongly encourage you to try
+code and see the results right there in the page. In fact, I strongly encourage you to try
 things out with the code, this will help you understand how things work.
 
 Finally, also note that you can also download and run the code examples for this tutorial,

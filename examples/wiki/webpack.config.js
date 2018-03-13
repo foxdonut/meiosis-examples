@@ -45,7 +45,6 @@ module.exports = {
   externals: {
     "inferno": "Inferno",
     "mithril": "m",
-    "picodom": "picodom",
     "preact": "preact",
     "react": "React",
     "react-dom": "ReactDOM"

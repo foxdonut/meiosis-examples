@@ -14,8 +14,8 @@ module.exports = {
     "maquette": "./maquette/index.js",
     "mithril": "./mithril/index.js",
     "petit-dom": "./petit-dom/index.js",
-    "picodom": "./picodom/index.js",
     "preact": "./preact/index.js",
+    "ultradom": "./ultradom/index.js",
     "react": "./react/index.js",
     "snabbdom": "./snabbdom/index.js"
   },
