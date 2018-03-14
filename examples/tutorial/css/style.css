@@ -17,3 +17,7 @@ h3 {
 .flemscode {
   height: 500px;
 }
+blockquote {
+  padding-left: 20px;
+  border-left: 2px solid gray;
+}

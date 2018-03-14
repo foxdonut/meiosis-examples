@@ -42,8 +42,13 @@ filenames.forEach(source => {
       });
       var linkString = "[" + linkContents.join(",") + "]";
 
+      var style = "";
+      if (parts.length > 3) {
+        style = " style=\"height:" + parts[3] + "px\"";
+      }
+
       line = `
-  <div id="flems${flemNumber}" class="flemscode"></div>
+  <div id="flems${flemNumber}" class="flemscode"${style}></div>
 
   <script>
     window.Flems(flems${flemNumber}, {
