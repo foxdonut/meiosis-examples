@@ -1,5 +1,7 @@
 # Meiosis Tutorial
 
+[Table of Contents](toc.html)
+
 ## 08 - Accumulator
 
 In the previous lesson, [07 - Stream Library](07-stream-lib-mithril.html),

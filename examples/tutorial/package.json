@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "mkdir -p build dist && node add-flems.js lessons build",
     "start": "harp compile build dist",
-    "poststart": "node add-struct.js dist && cp css/* dist"
+    "poststart": "node add-struct.js dist && cp css/* images/*.svg dist"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,7 @@
 # Meiosis Tutorial
 
+[Table of Contents](toc.html)
+
 ## 03 - Update Model
 
 In the previous lesson, [02 - View Function](02-view-function-mithril.html), we created a `view`

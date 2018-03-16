@@ -1,5 +1,7 @@
 # Meiosis Tutorial
 
+[Table of Contents](toc.html)
+
 ## 00 - Introduction
 
 Welcome to the Meiosis Tutorial!

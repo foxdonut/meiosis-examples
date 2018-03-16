@@ -1,5 +1,7 @@
 # Meiosis Tutorial
 
+[Table of Contents](toc.html)
+
 ## 02 - View Function
 
 In the previous lesson, [01 - Hello World](01-hello-world-mithril.html), we rendered a simple
@@ -18,6 +20,8 @@ In our example, the model is a counter. We've created an **initial** model with 
 When rendering with `m.render`, we pass the DOM element as before, but instead of directly
 passing what to render, we pass the **result** of calling the `view` function with the value
 `0`.
+
+![The View Function](02-view-function-01.svg)
 
 Within the `view` function, we can create a view as we see fit, using the `model`. In this
 case, we are simply creating a `div` element with the text `Counter:` and the value that was

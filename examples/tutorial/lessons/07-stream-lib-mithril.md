@@ -1,5 +1,7 @@
 # Meiosis Tutorial
 
+[Table of Contents](toc.html)
+
 ## 07 - Stream Library
 
 In the previous lesson, [06 - Scan](06-scan-mithril.html),

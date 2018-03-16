@@ -1,5 +1,7 @@
 # Meiosis Tutorial
 
+[Table of Contents](toc.html)
+
 ## 04 - Update Function
 
 In the previous lesson, [03 - Update Model](03-update-model-mithril.html),

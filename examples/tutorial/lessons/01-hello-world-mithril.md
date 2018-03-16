@@ -1,5 +1,7 @@
 # Meiosis Tutorial
 
+[Table of Contents](toc.html)
+
 ## 01 - Hello World
 
 The first thing that we will do is render something onto the page - a "Hello, world" message,
@@ -19,6 +21,8 @@ Here is the code to render a message onto the page:
 
 Notice that the `element` into which we render is the element that has the `app` id. You can
 see this element in the `app.html` file. This file represents our HTML page.
+
+![The Render Function](01-hello-world-01.svg)
 
 You can also use `document.body` as the element. The reason I am using an HTML file with an
 element inside it is that this enables you to render other things on the page, and have your

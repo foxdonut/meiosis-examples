@@ -10,7 +10,7 @@ h2 {
   color: #EA7840;
   font-size: 2.8rem;
 }
-h3 {
+h3, th {
   color: #3355FF;
   font-size: 2.4rem;
 }
@@ -20,4 +20,11 @@ h3 {
 blockquote {
   padding-left: 20px;
   border-left: 2px solid gray;
+}
+img {
+  max-width: 100%;
+}
+a, button {
+  min-width: 48px;
+  min-height: 48px;
 }
