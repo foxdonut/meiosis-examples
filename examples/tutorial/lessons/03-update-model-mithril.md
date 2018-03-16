@@ -24,7 +24,14 @@ m("button", { onclick: increase }, "+1")
 
 It is important to remember that what we associate to `onclick` must be a **function**. This
 function will automatically be called when the user clicks on the button, and the function gets
-a DOM event as a parameter. Here, the function is `increase`.
+a DOM event as a parameter. Here, the function is `increase`:
+
+```js
+var increase = function(_event) {
+  model = model + 1;
+  m.render(element, view(model));
+};
+```
 
 > **Note:** the `increase` function does not need to do anything with the DOM event. So, `increase`
 could have been a function with no parameters. For clarity, I included the event parameter in
@@ -35,6 +42,8 @@ used.
 
 As you can see in the code above, the `increase` function updates the model by adding 1 to the
 value. Then, it re-renders the view by calling `m.render` again.
+
+![The onclick Function](03-update-model-01.svg)
 
 > **Note:** you might wonder about rebuilding the whole view and re-rendering it when something
 changes. Generally speaking, producing a virtual-DOM view is not a performance concern.

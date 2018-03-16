@@ -1,6 +1,6 @@
 #!/bin/bash
 # need brew install graphviz
-# need npm i -g svgexport
+# need npm i -g svgexport for pngs
 EXT=svg
 TEMPSVG=tempsvg.svg
 SRC=$1
@@ -9,6 +9,4 @@ PNG=$(echo $DEST | sed -e "s/\.$EXT/.png/") && \
 echo $SRC '->' $DEST &&\
 dot -T$EXT -Nshape=record -Nmargin=0.05 -Nfontsize=12pt -Nfontname=Courier -Efontsize=12pt -Efontname=helvetica -Ecolor=maroon -Efontcolor=navy -Gnodesep=0.2 -o $DEST $SRC && \
 # svgexport $DEST $PNG
-# echo 'Cleanup..' && \
-#  rm $TEMPSVG && \
 echo 'Done.'

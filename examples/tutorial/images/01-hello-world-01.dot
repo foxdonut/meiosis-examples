@@ -1,4 +1,4 @@
-digraph helloworld01 {
+digraph meiosistutorial {
   mrender [shape="plaintext", style="filled", fillcolor="lightblue", label=<
     <table border="0">
       <tr>
