@@ -104,4 +104,4 @@ two lines of code to do this.
 **multiplying** instead of adding the incoming value. Verify that `+1` has no effect, `-1`
 only changes the sign, and `+5` and`-5` multiply by `5` and `-5` respectively.
 
-[05 - Stream](05-stream-mithril.html)
+When you are ready, continue on to [05 - Stream](05-stream-mithril.html).
