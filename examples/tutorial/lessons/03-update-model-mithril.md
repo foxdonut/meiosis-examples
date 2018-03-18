@@ -52,7 +52,7 @@ minimal changes are needed to make the real DOM reflect the view.
 
 ### Exercises
 
-1. As in the previous lesson, try passing in an object such as
+1. As in the [previous lesson](02-view-function-mithril.html), try passing in an object such as
 `{ label: "The Counter", value: 0 }` as the model. Change the `view` function so that it uses the
 model to produce the view, and change the `increase` function so that it increases the model value.
 1. Add a `-1` button that decreases the value by 1.
