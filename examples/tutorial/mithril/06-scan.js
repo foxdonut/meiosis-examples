@@ -1,20 +1,4 @@
 /*global m*/
-var createView = function(update) {
-  var increase = function(amount) {
-    return function(_event) {
-      update(amount);
-    };
-  };
-  var view = function(model) {
-    return [
-      m("div", "Counter: " + model),
-      m("button", { onclick: increase( 1) }, "+1"),
-      m("button", { onclick: increase(-1) }, "-1")
-    ];
-  };
-  return view;
-};
-
 var stream = function(initial) {
   var callbacks = [];
   var createdStream = function(value) {
@@ -49,6 +33,22 @@ var scan = function(accumulator, initial, st) {
   });
 
   return newStream;
+};
+
+var createView = function(update) {
+  var increase = function(amount) {
+    return function(_event) {
+      update(amount);
+    };
+  };
+  var view = function(model) {
+    return [
+      m("div", "Counter: " + model),
+      m("button", { onclick: increase( 1) }, "+1"),
+      m("button", { onclick: increase(-1) }, "-1")
+    ];
+  };
+  return view;
 };
 
 var model = 0;
