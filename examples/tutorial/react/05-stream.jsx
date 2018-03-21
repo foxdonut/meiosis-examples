@@ -1,23 +1,27 @@
 /*global ReactDOM*/
+
+// -- Utility code
+
 var stream = function() {
-  var callbacks = [];
+  var fns = [];
   var createdStream = function(value) {
-    for (var i = 0, t = callbacks.length; i < t; i++) {
-      var callback = callbacks[i];
-      callback(value);
+    for (var i in fns) {
+      fns[i](value);
     }
   };
-  createdStream.map = function(callback) {
+  createdStream.map = function(fn) {
     var newStream = stream();
 
-    callbacks.push(function(value) {
-      newStream(callback(value));
+    fns.push(function(value) {
+      newStream(fn(value));
     });
 
     return newStream;
   };
   return createdStream;
 };
+
+// -- Application code
 
 var createView = function(update) {
   var increase = function(amount) {
@@ -34,6 +38,8 @@ var createView = function(update) {
   };
   return view;
 };
+
+// -- Setup code
 
 var model = 0;
 var update = stream();

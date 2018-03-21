@@ -1,4 +1,7 @@
 /*global m*/
+
+// -- Application code
+
 var createView = function(update) {
   var increase = function(amount) {
     return function(_event) {
@@ -14,6 +17,8 @@ var createView = function(update) {
   };
   return view;
 };
+
+// -- Setup code
 
 var model = 0;
 

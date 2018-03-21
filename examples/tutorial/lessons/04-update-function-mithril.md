@@ -96,6 +96,13 @@ Also notice that `createView` is another function-that-returns-a-function. After
 `increase` event handler, it creates and returns the `view` function, which continues to be a
 function that takes a `model` and returns a view.
 
+Finally, by extracting the details out of the `increase` function and passing in `update` as a
+parameter, we've separated the **application code** from the **setup code**. The application code
+is concerned with creating views, event handlers, and issuing updates, without being tied to any
+details about data flow and rendering. The setup code takes care of the "wiring up" -- initializing
+the model, setting up the `update` function, creating the view function, and rendering the results
+onto the page.
+
 ### Exercises
 
 1. Add two buttons, which increase and decrease the counter by 5. You should only have to add
