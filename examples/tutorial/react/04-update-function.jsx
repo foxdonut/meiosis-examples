@@ -21,9 +21,7 @@ var createView = function(update) {
 // -- Setup code
 
 var model = 0;
-
 var element = document.getElementById("app");
-
 var view = null;
 
 var update = function(value) {
@@ -32,5 +30,4 @@ var update = function(value) {
 };
 
 view = createView(update);
-
 ReactDOM.render(view(model), element);
