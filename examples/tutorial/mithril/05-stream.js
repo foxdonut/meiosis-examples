@@ -3,17 +3,17 @@
 // -- Utility code
 
 var stream = function() {
-  var fns = [];
+  var funcs = [];
   var createdStream = function(value) {
-    for (var i in fns) {
-      fns[i](value);
+    for (var i in funcs) {
+      funcs[i](value);
     }
   };
-  createdStream.map = function(fn) {
+  createdStream.map = function(func) {
     var newStream = stream();
 
-    fns.push(function(value) {
-      newStream(fn(value));
+    funcs.push(function(value) {
+      newStream(func(value));
     });
 
     return newStream;

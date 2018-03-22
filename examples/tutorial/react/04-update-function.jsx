@@ -24,11 +24,13 @@ var model = 0;
 
 var element = document.getElementById("app");
 
+var view = null;
+
 var update = function(value) {
   model = model + value;
   ReactDOM.render(view(model), element);
 };
 
-var view = createView(update);
+view = createView(update);
 
 ReactDOM.render(view(model), element);

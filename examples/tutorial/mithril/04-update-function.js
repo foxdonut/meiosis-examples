@@ -24,11 +24,13 @@ var model = 0;
 
 var element = document.getElementById("app");
 
+var view = null;
+
 var update = function(value) {
   model = model + value;
   m.render(element, view(model));
 };
 
-var view = createView(update);
+view = createView(update);
 
 m.render(element, view(model));
