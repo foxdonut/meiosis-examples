@@ -3,17 +3,17 @@
 // -- Utility code
 
 var stream = function() {
-  var funcs = [];
+  var mapFunctions = [];
   var createdStream = function(value) {
-    for (var i in funcs) {
-      funcs[i](value);
+    for (var i in mapFunctions) {
+      mapFunctions[i](value);
     }
   };
-  createdStream.map = function(func) {
+  createdStream.map = function(mapFunction) {
     var newStream = stream();
 
-    funcs.push(function(value) {
-      newStream(func(value));
+    mapFunctions.push(function(value) {
+      newStream(mapFunction(value));
     });
 
     return newStream;
@@ -52,4 +52,4 @@ update.map(function(value) {
   m.render(element, view(model));
 });
 
-update(model);
+m.render(element, view(model));

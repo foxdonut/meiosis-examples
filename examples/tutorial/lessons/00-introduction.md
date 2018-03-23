@@ -45,4 +45,7 @@ as well as _all_ the Meiosis examples, by cloning the
 [github repository](https://github.com/foxdonut/meiosis-examples).
 
 Let's get started! Please continue with either the
-[React](01-hello-world-react.html) or the [Mithril](01-hello-world-mithril.html) version.
+[01 - Hello World - React](01-hello-world-react.html) or the
+[01 - Hello World - Mithril](01-hello-world-mithril.html) version.
+
+[Table of Contents](toc.html)

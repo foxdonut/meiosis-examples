@@ -12,7 +12,7 @@ this the **view**:
 
 ### View = function(model)
 
-In the code above, `view` is a function that produces what to render. Since it is a function,
+In the code above, `view` is a function that produces the vnode to render. Since it is a function,
 it can receive parameters - namely, the **model**. This is a plain JavaScript object that
 represents the state of the application.
 
@@ -42,3 +42,5 @@ It is just a simple function of the model.
 model to produce the view.
 
 When you are ready, continue on to [03 - Update Model](03-update-model-mithril.html).
+
+[Table of Contents](toc.html)

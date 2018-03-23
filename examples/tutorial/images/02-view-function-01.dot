@@ -4,7 +4,7 @@ digraph meiosistutorial {
       <tr>
         <td>m.render(</td>
         <td port="element">element,</td>
-        <td port="view">view</td>
+        <td port="vnode">vnode</td>
         <td>)</td>
       </tr>
     </table>
@@ -38,6 +38,6 @@ digraph meiosistutorial {
   >]
 
   mrender:element -> element:app [dir="back"]
-  view -> mrender:view
+  view -> mrender:vnode
   vfunction -> view
 }

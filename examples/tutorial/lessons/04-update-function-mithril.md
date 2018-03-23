@@ -24,7 +24,9 @@ Notice that the function above needs to "know" about the details of how to re-re
 - It references the `model`
 - It references the `view` function.
 
-That's a lot of details tied into that function!
+That's a lot of details tied into that function! We do not want these details tied into view
+functions. As we build larger applications, we'll have more view functions and more event
+handler functions, and we don't want all these references tied in everywhere.
 
 Let's extract those details out into an `update` function:
 
@@ -35,7 +37,8 @@ var update = function(value) {
 };
 ```
 
-Now the `increase` function just needs to call `update(1)` to increase the value by 1 and re-render the view.
+Now the `increase` function just needs to call `update(1)` to increase the value by 1 and re-render
+the view. As you will see, this `update` function will only be in one place.
 
 ### Event handler function
 
@@ -101,7 +104,9 @@ parameter, we've separated the **application code** from the **setup code**. The
 is concerned with creating views, event handlers, and issuing updates, without being tied to any
 details about data flow and rendering. The setup code takes care of the "wiring up" -- initializing
 the model, setting up the `update` function, creating the view function, and rendering the results
-onto the page.
+onto the page. As we build larger applications, the application can grow and only need to know
+about the passed-in `update` function. The setup code only needs to be written once, and does not
+need to change as we build more features in the application code.
 
 ### Exercises
 
@@ -112,3 +117,5 @@ two lines of code to do this.
 only changes the sign, and `+5` and`-5` multiply by `5` and `-5` respectively.
 
 When you are ready, continue on to [05 - Stream](05-stream-mithril.html).
+
+[Table of Contents](toc.html)

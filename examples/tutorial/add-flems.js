@@ -35,7 +35,10 @@ filenames.forEach(source => {
       });
       var fileString = "[" + fileContents.join(",") + "]";
 
-      var links = parts[2].split(",");
+      var links = parts.length > 2 ? parts[2].split(",") : [];
+      if (links.length === 1 && links[0] === "[]") {
+        links = [];
+      }
       var linkContents = links.map(link => {
         var url = linkMap[link];
         return `{name: "${link}", type: "js", url: "${url}"}`;

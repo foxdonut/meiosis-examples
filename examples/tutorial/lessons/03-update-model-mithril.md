@@ -5,7 +5,7 @@
 ## 03 - Update Model
 
 In the previous lesson, [02 - View Function](02-view-function-mithril.html), we created a `view`
-function that produces the view according to the `model` that is passed to the function.
+function that produces the vnode according to the `model` that is passed to the function.
 
 So, we can call `view(model)` and render it onto the page. Now, how do we make a change to the
 model and refresh the view?
@@ -46,9 +46,9 @@ value. Then, it re-renders the view by calling `m.render` again.
 ![The onclick Function](03-update-model-01.svg)
 
 > **Note:** you might wonder about rebuilding the whole view and re-rendering it when something
-changes. Generally speaking, producing a virtual-DOM view is not a performance concern.
-Further, re-rendering the view is what virtual-DOM libraries are good at: figuring out what
-minimal changes are needed to make the real DOM reflect the view.
+changes. Generally speaking, producing a vnode is not a performance concern. Further, re-rendering
+the view is what virtual-DOM libraries are good at: figuring out what minimal changes are needed to
+make the real DOM reflect the view.
 
 ### Exercises
 
@@ -58,3 +58,5 @@ model to produce the view, and change the `increase` function so that it increas
 1. Add a `-1` button that decreases the value by 1.
 
 When you are ready, continue on to [04 - Update Function](04-update-function-mithril.html).
+
+[Table of Contents](toc.html)

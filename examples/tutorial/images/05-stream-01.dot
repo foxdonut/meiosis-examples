@@ -40,8 +40,8 @@ digraph meiosistutorial {
   >]
 
   model -> view
-  view -> render
-  render -> update
+  view -> render [label="vnode"]
+  render -> update [label="event"]
   update -> modelupdate
   modelupdate -> view
 }

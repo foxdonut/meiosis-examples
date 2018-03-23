@@ -8,10 +8,11 @@ The first thing that we will do is render something onto the page - a "Hello, wo
 of course. With Mithril, this is accomplished using `m.render`. When calling this function, we
 must pass two parameters:
 
-1. the DOM element into which we want to render, and
-1. what we want to render.
+1. The DOM element into which we want to render, and
+1. What we want to render. This is a virtual-DOM node, or **vnode** for short.
 
-We can use the `m()` function to describe the HTML structure of what we want to render.
+We can use the `m()` function to describe the HTML structure of what we want to render and
+produce a vnode suitable for passing to `m.render`.
 
 ### Our First Example
 
@@ -40,3 +41,5 @@ displayed before and after the message that you are rendering.
 now overwrites anything that you had in the `app.html` file.
 
 When you are ready, move on to the next lesson: [02 - View Function](02-view-function-mithril.html).
+
+[Table of Contents](toc.html)
