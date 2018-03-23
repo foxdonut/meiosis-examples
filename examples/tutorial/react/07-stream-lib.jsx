@@ -1,4 +1,7 @@
 /*global ReactDOM, flyd*/
+
+// -- Application code
+
 var createView = function(update) {
   var increase = function(amount) {
     return function(_event) {
@@ -15,14 +18,14 @@ var createView = function(update) {
   return view;
 };
 
+// -- Setup code
+
 var update = flyd.stream();
 var view = createView(update);
 
-var model = 0;
-
 var models = flyd.scan(function(model, value) {
   return model + value;
-}, model, update);
+}, 0, update);
 
 var element = document.getElementById("app");
 

@@ -1,39 +1,43 @@
 /*global m*/
+
+// -- Utility code
+
 var stream = function(initial) {
-  var callbacks = [];
+  var mapFunctions = [];
   var createdStream = function(value) {
-    for (var i = 0, t = callbacks.length; i < t; i++) {
-      var callback = callbacks[i];
-      callback(value);
+    for (var i in mapFunctions) {
+      mapFunctions[i](value);
     }
   };
-  createdStream.map = function(callback) {
-    var newStream = stream();
-
-    callbacks.push(function(value) {
-      newStream(callback(value));
-    });
-
+  createdStream.map = function(mapFunction) {
+    var newInitial = undefined;
     if (initial !== undefined) {
-      callback(initial);
+      newInitial = mapFunction(initial);
     }
+    var newStream = stream(newInitial);
+
+    mapFunctions.push(function(value) {
+      newStream(mapFunction(value));
+    });
 
     return newStream;
   };
   return createdStream;
 };
 
-var scan = function(accumulator, initial, st) {
+var scan = function(accumulator, initial, sourceStream) {
   var newStream = stream(initial);
   var accumulated = initial;
 
-  st.map(function(value) {
+  sourceStream.map(function(value) {
     accumulated = accumulator(accumulated, value);
     newStream(accumulated);
   });
 
   return newStream;
 };
+
+// -- Application code
 
 var createView = function(update) {
   var increase = function(amount) {
@@ -51,13 +55,14 @@ var createView = function(update) {
   return view;
 };
 
-var model = 0;
+// -- Setup code
+
 var update = stream();
 var view = createView(update);
 
 var models = scan(function(model, value) {
   return model + value;
-}, model, update);
+}, 0, update);
 
 var element = document.getElementById("app");
 

@@ -1,4 +1,7 @@
 /*global ReactDOM, flyd*/
+
+// -- Application code
+
 var convert = function(value, to) {
   if (to === "C") {
     return Math.round( (value - 32) / 9 * 5 );
@@ -37,17 +40,19 @@ var createView = function(update) {
   return view;
 };
 
+// -- Setup code
+
 var update = flyd.stream();
 var view = createView(update);
 
-var model = {
+var initialModel = {
   value: 20,
   units: "C"
 };
 
 var models = flyd.scan(function(model, value) {
   return Object.assign(model, value);
-}, model, update);
+}, initialModel, update);
 
 var element = document.getElementById("app");
 

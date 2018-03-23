@@ -1,5 +1,5 @@
 digraph meiosistutorial {
-  stream [shape="none", label="var update = stream()"]
+  stream [shape="none", label="var update = stream();"]
 
   updateplus1 [shape="none", style="filled", fillcolor="yellow", label="update(1)"]
 
@@ -32,9 +32,9 @@ digraph meiosistutorial {
   themapstream [shape="plaintext", style="filled", fillcolor="orange", label=<
     <table border="1">
       <tr>
-        <td port="plusone" border="0">10</td>
+        <td border="0">10</td>
         <td border="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td port="minusone" border="0">-10</td>
+        <td border="0">-10</td>
       </tr>
     </table>
   >]
