@@ -8,7 +8,7 @@ In the previous lesson, [04 - Update Function](04-update-function-mithril.html),
 **functions that return functions** to extract the `update` logic out of the view, and also to
 create an event handler function that accepts a parameter.
 
-Our setup code was as follows:
+Our Meiosis pattern setup code was as follows:
 
 ```js
 var model = 0;
@@ -38,9 +38,9 @@ So `view` needs `update` and `update` needs `view`... We solved this problem by 
 get called until we have a chance to create the `view` function. This is okay as a workaround but
 it's not a great situation.
 
-### The Reactive Loop
+### The Meiosis Pattern: A Reactive Loop
 
-What we've set up here is a **reactive loop**:
+What we've set up with the Meiosis Pattern is a **reactive loop**:
 
 ![The Reactive Loop](05-stream-01.svg)
 

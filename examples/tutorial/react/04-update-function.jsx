@@ -18,7 +18,7 @@ var createView = function(update) {
   return view;
 };
 
-// -- Setup code
+// -- Meiosis pattern setup code
 
 var model = 0;
 var element = document.getElementById("app");

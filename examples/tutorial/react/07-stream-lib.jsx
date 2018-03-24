@@ -3,28 +3,36 @@
 // -- Application code
 
 var createView = function(update) {
-  var increase = function(amount) {
+  var oper = function(obj) {
     return function(_event) {
-      update(amount);
+      update(obj);
     };
   };
   var view = function(model) {
     return (<div>
       <div>Counter: {model}</div>
-      <button onClick={increase( 1)}>+1</button>
-      <button onClick={increase(-1)}>-1</button>
+      <button onClick={oper({ oper: "add", value: 1 })}>+1</button>
+      <button onClick={oper({ oper: "times", value: 2 })}>*2</button>
     </div>);
   };
   return view;
 };
 
-// -- Setup code
+// -- Meiosis pattern setup code
 
 var update = flyd.stream();
 var view = createView(update);
 
-var models = flyd.scan(function(model, value) {
-  return model + value;
+var models = flyd.scan(function(model, obj) {
+  if (obj.oper === "add") {
+    return model + obj.value;
+  }
+  else if (obj.oper === "times") {
+    return model * obj.value;
+  }
+  else {
+    return model;
+  }
 }, 0, update);
 
 var element = document.getElementById("app");

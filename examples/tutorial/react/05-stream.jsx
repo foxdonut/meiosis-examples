@@ -39,7 +39,7 @@ var createView = function(update) {
   return view;
 };
 
-// -- Setup code
+// -- Meiosis pattern setup code
 
 var model = 0;
 var update = stream();

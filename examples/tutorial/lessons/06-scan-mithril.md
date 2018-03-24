@@ -9,7 +9,7 @@ wrote a simple implementation with a `map` method. Using a stream for `update`, 
 to have a better separation between a way for the view to issue updates, and the functions
 that use these updates to change the model and re-render the view.
 
-Recall that our setup code was:
+Recall that our Meiosis pattern setup code was:
 
 ```js
 var model = 0;
@@ -41,7 +41,7 @@ next time. Let's call this an **accumulator**.
 It turns out that streams have, besides `map`, another method called `scan`. In fact, stream
 libraries have a number of other methods (also called operators), ranging from a handful to an
 overwhelming amount! But, we **only** need `map` and `scan`. Furthermore, we only need to use
-them in **one place** - the setup code.
+them in **one place** - the Meiosis pattern setup code.
 
 Like `map`, `scan` takes a source stream and produces a new stream. Remember that with `map`,
 whenever a new value arrives on the source stream, the function that we passed to `map` gets
@@ -86,7 +86,7 @@ below:
 
 ![Scan](06-scan-01.svg)
 
-As you can certainly guess, this will fit in nicely for our setup code.
+As you can certainly guess, this will fit in nicely for our Meiosis pattern setup code.
 
 ### Implementing scan
 
@@ -146,7 +146,7 @@ a function that takes the incoming value, calls the `accumulator` function with 
 
 ### Putting it all together
 
-Now that we have `scan`, we can improve our setup code. Previously, we had:
+Now that we have `scan`, we can improve our Meiosis pattern setup code. Previously, we had:
 
 ```js
 var model = 0;

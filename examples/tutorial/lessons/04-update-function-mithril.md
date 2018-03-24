@@ -100,13 +100,14 @@ Also notice that `createView` is another function-that-returns-a-function. After
 function that takes a `model` and returns a view.
 
 Finally, by extracting the details out of the `increase` function and passing in `update` as a
-parameter, we've separated the **application code** from the **setup code**. The application code
-is concerned with creating views, event handlers, and issuing updates, without being tied to any
-details about data flow and rendering. The setup code takes care of the "wiring up" -- initializing
-the model, setting up the `update` function, creating the view function, and rendering the results
-onto the page. As we build larger applications, the application can grow and only need to know
-about the passed-in `update` function. The setup code only needs to be written once, and does not
-need to change as we build more features in the application code.
+parameter, we've separated the **application code** from the **Meiosis pattern setup code**. The
+application code is concerned with creating views, event handlers, and issuing updates, without
+being tied to any details about data flow and rendering. The Meiosis pattern setup code takes care
+of the "wiring up" -- initializing the model, setting up the `update` function, creating the view
+function, and rendering the results onto the page. As we build larger applications, the application
+can grow and only need to know about the passed-in `update` function. The Meiosis pattern setup
+code only needs to be written once, and does not need to change as we build more features in the
+application code.
 
 ### Exercises
 

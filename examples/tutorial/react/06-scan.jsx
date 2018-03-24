@@ -55,7 +55,7 @@ var createView = function(update) {
   return view;
 };
 
-// -- Setup code
+// -- Meiosis pattern setup code
 
 var update = stream();
 var view = createView(update);

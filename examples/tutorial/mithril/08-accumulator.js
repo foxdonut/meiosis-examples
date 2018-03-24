@@ -42,19 +42,15 @@ var createView = function(update) {
   return view;
 };
 
-// -- Setup code
+// -- Meiosis pattern setup code
 
 var update = m.stream();
 var view = createView(update);
 
-var initialModel = {
-  value: 20,
-  units: "C"
-};
-
-var models = m.stream.scan(function(model, value) {
-  return Object.assign(model, value);
-}, initialModel, update);
+var models = m.stream.scan(
+  function(model, value) {
+    return Object.assign(model, value);
+  }, { value: 20, units: "C" }, update);
 
 var element = document.getElementById("app");
 
