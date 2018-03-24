@@ -22,7 +22,7 @@ use [mithril-stream](https://mithril.js.org/stream.html). Another good choice is
 stream library simply by using its equivalent of `map`, `scan`, and pushing a value onto a
 stream.
 
-### Using mithril-stream
+### Using `mithril-stream`
 
 The example below uses [mithril-stream](https://mithril.js.org/stream.html). The equivalent
 of our `stream` and `scan` functions are `m.stream` and `m.stream.scan` respectively. The `map`

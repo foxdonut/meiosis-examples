@@ -45,10 +45,8 @@ var createView = function(update) {
 var update = flyd.stream();
 var view = createView(update);
 
-var models = flyd.scan(
-  function(model, value) {
-    return Object.assign(model, value);
-  }, { value: 20, units: "C" }, update);
+var models = flyd.scan(Object.assign,
+  { value: 20, units: "C" }, update);
 
 var element = document.getElementById("app");
 

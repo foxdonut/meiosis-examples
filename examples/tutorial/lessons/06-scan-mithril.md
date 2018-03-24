@@ -36,7 +36,7 @@ Notice that when we update the model, `model = model + value`, we are **combinin
 value with the current model (here, by addition), and the result becomes the current model for
 next time. Let's call this an **accumulator**.
 
-### Introducing scan
+### Introducing `scan`
 
 It turns out that streams have, besides `map`, another method called `scan`. In fact, stream
 libraries have a number of other methods (also called operators), ranging from a handful to an
@@ -88,7 +88,7 @@ below:
 
 As you can certainly guess, this will fit in nicely for our Meiosis pattern setup code.
 
-### Implementing scan
+### Implementing `scan`
 
 To implement `scan`, first we'll improve our `stream` by adding a feature: optionally passing
 in an initial value for the stream:

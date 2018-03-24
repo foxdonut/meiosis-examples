@@ -27,9 +27,7 @@ var createView = function(update) {
 
   var view = function(model) {
     return [
-      m("span", "Temperature: ", model.value),
-      m.trust("&deg;"),
-      m("span", model.units),
+      "Temperature: ", model.value, m.trust("&deg;"), model.units,
       m("div",
         m("button", { onclick: increase(model, 1) }, "Increase"),
         m("button", { onclick: increase(model,-1) }, "Decrease")
@@ -47,10 +45,8 @@ var createView = function(update) {
 var update = m.stream();
 var view = createView(update);
 
-var models = m.stream.scan(
-  function(model, value) {
-    return Object.assign(model, value);
-  }, { value: 20, units: "C" }, update);
+var models = m.stream.scan(Object.assign,
+  { value: 22, units: "C" }, update);
 
 var element = document.getElementById("app");
 
