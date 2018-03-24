@@ -211,6 +211,8 @@ Change the `-1` button's label to `*2`, and have its `onclick` function call
 Finally, change the accumulator function that is passed to `scan` so that it looks at the object's
 `oper` and `value`, and performs the operation on the model accordingly and returns the result.
 
+![Scan with different types](06-scan-02.svg)
+
 When you are ready, continue on to [07 - Stream Library](07-stream-lib-mithril.html).
 
 [Table of Contents](toc.html)
