@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*global m*/
+=======
+/*global m, deepmerge*/
+>>>>>>> d9972b3b4d8f236928676eaeab0b2985fe6b854b
 
 // -- Utility code
 
@@ -72,7 +76,11 @@ var createTemperaturePair = function(update) {
   };
   var air = Component.map(createTemperature(update, "Air"), "air");
   var water = Component.map(createTemperature(update, "Water"), "water");
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> d9972b3b4d8f236928676eaeab0b2985fe6b854b
   component.view = function(model) {
     return [
       air.view(model),
@@ -84,7 +92,11 @@ var createTemperaturePair = function(update) {
 
 var createApp = function(update) {
   var pair = Component.map(createTemperaturePair(update), "temperatures");
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> d9972b3b4d8f236928676eaeab0b2985fe6b854b
   return {
     view: function(model) {
       return pair.view(model);
