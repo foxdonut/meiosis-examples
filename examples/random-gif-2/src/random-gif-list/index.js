@@ -1,14 +1,18 @@
-const m = require("mithril");
-const b = require("bss").default;
-const { nest } = require("../util/nest");
+const R = require("ramda");
+const { createActions } = require("./actions");
+const { createView } = require("./view");
 
 export const createRandomGifList = createRandomGif => update => {
-  const randomGifList = nest(createRandomGif, ["randomGifList"], update);
+  const randomGif = createRandomGif(modelUpdate =>
+    update({ fn: R.over(R.lensPath(["randomGifsById", modelUpdate.id]), modelUpdate.fn) }));
+
+  const actions = createActions(update, randomGif);
 
   return {
-    model: () => Object.assign({}, randomGifList.model()),
-    view: model => m("div" + b.border("1px solid blue").p(8).mt(4), [
-      m("div" + b.d("inline-block"), randomGifList.view(model))
-    ])
+    model: () => ({
+      randomGifIds: [],
+      randomGifsById: {}
+    }),
+    view: createView(actions, randomGif)
   }
 };

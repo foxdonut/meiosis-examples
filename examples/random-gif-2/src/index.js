@@ -5,7 +5,7 @@ const { createApp } = require("./app");
 
 const update = stream();
 const app = createApp(update);
-const models = stream.scan((model, modelUpdate) => modelUpdate(model),
+const models = stream.scan((model, modelUpdate) => modelUpdate.fn(model),
   app.model(), update);
 
 const element = document.getElementById("app");

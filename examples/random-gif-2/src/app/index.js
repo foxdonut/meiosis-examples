@@ -12,10 +12,10 @@ const { createRandomGifList } = require("../random-gif-list");
 
 exports.createApp = update => {
   const actions = {
-    newGif: () => update(model => {
+    newGif: () => update({ fn: model => {
       const increment = model.counter.value > 3 && model.button.active ? 2 : 1;
       return R.over(R.lensPath(["counter", "value"]), R.add(increment), model);
-    })
+    } })
   };
   const button = nest(createButton, ["button"], update);
   const counter = nest(createCounter("Counter"), ["counter"], update);
@@ -61,7 +61,7 @@ exports.createApp = update => {
       m("div" + b.mt(8), "Random Gif Pair Pair:"),
       randomGifPairPair.view(model),
 
-      m("div" + b.mt(8), "Random Gif Pair Pair:"),
+      m("div" + b.mt(8), "Random Gif List:"),
       randomGifList.view(model)
     ]
   };
