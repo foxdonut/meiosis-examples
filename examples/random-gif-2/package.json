@@ -1,0 +1,50 @@
+{
+  "name": "random-gif-2",
+  "version": "1.0.0",
+  "description": "meiosis-examples random-gif",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --colors --watch",
+    "develop": "onchange '**/*.js' -i -- npm t",
+    "test": "node test/run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "mithril",
+    "reactive"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "bss": "^1.1.4",
+    "mithril": "^1.1.6",
+    "ramda": "0.25.0",
+    "static-sum-type": "^0.18.1",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "browser-env": "^3.2.5",
+    "glob": "^7.1.2",
+    "jquery": "^3.3.1",
+    "meiosis": "^1.2.0",
+    "meiosis-tracer": "^1.2.1",
+    "onchange": "^3.3.0",
+    "ospec": "^1.4.0",
+    "reify": "^0.15.1",
+    "webpack": "^4.3.0",
+    "webpack-cli": "^2.0.13"
+  }
+}

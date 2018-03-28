@@ -33,6 +33,12 @@ the Mithril version of the tutorial. Other view libraries such as
 [snabbdom](https://github.com/paldepind/snabbdom), [domVM](https://github.com/leeoniya/domvm),
 and other hyperscript view libraries are also easy to use with Meiosis.
 
+### ES5 or ES6
+
+I purposely used ES5 syntax in the code examples so that readers who are not familiar with ES6
+could benefit from the tutorial, without requiring ES6 knowledge. If you prefer ES6, by all means
+go ahead and use it! It can certainly lead to more concise syntax in some cases.
+
 ### Embedded Code Examples
 
 The best way to learn is to practice! So, all code examples for this tutorial are embedded
@@ -40,12 +46,18 @@ into the page using [Flems](https://github.com/porsager/flems), so that you can 
 code and see the results right there in the page. In fact, I strongly encourage you to try
 things out with the code, this will help you understand how things work.
 
+You can edit and run the code within the page, or you can also open the code in a new,
+full-sized page if that is more comfortable. You can do so using the
+![Open Flems in new window](flems-open-in-new-window.png) at the top-right corner of the
+code window.
+
 Finally, also note that you can also download and run the code examples for this tutorial,
 as well as _all_ the Meiosis examples, by cloning the
 [github repository](https://github.com/foxdonut/meiosis-examples).
 
-Let's get started! Please continue with either the
-[01 - Hello World - React](01-hello-world-react.html) or the
-[01 - Hello World - Mithril](01-hello-world-mithril.html) version.
+Let's get started! Please continue by choosing a version:
+
+- [01 - Hello World - React](01-hello-world-react.html)
+- [01 - Hello World - Mithril](01-hello-world-mithril.html)
 
 [Table of Contents](toc.html)
