@@ -6,7 +6,9 @@ const { nest } = require("../util/nest");
 const { createButton } = require("../button");
 const { createCounter } = require("../counter");
 const RandomGif = require("../random-gif");
-const { createRandomGifPair } = require("../random-gif-pair");
+const RandomGifPair = require("../random-gif-pair");
+const { createRandomGifPairPair } = require("../random-gif-pair-pair");
+const { createRandomGifList } = require("../random-gif-list");
 
 exports.createApp = update => {
   const actions = {
@@ -22,7 +24,12 @@ exports.createApp = update => {
   const randomGif1 = nest(createRandomGif, ["randomGif1"], update);
   const randomGif2 = nest(createRandomGif, ["randomGif2"], update);
 
-  const randomGifPair = nest(createRandomGifPair(createRandomGif), ["randomGifPair"], update);
+  const createRandomGifPair = RandomGifPair.createRandomGifPair(createRandomGif);
+  const randomGifPair = nest(createRandomGifPair, ["randomGifPair"], update);
+  const randomGifPairPair = nest(createRandomGifPairPair(createRandomGifPair),
+    ["randomGifPairPair"], update);
+
+  const randomGifList = nest(createRandomGifList(createRandomGif), ["randomGifList"], update);
 
   return {
     model: () => Object.assign(
@@ -31,7 +38,9 @@ exports.createApp = update => {
       counter.model(),
       randomGif1.model(),
       randomGif2.model(),
-      randomGifPair.model()
+      randomGifPair.model(),
+      randomGifPairPair.model(),
+      randomGifList.model()
     ),
 
     view: model => [
@@ -47,7 +56,13 @@ exports.createApp = update => {
       randomGif2.view(model),
 
       m("div" + b.mt(8), "Random Gif Pair:"),
-      randomGifPair.view(model)
+      randomGifPair.view(model),
+
+      m("div" + b.mt(8), "Random Gif Pair Pair:"),
+      randomGifPairPair.view(model),
+
+      m("div" + b.mt(8), "Random Gif Pair Pair:"),
+      randomGifList.view(model)
     ]
   };
 };
