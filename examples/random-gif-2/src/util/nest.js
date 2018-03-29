@@ -9,6 +9,9 @@ const nest = (create, path, update) => {
   if (component.model) {
     result.model = () => R.assocPath(path, component.model(), {});
   }
+  if (component.state) {
+    result.state = R.over(R.lensPath(path), component.state);
+  }
   if (component.view) {
     result.view = R.compose(component.view, R.path(path));
   }

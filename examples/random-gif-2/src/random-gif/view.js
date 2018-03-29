@@ -21,7 +21,8 @@ exports.createView = actions => model =>
   m("div" + b.border("1px solid green").p(8).mt(4), [
     m("span" + b.mr(4), "Tag:"),
     m("input[type=text]", { value: model.tag, onkeyup: actions.editTag(model.id) }),
-    m("button" + button.bc("#357edd"), { onclick: actions.newGif(model.id, model.tag) },
+    m("button" + button.bc("#357edd"), { onclick: () => actions.newGif(model.id, model.tag) },
       "Random Gif"),
+    m("button" + button.bc("red"), { onclick: () => actions.reset(model.id) }, "Reset"),
     m("div" + b.mt(4), [ m("img", { width: 200, height: 200, src: imgsrc(model.image) }) ])
   ]);

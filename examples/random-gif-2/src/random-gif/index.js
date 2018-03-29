@@ -3,19 +3,18 @@ const { Loaded, Success, Image } = require("./types");
 const { createActions } = require("./actions");
 const { createView } = require("./view");
 
-/*
-const randomGif = {
-  reload: ({update, event, model}) =>
-    newGif({update, event, id: model.id, tag: model.tag})()
+exports.createRandomGif = parentActions => update => {
+  const actions = createActions(update, parentActions);
+
+  return {
+    model: () => ({
+      id: uuid.v1(),
+      image: Loaded.Y(Success.Y(Image.N())),
+      tag: ""
+    }),
+
+    actions,
+
+    view: createView(actions)
+  };
 };
-*/
-
-exports.createRandomGif = actions => update => ({
-  model: () => ({
-    id: uuid.v1(),
-    image: Loaded.Y(Success.Y(Image.N())),
-    tag: ""
-  }),
-
-  view: createView(createActions(update, actions))
-});

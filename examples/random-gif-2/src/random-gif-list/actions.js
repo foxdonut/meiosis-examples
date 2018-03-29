@@ -9,9 +9,11 @@ exports.createActions = (update, randomGif) => ({
     return model;
   } }),
 
-  remove: id => _event => update({ fn: model => {
+  remove: id => update({ fn: model => {
     delete model.randomGifsById[id];
     model.randomGifIds.splice(model.randomGifIds.indexOf(id), 1);
     return model;
-  } })
+  } }),
+
+  resetAll: model => model.randomGifIds.forEach(randomGif.actions.reset)
 });

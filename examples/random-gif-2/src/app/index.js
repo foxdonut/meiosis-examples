@@ -43,6 +43,10 @@ exports.createApp = update => {
       randomGifList.model()
     ),
 
+    state: R.compose(
+      randomGifList.state
+    ),
+
     view: model => [
       counter.view(model),
 

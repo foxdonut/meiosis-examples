@@ -7,12 +7,13 @@ const update = stream();
 const app = createApp(update);
 const models = stream.scan((model, modelUpdate) => modelUpdate.fn(model),
   app.model(), update);
+const states = models.map(app.state);
 
 const element = document.getElementById("app");
-models.map(model => m.render(element, app.view(model)));
+states.map(state => m.render(element, app.view(state)));
 
 // Only for using Meiosis Tracer in development.
 const { trace } = require("meiosis");
 const meiosisTracer = require("meiosis-tracer");
-trace({ update, dataStreams: [ models ] });
+trace({ update, dataStreams: [ models, states ], toUpdate: state => ({ fn: () => state }) });
 meiosisTracer({ selector: "#tracer" });
