@@ -1,18 +1,16 @@
-import m from "mithril";
-import { createComponents, combineComponents } from "../util/nest";
-import { createRandomGifPair } from "../random-gif-pair";
+const m = require("mithril");
+const b = require("bss").default;
+const { nest } = require("../util/nest");
 
-export const createRandomGifPairPair = event => update => {
-  const components = createComponents(update, {
-    randomGifPairOne: createRandomGifPair(event),
-    randomGifPairTwo: createRandomGifPair(event)
-  });
+export const createRandomGifPairPair = createRandomGifPair => update => {
+  const randomGifPairOne = nest(createRandomGifPair, ["randomGifPairOne"], update);
+  const randomGifPairTwo = nest(createRandomGifPair, ["randomGifPairTwo"], update);
 
   return {
-    model: combineComponents(components, "model"),
-    view: model => m("div.ba.br2.b--orange.pa2",
-      components.randomGifPairOne.view(model),
-      components.randomGifPairTwo.view(model)
-    )
+    model: () => Object.assign({}, randomGifPairOne.model(), randomGifPairTwo.model()),
+    view: model => m("div" + b.border("1px solid orange").p(8).mt(4), [
+      randomGifPairOne.view(model),
+      randomGifPairTwo.view(model)
+    ])
   };
 };

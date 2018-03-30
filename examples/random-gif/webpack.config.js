@@ -8,6 +8,7 @@ module.exports = {
     path: __dirname + "/build",
     filename: "generated-app.js"
   },
+  mode: isProduction ? "production" : "development",
   module: {
     rules: [
       {

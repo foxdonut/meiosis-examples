@@ -5,13 +5,15 @@ const { fold } = require("static-sum-type");
 const { Loaded, Success, Image } = require("./types");
 const { button } = require("../util/ui");
 
+const IMG_PREFIX = "/examples/random-gif/images/";
+
 const imgsrc = image =>
   fold(Loaded)({
-    N: () => "/examples/random-gif-2/images/loading.gif",
+    N: () => IMG_PREFIX + "loading.gif",
     Y: fold(Success)({
-      N: () => "/examples/random-gif-2/images/error.png",
+      N: () => IMG_PREFIX + "error.png",
       Y: fold(Image)({
-        N: () => "/examples/random-gif-2/images/blank.png",
+        N: () => IMG_PREFIX + "blank.png",
         Y: identity
       })
     })

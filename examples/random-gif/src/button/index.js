@@ -1,16 +1,23 @@
-import m from "mithril";
-import classnames from "classnames";
-import { lensPath, not, over } from "ramda";
+const m = require("mithril");
+const b = require("bss").default;
+const { lensPath, not, over } = require("ramda");
+const { button } = require("../util/ui");
 
-const toggle = update => () => update(over(lensPath(["active"]), not));
-
-export const createButton = update => ({
-  model: () => ({
-    active: false
-  }),
-  view: model => {
-    const classes = classnames({ "bg-green": model.active, "bg-gray": !model.active });
-    const label = model.active ? "Active" : "Inactive";
-    return m("button.white.ba.b--white.br2.pv1.ph2.link.w4", { class: classes, onclick: toggle(update) }, label);
-  }
+const createActions = update => ({
+  toggle: _event => update({ fn: over(lensPath(["active"]), not) })
 });
+
+exports.createButton = update => {
+  const actions = createActions(update);
+
+  return {
+    model: () => ({
+      active: false
+    }),
+    view: model => {
+      const bc = model.active ? "green" : "red";
+      const label = model.active ? "Active" : "Inactive";
+      return m("button" + button, { style: b.bc(bc).style, onclick: actions.toggle }, label);
+    }
+  };
+};
