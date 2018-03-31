@@ -1,18 +1,15 @@
-/*global b, m*/
+/*global m, deepmerge*/
 
 // -- Utility code
 
 var nestUpdate = function(update, prop) {
-  // This wraps the update stream function
-  return function(func) {
-    update(model => {
-      model[prop] = func(model[prop]);
-      return model;
-    });
+  return function(obj) {
+    var result = {};
+    result[prop] = obj;
+    update(result);
   };
 };
 
-// create :: update -> { view };
 var Component = function(create) {
   function nest(prop) {
     return Component(function(update) {
@@ -36,8 +33,6 @@ var Component = function(create) {
 
 // -- Application code
 
-var redBox = vnode => m("div" + b({ border: "1px solid red" }).p(4), vnode);
-
 var convert = function(value, to) {
   if (to === "C") {
     return Math.round( (value - 32) / 9 * 5 );
@@ -51,21 +46,14 @@ var createTemperature = function(label, init) {
   return function(update) {
     var increase = function(model, amount) {
       return function(_event) {
-        update(model => {
-          model.value += amount;
-          return model;
-        });
+        update({ value: model.value + amount });
       };
     };
     var changeUnits = function(model) {
       return function(_event) {
         var newUnits = model.units === "C" ? "F" : "C";
         var newValue = convert(model.value, newUnits);
-        update(model => {
-          model.value = newValue;
-          model.units = newUnits;
-          return model;
-        });
+        update({ value: newValue, units: newUnits });
       };
     };
 
@@ -100,7 +88,7 @@ var createTemperaturePair = function(update) {
 
   var view = function(model) {
     return [
-      redBox(air.view(model)),
+      air.view(model),
       water.view(model)
     ];
   };
@@ -116,7 +104,7 @@ var createApp = function(update) {
 var update = m.stream();
 var app = Component(createApp).create(update);
 
-var models = m.stream.scan((model, func) => func(model), app.model(), update);
+var models = m.stream.scan(deepmerge, app.model(), update);
 
 var element = document.body;
 

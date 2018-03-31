@@ -1,24 +1,32 @@
-/*global m, deepmerge*/
+/*global m*/
 
 // -- Utility code
 
 var nestUpdate = function(update, prop) {
-  // This wraps the update stream function
-  return function(obj) {
-    update({ [prop]: obj });
+  return function(func) {
+    update(model => {
+      model[prop] = func(model[prop]);
+      return model;
+    });
   };
 };
 
-// create :: update -> { view };
 var Component = function(create) {
   function nest(prop) {
     return Component(function(update) {
       var component = create(nestUpdate(update, prop));
-      return {
-        view: function(model) {
+      var result = {};
+      if (component.model) {
+        result.model = function() {
+          return { [prop]: component.model() };
+        };
+      }
+      if (component.view) {
+        result.view = function(model) {
           return component.view(model[prop]);
-        }
-      };
+        };
+      }
+      return result;
     });
   }
   return { nest: nest, create: create };
@@ -35,19 +43,30 @@ var convert = function(value, to) {
   }
 };
 
-var createTemperature = function(label) {
+var createTemperature = function(label, init) {
   return function(update) {
     var increase = function(model, amount) {
       return function(_event) {
-        update({ value: model.value + amount });
+        update(model => {
+          model.value += amount;
+          return model;
+        });
       };
     };
     var changeUnits = function(model) {
       return function(_event) {
         var newUnits = model.units === "C" ? "F" : "C";
         var newValue = convert(model.value, newUnits);
-        update({ value: newValue, units: newUnits });
+        update(model => {
+          model.value = newValue;
+          model.units = newUnits;
+          return model;
+        });
       };
+    };
+
+    var model = function() {
+      return Object.assign({ value: 22, units: "C" }, init);
     };
 
     var view = function(model) {
@@ -62,13 +81,18 @@ var createTemperature = function(label) {
         )
       ];
     };
-    return { view: view };
+    return { model: model, view: view };
   };
 };
 
 var createTemperaturePair = function(update) {
   var air = Component(createTemperature("Air")).nest("air").create(update);
-  var water = Component(createTemperature("Water")).nest("water").create(update);
+  var water = Component(createTemperature("Water", { value: 84, units: "F" }))
+    .nest("water").create(update);
+
+  var model = function() {
+    return Object.assign(air.model(), water.model());
+  };
 
   var view = function(model) {
     return [
@@ -76,15 +100,11 @@ var createTemperaturePair = function(update) {
       water.view(model)
     ];
   };
-  return { view: view };
+  return { model: model, view: view };
 };
 
 var createApp = function(update) {
-  var pair = Component(createTemperaturePair).nest("temperatures").create(update);
-
-  return {
-    view: model => pair.view(model)
-  };
+  return Component(createTemperaturePair).nest("temperatures").create(update);
 };
 
 // -- Meiosis pattern setup code
@@ -92,10 +112,9 @@ var createApp = function(update) {
 var update = m.stream();
 var app = Component(createApp).create(update);
 
-var models = m.stream.scan(deepmerge,
-  { temperatures: { air: { value: 22, units: "C" },
-    water: { value: 84, units: "F" }
-  } }, update);
+var models = m.stream.scan(function(model, func) {
+  return func(model);
+}, app.model(), update);
 
 var element = document.body;
 

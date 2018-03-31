@@ -1,9 +1,8 @@
-/*global b, m*/
+/*global m*/
 
 // -- Utility code
 
 var nestUpdate = function(update, prop) {
-  // This wraps the update stream function
   return function(func) {
     update(model => {
       model[prop] = func(model[prop]);
@@ -31,8 +30,6 @@ var nest = function(create, prop) {
 };
 
 // -- Application code
-
-var redBox = vnode => m("div" + b({ border: "1px solid red" }).p(4), vnode);
 
 var convert = function(value, to) {
   if (to === "C") {
@@ -95,7 +92,7 @@ var createTemperaturePair = function(update) {
 
   var view = function(model) {
     return [
-      redBox(air.view(model)),
+      air.view(model),
       water.view(model)
     ];
   };
@@ -111,7 +108,9 @@ var createApp = function(update) {
 var update = m.stream();
 var app = createApp(update);
 
-var models = m.stream.scan((model, func) => func(model), app.model(), update);
+var models = m.stream.scan(function(model, func) {
+  return func(model);
+}, app.model(), update);
 
 var element = document.body;
 

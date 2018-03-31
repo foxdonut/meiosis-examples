@@ -1,4 +1,4 @@
-/*global m*/
+/*global m, deepmerge*/
 
 // -- Utility code
 
@@ -21,7 +21,7 @@ var convert = function(value, to) {
   }
 };
 
-var createTemperature = function(update) {
+var createTemperature = function(update, label) {
   var increase = function(model, amount) {
     return function(_event) {
       update({ value: model.value + amount });
@@ -37,7 +37,7 @@ var createTemperature = function(update) {
 
   var view = function(model) {
     return [
-      " Temperature: ", model.value, m.trust("&deg;"), model.units,
+      label, " Temperature: ", model.value, m.trust("&deg;"), model.units,
       m("div",
         m("button", { onclick: increase(model, 1) }, "Increase"),
         m("button", { onclick: increase(model,-1) }, "Decrease")
@@ -53,7 +53,7 @@ var createTemperature = function(update) {
 var createTemperaturePair = function(update) {
   var air = createTemperature(nest(update, "air"), "Air");
   var water = createTemperature(nest(update, "water"), "Water");
-  
+
   return function(model) {
     return [
       air(model.air),
@@ -64,7 +64,7 @@ var createTemperaturePair = function(update) {
 
 var createView = function(update) {
   var pair = createTemperaturePair(nest(update, "temperatures"));
-  
+
   return function(model) {
     return pair(model.temperatures);
   };
@@ -87,4 +87,3 @@ var element = document.getElementById("app");
 models.map(function(model) {
   m.render(element, view(model));
 });
-
