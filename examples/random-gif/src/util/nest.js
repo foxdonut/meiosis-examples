@@ -1,7 +1,7 @@
 const R = require("ramda");
 
 const nestUpdate = (update, path) => modelUpdate =>
-  update({ id: modelUpdate.id, fn: R.over(R.lensPath(path), modelUpdate.fn) });
+  update(R.merge(modelUpdate, { fn: R.over(R.lensPath(path), modelUpdate.fn) }));
 
 const nest = (create, path, update) => {
   const component = create(nestUpdate(update, path));

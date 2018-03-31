@@ -17,7 +17,9 @@ var Component = function(create) {
       var result = {};
       if (component.model) {
         result.model = function() {
-          return { [prop]: component.model() };
+          var initialModel = {};
+          initialModel[prop] = component.model();
+          return initialModel;
         };
       }
       if (component.view) {

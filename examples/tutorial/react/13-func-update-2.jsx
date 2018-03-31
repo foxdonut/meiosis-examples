@@ -4,29 +4,29 @@
 
 var nestUpdate = function(update, prop) {
   return function(func) {
-    update(model => {
+    update(function(model) {
       model[prop] = func(model[prop]);
       return model;
     });
   };
 };
 
-var nest = function(create, prop) {
-  return function(update) {
-    var component = create(nestUpdate(update, prop));
-    var result = {};
-    if (component.model) {
-      result.model = function() {
-        return { [prop]: component.model() };
-      };
-    }
-    if (component.view) {
-      result.view = function(model) {
-        return component.view(model[prop]);
-      };
-    }
-    return result;
-  };
+var nest = function(create, prop, update) {
+  var component = create(nestUpdate(update, prop));
+  var result = {};
+  if (component.model) {
+    result.model = function() {
+      var initialModel = {};
+      initialModel[prop] = component.model();
+      return initialModel;
+    };
+  }
+  if (component.view) {
+    result.view = function(model) {
+      return component.view(model[prop]);
+    };
+  }
+  return result;
 };
 
 // -- Application code
@@ -44,7 +44,7 @@ var createTemperature = function(label, init) {
   return function(update) {
     var increase = function(model, amount) {
       return function(_event) {
-        update(model => {
+        update(function(model) {
           model.value += amount;
           return model;
         });
@@ -54,7 +54,7 @@ var createTemperature = function(label, init) {
       return function(_event) {
         var newUnits = model.units === "C" ? "F" : "C";
         var newValue = convert(model.value, newUnits);
-        update(model => {
+        update(function(model) {
           model.value = newValue;
           model.units = newUnits;
           return model;
@@ -83,8 +83,8 @@ var createTemperature = function(label, init) {
 };
 
 var createTemperaturePair = function(update) {
-  var air = nest(createTemperature("Air"), "air")(update);
-  var water = nest(createTemperature("Water", { value: 84, units: "F" }), "water")(update);
+  var air = nest(createTemperature("Air"), "air", update);
+  var water = nest(createTemperature("Water", { value: 84, units: "F" }), "water", update);
 
   var model = function() {
     return Object.assign(air.model(), water.model());
@@ -100,7 +100,7 @@ var createTemperaturePair = function(update) {
 };
 
 var createApp = function(update) {
-  return nest(createTemperaturePair, "temperatures")(update);
+  return nest(createTemperaturePair, "temperatures", update);
 };
 
 // -- Meiosis pattern setup code

@@ -4,7 +4,7 @@
 
 var nestUpdate = function(update, prop) {
   return function(func) {
-    update(model => {
+    update(function(model) {
       model[prop] = func(model[prop]);
       return model;
     });
@@ -18,7 +18,9 @@ var Component = function(create) {
       var result = {};
       if (component.model) {
         result.model = function() {
-          return { [prop]: component.model() };
+          var initialModel = {};
+          initialModel[prop] = component.model();
+          return initialModel;
         };
       }
       if (component.view) {
@@ -47,7 +49,7 @@ var createTemperature = function(label, init) {
   return function(update) {
     var increase = function(model, amount) {
       return function(_event) {
-        update(model => {
+        update(function(model) {
           model.value += amount;
           return model;
         });
@@ -57,7 +59,7 @@ var createTemperature = function(label, init) {
       return function(_event) {
         var newUnits = model.units === "C" ? "F" : "C";
         var newValue = convert(model.value, newUnits);
-        update(model => {
+        update(function(model) {
           model.value = newValue;
           model.units = newUnits;
           return model;
