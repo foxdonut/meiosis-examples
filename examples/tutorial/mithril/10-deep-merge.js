@@ -1,4 +1,4 @@
-/*global m, deepmerge*/
+/*global m, _*/
 
 // -- Utility code
 
@@ -75,7 +75,7 @@ var createView = function(update) {
 var update = m.stream();
 var view = createView(update);
 
-var models = m.stream.scan(deepmerge,
+var models = m.stream.scan(_.merge,
   { temperatures:
     { air: { value: 22, units: "C" },
       water: { value: 84, units: "F" }
