@@ -90,25 +90,64 @@ var createTemperature = function(label, init) {
   };
 };
 
-var createTemperaturePair = function(update) {
-  var air = nest(createTemperature("Air"), "air", update);
-  var water = nest(createTemperature("Water", { value: 84, units: "F" }), "water", update);
+var createTemperatureList = function(update) {
+  var temperature = createTemperature()(function(modelUpdate) {
+    var fn = modelUpdate.fn;
+    update({ fn: function(model) {
+      model.temperaturesById[modelUpdate.id] = fn(model.temperaturesById[modelUpdate.id]);
+      return model;
+    } });
+  });
 
   var model = function() {
-    return Object.assign(air.model(), water.model());
+    return {
+      temperatureIds: [],
+      temperaturesById: {}
+    };
+  };
+
+  var addTemperature = function(_event) {
+    update({ fn: function(model) {
+      var temperatureModel = temperature.model();
+      var id = temperatureModel.id;
+
+      model.temperatureIds.push(id);
+      model.temperaturesById[id] = temperatureModel;
+
+      return model;
+    } });
+  };
+
+  var removeTemperature = function(id) {
+    return function(_event) {
+      update({ fn: function(model) {
+        delete model.temperaturesById[id];
+        model.temperatureIds.splice(model.temperatureIds.indexOf(id), 1);
+        return model;
+      } });
+    };
+  };
+
+  var renderTemperature = function(model) {
+    return function(id) {
+      return (<div key={id}>
+        {temperature.view(model.temperaturesById[id])}
+        <button onClick={removeTemperature(id)}>Remove</button>
+      </div>);
+    };
   };
 
   var view = function(model) {
     return (<div>
-      {air.view(model)}
-      {water.view(model)}
+      <button onClick={addTemperature}>Add</button>
+      {model.temperatureIds.map(renderTemperature(model))}
     </div>);
   };
   return { model: model, view: view };
 };
 
 var createApp = function(update) {
-  return nest(createTemperaturePair, "temperatures", update);
+  return nest(createTemperatureList, "temperatures", update);
 };
 
 // -- Meiosis pattern setup code
