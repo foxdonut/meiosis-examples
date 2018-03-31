@@ -112,7 +112,7 @@ var models = m.stream.scan(function(model, func) {
   return func(model);
 }, app.model(), update);
 
-var element = document.body;
+var element = document.getElementById("app");
 
 models.map(function(model) {
   m.render(element, app.view(model));

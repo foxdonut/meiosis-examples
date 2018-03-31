@@ -106,7 +106,7 @@ var app = Component(createApp).create(update);
 
 var models = m.stream.scan(_.merge, app.model(), update);
 
-var element = document.body;
+var element = document.getElementById("app");
 
 models.map(function(model) {
   m.render(element, app.view(model));

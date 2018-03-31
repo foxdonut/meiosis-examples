@@ -1,13 +1,12 @@
-/*global m*/
+/*global ReactDOM, flyd, _*/
 
 // -- Utility code
 
 var nestUpdate = function(update, prop) {
-  return function(func) {
-    update(model => {
-      model[prop] = func(model[prop]);
-      return model;
-    });
+  return function(obj) {
+    var result = {};
+    result[prop] = obj;
+    update(result);
   };
 };
 
@@ -47,21 +46,14 @@ var createTemperature = function(label, init) {
   return function(update) {
     var increase = function(model, amount) {
       return function(_event) {
-        update(model => {
-          model.value += amount;
-          return model;
-        });
+        update({ value: model.value + amount });
       };
     };
     var changeUnits = function(model) {
       return function(_event) {
         var newUnits = model.units === "C" ? "F" : "C";
         var newValue = convert(model.value, newUnits);
-        update(model => {
-          model.value = newValue;
-          model.units = newUnits;
-          return model;
-        });
+        update({ value: newValue, units: newUnits });
       };
     };
 
@@ -70,16 +62,16 @@ var createTemperature = function(label, init) {
     };
 
     var view = function(model) {
-      return [
-        label, " Temperature: ", model.value, m.trust("&deg;"), model.units,
-        m("div",
-          m("button", { onclick: increase(model, 1) }, "Increase"),
-          m("button", { onclick: increase(model,-1) }, "Decrease")
-        ),
-        m("div",
-          m("button", { onclick: changeUnits(model) }, "Change Units")
-        )
-      ];
+      return (<div>
+        <span>{label} Temperature: {model.value}&deg;{model.units}</span>
+        <div>
+          <button onClick={increase(model, 1)}>Increase</button>
+          <button onClick={increase(model,-1)}>Decrease</button>
+        </div>
+        <div>
+          <button onClick={changeUnits(model)}>Change Units</button>
+        </div>
+      </div>);
     };
     return { model: model, view: view };
   };
@@ -95,10 +87,10 @@ var createTemperaturePair = function(update) {
   };
 
   var view = function(model) {
-    return [
-      air.view(model),
-      water.view(model)
-    ];
+    return (<div>
+      {air.view(model)}
+      {water.view(model)}
+    </div>);
   };
   return { model: model, view: view };
 };
@@ -109,15 +101,13 @@ var createApp = function(update) {
 
 // -- Meiosis pattern setup code
 
-var update = m.stream();
+var update = flyd.stream();
 var app = Component(createApp).create(update);
 
-var models = m.stream.scan(function(model, func) {
-  return func(model);
-}, app.model(), update);
+var models = flyd.scan(_.merge, app.model(), update);
 
 var element = document.getElementById("app");
 
 models.map(function(model) {
-  m.render(element, app.view(model));
+  ReactDOM.render(app.view(model), element);
 });

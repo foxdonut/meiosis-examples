@@ -1,4 +1,14 @@
-/*global ReactDOM, flyd*/
+/*global ReactDOM, flyd, _*/
+
+// -- Utility code
+
+var nest = function(update, prop) {
+  return function(obj) {
+    var result = {};
+    result[prop] = obj;
+    update(result);
+  };
+};
 
 // -- Application code
 
@@ -11,7 +21,7 @@ var convert = function(value, to) {
   }
 };
 
-var createView = function(update) {
+var createTemperature = function(update, label) {
   var increase = function(model, amount) {
     return function(_event) {
       update({ value: model.value + amount });
@@ -27,7 +37,7 @@ var createView = function(update) {
 
   var view = function(model) {
     return (<div>
-      <span>Temperature: {model.value}&deg;{model.units}</span>
+      <span>{label} Temperature: {model.value}&deg;{model.units}</span>
       <div>
         <button onClick={increase(model, 1)}>Increase</button>
         <button onClick={increase(model,-1)}>Decrease</button>
@@ -40,13 +50,37 @@ var createView = function(update) {
   return view;
 };
 
+var createTemperaturePair = function(update) {
+  var air = createTemperature(nest(update, "air"), "Air");
+  var water = createTemperature(nest(update, "water"), "Water");
+
+  return function(model) {
+    return (<div>
+      {air(model.air)}
+      {water(model.water)}
+    </div>);
+  };
+};
+
+var createView = function(update) {
+  var pair = createTemperaturePair(nest(update, "temperatures"));
+
+  return function(model) {
+    return pair(model.temperatures);
+  };
+};
+
 // -- Meiosis pattern setup code
 
 var update = flyd.stream();
 var view = createView(update);
 
-var models = flyd.scan(Object.assign,
-  { value: 22, units: "C" }, update);
+var models = flyd.scan(_.merge,
+  { temperatures:
+    { air: { value: 22, units: "C" },
+      water: { value: 84, units: "F" }
+    }
+  }, update);
 
 var element = document.getElementById("app");
 

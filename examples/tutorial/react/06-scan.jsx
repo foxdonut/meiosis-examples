@@ -64,12 +64,8 @@ var models = scan(function(model, value) {
   return model + value;
 }, 0, update);
 
-var render = (function(element) {
-  return function(vnode) {
-    ReactDOM.render(vnode, element);
-  };
-})(document.getElementById("app"));
+var element = document.getElementById("app");
 
 models.map(function(model) {
-  render(view(model));
+  ReactDOM.render(view(model), element);
 });
