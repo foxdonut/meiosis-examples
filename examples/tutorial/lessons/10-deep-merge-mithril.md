@@ -65,6 +65,8 @@ Again we are wrapping `update` with `nest`. Now, when the temperature code calls
 `update({ value: 23 })`, if we nest the temperature element with `nest(update, "air")`, the
 update will be transformed into `{ air: { value: 23 } }`.
 
+![Nesting objects](10-deep-merge-01.svg)
+
 We can then try to merge in the update using `Object.assign` as our accumulator function:
 
 ```js
@@ -104,7 +106,7 @@ Object.assign(
 
 As you can see above, at the first level we have `air` and `water`, so `Object.assign` merges
 `air` and keeps `water`. But after that, whatever is under `air` overwrites whatever was there
-previously. So `{ value: 23 }` replaces `{ value: 22, units: "C" }` and we lose `units`.
+previously. So `{ value: 23 }` entirely replaces `{ value: 22, units: "C" }` and we lose `units`.
 
 What we need is a **deep** merge, so that properties at every level are merged together.
 
@@ -120,11 +122,47 @@ Before we do that, though, let's talk about **multiple** levels of nesting.
 Now that we'll be passing plain objects via `update` and merging them into the model, we can use
 more than one level of nesting.
 
-Here is the example:
+What I mean by that is, we can nest temperatures at `air` and `water`, but then we can create
+another element, `temperaturePair`, which contains the `air` and `water` temperatures. Then, we
+can in turn nest `temperaturePair` at `temperatures`.
+
+Our top-level model is now:
+
+```js
+{ temperatures:
+  { air:   { value: 22, units: "C" },
+    water: { value: 84, units: "F" }
+  }
+}
+```
+
+The following illustrates multiple levels of nesting. `createTemperaturePair` nests
+`createTemperature` at `air` and `water`. `createView` in turn nests `createTemperaturePair`  at
+`temperatures`.
+
+![Multiple nesting](10-deep-merge-02.svg)
+
+Multiple levels of nesting means that we can use and re-use elements at various points within our
+top-level model. The code for these elements does not need to change, and is blissfully unaware of
+where they are nested within the top-level model. They can happily continue to work with just their
+model.
+
+This also enables us to have elements that use properties like `value` in their model, without
+conflicting with other elements that also use `value`. Each element has its separate place within
+the top-level model. We can compose elements out of other elements, and compose _those_ elements
+into other elements, and so on.
+
+Let's put everything together. You can see how we have multiple levels of nesting. As previously
+discussed, we're using Lodash's `_.merge` to achieve deep merging of updates into the model.
 
 @flems mithril/10-deep-merge.js,app.html mithril,mithril-stream,lodash 800
 
 ### Exercise
+
+- Add another element next to `temperatures` so that your top-level model is
+`{ temperatures: ..., other: ... }`, of course replacing `other` with your choice of property name.
+The element that you add should not "know" where it is nested within the top-level model. For bonus
+points, add another element that is nested within the element that you added.
 
 When you are ready, continue on to [11 - Components](11-components-mithril.html).
 

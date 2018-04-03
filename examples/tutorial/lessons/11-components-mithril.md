@@ -12,6 +12,6 @@ Here is the example:
 
 ### Exercise
 
-When you are ready, continue on to [12 - Function Update 1](12-func-update-1-mithril.html).
+When you are ready, continue on to [12 - Function Update](12-func-update-mithril.html).
 
 [Table of Contents](toc.html)

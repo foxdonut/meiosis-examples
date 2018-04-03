@@ -1,6 +1,7 @@
 /*global __dirname*/
 module.exports = {
   entry: "./src/index.js",
+  mode: "development",
   output: {
     path: __dirname + "/build",
     filename: "generated-app.js"

@@ -4,7 +4,7 @@ import { createEntryDate } from "../entryDate";
 import { createEntryNumber } from "../entryNumber";
 import { createTemperature } from "../temperature";
 import { validateModel } from "../validation";
-import { createComponents, combineComponents }  from "../util/nest";
+import { nest }  from "../util/nest";
 
 const createActions = update => ({
   save: evt => {
@@ -12,14 +12,9 @@ const createActions = update => ({
 
     update(model => {
       const errors = validateModel(model);
-      console.log("errors:", JSON.stringify(errors, null, 4));
-      /*
-      const errorMap = errors.reduce((result, next) =>
-        _.set(result, next.path, next.message), {});
-
-      [["entryNumber"], ["entryDate", "from"], ["entryDate", "to"]].forEach(path =>
-        _.set(model, path.concat(["errors"]), _.get(errorMap, path, {})));
-      */
+      _.set(model, ["entryDate", "from", "errors"], _.get(errors, ["entryDate", "from"]));
+      _.set(model, ["entryDate", "to", "errors"], _.get(errors, ["entryDate", "to"]));
+      _.set(model, ["entryNumber", "errors"], _.get(errors, ["entryNumber"]));
 
       if (_.isEmpty(errors)) {
         const air = model.temperature.air;
@@ -27,11 +22,13 @@ const createActions = update => ({
 
         model.saved =
           "Entry #" + model.entryNumber.value +
-           " on " + model.entryDate.value + ":" +
+           " from " + model.entryDate.from.value +
+           " to " + model.entryDate.to.value + ":" +
            " Air: " + air.value + "\xB0" + air.units +
            " Water: " + water.value + "\xB0" + water.units;
 
-        model.entryDate.value = "";
+        model.entryDate.from.value = "";
+        model.entryDate.to.value = "";
         model.entryNumber.value = "";
       }
       return model;
@@ -40,20 +37,28 @@ const createActions = update => ({
 });
 
 export const createApp = update => {
-  const components = createComponents(update, {
-    entryNumber: createEntryNumber,
-    entryDate: {
-      from: createEntryDate("From Date:"),
-      to: createEntryDate("To Date:")
-    },
-    temperature: {
-      air: createTemperature("Air temperature"),
-      water: createTemperature("Water temperature")
-    }
-  });
+  const entryNumber = nest(createEntryNumber, "entryNumber", update);
+  const entryDateFrom = nest(createEntryDate("From Date:"), ["entryDate", "from"], update);
+  const entryDateTo = nest(createEntryDate("To Date:"), ["entryDate", "to"], update);
+  const airTemperature = nest(createTemperature("Air temperature"), ["temperature", "air"], update);
+  const waterTemperature = nest(createTemperature("Water temperature"), ["temperature", "water"], update);
+
+  const components = {
+    entryNumber,
+    entryDateFrom,
+    entryDateTo,
+    airTemperature,
+    waterTemperature
+  };
 
   return {
-    model: combineComponents(components, "model"),
+    model: () => _.merge({},
+      entryNumber.model(),
+      entryDateFrom.model(),
+      entryDateTo.model(),
+      airTemperature.model(),
+      waterTemperature.model()
+    ),
     view: createView(createActions(update), components)
   };
 };

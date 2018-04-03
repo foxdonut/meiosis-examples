@@ -10,27 +10,22 @@ var nestUpdate = function(update, prop) {
   };
 };
 
-var Component = function(create) {
-  function nest(prop) {
-    return Component(function(update) {
-      var component = create(nestUpdate(update, prop));
-      var result = {};
-      if (component.model) {
-        result.model = function() {
-          var initialModel = {};
-          initialModel[prop] = component.model();
-          return initialModel;
-        };
-      }
-      if (component.view) {
-        result.view = function(model) {
-          return component.view(model[prop]);
-        };
-      }
-      return result;
-    });
+var nest = function(create, prop, update) {
+  var component = create(nestUpdate(update, prop));
+  var result = {};
+  if (component.model) {
+    result.model = function() {
+      var initialModel = {};
+      initialModel[prop] = component.model();
+      return initialModel;
+    };
   }
-  return { nest: nest, create: create };
+  if (component.view) {
+    result.view = function(model) {
+      return component.view(model[prop]);
+    };
+  }
+  return result;
 };
 
 // -- Application code
@@ -80,9 +75,9 @@ var createTemperature = function(label, init) {
 };
 
 var createTemperaturePair = function(update) {
-  var air = Component(createTemperature("Air")).nest("air").create(update);
-  var water = Component(createTemperature("Water", { value: 84, units: "F" }))
-    .nest("water").create(update);
+  var air = nest(createTemperature("Air"), "air", update);
+  var water = nest(createTemperature("Water", { value: 84, units: "F" }),
+    "water", update);
 
   var model = function() {
     return Object.assign(air.model(), water.model());
@@ -98,13 +93,13 @@ var createTemperaturePair = function(update) {
 };
 
 var createApp = function(update) {
-  return Component(createTemperaturePair).nest("temperatures").create(update);
+  return nest(createTemperaturePair, "temperatures", update);
 };
 
 // -- Meiosis pattern setup code
 
 var update = flyd.stream();
-var app = Component(createApp).create(update);
+var app = createApp(update);
 
 var models = flyd.scan(_.merge, app.model(), update);
 

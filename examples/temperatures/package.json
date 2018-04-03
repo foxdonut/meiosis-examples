@@ -24,19 +24,20 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "flyd": "^0.2.4",
-    "joi": "^13.1.1",
+    "flyd": "^0.2.6",
+    "joi": "^13.1.2",
     "joi-browser": "^13.0.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.5",
     "preact": "^8.2.7"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "1.6.1",
-    "meiosis": "^1.2.0",
-    "meiosis-tracer": "^1.2.1",
+    "meiosis": "^1.3.0",
+    "meiosis-tracer": "^1.3.0",
     "react-jsx": "^1.0.0",
-    "webpack": "^3.10.0"
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
   }
 }
