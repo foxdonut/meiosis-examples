@@ -99,7 +99,8 @@ var createTemperature = function(update, label) {
 ```
 
 That way, we can clearly see the `Air` and `Water` temperature in the view. Below is the code that
-we have so far:
+we have so far. Note that updates don't work yet, so clicking on `Increase`, `Decrease`, and
+`Change Units` won't have any effect.
 
 @flems mithril/09-nesting-a.js,app.html mithril,mithril-stream 800
 
@@ -107,8 +108,7 @@ You can see each temperature being rendered from the top-level model, without th
 needing to know about the `air` and `water` -- instead, it continues to use `model.value` and
 `model.units` as before.
 
-The problem now is, how do we get updates to work? Above, try clicking on `Increase`, `Decrease`,
-and `Change Units`. They don't work yet. Let's address that next.
+The problem now is, how do we get updates to work? Let's address that next.
 
 ### Nesting Updates
 

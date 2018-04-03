@@ -1,4 +1,4 @@
-/*global ReactDOM, flyd, _*/
+/*global m*/
 
 // -- Utility code
 
@@ -36,55 +36,46 @@ var createTemperature = function(update, label) {
   };
 
   var view = function(model) {
-    return (<div>
-      <span>{label} Temperature: {model.value}&deg;{model.units}</span>
-      <div>
-        <button onClick={increase(model, 1)}>Increase</button>
-        <button onClick={increase(model,-1)}>Decrease</button>
-      </div>
-      <div>
-        <button onClick={changeUnits(model)}>Change Units</button>
-      </div>
-    </div>);
+    return [
+      label, " Temperature: ", model.value, m.trust("&deg;"), model.units,
+      m("div",
+        m("button", { onclick: increase(model, 1) }, "Increase"),
+        m("button", { onclick: increase(model,-1) }, "Decrease")
+      ),
+      m("div",
+        m("button", { onclick: changeUnits(model) }, "Change Units")
+      )
+    ];
   };
   return view;
 };
 
-var createTemperaturePair = function(update) {
+var createView = function(update) {
   var air = createTemperature(nest(update, "air"), "Air");
   var water = createTemperature(nest(update, "water"), "Water");
 
   return function(model) {
-    return (<div>
-      {air(model.air)}
-      {water(model.water)}
-    </div>);
-  };
-};
-
-var createView = function(update) {
-  var pair = createTemperaturePair(nest(update, "temperatures"));
-
-  return function(model) {
-    return pair(model.temperatures);
+    return [
+      air(model.air),
+      water(model.water)
+    ];
   };
 };
 
 // -- Meiosis pattern setup code
 
-var update = flyd.stream();
+var update = m.stream();
 var view = createView(update);
 
-var models = flyd.scan(_.merge,
-  { temperatures:
-    { air:   { value: 22, units: "C" },
-      water: { value: 84, units: "F" }
-    }
+// This doesn't work!
+var models = m.stream.scan(Object.assign,
+  { air:   { value: 22, units: "C" },
+    water: { value: 84, units: "F" }
   },
   update);
 
 var element = document.getElementById("app");
 
 models.map(function(model) {
-  ReactDOM.render(view(model), element);
+  m.render(element, view(model));
 });

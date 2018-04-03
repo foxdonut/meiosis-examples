@@ -77,10 +77,11 @@ var view = createView(update);
 
 var models = m.stream.scan(_.merge,
   { temperatures:
-    { air: { value: 22, units: "C" },
+    { air:   { value: 22, units: "C" },
       water: { value: 84, units: "F" }
     }
-  }, update);
+  },
+  update);
 
 var element = document.getElementById("app");
 
