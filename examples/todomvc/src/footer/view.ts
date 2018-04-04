@@ -14,7 +14,7 @@ export const createView = (actions: any) => (model: State) =>
       h("li", h("a", { attrs: { href: "javascript://" }, on: { click: () => actions.filter("completed") },
         class: { selected: model.completedSelected } }, "Completed"))
     ]),
-    model.clearCompletedVisible ?
-        h("button.clear-completed", { on: { click: actions.clearCompleted } }, "Clear completed")
+    model.clearCompletedVisible
+      ? h("button.clear-completed", { on: { click: actions.clearCompleted } }, "Clear completed")
       : h("span")
   ]);

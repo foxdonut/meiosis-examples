@@ -1,11 +1,12 @@
 import { Promise } from "es6-promise";
-import { compose, Todo, todoStorage } from "../util";
+import { flowRight } from "lodash";
+import { Todo, todoStorage } from "../util";
 
 export const createActions = (updates: any) => ({
   loadAll: () => todoStorage.loadAll().then(updates.displayTodos),
   filter: (by: string) => {
     const updateFn = (todos: Todo[]) =>
-      updates.update(compose(updates.displayTodosFn(todos), updates.filterFn(by)));
+      updates.update(flowRight([updates.displayTodosFn(todos), updates.filterFn(by)]));
 
     if (by) {
       todoStorage.filter(by).then(updateFn);

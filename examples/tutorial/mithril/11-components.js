@@ -12,7 +12,7 @@ var nestUpdate = function(update, prop) {
 
 var nest = function(create, prop, update) {
   var component = create(nestUpdate(update, prop));
-  var result = {};
+  var result = Object.assign({}, component);
   if (component.model) {
     result.model = function() {
       var initialModel = {};

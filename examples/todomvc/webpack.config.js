@@ -1,6 +1,7 @@
 /* global __dirname */
 module.exports = {
   entry: "./src/index.ts",
+  mode: "development",
   devtool: "source-map",
   output: {
     path: __dirname + "/build",

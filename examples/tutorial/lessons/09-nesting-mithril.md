@@ -128,7 +128,7 @@ we end up with:
 }
 ```
 
-What we want instead is to **nest** the `air` and `water` updates at their respective properties:
+**What we want instead** is to **nest** the `air` and `water` updates at their respective properties:
 
 ![Nesting Updates](09-nesting-03.svg)
 

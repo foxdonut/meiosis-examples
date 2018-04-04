@@ -1,3 +1,4 @@
+import { merge } from "lodash";
 import { Model } from "../util";
 
 const allCompleted = (state: any) => {
@@ -13,7 +14,7 @@ const allCompleted = (state: any) => {
 };
 
 export const computeState = (model: Model) => {
-  const state = JSON.parse(JSON.stringify(model));
+  const state: any = merge({}, model);
 
   state.allSelected = model.filterBy === "";
   state.activeSelected = model.filterBy === "active";
