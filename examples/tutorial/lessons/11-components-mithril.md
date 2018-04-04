@@ -228,6 +228,10 @@ Here is the completed example:
 
 ### Exercise
 
+- Add another component next to `temperatures`. Start with a component that does not accept any
+parameters and creates its initial model. Then, modify the component so that it accepts an optional
+initial model. What did you have to change?
+
 When you are ready, continue on to [12 - Function Update](12-func-update-mithril.html).
 
 [Table of Contents](toc.html)
