@@ -2,6 +2,7 @@
 var Path = require("path");
 
 module.exports = {
+  mode: "development",
   entry: {
     "main": "./src/client/main/index.js"
   },

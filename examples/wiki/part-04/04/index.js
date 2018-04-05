@@ -7,9 +7,7 @@ import { createRouter } from "./router";
 
 // Meiosis Setup
 const update = flyd.stream();
-const initialModel = createAppModel();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = flyd.scan((model, modelUpdate) => modelUpdate(model), createAppModel(), update);
 
 const action = flyd.stream();
 action.map(fn => fn(models()));

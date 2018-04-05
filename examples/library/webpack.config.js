@@ -2,7 +2,6 @@
 var isProd = process.env.NODE_ENV === "prod";
 var webpack = require("webpack");
 var Path = require("path");
-var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 var plugins = [
   new webpack.DefinePlugin({
@@ -10,11 +9,8 @@ var plugins = [
   })
 ];
 
-if (isProd) {
-  plugins.push(new UglifyJsPlugin());
-}
-
 module.exports = {
+  mode: isProd ? "production" : "development",
   entry: {
     "domvm": "./src/client/domvm/index.js"
   },

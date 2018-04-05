@@ -15,7 +15,7 @@ export const createAppModel = () => ({
 export const createApp = (update, navigation, router) => {
   const homePage = createHomePage(update);
   const beerListPage = createBeerListPage({
-    beerDetails: id => _evt => navigation.navigateToBeerDetails({ id })
+    beerDetails: beerId => _evt => navigation.navigateToBeerDetails({ beerId })
   }, router);
   const beerDetailsPage = createBeerDetailsPage(update, navigation, router);
   const breweryListPage = createBreweryListPage(update, navigation, router);

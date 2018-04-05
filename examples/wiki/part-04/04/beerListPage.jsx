@@ -3,7 +3,7 @@ import { createBeerList } from "./beerList";
 
 export const createBeerListPage = (actions, router) => {
   const beerList = createBeerList(actions,
-    beerId => router.getLink(pages.beerDetails.id, {beerId}));
+    beerId => router.getLink(pages.beerDetails.id, { beerId }));
 
   return {
     view: model => (

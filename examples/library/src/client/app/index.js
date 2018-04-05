@@ -9,13 +9,11 @@ export const createApp = (render, element) => {
   const update = flyd.stream();
 
   const main = createMain(update);
+  const models = flyd.scan((model, modelUpdate) => modelUpdate(model), main.model(), update);
 
-  const initialModel = main.model();
-  const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-  const models = flyd.scan(applyUpdate, initialModel, update);
-
-  models.map(main.state);
-  models.map(model => render(main.view(model), element));
+  models
+    .map(main.state)
+    .map(state => render(main.view(state), element));
 
   // Only for using Meiosis Tracer in development.
   trace({ update, dataStreams: [ models ]});

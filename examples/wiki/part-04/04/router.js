@@ -9,24 +9,50 @@ export const createRouter = navigation => {
   };
 
   const routes = [
-    { path: "/", name: pages.home.id, action: wrap(navigation.navigateToHome) },
-    { path: "/beerList", children: [
-      { path: "", name: pages.beerList.id, action: wrap(navigation.navigateToBeerList) },
-      { path: "/:beerId", name: pages.beerDetails.id, action: wrap(navigation.navigateToBeerDetails) }
-    ]},
-    { path: "/breweryList", children: [
-      { path: "", name: pages.breweryList.id, action: wrap(navigation.navigateToBreweryList) },
-      { path: "/:breweryId", children: [
-        { path: "", name: pages.breweryDetails.id,
-          action: wrap(navigation.navigateToBreweryDetails) },
-        { path: "/beerList", children: [
-          { path: "", name: pages.breweryBeerList.id,
-            action: wrap(navigation.navigateToBreweryBeerList) },
-          { path: "/:beerId", name: pages.breweryBeerDetails.id,
-            action: wrap(navigation.navigateToBreweryBeerDetails) }
-        ]}
-      ]}
-    ]}
+    { path: "/",
+      name: pages.home.id,
+      action: wrap(navigation.navigateToHome)
+    },
+    { path: "/beerList",
+      children: [
+        { path: "",
+          name: pages.beerList.id,
+          action: wrap(navigation.navigateToBeerList)
+        },
+        { path: "/:beerId",
+          name: pages.beerDetails.id,
+          action: wrap(navigation.navigateToBeerDetails)
+        }
+      ]
+    },
+    { path: "/breweryList",
+      children: [
+        { path: "",
+          name: pages.breweryList.id,
+          action: wrap(navigation.navigateToBreweryList)
+        },
+        { path: "/:breweryId",
+          children: [
+            { path: "",
+              name: pages.breweryDetails.id,
+              action: wrap(navigation.navigateToBreweryDetails)
+            },
+            { path: "/beerList",
+              children: [
+                { path: "",
+                  name: pages.breweryBeerList.id,
+                  action: wrap(navigation.navigateToBreweryBeerList)
+                },
+                { path: "/:beerId",
+                  name: pages.breweryBeerDetails.id,
+                  action: wrap(navigation.navigateToBreweryBeerDetails)
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   ];
 
   const router = new UniversalRouter(routes);
