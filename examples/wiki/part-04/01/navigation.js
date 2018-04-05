@@ -1,5 +1,7 @@
 import { createServices } from "./services";
 
+const compose = (f1, f2) => x => f1(f2(x));
+
 export const pages = {
   home: {
     id: "Home",
@@ -23,33 +25,34 @@ export const createNavigation = update => {
   const services = createServices();
 
   const navigate = (page, params = {}) =>
-    update(model => Object.assign(model, { page, params }));
-
-  const navigateTo = page => params => navigate(page, params);
+    model => Object.assign(model, { page, params });
 
   const navigateToCoffee = params => {
     services.loadCoffees().then(coffees => {
-      update(model => Object.assign(model, { coffees }));
+      const assignCoffees = model => Object.assign(model, { coffees });
       if (params && params.id) {
         services.loadCoffee(params).then(coffee => {
-          update(model => Object.assign(model, { coffee: coffee.description }));
+          const assignCoffee = compose(
+            model => Object.assign(model, { coffee: coffee.description }), assignCoffees);
+          update(compose(navigate(pages.coffee, params), assignCoffee));
         });
       }
-      navigate(pages.coffee, params);
+      else {
+        update(compose(navigate(pages.coffee, params), assignCoffees));
+      }
     });
   };
 
   const navigateToBeer = () => {
     services.loadBeer().then(beerList => {
-      update(model => Object.assign(model, { beerList }));
-      navigate(pages.beer);
+      update(compose(navigate(pages.beer), model => Object.assign(model, { beerList })));
     });
   };
 
   return {
-    navigateToHome: navigateTo(pages.home),
+    navigateToHome: params => update(navigate(pages.home, params)),
     navigateToCoffee,
     navigateToBeer,
-    navigateToBeerDetails: navigateTo(pages.beerDetails)
+    navigateToBeerDetails: params => update(navigate(pages.beerDetails, params))
   };
 };
