@@ -9,9 +9,7 @@ import { createRouter } from "./router";
 const update = flyd.stream();
 const navigation = createNavigation(update);
 const app = createApp(update, navigation);
-const initialModel = app.model();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = flyd.scan((model, modelUpdate) => modelUpdate(model), app.model(), update);
 
 // Rendering
 const element = document.getElementById("app");

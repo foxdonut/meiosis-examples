@@ -23,7 +23,7 @@ export const createNavigation = update => {
   const services = createServices();
 
   const navigate = (page, params = {}) =>
-    update(model => Object.assign(model, ({ page, params })));
+    update(model => Object.assign(model, { page, params }));
 
   const navigateTo = page => params => navigate(page, params);
 

@@ -2,6 +2,7 @@
 var path = require("path");
 
 module.exports = {
+  mode: "development",
   entry: {
     "part-01-ex-01": "./part-01/index-01.jsx",
     "part-01-ex-02": "./part-01/index-02.jsx",
