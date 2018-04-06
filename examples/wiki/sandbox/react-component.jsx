@@ -206,15 +206,12 @@ const app = {
   }
 };
 
-const initialModel = app.model();
 const update = flyd.stream();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = flyd.scan((model, modelUpdate) => modelUpdate(model), app.model(), update);
 
 const element = document.getElementById("app");
 const view = app.create(update);
 models.map(model => ReactDOM.render(view(model), element));
-
 
 trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

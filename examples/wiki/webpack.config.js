@@ -23,7 +23,6 @@ module.exports = {
     "part-06-ex-02": "./part-06/index-02.jsx",
     "part-06-ex-03": "./part-06/index-03.js",
     "part-06-ex-04": "./part-06/index-04.js",
-    "part-06-ex-05": "./part-06/index-05.js",
 
     "react-component": "./sandbox/react-component.jsx"
   },

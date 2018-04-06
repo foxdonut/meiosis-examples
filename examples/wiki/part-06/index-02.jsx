@@ -210,14 +210,11 @@ class App extends React.PureComponent {
   }
 }
 
-const initialModel = Immutable.fromJS(App.model());
 const update = flyd.stream();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = flyd.scan((model, modelUpdate) => modelUpdate(model), Immutable.fromJS(App.model()), update);
 
 const element = document.getElementById("app");
 ReactDOM.render(<App models={models} update={update} />, element);
-
 
 trace({ update, dataStreams: [ models ], fromJS: Immutable.fromJS, toJS: Immutable.toJS });
 meiosisTracer({ selector: "#tracer" });

@@ -50,7 +50,7 @@ var convert = function(value, to) {
 
 var createTemperature = function(label, init) {
   return function(update) {
-    var increase = function(model, amount) {
+    var increase = function(amount) {
       return function(_event) {
         update({ id: model.id, fn: function(model) {
           model.value += amount;
@@ -58,16 +58,13 @@ var createTemperature = function(label, init) {
         } });
       };
     };
-    var changeUnits = function(model) {
-      return function(_event) {
+    var changeUnits = function(_event) {
+      update({ id: model.id, fn: function(model) {
         var newUnits = model.units === "C" ? "F" : "C";
-        var newValue = convert(model.value, newUnits);
-        update({ id: model.id, fn: function(model) {
-          model.value = newValue;
-          model.units = newUnits;
-          return model;
-        } });
-      };
+        model.value = convert(model.value, newUnits);
+        model.units = newUnits;
+        return model;
+      } });
     };
 
     var model = function() {
@@ -78,11 +75,11 @@ var createTemperature = function(label, init) {
       return (<div>
         <span>{label} Temperature: {model.value}&deg;{model.units}</span>
         <div>
-          <button onClick={increase(model, 1)}>Increase</button>
-          <button onClick={increase(model,-1)}>Decrease</button>
+          <button onClick={increase( 1)}>Increase</button>
+          <button onClick={increase(-1)}>Decrease</button>
         </div>
         <div>
-          <button onClick={changeUnits(model)}>Change Units</button>
+          <button onClick={changeUnits}>Change Units</button>
         </div>
       </div>);
     };
