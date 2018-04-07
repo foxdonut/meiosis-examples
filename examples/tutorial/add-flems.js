@@ -8,8 +8,8 @@ var linkMap = {
   "lodash": "https://unpkg.com/lodash@4.17.5",
   "mithril": "https://unpkg.com/mithril@1.1.6",
   "mithril-stream": "https://unpkg.com/mithril-stream@1.1.0",
-  "react": "https://unpkg.com/react@16.2.0/umd/react.development.js",
-  "react-dom": "https://unpkg.com/react-dom@16.2.0/umd/react-dom.development.js"
+  "react": "https://unpkg.com/react@16.3.1/umd/react.development.js",
+  "react-dom": "https://unpkg.com/react-dom@16.3.1/umd/react-dom.development.js"
 };
 
 var filenames = fs.readdirSync(fromDir);
