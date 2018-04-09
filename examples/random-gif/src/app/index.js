@@ -1,5 +1,5 @@
 const m = require("mithril");
-const b = require("bss").default;
+const b = require("bss");
 const R = require("ramda");
 
 const { nest } = require("../util/nest");

@@ -2,9 +2,10 @@
 
 ## Table of Contents
 
+[00 - Introduction](00-introduction.html)
+
 | Mithril | React |
 |---------|-------|
-| [00 - Introduction](00-introduction.html) | [00 - Introduction](00-introduction.html) |
 | [01 - Hello World](01-hello-world-mithril.html) | [01 - Hello World](01-hello-world-react.html) |
 | [02 - View Function](02-view-function-mithril.html) | [02 - View Function](02-view-function-react.html) |
 | [03 - Update Model](03-update-model-mithril.html) | [03 - Update Model](03-update-model-react.html) |

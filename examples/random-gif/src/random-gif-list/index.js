@@ -7,7 +7,7 @@ const state = model => R.assoc("hasGifs", R.any(
   R.map(R.path(["image", "value", "value", "case"]), R.values(model.randomGifsById))
 ), model);
 
-export const createRandomGifList = createRandomGif => update => {
+exports.createRandomGifList = createRandomGif => update => {
   const randomGif = createRandomGif(modelUpdate =>
     update({ fn: R.over(R.lensPath(["randomGifsById", modelUpdate.id]), modelUpdate.fn) }));
 

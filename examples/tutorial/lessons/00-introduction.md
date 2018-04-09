@@ -57,7 +57,7 @@ as well as _all_ the Meiosis examples, by cloning the
 
 Let's get started! Please continue by choosing a version:
 
-- [01 - Hello World - React](01-hello-world-react.html)
 - [01 - Hello World - Mithril](01-hello-world-mithril.html)
+- [01 - Hello World - React](01-hello-world-react.html)
 
 [Table of Contents](toc.html)

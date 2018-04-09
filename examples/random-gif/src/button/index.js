@@ -1,5 +1,5 @@
 const m = require("mithril");
-const b = require("bss").default;
+const b = require("bss");
 const { lensPath, not, over } = require("ramda");
 const { button } = require("../util/ui");
 

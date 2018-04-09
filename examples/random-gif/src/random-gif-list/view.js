@@ -1,5 +1,5 @@
 const m = require("mithril");
-const b = require("bss").default;
+const b = require("bss");
 const { button } = require("../util/ui");
 
 exports.createView = (actions, randomGif) => {

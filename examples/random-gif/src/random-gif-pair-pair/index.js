@@ -1,8 +1,8 @@
 const m = require("mithril");
-const b = require("bss").default;
+const b = require("bss");
 const { nest } = require("../util/nest");
 
-export const createRandomGifPairPair = createRandomGifPair => update => {
+exports.createRandomGifPairPair = createRandomGifPair => update => {
   const randomGifPairOne = nest(createRandomGifPair, ["randomGifPairOne"], update);
   const randomGifPairTwo = nest(createRandomGifPair, ["randomGifPairTwo"], update);
 

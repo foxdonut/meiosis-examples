@@ -1,5 +1,5 @@
 const m = require("mithril");
-const b = require("bss").default;
+const b = require("bss");
 
 exports.createCounter = label => _update => ({
   model: () => ({

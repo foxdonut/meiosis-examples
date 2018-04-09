@@ -1,5 +1,5 @@
 const m = require("mithril");
-const b = require("bss").default;
+const b = require("bss");
 const { identity } = require("ramda");
 const { fold } = require("static-sum-type");
 const { Loaded, Success, Image } = require("./types");
