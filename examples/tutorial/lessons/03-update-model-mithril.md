@@ -10,21 +10,19 @@ function that produces the vnode according to the `model` that is passed to the 
 So, we can call `view(model)` and render it onto the page. Now, how do we make a change to the
 model and refresh the view?
 
-Our model is a counter that has a value of `0`. Let's add a button to increase the counter:
+Our model is a counter that has a value of `0`. Let's add a button to increase the counter.
 
-@flems mithril/03-update-model.js,app.html mithril 550
+### DOM Event Handler Functions
 
-We've added a `+1` button with this code:
+We can add a `+1` button with this code:
 
 ```js
 m("button", { onclick: increase }, "+1")
 ```
 
-### DOM Event Handler Functions
-
 It is important to remember that what we associate to `onclick` must be a **function**. This
 function will automatically be called when the user clicks on the button, and the function gets
-a DOM event as a parameter. Here, the function is `increase`:
+passed a DOM event as a parameter. Here, the function is `increase`:
 
 ```js
 var increase = function(_event) {
@@ -49,6 +47,10 @@ value. Then, it re-renders the view by calling `m.render` again.
 changes. Generally speaking, producing a vnode is not a performance concern. Further, re-rendering
 the view is what virtual-DOM libraries are good at: figuring out what minimal changes are needed to
 make the real DOM reflect the view.
+
+You can see the working code below:
+
+@flems mithril/03-update-model.js,app.html mithril 550
 
 ### Exercises
 

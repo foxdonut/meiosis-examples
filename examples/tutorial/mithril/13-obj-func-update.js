@@ -50,21 +50,23 @@ var convert = function(value, to) {
 
 var createTemperature = function(label, init) {
   return function(update) {
-    var increase = function(amount) {
+    var increase = function(id, amount) {
       return function(_event) {
-        update({ id: model.id, fn: function(model) {
+        update({ id: id, fn: function(model) {
           model.value += amount;
           return model;
         } });
       };
     };
-    var changeUnits = function(_event) {
-      update({ id: model.id, fn: function(model) {
-        var newUnits = model.units === "C" ? "F" : "C";
-        model.value = convert(model.value, newUnits);
-        model.units = newUnits;
-        return model;
-      } });
+    var changeUnits = function(id) {
+      return function(_event) {
+        update({ id: id, fn: function(model) {
+          var newUnits = model.units === "C" ? "F" : "C";
+          model.value = convert(model.value, newUnits);
+          model.units = newUnits;
+          return model;
+        } });
+      };
     };
 
     var model = function() {
@@ -75,11 +77,11 @@ var createTemperature = function(label, init) {
       return [
         label, " Temperature: ", model.value, m.trust("&deg;"), model.units,
         m("div",
-          m("button", { onclick: increase( 1) }, "Increase"),
-          m("button", { onclick: increase(-1) }, "Decrease")
+          m("button", { onclick: increase(model.id,  1) }, "Increase"),
+          m("button", { onclick: increase(model.id, -1) }, "Decrease")
         ),
         m("div",
-          m("button", { onclick: changeUnits }, "Change Units")
+          m("button", { onclick: changeUnits(model.id) }, "Change Units")
         )
       ];
     };

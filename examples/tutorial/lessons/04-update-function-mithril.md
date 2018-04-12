@@ -86,24 +86,47 @@ Remember that `onclick` needs a `function(event)`, and that is what we are getti
 
 ![Event Handler Function](04-update-function-01.svg)
 
-### Putting it all together
+### The `createView` function
 
-@flems mithril/04-update-function.js,app.html mithril 800
+I mentioned that the `update` function would be defined in one single place. Since the view
+needs `update`, we'll write a `createView` function that receives `update` as a parameter:
 
-In the code above, notice that we now have a `createView` function that receives `update` as a
-parameter. This is the `update` function that we call to change the model and re-render the view,
-such as `update(1)`. By receiving `update` as a parameter, our `createView` function is not tied
-to anything outside of the function itself. It does not reference `update` as a global variable.
+```js
+var createView = function(update) {
+  var increase = function(amount) {
+    return function(_event) {
+      update(amount);
+    };
+  };
+  var view = function(model) {
+    return [
+      m("div", "Counter: " + model),
+      m("button", { onclick: increase( 1) }, "+1"),
+      m("button", { onclick: increase(-1) }, "-1")
+    ];
+  };
+  return view;
+};
+```
+
+By receiving `update` as a parameter, our `createView` function is not tied to anything outside of
+the function itself. It does not reference `update` as a global variable.
 
 Also notice that `createView` is another function-that-returns-a-function. After setting up the
 `increase` event handler, it creates and returns the `view` function, which continues to be a
 function that takes a `model` and returns a view.
 
-Finally, by extracting the details out of the `increase` function and passing in `update` as a
-parameter, we've separated the **application code** from the **Meiosis pattern setup code**. The
+### Putting it all together
+
+Here is the complete example:
+
+@flems mithril/04-update-function.js,app.html mithril 800
+
+By extracting the details out of the `increase` function and passing in `update` as a parameter,
+we've separated the **application code** from the **Meiosis pattern setup code**. The
 application code is concerned with creating views, event handlers, and issuing updates, without
 being tied to any details about data flow and rendering. The Meiosis pattern setup code takes care
-of the "wiring up" -- initializing the model, setting up the `update` function, creating the view
+of the "wiring up" - initializing the model, setting up the `update` function, creating the view
 function, and rendering the results onto the page. As we build larger applications, the application
 can grow and only need to know about the passed-in `update` function. The Meiosis pattern setup
 code only needs to be written once, and does not need to change as we build more features in the

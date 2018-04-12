@@ -1,4 +1,4 @@
-var sinon = require("sinon/pkg/sinon");
+var sinon = require("sinon");
 
 module.exports = function() {
   var server = sinon.fakeServer.create();

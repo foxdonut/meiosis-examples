@@ -42,6 +42,7 @@ One way to issue updates and handle them in the accumulator function is with `Ob
 This method copies properties from one or more source objects to a target object. For example:
 
 ```js
+                           // target object           source object
 var result = Object.assign({ value: 22, units: "C" }, { value: 24 });
 // result is { value: 24, units: "C" }
 ```

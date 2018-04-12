@@ -6,17 +6,15 @@
 
 In the previous lesson, [01 - Hello World](01-hello-world-mithril.html), we rendered a simple
 message onto the page. Now, let's write a **function** that produces what to render. We'll call
-this the **view**:
-
-@flems mithril/02-view-function.js,app.html mithril
+this the **view** function.
 
 ### View = function(model)
 
-In the code above, `view` is a function that produces the vnode to render. Since it is a function,
-it can receive parameters - namely, the **model**. This is a plain JavaScript object that
-represents the state of the application.
+The `view` function produces the vnode to render. Since it is a function, it can receive
+parameters - namely, the **model**. This is a plain JavaScript object that represents the state of
+the application.
 
-In our example, the model is a counter. We've created an **initial** model with a value of `0`.
+In our example, the model is a counter. We'll create an **initial** model with a value of `0`.
 When rendering with `m.render`, we pass the DOM element as before, but instead of directly
 passing what to render, we pass the **result** of calling the `view` function with the value
 `0`.
@@ -25,7 +23,9 @@ passing what to render, we pass the **result** of calling the `view` function wi
 
 Within the `view` function, we can create a view as we see fit, using the `model`. In this
 case, we are simply creating a `div` element with the text `Counter:` and the value that was
-passed in.
+passed in:
+
+@flems mithril/02-view-function.js,app.html mithril
 
 This concept of having the view as a **function of the model** is important. The resulting
 view depends only on what is passed in to the function. This makes it simple to write view

@@ -163,7 +163,20 @@ update.map(function(value) {
 m.render(element, view(model));
 ```
 
-We can change this to:
+We can make these improvements:
+
+- No longer have a `model` variable that we keep reassigning. Instead, our accumulator function
+can be cleaner and more self-contained: it can receive the latest model and the next value, and
+return the result. It will not refer to variables that are on the outside.
+- The initial value can simply be passed to `scan`.
+- The result of `scan` is a stream of models. We can `map` on that and re-render the view every
+time we have a new model value on the stream.
+- Since `scan` produces the initial value on the resulting stream, we no longer have to call
+`m.render` initially (this was done at the bottom of our previous setup code). Instead, we have
+the initial model on the `models` stream, and the function that we pass to `map` will get
+called to render the initial view.
+
+Here are our changes:
 
 ```js
 var update = stream();
@@ -179,19 +192,6 @@ models.map(function(model) {
   m.render(element, view(model));
 });
 ```
-
-Notice the improvements:
-
-- We no longer have a `model` variable that we keep reassigning. Instead, our accumulator function
-is cleaner and more self-contained: it receives the latest model and the next value, and returns
-the result. It does not refer to variables that are on the outside.
-- The initial value is simply passed to `scan`.
-- The result of `scan` is a stream of models. We can `map` on that and re-render the view every
-time we have a new model value on the stream.
-- Since `scan` produces the initial value on the resulting stream, we no longer have to call
-`m.render` initially (this was done at the bottom of our previous setup code). Instead, we have
-the initial model on the `models` stream, and the function that we pass to `map` will get
-called to render the initial view.
 
 You can try out the complete example below.
 

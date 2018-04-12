@@ -13,10 +13,10 @@ digraph meiosistutorial {
   element [shape="plaintext", style="filled", fillcolor="yellow", label=<
     <table border="0">
       <tr>
-        <td port="app">document.getElementById("app")</td>
+        <td>&lt;div id="app"&gt;&lt;/div&gt;</td>
       </tr>
       <tr>
-        <td>&lt;div id="app"&gt;&lt;/div&gt;</td>
+        <td port="app">document.getElementById("app")</td>
       </tr>
     </table>
   >]
@@ -29,6 +29,6 @@ digraph meiosistutorial {
     </table>
   >]
 
-  mrender:element -> element:app [label="", dir="back"]
-  view:mview -> mrender:view [label=""]
+  element:app -> mrender:element [label=""]
+  mrender:view -> view:mview [label="", dir="back"]
 }

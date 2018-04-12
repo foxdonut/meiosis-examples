@@ -16,18 +16,23 @@ produce a vnode suitable for passing to `m.render`.
 
 ### Our First Example
 
-Here is the code to render a message onto the page:
+The DOM element into which we want to render could be `document.body`. However, I will use an
+HTML file with an element inside of it. The element that has the `app` id and can be retrieved
+using `document.getElementById("app")`. The reason I am using an HTML file is that this enables you
+to render other things on the page, and have your app (or multiple apps) occupy specific places on
+the page.
+
+To produce the vnode for our message, we can simply use `m("h1", "Hello, world")`. This will render
+`<h1>Hello, world</h1>`.
+
+Here is the code to render the message onto the page:
 
 @flems mithril/01-hello-world.js,app.html mithril
 
-Notice that the `element` into which we render is the element that has the `app` id. You can
-see this element in the `app.html` file. This file represents our HTML page.
+Notice that `app.html` contains the `element` into which we render, and `m(...)` produces the
+vnode. These are the two arguments that we pass to `m.render`.
 
 ![The Render Function](01-hello-world-01.svg)
-
-You can also use `document.body` as the element. The reason I am using an HTML file with an
-element inside it is that this enables you to render other things on the page, and have your
-app (or multiple apps) occupy specific places on the page.
 
 ### Exercises
 

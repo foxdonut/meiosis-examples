@@ -105,7 +105,7 @@ we have so far. Note that updates don't work yet, so clicking on `Increase`, `De
 @flems mithril/09-nesting-a.js,app.html mithril,mithril-stream 800
 
 You can see each temperature being rendered from the top-level model, without the temperature view
-needing to know about the `air` and `water` -- instead, it continues to use `model.value` and
+needing to know about the `air` and `water` - instead, it continues to use `model.value` and
 `model.units` as before.
 
 The problem now is, how do we get updates to work? Let's address that next.
