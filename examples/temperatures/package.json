@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "rollup -c",
-    "watch": ""
+    "watch": "rollup -c --watch"
   },
   "repository": {
     "type": "git",
