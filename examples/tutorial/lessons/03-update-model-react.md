@@ -50,7 +50,7 @@ make the real DOM reflect the view.
 
 You can see the working code below:
 
-@flems react/03-update-model.jsx,app.html react,react-dom 550
+@flems react/03-update-model.jsx,app.html,app.css react,react-dom 550
 
 ### Exercises
 

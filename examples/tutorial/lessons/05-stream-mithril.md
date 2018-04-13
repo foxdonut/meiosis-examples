@@ -152,7 +152,7 @@ Using the code above, take our stream implementation out for a test drive.
 
 Now that we have our stream implementation, we can use it in our counter example:
 
-@flems mithril/05-stream.js,app.html mithril 800
+@flems mithril/05-stream.js,app.html,app.css mithril 800
 
 Our application code did not need to change - it still calls the `update` function as before - but
 we now use a stream for `update`, which enables us to separate out the function that determines

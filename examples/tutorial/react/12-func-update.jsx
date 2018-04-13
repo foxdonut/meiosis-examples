@@ -64,7 +64,7 @@ var createTemperature = function(label, init) {
     };
 
     var view = function(model) {
-      return (<div>
+      return (<div className="temperature">
         <span>{label} Temperature: {model.value}&deg;{model.units}</span>
         <div>
           <button onClick={increase( 1)}>Increase</button>

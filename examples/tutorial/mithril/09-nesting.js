@@ -34,7 +34,7 @@ var createTemperature = function(update, label) {
   };
 
   var view = function(model) {
-    return [
+    return m("div.temperature", [
       label, " Temperature: ", model.value, m.trust("&deg;"), model.units,
       m("div",
         m("button", { onclick: increase(model, 1) }, "Increase"),
@@ -43,7 +43,7 @@ var createTemperature = function(update, label) {
       m("div",
         m("button", { onclick: changeUnits(model) }, "Change Units")
       )
-    ];
+    ]);
   };
   return view;
 };

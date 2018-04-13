@@ -27,7 +27,7 @@ To produce the vnode for our message, we can simply use `m("h1", "Hello, world")
 
 Here is the code to render the message onto the page:
 
-@flems mithril/01-hello-world.js,app.html mithril
+@flems mithril/01-hello-world.js,app.html,app.css mithril
 
 Notice that `app.html` contains the `element` into which we render, and `m(...)` produces the
 vnode. These are the two arguments that we pass to `m.render`.

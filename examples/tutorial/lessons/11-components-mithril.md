@@ -224,7 +224,7 @@ view with `app.view(model)`.
 
 Here is the completed example:
 
-@flems mithril/11-components.js,app.html mithril,mithril-stream,lodash 800
+@flems mithril/11-components.js,app.html,app.css mithril,mithril-stream,lodash 800
 
 ### Exercise
 

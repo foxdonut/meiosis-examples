@@ -224,7 +224,7 @@ view with `app.view(model)`.
 
 Here is the completed example:
 
-@flems react/11-components.jsx,app.html react,react-dom,flyd,lodash 800
+@flems react/11-components.jsx,app.html,app.css react,react-dom,flyd,lodash 800
 
 ### Exercise
 

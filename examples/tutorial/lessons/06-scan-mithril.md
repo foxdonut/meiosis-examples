@@ -195,7 +195,7 @@ models.map(function(model) {
 
 You can try out the complete example below.
 
-@flems mithril/06-scan.js,app.html mithril 800
+@flems mithril/06-scan.js,app.html,app.css mithril 800
 
 ### Exercise
 

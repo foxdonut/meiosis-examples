@@ -50,7 +50,7 @@ make the real DOM reflect the view.
 
 You can see the working code below:
 
-@flems mithril/03-update-model.js,app.html mithril 550
+@flems mithril/03-update-model.js,app.html,app.css mithril 550
 
 ### Exercises
 

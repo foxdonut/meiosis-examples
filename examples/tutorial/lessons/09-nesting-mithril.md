@@ -85,10 +85,10 @@ function and render the label in the view:
 var createTemperature = function(update, label) {
   // ...
   var view = function(model) {
-    return [
+    return m("div.temperature", [
       label, " Temperature: ", // ...
       // ...
-    ];
+    ]);
   };
   return view;
 }
@@ -102,7 +102,7 @@ That way, we can clearly see the `Air` and `Water` temperature in the view. Belo
 we have so far. Note that updates don't work yet, so clicking on `Increase`, `Decrease`, and
 `Change Units` won't have any effect.
 
-@flems mithril/09-nesting-a.js,app.html mithril,mithril-stream 800
+@flems mithril/09-nesting-a.js,app.html,app.css mithril,mithril-stream 800
 
 You can see each temperature being rendered from the top-level model, without the temperature view
 needing to know about the `air` and `water` - instead, it continues to use `model.value` and
@@ -204,7 +204,7 @@ There you have it, instead of passing `update` directly, we use `nest` to wrap `
 path that we specify, `air` and `water`. The temperature code does not need to change, and the
 updates now work correctly, as you can see in the complete example below.
 
-@flems mithril/09-nesting.js,app.html mithril,mithril-stream 800
+@flems mithril/09-nesting.js,app.html,app.css mithril,mithril-stream 800
 
 ### Exercise
 

@@ -110,7 +110,7 @@ value is converted to the new units.
 
 Here is the example:
 
-@flems react/08-accumulator.jsx,app.html react,react-dom,flyd 800
+@flems react/08-accumulator.jsx,app.html,app.css react,react-dom,flyd 800
 
 As you can see, `convert` is just a matter of simple math to convert the temperature value
 between units.

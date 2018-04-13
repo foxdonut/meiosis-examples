@@ -30,7 +30,7 @@ The code also implements a solution to the exercise at the end of the
 [previous lesson](06-scan-react.html), pushing objects onto the `update` stream and handling
 them in the accumulator function.
 
-@flems react/07-stream-lib.jsx,app.html react,react-dom,flyd 800
+@flems react/07-stream-lib.jsx,app.html,app.css react,react-dom,flyd 800
 
 As you can see, the streams work the same way as before. So, it's really up to your preference
 whether to use a stream library or use your own implementation.

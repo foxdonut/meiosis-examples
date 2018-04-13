@@ -195,7 +195,7 @@ models.map(function(model) {
 
 You can try out the complete example below.
 
-@flems react/06-scan.jsx,app.html react,react-dom 800
+@flems react/06-scan.jsx,app.html,app.css react,react-dom 800
 
 ### Exercise
 

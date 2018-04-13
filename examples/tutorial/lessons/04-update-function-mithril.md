@@ -120,7 +120,7 @@ function that takes a `model` and returns a view.
 
 Here is the complete example:
 
-@flems mithril/04-update-function.js,app.html mithril 800
+@flems mithril/04-update-function.js,app.html,app.css mithril 800
 
 By extracting the details out of the `increase` function and passing in `update` as a parameter,
 we've separated the **application code** from the **Meiosis pattern setup code**. The

@@ -26,7 +26,7 @@ To produce the vnode for our message, we can simply use `<h1>Hello, world</h1>`.
 
 Here is the code to render the message onto the page:
 
-@flems react/01-hello-world.jsx,app.html react,react-dom
+@flems react/01-hello-world.jsx,app.html,app.css react,react-dom
 
 Notice that JSX produces the vnode, and `app.html` contains the `element` into which we render.
 These are the two arguments that we pass to `ReactDOM.render`.

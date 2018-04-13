@@ -80,7 +80,7 @@ var models = flyd.scan(Object.assign,
 But this doesn't work. Try it out below. Can you see what is not quite working? Do you have an
 idea why?
 
-@flems react/10-deep-merge-a.jsx,app.html react,react-dom,flyd 800
+@flems react/10-deep-merge-a.jsx,app.html,app.css react,react-dom,flyd 800
 
 Above, changing units works at first, but increasing or decreasing the temperature causes us to
 lose the units. What's happening?
@@ -155,7 +155,7 @@ into other elements, and so on.
 Let's put everything together. You can see how we have multiple levels of nesting. As previously
 discussed, we're using Lodash's `_.merge` to achieve deep merging of updates into the model.
 
-@flems react/10-deep-merge.jsx,app.html react,react-dom,flyd,lodash 800
+@flems react/10-deep-merge.jsx,app.html,app.css react,react-dom,flyd,lodash 800
 
 ### Exercise
 

@@ -120,7 +120,7 @@ function that takes a `model` and returns a view.
 
 Here is the complete example:
 
-@flems react/04-update-function.jsx,app.html react,react-dom 800
+@flems react/04-update-function.jsx,app.html,app.css react,react-dom 800
 
 By extracting the details out of the `increase` function and passing in `update` as a parameter,
 we've separated the **application code** from the **Meiosis pattern setup code**. The

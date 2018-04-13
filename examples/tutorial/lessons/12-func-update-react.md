@@ -175,7 +175,7 @@ always gets passed the latest model, can make the necessary changes, and return 
 
 Here is the full example:
 
-@flems react/12-func-update.jsx,app.html react,react-dom,flyd 800
+@flems react/12-func-update.jsx,app.html,app.css react,react-dom,flyd 800
 
 ### Exercise
 

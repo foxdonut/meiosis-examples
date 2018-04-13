@@ -1,0 +1,18 @@
+body, button {
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+button {
+  cursor: pointer;
+  padding: 2px 8px 2px 8px;
+  color: #5755d9;
+  background-color: #ffffff;
+  border: 1px solid #5755d9;
+  margin: 4px;
+}
+button:hover {
+  background-color: #eeeeee;
+}
+.temperature {
+  margin-bottom: 20px;
+}

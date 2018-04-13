@@ -175,7 +175,7 @@ always gets passed the latest model, can make the necessary changes, and return 
 
 Here is the full example:
 
-@flems mithril/12-func-update.js,app.html mithril,mithril-stream 800
+@flems mithril/12-func-update.js,app.html,app.css mithril,mithril-stream 800
 
 ### Exercise
 

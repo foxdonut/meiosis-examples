@@ -25,7 +25,7 @@ Within the `view` function, we can create a view as we see fit, using the `model
 case, we are simply creating a `div` element with the text `Counter:` and the value that was
 passed in:
 
-@flems mithril/02-view-function.js,app.html mithril
+@flems mithril/02-view-function.js,app.html,app.css mithril
 
 This concept of having the view as a **function of the model** is important. The resulting
 view depends only on what is passed in to the function. This makes it simple to write view
