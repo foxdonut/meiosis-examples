@@ -9,7 +9,8 @@ export const createView = (actions, components) => model => (
       {components.airTemperature.view(model)}
       {components.waterTemperature.view(model)}
 
-      <button className="pure-button pure-button-primary" onClick={actions.save(model)}>Save</button>
+      <button className="pure-button pure-button-primary"
+        onClick={actions.save}>Save</button>
     </fieldset>
 
     <span>Saved: {model.saved}</span>

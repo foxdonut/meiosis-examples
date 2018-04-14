@@ -1,11 +1,7 @@
 import _ from "lodash";
 
-const nestUpdate = (update, path) => modelUpdate => {
-  const fn = modelUpdate.fn;
-  update(_.merge(modelUpdate, {
-    fn: fn ? (model => _.update(model, path, fn)) : null
-  }));
-};
+const nestUpdate = (update, path) => func =>
+  update(model => _.update(model, path, func));
 
 export const nest = (create, path, update) => {
   const component = create(nestUpdate(update, path));

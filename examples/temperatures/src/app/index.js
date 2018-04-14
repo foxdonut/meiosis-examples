@@ -7,32 +7,30 @@ import { validateModel } from "../validation";
 import { nest }  from "../util/nest";
 
 const createActions = update => ({
-  save: model => evt => {
+  save: evt => {
     evt.preventDefault();
 
-    const errors = validateModel(model);
+    update(model => {
+      const errors = validateModel(model);
+      model.errors = errors;
 
-    const fn = _.isEmpty(errors)
-      ? model => {
-          const air = model.temperature.air;
-          const water = model.temperature.water;
+      if (_.isEmpty(errors)) {
+        const air = model.temperature.air;
+        const water = model.temperature.water;
 
-          model.saved =
-            "Entry #" + model.entryNumber.value +
-            " from " + model.entryDate.from.value +
-            " to " + model.entryDate.to.value + ":" +
-            " Air: " + air.value + "\xB0" + air.units +
-            " Water: " + water.value + "\xB0" + water.units;
+        model.saved =
+          "Entry #" + model.entryNumber.value +
+          " from " + model.entryDate.from.value +
+          " to " + model.entryDate.to.value + ":" +
+          " Air: " + air.value + "\xB0" + air.units +
+          " Water: " + water.value + "\xB0" + water.units;
 
-          model.entryDate.from.value = "";
-          model.entryDate.to.value = "";
-          model.entryNumber.value = "";
-
-          return model;
+        model.entryDate.from.value = "";
+        model.entryDate.to.value = "";
+        model.entryNumber.value = "";
       }
-      : null;
-
-    update({ fn, errors: () => errors });
+      return model;
+    });
   }
 });
 
