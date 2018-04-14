@@ -27,14 +27,13 @@ var nest = function(create, prop, update) {
   }
   if (component.view) {
     result.view = function(model) {
-      return component.view(model[prop]);
+      return component.view(Object.assign(
+        { context: model.context },
+        model[prop])
+      );
     };
   }
   return result;
-};
-
-var generateId = function() {
-  return "uid-" + new Date().getTime();
 };
 
 // -- Application code
@@ -50,38 +49,37 @@ var convert = function(value, to) {
 
 var createTemperature = function(label, init) {
   return function(update) {
-    var increase = function(id, amount) {
+    var increase = function(amount) {
       return function(_event) {
-        update({ id: id, fn: function(model) {
+        update({ fn: function(model) {
           model.value += amount;
           return model;
         } });
       };
     };
-    var changeUnits = function(id) {
-      return function(_event) {
-        update({ id: id, fn: function(model) {
-          var newUnits = model.units === "C" ? "F" : "C";
-          model.value = convert(model.value, newUnits);
-          model.units = newUnits;
-          return model;
-        } });
-      };
+    var changeUnits = function(_event) {
+      update({ fn: function(model) {
+        var newUnits = model.units === "C" ? "F" : "C";
+        model.value = convert(model.value, newUnits);
+        model.units = newUnits;
+        return model;
+      } });
     };
 
     var model = function() {
-      return Object.assign({ id: generateId(), value: 22, units: "C" }, init);
+      return Object.assign({ value: 22, units: "C" }, init);
     };
 
     var view = function(model) {
+      var btn = "button." + model.context.theme;
       return m("div.temperature", [
         label, " Temperature: ", model.value, m.trust("&deg;"), model.units,
         m("div",
-          m("button", { onclick: increase(model.id,  1) }, "Increase"),
-          m("button", { onclick: increase(model.id, -1) }, "Decrease")
+          m(btn, { onclick: increase( 1) }, "Increase"),
+          m(btn, { onclick: increase(-1) }, "Decrease")
         ),
         m("div",
-          m("button", { onclick: changeUnits(model.id) }, "Change Units")
+          m(btn, { onclick: changeUnits }, "Change Units")
         )
       ]);
     };
@@ -89,64 +87,53 @@ var createTemperature = function(label, init) {
   };
 };
 
-var createTemperatureList = function(update) {
-  var temperature = createTemperature()(function(modelUpdate) {
-    var fn = modelUpdate.fn;
-    update({ fn: function(model) {
-      model.temperaturesById[modelUpdate.id] = fn(model.temperaturesById[modelUpdate.id]);
-      return model;
-    } });
-  });
+var createTemperaturePair = function(update) {
+  var air = nest(createTemperature("Air"), "air", update);
+  var water = nest(createTemperature("Water", { value: 84, units: "F" }),
+    "water", update);
 
   var model = function() {
-    return {
-      temperatureIds: [],
-      temperaturesById: {}
-    };
-  };
-
-  var addTemperature = function(_event) {
-    update({ fn: function(model) {
-      var temperatureModel = temperature.model();
-      var id = temperatureModel.id;
-
-      model.temperatureIds.push(id);
-      model.temperaturesById[id] = temperatureModel;
-
-      return model;
-    } });
-  };
-
-  var removeTemperature = function(id) {
-    return function(_event) {
-      update({ fn: function(model) {
-        delete model.temperaturesById[id];
-        model.temperatureIds.splice(model.temperatureIds.indexOf(id), 1);
-        return model;
-      } });
-    };
-  };
-
-  var renderTemperature = function(model) {
-    return function(id) {
-      return m("div", { key: id }, [
-        temperature.view(model.temperaturesById[id]),
-        m("button", { onclick: removeTemperature(id) }, "Remove")
-      ]);
-    };
+    return Object.assign(air.model(), water.model());
   };
 
   var view = function(model) {
-    return m("div", [
-      m("button", { onclick: addTemperature }, "Add"),
-      model.temperatureIds.map(renderTemperature(model))
-    ]);
+    return [
+      air.view(model),
+      water.view(
+        Object.assign(model, { context: { theme: "light" } })
+      )
+    ];
   };
   return { model: model, view: view };
 };
 
+var createThemeChanger = function(update) {
+  var changeTheme = function(_event) {
+    update({ ctx: function(context) {
+      context.theme = context.theme === "light" ? "dark" : "light";
+      return context;
+    }});
+  };
+  var view = function(model) {
+    return m("div", [
+      "Theme: " + model.context.theme,
+      m("button." + model.context.theme,
+        { onclick: changeTheme }, "Change Theme")
+    ]);
+  };
+  return { view: view };
+}
+
 var createApp = function(update) {
-  return nest(createTemperatureList, "temperatures", update);
+  var temperaturePair = nest(createTemperaturePair, "temperatures", update);
+  var themeChanger = createThemeChanger(update);
+  var view = function(model) {
+    return [
+      temperaturePair.view(model),
+      themeChanger.view(model)
+    ];
+  };
+  return { model: temperaturePair.model, view: view };
 };
 
 // -- Meiosis pattern setup code
@@ -154,9 +141,18 @@ var createApp = function(update) {
 var update = m.stream();
 var app = createApp(update);
 
-var models = m.stream.scan(function(model, modelUpdate) {
-  return modelUpdate.fn(model);
-}, app.model(), update);
+var models = m.stream.scan(
+  function(model, modelUpdate) {
+    if (modelUpdate.fn) {
+      model = modelUpdate.fn(model);
+    }
+    if (modelUpdate.ctx) {
+      model.context = modelUpdate.ctx(model.context);
+    }
+    return model;
+  },
+  Object.assign({ context: { theme: "light" } }, app.model()),
+  update);
 
 var element = document.getElementById("app");
 
