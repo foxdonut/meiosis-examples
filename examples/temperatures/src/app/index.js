@@ -32,14 +32,14 @@ const createActions = update => ({
       }
       : null;
 
-    update({ fn, ctx: context => _.set(context, "errors", errors) });
+    update({ fn, errors: () => errors });
   }
 });
 
 export const createApp = update => {
-  const entryNumber = nest(createEntryNumber, "entryNumber", update);
-  const entryDateFrom = nest(createEntryDate("From Date:", ["context", "errors", "entryDate", "from", "value"]), ["entryDate", "from"], update);
-  const entryDateTo = nest(createEntryDate("To Date:", ["context", "errors", "entryDate", "to", "value"]), ["entryDate", "to"], update);
+  const entryNumber = nest(createEntryNumber, ["entryNumber"], update);
+  const entryDateFrom = nest(createEntryDate("From Date:"), ["entryDate", "from"], update);
+  const entryDateTo = nest(createEntryDate("To Date:"), ["entryDate", "to"], update);
   const airTemperature = nest(createTemperature("Air temperature"), ["temperature", "air"], update);
   const waterTemperature = nest(createTemperature("Water temperature"), ["temperature", "water"], update);
 
@@ -52,14 +52,10 @@ export const createApp = update => {
   };
 
   return {
-    model: () => _.merge({
-        context: {}
-      },
-      entryNumber.model(),
-      entryDateFrom.model(),
-      entryDateTo.model(),
-      airTemperature.model(),
-      waterTemperature.model()
+    model: () => _.reduce(
+      _.values(components),
+      (result, component) => _.merge(result, component.model()),
+      { }
     ),
     view: createView(createActions(update), components)
   };

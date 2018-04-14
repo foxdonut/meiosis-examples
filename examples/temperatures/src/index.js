@@ -10,8 +10,8 @@ const models = flyd.scan((model, modelUpdate) => {
   if (modelUpdate.fn) {
     model = modelUpdate.fn(model);
   }
-  if (modelUpdate.ctx) {
-    _.update(model, "context", modelUpdate.ctx);
+  if (modelUpdate.errors) {
+    _.update(model, ["errors"], modelUpdate.errors);
   }
   return model;
 }, app.model(), update);
