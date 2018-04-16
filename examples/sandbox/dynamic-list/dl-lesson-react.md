@@ -98,6 +98,8 @@ to `ctx` instead of `fn`, and use it accordingly in the Meiosis setup code.
 Keep that in mind if you are creating a larger project with Meiosis. You may find that object
 updates will be helpful down the line for dealing with complex scenarios.
 
+@flems react/13-obj-func-update.jsx,app.html,app.css react,react-dom,flyd 800
+
 This concludes the Meiosis tutorial. Thanks for reading, I hope you enjoy Meiosis!
 
 [Table of Contents](toc.html)

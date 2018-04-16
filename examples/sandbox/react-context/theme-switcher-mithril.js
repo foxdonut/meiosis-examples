@@ -3,15 +3,11 @@
 // -- Utility code
 
 var nestUpdate = function(update, prop) {
-  return function(modelUpdate) {
-    var fn = modelUpdate.fn;
-
-    update(Object.assign(modelUpdate, {
-      fn: function(model) {
-        model[prop] = fn(model[prop]);
-        return model;
-      }
-    }));
+  return function(func) {
+    update(function(model) {
+      model[prop] = func(model[prop]);
+      return model;
+    });
   };
 };
 
@@ -51,19 +47,19 @@ var createTemperature = function(label, init) {
   return function(update) {
     var increase = function(amount) {
       return function(_event) {
-        update({ fn: function(model) {
+        update(function(model) {
           model.value += amount;
           return model;
-        } });
+        });
       };
     };
     var changeUnits = function(_event) {
-      update({ fn: function(model) {
+      update(function(model) {
         var newUnits = model.units === "C" ? "F" : "C";
         model.value = convert(model.value, newUnits);
         model.units = newUnits;
         return model;
-      } });
+      });
     };
 
     var model = function() {
@@ -109,20 +105,20 @@ var createTemperaturePair = function(update) {
 
 var createThemeChanger = function(update) {
   var changeTheme = function(_event) {
-    update({ ctx: function(context) {
-      context.theme = context.theme === "light" ? "dark" : "light";
-      return context;
-    }});
+    update(function(model) {
+      model.context.theme = model.context.theme === "light" ? "dark" : "light";
+      return model;
+    });
   };
   var view = function(model) {
     return m("div", [
-      "Theme: " + model.context.theme,
+      m("div", "Theme: " + model.context.theme),
       m("button." + model.context.theme,
         { onclick: changeTheme }, "Change Theme")
     ]);
   };
   return { view: view };
-}
+};
 
 var createApp = function(update) {
   var temperaturePair = nest(createTemperaturePair, "temperatures", update);
@@ -133,7 +129,15 @@ var createApp = function(update) {
       themeChanger.view(model)
     ];
   };
-  return { model: temperaturePair.model, view: view };
+  return {
+    model: function() {
+      return Object.assign(
+        { context: { theme: "light" } },
+        temperaturePair.model()
+      );
+    },
+    view: view
+  };
 };
 
 // -- Meiosis pattern setup code
@@ -141,18 +145,9 @@ var createApp = function(update) {
 var update = m.stream();
 var app = createApp(update);
 
-var models = m.stream.scan(
-  function(model, modelUpdate) {
-    if (modelUpdate.fn) {
-      model = modelUpdate.fn(model);
-    }
-    if (modelUpdate.ctx) {
-      model.context = modelUpdate.ctx(model.context);
-    }
-    return model;
-  },
-  Object.assign({ context: { theme: "light" } }, app.model()),
-  update);
+var models = m.stream.scan(function(model, func) {
+  return func(model);
+}, app.model(), update);
 
 var element = document.getElementById("app");
 

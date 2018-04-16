@@ -18,4 +18,3 @@
 | [10 - Deep Merge](10-deep-merge-mithril.html) | [10 - Deep Merge](10-deep-merge-react.html) |
 | [11 - Components](11-components-mithril.html) | [11 - Components](11-components-react.html) |
 | [12 - Function Update](12-func-update-mithril.html) | [12 - Function Update](12-func-update-react.html) |
-| [13 - Object Function Update](13-obj-func-update-mithril.html) | [13 - Object Function Update](13-obj-func-update-react.html) |

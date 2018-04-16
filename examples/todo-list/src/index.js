@@ -1,4 +1,4 @@
-import { render } from "inferno";
+import { createRenderer } from "inferno";
 import flyd from "flyd";
 import { merge } from "ramda";
 
@@ -19,8 +19,8 @@ ajaxServices.loadTodos().then(todos => {
   const applyUpdate = (model, modelUpdate) => modelUpdate(model);
   const models = flyd.scan(applyUpdate, initialModel, update);
 
-  const element = document.getElementById("app");
-  models.map(model => render(app.view(model), element));
+  // https://infernojs.org/docs/api/inferno
+  flyd.scan(createRenderer(), document.getElementById("app"), models.map(app.view));
 
   // Only for using Meiosis Tracer in development.
   trace({ update, dataStreams: [ models ]});

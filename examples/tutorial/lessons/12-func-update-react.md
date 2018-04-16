@@ -182,6 +182,14 @@ Here is the full example:
 - Add another component next to `temperatures`. Issue updates by calling `update()` and passing
 functions that update the model. Verify that the nesting works.
 
-When you are ready, continue on to [13 - Object Function Update](13-obj-func-update-react.html).
+This concludes the Meiosis tutorial. Thanks for reading, I hope you enjoy Meiosis!
+
+### What's Next?
+
+- [Wiki](https://github.com/foxdonut/meiosis/wiki)
+- [Examples](http://meiosis.js.org/examples.html)
+- [Meiosis Tracer](https://github.com/foxdonut/meiosis-tracer)
+- [Gitter channel](https://gitter.im/foxdonut/meiosis)
+- [Meiosis home page](http://meiosis.js.org)
 
 [Table of Contents](toc.html)
