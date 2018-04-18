@@ -44,3 +44,7 @@ model to produce the view.
 When you are ready, continue on to [03 - Update Model](03-update-model-mithril.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

@@ -216,3 +216,7 @@ Finally, change the accumulator function that is passed to `scan` so that it loo
 When you are ready, continue on to [07 - Stream Library](07-stream-lib-react.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

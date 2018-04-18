@@ -3,16 +3,11 @@ import { createTemperature } from "../temperature";
 import { nest } from "../util/nest";
 
 export const createApp = update => {
-  const components = {
-    air: createTemperature(nest(update, "air")),
-    water: createTemperature(nest(update, "water"))
-  };
+  const air = nest(createTemperature, "air", update);
+  const water = nest(createTemperature, "water", update);
 
   return {
-    model: () => ({
-      air: components.air.model(),
-      water: components.water.model()
-    }),
-    view: createView(components)
+    model: () => Object.assign(air.model(), water.model()),
+    view: createView({air, water})
   };
 };

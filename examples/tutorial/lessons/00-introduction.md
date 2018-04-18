@@ -61,3 +61,7 @@ Let's get started! Please continue by choosing a version:
 - [01 - Hello World - React](01-hello-world-react.html)
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

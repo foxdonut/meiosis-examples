@@ -18,3 +18,7 @@
 | [10 - Deep Merge](10-deep-merge-mithril.html) | [10 - Deep Merge](10-deep-merge-react.html) |
 | [11 - Components](11-components-mithril.html) | [11 - Components](11-components-react.html) |
 | [12 - Function Update](12-func-update-mithril.html) | [12 - Function Update](12-func-update-react.html) |
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

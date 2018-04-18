@@ -167,3 +167,7 @@ points, add another element that is nested within the element that you added.
 When you are ready, continue on to [11 - Components](11-components-mithril.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

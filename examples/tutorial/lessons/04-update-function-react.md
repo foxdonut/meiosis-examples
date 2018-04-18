@@ -143,3 +143,7 @@ only changes the sign, and `+5` and`-5` multiply by `5` and `-5` respectively.
 When you are ready, continue on to [05 - Stream](05-stream-react.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

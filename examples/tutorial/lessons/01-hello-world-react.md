@@ -47,3 +47,7 @@ now overwrites anything that you had in the `app.html` file.
 When you are ready, move on to the next lesson: [02 - View Function](02-view-function-react.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

@@ -5,13 +5,13 @@ export const createActions = update => ({
       return model;
     }),
 
-  increase: amount => () =>
+  increase: amount => _evt =>
     update(model => {
       model.value = model.value + amount;
       return model;
     }),
 
-  changeUnits: () => update(model => {
+  changeUnits: _evt => update(model => {
     if (model.units === "C") {
       model.units = "F";
       model.value = Math.round( model.value * 9 / 5 + 32 );

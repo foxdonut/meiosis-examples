@@ -10,7 +10,6 @@ module.exports = {
     "part-01-ex-04": "./part-01/04/index.js",
     "part-02-ex-01": "./part-02/01/index.js",
     "part-02-ex-02": "./part-02/02/index.js",
-    "part-02-ex-03": "./part-02/03/index.js",
     "part-03-ex-01": "./part-03/01/index.js",
     "part-03-ex-02": "./part-03/02/index.js",
     "part-03-ex-03": "./part-03/03/index.js",

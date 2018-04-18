@@ -189,3 +189,7 @@ to your personal preference.
 When you are ready, continue on to [06 - Scan](06-scan-mithril.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

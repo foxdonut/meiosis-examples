@@ -2,10 +2,6 @@ import flyd from "flyd";
 import React from "react";
 import ReactDOM from "react-dom";
 
-const initialModel = {
-  value: 20
-};
-
 const createActions = update => ({
   increase: () => update(model => {
     model.value = model.value + 1;
@@ -21,8 +17,8 @@ const createView = actions => model => (
 );
 
 const update = flyd.stream();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = flyd.scan((model, func) => func(model),
+  { value: 20 }, update);
 
 const view = createView(createActions(update));
 const element = document.getElementById("app");

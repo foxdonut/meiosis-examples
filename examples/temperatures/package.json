@@ -27,6 +27,7 @@
     "flyd": "^0.2.6",
     "joi": "^13.1.2",
     "joi-browser": "^13.0.1",
+    "joi-date-extensions": "^1.1.1",
     "lodash": "^4.17.5",
     "preact": "^8.2.7"
   },

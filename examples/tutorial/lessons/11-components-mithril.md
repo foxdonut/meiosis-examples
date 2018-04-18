@@ -235,3 +235,7 @@ initial model. What did you have to change?
 When you are ready, continue on to [12 - Function Update](12-func-update-mithril.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.

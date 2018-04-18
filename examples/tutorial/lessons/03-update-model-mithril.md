@@ -62,3 +62,7 @@ model to produce the view, and change the `increase` function so that it increas
 When you are ready, continue on to [04 - Update Function](04-update-function-mithril.html).
 
 [Table of Contents](toc.html)
+
+-----
+
+Meiosis is developed by [@foxdonut00](http://twitter.com/foxdonut00) / [foxdonut](https://github.com/foxdonut) and is released under the MIT license.
