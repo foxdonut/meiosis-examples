@@ -1,7 +1,7 @@
 /*global $*/
 
 import m from "mithril";
-import stream from "mithril-stream";
+import stream from "mithril/stream";
 import _ from "lodash/fp";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
@@ -28,61 +28,58 @@ const entry = {
 
     return model =>
       m("div",
-        m("span", { style: { marginRight: 8 } }, "Entry number:"),
+        m("span", { style: { "margin-right": "8px" } }, "Entry number:"),
         m("input[type=text][size=2]", { value: model.value, oninput: actions.editEntryValue })
       );
   }
 };
 
-class DateField extends React.Component {
-  static model() {
-    return {
-      value: ""
-    };
-  }
+const DateField = {
+  model: () => ({
+    value: ""
+  }),
 
-  componentWillMount() {
-    this.dateFieldRef = React.createRef();
-    const update = this.props.update;
+  oninit: vnode => {
+    const update = vnode.attrs.update;
 
     const updates = {
       editDateValue: value => update(_.set("value", value))
     };
 
-    this.actions = {
+    vnode.state.actions = {
       editDateValue: evt => updates.editDateValue(evt.target.value)
     };
-  }
+  },
 
-  componentDidMount() {
-    const update = this.props.update;
+  oncreate: vnode => {
+    const update = vnode.attrs.update;
 
-    const $datepicker = $(this.dateFieldRef.current);
+    const $datepicker = $(vnode.dom).find(".dateField");
 
     $datepicker
       .datepicker({ autoHide: true })
       .on("pick.datepicker", _evt =>
         update(_.set("value", $datepicker.datepicker("getDate", true)))
       )
-  }
+  },
 
-  render() {
-    const model = this.props.model;
-    const actions = this.actions;
+  view: vnode => {
+    const model = vnode.attrs.model;
+    const actions = vnode.state.actions;
 
     return (
-      m("div", { style: { marginTop: 8 } },
-        m("span", { style: { marginRight: 8 } }, "Date:"),
-        m("input[type=text][size=10]", { ref: this.dateFieldRef, value: model.value,
+      m("div", { style: { "margin-top": "8px" } },
+        m("span", { style: { "margin-right": "8px" } }, "Date:"),
+        m("input[type=text][size=10].dateField", { value: model.value,
           oninput: actions.editDateValue })
       )
     );
-  }
+  },
 
-  componentWillUnmount() {
-    $(this.dateFieldRef.current).datepicker("destroy");
+  onremove: vnode => {
+    $(vnode.dom).find(".dateField").datepicker("destroy");
   }
-}
+};
 
 const temperature = {
   model: label => ({
@@ -114,14 +111,14 @@ const temperature = {
     };
 
     return model =>
-      m("div.row", { style: { marginTop: 8 } },
+      m("div.row", { style: { "margin-top": "8px" } },
         m("div.col-md-3",
           m("span", model.label, " Temperature: ", model.value, m.trust("&deg;"), model.units)
         ),
         m("div.col-md-6",
-          m("button.btn.btn-sm.btn-default", { onClick: actions.increase(1) }, "Increase"),
-          m("button.btn.btn-sm.btn-default", { onClick: actions.increase(-1) }, "Decrease"),
-          m("button.btn.btn-sm.btn-info", { onClick: actions.changeUnits }, "Change Units")
+          m("button.btn.btn-sm.btn-default", { onclick: actions.increase(1) }, "Increase"), " ",
+          m("button.btn.btn-sm.btn-default", { onclick: actions.increase(-1) }, "Decrease"), " ",
+          m("button.btn.btn-sm.btn-info", { onclick: actions.changeUnits }, "Change Units")
         )
       );
   }
