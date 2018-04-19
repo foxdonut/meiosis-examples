@@ -1,8 +1,7 @@
 /*global $*/
 
-import flyd from "flyd";
-import React from "react";
-import ReactDOM from "react-dom";
+import m from "mithril";
+import stream from "mithril-stream";
 import _ from "lodash/fp";
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
@@ -27,12 +26,11 @@ const entry = {
       editEntryValue: evt => update(_.set("value", evt.target.value))
     };
 
-    return model => (
-      <div>
-        <span style={{marginRight: 8}}>Entry number:</span>
-        <input type="text" size="2" value={model.value} onChange={actions.editEntryValue}/>
-      </div>
-    );
+    return model =>
+      m("div",
+        m("span", { style: { marginRight: 8 } }, "Entry number:"),
+        m("input[type=text][size=2]", { value: model.value, oninput: actions.editEntryValue })
+      );
   }
 };
 
@@ -73,11 +71,11 @@ class DateField extends React.Component {
     const actions = this.actions;
 
     return (
-      <div style={{marginTop: 8}}>
-        <span style={{marginRight: 8}}>Date:</span>
-        <input ref={this.dateFieldRef} type="text" size="10" value={model.value}
-          onChange={actions.editDateValue}/>
-      </div>
+      m("div", { style: { marginTop: 8 } },
+        m("span", { style: { marginRight: 8 } }, "Date:"),
+        m("input[type=text][size=10]", { ref: this.dateFieldRef, value: model.value,
+          oninput: actions.editDateValue })
+      )
     );
   }
 
@@ -115,18 +113,17 @@ const temperature = {
       }
     };
 
-    return model => (
-      <div className="row" style={{marginTop: 8}}>
-        <div className="col-md-3">
-          <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
-        </div>
-        <div className="col-md-6">
-          <button className="btn btn-sm btn-default" onClick={actions.increase(1)}>Increase</button>{" "}
-          <button className="btn btn-sm btn-default" onClick={actions.increase(-1)}>Decrease</button>{" "}
-          <button className="btn btn-sm btn-info" onClick={actions.changeUnits}>Change Units</button>
-        </div>
-      </div>
-    );
+    return model =>
+      m("div.row", { style: { marginTop: 8 } },
+        m("div.col-md-3",
+          m("span", model.label, " Temperature: ", model.value, m.trust("&deg;"), model.units)
+        ),
+        m("div.col-md-6",
+          m("button.btn.btn-sm.btn-default", { onClick: actions.increase(1) }, "Increase"),
+          m("button.btn.btn-sm.btn-default", { onClick: actions.increase(-1) }, "Decrease"),
+          m("button.btn.btn-sm.btn-info", { onClick: actions.changeUnits }, "Change Units")
+        )
+      );
   }
 };
 
@@ -171,28 +168,27 @@ const app = {
       }
     };
 
-    return model => (
-      <form>
-        {components.entry(model)}
-        <DateField model={model.date} update={nestUpdate(update, "date")} />
-        {components.temperature.air(model)}
-        {components.temperature.water(model)}
-        <div>
-          <button className="btn btn-primary" onClick={actions.save}>Save</button>
-          <span>{model.saved}</span>
-        </div>
-      </form>
-    );
+    return model =>
+      m("form",
+        components.entry(model),
+        m(DateField, { model: model.date, update: nestUpdate(update, "date") }),
+        components.temperature.air(model),
+        components.temperature.water(model),
+        m("div",
+          m("button.btn.btn-primary", { onclick: actions.save }, "Save"),
+          m("span", model.saved)
+        )
+      );
   }
 };
 
-const update = flyd.stream();
-const models = flyd.scan((model, func) => func(model),
+const update = stream();
+const models = stream.scan((model, func) => func(model),
   app.model(), update);
 
 const element = document.getElementById("app");
 const view = app.create(update);
-models.map(model => ReactDOM.render(view(model), element));
+models.map(model => m.render(element, view(model)));
 
 trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

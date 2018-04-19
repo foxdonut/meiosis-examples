@@ -23,7 +23,8 @@ module.exports = {
     "part-06-ex-03": "./part-06/index-03.js",
     "part-06-ex-04": "./part-06/index-04.js",
 
-    "react-component": "./sandbox/react-component.jsx"
+    "react-component": "./sandbox/react-component.jsx",
+    "mithril-component": "./sandbox/mithril-component.js"
   },
   output: {
     path: path.join(__dirname, "build"),
