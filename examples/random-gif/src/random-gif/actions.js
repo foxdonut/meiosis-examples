@@ -6,16 +6,16 @@ const gif_new_url = "https://api.giphy.com/v1/gifs/random";
 const api_key = "dc6zaTOxFJmzC";
 
 exports.createActions = (update, actions) => ({
-  editTag: id => event => update({ id, fn: assoc("tag", event.target.value) }),
+  editTag: event => update(assoc("tag", event.target.value)),
 
-  newGif: (id, tag) => {
+  newGif: tag => {
     actions.newGif();
-    update({ id, fn: assoc("image", Loaded.N()) });
+    update(assoc("image", Loaded.N()));
     m.request({ url: gif_new_url, data: { api_key, tag }}).
       then(response =>
-        update({ id, fn: assoc("image", Loaded.Y(Success.Y(Image.Y(response.data.image_url)))) })).
-      catch(() => update({ id, fn: assoc("image", Loaded.Y(Success.N())) }));
+        update(assoc("image", Loaded.Y(Success.Y(Image.Y(response.data.image_url)))))).
+      catch(() => update(assoc("image", Loaded.Y(Success.N()))));
   },
 
-  reset: id => update({ id, fn: assoc("image", Loaded.Y(Success.Y(Image.N()))) })
+  reset: () => update(assoc("image", Loaded.Y(Success.Y(Image.N()))))
 });

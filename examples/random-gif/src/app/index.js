@@ -12,24 +12,24 @@ const { createRandomGifList } = require("../random-gif-list");
 
 exports.createApp = update => {
   const actions = {
-    newGif: () => update({ fn: model => {
+    newGif: () => update(model => {
       const increment = model.counter.value > 3 && model.button.active ? 2 : 1;
       return R.over(R.lensPath(["counter", "value"]), R.add(increment), model);
-    } })
+    })
   };
-  const button = nest(createButton, ["button"], update);
-  const counter = nest(createCounter("Counter"), ["counter"], update);
+  const button = nest(createButton, update, ["button"]);
+  const counter = nest(createCounter("Counter"), update, ["counter"]);
 
   const createRandomGif = RandomGif.createRandomGif(actions);
-  const randomGif1 = nest(createRandomGif, ["randomGif1"], update);
-  const randomGif2 = nest(createRandomGif, ["randomGif2"], update);
+  const randomGif1 = nest(createRandomGif, update, ["randomGif1"]);
+  const randomGif2 = nest(createRandomGif, update, ["randomGif2"]);
 
   const createRandomGifPair = RandomGifPair.createRandomGifPair(createRandomGif);
-  const randomGifPair = nest(createRandomGifPair, ["randomGifPair"], update);
+  const randomGifPair = nest(createRandomGifPair, update, ["randomGifPair"]);
   const randomGifPairPair = nest(createRandomGifPairPair(createRandomGifPair),
-    ["randomGifPairPair"], update);
+    update, ["randomGifPairPair"]);
 
-  const randomGifList = nest(createRandomGifList(createRandomGif), ["randomGifList"], update);
+  const randomGifList = nest(createRandomGifList(createRandomGif), update, ["randomGifList"]);
 
   return {
     model: () => Object.assign(
@@ -43,9 +43,7 @@ exports.createApp = update => {
       randomGifList.model()
     ),
 
-    state: R.compose(
-      randomGifList.state
-    ),
+    state: randomGifList.state,
 
     view: model => [
       counter.view(model),

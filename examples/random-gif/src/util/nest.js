@@ -1,11 +1,11 @@
 const R = require("ramda");
 
-const nestUpdate = (update, path) => modelUpdate =>
-  update(R.merge(modelUpdate, { fn: R.over(R.lensPath(path), modelUpdate.fn) }));
+const nestUpdate = (update, path) => func =>
+  update(R.over(R.lensPath(path), func));
 
-const nest = (create, path, update) => {
+const nest = (create, update, path) => {
   const component = create(nestUpdate(update, path));
-  const result = {};
+  const result = Object.assign({}, component);
   if (component.model) {
     result.model = () => R.assocPath(path, component.model(), {});
   }

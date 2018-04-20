@@ -4,7 +4,7 @@ const { lensPath, not, over } = require("ramda");
 const { button } = require("../util/ui");
 
 const createActions = update => ({
-  toggle: _event => update({ fn: over(lensPath(["active"]), not) })
+  toggle: _event => update(over(lensPath(["active"]), not))
 });
 
 exports.createButton = update => {
