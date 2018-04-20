@@ -36,11 +36,11 @@ const createActions = update => ({
 
 export const createApp = update => {
   const components = {
-    entryNumber: nest(createEntryNumber, ["entryNumber"], update),
-    entryDateFrom: nest(createEntryDate("From Date:"), ["entryDate", "from"], update),
-    entryDateTo: nest(createEntryDate("To Date:"), ["entryDate", "to"], update),
-    airTemperature: nest(createTemperature("Air temperature"), ["temperature", "air"], update),
-    waterTemperature: nest(createTemperature("Water temperature"), ["temperature", "water"], update)
+    entryNumber: nest(createEntryNumber, update, ["entryNumber"]),
+    entryDateFrom: nest(createEntryDate("From Date:"), update, ["entryDate", "from"]),
+    entryDateTo: nest(createEntryDate("To Date:"), update, ["entryDate", "to"]),
+    airTemperature: nest(createTemperature("Air temperature"), update, ["temperature", "air"]),
+    waterTemperature: nest(createTemperature("Water temperature"), update, ["temperature", "water"])
   };
 
   return {

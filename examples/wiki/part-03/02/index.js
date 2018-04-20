@@ -5,9 +5,8 @@ import { createApp } from "./app";
 
 const update = flyd.stream();
 const app = createApp(update);
-const initialModel = app.model();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = flyd.scan((model, func) => func(model),
+  app.model(), update);
 
 const element = document.getElementById("app");
 models.map(model => ReactDOM.render(app.view(model), element));

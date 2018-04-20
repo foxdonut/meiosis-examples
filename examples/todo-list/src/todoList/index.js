@@ -4,9 +4,8 @@ import { model } from "./model";
 import { createActions } from "./actions";
 import { createView } from "./view.jsx";
 import { createTodoItem } from "../todoItem";
-import { uncurry } from "../util/functional";
 
-export const createTodoList = uncurry(parentActions => update => {
+export const createTodoList = parentActions => update => {
   const actions = createActions(update);
 
   const components = {
@@ -17,4 +16,4 @@ export const createTodoList = uncurry(parentActions => update => {
     model,
     view: createView(components)
   };
-});
+};

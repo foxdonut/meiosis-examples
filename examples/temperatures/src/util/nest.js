@@ -3,7 +3,7 @@ import _ from "lodash";
 const nestUpdate = (update, path) => func =>
   update(model => _.update(model, path, func));
 
-export const nest = (create, path, update) => {
+export const nest = (create, update, path) => {
   const component = create(nestUpdate(update, path));
   const result = {};
   if (component.model) {

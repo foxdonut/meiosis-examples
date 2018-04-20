@@ -125,7 +125,7 @@ var nestUpdate = function(update, prop) {
 };
 
 // Now "nest" works on a component's "create" function
-var nest = function(create, prop, update) {
+var nest = function(create, update, prop) {
   var component = create(nestUpdate(update, prop));
   var result = Object.assign({}, component);
   if (component.model) {
@@ -164,9 +164,9 @@ Having done this, we can create and use nested components like so:
 
 ```js
 var createTemperaturePair = function(update) {
-  var air = nest(createTemperature("Air"), "air", update);
+  var air = nest(createTemperature("Air"), update, "air");
   var water = nest(createTemperature("Water", { value: 84, units: "F" }),
-    "water", update);
+    update, "water");
 
   var model = function() {
     return Object.assign(air.model(), water.model());
@@ -183,7 +183,7 @@ var createTemperaturePair = function(update) {
 ```
 
 Remember that `createTemperature(...)` returns `function(update)`. That is the `create` function
-that we pass to `nest`, along with the property to nest at and the `update` function.
+that we pass to `nest`, along with the `update` function and the property at which to nest.
 
 Notice how we use the default initial model for `air`, but we can also specify a different
 initial model, like we're doing for `water`.
@@ -201,7 +201,7 @@ at `"temperatures"`:
 
 ```js
 var createApp = function(update) {
-  return nest(createTemperaturePair, "temperatures", update);
+  return nest(createTemperaturePair, update, "temperatures");
 };
 
 var update = m.stream();

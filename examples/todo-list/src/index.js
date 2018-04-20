@@ -15,9 +15,8 @@ createServer();
 ajaxServices.loadTodos().then(todos => {
   const update = flyd.stream();
   const app = createApp(update);
-  const initialModel = merge(app.model(), { list: { todos, message: "" } });
-  const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-  const models = flyd.scan(applyUpdate, initialModel, update);
+  const models = flyd.scan((model, func) => func(model),
+     merge(app.model(), { list: { todos, message: "" } }), update);
 
   // https://infernojs.org/docs/api/inferno
   flyd.scan(createRenderer(), document.getElementById("app"), models.map(app.view));

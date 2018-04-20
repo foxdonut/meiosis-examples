@@ -10,7 +10,7 @@ var nestUpdate = function(update, prop) {
   };
 };
 
-var nest = function(create, prop, update) {
+var nest = function(create, update, prop) {
   var component = create(nestUpdate(update, prop));
   var result = Object.assign({}, component);
   if (component.model) {
@@ -75,9 +75,9 @@ var createTemperature = function(label, init) {
 };
 
 var createTemperaturePair = function(update) {
-  var air = nest(createTemperature("Air"), "air", update);
+  var air = nest(createTemperature("Air"), update, "air");
   var water = nest(createTemperature("Water", { value: 84, units: "F" }),
-    "water", update);
+    update, "water");
 
   var model = function() {
     return Object.assign(air.model(), water.model());
@@ -93,7 +93,7 @@ var createTemperaturePair = function(update) {
 };
 
 var createApp = function(update) {
-  return nest(createTemperaturePair, "temperatures", update);
+  return nest(createTemperaturePair, update, "temperatures");
 };
 
 // -- Meiosis pattern setup code

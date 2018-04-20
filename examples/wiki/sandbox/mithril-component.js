@@ -8,7 +8,7 @@ import meiosisTracer from "meiosis-tracer";
 
 const nestUpdate = (update, path) => func => update(_.update(path, func));
 
-const nest = (create, update, path) => {
+const nest = (create, update, path, isMithril) => {
   const component = create(nestUpdate(update, path));
   const result = Object.assign({}, component);
 
@@ -16,9 +16,17 @@ const nest = (create, update, path) => {
     result.model = () => _.set(path, component.model(), {});
   }
   if (component.view) {
-    // This is equivalent to:
-    // return model => component.view(_.get(path, model));
-    result.view = _.flow([_.get(path), component.view]);
+    if (isMithril) {
+      // for Mithril, view is a function of vnode instead of model
+      result.view = vnode => component.view(
+        _.merge(vnode, { attrs: { model: _.get(path, vnode.attrs.model) } })
+      )
+    }
+    else {
+      // This is equivalent to:
+      // result.view = model => component.view(_.get(path, model));
+      result.view = _.flow([_.get(path), component.view]);
+    }
   }
   return result;
 };
@@ -41,26 +49,18 @@ const createEntry = update => {
   };
 };
 
-const DateField = {
+const createDateField = update => ({
   model: () => ({
     value: ""
   }),
 
   oninit: vnode => {
-    const update = vnode.attrs.update;
-
-    const updates = {
-      editDateValue: value => update(_.set("value", value))
-    };
-
     vnode.state.actions = {
-      editDateValue: evt => updates.editDateValue(evt.target.value)
+      editDateValue: evt => update(_.set("value", evt.target.value))
     };
   },
 
   oncreate: vnode => {
-    const update = vnode.attrs.update;
-
     const $datepicker = $(vnode.dom).find(".dateField");
 
     $datepicker
@@ -86,7 +86,7 @@ const DateField = {
   onremove: vnode => {
     $(vnode.dom).find(".dateField").datepicker("destroy");
   }
-};
+});
 
 const createTemperature = label => update => {
   const actions = {
@@ -154,6 +154,7 @@ const createApp = update => {
   };
 
   const entry = nest(createEntry, update, "entry");
+  const DateField = nest(createDateField, update, "date", true);
   const air = nest(createTemperature("Air"), update, "temperature.air");
   const water = nest(createTemperature("Water"), update, ["temperature", "water"]);
 
@@ -161,7 +162,7 @@ const createApp = update => {
     model: () => _.mergeAll([
       { saved: "" },
       entry.model(),
-      { date: DateField.model() },
+      DateField.model(),
       air.model(),
       water.model()
     ]),
@@ -169,7 +170,7 @@ const createApp = update => {
     view: model =>
       m("form",
         entry.view(model),
-        m(DateField, { model: model.date, update: nestUpdate(update, "date") }),
+        m(DateField, { model }),
         air.view(model),
         water.view(model),
         m("div",

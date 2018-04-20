@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "browserify src/index.js -p [ tsify ] -o build/generated-app.js",
-    "watch": "webpack --progress --colors --watch",
-    "develop": "onchange '**/*.js' -i -- npm t",
+    "watch": "watchify src/index.js -p [ tsify ] -o build/generated-app.js -v",
     "test": "node test/run"
   },
   "repository": {
@@ -43,6 +42,7 @@
     "ospec": "^1.4.0",
     "reify": "^0.15.1",
     "tsify": "^3.0.4",
-    "typescript": "^2.8.1"
+    "typescript": "^2.8.1",
+    "watchify": "^3.11.0"
   }
 }

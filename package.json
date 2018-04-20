@@ -4,14 +4,7 @@
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
-    "random-gif": "(cd examples/random-gif && npm i && npm start)",
-    "temperatures": "(cd examples/temperatures && npm i && npm start)",
-    "todo-list": "(cd examples/todo-list && npm i && npm start)",
-    "todomvc": "(cd examples/todomvc && npm i && npm start)",
-    "wiki": "(cd examples/wiki && npm i && npm start)",
-    "examples": "npm run random-gif && npm run temperatures && npm run todo-list && npm run todomvc",
-    "prestart": "npm i && npm run examples",
-    "start": "node --harmony server/todo-list/main"
+    "start": "static-server -p 3000"
   },
   "repository": {
     "type": "git",
@@ -29,16 +22,11 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "co-body": "^5.1.1",
-    "koa": "^2.3.0",
-    "koa-route": "^3.2.0",
-    "koa-static": "^4.0.1"
+    "static-server": "^2.2.1"
   },
   "devDependencies": {
-    "eslint": "^4.8.0",
-    "eslint-plugin-inferno": "^7.0.1",
-    "eslint-plugin-react": "^7.4.0",
-    "tslint": "^5.7.0",
-    "typescript": "^2.5.3"
+    "eslint": "^4.19.1",
+    "eslint-plugin-inferno": "^7.8.0",
+    "eslint-plugin-react": "^7.7.0"
   }
 }

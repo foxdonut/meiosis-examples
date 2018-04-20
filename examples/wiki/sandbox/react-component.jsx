@@ -10,30 +10,37 @@ import meiosisTracer from "meiosis-tracer";
 const nestUpdate = (update, path) => func => update(_.update(path, func));
 
 const nest = (create, update, path) => {
-  const view = create(nestUpdate(update, path));
+  const component = create(nestUpdate(update, path));
+  const result = Object.assign({}, component);
 
-  // This is equivalent to:
-  // return model => view(_.get(path, model));
-  return _.flow([_.get(path), view]);
+  if (component.model) {
+    result.model = () => _.set(path, component.model(), {});
+  }
+  if (component.view) {
+    // This is equivalent to:
+    // result.view = model => component.view(_.get(path, model));
+    result.view = _.flow([_.get(path), component.view]);
+  }
+  return result;
 };
 
-const entry = {
-  model: () => ({
-    value: ""
-  }),
+const createEntry = update => {
+  const actions = {
+    editEntryValue: evt => update(_.set("value", evt.target.value))
+  };
 
-  create: update => {
-    const actions = {
-      editEntryValue: evt => update(_.set("value", evt.target.value))
-    };
+  return {
+    model: () => ({
+      value: ""
+    }),
 
-    return model => (
+    view: model => (
       <div>
         <span style={{marginRight: 8}}>Entry number:</span>
         <input type="text" size="2" value={model.value} onChange={actions.editEntryValue}/>
       </div>
-    );
-  }
+    )
+  };
 };
 
 class DateField extends React.Component {
@@ -47,12 +54,8 @@ class DateField extends React.Component {
     this.dateFieldRef = React.createRef();
     const update = this.props.update;
 
-    const updates = {
-      editDateValue: value => update(_.set("value", value))
-    };
-
     this.actions = {
-      editDateValue: evt => updates.editDateValue(evt.target.value)
+      editDateValue: evt => update(_.set("value", evt.target.value))
     };
   }
 
@@ -86,36 +89,36 @@ class DateField extends React.Component {
   }
 }
 
-const temperature = {
-  model: label => ({
-    label,
-    value: 20,
-    units: "C"
-  }),
+const createTemperature = label => update => {
+  const actions = {
+    increase: value => evt => {
+      evt.preventDefault();
+      update(_.update("value", _.add(value)));
+    },
+    changeUnits: evt => {
+      evt.preventDefault();
+      update(model => {
+        if (model.units === "C") {
+          model.units = "F";
+          model.value = Math.round( model.value * 9 / 5 + 32 );
+        }
+        else {
+          model.units = "C";
+          model.value = Math.round( (model.value - 32) / 9 * 5 );
+        }
+        return model;
+      })
+    }
+  };
 
-  create: update => {
-    const actions = {
-      increase: value => evt => {
-        evt.preventDefault();
-        update(_.update("value", _.add(value)));
-      },
-      changeUnits: evt => {
-        evt.preventDefault();
-        update(model => {
-          if (model.units === "C") {
-            model.units = "F";
-            model.value = Math.round( model.value * 9 / 5 + 32 );
-          }
-          else {
-            model.units = "C";
-            model.value = Math.round( (model.value - 32) / 9 * 5 );
-          }
-          return model;
-        })
-      }
-    };
+  return {
+    model: () => ({
+      label,
+      value: 20,
+      units: "C"
+    }),
 
-    return model => (
+    view: model => (
       <div className="row" style={{marginTop: 8}}>
         <div className="col-md-3">
           <span>{model.label} Temperature: {model.value}&deg;{model.units} </span>
@@ -126,73 +129,67 @@ const temperature = {
           <button className="btn btn-sm btn-info" onClick={actions.changeUnits}>Change Units</button>
         </div>
       </div>
-    );
-  }
+    )
+  };
 };
 
-const app = {
-  model: () => ({
-    entry: entry.model(),
-    date: DateField.model(),
-    temperature: {
-      air: temperature.model("Air"),
-      water: temperature.model("Water")
-    },
-    saved: ""
-  }),
+const createApp = update => {
+  const displayTemperature = temperature => temperature.label + ": " +
+    temperature.value + "\xB0" + temperature.units;
 
-  create: update => {
-    const displayTemperature = temperature => temperature.label + ": " +
-      temperature.value + "\xB0" + temperature.units;
+  const actions = {
+    save: evt => {
+      evt.preventDefault();
+      update(model => {
+        model.saved = " Entry #" + model.entry.value +
+          " on " + model.date.value + ":" +
+          " Temperatures: " +
+          displayTemperature(model.temperature.air) + " " +
+          displayTemperature(model.temperature.water);
 
-    const actions = {
-      save: evt => {
-        evt.preventDefault();
-        update(model => {
-          model.saved = " Entry #" + model.entry.value +
-            " on " + model.date.value + ":" +
-            " Temperatures: " +
-            displayTemperature(model.temperature.air) + " " +
-            displayTemperature(model.temperature.water);
+        model.entry.value = "";
+        model.date.value = "";
 
-          model.entry.value = "";
-          model.date.value = "";
+        return model;
+      });
+    }
+  };
 
-          return model;
-        });
-      }
-    };
+  const entry = nest(createEntry, update, "entry");
+  const air = nest(createTemperature("Air"), update, "temperature.air");
+  const water = nest(createTemperature("Water"), update, ["temperature", "water"]);
 
-    const components = {
-      entry: nest(entry.create, update, "entry"),
-      temperature: {
-        air: nest(temperature.create, update, "temperature.air"),
-        water: nest(temperature.create, update, ["temperature", "water"])
-      }
-    };
+  return {
+    model: () => _.mergeAll([
+      { saved: "" },
+      entry.model(),
+      { date: DateField.model() },
+      air.model(),
+      water.model()
+    ]),
 
-    return model => (
+    view: model => (
       <form>
-        {components.entry(model)}
+        {entry.view(model)}
         <DateField model={model.date} update={nestUpdate(update, "date")} />
-        {components.temperature.air(model)}
-        {components.temperature.water(model)}
+        {air.view(model)}
+        {water.view(model)}
         <div>
           <button className="btn btn-primary" onClick={actions.save}>Save</button>
           <span>{model.saved}</span>
         </div>
       </form>
-    );
-  }
+    )
+  };
 };
 
 const update = flyd.stream();
+const app = createApp(update);
 const models = flyd.scan((model, func) => func(model),
   app.model(), update);
 
 const element = document.getElementById("app");
-const view = app.create(update);
-models.map(model => ReactDOM.render(view(model), element));
+models.map(model => ReactDOM.render(app.view(model), element));
 
 trace({ update, dataStreams: [ models ] });
 meiosisTracer({ selector: "#tracer" });

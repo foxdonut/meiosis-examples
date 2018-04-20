@@ -2,18 +2,16 @@ import { createActions } from "./actions";
 import { createView } from "./view.jsx";
 import { createTodoForm } from "../todoForm";
 import { createTodoList } from "../todoList";
-import { createComponents, combineComponents } from "../util/nest";
+import { nest } from "../util/nest";
 
 export const createApp = update => {
   const actions = createActions(update);
 
-  const components = createComponents(update, {
-    form: createTodoForm(actions),
-    list: createTodoList(actions)
-  });
+  const form = nest(createTodoForm(actions), update, ["form"]);
+  const list = nest(createTodoList(actions), update, ["list"]);
 
   return {
-    model: combineComponents(components, "model"),
-    view: createView(components)
+    model: () => Object.assign({}, form.model(), list.model()),
+    view: createView({ form, list })
   };
 };
