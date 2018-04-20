@@ -138,7 +138,7 @@ var scan = function(accumulator, initial, sourceStream) {
 };
 ```
 
-As we discussed, `scan` takes an accumulator function, an initial value, and a source streawm.
+As we discussed, `scan` takes an accumulator function, an initial value, and a source stream.
 The new stream starts with the initial value. This is also the starting point for the
 `accumulated` value, which is the latest result. Then, we `map` on the source stream, passing in
 a function that takes the incoming value, calls the `accumulator` function with the latest
