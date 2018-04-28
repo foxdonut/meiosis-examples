@@ -9,9 +9,8 @@ import meiosisTracer from "meiosis-tracer";
 
 const update = stream();
 const temperature = createTemperature(update);
-const initialModel = temperature.model();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = stream.scan(applyUpdate, initialModel, update);
+const models = stream.scan((model, func) => func(model),
+  temperature.model(), update);
 
 const element = document.getElementById("app");
 models.map(model => m.render(element, temperature.view(model)));

@@ -4,7 +4,7 @@ import { createEntryDate } from "../entryDate";
 import { createEntryNumber } from "../entryNumber";
 import { createTemperature } from "../temperature";
 import { validateModel } from "../validation";
-import { nest }  from "../util/nest";
+import { nest } from "../util/nest";
 
 const createActions = update => ({
   save: evt => {

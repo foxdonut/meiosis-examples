@@ -47,7 +47,7 @@ todoStorage.loadAll().then((todos: Todo[]) => {
     }, {})
   };
 
-  const applyUpdate = (model: any, modelUpdate: UpdateFunction) => modelUpdate(model);
+  const applyUpdate = (model: any, func: UpdateFunction) => func(model);
   const models = flyd.scan(applyUpdate, initialModel, update);
   const app = createApp(update);
   const states = models.map(app.computeState);

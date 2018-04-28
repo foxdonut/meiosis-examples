@@ -9,9 +9,8 @@ import meiosisTracer from "meiosis-tracer";
 
 const update = flyd.stream();
 const temperature = createTemperature(update);
-const initialModel = temperature.model();
-const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-const models = flyd.scan(applyUpdate, initialModel, update);
+const models = flyd.scan((model, func) => func(model),
+  temperature.model(), update);
 
 const element = document.getElementById("app");
 const render = hyperHTML.bind(element);
