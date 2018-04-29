@@ -8,7 +8,7 @@ export function O(a, b){
         this.apply = a;
 
     else
-      return new O(function(c){
+      return new O(function(c = {}){
         return O(c, a);
       });
 
@@ -20,7 +20,7 @@ export function O(a, b){
             ? delete a[key]
             : a[key] =
               b[key] instanceof O
-                ? b[key].apply(a[key] === undefined ? {} : a[key])
+                ? b[key].apply(a[key])
                 : b[key];
 
     return a;
