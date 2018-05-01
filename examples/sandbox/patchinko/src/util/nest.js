@@ -12,7 +12,7 @@ const nestUpdate = (update, path) => patch =>
 
 export const nest = (create, update, path) => {
   const component = create(nestUpdate(update, path));
-  const result = {};
+  const result = O({}, component);
   if (component.model) {
     result.model = () => nestPatch(component.model(), path);
   }
