@@ -1,0 +1,33 @@
+{
+  "name": "sam",
+  "version": "1.0.0",
+  "description": "meiosis-examples sandbox",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel build src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive",
+    "sandbox"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "dependencies": {
+    "flyd": "^0.2.6",
+    "lit-html": "^0.9.0"
+  },
+  "devDependencies": {
+    "meiosis": "^1.3.0",
+    "meiosis-tracer": "^1.3.0",
+    "parcel-bundler": "^1.7.1"
+  }
+}
