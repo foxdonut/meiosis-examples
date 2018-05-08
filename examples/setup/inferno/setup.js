@@ -1,5 +1,5 @@
-import Inferno from "inferno";
-import createElement from 'inferno-create-element';
+import { render } from "inferno";
+import { createElement } from "inferno-create-element";
 import { setup } from "../common";
 import { jsx } from "../common/jsx";
 
@@ -9,7 +9,7 @@ const jsxInferno = jsx({
 
 export const setupRender = () => {
   global.jsx = jsxInferno(createElement);
-  return Inferno.render;
+  return render;
 };
 
 export const setupApp = () => setup(setupRender());

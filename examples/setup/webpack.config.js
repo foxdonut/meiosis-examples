@@ -3,6 +3,7 @@ var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
+  mode: "development",
   entry: {
     "bobril": "./bobril/index.js",
     "deku": "./deku/index.js",

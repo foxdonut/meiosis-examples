@@ -3,6 +3,7 @@ import { setup } from "../common";
 import { jsx } from "../common/jsx";
 
 const jsxPetitDom = jsx({
+  "className": "class",
   "onChange": "onchange",
   "onClick": "onclick",
   "onInput": "oninput"

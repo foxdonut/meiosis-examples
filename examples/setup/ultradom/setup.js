@@ -10,7 +10,7 @@ const jsxUltradom = jsx({
 
 export const setupRender = () => {
   global.jsx = jsxUltradom(h);
-  return (view, element) => patch(view, element);
+  return patch;
 };
 
 export const setupApp = () => setup(setupRender());

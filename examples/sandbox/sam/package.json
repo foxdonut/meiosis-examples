@@ -23,11 +23,11 @@
   },
   "dependencies": {
     "flyd": "^0.2.6",
-    "lit-html": "^0.9.0"
+    "lit-html": "^0.10.0"
   },
   "devDependencies": {
-    "meiosis": "^1.3.0",
-    "meiosis-tracer": "^1.3.0",
-    "parcel-bundler": "^1.7.1"
+    "meiosis": "^1.4.1",
+    "meiosis-tracer": "^1.4.1",
+    "parcel-bundler": "^1.8.1"
   }
 }
