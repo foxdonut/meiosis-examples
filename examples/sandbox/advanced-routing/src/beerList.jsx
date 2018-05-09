@@ -1,3 +1,5 @@
+import React from "react";
+
 export const createBeerList = (actions, beerListLink) => ({
   view: model => (
     <div>

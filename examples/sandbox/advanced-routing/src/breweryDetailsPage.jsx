@@ -1,6 +1,8 @@
-import { createBreweryListPage } from "./breweryListPage";
-import { createBreweryDetails } from "./breweryDetails";
-import { createLoadBeerList } from "./loadBeerList";
+import React from "react";
+
+import { createBreweryListPage } from "./breweryListPage.jsx";
+import { createBreweryDetails } from "./breweryDetails.jsx";
+import { createLoadBeerList } from "./loadBeerList.jsx";
 
 export const createBreweryDetailsPage = (update, navigation, router) => {
   const breweryListPage = createBreweryListPage(update, navigation, router);

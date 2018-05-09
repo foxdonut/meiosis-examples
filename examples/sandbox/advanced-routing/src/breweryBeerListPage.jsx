@@ -1,6 +1,8 @@
+import React from "react";
+
 import { pages } from "./navigation";
-import { createBreweryDetailsPage } from "./breweryDetailsPage";
-import { createBeerList } from "./beerList";
+import { createBreweryDetailsPage } from "./breweryDetailsPage.jsx";
+import { createBeerList } from "./beerList.jsx";
 
 export const createBreweryBeerListPage = (update, navigation, router) => {
   const breweryDetailsPage = createBreweryDetailsPage(update, navigation, router);
@@ -9,10 +11,10 @@ export const createBreweryBeerListPage = (update, navigation, router) => {
     view: model => {
       const beerList = createBeerList(
         { beerDetails: beerId => _evt =>
-            navigation.navigateToBreweryBeerDetails({
-              breweryId: model.brewery.id,
-              beerId: beerId
-            })
+          navigation.navigateToBreweryBeerDetails({
+            breweryId: model.brewery.id,
+            beerId: beerId
+          })
         },
         beerId => router.getLink(
           pages.breweryBeerDetails.id,

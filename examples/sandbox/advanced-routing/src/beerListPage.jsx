@@ -1,5 +1,7 @@
+import React from "react";
+
 import { pages } from "./navigation";
-import { createBeerList } from "./beerList";
+import { createBeerList } from "./beerList.jsx";
 
 export const createBeerListPage = (actions, router) => {
   const beerList = createBeerList(actions,

@@ -1,12 +1,14 @@
+import React from "react";
+
 import { pages } from "./navigation";
-import { createHomePage } from "./homePage";
-import { createBeerListPage } from "./beerListPage";
-import { createBeerDetailsPage } from "./beerDetailsPage";
-import { createBreweryListPage } from "./breweryListPage";
-import { createBreweryDetailsPage } from "./breweryDetailsPage";
-import { createBreweryBeerListPage } from "./breweryBeerListPage";
-import { createBreweryBeerDetailsPage } from "./breweryBeerDetailsPage";
-import { createPleaseWait } from "./pleaseWait";
+import { createHomePage } from "./homePage.jsx";
+import { createBeerListPage } from "./beerListPage.jsx";
+import { createBeerDetailsPage } from "./beerDetailsPage.jsx";
+import { createBreweryListPage } from "./breweryListPage.jsx";
+import { createBreweryDetailsPage } from "./breweryDetailsPage.jsx";
+import { createBreweryBeerListPage } from "./breweryBeerListPage.jsx";
+import { createBreweryBeerDetailsPage } from "./breweryBeerDetailsPage.jsx";
+import { createPleaseWait } from "./pleaseWait.jsx";
 
 export const createAppModel = () => ({
   page: Object.assign({ params: {} }, pages.home)

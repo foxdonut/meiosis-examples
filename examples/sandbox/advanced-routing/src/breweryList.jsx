@@ -1,3 +1,5 @@
+import React from "react";
+
 import { pages } from "./navigation";
 
 export const createBreweryList = (actions, router) => ({

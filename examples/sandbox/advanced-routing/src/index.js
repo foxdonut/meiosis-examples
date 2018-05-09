@@ -2,7 +2,7 @@ import flyd from "flyd";
 import ReactDOM from "react-dom";
 
 import { createNavigation } from "./navigation";
-import { createAppModel, createApp } from "./app";
+import { createAppModel, createApp } from "./app.jsx";
 import { createRouter } from "./router";
 
 // Meiosis Setup
