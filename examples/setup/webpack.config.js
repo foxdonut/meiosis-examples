@@ -1,18 +1,15 @@
 /*global __dirname*/
-var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
   mode: "development",
   entry: {
-    "bobril": "./bobril/index.js",
     "deku": "./deku/index.js",
     "diojs": "./diojs/index.js",
     "domvm": "./domvm/index.js",
     "hyperHTML": "./hyperHTML/index.js",
     "inferno": "./inferno/index.js",
     "lit-html": "./lit-html/index.js",
-    "maquette": "./maquette/index.js",
     "mithril": "./mithril/index.js",
     "petit-dom": "./petit-dom/index.js",
     "preact": "./preact/index.js",
@@ -33,26 +30,9 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"/*,
-          // options are in .babelrc for tests to work
-          // keeping this here as a reference
-          options: {
-            presets: ["env"],
-            plugins: [
-              ["transform-react-jsx", {
-                "pragma": "jsx"
-              }]
-            ]
-          }
-          */
+          loader: "babel-loader"
         }
       }
     ]
-  },
-  // Only needed for Bobril
-  plugins: [
-    new webpack.DefinePlugin({
-      "DEBUG": false
-    })
-  ]
+  }
 };

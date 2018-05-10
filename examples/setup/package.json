@@ -36,7 +36,6 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bobril": "^8.8.1",
     "deku": "^2.0.0-rc16",
     "dio.js": "^9.0.4",
     "domvm": "^3.2.8",
@@ -45,21 +44,20 @@
     "inferno": "^5.0.4",
     "inferno-create-element": "^5.0.4",
     "lit-html": "^0.10.0",
-    "maquette": "^3.2.2",
     "mithril": "^1.1.6",
     "petit-dom": "0.2.0",
     "preact": "^8.2.9",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "snabbdom": "^0.7.1",
-    "ultradom": "^2.3.4"
+    "ultradom": "^3.2.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "browser-env": "^3.2.5",
     "jquery": "^3.3.1",
     "meiosis": "^1.4.1",

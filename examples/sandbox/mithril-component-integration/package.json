@@ -1,7 +1,7 @@
 {
-  "name": "advanced-routing",
+  "name": "mithril-component-integration",
   "version": "1.0.0",
-  "description": "meiosis-examples advanced-routing",
+  "description": "meiosis-examples mithril-component-integration",
   "main": "src/index.js",
   "scripts": {
     "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
@@ -14,8 +14,8 @@
   "keywords": [
     "example",
     "meiosis",
-    "reactive",
-    "routing"
+    "mithril",
+    "reactive"
   ],
   "author": "foxdonut",
   "license": "MIT",
@@ -24,16 +24,12 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "es6-promise": "^4.2.4",
-    "flyd": "^0.2.6",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "universal-router": "^6.0.0",
-    "uuid": "^3.2.1"
+    "mithril": "^1.1.6",
+    "mithril-stream": "^1.1.0",
+    "patchinko": "^3.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babelify": "^8.0.0",
     "browserify": "^16.2.2",

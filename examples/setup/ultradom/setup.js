@@ -1,4 +1,4 @@
-import { h, patch } from "ultradom";
+import { h, render } from "ultradom";
 import { setup } from "../common";
 import { jsx } from "../common/jsx";
 
@@ -10,7 +10,7 @@ const jsxUltradom = jsx({
 
 export const setupRender = () => {
   global.jsx = jsxUltradom(h);
-  return patch;
+  return render;
 };
 
 export const setupApp = () => setup(setupRender());
