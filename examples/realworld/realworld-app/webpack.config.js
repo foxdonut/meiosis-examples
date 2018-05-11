@@ -13,6 +13,7 @@ module.exports = {
     alias: {
       "realworld-services": path.resolve(__dirname, "../realworld-services-axios/src"),
       "realworld-state": path.resolve(__dirname, "../realworld-state-lodash/src"),
+      "realworld-router": path.resolve(__dirname, "../realworld-router-url-mapper/src"),
       "realworld-view": path.resolve(__dirname, "../realworld-view-react/src")
     }
   },

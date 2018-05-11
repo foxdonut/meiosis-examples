@@ -1,39 +1,6 @@
-import flyd from "flyd";
 import ReactDOM from "react-dom";
 
-import { page } from "./page";
-import { router } from "./router";
-import { credentialsApi } from "realworld-services";
-import { viewModel } from "./util";
+import { createMainView } from "./main";
 
-export const start = () => {
-  credentialsApi.getUser().then(user => {
-    const applyUpdate = (model, modelUpdate) => modelUpdate(model);
-
-    const initialModel = {
-      article: {},
-      articles: [],
-      articlesFilter: {
-        limit: 10,
-        offset: 0,
-        tagFilter: ""
-      },
-      login: {},
-      page: "Home",
-      profile: {},
-      register: {},
-      user,
-      tags: []
-    };
-
-    const update = flyd.stream();
-    const Router = router.create(update);
-
-    const models = flyd.scan(applyUpdate, initialModel, update);
-    const viewModels = models.map(viewModel).map(Router.syncRoute);
-
-    const element = document.getElementById("app");
-    const view = page.create(update);
-    viewModels.map(model => ReactDOM.render(view(model), element));
-  });
-};
+export const createView = createMainView;
+export const render = ReactDOM.render;

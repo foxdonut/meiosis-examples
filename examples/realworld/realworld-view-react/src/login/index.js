@@ -1,12 +1,11 @@
-import { credentials } from "../credentials";
+import { createCredentials } from "../credentials";
 
-export const login = {
-  create: update => credentials.create(update, {
+export const createLogin = update =>
+  createCredentials(update, {
     path: ["login"],
     method: "login",
     alternativeLink: "/register",
     alternativeLabel: "Need an account?",
     label: "Sign in",
     showUsername: false
-  })
-};
+  });

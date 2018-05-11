@@ -1,8 +1,6 @@
 import React from "react";
 import marked from "marked";
-import { ifElse, path } from "ramda";
-
-import { T, profileLink } from "../util";
+import { path } from "ramda";
 
 const isAuthor = username => article => article.author.username === username;
 
@@ -38,13 +36,12 @@ const nonAuthorMeta = article => (
 
 const articleMeta = (article, username) => (
   <div className="article-meta">
-    <a href={profileLink(article.author.username)}><img src={article.author.image}/></a>
+    <a href="#/profile/username"><img src={article.author.image}/></a>
     <div className="info">
-      <a className="author" href={profileLink(article.author.username)}>{article.author.username}</a>
+      <a className="author" href="#/profileLink">{article.author.username}</a>
       <span className="date">{new Date(article.createdAt).toDateString()}</span>
     </div>
-    {/*ifElse(isAuthor(username), authorMeta, nonAuthorMeta)(article)*/}
-    {T(article, ifElse(isAuthor(username), authorMeta, nonAuthorMeta))}
+    {(isAuthor(username) ? authorMeta : nonAuthorMeta)(article)}
   </div>
 );
 

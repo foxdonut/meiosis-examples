@@ -32,11 +32,11 @@ export const createView = components => model => {
                 {content.tagFeedComponent}
               </ul>
             </div>
-            {components.Articles(model)}
+            {/* components.Articles(model) */}
           </div>
           <div className="col-md-3">
             <div className="sidebar">
-              {components.PopularTags(model)}
+              {/* components.PopularTags(model) */}
             </div>
           </div>
         </div>

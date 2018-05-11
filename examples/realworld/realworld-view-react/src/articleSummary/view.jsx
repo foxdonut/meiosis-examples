@@ -1,7 +1,5 @@
 import React from "react";
 
-import { profileLink } from "../util";
-
 const articleLink = slug => "#/article/" + slug;
 
 export const createView = () => model => {
@@ -10,9 +8,9 @@ export const createView = () => model => {
   return (
     <div key={'article' + model.slug} className="article-preview">
       <div className="article-meta">
-        <a href={profileLink(username)}><img src={model.author.image} /></a>
+        <a href="#/profileLink(username)"><img src={model.author.image} /></a>
         <div className="info">
-          <a href={profileLink(username)} className="author">{username}</a>
+          <a href="#/profileLink(username)" className="author">{username}</a>
           <span className="date">{new Date(model.createdAt).toDateString()}</span>
         </div>
         <button className="btn btn-outline-primary btn-sm pull-xs-right">
