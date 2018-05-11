@@ -4,7 +4,7 @@
   "description": "meiosis-examples",
   "main": "index.js",
   "scripts": {
-    "start": "static-server -p 3000"
+    "start": "static-server -p ${PORT:-3000}"
   },
   "repository": {
     "type": "git",
