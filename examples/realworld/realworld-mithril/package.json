@@ -25,7 +25,10 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "marked": "^0.3.19"
+    "marked": "^0.3.19",
+    "mithril": "^1.1.6",
+    "mithril-stream": "^1.1.0",
+    "patchinko": "^3.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
