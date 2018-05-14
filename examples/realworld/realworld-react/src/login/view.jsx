@@ -1,8 +1,8 @@
 import React from "react";
-import { defaultTo } from "ramda";
+import _ from "lodash";
 
-export const createView = (actions, options) => model => {
-  const errors = Object.keys(defaultTo({}, model.errors)).map(key => key + " " + model.errors[key]);
+export const createView = actions => model => {
+  const errors = Object.keys(_.defaultTo(model.errors, {})).map(key => key + " " + model.errors[key]);
 
   return (
     <div className="auth-page">
@@ -10,9 +10,9 @@ export const createView = (actions, options) => model => {
         <div className="row">
 
           <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">{options.label}</h1>
+            <h1 className="text-xs-center">Sign In</h1>
             <p className="text-xs-center">
-              <a href="{options.alternativeLink}">{options.alternativeLabel}</a>
+              <a href="/register">Need an account?</a>
             </p>
 
             <ul className="error-messages">
@@ -20,12 +20,6 @@ export const createView = (actions, options) => model => {
             </ul>
 
             <form>
-              {options.showUsername && (
-                <fieldset className="form-group">
-                  <input className="form-control form-control-lg" type="text" placeholder="Username"
-                    value={model.username} onChange={actions.updateForm("username")} />
-                </fieldset>
-              )}
               <fieldset className="form-group">
                 <input className="form-control form-control-lg" type="text" placeholder="Email"
                   value={model.email} onChange={actions.updateForm("email")} />
@@ -35,7 +29,7 @@ export const createView = (actions, options) => model => {
                   value={model.password} onChange={actions.updateForm("password")} />
               </fieldset>
               <button className="btn btn-lg btn-primary pull-xs-right" onClick={actions.callback(model)}>
-                {options.label}
+                Sign In
               </button>
             </form>
           </div>
