@@ -35,10 +35,10 @@ const createApp = update => {
 const update = stream();
 const app = createApp(update);
 const models = stream.scan(O, { }, update);
-models.map(m.redraw);
 m.mount(document.getElementById("app"), { view: () => m(app, { model: models() }) });
 
 import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
 trace({ update, dataStreams: [ models ], toUpdate: obj => obj });
 meiosisTracer({ selector: "#tracer" });
+//models.map(m.redraw);
