@@ -1,10 +1,10 @@
 import flyd from "flyd";
 import { render } from "lit-html/lib/lit-extended";
 
-import { createTemperature } from "./temperature";
+import { createApp } from "./app";
 
 const update = flyd.stream();
-const app = createTemperature(update);
+const app = createApp(update);
 
 const models = flyd.scan((model, func) => func(model),
   app.model(), update);

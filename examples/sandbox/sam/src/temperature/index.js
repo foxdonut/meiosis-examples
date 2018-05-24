@@ -3,8 +3,9 @@ import { createActions } from "./actions";
 import { createView } from "./view";
 import { state } from "./state";
 
-export const createTemperature = update => ({
+export const createTemperature = label => update => ({
   model: () => ({
+    label,
     precipitations: false,
     precipitation: null,
     date: "",
