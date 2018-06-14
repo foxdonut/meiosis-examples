@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bss": "^1.1.6",
+    "bss": "^1.1.8",
     "mithril": "^1.1.6",
     "ramda": "0.25.0",
     "static-sum-type": "^0.18.1",
@@ -33,16 +33,16 @@
   },
   "devDependencies": {
     "browser-env": "^3.2.5",
-    "browserify": "^16.2.0",
+    "browserify": "^16.2.2",
     "glob": "^7.1.2",
     "jquery": "^3.3.1",
     "meiosis": "^1.4.1",
     "meiosis-tracer": "^1.4.1",
     "onchange": "^4.0.0",
-    "ospec": "^1.4.1",
-    "reify": "^0.15.1",
+    "ospec": "^2.1.0",
+    "reify": "^0.16.2",
     "tsify": "^4.0.0",
-    "typescript": "^2.8.3",
+    "typescript": "^2.9.2",
     "watchify": "^3.11.0"
   }
 }
