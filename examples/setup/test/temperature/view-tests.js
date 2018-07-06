@@ -1,6 +1,6 @@
 import test from "ava";
 import $ from "jquery";
-import { createView } from "../../common/temperature/view";
+import { createView } from "../../common/temperature/view.jsx";
 
 const id = "app";
 const sel = "#" + id;
@@ -34,7 +34,7 @@ const libs =
 libs.forEach(lib => {
 
   test.serial(lib + " integration tests", t => {
-    const { setupApp } = require("../../" + lib + "/setup");
+    const { setupApp } = require("../../" + lib + "/setup.jsx");
     setupApp();
 
     // Verify presence of elements
@@ -80,7 +80,7 @@ libs.forEach(lib => {
 
   test.serial(lib + " action trigger tests", t => {
     return new Promise(resolve => {
-      const { setupRender } = require("../../" + lib + "/setup");
+      const { setupRender } = require("../../" + lib + "/setup.jsx");
       const render = setupRender();
 
       // Verify that click triggers action

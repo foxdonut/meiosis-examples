@@ -4,18 +4,19 @@ var path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    "deku": "./deku/index.js",
-    "diojs": "./diojs/index.js",
-    "domvm": "./domvm/index.js",
+    "jsx-deku": "./deku/index.jsx",
+    "jsx-diojs": "./diojs/index.jsx",
+    "jsx-domvm": "./domvm/index.jsx",
     "hyperHTML": "./hyperHTML/index.js",
-    "inferno": "./inferno/index.js",
+    "jsx-inferno": "./inferno/index.jsx",
     "lit-html": "./lit-html/index.js",
-    "mithril": "./mithril/index.js",
-    "petit-dom": "./petit-dom/index.js",
-    "preact": "./preact/index.js",
-    "react": "./react/index.js",
-    "snabbdom": "./snabbdom/index.js",
-    "ultradom": "./ultradom/index.js"
+    "jsx-mithril": "./mithril/index.jsx",
+    "jsx-petit-dom": "./petit-dom/index.jsx",
+    "jsx-preact": "./preact/index.jsx",
+    "jsx-react": "./react/index.jsx",
+    "jsx-snabbdom": "./snabbdom/index.jsx",
+    "jsx-ultradom": "./ultradom/index.jsx",
+    "js-preact": "./preact/index.js"
   },
   output: {
     path: path.join(__dirname, "build"),
