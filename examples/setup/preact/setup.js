@@ -1,6 +1,6 @@
 import preact from "preact";
 import { setup } from "../common";
-const { mapKeys, sv } = require("seview");
+import { mapKeys, sv } from "seview";
 
 const h = sv(mapKeys({
   tag: "nodeName",
