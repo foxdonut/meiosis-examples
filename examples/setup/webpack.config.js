@@ -15,8 +15,14 @@ module.exports = {
     "jsx-preact": "./preact/index.jsx",
     "jsx-react": "./react/index.jsx",
     "jsx-snabbdom": "./snabbdom/index.jsx",
-    "jsx-ultradom": "./ultradom/index.jsx",
-    "js-preact": "./preact/index.js"
+    "js-deku": "./deku/index.js",
+    "js-diojs": "./diojs/index.js",
+    "js-domvm": "./domvm/index.js",
+    "js-inferno": "./inferno/index.js",
+    "js-mithril": "./mithril/index.js",
+    "js-petit-dom": "./petit-dom/index.js",
+    "js-preact": "./preact/index.js",
+    "js-react": "./react/index.js"
   },
   output: {
     path: path.join(__dirname, "build"),

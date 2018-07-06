@@ -27,7 +27,7 @@ export const createView = actions => model =>
       "Date:",
       ["input:text[size=10]", { value: model.date, onInput: safe(actions.editDate) }]
     ],
-    ["span", "Temperature:"],
+    ["span", "Temperature: "],
     ["span.tempValue", model.value],
     "\u00B0",
     ["span.tempUnits", model.units],

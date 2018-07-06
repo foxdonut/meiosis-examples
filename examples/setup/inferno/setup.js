@@ -1,15 +1,26 @@
 import { render } from "inferno";
-import { createElement } from "inferno-create-element";
+import { h as hyper } from "inferno-hyperscript";
 import { setup } from "../common";
-import { jsx } from "../common/jsx";
+import { sv } from "seview";
 
-const jsxInferno = jsx({
-  "htmlFor": "for"
-});
-
-export const setupRender = () => {
-  global.jsx = jsxInferno(createElement);
-  return render;
+const processAttrs = (attrs = {}) => {
+  Object.keys(attrs).forEach(key => {
+    if (key === "htmlFor") {
+      const value = attrs[key];
+      delete attrs[key];
+      attrs["for"] = value;
+    }
+  })
+  return attrs;
 };
+
+const h = sv(node =>
+  (typeof node === "string")
+  ? node
+  : hyper(node.tag, processAttrs(node.attrs), node.children || [])
+);
+
+export const setupRender = () =>
+  (view, element) => render(h(view), element);
 
 export const setupApp = () => setup(setupRender());

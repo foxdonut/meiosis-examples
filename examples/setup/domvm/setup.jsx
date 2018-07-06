@@ -1,4 +1,4 @@
-import domvm from "domvm";
+import { createView, defineElement } from "domvm";
 import { setup } from "../common/index.jsx";
 import { jsx } from "../common/jsx";
 
@@ -11,23 +11,23 @@ export const jsxDomvm = jsx({
 });
 
 export const setupRender = () => {
-  global.jsx = jsxDomvm(domvm.defineElement);
+  global.jsx = jsxDomvm(defineElement);
 
   return (view, element) => {
     const AppView = () => () => view;
-    const vm = domvm.createView(AppView, {});
+    const vm = createView(AppView, {});
     vm.mount(element);
   };
 };
 
 export const setupApp = () => {
-  global.jsx = jsxDomvm(domvm.defineElement);
+  global.jsx = jsxDomvm(defineElement);
 
   const app = setup(() => null);
 
   const AppView = () => (vm, model) => app.view(model);
 
-  const vm = domvm.createView(AppView, app.models());
+  const vm = createView(AppView, app.models());
   vm.mount(app.element);
   app.models.map(model => vm.update(model));
 

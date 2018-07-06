@@ -28,7 +28,6 @@ const libs =
   , "preact"
   , "react"
   , "snabbdom"
-  //, "ultradom"
   ];
 
 libs.forEach(lib => {

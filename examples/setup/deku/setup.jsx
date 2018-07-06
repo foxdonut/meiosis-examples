@@ -3,8 +3,8 @@ import { setup } from "../common/index.jsx";
 import { jsx } from "../common/jsx";
 
 const jsxDeku = jsx({
-  "className": "class",
-  "htmlFor": "for"
+  "htmlFor": "for",
+  "className": "class"
 });
 
 export const setupRender = () => {

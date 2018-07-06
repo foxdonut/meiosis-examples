@@ -1,33 +1,27 @@
-import domvm from "domvm";
+import { createView } from "domvm";
 import { setup } from "../common";
-import { jsx } from "../common/jsx";
+import { mapKeys, sv } from "seview";
 
-export const jsxDomvm = jsx({
-  "className": "class",
-  "htmlFor": "for",
-  "onChange": "onchange",
-  "onClick": "onclick",
-  "onInput": "oninput"
-});
+const h = sv(mapKeys({
+  tag: "tag",
+  attrs: "attrs",
+  children: "body"
+}));
 
 export const setupRender = () => {
-  global.jsx = jsxDomvm(domvm.defineElement);
-
   return (view, element) => {
     const AppView = () => () => view;
-    const vm = domvm.createView(AppView, {});
+    const vm = createView(AppView, {});
     vm.mount(element);
   };
 };
 
 export const setupApp = () => {
-  global.jsx = jsxDomvm(domvm.defineElement);
-
   const app = setup(() => null);
 
-  const AppView = () => (vm, model) => app.view(model);
+  const AppView = () => (vm, model) => h(app.view(model));
 
-  const vm = domvm.createView(AppView, app.models());
+  const vm = createView(AppView, app.models());
   vm.mount(app.element);
   app.models.map(model => vm.update(model));
 

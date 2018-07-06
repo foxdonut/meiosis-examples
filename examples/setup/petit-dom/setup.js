@@ -1,27 +1,49 @@
-import { h, mount, patch } from "petit-dom";
+import { h as hyper, mount, patch } from "petit-dom";
 import { setup } from "../common";
-import { jsx } from "../common/jsx";
+import { sv } from "seview";
 
-const jsxPetitDom = jsx({
-  "className": "class",
-  "onChange": "onchange",
-  "onClick": "onclick",
-  "onInput": "oninput"
-});
+const attrMappings = {
+  "htmlFor": "for",
+  "className": "class"
+};
+
+const processAttrs = (attrs = {}) => {
+  Object.keys(attrs).forEach(key => {
+    if (key.startsWith("on")) {
+      const value = attrs[key];
+      delete attrs[key];
+      attrs[key.toLowerCase()] = value;
+    }
+    else {
+      const to = attrMappings[key];
+      if (to) {
+        const value = attrs[key];
+        delete attrs[key];
+        attrs[to] = value;
+      }
+    }
+  });
+  return attrs;
+};
+
+const h = sv(node =>
+  (typeof node === "string")
+  ? node
+  : hyper(node.tag, processAttrs(node.attrs), node.children || [])
+);
 
 export const setupRender = () => {
-  global.jsx = jsxPetitDom(h);
-
   let vnode = null;
 
   return (view, element) => {
+    const node = h(view)
     if (!vnode) {
-      element.appendChild(mount(view));
+      element.appendChild(mount(node));
     }
     else {
-      patch(view, vnode);
+      patch(node, vnode);
     }
-    vnode = view;
+    vnode = node;
   };
 };
 
