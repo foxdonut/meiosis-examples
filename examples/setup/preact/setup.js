@@ -8,12 +8,7 @@ const h = sv(mapKeys({
   children: "children"
 }))
 
-export const setupRender = () => {
-  return (view, element) => {
-    console.log(JSON.stringify(h(view), null, 4));
-    preact.render(h(view), element, element.lastElementChild);
-  };
-  // return (view, element) => preact.render(h(view), element, element.lastElementChild);
-};
+export const setupRender = () =>
+  (view, element) => preact.render(h(view), element, element.lastElementChild);
 
 export const setupApp = () => setup(setupRender());
