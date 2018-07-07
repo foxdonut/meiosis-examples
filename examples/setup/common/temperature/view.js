@@ -29,7 +29,7 @@ export const createView = actions => model =>
     ],
     ["span", "Temperature: "],
     ["span.tempValue", model.value],
-    "\u00B0",
+    ["span", { innerHTML: "&deg;" }],
     ["span.tempUnits", model.units],
     ["div",
       ["button.btn.btn-default.increase", { onClick: wrap(actions.increase, 1) }, "Increase"],

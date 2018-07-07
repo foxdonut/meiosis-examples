@@ -2,7 +2,7 @@ import m from "mithril";
 import { setup } from "../common";
 import { sv } from "seview";
 
-const lowercaseEvents = (attrs = {}) => {
+const processAttrs = (attrs = {}) => {
   Object.keys(attrs).forEach(key => {
     if (key.startsWith("on")) {
       const value = attrs[key];
@@ -16,7 +16,9 @@ const lowercaseEvents = (attrs = {}) => {
 const h = sv(node =>
   (typeof node === "string")
   ? { tag: "#", children: node }
-  : m(node.tag, lowercaseEvents(node.attrs), node.children || [])
+  : node.attrs && node.attrs.innerHTML
+    ? m(node.tag, m.trust(node.attrs.innerHTML))
+    : m(node.tag, processAttrs(node.attrs), node.children || [])
 );
 
 export const setupRender = () =>
