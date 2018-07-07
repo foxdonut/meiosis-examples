@@ -1,12 +1,35 @@
-import { createView } from "domvm";
+import { createView, defineElement } from "domvm";
 import { setup } from "../common";
-import { mapKeys, sv } from "seview";
+import { sv } from "seview";
 
-const h = sv(mapKeys({
-  tag: "tag",
-  attrs: "attrs",
-  children: "body"
-}));
+const attrMappings = {
+  "className": "class"
+};
+
+const processAttrs = (attrs = {}) => {
+  Object.keys(attrs).forEach(key => {
+    if (key.startsWith("on")) {
+      const value = attrs[key];
+      delete attrs[key];
+      attrs[key.toLowerCase()] = value;
+    }
+    else {
+      const to = attrMappings[key];
+      if (to) {
+        const value = attrs[key];
+        delete attrs[key];
+        attrs[to] = value;
+      }
+    }
+  });
+  return attrs;
+};
+
+const h = sv(node =>
+  (typeof node === "string")
+  ? node
+  : defineElement(node.tag, processAttrs(node.attrs), node.children || [])
+);
 
 export const setupRender = () => {
   return (view, element) => {

@@ -30,41 +30,49 @@ const libs =
   , "snabbdom"
   ];
 
+const exts = [ "js", "jsx" ];
+
 libs.forEach(lib => {
+  exts.forEach(ext => {
 
-  test.serial(lib + " integration tests", t => {
-    const { setupApp } = require("../../" + lib + "/setup.jsx");
-    setupApp();
+    test.serial(lib + " " + ext + " integration tests", t => {
+      if (lib === "snabbdom" && ext === "js") {
+        t.pass();
+        return;
+      }
+      const { setupApp } = require("../../" + lib + "/setup." + ext);
+      setupApp();
 
-    // Verify presence of elements
-    t.is(element.find("input[type=checkbox]").length, 1);
-    t.is(element.find("input[type=radio]").length, 3);
-    t.is(element.find("input[type=text]").length, 1);
-    t.is(element.find("button").length, 3);
+      // Verify presence of elements
+      t.is(element.find("input[type=checkbox]").length, 1);
+      t.is(element.find("input[type=radio]").length, 3);
+      t.is(element.find("input[type=text]").length, 1);
+      t.is(element.find("button").length, 3);
 
-    // Verify rendering of initial model
-    t.is(element.find(".tempValue").text(), "20");
-    t.is(element.find(".tempUnits").text(), "C");
+      // Verify rendering of initial model
+      t.is(element.find(".tempValue").text(), "20");
+      t.is(element.find(".tempUnits").text(), "C");
 
-    // Verify click -> update model -> re-render view
-    element.find(".increase").click();
-    t.is(element.find(".tempValue").text(), "21");
+      // Verify click -> update model -> re-render view
+      element.find(".increase").click();
+      t.is(element.find(".tempValue").text(), "21");
 
-    element.find(".changeUnits").click();
-    t.is(element.find(".tempValue").text(), "70");
-    t.is(element.find(".tempUnits").text(), "F");
+      element.find(".changeUnits").click();
+      t.is(element.find(".tempValue").text(), "70");
+      t.is(element.find(".tempUnits").text(), "F");
 
-    const cb = element.find("input[type=checkbox]");
-    t.is(cb.is(":checked"), false);
-    cb.click();
-    t.is(cb.is(":checked"), true);
+      const cb = element.find("input[type=checkbox]");
+      t.is(cb.is(":checked"), false);
+      cb.click();
+      t.is(cb.is(":checked"), true);
 
-    const rb = element.find("#snow");
-    t.is(rb.is(":checked"), false);
-    rb.click();
-    t.is(rb.is(":checked"), true);
+      const rb = element.find("#snow");
+      t.is(rb.is(":checked"), false);
+      rb.click();
+      t.is(rb.is(":checked"), true);
+    });
+
   });
-
 });
 
 const model = {
