@@ -20,7 +20,7 @@ test.beforeEach(function() {
 
 const libs =
   [ "deku"
-  , "diojs"
+  // , "diojs"
   , "domvm"
   , "inferno"
   , "mithril"
