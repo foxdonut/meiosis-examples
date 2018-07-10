@@ -1,10 +1,8 @@
-import { safe, wrap } from "../handler";
-
 const precipitationOption = ({ model, actions, id, value, label }) =>
   ["span",
     [`input:radio#${id}[name=precipitation]`, {
       value, checked: model.precipitation === value,
-      onClick: safe(actions.changePrecipitation)
+      onClick: actions.changePrecipitation
     }],
     ["label", { htmlFor: id }, label]
   ];
@@ -14,7 +12,7 @@ export const createView = actions => model =>
     ["div",
       ["input:checkbox#precipitations", {
         checked: model.precipitations,
-        onClick: safe(actions.togglePrecipitations)
+        onClick: actions.togglePrecipitations
       }],
       ["label", { htmlFor: "precipitations" }, "Precipitations"]
     ],
@@ -25,17 +23,17 @@ export const createView = actions => model =>
     ],
     ["div",
       "Date:",
-      ["input:text[size=10]", { value: model.date, onInput: safe(actions.editDate) }]
+      ["input:text[size=10]", { value: model.date, onInput: actions.editDate }]
     ],
     ["span", "Temperature: "],
     ["span.tempValue", model.value],
     ["span", { innerHTML: "&deg;" }],
     ["span.tempUnits", model.units],
     ["div",
-      ["button.btn.btn-default.increase", { onClick: wrap(actions.increase, 1) }, "Increase"],
-      ["button.btn.btn-default.decrease", { onClick: wrap(actions.increase, -1) }, "Decrease"]
+      ["button.btn.btn-default.increase", { onClick: () => actions.increase( 1) }, "Increase"],
+      ["button.btn.btn-default.decrease", { onClick: () => actions.increase(-1) }, "Decrease"]
     ],
     ["div",
-      ["button.btn.btn-primary.changeUnits", { onClick: safe(actions.changeUnits) }, "Change Units"]
+      ["button.btn.btn-primary.changeUnits", { onClick: actions.changeUnits }, "Change Units"]
     ]
   ];

@@ -1,11 +1,10 @@
 import { wire } from "hyperhtml/esm";
-import { safe, wrap } from "../../common/handler";
 
 const precipitationOption = ({ model, actions, id, value, label }) => wire(model, `:precip-${id}`)`
   <span>
     <input type="radio" id="${id}" name="precipitation" value="${value}"
       checked="${model.precipitation === value}"
-      onclick=${safe(actions.changePrecipitation)}/>
+      onclick=${actions.changePrecipitation}/>
     <label for="${id}">${label}</label>
   </span>
 `;
@@ -16,7 +15,7 @@ export const createView = actions => model => {
       <div>
         <div>
           <input type="checkbox" checked="${model.precipitations}"
-            onclick=${safe(actions.togglePrecipitations)} id="precipitations"/>
+            onclick=${actions.togglePrecipitations} id="precipitations"/>
           <label for="precipitations">Precipitations</label>
         </div>
         <div>
@@ -26,16 +25,16 @@ export const createView = actions => model => {
         </div>
         <div>
           Date:
-          <input type="text" size="10" oninput=${safe(actions.editDate)}/>
+          <input type="text" size="10" oninput=${actions.editDate}/>
         </div>
         <span>Temperature: </span>
         <span class="tempValue">${model.value}</span>&deg;<span class="tempUnits">${model.units}</span>
         <div>
-          <button class="btn btn-default increase" onclick=${wrap(actions.increase, 1)}>Increase</button>
-          <button class="btn btn-default decrease" onclick=${wrap(actions.increase, -1)}>Decrease</button>
+          <button class="btn btn-default increase" onclick=${() => actions.increase( 1)}>Increase</button>
+          <button class="btn btn-default decrease" onclick=${() => actions.increase(-1)}>Decrease</button>
         </div>
         <div>
-          <button class="btn btn-primary changeUnits" onclick=${safe(actions.changeUnits)}>Change Units</button>
+          <button class="btn btn-primary changeUnits" onclick=${actions.changeUnits}>Change Units</button>
         </div>
       </div>
     `;
