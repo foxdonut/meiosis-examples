@@ -3,7 +3,8 @@ import { setup } from "../common";
 import { sv } from "seview";
 
 const attrMappings = {
-  "className": "class"
+  "className": "class",
+  "htmlFor": "for"
 };
 
 const processAttrs = (attrs = {}) => {

@@ -19,9 +19,8 @@ test.beforeEach(function() {
 });
 
 const libs =
-  [ "deku"
-  // , "diojs"
-  , "domvm"
+  [ "domvm"
+  //, "diojs"
   , "inferno"
   , "mithril"
   , "petit-dom"
@@ -36,10 +35,6 @@ libs.forEach(lib => {
   exts.forEach(ext => {
 
     test.serial(lib + " " + ext + " integration tests", t => {
-      if (lib === "snabbdom" && ext === "js") {
-        t.pass();
-        return;
-      }
       const { setupApp } = require("../../" + lib + "/setup." + ext);
       setupApp();
 

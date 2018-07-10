@@ -4,7 +4,6 @@ var path = require("path");
 module.exports = {
   mode: "development",
   entry: {
-    "jsx-deku": "./deku/index.jsx",
     "jsx-diojs": "./diojs/index.jsx",
     "jsx-domvm": "./domvm/index.jsx",
     "hyperHTML": "./hyperHTML/index.js",
@@ -15,14 +14,14 @@ module.exports = {
     "jsx-preact": "./preact/index.jsx",
     "jsx-react": "./react/index.jsx",
     "jsx-snabbdom": "./snabbdom/index.jsx",
-    "js-deku": "./deku/index.js",
     "js-diojs": "./diojs/index.js",
     "js-domvm": "./domvm/index.js",
     "js-inferno": "./inferno/index.js",
     "js-mithril": "./mithril/index.js",
     "js-petit-dom": "./petit-dom/index.js",
     "js-preact": "./preact/index.js",
-    "js-react": "./react/index.js"
+    "js-react": "./react/index.js",
+    "js-snabbdom": "./snabbdom/index.js"
   },
   output: {
     path: path.join(__dirname, "build"),

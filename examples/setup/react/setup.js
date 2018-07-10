@@ -12,10 +12,7 @@ const h = sv(node => {
     attrs.dangerouslySetInnerHTML = { __html: attrs.innerHTML };
     delete attrs.innerHTML;
   }
-  const args = [node.tag, node.attrs || {}];
-  if (node.children) {
-    node.children.forEach(child => args.push(child))
-  }
+  const args = [node.tag, node.attrs || {}].concat(node.children || []);
   return React.createElement.apply(null, args);
 });
 
