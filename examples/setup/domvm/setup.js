@@ -4,7 +4,8 @@ import { sv } from "seview";
 
 const attrMappings = {
   "className": "class",
-  "htmlFor": "for"
+  "htmlFor": "for",
+  "innerHTML": ".innerHTML"
 };
 
 const processAttrs = (attrs = {}) => {
@@ -29,7 +30,7 @@ const processAttrs = (attrs = {}) => {
 const h = sv(node =>
   (typeof node === "string")
   ? node
-  : defineElement(node.tag, processAttrs(node.attrs), node.children || [])
+  : defineElement(node.tag, processAttrs(node.attrs), node.children || null)
 );
 
 export const setupRender = () => {
