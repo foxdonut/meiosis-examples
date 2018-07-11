@@ -14,6 +14,6 @@ exports.createView = (actions, randomGif) => {
       m("div", "Has gif(s): ", model.hasGifs ? "Yes" : "No"),
       m("button" + button.bc("green"), { onclick: actions.add }, "Add"),
       m("button" + button.bc("red"), { onclick: () => actions.resetAll() }, "Reset All"),
-      m("div", model.randomGifs.map(renderRandomGif))
+      m("div", model.randomGifIds.map(id => renderRandomGif(model.randomGifsById[id])))
     ]);
 };

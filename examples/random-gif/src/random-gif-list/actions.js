@@ -3,7 +3,8 @@ const R = require("ramda");
 exports.createActions = (update, randomGif) => ({
   add: _event => update(model => {
     const randomGifModel = randomGif.model();
-    model.randomGifs.push(randomGifModel);
+    model.randomGifIds.push(randomGifModel.id);
+    model.randomGifsById[randomGifModel.id] = randomGifModel;
     return model;
   }),
 
