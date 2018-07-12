@@ -1,18 +1,18 @@
-const R = require("ramda");
+const RandomGif = require("../random-gif")
 
-exports.createActions = (update, randomGif) => ({
-  add: _event => update(model => {
-    const randomGifModel = randomGif.model();
-    model.randomGifIds.push(randomGifModel.id);
-    model.randomGifsById[randomGifModel.id] = randomGifModel;
-    return model;
+exports.createActions = (update, idUpdate) => ({
+  add: () => update(model => {
+    const randomGifModel = RandomGif.model()
+    model.randomGifIds.push(randomGifModel.id)
+    model.randomGifsById[randomGifModel.id] = randomGifModel
+    return model
   }),
 
   remove: id => update(model => {
-    const index = R.findIndex(R.propEq("id", id), model.randomGifs);
-    model.randomGifs.splice(index, 1);
-    return model;
+    model.randomGifIds.splice(model.randomGifIds.indexOf(id), 1)
+    delete model.randomGifsById[id]
+    return model
   }),
 
-  resetAll: model => model.randomGifs.forEach(randomGif.actions.reset)
-});
+  resetAll: ids => ids.forEach(id => RandomGif.actions.reset(idUpdate, id))
+})

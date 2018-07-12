@@ -1,20 +1,16 @@
-const uuid = require("uuid");
-const { Loaded, Success, Image } = require("./types");
-const { createActions } = require("./actions");
-const { createView } = require("./view");
+const uuid = require("uuid")
+const { Loaded, Success, Image } = require("./types")
+const { actions } = require("./actions")
+const { view } = require("./view")
+const { signals } = require("./signals")
 
-exports.createRandomGif = parentActions => update => {
-  const actions = createActions(update, parentActions);
-
-  return {
-    model: () => ({
-      id: uuid.v1(),
-      image: Loaded.Y(Success.Y(Image.N())),
-      tag: ""
-    }),
-
-    actions,
-
-    view: createView(actions)
-  };
-};
+module.exports = {
+  model: () => ({
+    id: uuid.v1(),
+    image: Loaded.Y(Success.Y(Image.N())),
+    tag: ""
+  }),
+  view,
+  actions,
+  signals
+}

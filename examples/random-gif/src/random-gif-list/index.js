@@ -1,17 +1,17 @@
-const R = require("ramda");
-const { createActions } = require("./actions");
-const { createView } = require("./view");
+const R = require("ramda")
+const { createActions } = require("./actions")
+const { createView } = require("./view")
 
 const state = model => R.assoc("hasGifs", R.any(
   R.equals("Y"),
   R.map(R.path(["image", "value", "value", "case"]), R.values(model.randomGifsById))
-), model);
+), model)
 
-exports.createRandomGifList = createRandomGif => update => {
-  const randomGif = createRandomGif(func =>
-    update(R.over(R.lensPath(["randomGifsById", null]), func)));
+exports.createRandomGifList = update => {
+  const idUpdate = (func, id) =>
+    update(R.over(R.lensPath(["randomGifsById", id]), func))
 
-  const actions = createActions(update, randomGif);
+  const actions = createActions(update, idUpdate)
 
   return {
     model: () => ({
@@ -19,6 +19,6 @@ exports.createRandomGifList = createRandomGif => update => {
       randomGifIds: []
     }),
     state,
-    view: createView(actions, randomGif)
+    view: createView(actions, idUpdate)
   }
-};
+}
