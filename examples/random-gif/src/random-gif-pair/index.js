@@ -1,10 +1,10 @@
 const b = require("bss")
-const { nestStatic } = require("../util/nest")
+const { nestComponent } = require("../util/nest")
 const RandomGif = require("../random-gif")
 
 exports.createRandomGifPair = update => {
-  const randomGifFirst = nestStatic(RandomGif, update, ["randomGifFirst"])
-  const randomGifSecond = nestStatic(RandomGif, update, ["randomGifSecond"])
+  const randomGifFirst = nestComponent(RandomGif, update, ["randomGifFirst"])
+  const randomGifSecond = nestComponent(RandomGif, update, ["randomGifSecond"])
 
   return {
     model: () => Object.assign({}, randomGifFirst.model(), randomGifSecond.model()),

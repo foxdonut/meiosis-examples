@@ -1,7 +1,7 @@
 const b = require("bss")
 const R = require("ramda")
 
-const { nest, nestStatic } = require("../util/nest")
+const { nestCreateComponent, nestComponent } = require("../util/nest")
 const { createButton } = require("../button")
 const { createCounter } = require("../counter")
 const RandomGif = require("../random-gif")
@@ -16,16 +16,16 @@ exports.createApp = update => {
       return R.over(R.lensPath(["counter", "value"]), R.add(increment), model)
     })
   })
-  const button = nest(createButton, update, ["button"])
-  const counter = nest(createCounter("Counter"), update, ["counter"])
+  const button = nestCreateComponent(createButton, update, ["button"])
+  const counter = nestCreateComponent(createCounter("Counter"), update, ["counter"])
 
-  const randomGif1 = nestStatic(RandomGif, update, ["randomGif1"])
-  const randomGif2 = nestStatic(RandomGif, update, ["randomGif2"])
+  const randomGif1 = nestComponent(RandomGif, update, ["randomGif1"])
+  const randomGif2 = nestComponent(RandomGif, update, ["randomGif2"])
 
-  const randomGifPair = nest(createRandomGifPair, update, ["randomGifPair"])
-  const randomGifPairPair = nest(createRandomGifPairPair, update, ["randomGifPairPair"])
+  const randomGifPair = nestCreateComponent(createRandomGifPair, update, ["randomGifPair"])
+  const randomGifPairPair = nestCreateComponent(createRandomGifPairPair, update, ["randomGifPairPair"])
 
-  const randomGifList = nest(createRandomGifList, update, ["randomGifList"])
+  const randomGifList = nestCreateComponent(createRandomGifList, update, ["randomGifList"])
 
   return {
     model: () => Object.assign(

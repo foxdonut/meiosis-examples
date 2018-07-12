@@ -3,7 +3,7 @@ const R = require("ramda")
 const nestUpdate = (update, path) => (func, context) =>
   update(R.over(R.lensPath(path), func), context)
 
-const nest = (create, update, path) => {
+const nestCreateComponent = (create, update, path) => {
   const component = create(nestUpdate(update, path))
   const result = Object.assign({}, component)
   if (component.model) {
@@ -18,7 +18,7 @@ const nest = (create, update, path) => {
   return result
 }
 
-const nestStatic = (component, update, path) => {
+const nestComponent = (component, update, path) => {
   const result = Object.assign({}, component)
 
   if (component.model) {
@@ -31,4 +31,4 @@ const nestStatic = (component, update, path) => {
   return result
 }
 
-module.exports = { nest, nestStatic }
+module.exports = { nestCreateComponent, nestComponent }
