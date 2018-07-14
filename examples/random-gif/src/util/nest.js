@@ -1,7 +1,7 @@
 const R = require("ramda")
 
-const nestUpdate = (update, path) => (func, context) =>
-  update(R.over(R.lensPath(path), func), context)
+const nestUpdate = (update, path) => func =>
+  update(R.over(R.lensPath(path), func))
 
 const nestCreateComponent = (create, update, path) => {
   const component = create(nestUpdate(update, path))
@@ -31,4 +31,4 @@ const nestComponent = (component, update, path) => {
   return result
 }
 
-module.exports = { nestCreateComponent, nestComponent }
+module.exports = { nestUpdate, nestCreateComponent, nestComponent }

@@ -8,10 +8,7 @@ const state = model => R.assoc("hasGifs", R.any(
 ), model)
 
 exports.createRandomGifList = update => {
-  const idUpdate = (func, id) =>
-    update(R.over(R.lensPath(["randomGifsById", id]), func))
-
-  const actions = createActions(update, idUpdate)
+  const actions = createActions(update)
 
   return {
     model: () => ({
@@ -19,6 +16,6 @@ exports.createRandomGifList = update => {
       randomGifIds: []
     }),
     state,
-    view: createView(actions, idUpdate)
+    view: createView(actions, update)
   }
 }

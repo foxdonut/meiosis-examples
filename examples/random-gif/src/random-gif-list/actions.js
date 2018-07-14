@@ -1,6 +1,7 @@
 const RandomGif = require("../random-gif")
+const { nestUpdate } = require("../util/nest")
 
-exports.createActions = (update, idUpdate) => ({
+exports.createActions = update => ({
   add: () => update(model => {
     const randomGifModel = RandomGif.model()
     model.randomGifIds.push(randomGifModel.id)
@@ -14,5 +15,5 @@ exports.createActions = (update, idUpdate) => ({
     return model
   }),
 
-  resetAll: ids => ids.forEach(id => RandomGif.actions.reset(idUpdate, id))
+  resetAll: ids => ids.forEach(id => RandomGif.actions.reset(nestUpdate(update, ["randomGifsById", id])))
 })

@@ -22,9 +22,9 @@ const imgsrc = image =>
 exports.view = (model, update) =>
   ["div" + b.border("1px solid green").p(8).mt(4),
     ["span" + b.mr(4), "Tag:"],
-    ["input[type=text]", { value: model.tag, onkeyup: evt => actions.editTag(update, model.id, evt.target.value) }],
-    ["button" + button.bc("#357edd"), { onclick: () => actions.newGif(update, model.id, model.tag) },
+    ["input[type=text]", { value: model.tag, onkeyup: evt => actions.editTag(update, evt.target.value) }],
+    ["button" + button.bc("#357edd"), { onclick: () => actions.newGif(update, model.tag) },
       "Random Gif"],
-    ["button" + button.bc("red"), { onclick: () => actions.reset(update, model.id) }, "Reset"],
+    ["button" + button.bc("red"), { onclick: () => actions.reset(update) }, "Reset"],
     ["div" + b.mt(4), ["img", { width: 200, height: 200, src: imgsrc(model.image) }] ]
   ]
