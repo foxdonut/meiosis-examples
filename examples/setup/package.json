@@ -38,8 +38,8 @@
   "dependencies": {
     "dio.js": "^9.1.0",
     "domvm": "^3.3.3",
-    "flyd": "^0.2.7",
-    "hyperhtml": "^2.11.1",
+    "flyd": "^0.2.8",
+    "hyperhtml": "^2.11.2",
     "inferno": "^5.3.0",
     "inferno-create-element": "^5.3.0",
     "inferno-hyperscript": "^5.3.0",
@@ -64,7 +64,7 @@
     "meiosis-tracer": "^1.4.1",
     "raf": "^3.4.0",
     "snabbdom-jsx": "^0.4.2",
-    "webpack": "^4.15.1",
+    "webpack": "^4.16.0",
     "webpack-cli": "^3.0.8"
   }
 }
