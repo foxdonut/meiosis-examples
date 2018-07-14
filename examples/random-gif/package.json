@@ -25,10 +25,10 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bss": "^1.2.0",
+    "bss": "^1.2.1",
     "mithril": "^1.1.6",
     "ramda": "0.25.0",
-    "seview": "^0.5.0",
+    "seview": "^0.6.0",
     "static-sum-type": "^0.18.1",
     "uuid": "^3.3.2"
   },
