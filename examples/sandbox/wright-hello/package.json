@@ -24,15 +24,15 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bss": "^1.1.6",
+    "bss": "^1.2.1",
     "mithril": "^1.1.6"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
     "babelify": "^8.0.0",
-    "browserify": "^16.2.0",
+    "browserify": "^16.2.2",
     "meiosis": "^1.4.1",
     "meiosis-tracer": "^1.4.1",
     "wright": "^1.0.7"

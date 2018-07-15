@@ -38,4 +38,3 @@ typings
 .cache
 .reify-cache
 generated-*
-package-lock.json

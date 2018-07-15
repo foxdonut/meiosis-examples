@@ -22,12 +22,12 @@
     "url": "https://github.com/foxdonut/meiosis-examples/issues"
   },
   "dependencies": {
-    "flyd": "^0.2.6",
-    "lit-html": "^0.10.0"
+    "flyd": "^0.2.8",
+    "lit-html": "^0.10.2"
   },
   "devDependencies": {
     "meiosis": "^1.4.1",
     "meiosis-tracer": "^1.4.1",
-    "parcel-bundler": "^1.8.1"
+    "parcel-bundler": "^1.9.6"
   }
 }

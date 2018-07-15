@@ -25,16 +25,16 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "es6-promise": "^4.2.4",
-    "flyd": "^0.2.6",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "flyd": "^0.2.8",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "universal-router": "^6.0.0",
-    "uuid": "^3.2.1"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babelify": "^8.0.0",
     "browserify": "^16.2.2",
     "meiosis": "^1.4.1",
