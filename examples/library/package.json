@@ -43,7 +43,7 @@
     "flyd": "^0.2.8",
     "hapi": "^17.5.2",
     "inert": "^5.1.0",
-    "sqlite3": "^4.0.1"
+    "sqlite3": "^4.0.2"
   },
   "devDependencies": {
     "ava": "^0.25.0",
@@ -53,7 +53,7 @@
     "browser-env": "^3.2.5",
     "jquery": "^3.3.1",
     "meiosis": "^1.4.1",
-    "webpack": "^4.16.0",
+    "webpack": "^4.16.1",
     "webpack-cli": "^3.0.8"
   }
 }

@@ -39,7 +39,7 @@
     "jquery": "^3.3.1",
     "meiosis": "^1.4.1",
     "meiosis-tracer": "^1.4.1",
-    "onchange": "^4.0.0",
+    "onchange": "^4.1.0",
     "ospec": "^3.0.1",
     "reify": "^0.16.4",
     "tsify": "^4.0.0",
