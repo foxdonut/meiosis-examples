@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "seview": "^0.7.0",
     "static-server": "^2.2.1"
   },
   "devDependencies": {
