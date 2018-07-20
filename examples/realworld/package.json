@@ -1,0 +1,45 @@
+{
+  "name": "realworld-meiosis",
+  "version": "1.0.0",
+  "description": "meiosis-examples realworld",
+  "main": "index.js",
+  "scripts": {
+    "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
+    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "reactive",
+    "realworld",
+    "seview"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "bss": "^1.2.1",
+    "crocks": "^0.9.4",
+    "flyd": "^0.2.8",
+    "marked": "^0.4.0",
+    "mithril": "^1.1.6",
+    "navigo": "^7.1.2",
+    "patchinko": "^3.2.1",
+    "seview": "^0.7.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babelify": "^8.0.0",
+    "browserify": "^16.2.2",
+    "eslint": "^5.1.0",
+    "watchify": "^3.11.0"
+  }
+}
