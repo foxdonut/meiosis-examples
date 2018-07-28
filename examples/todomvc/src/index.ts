@@ -11,9 +11,6 @@ import eventlisteners from "snabbdom/modules/eventlisteners";
 import props from "snabbdom/modules/props";
 import { VNode } from "snabbdom/vnode";
 
-// Only for using Meiosis Tracer in development.
-import { trace } from "meiosis";
-
 const patch = init([
   attributes,
   classModule,
@@ -50,16 +47,15 @@ todoStorage.loadAll().then((todos: Todo[]) => {
   const applyUpdate = (model: any, func: UpdateFunction) => func(model);
   const models = flyd.scan(applyUpdate, initialModel, update);
   const app = createApp(update);
-  const states = models.map(app.computeState);
+  app.state(models).map(update);
   const element = document.getElementById("app");
 
-  states.map((state: any) => render(element, app.view(state)));
+  models.map((model: Model) => render(element, app.view(model)));
 
   const router = app.createRouter();
-  states.map(router.routeSync);
+  models.map(router.routeSync);
 
   // Only for using Meiosis Tracer in development.
-  trace({ update, dataStreams: [ models, states ] });
   const meiosisTracer = require("meiosis-tracer");
-  meiosisTracer({ selector: "#tracer" });
+  meiosisTracer({ selector: "#tracer", streams: [ models ], rows: 40 });
 });

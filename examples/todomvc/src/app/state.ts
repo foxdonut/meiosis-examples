@@ -1,11 +1,12 @@
-import { merge } from "lodash";
+const flyd = require("flyd");
+import * as _ from "lodash";
 import { Model } from "../util";
 
-const allCompleted = (state: any) => {
+const allCompleted = (model: Model) => {
   let result = true;
 
-  for (let i = 0, t = state.todoIds.length; i < t; i++) {
-    if (!state.todosById[state.todoIds[i]].completed) {
+  for (let i = 0, t = model.todoIds.length; i < t; i++) {
+    if (!model.todosById[model.todoIds[i]].completed) {
       result = false;
       break;
     }
@@ -13,22 +14,47 @@ const allCompleted = (state: any) => {
   return result;
 };
 
-export const computeState = (model: Model) => {
-  const state: any = merge({}, model);
+const computeState = (model: Model) => {
+  const result: any = {};
 
-  state.allSelected = model.filterBy === "";
-  state.activeSelected = model.filterBy === "active";
-  state.completedSelected = model.filterBy === "completed";
+  result.allSelected = model.filterBy === "";
+  result.activeSelected = model.filterBy === "active";
+  result.completedSelected = model.filterBy === "completed";
 
-  state.allCompleted = allCompleted(state);
+  result.allCompleted = allCompleted(model);
 
-  const notCompleted = (todoId: string) => !state.todosById[todoId].completed;
-  const itemsLeft = state.todoIds.filter(notCompleted).length;
+  const notCompleted = (todoId: string) => !model.todosById[todoId].completed;
+  const itemsLeft = model.todoIds.filter(notCompleted).length;
 
-  state.itemsLeftText = itemsLeft > 0 ?
+  result.itemsLeftText = itemsLeft > 0 ?
     (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : "";
 
-  state.clearCompletedVisible = (state.todoIds.length - itemsLeft) > 0;
+  result.clearCompletedVisible = (model.todoIds.length - itemsLeft) > 0;
 
-  return state;
+  return result;
+};
+
+const diff = (source: any, object: any) => {
+  let result: boolean = false;
+
+  Object.keys(source).forEach((key: string) => {
+    if (object[key] === undefined || object[key] !== source[key]) {
+      result = true;
+    }
+  });
+  return result;
+};
+
+export const state = (models: any) => {
+  const updates = flyd.stream();
+
+  models.map((model: Model) => {
+    const newState: any = computeState(model);
+
+    if (diff(newState, model)) {
+      updates(() => _.merge(model, newState));
+    }
+  });
+
+  return updates;
 };

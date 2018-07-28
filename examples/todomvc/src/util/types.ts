@@ -14,13 +14,10 @@ export interface Model {
   todoIds: string[];
   todosById: { [id: string]: Todo };
   filterBy: string;
-}
-
-export interface State extends Model {
-  clearCompletedVisible: boolean;
-  itemsLeftText: string;
-  allCompleted: boolean;
-  allSelected: boolean;
-  activeSelected: boolean;
-  completedSelected: boolean;
+  clearCompletedVisible?: boolean;
+  itemsLeftText?: string;
+  allCompleted?: boolean;
+  allSelected?: boolean;
+  activeSelected?: boolean;
+  completedSelected?: boolean;
 }

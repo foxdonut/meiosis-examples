@@ -34,13 +34,12 @@
     "url-mapper": "^2.0.0"
   },
   "devDependencies": {
-    "@types/classnames": "2.2.4",
-    "@types/lodash": "^4.14.112",
-    "@types/node": "^10.5.2",
-    "meiosis": "^1.4.1",
-    "meiosis-tracer": "^1.4.1",
+    "@types/classnames": "2.2.6",
+    "@types/lodash": "^4.14.113",
+    "@types/node": "^10.5.3",
+    "meiosis-tracer": "file:../../../meiosis-tracer/meiosis-tracer-2.0.0.tgz",
     "parcel-bundler": "^1.9.7",
-    "tslint": "^5.10.0",
+    "tslint": "^5.11.0",
     "typescript": "^2.9.2"
   }
 }
