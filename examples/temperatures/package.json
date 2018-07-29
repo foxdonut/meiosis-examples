@@ -33,8 +33,7 @@
   },
   "devDependencies": {
     "buble": "^0.19.3",
-    "meiosis": "^1.4.1",
-    "meiosis-tracer": "^1.4.1",
+    "meiosis-tracer": "file:../../../meiosis-tracer/meiosis-tracer-2.0.0.tgz",
     "react-jsx": "^1.0.0",
     "rollup": "^0.62.0",
     "rollup-plugin-buble": "^0.19.2",

@@ -12,7 +12,5 @@ const element = document.getElementById("app");
 models.map(model => render(app.view(model), element, element.lastElementChild));
 
 // Only for using Meiosis Tracer in development.
-import { trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
-trace({ update, dataStreams: [ models ] });
-meiosisTracer({ selector: "#tracer" });
+import meiosisTracer from "meiosis-tracer"
+meiosisTracer({ selector: "#tracer", streams: [ models ] });

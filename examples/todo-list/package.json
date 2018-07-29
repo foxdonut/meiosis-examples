@@ -57,8 +57,7 @@
     "eslint-plugin-inferno": "^7.8.0",
     "gulp": "^3.9.1",
     "jquery": "^3.3.1",
-    "meiosis": "^1.4.1",
-    "meiosis-tracer": "^1.4.1",
+    "meiosis-tracer": "file:../../../meiosis-tracer/meiosis-tracer-2.0.0.tgz",
     "watchify": "^3.11.0"
   }
 }

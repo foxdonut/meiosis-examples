@@ -3,10 +3,6 @@ import hyperHTML from "hyperhtml/esm";
 
 import { createTemperature } from "./temperature";
 
-// Only for using Meiosis Tracer in development.
-import { trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
-
 const update = flyd.stream();
 const temperature = createTemperature(update);
 const models = flyd.scan((model, func) => func(model),
@@ -17,5 +13,4 @@ const render = hyperHTML.bind(element);
 models.map(model => render`${temperature.view(model)}`);
 
 // Only for using Meiosis Tracer in development.
-trace({ update, dataStreams: [ models ]});
-meiosisTracer({ selector: "#tracer" });
+require("meiosis-tracer")({ selector: "#tracer", streams: [ models ]});

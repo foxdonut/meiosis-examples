@@ -2,10 +2,6 @@ import flyd from "flyd";
 
 import { createTemperature } from "./temperature";
 
-// Only for using Meiosis Tracer in development.
-import { trace } from "meiosis";
-import meiosisTracer from "meiosis-tracer";
-
 export const setup = render => {
   const update = flyd.stream();
   const temperature = createTemperature(update);
@@ -16,8 +12,7 @@ export const setup = render => {
   models.map(model => render(temperature.view(model), element));
 
   // Only for using Meiosis Tracer in development.
-  trace({ update, dataStreams: [ models ]});
-  meiosisTracer({ selector: "#tracer" });
+  require("meiosis-tracer")({ selector: "#tracer", streams: [ models ]});
 
   return { models, view: temperature.view, element };
 };
