@@ -25,10 +25,10 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bss": "^1.2.1",
+    "bss": "^1.2.5",
     "mithril": "^1.1.6",
     "ramda": "0.25.0",
-    "seview": "^0.7.0",
+    "seview": "^0.10.0",
     "static-sum-type": "^0.18.1",
     "uuid": "^3.3.2"
   },
@@ -40,9 +40,9 @@
     "meiosis-tracer": "file:../../../meiosis-tracer/meiosis-tracer-2.0.0.tgz",
     "onchange": "^4.1.0",
     "ospec": "^3.0.1",
-    "reify": "^0.16.4",
+    "reify": "^0.17.0",
     "tsify": "^4.0.0",
-    "typescript": "^2.9.2",
+    "typescript": "^3.0.1",
     "watchify": "^3.11.0"
   }
 }
