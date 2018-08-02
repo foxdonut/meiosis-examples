@@ -16,9 +16,9 @@ states.map(state => m.render(element, h(app.view(state))))
 // Only for using Meiosis Tracer in development.
 const meiosisTracer = require("meiosis-tracer")
 const { signals } = require("./random-gif/signals")
-meiosisTracer({ selector: "#tracer", streams: [
+meiosisTracer({ selector: "#tracer", autoSend: true, streams: [
 //meiosisTracer({ streams: [
-  { label: "models", stream: models },
-  { label: "states", stream: states },
+  { label: "models", stream: models, hist: false },
+  { label: "states", stream: states, hide: true },
   { label: "newGif", stream: signals.newGif }
 ], rows: 12 })
