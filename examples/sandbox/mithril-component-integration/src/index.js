@@ -37,8 +37,7 @@ const app = createApp(update);
 const models = stream.scan(O, { }, update);
 m.mount(document.getElementById("app"), { view: () => m(app, { model: models() }) });
 
-import { trace } from "meiosis";
+// Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer";
-trace({ update, dataStreams: [ models ], toUpdate: obj => obj });
-meiosisTracer({ selector: "#tracer" });
-//models.map(m.redraw);
+meiosisTracer({ selector: "#tracer", streams: [ models ]});
+models.map(m.redraw);

@@ -34,27 +34,9 @@ const computeState = (model: Model) => {
   return result;
 };
 
-const diff = (source: any, object: any) => {
-  let result: boolean = false;
-
-  Object.keys(source).forEach((key: string) => {
-    if (object[key] === undefined || object[key] !== source[key]) {
-      result = true;
-    }
-  });
-  return result;
-};
-
-export const state = (models: any) => {
-  const updates = flyd.stream();
-
-  models.map((model: Model) => {
+export const state = (currentModel: Model) => {
+  return (model: Model) => {
     const newState: any = computeState(model);
-
-    if (diff(newState, model)) {
-      updates(() => _.merge(model, newState));
-    }
-  });
-
-  return updates;
+    return _.merge(model, newState);
+  };
 };

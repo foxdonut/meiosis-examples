@@ -21,3 +21,6 @@ export interface Model {
   activeSelected?: boolean;
   completedSelected?: boolean;
 }
+
+export const T = (model: any, func: UpdateFunction) => func(model);
+export const W = (f: any) => (x: any) => f(x)(x);

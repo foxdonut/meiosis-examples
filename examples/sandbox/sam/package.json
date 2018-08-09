@@ -26,8 +26,7 @@
     "lit-html": "^0.10.2"
   },
   "devDependencies": {
-    "meiosis": "^1.4.1",
-    "meiosis-tracer": "^1.4.1",
+    "meiosis-tracer": "^2.0.0",
     "parcel-bundler": "^1.9.7"
   }
 }

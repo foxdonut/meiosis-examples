@@ -1,7 +1,7 @@
 const flyd = require("flyd");
 
 import { createApp } from "./app";
-import { Model, Todo, UpdateFunction } from "./util";
+import { Model, T, Todo, UpdateFunction, W } from "./util";
 import { todoStorage } from "./util/todo-storage";
 
 import { init } from "snabbdom";
@@ -44,18 +44,17 @@ todoStorage.loadAll().then((todos: Todo[]) => {
     }, {})
   };
 
-  const applyUpdate = (model: any, func: UpdateFunction) => func(model);
-  const models = flyd.scan(applyUpdate, initialModel, update);
   const app = createApp(update);
-  app.state(models).map(update);
+  const models = flyd.scan(T, initialModel, update);
+  const state = models.map(W(app.state));
   const element = document.getElementById("app");
 
-  models.map((model: Model) => render(element, app.view(model)));
+  state.map((model: Model) => render(element, app.view(model)));
 
   const router = app.createRouter();
-  models.map(router.routeSync);
+  state.map(router.routeSync);
 
   // Only for using Meiosis Tracer in development.
   const meiosisTracer = require("meiosis-tracer");
-  meiosisTracer({ selector: "#tracer", streams: [ models ], rows: 40 });
+  meiosisTracer({ selector: "#tracer", streams: [ models, state ] });
 });

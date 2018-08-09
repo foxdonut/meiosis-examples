@@ -14,8 +14,5 @@ const states = models.map(app.state);
 states.map(state => render(app.view(state), element));
 
 // Only for using Meiosis Tracer in development.
-import { trace } from "meiosis";
 import meiosisTracer from "meiosis-tracer";
-
-trace({ update, dataStreams: [ models, states ]});
-meiosisTracer({ selector: "#tracer" });
+meiosisTracer({ selector: "#tracer", streams: [ models, states ]});
