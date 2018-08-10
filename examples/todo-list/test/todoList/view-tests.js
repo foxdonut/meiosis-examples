@@ -23,15 +23,14 @@ test.beforeEach(function() {
 });
 
 test("renders the list of todos", t => {
-  const todoList = createTodoList(null, null);
+  const todoList = createTodoList(null)(null);
   const model = {
     todos: [
       {id: 1, priority: 1, description: "Item 1"},
       {id: 2, priority: 2, description: "Item 2"}
     ]
   };
-  const view = todoList.view(model);
-  render(view, element);
+  render(todoList.view(model), element);
 
   t.is($(element).find("tbody tr").length, model.todos.length);
 });

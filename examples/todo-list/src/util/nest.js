@@ -5,12 +5,11 @@ const nestUpdate = (update, path) => func =>
 
 export const nest = (create, update, path) => {
   const component = create(nestUpdate(update, path));
-  const result = Object.assign({}, component);
-  if (component.model) {
-    result.model = () => R.assocPath(path, component.model(), {});
-  }
-  if (component.view) {
-    result.view = R.compose(component.view, R.path(path));
-  }
-  return result;
+  return R.applyTo(component,
+    R.pipe(
+      R.merge({}),
+      R.when(R.has("model"), R.assoc("model", () => R.assocPath(path, component.model(), {}))),
+      R.when(R.has("view"), R.assoc("view", R.compose(component.view, R.path(path))))
+    )
+  );
 };
