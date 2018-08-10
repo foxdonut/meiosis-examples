@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bss": "^1.2.5",
+    "bss": "^1.2.9",
     "crocks": "^0.10.1",
     "flyd": "^0.2.8",
     "marked": "^0.4.0",
@@ -39,7 +39,7 @@
     "babel-preset-env": "^1.7.0",
     "babelify": "^8.0.0",
     "browserify": "^16.2.2",
-    "eslint": "^5.2.0",
+    "eslint": "^5.3.0",
     "watchify": "^3.11.0"
   }
 }

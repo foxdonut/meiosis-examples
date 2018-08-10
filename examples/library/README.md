@@ -9,3 +9,5 @@ npm i
 npm start
 npm run server
 ```
+
+Then open http://localhost:8000/index.html

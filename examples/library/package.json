@@ -38,11 +38,10 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples",
   "dependencies": {
-    "crocks": "^0.9.4",
-    "domvm": "^3.3.3",
+    "crocks": "^0.10.1",
+    "domvm": "^3.4.3",
     "flyd": "^0.2.8",
-    "hapi": "^17.5.2",
-    "inert": "^5.1.0",
+    "paperplane": "^1.2.2",
     "sqlite3": "^4.0.2"
   },
   "devDependencies": {
@@ -53,7 +52,7 @@
     "browser-env": "^3.2.5",
     "jquery": "^3.3.1",
     "meiosis": "^1.4.1",
-    "webpack": "^4.16.1",
-    "webpack-cli": "^3.0.8"
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
   }
 }

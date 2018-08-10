@@ -4,37 +4,38 @@
 const fs = require("fs");
 const Path = require("path");
 const domvm = require("domvm");
+const { html, json } = require("paperplane");
+const Sqlite3 = require("sqlite3")
 
 const Persistence = require("../persistence");
 const createMain = require("../../build/generated-main").createMain;
+const db = new Sqlite3.Database("./library.db")
 
 const main = createMain();
 const View = () => () => main.view(main.model());
-const html = () => domvm.createView(View).html();
+const appHtml = () => domvm.createView(View).html();
 
-exports.root = function(request, reply) {
-  fs.readFile(Path.join(__dirname, "../../public/index.html"), "utf8", (err, data) => {
-    if (err) {
-      throw err;
-    }
-    const document = data.replace(/\r?\n */g, "").replace(/<div id="app"><\/div>/,
-      '<div id="app">' + html() + '</div>');
-    reply(document);
+exports.root = function() {
+  return new Promise((resolve, reject) => {
+    fs.readFile(Path.join(__dirname, "../../public/index.html"), "utf8", (err, data) => {
+      if (err) {
+        reject(err);
+      }
+      const document = data.replace(/\r?\n */g, "").replace(/<div id="app"><\/div>/,
+        '<div id="app">' + appHtml() + '</div>');
+      resolve(html(document));
+    });
   });
 };
 
-exports.staticFile = {
-  directory: {
-    path: Path.join(__dirname, "../../public")
-  }
-};
-
-exports.findAllBooks = function(request, reply) {
-  Persistence.findAllBooks(this.db, (err, rows) => {
-    if (err) {
-      throw err;
-    }
-    return reply(rows);
+exports.findAllBooks = function() {
+  return new Promise((resolve, reject) => {
+    Persistence.findAllBooks(db, (err, rows) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(json(rows));
+    });
   });
 };
 
@@ -44,9 +45,7 @@ const OPERATIONS = [
   "Take out of circulation"
 ];
 
-exports.findAllOperations = function(request, reply) {
-  return reply(OPERATIONS);
-};
+exports.findAllOperations = () => json(OPERATIONS);
 
 const PROBLEMS = [
   { isbn: "1-86092-030-6", type: "WARNING", description: "Moderately damaged" },
@@ -55,6 +54,4 @@ const PROBLEMS = [
   { isbn: "1-86092-016-0", type: "WARNING", description: "Some pages are stained" }
 ];
 
-exports.findAllProblems = function(request, reply) {
-  return reply(PROBLEMS);
-};
+exports.findAllProblems = () => json(PROBLEMS);
