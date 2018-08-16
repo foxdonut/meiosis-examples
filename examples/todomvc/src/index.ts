@@ -1,7 +1,7 @@
 const flyd = require("flyd");
 
 import { createApp } from "./app";
-import { Model, T, Todo, UpdateFunction, W } from "./util";
+import { Model, T, Todo, W } from "./util";
 import { todoStorage } from "./util/todo-storage";
 
 import { init } from "snabbdom";

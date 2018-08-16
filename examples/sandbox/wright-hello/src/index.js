@@ -13,7 +13,8 @@ models.map(model => m.render(element, temperature.view(model)));
 
 // Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer";
-meiosisTracer({ selector: "#tracer", streams: [ models ] });
+//meiosisTracer({ selector: "#tracer", streams: [ models ] });
+meiosisTracer({ streams: [ models ] });
 
 // For hot module reloading
 window.rerender = function() {
