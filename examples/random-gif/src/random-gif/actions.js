@@ -10,11 +10,12 @@ exports.actions = ({
   editTag: (update, tag) => update(assoc("tag", tag)),
 
   newGif: (update, tag) => {
-    signals.newGif(true)
     update(assoc("image", Loaded.N()))
     m.request({ url: gif_new_url, data: { api_key, tag }}).
-      then(response =>
-        update(assoc("image", Loaded.Y(Success.Y(Image.Y(response.data.image_url)))))).
+      then(response => {
+        update(assoc("image", Loaded.Y(Success.Y(Image.Y(response.data.image_url)))))
+        signals.newGif(true)
+      }).
       catch(() => update(assoc("image", Loaded.Y(Success.N()))))
   },
 

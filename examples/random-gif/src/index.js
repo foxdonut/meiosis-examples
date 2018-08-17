@@ -1,13 +1,13 @@
 const m = require("mithril")
 const stream = require("mithril/stream")
+const R = require("ramda")
 
 const { createApp } = require("./app")
 const { h } = require("./util/ui")
 
 const update = stream()
 const app = createApp(update)
-const models = stream.scan((model, func) => func(model),
-  app.model(), update)
+const models = stream.scan(R.applyTo, app.model(), update)
 const states = models.map(app.state)
 
 const element = document.getElementById("app")

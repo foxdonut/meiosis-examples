@@ -1,4 +1,4 @@
-import flyd from "flyd"
+import stream from "mithril-stream"
 import O from "patchinko/overloaded"
 import { sv } from "seview"
 import m from "mithril"
@@ -62,8 +62,8 @@ const initialModel = {
   tags: []
 }
 
-const update = flyd.stream()
-const models = flyd.scan(O, initialModel, update)
+const update = stream()
+const models = stream.scan(O, initialModel, update)
 //const viewModels = models.map(viewModel)
 
 /*

@@ -1,6 +1,6 @@
 import { createRenderer } from "inferno";
 import flyd from "flyd";
-import { merge } from "ramda";
+import { applyTo, merge } from "ramda";
 
 import ajaxServices from "./util/ajax-services";
 import createServer from "./sinonServer";
@@ -11,7 +11,7 @@ createServer();
 ajaxServices.loadTodos().then(todos => {
   const update = flyd.stream();
   const app = createApp(update);
-  const models = flyd.scan((model, func) => func(model),
+  const models = flyd.scan(applyTo,
      merge(app.model(), { list: { todos, message: "" } }), update);
 
   // https://infernojs.org/docs/api/inferno

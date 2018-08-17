@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import Inferno from "inferno";
 
 import { wrap } from "../util/handler";

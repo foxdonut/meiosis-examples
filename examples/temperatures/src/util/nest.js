@@ -5,7 +5,7 @@ const nestUpdate = (update, path) => func =>
 
 export const nest = (create, update, path) => {
   const component = create(nestUpdate(update, path));
-  const result = {};
+  const result = Object.assign({}, component);
   if (component.model) {
     result.model = () => _.set({}, path, component.model());
   }

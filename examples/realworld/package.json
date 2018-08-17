@@ -27,9 +27,9 @@
   "dependencies": {
     "bss": "^1.2.9",
     "crocks": "^0.10.1",
-    "flyd": "^0.2.8",
     "marked": "^0.4.0",
     "mithril": "^1.1.6",
+    "mithril-stream": "^1.1.0",
     "navigo": "^7.1.2",
     "patchinko": "^3.2.1",
     "seview": "^0.10.0"
