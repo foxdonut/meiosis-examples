@@ -1,6 +1,6 @@
 import { createNavigator } from "../navigator"
 import { HomePage, LoginPage, RegisterPage } from "../util/constants"
-import { nestCreateComponent } from "../util"
+import { nestCreateComponent } from "../util/nest"
 import { createHeader, createFooter } from "../layout"
 import { createHome } from "../home"
 import { createLogin } from "../login"
@@ -31,7 +31,7 @@ export const createApp = update => {
   navigator.start()
 
   return {
-    navigator,
+    model: () => ({}),
     view: model => {
       const component = navigator.getComponent(model.pageId)
 

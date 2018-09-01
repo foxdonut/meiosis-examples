@@ -1,4 +1,4 @@
-import O from "patchinko/overloaded"
+import O from "patchinko/constant"
 import m from "mithril"
 
 //const API_ROOT = "https://conduit.productionready.io/api"

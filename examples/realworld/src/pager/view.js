@@ -1,5 +1,4 @@
-import { compose, constant } from "crocks"
-import { preventDefault } from "../util"
+import { compose, constant, preventDefault } from "../util/fp"
 
 export const createView = actions => model => {
   const currentPageNumber = (model.offset / model.limit) + 1

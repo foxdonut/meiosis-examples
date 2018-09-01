@@ -1,8 +1,4 @@
-import { propPathOr, tap } from "crocks"
-import O from "patchinko/overloaded"
-
-export const preventDefault = tap(evt => evt.preventDefault())
-export const targetValue = propPathOr(null, ["target", "value"])
+import O from "patchinko/constant"
 
 export const nestPatch = (object, path) => ({
   [path[0]]: path.length === 1
@@ -20,7 +16,7 @@ export const nestCreateComponent = (create, update, path) => {
     result.model = () => nestPatch(component.model(), path)
   }
   if (component.view) {
-    result.view = model => component.view(propPathOr(null, path, model))
+    result.view = model => component.view(path(path, model))
   }
   return result
 }

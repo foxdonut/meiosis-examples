@@ -1,5 +1,4 @@
-import { compose, constant } from "crocks"
-import { preventDefault, targetValue } from "../util"
+import { compose, constant, preventDefault, targetValue  } from "../util/fp"
 
 export const createView = (navigator, actions, options) => {
   const updateForm = field => compose(actions.updateForm(field), targetValue)
