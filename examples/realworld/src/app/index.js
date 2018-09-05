@@ -31,7 +31,10 @@ export const createApp = update => {
   navigator.start()
 
   return {
-    model: () => ({}),
+    model: () => ({
+      login: {},
+      register: {}
+    }),
     view: model => {
       const component = navigator.getComponent(model.pageId)
 

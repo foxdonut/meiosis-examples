@@ -1,7 +1,7 @@
-import { compose, constant, preventDefault, targetValue  } from "../util/fp"
+import { compose, constant, path, preventDefault } from "../util/fp"
 
 export const createView = (navigator, actions, options) => {
-  const updateForm = field => compose(actions.updateForm(field), targetValue)
+  const updateForm = field => compose(actions.updateForm(field), path(["target", "value"]))
 
   return model => {
     const errors = Object.keys(model.errors || {}).map(key => key + " " + model.errors[key])

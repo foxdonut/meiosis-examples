@@ -1,55 +1,54 @@
-import m from "mithril";
-import { /*curryN,*/ defaultTo, prop } from "ramda";
+import { /*curryN,*/ defaultTo, prop } from "ramda"
 
-import { T } from "../util";
+import { T } from "../util"
 
-const cm = x => y => m(x, y);
+//const cm = x => y => m(x, y)
 // curryN doesn't work here because .map passes 3 args to the function!
-//const cm = curryN(2, m);
+//const cm = curryN(2, m)
 
-const displayFieldErrors = errors => m("ul", errors.map(cm("li")));
+const displayFieldErrors = errors => ["ul", errors.map(err => ["li", err])]
 
 const getFieldErrors = validationErrors => field =>
-  T(defaultTo([], prop(field, defaultTo({}, validationErrors))), displayFieldErrors);
+  T(defaultTo([], prop(field, defaultTo({}, validationErrors))), displayFieldErrors)
 
 export const createView = actions => model => {
-  const fieldErrors = getFieldErrors(model.validationErrors);
+  const fieldErrors = getFieldErrors(model.validationErrors)
 
-  return m(".editor-page",
-    m(".container page",
-      m(".row",
-        m(".col-md-10.offset-md-1.col-xs-12",
-          m("form",
-            m("fieldset",
-              m("fieldset.form-group",
-                m("input.form-control.form-control-lg[type='text'][placeholder='Article Title']",
-                  { value: model.title, oninput: actions.updateForm("title") }),
+  return [".editor-page",
+    [".container page",
+      [".row",
+        [".col-md-10.offset-md-1.col-xs-12",
+          ["form",
+            ["fieldset",
+              ["fieldset.form-group",
+                ["input:text.form-control.form-control-lg[placeholder=Article Title]",
+                  { value: model.title, onInput: actions.updateForm("title") }],
                 fieldErrors("title")
-              ),
-              m("fieldset.form-group",
-                m("input.form-control[type='text'][placeholder='What\'s this article about?']",
-                  { value: model.description, oninput: actions.updateForm("description") }),
+              ],
+              ["fieldset.form-group",
+                ["input:text.form-control[placeholder=What's this article about?]",
+                  { value: model.description, onInput: actions.updateForm("description") }],
                 fieldErrors("description")
-              ),
-              m("fieldset.form-group",
-                m("textarea.form-control[rows='8'][placeholder='Write your article (in markdown)']",
-                  { value: model.body, oninput: actions.updateForm("body") }),
+              ],
+              ["fieldset.form-group",
+                ["textarea.form-control[rows=8][placeholder=Write your article (in markdown)]",
+                  { value: model.body, onInput: actions.updateForm("body") }],
                 fieldErrors("body")
-              ),
-              m("fieldset.form-group",
-                m("input.form-control[type='text'][placeholder='Enter tags']",
-                  { value: model.tags, oninput: actions.updateForm("tags") }
-                ),
-                m(".tag-list",
-                  model.tagList.map(tag => m("span.tag-pill.tag-default", tag))
-                )
-              ),
-              m("button.btn.btn-lg.pull-xs-right.btn-primary[type='button']",
-                { onclick: actions.publish(model) }, "Publish Article")
-            )
-          )
-        )
-      )
-    )
-  );
-};
+              ],
+              ["fieldset.form-group",
+                ["input:text.form-control[placeholder=Enter tags]",
+                  { value: model.tags, onInput: actions.updateForm("tags") }
+                ],
+                [".tag-list",
+                  model.tagList.map(tag => ["span.tag-pill.tag-default", tag])
+                ]
+              ],
+              ["button:button.btn.btn-lg.pull-xs-right.btn-primary",
+                { onClick: actions.publish(model) }, "Publish Article"]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+}
