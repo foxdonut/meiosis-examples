@@ -21,7 +21,7 @@ export const createView = (actions, components) => ({
               ["p", model.profile.bio],
               ["button.btn.btn-sm.btn-outline-secondary.action-btn",
                 ["i.ion-plus-round"],
-                ["span", {".innerHTML": "&nbsp;"}],
+                ["span", {innerHTML: "&nbsp;"}],
                 "Follow " + username
               ]
             ]

@@ -19,13 +19,13 @@ const authorMeta = article => [
 const nonAuthorMeta = article => [
   ["button.btn.btn-sm.btn-outline-secondary",
     ["i.ion-plus-round"],
-    ["span", {".innerHTML": "&nbsp"}],
+    ["span", {innerHTML: "&nbsp"}],
     "Follow " + article.author.username
   ],
-  ["span", {".innerHTML": "&nbsp;"}],
+  ["span", {innerHTML: "&nbsp;"}],
   ["button.btn.btn-sm.btn-outline-primary",
     ["i.ion-heart"],
-    ["span", {".innerHTML": "&nbsp;"}],
+    ["span", {innerHTML: "&nbsp;"}],
     "Favorite Post ",
     ["span.counter", "(" + article.favoritesCount + ")"]
   ]
@@ -60,7 +60,7 @@ export const createView = actions => model => {
           [".tag-list",
             article.tagList.map(tag => ["span.tag-pill.tag-default", tag])
           ],
-          ["p", {".innerHTML": marked(article.body, { sanitize: true })}]
+          ["p", {innerHTML: marked(article.body, { sanitize: true })}]
         ]
       ],
       ["hr"],
@@ -89,7 +89,7 @@ export const createView = actions => model => {
                 ["a.comment-author[href='']",
                   ["img.comment-author-img", { src: comment.author.image }]
                 ],
-                ["span", {".innerHTML": "&nbsp;"}],
+                ["span", {innerHTML: "&nbsp;"}],
                 ["a.comment-author[href='']", comment.author.username],
                 ["span.date-posted", new Date(comment.createdAt).toDateString()],
                 ["span.mod-options",

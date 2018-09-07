@@ -1,39 +1,24 @@
-import { createNavigator } from "../navigator"
-import { HomePage, LoginPage, RegisterPage } from "../util/constants"
-import { nestCreateComponent } from "../util/nest"
+import O from "patchinko/constant"
+import { createRoutes } from "./routes"
 import { createHeader, createFooter } from "../layout"
-import { createHome } from "../home"
-import { createLogin } from "../login"
-import { createRegister } from "../register"
-import { createNotFound } from "../notFound"
+import { credentialsApi, articlesApi } from "../services"
 
-export const createApp = update => {
-  const navigator = createNavigator(update)
+export const createApp = update => Promise.all([
+  credentialsApi.getUser()/*,
+  articlesApi.getList()*/
+]).then(([user/*, articles*/]) => {
+  const navigator = createRoutes(update)
 
   const header = createHeader(navigator)(update)
   const footer = createFooter(navigator)(update)
 
-  navigator.register([
-    { key: HomePage,
-      component: createHome(navigator)(update),
-      route: "/"
-    },
-    { key: RegisterPage,
-      component: nestCreateComponent(createRegister(navigator), update, ["register"]),
-      route: "/register"
-    },
-    { key: LoginPage,
-      component: nestCreateComponent(createLogin(navigator), update, ["login"]),
-      route: "/login"
-    }
-  ], createNotFound(navigator)(update))
-
-  navigator.start()
-
   return {
-    model: () => ({
+    model: () => O(/*articles*/{}, {
+      article: {},
       login: {},
-      register: {}
+      register: {},
+      user,
+      signedIn: !!user.token
     }),
     view: model => {
       const component = navigator.getComponent(model.pageId)
@@ -45,4 +30,4 @@ export const createApp = update => {
       ]
     }
   }
-}
+})

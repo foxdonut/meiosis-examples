@@ -32,7 +32,8 @@
     "navigo": "^7.1.2",
     "patchinko": "^4.1.0",
     "seview": "^0.10.0",
-    "tinyfunk": "^1.2.1"
+    "tinyfunk": "^1.2.1",
+    "validate.js": "^0.12.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

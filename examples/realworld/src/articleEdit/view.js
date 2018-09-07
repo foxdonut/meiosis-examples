@@ -1,15 +1,9 @@
-import { /*curryN,*/ defaultTo, prop } from "ramda"
+import { defaultTo, path, thrush } from "../util/fp"
 
-import { T } from "../util"
-
-//const cm = x => y => m(x, y)
-// curryN doesn't work here because .map passes 3 args to the function!
-//const cm = curryN(2, m)
-
-const displayFieldErrors = errors => ["ul", errors.map(err => ["li", err])]
+const displayFieldErrors = errors => ["ul.error-messages", errors.map(err => ["li", err])]
 
 const getFieldErrors = validationErrors => field =>
-  T(defaultTo([], prop(field, defaultTo({}, validationErrors))), displayFieldErrors)
+  thrush(defaultTo([], path([field], defaultTo({}, validationErrors))), displayFieldErrors)
 
 export const createView = actions => model => {
   const fieldErrors = getFieldErrors(model.validationErrors)
@@ -40,7 +34,7 @@ export const createView = actions => model => {
                   { value: model.tags, onInput: actions.updateForm("tags") }
                 ],
                 [".tag-list",
-                  model.tagList.map(tag => ["span.tag-pill.tag-default", tag])
+                  defaultTo([], model.tagList).map(tag => ["span.tag-pill.tag-default", tag])
                 ]
               ],
               ["button:button.btn.btn-lg.pull-xs-right.btn-primary",

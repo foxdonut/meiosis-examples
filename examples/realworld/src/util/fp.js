@@ -1,4 +1,4 @@
-import { compose, constant, defaultTo, path, tap } from "tinyfunk"
+import { compose, constant, defaultTo, omit, path, pipe, tap, thrush } from "tinyfunk"
 
 // Credit: http://www.tomharding.me/2016/11/12/curry-on-wayward-son/
 const uncurry = func => {
@@ -12,7 +12,10 @@ module.exports = {
   compose,
   constant,
   defaultTo,
+  omit,
   path,
+  pipe,
   preventDefault: tap(evt => evt.preventDefault()),
-  tap
+  tap,
+  thrush
 }

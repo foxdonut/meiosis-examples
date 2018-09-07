@@ -11,7 +11,7 @@ export const nestPatch = (object, path) => ({
 export const nestUpdate = (update, path) => patch =>
   update(nestPatch(patch, path))
 
-export const nestCreateComponent = (create, update, path) => {
+export const nest = (create, update, path) => {
   const component = create(nestUpdate(update, path))
   const result = O({}, component)
   if (component.model) {

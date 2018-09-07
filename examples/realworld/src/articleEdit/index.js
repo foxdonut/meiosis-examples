@@ -1,8 +1,6 @@
-import { compose } from "ramda";
+import { createActions } from "./actions"
+import { createView } from "./view"
 
-import { createActions } from "realworld-common/src/articleEdit/actions";
-import { createView } from "./view";
-
-export const articleEdit = {
-  create: compose(createView, createActions)
-};
+export const createArticleEdit = navigator => update => ({
+  view: createView(createActions(navigator, update))
+})

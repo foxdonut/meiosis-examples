@@ -3,13 +3,18 @@ export const createView = () => model => {
 
   return [".article-preview",
     [".article-meta",
-      ["a", /*profileLink(username),*/ ["img", { src: model.author.image }]],
+      ["a", /*profileLink(username),*/
+        model.author.image && ["img", { src: model.author.image }]
+      ],
       [".info",
         ["a.author", /*profileLink(username),*/ username],
         ["span.date", new Date(model.createdAt).toDateString()]
       ],
-      ["button.btn.btn-outline-primary.btn-sm.pull-xs-right",
-        ["i.ion-heart"], ["span", model.favoritesCount]
+      [".pull-xs-right",
+        ["button.btn.btn-sm.btn-outline-primary",
+          ["i.ion-heart"],
+          ["span", model.favoritesCount]
+        ]
       ]
     ],
     ["a.preview-link", { href: "/article/" + model.slug },
