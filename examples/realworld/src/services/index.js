@@ -5,7 +5,7 @@ import m from "mithril"
 const API_ROOT = "http://localhost:4000/api"
 
 const request = (url, options) =>
-  m.request(O(options || {}, { url })).then(response => response.data || response)
+  m.request(O(options || {}, { url })).then(response => (response && response.data) || response)
 
 const getToken = () => window.localStorage.getItem("jwt")
 export const setToken = token => window.localStorage.setItem("jwt", token)

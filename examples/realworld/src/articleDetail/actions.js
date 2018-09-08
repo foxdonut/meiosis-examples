@@ -1,3 +1,5 @@
+import O from "patchinko/constant"
+
 import { articlesApi } from "../services"
 
 export const createActions = ({ update }) => ({
@@ -13,6 +15,6 @@ export const createActions = ({ update }) => ({
   },
 
   deleteComment: (slug, id) => () => articlesApi.deleteComment(slug, id).then(() =>
-    update({ comments: comments => comments.filter(comment => comment.id !== id) })
+    update({ comments: O(comments => comments.filter(comment => comment.id !== id)) })
   )
 })

@@ -1,5 +1,4 @@
 import Navigo from "navigo"
-import O from "patchinko/constant"
 
 export const createNavigator = update => {
   const router = new Navigo(null, true)

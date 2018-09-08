@@ -32,7 +32,7 @@ const nonAuthorMeta = article => [
 
 const articleMeta = (article, username) =>
   [".article-meta",
-    ["a", /*profileLink(article.author.username),*/ ["img", { src: article.author.image }]],
+    ["a", /*profileLink(article.author.username),*/ /*["img", { src: article.author.image }]*/],
     [".info",
       ["a.author", /*profileLink(article.author.username),*/ article.author.username],
       ["span.date", new Date(article.createdAt).toDateString()]
@@ -86,7 +86,7 @@ export const createView = ({ actions }) => model => {
               ],
               [".card-footer",
                 ["a.comment-author[href='']",
-                  ["img.comment-author-img", { src: comment.author.image }]
+                  /*["img.comment-author-img", { src: comment.author.image }]*/
                 ],
                 ["span", {innerHTML: "&nbsp;"}],
                 ["a.comment-author[href='']", comment.author.username],
