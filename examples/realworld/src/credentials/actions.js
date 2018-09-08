@@ -1,6 +1,6 @@
 import { credentialsApi, setToken } from "../services"
 
-export const createActions = (update, method) => ({
+export const createActions = ({ update, method }) => ({
   updateForm: field => text => update({ [field]: text }),
 
   sendCredentials: model => {

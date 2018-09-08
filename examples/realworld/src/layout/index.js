@@ -1,6 +1,6 @@
 import { HomePage, LoginPage, RegisterPage, ArticleEditPage } from "../util/constants"
 
-export const createHeader = navigator => _update => ({
+export const createHeader = ({ navigator }) => ({
   view: model => {
     const active = pageId => ({ className: { "active": model.pageId === pageId } })
 
@@ -41,7 +41,7 @@ export const createHeader = navigator => _update => ({
   }
 })
 
-export const createFooter = navigator => _update => ({
+export const createFooter = ({ navigator }) => ({
   view: _model =>
     ["footer",
       [".container",

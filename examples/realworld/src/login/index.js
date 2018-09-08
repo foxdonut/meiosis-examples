@@ -1,10 +1,14 @@
 import { RegisterPage } from "../util/constants"
 import { createCredentials } from "../credentials"
 
-export const createLogin = navigator => createCredentials(navigator, {
-  method: "login",
-  alternativePage: RegisterPage,
-  alternativeLabel: "Need an account?",
-  label: "Sign in",
-  showUsername: false
+export const createLogin = ({ navigator, update }) => createCredentials({
+  navigator,
+  update,
+  options: {
+    method: "login",
+    alternativePage: RegisterPage,
+    alternativeLabel: "Need an account?",
+    label: "Sign in",
+    showUsername: false
+  }
 })

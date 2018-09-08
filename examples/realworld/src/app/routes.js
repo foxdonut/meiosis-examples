@@ -12,22 +12,22 @@ export const createRoutes = update => {
 
   navigator.register([
     { key: HomePage,
-      component: createHome(navigator)(update),
+      component: createHome({ navigator, update }),
       route: "/"
     },
     { key: RegisterPage,
-      component: nest(createRegister(navigator), update, ["register"]),
+      component: nest(createRegister, ["register"], { navigator, update }),
       route: "/register"
     },
     { key: LoginPage,
-      component: nest(createLogin(navigator), update, ["login"]),
+      component: nest(createLogin, ["login"], { navigator, update }),
       route: "/login"
     },
     { key: ArticleEditPage,
-      component: nest(createArticleEdit(navigator), update, ["article"]),
+      component: nest(createArticleEdit, ["article"], { navigator, update }),
       route: "/editor"
     }
-  ], createNotFound(navigator)(update))
+  ], createNotFound({ navigator, update }))
 
   navigator.start()
 

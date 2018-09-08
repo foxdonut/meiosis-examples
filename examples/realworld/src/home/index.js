@@ -1,16 +1,24 @@
-import { createView } from "./view"
+import O from "patchinko/constant"
 
+import { createView } from "./view"
 import { createArticles } from "../articles"
 import { createPopularTags } from "../popularTags"
-import { articlesApi } from "../services"
+import { articlesApi, popularTagsApi } from "../services"
 
-export const createHome = _navigator => update => {
+export const createHome = ({ update }) => {
   const components = {
     articles: createArticles(update),
     popularTags: createPopularTags(update)
   }
   return {
-    navigating: (params, update) => articlesApi.getList().then(update),
+    navigating: ({ update }) => {
+      Promise.all([
+        articlesApi.getList(),
+        popularTagsApi.get()
+      ]).then(
+        ([articles, tags]) => update(O(articles, tags))
+      )
+    },
     view: createView(components)
   }
 }

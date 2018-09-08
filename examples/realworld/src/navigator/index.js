@@ -19,7 +19,7 @@ export const createNavigator = update => {
           as: config.key,
           uses: params => {
             if (component.navigating) {
-              component.navigating(params, obj => update(O(updateObj, obj)))
+              component.navigating({ params, update: obj => update(O(updateObj, obj)) })
             }
             else {
               update(updateObj)

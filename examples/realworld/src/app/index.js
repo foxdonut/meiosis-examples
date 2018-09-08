@@ -1,19 +1,17 @@
-import O from "patchinko/constant"
 import { createRoutes } from "./routes"
 import { createHeader, createFooter } from "../layout"
-import { credentialsApi, articlesApi } from "../services"
+import { credentialsApi } from "../services"
 
 export const createApp = update => Promise.all([
-  credentialsApi.getUser()/*,
-  articlesApi.getList()*/
-]).then(([user/*, articles*/]) => {
+  credentialsApi.getUser()
+]).then(([user]) => {
   const navigator = createRoutes(update)
 
-  const header = createHeader(navigator)(update)
-  const footer = createFooter(navigator)(update)
+  const header = createHeader({ navigator, update })
+  const footer = createFooter({ navigator, update })
 
   return {
-    model: () => O(/*articles*/{}, {
+    model: () => ({
       article: {},
       login: {},
       register: {},

@@ -1,6 +1,6 @@
 import { compose, constant, defaultTo, path, preventDefault } from "../util/fp"
 
-export const createView = actions => model => [
+export const createView = ({ actions }) => model => [
   ["p", "Popular Tags"],
 
   [".tag-list", defaultTo([], path(["tags"], model)).map(tag =>
