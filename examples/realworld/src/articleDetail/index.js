@@ -1,8 +1,10 @@
-import { compose } from "ramda";
+import { createActions } from "./actions"
+import { createView } from "./view"
+import { articlesApi } from "../services"
 
-import { createActions } from "realworld-common/src/articleDetail/actions";
-import { createView } from "./view";
-
-export const articleDetail = {
-  create: compose(createView, createActions)
-};
+export const createArticleDetail = ({ navigator, update }) => ({
+  navigating: ({ done, params }) => {
+    articlesApi.getSingle(params.slug).then(update).then(done)
+  },
+  view: createView({ actions: createActions({ navigator, update }) })
+})

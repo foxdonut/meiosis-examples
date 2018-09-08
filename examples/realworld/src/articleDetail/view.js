@@ -1,12 +1,11 @@
 import marked from "marked"
-import { ifElse, path } from "ramda"
 
-import { T, mlink, profileLink } from "../util"
+import { defaultTo, thrush } from "../util/fp"
 
-const isAuthor = username => article => article.author.username === username
+const isAuthor = (username, article) => article.author.username === username
 
 const authorMeta = article => [
-  ["a.btn.btn-outline-secondary.btn-sm[href='/editor/" + article.slug + "']", mlink(),
+  ["a.btn.btn-outline-secondary.btn-sm[href='/editor/" + article.slug + "']",
     ["i.ion-edit"],
     " Edit Article"
   ],
@@ -33,18 +32,18 @@ const nonAuthorMeta = article => [
 
 const articleMeta = (article, username) =>
   [".article-meta",
-    ["a", profileLink(article.author.username), ["img", { src: article.author.image }]],
+    ["a", /*profileLink(article.author.username),*/ ["img", { src: article.author.image }]],
     [".info",
-      ["a.author", profileLink(article.author.username), article.author.username],
+      ["a.author", /*profileLink(article.author.username),*/ article.author.username],
       ["span.date", new Date(article.createdAt).toDateString()]
     ],
-    //ifElse(isAuthor(username), authorMeta, nonAuthorMeta)(article)
-    T(article, ifElse(isAuthor(username), authorMeta, nonAuthorMeta))
+    thrush(article, isAuthor(username, article) ? authorMeta : nonAuthorMeta)
   ]
 
-export const createView = actions => model => {
+export const createView = ({ actions }) => model => {
   const article = model.article
-  const username = path(["user", "username"], model)
+  //const username = path(["user", "username"], model) //FIXME
+  const username = "DUCK"
 
   return [".article-page",
     [".banner",
@@ -80,7 +79,7 @@ export const createView = actions => model => {
                 { onClick: actions.addComment(article.slug, model.comment) }, "Post Comment"]
             ]
           ],
-          model.comments.map(comment =>
+          defaultTo([], model.comments).map(comment =>
             [".card",
               [".card-block",
                 ["p.card-text", comment.body]

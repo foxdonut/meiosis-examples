@@ -43,7 +43,8 @@ npm i
 npm run dev
 ```
 
-
-
 ## Setup - Frontend
 
+Edit the `src/services/index.js` file and change the `API_ROOT` constant to
+the URI of the backend that you are running. You can also try using the online backend by
+setting the value to `https://conduit.productionready.io/api`.

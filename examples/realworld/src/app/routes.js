@@ -1,9 +1,12 @@
+import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage }
+  from "../util/constants"
+
 import { createNavigator } from "../navigator"
-import { HomePage, LoginPage, RegisterPage, ArticleEditPage } from "../util/constants"
 import { nest } from "../util/nest"
 import { createHome } from "../home"
 import { createLogin } from "../login"
 import { createRegister } from "../register"
+import { createArticleDetail } from "../articleDetail"
 import { createArticleEdit } from "../articleEdit"
 import { createNotFound } from "../notFound"
 
@@ -23,8 +26,12 @@ export const createRoutes = update => {
       component: nest(createLogin, ["login"], { navigator, update }),
       route: "/login"
     },
+    { key: ArticleDetailPage,
+      component: nest(createArticleDetail, ["articleDetail"], { navigator, update }),
+      route: "/article/:slug"
+    },
     { key: ArticleEditPage,
-      component: nest(createArticleEdit, ["article"], { navigator, update }),
+      component: nest(createArticleEdit, ["articleEdit"], { navigator, update }),
       route: "/editor"
     }
   ], createNotFound({ navigator, update }))

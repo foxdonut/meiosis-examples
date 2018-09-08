@@ -2,9 +2,9 @@ import { createView } from "./view"
 import { createArticleSummary } from "../articleSummary"
 import { createPager } from "../pager"
 
-export const createArticles = update => {
+export const createArticles = ({ navigator, update }) => {
   const components = {
-    articleSummary: createArticleSummary(update),
+    articleSummary: createArticleSummary({ navigator, update }),
     pager: createPager(update)
   }
 

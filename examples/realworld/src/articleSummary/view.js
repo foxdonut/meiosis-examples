@@ -1,4 +1,6 @@
-export const createView = () => model => {
+import { ArticleDetailPage } from "../util/constants"
+
+export const createView = ({ navigator }) => model => {
   const username = model.author.username
 
   return [".article-preview",
@@ -17,7 +19,7 @@ export const createView = () => model => {
         ]
       ]
     ],
-    ["a.preview-link", { href: "/article/" + model.slug },
+    ["a.preview-link", { href: navigator.getUrl(ArticleDetailPage, { slug: model.slug }) },
       ["h1", model.title],
       ["p", model.description],
       ["span", "Read more..."],

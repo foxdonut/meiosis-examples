@@ -1,5 +1,5 @@
 import { createView } from "./view"
 
-export const createArticleSummary = () => ({
-  view: createView()
+export const createArticleSummary = ({ navigator }) => ({
+  view: createView({ navigator })
 })

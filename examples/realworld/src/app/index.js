@@ -12,7 +12,8 @@ export const createApp = update => Promise.all([
 
   return {
     model: () => ({
-      article: {},
+      articleDetail: {},
+      articleEdit: {},
       login: {},
       register: {},
       user,

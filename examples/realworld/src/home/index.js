@@ -5,18 +5,21 @@ import { createArticles } from "../articles"
 import { createPopularTags } from "../popularTags"
 import { articlesApi, popularTagsApi } from "../services"
 
-export const createHome = ({ update }) => {
+export const createHome = ({ navigator, update }) => {
   const components = {
-    articles: createArticles(update),
+    articles: createArticles({ navigator, update }),
     popularTags: createPopularTags(update)
   }
   return {
-    navigating: ({ update }) => {
+    navigating: ({ done }) => {
       Promise.all([
         articlesApi.getList(),
         popularTagsApi.get()
       ]).then(
-        ([articles, tags]) => update(O(articles, tags))
+        ([articles, tags]) => {
+          update(O(articles, tags))
+          done()
+        }
       )
     },
     view: createView(components)
