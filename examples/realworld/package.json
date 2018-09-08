@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
-    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v"
+    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v",
+    "reload": "reload -b -w build",
+    "server": "static-server -p ${PORT:-3000}"
   },
   "repository": {
     "type": "git",
@@ -42,6 +44,8 @@
     "browserify": "^16.2.2",
     "eslint": "^5.5.0",
     "meiosis-tracer": "^2.0.2",
+    "reload": "^2.3.1",
+    "static-server": "^2.2.1",
     "watchify": "^3.11.0"
   }
 }
