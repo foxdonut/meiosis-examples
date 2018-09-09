@@ -6,6 +6,7 @@
   "scripts": {
     "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
     "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v",
+    "wright": "wright build",
     "reload": "reload -b -w build",
     "server": "static-server -p ${PORT:-3000}"
   },
@@ -46,6 +47,7 @@
     "meiosis-tracer": "^2.0.2",
     "reload": "^2.3.1",
     "static-server": "^2.2.1",
-    "watchify": "^3.11.0"
+    "watchify": "^3.11.0",
+    "wright": "^1.2.4"
   }
 }

@@ -1,8 +1,6 @@
-import { compose } from "ramda";
+import { createActions } from "./actions"
+import { createView } from "./view"
 
-import { createActions } from "realworld-common/src/settings/actions";
-import { createView } from "./view";
-
-export const settings = {
-  create: compose(createView, createActions)
-};
+export const createSettings = ({ navigator, update }) => ({
+  view: createView({ actions: createActions({ navigator, update }) })
+})

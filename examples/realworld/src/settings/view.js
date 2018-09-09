@@ -1,4 +1,4 @@
-export const createView = actions => _model =>
+export const createView = ({ actions }) => _model =>
   [".settings-page",
     [".container page",
       [".row",

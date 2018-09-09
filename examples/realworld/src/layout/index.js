@@ -1,4 +1,5 @@
-import { HomePage, LoginPage, RegisterPage, ArticleEditPage } from "../util/constants"
+import { HomePage, LoginPage, RegisterPage, ArticleEditPage, SettingsPage }
+  from "../util/constants"
 
 export const createHeader = ({ navigator }) => ({
   view: model => {
@@ -12,14 +13,14 @@ export const createHeader = ({ navigator }) => ({
             ["a.nav-link", { href: navigator.getUrl(HomePage) }, "Home"]
           ],
           model.signedIn ? [
-            ["li.nav-item", active("articleEdit"),
+            ["li.nav-item", active(ArticleEditPage),
               ["a.nav-link", { href: navigator.getUrl(ArticleEditPage) },
                 ["i.ion-compose"],
                 ["span", { innerHTML: "&nbsp;New Post" }]
               ]
             ],
-            ["li.nav-item", active("settings"),
-              ["a.nav-link", { href: "/settings" },
+            ["li.nav-item", active(SettingsPage),
+              ["a.nav-link", { href: navigator.getUrl(SettingsPage) },
                 ["i.ion-gear-a"],
                 ["span", { innerHTML: "&nbsp;Settings" }]
               ]

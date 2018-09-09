@@ -1,4 +1,4 @@
-import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage }
+import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage, SettingsPage }
   from "../util/constants"
 
 import { createNavigator } from "../navigator"
@@ -8,6 +8,7 @@ import { createLogin } from "../login"
 import { createRegister } from "../register"
 import { createArticleDetail } from "../articleDetail"
 import { createArticleEdit } from "../articleEdit"
+import { createSettings } from "../settings"
 import { createNotFound } from "../notFound"
 
 export const createRoutes = update => {
@@ -33,6 +34,10 @@ export const createRoutes = update => {
     { key: ArticleEditPage,
       component: nest(createArticleEdit, ["articleEdit"], { navigator, update }),
       route: "/editor"
+    },
+    { key: SettingsPage,
+      component: createSettings({ navigator, update }),
+      route: "/settings"
     }
   ], createNotFound({ navigator, update }))
 
@@ -40,4 +45,3 @@ export const createRoutes = update => {
 
   return navigator
 }
-

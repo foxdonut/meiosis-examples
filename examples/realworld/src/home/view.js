@@ -10,7 +10,7 @@ export const createView = ({ articles, popularTags }) => model => {
   }
 
   return [".home-page",
-    [".banner",
+    !model.signedIn && [".banner",
       [".container",
         ["h1.logo-font", "conduit"],
         ["p", "A place to share your knowledge."]
