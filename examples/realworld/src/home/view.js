@@ -10,7 +10,7 @@ export const createView = ({ articles, popularTags }) => model => {
   }
 
   return [".home-page",
-    !model.signedIn && [".banner",
+    !model.context.user && [".banner",
       [".container",
         ["h1.logo-font", "conduit"],
         ["p", "A place to share your knowledge."]
@@ -21,7 +21,7 @@ export const createView = ({ articles, popularTags }) => model => {
         [".col-md-9",
           [".feed-toggle",
             ["ul.nav.nav-pills.outline-active",
-              model.signedIn && ["li.nav-item",
+              model.context.user && ["li.nav-item",
                 ["a.nav-link[href='']", "Your Feed"]
               ],
               ["li.nav-item",

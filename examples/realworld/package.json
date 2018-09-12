@@ -7,7 +7,7 @@
     "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
     "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v",
     "wright": "wright build",
-    "reload": "reload -b -w build",
+    "reload": "reload -b -w build -p ${PORT:-3000}",
     "server": "static-server -p ${PORT:-3000}"
   },
   "repository": {

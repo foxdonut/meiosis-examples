@@ -43,7 +43,7 @@ export const credentialsApi = {
       request(API_ROOT + "/user", authHeader()).then(user => resolve(user.user))
     }
     else {
-      resolve({})
+      resolve(null)
     }
   })
 }

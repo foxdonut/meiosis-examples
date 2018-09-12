@@ -12,7 +12,7 @@ export const createHeader = ({ navigator }) => ({
           ["li.nav-item", active(HomePage),
             ["a.nav-link", { href: navigator.getUrl(HomePage) }, "Home"]
           ],
-          model.signedIn ? [
+          model.context.user ? [
             ["li.nav-item", active(ArticleEditPage),
               ["a.nav-link", { href: navigator.getUrl(ArticleEditPage) },
                 ["i.ion-compose"],
@@ -26,7 +26,8 @@ export const createHeader = ({ navigator }) => ({
               ]
             ],
             ["li.nav-item", active("username"),
-              ["a.nav-link", { href: "/@" + model.user.username }, model.user.username]
+              ["a.nav-link", { href: "/@" + model.context.user.username },
+                model.context.user.username]
             ]
           ] : [
             ["li.nav-item", active(LoginPage),

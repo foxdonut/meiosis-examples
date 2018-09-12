@@ -20,15 +20,16 @@ export const createView = ({ navigator, actions, options }) => {
               options.showUsername &&
                 ["fieldset.form-group",
                   ["input:text.form-control.form-control-lg[placeholder=Username]",
-                    { value: model.username, onInput: updateForm("username") }]
+                  //FIXME -- also, clear values when leave the page
+                    { value: model.username || "", onInput: updateForm("username") }]
                 ],
               ["fieldset.form-group",
                 ["input:text.form-control.form-control-lg[placeholder=Email]",
-                  { value: model.email, onInput: updateForm("email") }]
+                  { value: model.email || "", onInput: updateForm("email") }]
               ],
               ["fieldset.form-group",
                 ["input:password.form-control.form-control-lg[placeholder=Password]",
-                  { value: model.password, onInput: updateForm("password") }]
+                  { value: model.password || "", onInput: updateForm("password") }]
               ],
               ["button.btn.btn-lg.btn-primary.pull-xs-right",
                 { onClick: compose(actions.sendCredentials, constant(model), preventDefault) },

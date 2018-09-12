@@ -1,11 +1,13 @@
+import O from "patchinko/constant"
+
 import { HomePage } from "../util/constants"
 import { setToken } from "../services"
+import { getNav } from "../navigator"
 
-export const createActions = ({ navigator, update }) => ({
+export const createActions = ({ update }) => ({
   logout: evt => {
     evt.preventDefault()
     setToken("")
-    update({ user: {}, signedIn: false })
-    navigator.navigateTo(HomePage)
+    update({ context: O({ user: O }), navigateTo: getNav(HomePage) })
   }
 })

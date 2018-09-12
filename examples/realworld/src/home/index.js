@@ -11,14 +11,14 @@ export const createHome = ({ navigator, update }) => {
     popularTags: createPopularTags(update)
   }
   return {
-    navigating: ({ done }) => {
+    navigating: ({ navigate }) => {
       Promise.all([
         articlesApi.getList(),
         popularTagsApi.get()
       ]).then(
         ([articles, tags]) => {
           update(O(articles, tags))
-          done()
+          navigate()
         }
       )
     },

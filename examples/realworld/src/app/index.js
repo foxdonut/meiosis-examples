@@ -1,4 +1,5 @@
 import { createRoutes } from "./routes"
+import { createState } from "./state"
 import { createHeader, createFooter } from "../layout"
 import { credentialsApi } from "../services"
 
@@ -6,6 +7,8 @@ export const createApp = update => Promise.all([
   credentialsApi.getUser()
 ]).then(([user]) => {
   const navigator = createRoutes(update)
+
+  const state = createState()
 
   const header = createHeader({ navigator, update })
   const footer = createFooter({ navigator, update })
@@ -16,9 +19,11 @@ export const createApp = update => Promise.all([
       articleEdit: {},
       login: {},
       register: {},
-      user,
-      signedIn: !!user.token
+      context: { user }
     }),
+
+    state,
+
     view: model => {
       const component = navigator.getComponent(model.pageId)
 

@@ -1,6 +1,6 @@
 import O from "patchinko/constant"
 
-import * as fp from "./fp"
+import { get } from "./fp"
 
 export const nestPatch = (object, path) => ({
   [path[0]]: path.length === 1
@@ -9,7 +9,7 @@ export const nestPatch = (object, path) => ({
 })
 
 export const nestUpdate = (update, path) => patch =>
-  update(nestPatch(patch, path))
+  update(patch.context ? patch : nestPatch(patch, path))
 
 export const nest = (create, path, options) => {
   const component = create(O(options, { update: nestUpdate(options.update, path) }))
@@ -18,7 +18,7 @@ export const nest = (create, path, options) => {
     result.model = () => nestPatch(component.model(), path)
   }
   if (component.view) {
-    result.view = model => component.view(fp.path(path, model))
+    result.view = model => component.view(O({ context: model.context }, get(model, path)))
   }
   return result
 }
