@@ -8,8 +8,6 @@ export const createApp = update => Promise.all([
 ]).then(([user]) => {
   const navigator = createRoutes(update)
 
-  const state = createState()
-
   const header = createHeader({ navigator, update })
   const footer = createFooter({ navigator, update })
 
@@ -22,7 +20,7 @@ export const createApp = update => Promise.all([
       context: { user }
     }),
 
-    state,
+    state: createState(),
 
     view: model => {
       const component = navigator.getComponent(model.pageId)

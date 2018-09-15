@@ -1,13 +1,5 @@
 import { compose, constant, defaultTo, omit, path, pick, pipe, tap, thrush } from "tinyfunk"
 
-// Credit: http://www.tomharding.me/2016/11/12/curry-on-wayward-son/
-const uncurry = func => {
-  if (typeof func !== "function") {
-    return func
-  }
-  return (...xs) => uncurry(xs.reduce((func, x) => func(x), func))
-}
-
 // Using reduce, courtesy Barney Carroll (https://github.com/barneycarroll)
 const get = (object, path) =>
   path.reduce((obj, key) => obj == undefined ? undefined : obj[key], object)
