@@ -1,16 +1,12 @@
-const uuid = require("uuid")
 const { Loaded, Success, Image } = require("./types")
-const { actions } = require("./actions")
-const { view } = require("./view")
-const { signals } = require("./signals")
+const { createActions } = require("./actions")
+const { createView } = require("./view")
 
 module.exports = {
-  model: () => ({
-    id: uuid.v1(),
+  model: id => ({ [id]: {
     image: Loaded.Y(Success.Y(Image.N())),
     tag: ""
-  }),
-  view,
-  actions,
-  signals
+  } }),
+  createActions,
+  createView
 }
