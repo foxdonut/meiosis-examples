@@ -1,19 +1,30 @@
+const O = require("patchinko/constant")
+const R = require("ramda")
 const RandomGif = require("../random-gif")
-const { nestUpdate } = require("../util/nest")
+const { createId } = require("../util/nest")
 
-exports.createActions = update => ({
-  add: () => update(model => {
-    const randomGifModel = RandomGif.model()
-    model.randomGifIds.push(randomGifModel.id)
-    model.randomGifsById[randomGifModel.id] = randomGifModel
-    return model
-  }),
+exports.createActions = update => {
+  const randomGifActions = RandomGif.createActions(update)
 
-  remove: id => update(model => {
-    model.randomGifIds.splice(model.randomGifIds.indexOf(id), 1)
-    delete model.randomGifsById[id]
-    return model
-  }),
+  return {
+    add: id => {
+      const newId = "randomGifList:" + createId()
+      const randomGifModel = RandomGif.model(newId)
+      const key = Object.keys(randomGifModel)[0]
 
-  resetAll: ids => ids.forEach(id => RandomGif.actions.reset(nestUpdate(update, ["randomGifsById", id])))
-})
+      update({
+        [key]: randomGifModel[key],
+        [id]: O({ randomGifIds: O(R.concat([ newId ])) })
+      })
+    },
+
+    remove: (id, subId) => update({
+      [id]: O({
+        randomGifIds: O(list => R.remove(list.indexOf(subId), 1, list))
+      }),
+      [subId]: O
+    }),
+
+    resetAll: ids => ids.forEach(randomGifActions.reset)
+  }
+}

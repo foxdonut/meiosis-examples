@@ -1,20 +1,18 @@
-//const b = require("bss")
-//const { button } = require("../util/ui")
-const RandomGif = require("../random-gif")
-const { nestUpdate } = require("../util/nest")
+const { button } = require("../util/ui")
 
-exports.createView = (actions, update) => {
-  const renderRandomGif = model =>
-    ["div"/*+ b.d("inline-block").mr(8)*/, { key: model.id },
-      RandomGif.view(model, nestUpdate(update, ["randomGifsById", model.id])),
-      ["button"/*+ button.bc("red")*/, { onclick: () => actions.remove(model.id) }, "Remove"]
+exports.createView = ({ actions, randomGifView }) => {
+  const renderRandomGif = (model, id, subId) =>
+    ["div.dib.mr2", { key: id },
+      randomGifView(model, subId),
+      ["button.bg-red" + button, { onclick: () => actions.remove(id, subId) }, "Remove"]
     ]
 
-  return model =>
-    ["div"/*+ b.border("1px solid blue").p(8).mt(4)*/,
-      ["div", "Has gifs: ", model.hasGifs ? "Yes" : "No"],
-      ["button"/*+ button.bc("green")*/, { onclick: () => actions.add() }, "Add"],
-      ["button"/*+ button.bc("red")*/, { onclick: () => actions.resetAll(model.randomGifIds) }, "Reset All"],
-      ["div", model.randomGifIds.map(id => renderRandomGif(model.randomGifsById[id]))]
+  return (model, id) =>
+    ["div.ba.b--blue.pa2.mt2",
+      ["div", "Has gifs: ", model[id].hasGifs ? "Yes" : "No"],
+      ["button.bg-green"  + button, { onclick: () => actions.add(id) }, "Add"],
+      ["button.bg-red" + button, { onclick: () => actions.resetAll(model[id].randomGifIds) },
+        "Reset All"],
+      ["div", model[id].randomGifIds.map(subId => renderRandomGif(model, id, subId))]
     ]
 }

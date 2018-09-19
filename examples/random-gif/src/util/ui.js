@@ -2,7 +2,7 @@ const m = require("mithril")
 //const b = require("bss")
 const { sv } = require("seview")
 
-//exports.button = b.d("block").mt(4).p(8).w("8rem").br(".25rem").c("white")
+exports.button = ".db.w4.mt2.pa2.white.br2"
 
 exports.h = sv(node =>
   (typeof node === "string")

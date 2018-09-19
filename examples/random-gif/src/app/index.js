@@ -1,78 +1,66 @@
-//const b = require("bss")
-//const R = require("ramda")
-
-const { nestUpdate } = require("../util/nest")
-//const { createButton } = require("../button")
-//const { createCounter } = require("../counter")
+const R = require("ramda")
+const Button = require("../button")
+const Counter = require("../counter")
 const RandomGif = require("../random-gif")
 const RandomGifPair = require("../random-gif-pair")
 const RandomGifPairPair = require("../random-gif-pair-pair")
-//const { createRandomGifList } = require("../random-gif-list")
+const RandomGifList = require("../random-gif-list")
 
 exports.createApp = update => {
-  /*
-  RandomGif.signals.newGif.map(() => {
-    update(model => {
-      const increment = model.counter.value > 3 && model.button.active ? 2 : 1
-      return R.over(R.lensPath(["counter", "value"]), R.add(increment), model)
-    })
-  })
-  const button = nestCreateComponent(createButton, update, ["button"])
-  const counter = nestCreateComponent(createCounter("Counter"), update, ["counter"])
-  */
-
-  //const randomGif1 = nestComponent(RandomGif, update, ["randomGif1"])
-  //const randomGif2 = nestComponent(RandomGif, update, ["randomGif2"])
-
-  /*
-  const randomGifPair = nestCreateComponent(createRandomGifPair, update, ["randomGifPair"])
-  const randomGifPairPair = nestCreateComponent(createRandomGifPairPair, update, ["randomGifPairPair"])
-
-  const randomGifList = nestCreateComponent(createRandomGifList, update, ["randomGifList"])
-  */
-  const nestedUpdate = (id, f) => nestUpdate(update, [id])(f)
-
-  //const callbacks = { newGif: () => { ... } }
-
-  const randomGifView = RandomGif.createView({ actions: RandomGif.createActions(nestedUpdate) })
+  const buttonView = Button.createView({ actions: Button.createActions(update) })
+  const counterView = Counter.createView()
+  const randomGifView = RandomGif.createView({ actions: RandomGif.createActions(update) })
   const randomGifPairView = RandomGifPair.createView({ randomGifView })
   const randomGifPairPairView = RandomGifPairPair.createView({ randomGifPairView })
+  const randomGifListView = RandomGifList.createView(
+    { randomGifView, actions: RandomGifList.createActions(update) })
 
   return {
     model: () => Object.assign(
       {},
-      //button.model(),
-      //counter.model(),
+      Button.model("button"),
+      Counter.model("counter", "Counter"),
       RandomGif.model("randomGif:1"),
       RandomGif.model("randomGif:2"),
       RandomGifPair.model("randomGifPair"),
-      RandomGifPairPair.model("randomGifPairPair")//,
-      //randomGifList.model()
+      RandomGifPairPair.model("randomGifPairPair"),
+      RandomGifList.model("randomGifList")
     ),
 
-    //state: randomGifList.state,
-    state: x => x,
+    state: model => {
+      if (model["handler:newGifCounted"] !== model["event:newGifGenerated"]) {
+        const increment = model.counter.value > 3 && model.button.active ? 2 : 1
+        model.counter.value = model.counter.value + increment
+        model["handler:newGifCounted"] = model["event:newGifGenerated"]
+      }
+      model.randomGifList.hasGifs = R.any(
+        R.equals("Y"),
+        R.map(R.path(["image", "value", "value", "case"]),
+          R.map(id => R.prop(id, model), model.randomGifList.randomGifIds)))
+
+      return model
+    },
 
     view: model => ["div",
-      //counter.view(model),
+      counterView(model, "counter"),
 
-      //["div"/*+ b.mt(8)*/, "Button:"],
-      //button.view(model),
+      ["div.mt2", "Button:"],
+      buttonView(model, "button"),
 
-      ["div"/*+ b.mt(8)*/, "Random Gif:"],
+      ["div.mt2", "Random Gif:"],
       randomGifView(model, "randomGif:1"),
 
-      ["div"/*+ b.mt(8)*/, "Another Random Gif:"],
+      ["div.mt2", "Another Random Gif:"],
       randomGifView(model, "randomGif:2"),
 
-      ["div"/*+ b.mt(8)*/, "Random Gif Pair:"],
+      ["div.mt2", "Random Gif Pair:"],
       randomGifPairView(model, "randomGifPair"),
 
-      ["div"/*+ b.mt(8)*/, "Random Gif Pair Pair:"],
-      randomGifPairPairView(model, "randomGifPairPair")//,
+      ["div.mt2", "Random Gif Pair Pair:"],
+      randomGifPairPairView(model, "randomGifPairPair"),
 
-      //["div"/*+ b.mt(8)*/, "Random Gif List:"],
-      //randomGifList.view(model)
+      ["div.mt2", "Random Gif List:"],
+      randomGifListView(model, "randomGifList")
     ]
   }
 }

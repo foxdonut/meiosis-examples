@@ -1,4 +1,3 @@
-//const b = require("bss")
 const RandomGif = require("../random-gif")
 
 module.exports = {
@@ -6,8 +5,8 @@ module.exports = {
     RandomGif.model(id + ":first"),
     RandomGif.model(id + ":second")
   ),
-  createView: ({ randomGifView }) => (model, id) => ["div"/*+ b.border("1px solid purple").p(8).mt(4)*/,
-    ["div"/*+ b.d("inline-block")*/, randomGifView(model, id + ":first")],
-    ["div"/*+ b.d("inline-block").ml(8)*/, randomGifView(model, id + ":second")]
+  createView: ({ randomGifView }) => (model, id) => ["div.ba.b--purple.pa2.mt2",
+    ["div.dib", randomGifView(model, id + ":first")],
+    ["div.dib.ml2", randomGifView(model, id + ":second")]
   ]
 }

@@ -1,4 +1,3 @@
-//const b = require("bss")
 const RandomGifPair = require("../random-gif-pair")
 
 module.exports = {
@@ -6,7 +5,7 @@ module.exports = {
     RandomGifPair.model(id + ":one"),
     RandomGifPair.model(id + ":two")
   ),
-  createView: ({ randomGifPairView }) => (model, id) => ["div"/*+ b.border("1px solid orange").p(8).mt(4)*/,
+  createView: ({ randomGifPairView }) => (model, id) => ["div.ba.b--orange.pa2.mt2",
     randomGifPairView(model, id + ":one"),
     randomGifPairView(model, id + ":two")
   ]
