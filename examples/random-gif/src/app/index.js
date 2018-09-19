@@ -1,4 +1,4 @@
-const R = require("ramda")
+const O = require("patchinko/constant")
 const Button = require("../button")
 const Counter = require("../counter")
 const RandomGif = require("../random-gif")
@@ -16,8 +16,7 @@ exports.createApp = update => {
     { randomGifView, actions: RandomGifList.createActions(update) })
 
   return {
-    model: () => Object.assign(
-      {},
+    model: () => O(
       Button.model("button"),
       Counter.model("counter", "Counter"),
       RandomGif.model("randomGif:1"),
@@ -27,19 +26,10 @@ exports.createApp = update => {
       RandomGifList.model("randomGifList")
     ),
 
-    state: model => {
-      if (model["handler:newGifCounted"] !== model["event:newGifGenerated"]) {
-        const increment = model.counter.value > 3 && model.button.active ? 2 : 1
-        model.counter.value = model.counter.value + increment
-        model["handler:newGifCounted"] = model["event:newGifGenerated"]
-      }
-      model.randomGifList.hasGifs = R.any(
-        R.equals("Y"),
-        R.map(R.path(["image", "value", "value", "case"]),
-          R.map(id => R.prop(id, model), model.randomGifList.randomGifIds)))
-
-      return model
-    },
+    state: model => [
+      Counter.state,
+      RandomGifList.state
+    ].reduce((x, f) => O(x, f(x)), model),
 
     view: model => ["div",
       counterView(model, "counter"),
