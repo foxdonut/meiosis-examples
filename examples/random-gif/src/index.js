@@ -14,7 +14,7 @@ states.map(state => m.render(element, h(app.view(state))))
 
 // Only for using Meiosis Tracer in development.
 const meiosisTracer = require("meiosis-tracer")
-meiosisTracer({ selector: "#tracer", streams: [
+meiosisTracer({ selector: "#tracer", rows: 8, streams: [
   { label: "update", stream: update },
   { label: "models", stream: models },
   { label: "states", stream: states }
