@@ -7,13 +7,13 @@ module.exports = {
     value: 0
   }),
   createView: () => (model, id) => ["div", model[id].label + ": " + model[id].value],
-  state: model => {
-    if (model["handler:newGifCounted"] !== model["event:newGifGenerated"]) {
+  onUpdate: (model, obj) => {
+    if (obj.event === "newGifGenerated") {
       const increment = model.counter.value > 3 && model.button.active ? 2 : 1
-      return {
-        counter: O({ value: O(R.add(increment)) }),
-        "handler:newGifCounted": model["event:newGifGenerated"]
-      }
+      return Object.assign(obj, {
+        counter: O({ value: O(R.add(increment)) })
+      })
     }
+    return obj
   }
 }

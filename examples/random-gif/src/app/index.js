@@ -26,9 +26,14 @@ exports.createApp = update => {
       RandomGifList.model("randomGifList")
     ),
 
+    onUpdate: (model, obj) => O(model, [
+      Counter.onUpdate
+      // could have more functions here
+    ].reduce((x, f) => f(model, x), obj)),
+
     state: model => [
-      Counter.state,
       RandomGifList.state
+      // could have more functions here
     ].reduce((x, f) => O(x, f(x)), model),
 
     view: model => ["div",

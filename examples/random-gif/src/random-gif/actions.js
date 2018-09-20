@@ -18,7 +18,7 @@ exports.createActions = update => ({
           [id]: O({
             image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
           }),
-          "event:newGifGenerated": new Date().getTime()
+          event: "newGifGenerated"
         })
       ).
       catch(() => update(R.objOf(id, O({ image: Loaded.Y(Success.N()) }))))
