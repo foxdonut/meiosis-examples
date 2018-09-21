@@ -8,8 +8,11 @@ export const createView = actions => todo => (
     <td>{todo.priority}</td>
     <td>{todo.description}</td>
     <td>
-      <button className="ui primary basic tiny button" onClick={wrap(actions.editTodo, todo)}>Edit</button>
-      <button className="ui negative basic tiny button" onClick={wrap(actions.deleteTodo, todo)}>Delete</button>
+      <button className="ui primary basic tiny button"
+        onClick={wrap(actions.editTodo, todo)}>Edit</button>
+
+      <button className="ui negative basic tiny button"
+        onClick={wrap(actions.deleteTodo, todo)}>Delete</button>
     </td>
   </tr>
 );

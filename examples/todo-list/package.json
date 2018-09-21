@@ -40,7 +40,7 @@
     "inferno": "^5.6.1",
     "prevent-default": "^1.0.0",
     "ramda": "^0.25.0",
-    "semantic-ui": "^2.3.3",
+    "semantic-ui": "^2.4.0",
     "sinon": "^6.3.4",
     "validate.js": "^0.12.0"
   },

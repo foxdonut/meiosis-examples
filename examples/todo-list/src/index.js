@@ -12,7 +12,7 @@ ajaxServices.loadTodos().then(todos => {
   const update = flyd.stream();
   const app = createApp(update);
   const models = flyd.scan(applyTo,
-     merge(app.model(), { list: { todos, message: "" } }), update);
+    merge(app.model(), { list: { todos, message: "" } }), update);
 
   // https://infernojs.org/docs/api/inferno
   flyd.scan(createRenderer(), document.getElementById("app"), models.map(app.view));
