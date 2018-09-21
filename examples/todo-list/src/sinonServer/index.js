@@ -3,6 +3,7 @@ var sinon = require("sinon");
 module.exports = function() {
   var server = sinon.fakeServer.create();
   server.autoRespond = true;
+  server.autoRespondAfter = 1000;
   var headers = {"Content-Type": "application/json"};
 
   // Counter to fake/simulate errors every N requests.
