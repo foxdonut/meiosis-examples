@@ -4,6 +4,7 @@ let validationSpec = {
   description: {
     presence: true,
     length: {
+      minimum: 2,
       maximum: 50
     }
   },

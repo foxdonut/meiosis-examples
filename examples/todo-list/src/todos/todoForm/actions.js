@@ -1,18 +1,25 @@
-import { assoc, assocPath, compose } from "ramda";
+import { assoc, merge } from "ramda";
 
-export const createActions = id => update => ({
-  editingTodo: (field, value) => update(model =>
-    assocPath([id, "todo"], assoc(field, value, model[id].todo), model)),
+import { validateModel } from "./validation";
 
-  clearForm: () => update(assoc(id, { todo: { }, validationErrors: { } })),
+export const actions = (update, actions) => {
+  const clearForm = () => update(model => merge(model, ({ todo: { }, validationErrors: { } })));
 
-  editTodo: todo => update(
-    compose(
-      assocPath([id, "todo"], todo),
-      assocPath([id, "validationErrors"], { })
-    )
-  ),
+  return {
+    editingTodo: (field, value) => update(model =>
+      assoc("todo", assoc(field, value, model.todo), model)),
 
-  showValidationErrors: validationErrors =>
-    update(assocPath([id, "validationErrors"], validationErrors))
-});
+    clearForm,
+
+    onSaveTodo: todo => {
+      const validationErrors = validateModel(todo);
+
+      if (Object.keys(validationErrors).length === 0) {
+        actions.saveTodo(todo).then(clearForm);
+      }
+      else {
+        update(assoc("validationErrors", validationErrors));
+      }
+    }
+  };
+};

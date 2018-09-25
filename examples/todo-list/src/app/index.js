@@ -1,22 +1,26 @@
-import { createActions } from "./actions";
-import { createView } from "./view.jsx";
-import { createTodos } from "../todos";
+import { actions } from "./actions";
+import { view } from "./view.jsx";
+import { Todos } from "../todos";
 import { ajaxServices } from "../util/ajax-services";
 import { ProjectsPage } from "../util/constants";
 
 export const createApp = update => ajaxServices.loadTodos().then(initialTodoList => {
-  const todos = createTodos("todos");
-
-  const actions = Object.assign(
-    createActions(update),
-    todos.createActions(update)
+  const componentActions = actions(update);
+  const allActions = Object.assign(
+    componentActions,
+    Todos.actions(update, componentActions)
   );
+
+  const todos = Todos.view(allActions);
 
   return {
     model: () => Object.assign(
-      { pageId: ProjectsPage },
-      todos.model(initialTodoList)
+      {
+        pageId: ProjectsPage,
+        message: ""
+      },
+      Todos.model({ initialTodoList })
     ),
-    view: createView({ todos }, actions)
+    view: view({ actions: allActions, todos })
   };
 });

@@ -1,16 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import Inferno from "inferno";
 
-export const createView = actions => todo => (
-  <tr key={todo.id}>
-    <td>{todo.priority}</td>
-    <td>{todo.description}</td>
+export const view = ({ actions }) => model => (
+  <tr key={model.id}>
+    <td>{model.priority}</td>
+    <td>{model.description}</td>
     <td>
       <button className="ui primary basic tiny button"
-        onClick={() => actions.editTodo(todo)}>Edit</button>
+        onClick={() => actions.editTodo(model)}>Edit</button>
 
       <button className="ui negative basic tiny button"
-        onClick={() => actions.deleteTodo(todo)}>Delete</button>
+        onClick={() => actions.deleteTodo(model)}>Delete</button>
     </td>
   </tr>
 );

@@ -1,18 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import Inferno from "inferno";
 
-export const createView = (id, { todoList, todoForm }) => actions => {
-  const todoFormView = todoForm.createView(actions);
-  const todoListView = todoList.createView(actions);
-
-  return model => (
-    <div>
-      <div className="row">
-        <div className="col-md-4">
-          {todoFormView(model)}
-        </div>
+export const view = ({ todoForm, todoList }) => model => (
+  <div>
+    <div className="row">
+      <div className="col-md-4">
+        {todoForm(model.todoForm)}
       </div>
-      {todoListView(model)}
     </div>
-  );
-};
+    {todoList(model)}
+  </div>
+);

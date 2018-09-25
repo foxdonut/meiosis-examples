@@ -1,5 +1,5 @@
-import { createView } from "./view.jsx";
+import { view } from "./view.jsx";
 
-export const createTodoItem = () => ({
-  createView
-});
+export const TodoItem = {
+  view: actions => view({ actions })
+};

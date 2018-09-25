@@ -1,31 +1,47 @@
+import { assoc } from "ramda";
+
 import { ajaxServices } from "../util/ajax-services";
-import { validateModel } from "./validation";
+import { TodoForm } from "./todoForm"
 
-export const createActions = (_id, { todoList, todoForm }) => update => {
-  const todoListActions = todoList.createActions(update);
-  const todoFormActions = todoForm.createActions(update);
+export const actions = (update, actions) => {
+  const updateList = todo => update(model => {
+    model.todos[todo.id] = todo;
 
-  return Object.assign(
-    {
-      saveTodo: todo => {
-        const validationErrors = validateModel(todo);
+    if (model.todoIds.indexOf(todo.id) < 0) {
+      model.todoIds.push(todo.id);
+    }
+    return model;
+  });
 
-        if (Object.keys(validationErrors).length === 0) {
-          todoListActions.showMessage("Saving, please wait...");
+  return {
+    editTodo: todo => update(
+      assoc("todoForm", TodoForm.model({ todo }))
+    ),
 
-          ajaxServices.saveTodo(todo).
-            then(todo => {
-              todoFormActions.clearForm();
-              todoListActions.updateList(todo);
-            }).
-            catch(() => todoListActions.showMessage("Sorry, an error occurred."));
-        }
-        else {
-          todoFormActions.showValidationErrors(validationErrors);
-        }
-      }
+    saveTodo: todo => {
+      actions.showMessage("Saving, please wait...");
+
+      return ajaxServices.saveTodo(todo).
+        then(todo => {
+          updateList(todo);
+          actions.clearMessage();
+        }).
+        catch(() => actions.showMessage("Sorry, an error occurred."));
     },
-    todoListActions,
-    todoFormActions
-  );
+
+    deleteTodo: todo => {
+      actions.showMessage("Deleting, please wait...");
+
+      ajaxServices.deleteTodo(todo.id).
+        then(() => {
+          update(model => {
+            delete model.todos[todo.id];
+            model.todoIds.splice(model.todoIds.indexOf(todo.id), 1);
+            return model;
+          });
+          actions.clearMessage();
+        }).
+        catch(() => actions.showMessage("Sorry, an error occurred."));
+    }
+  }
 };
