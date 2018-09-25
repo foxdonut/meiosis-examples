@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import Inferno from "inferno";
+import classNames from "classnames";
 
 import { ProjectsPage, TodoListPage } from "../util/constants";
 
@@ -9,11 +10,11 @@ export const createView = ({ todos }, actions) => {
   return model => (
     <div>
       <div className="ui two item menu">
-        <a className={"item" + (model.pageId === ProjectsPage ? " active" : "")}
+        <a className={classNames("item", { "active": model.pageId === ProjectsPage })}
            onClick={() => actions.navigateTo(ProjectsPage)}>
           Projects
         </a>
-        <a className={"item" + (model.pageId === TodoListPage ? " active" : "")}
+        <a className={classNames("item", { "active": model.pageId === TodoListPage })}
            onClick={() => actions.navigateTo(TodoListPage)}>
           Todo List
         </a>
