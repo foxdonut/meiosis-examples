@@ -4,7 +4,6 @@ import { view } from "./view.jsx";
 import { TodoForm } from "./todoForm";
 import { TodoList } from "./todoList";
 import { TodoItem } from "./todoList/todoItem";//FIXME
-import { nestUpdate } from "../util/wire";
 
 export const Todos = {
   model: data => Object.assign(
@@ -16,7 +15,8 @@ export const Todos = {
     const componentActions = Object.assign(parentActions, actions(update, parentActions));
     return Object.assign(
       componentActions,
-      TodoForm.actions(nestUpdate(update, "todoForm"), componentActions)
+      TodoForm.actions(update, componentActions),
+      TodoItem.actions(update, componentActions)
     );
   },
   view: actions => {

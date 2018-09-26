@@ -5,7 +5,7 @@ export const view = ({ todoForm, todoList }) => model => (
   <div>
     <div className="row">
       <div className="col-md-4">
-        {todoForm(model.todoForm)}
+        {todoForm(model, "todoForm")}
       </div>
     </div>
     {todoList(model)}
