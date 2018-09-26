@@ -14,9 +14,8 @@ export const view = ({ todoItem }) => model => (
           </tr>
         </thead>
         <tbody>
-          {model.todoIds.map(todoId => todoItem(Object.assign({
-            todo: model.todos[todoId]
-          }, model.todoItem)))}
+          {model.todoIds.map(todoId =>
+            todoItem(model, "todoItem", { todo: model.todos[todoId] }))}
         </tbody>
       </table>
     </div>

@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 export const view = actions => (model, id) => {
   const inputField = (name, value) =>
-    <input type="text" id={name} name={name} className="form-control" value={value}
+    <input type="text" className="form-control" value={value}
       onInput={evt => actions.editingTodo(id, name, evt.target.value)}/>;
 
   const errorMessage = errors => errors ?
@@ -22,7 +22,6 @@ export const view = actions => (model, id) => {
 
   return (
     <form className="ui form">
-      <input type="hidden" name="id" value={model[id].todo.id}/>
       {inputDiv("priority", "Priority:")}
       {inputDiv("description", "Description:")}
       <div>
