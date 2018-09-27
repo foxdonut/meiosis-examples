@@ -8,8 +8,7 @@ import { TodoItem } from "./todoList/todoItem";//FIXME
 export const Todos = {
   model: data => Object.assign(
     model(data),
-    { todoForm: TodoForm.model(data) },
-    { todoItem: TodoItem.model() } //FIXME
+    { todoForm: TodoForm.model(data) }
   ),
   actions: (update, parentActions) => {
     const componentActions = Object.assign(parentActions, actions(update, parentActions));

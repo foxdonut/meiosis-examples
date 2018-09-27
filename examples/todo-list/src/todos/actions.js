@@ -20,7 +20,7 @@ export const actions = (update, actions) => {
     )),
 
     cancelEditTodo: todo => update(
-      assocPath(["todoItem", todo.id, "editing"], false)
+      assocPath([`todoItem:${todo.id}`, "editing"], false)
     ),
 
     saveTodo: todo => {
@@ -30,6 +30,7 @@ export const actions = (update, actions) => {
         then(todo => {
           updateList(todo);
           actions.clearMessage();
+          update(assocPath([`todoItem:${todo.id}`, "editing"], false));
         }).
         catch(() => actions.showMessage("Sorry, an error occurred."));
     },

@@ -5,6 +5,6 @@ export const actions = (update, actions) => ({
     //FIXME: the order of these operation matters.
     //Ultimately, would like to combine these two updates into one.
     actions.editTodo(todo);
-    update(assocPath([id, todo.id, "editing"], true))
+    update(assocPath([id, "editing"], true))
   }
 });

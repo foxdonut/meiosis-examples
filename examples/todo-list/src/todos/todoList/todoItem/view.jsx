@@ -13,10 +13,10 @@ export const view = ({ actions, todoForm }) => (model, id, { todo }) => ([
         onClick={() => actions.deleteTodo(todo)}>Delete</button>
     </td>
   </tr>
-  , model[id][todo.id] && model[id][todo.id].editing &&
+  , model[id] && model[id].editing &&
   <tr key={todo.id + "editing"}>
     <td colSpan={3}>
-      {todoForm(model, "todoForm:" + todo.id)}
+      {todoForm(model, `todoForm:${todo.id}`)}
     </td>
   </tr>
 ]);
