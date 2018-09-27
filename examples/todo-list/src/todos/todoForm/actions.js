@@ -11,8 +11,6 @@ export const actions = (update, actions) => {
     editingTodo: (id, field, value) => update(over(lensProp(id),
       model => assoc("todo", assoc(field, value, model.todo), model))),
 
-    clearForm,
-
     onSaveTodo: (id, todo) => {
       const validationErrors = validateModel(todo);
 
@@ -22,6 +20,13 @@ export const actions = (update, actions) => {
       else {
         update(over(lensProp(id), assoc("validationErrors", validationErrors)));
       }
+    },
+
+    clearForm,
+
+    onCancelEdit: (id, todo) => {
+      clearForm(id, todo);
+      actions.cancelEditTodo(todo);
     }
   };
 };

@@ -1,4 +1,4 @@
-import { assoc, compose } from "ramda";
+import { assoc, assocPath, compose } from "ramda";
 
 import { ajaxServices } from "../util/ajax-services";
 import { TodoForm } from "./todoForm"
@@ -18,6 +18,10 @@ export const actions = (update, actions) => {
       assoc("todoForm", TodoForm.model({ todo })),
       assoc("todoForm:" + todo.id, TodoForm.model({ todo }))
     )),
+
+    cancelEditTodo: todo => update(
+      assocPath(["todoItem", todo.id, "editing"], false)
+    ),
 
     saveTodo: todo => {
       actions.showMessage("Saving, please wait...");
