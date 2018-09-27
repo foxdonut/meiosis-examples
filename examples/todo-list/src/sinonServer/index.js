@@ -56,7 +56,7 @@ module.exports = function() {
     }
   };
 
-  server.respondWith("DELETE", /\/api\/deleteTodo\/(\d+)/, function(request, todoId) {
+  server.respondWith("DELETE", /\/api\/deleteTodo\/(.+)/, function(request, todoId) {
     if (requestShouldSucceed(request)) {
       deleteTodo(todoId);
       request.respond(204);

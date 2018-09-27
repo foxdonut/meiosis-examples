@@ -15,8 +15,8 @@ export const actions = (update, actions) => {
 
   return {
     editTodo: todo => update(compose(
-      over(lensProp("todoForm"), model => merge(model, TodoForm.model({ todo }))),
-      assocPath(["todoForm", todo.id], TodoForm.model({ todo }))
+      over(lensProp("todoForm"), model => merge(model, TodoForm.createModel({ todo }))),
+      assocPath(["todoForm", todo.id], TodoForm.createModel({ todo }))
     )),
 
     cancelEditTodo: todo => update(

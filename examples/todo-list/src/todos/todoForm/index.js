@@ -3,7 +3,7 @@ import { actions } from "./actions";
 import { view } from "./view.jsx";
 
 export const TodoForm = {
-  model,
+  createModel: model,
   actions,
   view
 };

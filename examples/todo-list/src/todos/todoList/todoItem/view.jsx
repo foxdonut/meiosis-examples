@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import Inferno from "inferno";
 
-import { get } from "../../../util/wirem";
+import { get } from "../../../util";
 
 export const view = ({ actions, todoForm }) => (model, path, { todo }) => ([
   <tr key={todo.id}>
@@ -16,7 +16,7 @@ export const view = ({ actions, todoForm }) => (model, path, { todo }) => ([
     </td>
   </tr>
   , get(model, path, "editing") &&
-  <tr key={todo.id + "editing"}>
+  <tr key={`${todo.id}_editing`}>
     <td colSpan={3}>
       {todoForm(model, ["todoForm", todo.id])}
     </td>

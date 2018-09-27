@@ -3,9 +3,9 @@ import Inferno from "inferno";
 import preventDefault from "prevent-default";
 import classNames from "classnames";
 
-import { get } from "../../util/wirem";
+import { get } from "../../util";
 
-export const view = actions => (model, path) => {
+export const view = ({ actions }) => (model, path) => {
   const todo = get(model, path, "todo");
 
   const inputField = (name, value) =>
