@@ -1,10 +1,10 @@
-import { assocPath } from "ramda";
+import { append, assocPath } from "ramda";
 
 export const actions = (update, actions) => ({
-  onEditTodo: (id, todo) => {
+  onEditTodo: (path, todo) => {
     //FIXME: the order of these operation matters.
     //Ultimately, would like to combine these two updates into one.
     actions.editTodo(todo);
-    update(assocPath([id, "editing"], true))
+    update(assocPath(append("editing", path), true))
   }
 });

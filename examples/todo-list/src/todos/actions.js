@@ -1,4 +1,4 @@
-import { assoc, assocPath, compose } from "ramda";
+import { assocPath, compose, lensProp, merge, over } from "ramda";
 
 import { ajaxServices } from "../util/ajax-services";
 import { TodoForm } from "./todoForm"
@@ -15,12 +15,12 @@ export const actions = (update, actions) => {
 
   return {
     editTodo: todo => update(compose(
-      assoc("todoForm", TodoForm.model({ todo })),
-      assoc("todoForm:" + todo.id, TodoForm.model({ todo }))
+      over(lensProp("todoForm"), model => merge(model, TodoForm.model({ todo }))),
+      assocPath(["todoForm", todo.id], TodoForm.model({ todo }))
     )),
 
     cancelEditTodo: todo => update(
-      assocPath([`todoItem:${todo.id}`, "editing"], false)
+      assocPath(["todoItem", todo.id, "editing"], false)
     ),
 
     saveTodo: todo => {
@@ -30,7 +30,7 @@ export const actions = (update, actions) => {
         then(todo => {
           updateList(todo);
           actions.clearMessage();
-          update(assocPath([`todoItem:${todo.id}`, "editing"], false));
+          update(assocPath(["todoItem", todo.id, "editing"], false));
         }).
         catch(() => actions.showMessage("Sorry, an error occurred."));
     },

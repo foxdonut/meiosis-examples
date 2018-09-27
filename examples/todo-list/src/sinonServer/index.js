@@ -23,11 +23,11 @@ module.exports = function() {
 
   var createTodoList = function() {
     return [
-      {id: 5, priority: 1, description: "Buy more beer"},
-      {id: 2, priority: 1, description: "Order pizza"},
-      {id: 3, priority: 2, description: "Eat pie"},
-      {id: 4, priority: 4, description: "Watch TV"},
-      {id: 1, priority: 5, description: "Sleep"}
+      {id: "t5", priority: 1, description: "Buy more beer"},
+      {id: "t2", priority: 1, description: "Order pizza"},
+      {id: "t3", priority: 2, description: "Eat pie"},
+      {id: "t4", priority: 4, description: "Watch TV"},
+      {id: "t1", priority: 5, description: "Sleep"}
     ];
   };
   var todoList = [];
@@ -58,7 +58,7 @@ module.exports = function() {
 
   server.respondWith("DELETE", /\/api\/deleteTodo\/(\d+)/, function(request, todoId) {
     if (requestShouldSucceed(request)) {
-      deleteTodo(parseInt(todoId, 10));
+      deleteTodo(todoId);
       request.respond(204);
     }
   });
@@ -67,12 +67,11 @@ module.exports = function() {
     todo.priority = parseInt(todo.priority, 10);
 
     if (!todo.id) {
-      todo.id = nextId;
+      todo.id = "t" + nextId;
       nextId++;
       todoList.push(todo);
     }
     else {
-      todo.id = parseInt(todo.id, 10);
       for (var i = 0, t = todoList.length; i < t; i++) {
         if (todoList[i].id === todo.id) {
           todoList[i] = todo;

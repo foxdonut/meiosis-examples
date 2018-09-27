@@ -1,31 +1,31 @@
-import { assoc, lensProp, merge, over } from "ramda";
+import { assoc, lensPath, merge, over } from "ramda";
 
 import { validateModel } from "./validation";
 
 export const actions = (update, actions) => {
-  const clearForm = id => update(over(lensProp(id),
+  const clearForm = path => update(over(lensPath(path),
     model => merge(model, ({ todo: { }, validationErrors: { } }))
   ));
 
   return {
-    editingTodo: (id, field, value) => update(over(lensProp(id),
+    editingTodo: (path, field, value) => update(over(lensPath(path),
       model => assoc("todo", assoc(field, value, model.todo), model))),
 
-    onSaveTodo: (id, todo) => {
+    onSaveTodo: (path, todo) => {
       const validationErrors = validateModel(todo);
 
       if (Object.keys(validationErrors).length === 0) {
-        actions.saveTodo(todo).then(clearForm(id));
+        actions.saveTodo(todo).then(() => clearForm(path));
       }
       else {
-        update(over(lensProp(id), assoc("validationErrors", validationErrors)));
+        update(over(lensPath(path), assoc("validationErrors", validationErrors)));
       }
     },
 
     clearForm,
 
-    onCancelEdit: (id, todo) => {
-      clearForm(id, todo);
+    onCancelEdit: (path, todo) => {
+      clearForm(path, todo);
       actions.cancelEditTodo(todo);
     }
   };
