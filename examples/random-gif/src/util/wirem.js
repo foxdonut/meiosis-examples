@@ -16,8 +16,8 @@ export const wireView = (component, actions) => {
   return getFn(component, "view")(Object.assign({ actions }, dependencies))
 }
 
-export const wirem = ({ component, update }) => {
-  const model = component.model
+export const wirem = ({ component, data, update }) => {
+  const model = component.model ? () => component.model(data) : () => null
   const actions = wireActions(component, update)
   const view = wireView(component, actions)
   const state = component.state || (x => x)
