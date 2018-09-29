@@ -25,7 +25,7 @@ export const view = ({ actions }) => (model, id) => {
     </div>;
 
   return (<div>
-    {model.label && <div>{model.label}</div>}
+    {model[id].label && <h4>{model[id].label}</h4>}
     <form className="ui form">
       {inputDiv("priority", "Priority:")}
       {inputDiv("description", "Description:")}

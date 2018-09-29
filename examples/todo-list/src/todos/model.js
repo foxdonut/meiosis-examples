@@ -1,5 +1,7 @@
 import { assoc, prop } from "ramda"
 
+import { TodoForm } from "./todoForm";
+
 export const model = ({ initialTodoList }) => {
   const todos = initialTodoList.reduce((result, todo) =>
     assoc(todo.id, todo, result), {});
@@ -8,6 +10,7 @@ export const model = ({ initialTodoList }) => {
 
   return {
     todos,
-    todoIds
+    todoIds,
+    todoForm: TodoForm.model({ label: "New Todo:"})
   };
 };
