@@ -24,7 +24,8 @@ export const view = ({ actions }) => (model, id) => {
       {errorMessage(get(model, id, ["validationErrors", field]))}
     </div>;
 
-  return (
+  return (<div>
+    {model.label && <div>{model.label}</div>}
     <form className="ui form">
       {inputDiv("priority", "Priority:")}
       {inputDiv("description", "Description:")}
@@ -36,5 +37,5 @@ export const view = ({ actions }) => (model, id) => {
           onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>Cancel</button>
       </div>
     </form>
-  );
+  </div>);
 };

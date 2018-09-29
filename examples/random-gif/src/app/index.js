@@ -13,12 +13,12 @@ const { wirem } = require("../util/wirem")
 exports.createApp = update => {
   const Root = {
     dependencies: [
-      { component: Button, key: "button", models: ["button"] },
-      { component: Counter, key: "counter", models: ["counter"] },
+      { component: Button, key: "button", model: "button" },
+      { component: Counter, key: "counter", model: "counter" },
       { component: RandomGif, key: "rg", models: ["randomGif1", "randomGif2"] },
-      { component: RandomGifPair, key: "rgPair", models: ["randomGifPair"] },
-      { component: RandomGifPairPair, key: "rgPairPair", models: ["randomGifPairPair"] },
-      { component: RandomGifList, key: "rgList", models: ["randomGifList"] }
+      { component: RandomGifPair, key: "rgPair", model: "randomGifPair" },
+      { component: RandomGifPairPair, key: "rgPairPair", model: "randomGifPairPair" },
+      { component: RandomGifList, key: "rgList", model: "randomGifList" }
     ],
     actions: CountingRule.actions,
     view: ({ button, counter, rg, rgPair, rgPairPair, rgList }) => model => ["div",

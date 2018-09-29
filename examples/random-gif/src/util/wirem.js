@@ -1,6 +1,9 @@
 const getFn = (component, prop) => component[prop] || (() => null)
+const getModelKeys = dependency => dependency.model != null
+  ? [dependency.model]
+  : dependency.models || []
 
-const wireModel = (component, data, modelKeys = [], parentKey = "", model = {}) => {
+export const wireModel = (component, data, modelKeys = [], parentKey = "", model = {}) => {
   modelKeys.forEach(modelKey => {
     const result = getFn(component, "model")(data)
     if (result) {
@@ -10,13 +13,13 @@ const wireModel = (component, data, modelKeys = [], parentKey = "", model = {}) 
   })
   ;(component.dependencies || []).forEach(dependency => {
     modelKeys.forEach(key =>
-      wireModel(dependency.component, data, dependency.models, parentKey + key, model)
+      wireModel(dependency.component, data, getModelKeys(dependency), parentKey + key, model)
     )
   })
   return model
 }
 
-const wireActions = (component, update, actions = {}) => {
+export const wireActions = (component, update, actions = {}) => {
   Object.assign(actions, getFn(component, "actions")(update, actions))
   ;(component.dependencies || []).forEach(dependency => {
     wireActions(dependency.component, update, actions)
@@ -24,7 +27,7 @@ const wireActions = (component, update, actions = {}) => {
   return actions
 }
 
-const wireView = (component, actions) => {
+export const wireView = (component, actions) => {
   const dependencies = {}
   ;(component.dependencies || []).forEach(dependency => {
     dependencies[dependency.key] = wireView(dependency.component, actions)
@@ -32,20 +35,18 @@ const wireView = (component, actions) => {
   return getFn(component, "view")(Object.assign({ actions }, dependencies))
 }
 
-const wirem = ({ component, data, update }) => {
+export const wirem = ({ component, data, update }) => {
   const model = wireModel(component, data, [""])
   const actions = wireActions(component, update)
   const view = wireView(component, actions)
+  const state = component.state || (x => x)
+  const nextAction = component.nextAction ? component.nextAction(actions) : () => null
 
   return {
     model: () => model,
-    view
+    actions,
+    view,
+    state,
+    nextAction
   }
-}
-
-module.exports = {
-  wireModel,
-  wireActions,
-  wireView,
-  wirem
 }

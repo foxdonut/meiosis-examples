@@ -21,7 +21,6 @@ export const actions = (update, actions) => {
   return {
     editTodo: (id, todo) => update(compose(
       assocPath([id, "editing"], true),
-      over(lensProp("todoForm"), model => merge(model, TodoForm.model({ todo }))),
       assoc("todoForm:" + todo.id, TodoForm.model({ todo }))
     )),
 
@@ -42,7 +41,7 @@ export const actions = (update, actions) => {
         ))).
         catch(() => update(compose(
           Root.updates.clearMessage(),
-          Root.updates.showError("Sorry, an error occurred.")
+          Root.updates.showError("Sorry, an error occurred. Please try again.")
         )));
     },
 
@@ -60,7 +59,7 @@ export const actions = (update, actions) => {
         }).
         catch(() => update(compose(
           Root.updates.clearMessage(),
-          Root.updates.showError("Sorry, an error occurred.")
+          Root.updates.showError("Sorry, an error occurred. Please try again.")
         )));
     }
   }

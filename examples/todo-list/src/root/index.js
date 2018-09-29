@@ -7,7 +7,7 @@ import { TodoListPage } from "./constants";
 
 export const Root = {
   dependencies: [
-    { component: Todos, key: "todos", models: [""] }
+    { component: Todos, key: "todos", model: "" }
   ],
   model: () => ({
     pageId: TodoListPage,

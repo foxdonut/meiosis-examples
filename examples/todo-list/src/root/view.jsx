@@ -2,7 +2,7 @@
 import Inferno from "inferno";
 import classNames from "classnames";
 
-import { TodoListPage, InlineEditPage } from "./constants";
+import { TodoListPage, ProjectPage } from "./constants";
 
 export const view = ({ actions, todos }) => model => (
   <div>
@@ -11,9 +11,9 @@ export const view = ({ actions, todos }) => model => (
          onClick={() => actions.navigateTo(TodoListPage)}>
         Todo List
       </a>
-      <a className={classNames("item", { "active": model.pageId === InlineEditPage })}
-         onClick={() => actions.navigateTo(InlineEditPage)}>
-        Inline Edit
+      <a className={classNames("item", { "active": model.pageId === ProjectPage })}
+         onClick={() => actions.navigateTo(ProjectPage)}>
+        Projects
       </a>
     </div>
     <div>

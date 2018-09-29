@@ -1,4 +1,5 @@
-export const model = ({todo = {}}) => ({
+export const model = ({label, todo = {}}) => ({
+  label,
   todo,
   validationErrors: {}
 });
