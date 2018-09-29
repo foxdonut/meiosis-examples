@@ -2,7 +2,7 @@ import { assoc, lensProp, over } from "ramda";
 
 import { validateModel } from "./validation";
 
-export const actions = (update, actions) => {
+export const actions = ({ update, actions }) => {
   return {
     editingTodo: (id, field, value) => update(over(lensProp(id),
       model => assoc("todo", assoc(field, value, model.todo), model))),

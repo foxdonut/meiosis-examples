@@ -4,7 +4,7 @@ const uuid = require("uuid")
 
 const RandomGif = require("../random-gif")
 
-exports.actions = (update, actions) => ({
+exports.actions = ({ update, actions }) => ({
   add: id => {
     const newId = "randomGifList:" + uuid.v1()
     const randomGifModel = RandomGif.model()

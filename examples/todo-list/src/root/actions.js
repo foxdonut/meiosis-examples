@@ -8,7 +8,7 @@ export const updates = {
   clearError: () => assoc("error", null)
 };
 
-export const actions = update => ({
+export const actions = ({ update }) => ({
   navigateTo: compose(update, updates.navigateTo),
   showMessage: compose(update, updates.showMessage),
   clearMessage: compose(update, updates.clearMessage),

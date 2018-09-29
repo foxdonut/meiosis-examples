@@ -1,9 +1,10 @@
 const getFn = (component, prop) => component[prop] || (() => null)
 
-export const wireActions = (component, update, actions = {}) => {
-  Object.assign(actions, getFn(component, "actions")(update, actions))
+export const wireActions = (component, update, actions = {}, updates = {}) => {
+  Object.assign(updates, component.updates)
+  Object.assign(actions, getFn(component, "actions")({ update, actions, updates }))
   ;(component.dependencies || []).forEach(dependency => {
-    wireActions(dependency.component, update, actions)
+    wireActions(dependency.component, update, actions, updates)
   })
   return actions
 }

@@ -2,9 +2,8 @@ import { assoc, assocPath, compose, lensProp, merge, over } from "ramda";
 
 import { ajaxServices } from "../util/ajax-services";
 import { TodoForm } from "./todoForm"
-import { Root } from "../root"
 
-export const actions = (update, actions) => {
+export const actions = ({ update, actions, updates }) => {
   const updateList = todo => model => {
     model.todos[todo.id] = todo;
 
@@ -35,13 +34,13 @@ export const actions = (update, actions) => {
       return ajaxServices.saveTodo(todo).
         then(todo => update(compose(
           updateList(todo),
-          Root.updates.clearMessage(),
+          updates.clearMessage(),
           assocPath(["todoItem:" + todo.id, "editing"], false),
           clearForm(id)
         ))).
         catch(() => update(compose(
-          Root.updates.clearMessage(),
-          Root.updates.showError("Sorry, an error occurred. Please try again.")
+          updates.clearMessage(),
+          updates.showError("Sorry, an error occurred. Please try again.")
         )));
     },
 
@@ -58,8 +57,8 @@ export const actions = (update, actions) => {
           actions.clearMessage();
         }).
         catch(() => update(compose(
-          Root.updates.clearMessage(),
-          Root.updates.showError("Sorry, an error occurred. Please try again.")
+          updates.clearMessage(),
+          updates.showError("Sorry, an error occurred. Please try again.")
         )));
     }
   }

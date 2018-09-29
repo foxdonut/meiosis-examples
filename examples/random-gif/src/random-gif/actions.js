@@ -7,7 +7,7 @@ const { Loaded, Success, Image } = require("./types")
 const gif_new_url = "https://api.giphy.com/v1/gifs/random"
 const api_key = "dc6zaTOxFJmzC"
 
-exports.actions = (update, actions) => ({
+exports.actions = ({ update, actions }) => ({
   editTag: (id, tag) => update(R.objOf(id, O({ tag }))),
 
   newGif: (id, model) => {

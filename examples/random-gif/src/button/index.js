@@ -3,7 +3,7 @@ const R = require("ramda")
 
 const { button } = require("../util/ui")
 
-const actions = update => ({
+const actions = ({ update }) => ({
   toggle: id => _event => update(R.objOf(id, O({ active: O(x => !x) })))
 })
 
