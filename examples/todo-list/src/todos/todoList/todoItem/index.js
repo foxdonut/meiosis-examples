@@ -4,7 +4,7 @@ import { TodoForm } from "../../todoForm";
 
 export const TodoItem = {
   dependencies: [
-    { todoForm: TodoForm }
+    { component: TodoForm, key: "todoForm" }
   ],
   actions,
   view

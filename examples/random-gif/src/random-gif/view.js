@@ -17,12 +17,12 @@ const imgsrc = image =>
     })
   })(image)
 
-exports.createView = ({ actions }) => (model, id) =>
+exports.view = ({ actions }) => (model, id) =>
   ["div.ba.b--green.pa2.mt2",
     ["span.mr2", "Tag:"],
-    ["input[type=text]", { value: model[id].tag, onkeyup: evt => actions.editTag(id, evt.target.value) }],
-    ["button.bg-blue" + button, { onclick: () => actions.newGif(id, model[id].tag) },
+    ["input[type=text]", { value: model[id].tag, onKeyUp: evt => actions.editTag(id, evt.target.value) }],
+    ["button.bg-blue" + button, { onClick: () => actions.newGif(id, model) },
       "Random Gif"],
-    ["button.bg-red" + button, { onclick: () => actions.reset(id) }, "Reset"],
+    ["button.bg-red" + button, { onClick: () => actions.reset(id) }, "Reset"],
     ["div.mt2", ["img", { width: 200, height: 200, src: imgsrc(model[id].image) }] ]
   ]

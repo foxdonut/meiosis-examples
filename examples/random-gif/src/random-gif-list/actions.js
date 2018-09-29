@@ -4,28 +4,23 @@ const uuid = require("uuid")
 
 const RandomGif = require("../random-gif")
 
-exports.createActions = update => {
-  const randomGifActions = RandomGif.createActions(update)
+exports.actions = (update, actions) => ({
+  add: id => {
+    const newId = "randomGifList:" + uuid.v1()
+    const randomGifModel = RandomGif.model()
 
-  return {
-    add: id => {
-      const newId = "randomGifList:" + uuid.v1()
-      const randomGifModel = RandomGif.model(newId)
-      const key = Object.keys(randomGifModel)[0]
+    update({
+      [newId]: randomGifModel,
+      [id]: O({ randomGifIds: O(R.append(newId)) })
+    })
+  },
 
-      update({
-        [key]: randomGifModel[key],
-        [id]: O({ randomGifIds: O(R.concat([ newId ])) })
-      })
-    },
-
-    remove: (id, subId) => update({
-      [id]: O({
-        randomGifIds: O(list => R.remove(list.indexOf(subId), 1, list))
-      }),
-      [subId]: O
+  remove: (id, subId) => update({
+    [id]: O({
+      randomGifIds: O(list => R.remove(list.indexOf(subId), 1, list))
     }),
+    [subId]: O
+  }),
 
-    resetAll: ids => ids.forEach(randomGifActions.reset)
-  }
-}
+  resetAll: ids => ids.forEach(actions.reset)
+})

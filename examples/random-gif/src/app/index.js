@@ -1,61 +1,59 @@
 const O = require("patchinko/constant")
+
 const Button = require("../button")
 const Counter = require("../counter")
+const CountingRule = require("../counting-rule")
 const RandomGif = require("../random-gif")
 const RandomGifPair = require("../random-gif-pair")
 const RandomGifPairPair = require("../random-gif-pair-pair")
 const RandomGifList = require("../random-gif-list")
 
+const { wirem } = require("../util/wirem")
+
 exports.createApp = update => {
-  const buttonView = Button.createView({ actions: Button.createActions(update) })
-  const counterView = Counter.createView()
-  const randomGifView = RandomGif.createView({ actions: RandomGif.createActions(update) })
-  const randomGifPairView = RandomGifPair.createView({ randomGifView })
-  const randomGifPairPairView = RandomGifPairPair.createView({ randomGifPairView })
-  const randomGifListView = RandomGifList.createView(
-    { randomGifView, actions: RandomGifList.createActions(update) })
-
-  return {
-    model: () => O(
-      Button.model("button"),
-      Counter.model("counter", "Counter"),
-      RandomGif.model("randomGif:1"),
-      RandomGif.model("randomGif:2"),
-      RandomGifPair.model("randomGifPair"),
-      RandomGifPairPair.model("randomGifPairPair"),
-      RandomGifList.model("randomGifList")
-    ),
-
-    onUpdate: (model, obj) => O(model, [
-      Counter.onUpdate
-      // could have more functions here
-    ].reduce((x, f) => f(model, x), obj)),
-
-    state: model => [
-      RandomGifList.state
-      // could have more functions here
-    ].reduce((x, f) => O(x, f(x)), model),
-
-    view: model => ["div",
-      counterView(model, "counter"),
+  const Root = {
+    dependencies: [
+      { component: Button, key: "button", models: ["button"] },
+      { component: Counter, key: "counter", models: ["counter"] },
+      { component: RandomGif, key: "rg", models: ["randomGif1", "randomGif2"] },
+      { component: RandomGifPair, key: "rgPair", models: ["randomGifPair"] },
+      { component: RandomGifPairPair, key: "rgPairPair", models: ["randomGifPairPair"] },
+      { component: RandomGifList, key: "rgList", models: ["randomGifList"] }
+    ],
+    actions: CountingRule.actions,
+    view: ({ button, counter, rg, rgPair, rgPairPair, rgList }) => model => ["div",
+      counter(model, "counter"),
 
       ["div.mt2", "Button:"],
-      buttonView(model, "button"),
+      button(model, "button"),
 
       ["div.mt2", "Random Gif:"],
-      randomGifView(model, "randomGif:1"),
+      rg(model, "randomGif1"),
 
       ["div.mt2", "Another Random Gif:"],
-      randomGifView(model, "randomGif:2"),
+      rg(model, "randomGif2"),
 
       ["div.mt2", "Random Gif Pair:"],
-      randomGifPairView(model, "randomGifPair"),
+      rgPair(model, "randomGifPair"),
 
       ["div.mt2", "Random Gif Pair Pair:"],
-      randomGifPairPairView(model, "randomGifPairPair"),
+      rgPairPair(model, "randomGifPairPair"),
 
       ["div.mt2", "Random Gif List:"],
-      randomGifListView(model, "randomGifList")
+      rgList(model, "randomGifList")
     ]
   }
+
+  const app = wirem({
+    component: Root,
+    data: { label: "Counter" },
+    update
+  })
+
+  app.state = model => [
+    RandomGifList.state
+    // could have more functions here
+  ].reduce((x, f) => O(x, f(x)), model)
+
+  return app
 }

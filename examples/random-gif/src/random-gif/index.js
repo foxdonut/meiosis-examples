@@ -1,14 +1,12 @@
-const R = require("ramda")
-
 const { Loaded, Success, Image } = require("./types")
-const { createActions } = require("./actions")
-const { createView } = require("./view")
+const { actions } = require("./actions")
+const { view } = require("./view")
 
 module.exports = {
-  model: id => R.objOf(id, {
+  model: () => ({
     image: Loaded.Y(Success.Y(Image.N())),
     tag: ""
   }),
-  createActions,
-  createView
+  actions,
+  view
 }

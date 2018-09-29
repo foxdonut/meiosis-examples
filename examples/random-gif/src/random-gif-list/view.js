@@ -1,9 +1,9 @@
 const { button } = require("../util/ui")
 
-exports.createView = ({ actions, randomGifView }) => {
+exports.view = ({ actions, randomGif }) => {
   const renderRandomGif = (model, id, subId) =>
     ["div.dib.mr2", { key: id },
-      randomGifView(model, subId),
+      randomGif(model, subId),
       ["button.bg-red" + button, { onclick: () => actions.remove(id, subId) }, "Remove"]
     ]
 

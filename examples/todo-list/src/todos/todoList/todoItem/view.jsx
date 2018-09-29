@@ -3,22 +3,22 @@ import Inferno from "inferno";
 
 import { get } from "../../../util";
 
-export const view = ({ actions, todoForm }) => (model, path, { todo }) => ([
+export const view = ({ actions, todoForm }) => (model, id, { todo }) => ([
   <tr key={todo.id}>
     <td>{todo.priority}</td>
     <td>{todo.description}</td>
     <td>
       <button className="ui primary basic tiny button"
-        onClick={() => actions.onEditTodo(path, todo)}>Edit</button>
+        onClick={() => actions.onEditTodo(id, todo)}>Edit</button>
 
       <button className="ui negative basic tiny button"
         onClick={() => actions.deleteTodo(todo)}>Delete</button>
     </td>
   </tr>
-  , get(model, path, "editing") &&
+  , get(model, id, "editing") &&
   <tr key={`${todo.id}_editing`}>
     <td colSpan={3}>
-      {todoForm(model, ["todoForm", todo.id])}
+      {todoForm(model, `todoForm:${todo.id}`)}
     </td>
   </tr>
 ]);

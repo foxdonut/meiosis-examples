@@ -1,12 +1,11 @@
 const RandomGif = require("../random-gif")
 
 module.exports = {
-  model: id => Object.assign(
-    RandomGif.model(id + ":first"),
-    RandomGif.model(id + ":second")
-  ),
-  createView: ({ randomGifView }) => (model, id) => ["div.ba.b--purple.pa2.mt2",
-    ["div.dib", randomGifView(model, id + ":first")],
-    ["div.dib.ml2", randomGifView(model, id + ":second")]
+  dependencies: [
+    { component: RandomGif, key: "randomGif", models: ["First", "Second"] }
+  ],
+  view: ({ randomGif }) => (model, id) => ["div.ba.b--purple.pa2.mt2",
+    ["div.dib", randomGif(model, id + "First")],
+    ["div.dib.ml2", randomGif(model, id + "Second")]
   ]
 }

@@ -1,15 +1,20 @@
 const O = require("patchinko/constant")
 const R = require("ramda")
 
-const { createActions } = require("./actions")
-const { createView } = require("./view")
+const { actions } = require("./actions")
+const { view } = require("./view")
+
+const RandomGif = require("../random-gif")
 
 module.exports = {
-  model: id => R.objOf(id, {
+  dependencies: [
+    { component: RandomGif, key: "randomGif" }
+  ],
+  model: () => ({
     randomGifIds: []
   }),
-  createActions,
-  createView,
+  actions,
+  view,
   state: model => ({
     randomGifList: O({
       hasGifs: R.any(

@@ -6,8 +6,8 @@ import { TodoList } from "./todoList";
 
 export const Todos = {
   dependencies: [
-    { todoForm: TodoForm },
-    { todoList: TodoList }
+    { component: TodoForm, key: "todoForm", models: ["todoForm"] },
+    { component: TodoList, key: "todoList" }
   ],
   model,
   actions,

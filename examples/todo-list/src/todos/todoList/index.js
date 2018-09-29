@@ -3,7 +3,7 @@ import { TodoItem } from "./todoItem";
 
 export const TodoList = {
   dependencies: [
-    { todoItem: TodoItem }
+    { component: TodoItem, key: "todoItem" }
   ],
   view
 };
