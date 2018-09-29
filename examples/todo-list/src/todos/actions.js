@@ -40,7 +40,10 @@ export const actions = (update, actions) => {
           assocPath(["todoItem:" + todo.id, "editing"], false),
           clearForm(id)
         ))).
-        catch(() => actions.showError("Sorry, an error occurred."));
+        catch(() => update(compose(
+          Root.updates.clearMessage(),
+          Root.updates.showError("Sorry, an error occurred.")
+        )));
     },
 
     deleteTodo: todo => {
