@@ -22,3 +22,19 @@ h4 {
   border: 1px solid #e7e7e7;
   padding: 8px;
 }
+.blockingModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box {
+  padding: 30px;
+  background: white;
+  text-align: center;
+}

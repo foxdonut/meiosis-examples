@@ -19,5 +19,20 @@ export const view = ({ actions, todos }) => model => (
     <div>
       {todos(model)}
     </div>
+    {model.message && <div className="blockingModal">
+      <div className="box">
+        <p>{model.message}</p>
+      </div>
+    </div>}
+    <div className="ui small modal">
+      <div className="content">
+        <p>{model.error}</p>
+      </div>
+      <div className="actions">
+        <div className="ui ok right button">
+          Ok
+        </div>
+      </div>
+    </div>
   </div>
 );

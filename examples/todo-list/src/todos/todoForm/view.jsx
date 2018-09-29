@@ -33,7 +33,7 @@ export const view = ({ actions }) => (model, id) => {
           onClick={preventDefault(() => actions.onSaveTodo(id, todo))}>Save</button>
 
         <button className="ui basic small button"
-          onClick={preventDefault(() => actions.onCancelEdit(id, todo))}>Cancel</button>
+          onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>Cancel</button>
       </div>
     </form>
   );

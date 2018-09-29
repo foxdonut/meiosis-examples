@@ -2,37 +2,45 @@ import { assoc, assocPath, compose, lensProp, merge, over } from "ramda";
 
 import { ajaxServices } from "../util/ajax-services";
 import { TodoForm } from "./todoForm"
+import { Root } from "../root"
 
 export const actions = (update, actions) => {
-  const updateList = todo => update(model => {
+  const updateList = todo => model => {
     model.todos[todo.id] = todo;
 
     if (model.todoIds.indexOf(todo.id) < 0) {
       model.todoIds.push(todo.id);
     }
     return model;
-  });
+  };
+
+  const clearForm = id => over(lensProp(id),
+    model => merge(model, ({ todo: { }, validationErrors: { } }))
+  );
 
   return {
-    editTodo: todo => update(compose(
+    editTodo: (id, todo) => update(compose(
+      assocPath([id, "editing"], true),
       over(lensProp("todoForm"), model => merge(model, TodoForm.model({ todo }))),
       assoc("todoForm:" + todo.id, TodoForm.model({ todo }))
     )),
 
-    cancelEditTodo: todo => update(
-      assocPath(["todoItem:" + todo.id, "editing"], false)
-    ),
+    cancelEditTodo: (id, todo) => update(compose(
+      assocPath(["todoItem:" + todo.id, "editing"], false),
+      clearForm(id)
+    )),
 
-    saveTodo: todo => {
+    saveTodo: (id, todo) => {
       actions.showMessage("Saving, please wait...");
 
       return ajaxServices.saveTodo(todo).
-        then(todo => {
-          updateList(todo);
-          actions.clearMessage();
-          update(assocPath(["todoItem:" + todo.id, "editing"], false));
-        }).
-        catch(() => actions.showMessage("Sorry, an error occurred."));
+        then(todo => update(compose(
+          updateList(todo),
+          Root.updates.clearMessage(),
+          assocPath(["todoItem:" + todo.id, "editing"], false),
+          clearForm(id)
+        ))).
+        catch(() => actions.showError("Sorry, an error occurred."));
     },
 
     deleteTodo: todo => {
@@ -47,7 +55,10 @@ export const actions = (update, actions) => {
           });
           actions.clearMessage();
         }).
-        catch(() => actions.showMessage("Sorry, an error occurred."));
+        catch(() => update(compose(
+          Root.updates.clearMessage(),
+          Root.updates.showError("Sorry, an error occurred.")
+        )));
     }
   }
 };

@@ -9,7 +9,7 @@ export const view = ({ actions, todoForm }) => (model, id, { todo }) => ([
     <td>{todo.description}</td>
     <td>
       <button className="ui primary basic tiny button"
-        onClick={() => actions.onEditTodo(id, todo)}>Edit</button>
+        onClick={() => actions.editTodo(id, todo)}>Edit</button>
 
       <button className="ui negative basic tiny button"
         onClick={() => actions.deleteTodo(todo)}>Delete</button>

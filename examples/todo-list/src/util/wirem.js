@@ -39,6 +39,7 @@ export const wirem = ({ component, data, update }) => {
 
   return {
     model: () => model,
+    actions,
     view
   };
 };
