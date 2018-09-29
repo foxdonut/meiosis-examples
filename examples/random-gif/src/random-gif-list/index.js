@@ -7,13 +7,11 @@ const { view } = require("./view")
 const RandomGif = require("../random-gif")
 
 module.exports = {
-  dependencies: [
-    { component: RandomGif, key: "randomGif" }
-  ],
   model: () => ({
     randomGifIds: []
   }),
   actions,
+  dependencies: [ { component: RandomGif, key: "randomGif" } ],
   view,
   state: model => ({
     randomGifList: O({

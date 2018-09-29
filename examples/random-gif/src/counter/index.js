@@ -3,5 +3,5 @@ module.exports = {
     label,
     value: 0
   }),
-  view: () => (model, id) => ["div", model[id].label + ": " + model[id].value]
+  view: () => (model, id) => ["div", model[id].label + " " + model[id].value]
 }
