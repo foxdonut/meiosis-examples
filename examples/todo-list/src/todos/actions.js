@@ -1,4 +1,4 @@
-import { assoc, assocPath, compose, lensProp, merge, over } from "ramda";
+import R from "ramda";
 
 import { ajaxServices } from "../util/ajax-services";
 import { TodoForm } from "./todoForm"
@@ -8,23 +8,33 @@ export const actions = ({ update, actions, updates }) => {
     model.todos[todo.id] = todo;
 
     if (model.todoIds.indexOf(todo.id) < 0) {
-      model.todoIds.push(todo.id);
+      if (model.todos[R.last(model.todoIds)].priority <= todo.priority) {
+        model.todoIds.push(todo.id);
+      }
+      else {
+        for (let i = 0; i < model.todoIds.length; i++) {
+          if (model.todos[model.todoIds[i]].priority > todo.priority) {
+            model.todoIds.splice(i, 0, todo.id);
+            break;
+          }
+        }
+      }
     }
     return model;
   };
 
-  const clearForm = id => over(lensProp(id),
-    model => merge(model, ({ todo: { }, validationErrors: { } }))
+  const clearForm = id => R.over(R.lensProp(id),
+    model => R.merge(model, ({ todo: { }, validationErrors: { } }))
   );
 
   return {
-    editTodo: (id, todo) => update(compose(
-      assocPath([id, "editing"], true),
-      assoc("todoForm:" + todo.id, TodoForm.model({ todo }))
+    editTodo: (id, todo) => update(R.compose(
+      R.assocPath([id, "editing"], true),
+      R.assoc(`todoForm:${todo.id}`, TodoForm.model({ todo }))
     )),
 
-    cancelEditTodo: (id, todo) => update(compose(
-      assocPath(["todoItem:" + todo.id, "editing"], false),
+    cancelEditTodo: (id, todo) => update(R.compose(
+      R.assocPath([`todoItem:${todo.id}`, "editing"], false),
       clearForm(id)
     )),
 
@@ -32,13 +42,13 @@ export const actions = ({ update, actions, updates }) => {
       actions.showMessage("Saving, please wait...");
 
       return ajaxServices.saveTodo(todo).
-        then(todo => update(compose(
+        then(todo => update(R.compose(
           updateList(todo),
           updates.clearMessage(),
-          assocPath(["todoItem:" + todo.id, "editing"], false),
+          R.assocPath([`todoItem:${todo.id}`, "editing"], false),
           clearForm(id)
         ))).
-        catch(() => update(compose(
+        catch(() => update(R.compose(
           updates.clearMessage(),
           updates.showError("Sorry, an error occurred. Please try again.")
         )));
@@ -56,7 +66,7 @@ export const actions = ({ update, actions, updates }) => {
           });
           actions.clearMessage();
         }).
-        catch(() => update(compose(
+        catch(() => update(R.compose(
           updates.clearMessage(),
           updates.showError("Sorry, an error occurred. Please try again.")
         )));
