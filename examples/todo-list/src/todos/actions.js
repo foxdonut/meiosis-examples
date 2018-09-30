@@ -6,17 +6,18 @@ import { TodoForm } from "./todoForm"
 export const actions = ({ update, actions, updates }) => {
   const updateList = todo => model => {
     model.todos[todo.id] = todo;
-
-    if (model.todoIds.indexOf(todo.id) < 0) {
-      if (model.todos[R.last(model.todoIds)].priority <= todo.priority) {
-        model.todoIds.push(todo.id);
-      }
-      else {
-        for (let i = 0; i < model.todoIds.length; i++) {
-          if (model.todos[model.todoIds[i]].priority > todo.priority) {
-            model.todoIds.splice(i, 0, todo.id);
-            break;
-          }
+    const idx = model.todoIds.indexOf(todo.id);
+    if (idx >= 0) {
+      model.todoIds.splice(idx, 1);
+    }
+    if (model.todos[R.last(model.todoIds)].priority <= todo.priority) {
+      model.todoIds.push(todo.id);
+    }
+    else {
+      for (let i = 0; i < model.todoIds.length; i++) {
+        if (model.todos[model.todoIds[i]].priority > todo.priority) {
+          model.todoIds.splice(i, 0, todo.id);
+          break;
         }
       }
     }
