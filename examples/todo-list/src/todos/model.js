@@ -1,12 +1,12 @@
-import { assoc, prop } from "ramda"
+import R from "ramda"
 
 import { TodoForm } from "./todoForm";
 
 export const model = ({ initialTodoList }) => {
   const todos = initialTodoList.reduce((result, todo) =>
-    assoc(todo.id, todo, result), {});
+    R.assoc(todo.id, todo, result), {});
 
-  const todoIds = initialTodoList.map(prop("id"));
+  const todoIds = initialTodoList.map(R.prop("id"));
 
   return {
     todos,

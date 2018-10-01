@@ -1,8 +1,8 @@
 import axios from "axios";
-import {prop} from "ramda";
+import R from "ramda";
 
 const ajaxPromise = function(options) {
-  return axios(options).then(prop("data"));
+  return axios(options).then(R.prop("data"));
 };
 
 const ajax = {

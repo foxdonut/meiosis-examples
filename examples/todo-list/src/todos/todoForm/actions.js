@@ -1,11 +1,11 @@
-import { assoc, lensProp, over } from "ramda";
+import R from "ramda";
 
 import { validateModel } from "./validation";
 
 export const actions = ({ update, actions }) => {
   return {
-    editingTodo: (id, field, value) => update(over(lensProp(id),
-      model => assoc("todo", assoc(field, value, model.todo), model))),
+    editingTodo: (id, field, value) => update(R.over(R.lensProp(id),
+      model => R.assoc("todo", R.assoc(field, value, model.todo), model))),
 
     onSaveTodo: (id, todo) => {
       const validationErrors = validateModel(todo);
@@ -14,7 +14,7 @@ export const actions = ({ update, actions }) => {
         actions.saveTodo(id, todo);
       }
       else {
-        update(over(lensProp(id), assoc("validationErrors", validationErrors)));
+        update(R.over(R.lensProp(id), R.assoc("validationErrors", validationErrors)));
       }
     }
   };

@@ -1,17 +1,17 @@
-import { assoc, compose } from "ramda";
+import R from "ramda";
 
 export const updates = {
-  navigateTo: pageId => assoc("pageId", pageId),
-  showMessage: message => assoc("message", message),
-  clearMessage: () => assoc("message", null),
-  showError: error => assoc("error", error),
-  clearError: () => assoc("error", null)
+  navigateTo: pageId => R.assoc("pageId", pageId),
+  showMessage: message => R.assoc("message", message),
+  clearMessage: () => R.assoc("message", null),
+  showError: error => R.assoc("error", error),
+  clearError: () => R.assoc("error", null)
 };
 
 export const actions = ({ update }) => ({
-  navigateTo: compose(update, updates.navigateTo),
-  showMessage: compose(update, updates.showMessage),
-  clearMessage: compose(update, updates.clearMessage),
-  showError: compose(update, updates.showError),
-  clearError: compose(update, updates.clearError)
+  navigateTo: R.compose(update, updates.navigateTo),
+  showMessage: R.compose(update, updates.showMessage),
+  clearMessage: R.compose(update, updates.clearMessage),
+  showError: R.compose(update, updates.showError),
+  clearError: R.compose(update, updates.clearError)
 });
