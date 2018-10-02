@@ -3,16 +3,16 @@ const getFn = (component, prop) => component[prop] || (() => null)
 export const wireActions = (component, update, actions = {}, updates = {}) => {
   Object.assign(updates, component.updates)
   Object.assign(actions, getFn(component, "actions")({ update, actions, updates }))
-  ;(component.dependencies || []).forEach(dependency => {
-    wireActions(dependency.component, update, actions, updates)
+  Object.keys(component.dependencies || {}).forEach(key => {
+    wireActions(component.dependencies[key], update, actions, updates)
   })
   return actions
 }
 
 export const wireView = (component, actions) => {
   const dependencies = {}
-  ;(component.dependencies || []).forEach(dependency => {
-    dependencies[dependency.key] = wireView(dependency.component, actions)
+  Object.keys(component.dependencies || {}).forEach(key => {
+    dependencies[key] = wireView(component.dependencies[key], actions)
   })
   return getFn(component, "view")(Object.assign({ actions }, dependencies))
 }

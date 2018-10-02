@@ -21,14 +21,14 @@ module.exports = {
     RandomGifPairPair.model("randomGifPairPair")
   ),
   actions: CountingRule.actions,
-  dependencies: [
-    { component: Button, key: "button" },
-    { component: Counter, key: "counter" },
-    { component: RandomGif, key: "rg" },
-    { component: RandomGifPair, key: "rgPair" },
-    { component: RandomGifPairPair, key: "rgPairPair" },
-    { component: RandomGifList, key: "rgList" }
-  ],
+  dependencies: {
+    button: Button,
+    counter: Counter,
+    rg: RandomGif,
+    rgPair: RandomGifPair,
+    rgPairPair: RandomGifPairPair,
+    rgList: RandomGifList
+  },
   view: ({ button, counter, rg, rgPair, rgPairPair, rgList }) => model => ["div",
     counter(model, "counter"),
 

@@ -11,7 +11,7 @@ module.exports = {
     randomGifIds: []
   }),
   actions,
-  dependencies: [ { component: RandomGif, key: "randomGif" } ],
+  dependencies: { randomGif: RandomGif },
   view,
   state: model => ({
     randomGifList: O({

@@ -5,7 +5,7 @@ module.exports = {
     RandomGifPair.model(id + "One"),
     RandomGifPair.model(id + "Two")
   ),
-  dependencies: [ { component: RandomGifPair, key: "randomGifPair" } ],
+  dependencies: { randomGifPair: RandomGifPair },
   view: ({ randomGifPair }) => (model, id) => ["div.ba.b--orange.pa2.mt2",
     randomGifPair(model, id + "One"),
     randomGifPair(model, id + "Two")

@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import { TodoListPage, ProjectPage } from "./constants";
 
-export const view = ({ actions, todos }) => model => (
+export const view = ({ actions, todos, projects }) => model => (
   <div>
     <div className="ui two item menu">
       <a className={classNames("item", { "active": model.pageId === TodoListPage })}
@@ -17,7 +17,8 @@ export const view = ({ actions, todos }) => model => (
       </a>
     </div>
     <div>
-      {todos(model)}
+      {model.pageId === TodoListPage && todos(model)}
+      {model.pageId === ProjectPage && projects(model)}
     </div>
     <div className="ui small modal message">
       <div className="content">
