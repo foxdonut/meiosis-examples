@@ -1,6 +1,6 @@
 import { compose, constant, path, preventDefault } from "../util/fp"
 
-export const createView = ({ navigator, actions, options }) => {
+export const view = options => ({ actions, navigator }) => {
   const updateForm = field => compose(actions.updateForm(field), path(["target", "value"]))
 
   return model => {

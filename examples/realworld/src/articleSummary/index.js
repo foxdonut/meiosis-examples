@@ -1,5 +1,7 @@
-import { createView } from "./view"
+import { view } from "./view"
+import { Navigator } from "../navigator"
 
-export const createArticleSummary = ({ navigator }) => ({
-  view: createView({ navigator })
-})
+export const ArticleSummary = {
+  dependencies: { navigator: Navigator },
+  view
+}

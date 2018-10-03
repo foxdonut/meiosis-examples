@@ -1,6 +1,6 @@
 //import { articlesApi, popularTagsApi } from "../services"
 
-export const createActions = _update => ({
+export const actions = ({ _update }) => ({
   loadPopularTags: () => null /* popularTagsApi.get().then(
     popularTags => update({ tags: popularTags.tags })
   )*/,

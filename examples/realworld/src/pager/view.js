@@ -1,6 +1,6 @@
 import { compose, constant, preventDefault } from "../util/fp"
 
-export const createView = actions => model => {
+export const view = ({ actions }) => model => {
   const currentPageNumber = (model.offset / model.limit) + 1
   const pageList = [1, 2, 3, 4]//range(1, Math.ceil(model.total / model.limit) + 1)
 

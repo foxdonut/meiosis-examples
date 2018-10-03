@@ -1,6 +1,6 @@
 import { ArticleDetailPage } from "../util/constants"
 
-export const createView = ({ navigator }) => model => {
+export const view = ({ navigator }) => model => {
   const username = model.author.username
 
   return [".article-preview",

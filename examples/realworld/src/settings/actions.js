@@ -4,10 +4,10 @@ import { HomePage } from "../util/constants"
 import { setToken } from "../services"
 import { getNav } from "../navigator"
 
-export const createActions = ({ update }) => ({
+export const actions = ({ update }) => ({
   logout: evt => {
     evt.preventDefault()
     setToken("")
-    update({ context: O({ user: O }), navigateTo: getNav(HomePage) })
+    update({ user: O, navigateTo: getNav(HomePage) })
   }
 })

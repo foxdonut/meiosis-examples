@@ -3,7 +3,7 @@ import O from "patchinko/constant"
 import { credentialsApi, setToken } from "../services"
 import { pick } from "../util/fp"
 
-export const createActions = ({ update, method }) => ({
+export const actions = ({ method }) => ({ update }) => ({
   updateForm: field => text => update({ [field]: text }),
 
   sendCredentials: model => {

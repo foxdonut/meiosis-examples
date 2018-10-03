@@ -2,7 +2,7 @@ import O from "patchinko/constant"
 
 import { articlesApi } from "../services"
 
-export const createActions = ({ update }) => ({
+export const actions = ({ update }) => ({
   updateCommentField: evt => update({ comment: evt.target.value }),
 
   addComment: (slug, body) => evt => {

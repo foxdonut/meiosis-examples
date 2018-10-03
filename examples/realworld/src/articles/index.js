@@ -1,14 +1,11 @@
-import { createView } from "./view"
-import { createArticleSummary } from "../articleSummary"
-import { createPager } from "../pager"
+import { view } from "./view"
+import { ArticleSummary } from "../articleSummary"
+import { Pager } from "../pager"
 
-export const createArticles = ({ navigator, update }) => {
-  const components = {
-    articleSummary: createArticleSummary({ navigator, update }),
-    pager: createPager(update)
-  }
-
-  return {
-    view: createView(components)
-  }
+export const Articles = {
+  dependencies: {
+    articleSummary: ArticleSummary,
+    pager: Pager
+  },
+  view
 }

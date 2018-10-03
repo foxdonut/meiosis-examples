@@ -1,6 +1,7 @@
-import { createActions } from "./actions"
-import { createView } from "./view"
+import { actions } from "./actions"
+import { view } from "./view"
 
-export const createPager = update => ({
-  view: createView(createActions(update))
-})
+export const Pager = {
+  actions,
+  view
+}

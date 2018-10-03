@@ -10,7 +10,7 @@ const validationSpec = {
   title: { presence: true }
 }
 
-export const createActions = ({ navigator, update }) => ({
+export const actions = ({ navigator, update }) => ({
   updateForm: field => evt => update(model => {
     model[field] = evt.target.value
 

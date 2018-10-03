@@ -40,7 +40,7 @@ const articleMeta = (article, username) =>
     thrush(article, isAuthor(username, article) ? authorMeta : nonAuthorMeta)
   ]
 
-export const createView = ({ actions }) => model => {
+export const view = ({ actions }) => model => {
   const article = model.article
   //const username = path(["user", "username"], model) //FIXME
   const username = "DUCK"

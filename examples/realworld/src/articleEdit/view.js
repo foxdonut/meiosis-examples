@@ -5,7 +5,7 @@ const displayFieldErrors = errors => ["ul.error-messages", errors.map(err => ["l
 const getFieldErrors = validationErrors => field =>
   thrush(defaultTo([], path([field], defaultTo({}, validationErrors))), displayFieldErrors)
 
-export const createView = ({ actions }) => model => {
+export const view = ({ actions }) => model => {
   const fieldErrors = getFieldErrors(model.validationErrors)
 
   return [".editor-page",

@@ -1,6 +1,7 @@
-import { createActions } from "./actions"
-import { createView } from "./view"
+import { actions } from "./actions"
+import { view } from "./view"
 
-export const createPopularTags = ({ update }) => ({
-  view: createView({ actions: createActions(update) })
-})
+export const PopularTags = {
+  actions,
+  view
+}

@@ -1,6 +1,9 @@
-import { createActions } from "./actions"
-import { createView } from "./view"
+import { actions } from "./actions"
+import { view } from "./view"
+import { Navigator } from "../navigator"
 
-export const createArticleEdit = ({ navigator, update }) => ({
-  view: createView({ actions: createActions({ navigator, update }) })
-})
+export const ArticleEdit = {
+  dependencies: { navigator: Navigator },
+  actions,
+  view
+}

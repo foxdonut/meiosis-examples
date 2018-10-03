@@ -1,4 +1,4 @@
-export const createView = ({ articles, popularTags }) => model => {
+export const View = ({ articles, popularTags }) => model => {
   const content = model.tagFilter ? {
     globalFeedClass: "",
     tagFeedComponent: ["li.nav-item",
@@ -10,7 +10,7 @@ export const createView = ({ articles, popularTags }) => model => {
   }
 
   return [".home-page",
-    !model.context.user && [".banner",
+    !model.user && [".banner",
       [".container",
         ["h1.logo-font", "conduit"],
         ["p", "A place to share your knowledge."]
@@ -21,7 +21,7 @@ export const createView = ({ articles, popularTags }) => model => {
         [".col-md-9",
           [".feed-toggle",
             ["ul.nav.nav-pills.outline-active",
-              model.context.user && ["li.nav-item",
+              model.user && ["li.nav-item",
                 ["a.nav-link[href='']", "Your Feed"]
               ],
               ["li.nav-item",

@@ -1,16 +1,15 @@
-import O from "patchinko/constant"
+import { view } from "./view"
+import { Articles } from "../articles"
+import { PopularTags } from "../popularTags"
+//import { articlesApi, popularTagsApi } from "../services"
 
-import { createView } from "./view"
-import { createArticles } from "../articles"
-import { createPopularTags } from "../popularTags"
-import { articlesApi, popularTagsApi } from "../services"
-
-export const createHome = ({ navigator, update }) => {
-  const components = {
-    articles: createArticles({ navigator, update }),
-    popularTags: createPopularTags(update)
-  }
-  return {
+export const Home = {
+  dependencies: {
+    articles: Articles,
+    popularTags: PopularTags
+  },
+  view
+  /*
     navigating: ({ navigate }) => {
       Promise.all([
         articlesApi.getList(),
@@ -21,7 +20,6 @@ export const createHome = ({ navigator, update }) => {
           navigate()
         }
       )
-    },
-    view: createView(components)
-  }
+    }
+  */
 }

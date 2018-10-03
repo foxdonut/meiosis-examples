@@ -1,8 +1,8 @@
 import { HomePage, LoginPage, RegisterPage, ArticleEditPage, SettingsPage }
   from "../util/constants"
 
-export const createHeader = ({ navigator }) => ({
-  view: model => {
+export const Header = {
+  view: ({ navigator }) => model => {
     const active = pageId => ({ className: { "active": model.pageId === pageId } })
 
     return ["nav.navbar.navbar-light",
@@ -12,7 +12,7 @@ export const createHeader = ({ navigator }) => ({
           ["li.nav-item", active(HomePage),
             ["a.nav-link", { href: navigator.getUrl(HomePage) }, "Home"]
           ],
-          model.context.user ? [
+          model.user ? [
             ["li.nav-item", active(ArticleEditPage),
               ["a.nav-link", { href: navigator.getUrl(ArticleEditPage) },
                 ["i.ion-compose"],
@@ -26,8 +26,8 @@ export const createHeader = ({ navigator }) => ({
               ]
             ],
             ["li.nav-item", active("username"),
-              ["a.nav-link", { href: "/@" + model.context.user.username },
-                model.context.user.username]
+              ["a.nav-link", { href: "/@" + model.user.username },
+                model.user.username]
             ]
           ] : [
             ["li.nav-item", active(LoginPage),
@@ -41,10 +41,10 @@ export const createHeader = ({ navigator }) => ({
       ]
     ]
   }
-})
+}
 
-export const createFooter = ({ navigator }) => ({
-  view: _model =>
+export const Footer = {
+  view: ({ navigator }) => _model =>
     ["footer",
       [".container",
         ["a.logo-font", { href: navigator.getUrl(HomePage) }, "conduit"],
@@ -55,4 +55,4 @@ export const createFooter = ({ navigator }) => ({
         ]
       ]
     ]
-})
+}

@@ -1,15 +1,15 @@
 import stream from "mithril-stream"
 import O from "patchinko/constant"
 
+import { pipe } from "./util/fp"
 import { render } from "./util/view"
 import { createApp } from "./app"
 
 const update = stream()
 createApp(update).then(app => {
   const models = stream.scan(O, app.model(), update)
-  const states = stream()
-  models.map(model => app.state(model).then(states))
-  states.map(app.view).map(render(document.getElementById("app")))
+  const states = models.map(app.state)
+  states.map(pipe(app.view, render(document.getElementById("app"))))
 
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   const meiosisTracer = require("meiosis-tracer")

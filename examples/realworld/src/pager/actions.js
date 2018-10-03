@@ -1,6 +1,6 @@
 //import { articlesApi } from "../services";
 
-export const createActions = _update => ({
+export const actions = ({ _update }) => ({
   page: ({ _model, _pageNumber }) => null /* {
     const articlesFilter = _.set(filter, "offset", (pageNumber - 1) * filter.limit)
     articlesApi.getList(articlesFilter).then(

@@ -16,34 +16,29 @@ const createNav = (pageId, route, params) => ({ pageId, url: route, params })
 export const getNav = (pageId, params) =>
   createNav(pageId, getUrl(pageId, params), params)
 
-export const createNavigator = update => {
-  const componentMap = {}
-  const routes = {}
-  let notFoundComponent = undefined
+export const Navigator = {
+  actions: ({ update }) => {
+    const routes = {}
 
-  const navigator = {
-    register: (configs, notFound) => {
-      configs.forEach(config => {
-        const component = config.component
-        componentMap[config.key] = component
-
-        routes[config.route] = {
-          as: config.key,
-          uses: params => {
-            update({ navigateTo: createNav(config.key, prefix + config.route, params) })
+    const navigator = {
+      register: configs => {
+        configs.forEach(config => {
+          routes[config.route] = {
+            as: config.pageId,
+            uses: params => {
+              update({ navigateTo: createNav(config.pageId, prefix + config.route, params) })
+            }
           }
-        }
-      })
-      notFoundComponent = notFound
-
-      if (notFoundComponent) {
+        })
         router.notFound(() => update({ pageId: undefined, url: document.location.hash }))
-      }
-    },
-    getComponent: pageId => componentMap[pageId] || notFoundComponent,
-    getUrl,
-    navigateTo: (id, params) => router.navigate(getUrl(id, params)),
-    start: () => router.on(routes).resolve()
+      },
+      getUrl,
+      navigateTo: (id, params) => router.navigate(getUrl(id, params)),
+      start: () => router.on(routes).resolve()
+    }
+    return navigator
+  },
+  view: () => {
+
   }
-  return navigator
 }
