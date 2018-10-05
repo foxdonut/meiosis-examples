@@ -1,4 +1,4 @@
-export const View = ({ articles, popularTags }) => model => {
+export const view = ({ articles, popularTags }) => model => {
   const content = model.tagFilter ? {
     globalFeedClass: "",
     tagFeedComponent: ["li.nav-item",
@@ -30,10 +30,10 @@ export const View = ({ articles, popularTags }) => model => {
               content.tagFeedComponent
             ]
           ],
-          articles.view(model)
+          articles(model)
         ],
         [".col-md-3",
-          [".sidebar", popularTags.view(model)]
+          [".sidebar", popularTags(model)]
         ]
       ]
     ]

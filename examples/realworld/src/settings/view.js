@@ -1,3 +1,5 @@
+import { compose, preventDefault } from "../util/fp"
+
 export const view = ({ actions }) => _model =>
   [".settings-page",
     [".container page",
@@ -25,7 +27,8 @@ export const view = ({ actions }) => _model =>
             ]
           ],
           ["hr"],
-          ["button.btn.btn-outline-danger", { onClick: actions.logout },
+          ["button.btn.btn-outline-danger",
+            { onClick: compose(() => actions.logout(), preventDefault) },
             "Or click here to logout."]
         ]
       ]

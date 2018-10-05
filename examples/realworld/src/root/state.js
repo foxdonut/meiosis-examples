@@ -1,9 +1,10 @@
 import O from "patchinko/constant"
-import { get, asyncPipe } from "../util/fp"
-import { HomePage, LoginPage, ArticleDetailPage, SettingsPage } from "../util/constants"
-import { articlesApi, popularTagsApi } from "../services"
-import { getNav } from "../navigator"
+import { get, pipe } from "../util/fp"
+//import { LoginPage } from "../login"
+//import { SettingsPage } from "../settings"
+//import { getNav } from "../navigator"
 
+/*
 const checkAuthentication = model => {
   const navigateTo = get(model, ["navigateTo", "pageId"])
   if (navigateTo !== model.pageId && navigateTo === SettingsPage && !model.context.user) {
@@ -11,6 +12,7 @@ const checkAuthentication = model => {
   }
   return model
 }
+*/
 
 const checkSignIn = model => {
   const returnTo = get(model, ["returnTo"])
@@ -20,35 +22,7 @@ const checkSignIn = model => {
   return model
 }
 
-const navigatingToHome = model => {
-  const navigateTo = get(model, ["navigateTo", "pageId"])
-  if (navigateTo !== model.pageId && navigateTo === HomePage) {
-    return Promise.all([
-      articlesApi.getList(),
-      popularTagsApi.get()
-    ]).then(
-      ([articles, tags]) => O(model, articles, tags)
-    )
-  }
-  return model
-}
-
-const navigatingToArticleDetail = model => {
-  const navigateTo = get(model, ["navigateTo", "pageId"])
-  if (navigateTo !== model.pageId && navigateTo === ArticleDetailPage) {
-    const slug = get(model, ["navigateTo", "params", "slug"])
-    return Promise.all([
-      articlesApi.getSingle(slug),
-      articlesApi.getComments(slug)
-    ]).then(
-      //FIXME: nesting
-      ([articleDetail, comments]) => O(model, { articleDetail: O(articleDetail, comments) })
-    )
-  }
-  return model
-}
-
-const navigateTo = model => O(model, model.navigateTo)
+const doNavigateTo = model => O(model, model.navigateTo)
 
 const urlInLocationBar = model => {
   // Display the url in the browser's location bar.
@@ -59,11 +33,11 @@ const urlInLocationBar = model => {
   return model
 }
 
-export const createState = () => asyncPipe(
-  checkAuthentication,
+export const state = pipe(
+  //checkAuthentication,
   checkSignIn,
-  navigatingToHome,
-  navigatingToArticleDetail,
-  navigateTo,
+  //navigatingToHome,
+  //navigatingToArticleDetail,
+  doNavigateTo,
   urlInLocationBar
 )

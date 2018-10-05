@@ -10,7 +10,8 @@ const validationSpec = {
   title: { presence: true }
 }
 
-export const actions = ({ navigator, update }) => ({
+export const actions = ({ update, actions }) => ({
+  /* FIXME: name clash
   updateForm: field => evt => update(model => {
     model[field] = evt.target.value
 
@@ -21,6 +22,7 @@ export const actions = ({ navigator, update }) => ({
 
     return model
   }),
+  */
 
   publish: article => evt => {
     evt.preventDefault()
@@ -28,7 +30,7 @@ export const actions = ({ navigator, update }) => ({
     update({ validationErrors })
     if (!validationErrors) {
       articlesApi.publish({ article: omit(["tags"], article) })
-        .then(() => navigator.navigateTo(HomePage))
+        .then(() => actions.navigateTo(HomePage))
     }
   }
 })

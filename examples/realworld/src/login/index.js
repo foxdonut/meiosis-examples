@@ -1,7 +1,7 @@
 import { RegisterPage } from "../util/constants"
 import { Credentials } from "../credentials"
 
-export const createLogin = Credentials({
+export const Login = Credentials({
   method: "login",
   alternativePage: RegisterPage,
   alternativeLabel: "Need an account?",
