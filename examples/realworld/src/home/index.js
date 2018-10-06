@@ -11,17 +11,4 @@ export const Home = {
   },
   actions,
   view
-  /*
-    navigating: ({ navigate }) => {
-      Promise.all([
-        articlesApi.getList(),
-        popularTagsApi.get()
-      ]).then(
-        ([articles, tags]) => {
-          update(O(articles, tags))
-          navigate()
-        }
-      )
-    }
-  */
 }

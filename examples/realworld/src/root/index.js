@@ -10,18 +10,6 @@ import { Login } from "../login"
 import { ArticleDetail } from "../articleDetail"
 import { ArticleEdit } from "../articleEdit"
 import { Settings } from "../settings"
-//import { Navigator } from "../navigator"
-
-/*
-const routeMappings = [
-  { pageId: HomePage, route: "/" },
-  { pageId: RegisterPage, route: "/register" },
-  { pageId: LoginPage, route: "/login" },
-  { pageId: ArticleDetailPage, route: "/article/:slug" },
-  { pageId: ArticleEditPage, route: "/editor" },
-  { pageId: SettingsPage, route: "/settings" }
-]
-*/
 
 export const Root = {
   dependencies: {
@@ -42,7 +30,6 @@ export const Root = {
     register: {},
     user
   }),
-  //actions: ({ update }) => Object.assign(actions({ update }), Navigator.actions(routeMappings)({ update })),
   actions,
   state,
   view: components => model => {

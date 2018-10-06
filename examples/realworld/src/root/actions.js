@@ -1,48 +1,63 @@
 import O from "patchinko/constant"
 
 import { articlesApi, popularTagsApi } from "../services"
+import { createRouter } from "../util/router"
+import { ArticleDetailPage, ArticleEditPage, HomePage, LoginPage, RegisterPage,
+  SettingsPage } from "../util/constants"
 
-export const actions = ({ update }) => ({
-  loadArticles: () => Promise.all([
+export const actions = ({ update }) => {
+  const loadArticles = () => Promise.all([
     articlesApi.getList(),
-    popularTagsApi.get()
+    popularTagsApi.getList()
   ]).then(
     ([articles, tags]) => update(O(articles, tags))
-  ),
+  )
 
-  loadArticle: slug => Promise.all([
+  const loadArticle = slug => Promise.all([
     articlesApi.getSingle(slug),
     articlesApi.getComments(slug)
   ]).then(
     ([articleDetail, comments]) => update({ articleDetail: O(articleDetail, comments) })
   )
 
-  ,getUrl: () => "#/FIXME"
-})
+  const navigateToHome = () => {
+    update({ pageId: HomePage })
+    loadArticles()
+  }
+  const navigateToLogin = () => {
+    update({ pageId: LoginPage })
+  }
+  const navigateToRegister = () => {
+    update({ pageId: RegisterPage })
+  }
+  const navigateToArticleDetail = ({ slug }) => {
+    update({ pageId: ArticleDetailPage })
+    loadArticle(slug)
+  }
+  const navigateToArticleEdit = () => {
+    update({ pageId: ArticleEditPage })
+  }
+  const navigateToSettings = () => {
+    update({ pageId: SettingsPage })
+  }
 
-/*
-import { HomePage } from "../home"
-import { ArticleDetailPage } from "../articleDetail"
-import { get } from "../util/fp"
+  createRouter({
+    "/": navigateToHome,
+    "/login": navigateToLogin,
+    "/register": navigateToRegister,
+    "/article/:slug": navigateToArticleDetail,
+    "/editor": navigateToArticleEdit,
+    "/settings": navigateToSettings
+  })
 
-const checkNavigatingToHome = (actions, model) => {
-  const navigateTo = get(model, ["navigateTo", "pageId"])
-  //FIXME
-  if (navigateTo !== model.pageId && navigateTo === HomePage) {
-    actions.loadArticles()
+  return {
+    getUrl: () => "#/FIXME",
+
+    navigateToArticleDetail,
+    navigateToArticleEdit,
+    navigateToHome,
+    navigateToLogin,
+    navigateToRegister,
+    navigateToSettings,
   }
 }
-
-const checkNavigatingToArticleDetail = (actions, model) => {
-  const navigateTo = get(model, ["navigateTo", "pageId"])
-  if (navigateTo !== model.pageId && navigateTo === ArticleDetailPage) {
-    const slug = get(model, ["navigateTo", "params", "slug"])
-    actions.loadArticle(slug)
-  }
-}
-
-export const nextAction = actions => model => {
-  checkNavigatingToHome(actions, model)
-  checkNavigatingToArticleDetail(actions, model)
-}
-*/

@@ -49,7 +49,7 @@ export const credentialsApi = {
 }
 
 export const popularTagsApi = {
-  get: () => request(API_ROOT + "/tags")
+  getList: () => request(API_ROOT + "/tags")
 }
 
 export const profileApi = {
