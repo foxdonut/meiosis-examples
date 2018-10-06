@@ -41,17 +41,17 @@ export const actions = ({ update }) => {
     update({ pageId: SettingsPage })
   }
 
-  createRouter({
-    "/": navigateToHome,
-    "/login": navigateToLogin,
-    "/register": navigateToRegister,
-    "/article/:slug": navigateToArticleDetail,
-    "/editor": navigateToArticleEdit,
-    "/settings": navigateToSettings
-  })
+  const router = createRouter([
+    { route: "/", handler: navigateToHome, pageId: HomePage },
+    { route: "/login", handler: navigateToLogin, pageId: LoginPage },
+    { route: "/register", handler: navigateToRegister, pageId: RegisterPage },
+    { route: "/article/:slug", handler: navigateToArticleDetail, pageId: ArticleDetailPage },
+    { route: "/editor", handler: navigateToArticleEdit, pageId: ArticleEditPage },
+    { route: "/settings", handler: navigateToSettings, pageId: SettingsPage }
+  ])
 
   return {
-    getUrl: () => "#/FIXME",
+    getUrl: router.getUrl,
 
     navigateToArticleDetail,
     navigateToArticleEdit,

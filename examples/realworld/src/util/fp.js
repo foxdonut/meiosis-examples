@@ -1,4 +1,4 @@
-import { compose, constant, defaultTo, omit, path, pick, pipe, tap, thrush } from "tinyfunk"
+import { assoc, compose, constant, defaultTo, omit, path, pick, pipe, tap, thrush } from "tinyfunk"
 
 // Using reduce, courtesy Barney Carroll (https://github.com/barneycarroll)
 const get = (object, path) =>
@@ -9,6 +9,7 @@ const asyncPipe = (...fns) => input =>
   fns.reduce((chain, fn) => chain.then(fn), Promise.resolve(input))
 
 module.exports = {
+  assoc,
   asyncPipe,
   compose,
   constant,

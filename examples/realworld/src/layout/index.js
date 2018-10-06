@@ -10,9 +10,7 @@ export const Header = {
         ["a.navbar-brand", { href: actions.getUrl(HomePage) }, "conduit"],
         ["ul.nav.navbar-nav.pull-xs-right",
           ["li.nav-item", active(HomePage),
-            //["a.nav-link", { href: actions.getUrl(HomePage) }, "Home"]
-            ["a.nav-link", { href: "#/" }, "Home"]
-            //["a.nav-link", { href: "#/", onClick: () => actions.navigateToHome() }, "Home"]
+            ["a.nav-link", { href: actions.getUrl(HomePage) }, "Home"]
           ],
           model.user ? [
             ["li.nav-item", active(ArticleEditPage),
@@ -33,14 +31,10 @@ export const Header = {
             ]
           ] : [
             ["li.nav-item", active(LoginPage),
-              //["a.nav-link", { href: actions.getUrl(LoginPage) }, "Sign in"]
-              ["a.nav-link", { href: "#/login" }, "Sign in"]
-              //["a.nav-link", { href: "#/", onClick: () => actions.navigateToLogin() }, "Sign in"]
+              ["a.nav-link", { href: actions.getUrl(LoginPage) }, "Sign in"]
             ],
             ["li.nav-item", active(RegisterPage),
-              //["a.nav-link", { href: actions.getUrl(RegisterPage) }, "Sign up"]
-              ["a.nav-link", { href: "#/register" }, "Sign up"]
-              //["a.nav-link", { href: "#/", onClick: () => actions.navigateToRegister() }, "Sign up"]
+              ["a.nav-link", { href: actions.getUrl(RegisterPage) }, "Sign up"]
             ]
           ]
         ]

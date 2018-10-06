@@ -1,11 +1,21 @@
 import Navigo from "navigo"
 
+import { assoc } from "./fp"
+
 const root = ""
 const useHash = true
 const prefix = "#"
 
-export const createRouter = routes => {
+export const createRouter = routeMappings => {
   const router = new Navigo(root, useHash, prefix)
-  Object.keys(routes).forEach(route => router.on(route, routes[route]))
-  router.resolve()
+  const routes = routeMappings.reduce((result, { pageId, route, handler }) =>
+    assoc(route, { as: pageId, uses: handler }, result), {})
+  router.on(routes).resolve()
+
+  return {
+    getUrl: (id, params) => {
+      const result = router.generate(id, params)
+      return result === "#" ? "#/" : result
+    }
+  }
 }
