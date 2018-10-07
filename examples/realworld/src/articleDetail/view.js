@@ -41,7 +41,7 @@ const articleMeta = (article, username) =>
   ]
 
 export const view = ({ actions }) => model => {
-  const article = model.article
+  const article = model.articleDetail.article
   //const username = path(["user", "username"], model) //FIXME
   const username = "DUCK"
 
@@ -79,7 +79,7 @@ export const view = ({ actions }) => model => {
                 { onClick: actions.addComment(article.slug, model.comment) }, "Post Comment"]
             ]
           ],
-          defaultTo([], model.comments).map(comment =>
+          defaultTo([], model.articleDetail.comments).map(comment =>
             [".card",
               [".card-block",
                 ["p.card-text", comment.body]

@@ -17,7 +17,7 @@ export const actions = ({ update }) => {
     articlesApi.getSingle(slug),
     articlesApi.getComments(slug)
   ]).then(
-    ([articleDetail, comments]) => update({ articleDetail: O(articleDetail, comments) })
+    ([articleDetail, comments]) => ({ articleDetail: O(articleDetail, comments) })
   )
 
   const navigateToHome = () => {
@@ -31,8 +31,7 @@ export const actions = ({ update }) => {
     update({ pageId: RegisterPage })
   }
   const navigateToArticleDetail = ({ slug }) => {
-    update({ pageId: ArticleDetailPage })
-    loadArticle(slug)
+    loadArticle(slug).then(data => update(O({ pageId: ArticleDetailPage }, data)))
   }
   const navigateToArticleEdit = () => {
     update({ pageId: ArticleEditPage })
