@@ -20,35 +20,25 @@ export const actions = ({ update }) => {
     ([articleDetail, comments]) => ({ articleDetail: O(articleDetail, comments) })
   )
 
-  const navigateToHome = () =>
-    loadArticles().then(data => update(O({ pageId: HomePage }, data)))
+  const defaultNavigateTo = obj => update(obj)
 
-  const navigateToLogin = () => update({ pageId: LoginPage })
-  const navigateToRegister = () => update({ pageId: RegisterPage })
+  const navigateToHome = obj =>
+    loadArticles().then(data => update(O(obj, data)))
 
-  const navigateToArticleDetail = ({ slug }) =>
-    loadArticle(slug).then(data => update(O({ pageId: ArticleDetailPage }, data)))
-
-  const navigateToArticleEdit = () => update({ pageId: ArticleEditPage })
-  const navigateToSettings = () => update({ pageId: SettingsPage })
+  const navigateToArticleDetail = obj =>
+    loadArticle(obj.params.slug).then(data => update(O(obj, data)))
 
   const router = createRouter([
     { route: "/", handler: navigateToHome, pageId: HomePage },
-    { route: "/login", handler: navigateToLogin, pageId: LoginPage },
-    { route: "/register", handler: navigateToRegister, pageId: RegisterPage },
+    { route: "/login", handler: defaultNavigateTo, pageId: LoginPage },
+    { route: "/register", handler: defaultNavigateTo, pageId: RegisterPage },
     { route: "/article/:slug", handler: navigateToArticleDetail, pageId: ArticleDetailPage },
-    { route: "/editor", handler: navigateToArticleEdit, pageId: ArticleEditPage },
-    { route: "/settings", handler: navigateToSettings, pageId: SettingsPage }
+    { route: "/editor", handler: defaultNavigateTo, pageId: ArticleEditPage },
+    { route: "/settings", handler: defaultNavigateTo, pageId: SettingsPage }
   ])
 
   return {
     getUrl: router.getUrl,
-
-    navigateToArticleDetail,
-    navigateToArticleEdit,
-    navigateToHome,
-    navigateToLogin,
-    navigateToRegister,
-    navigateToSettings,
+    navigateTo: router.navigateTo
   }
 }
