@@ -15,7 +15,7 @@ export const createRouter = routeMappings => {
   return {
     getUrl: (id, params) => {
       const result = router.generate(id, params)
-      return result === "#" ? "#/" : result
+      return result === prefix ? prefix + "/" : result
     }
   }
 }

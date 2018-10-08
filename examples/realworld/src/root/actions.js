@@ -10,7 +10,7 @@ export const actions = ({ update }) => {
     articlesApi.getList(),
     popularTagsApi.getList()
   ]).then(
-    ([articles, tags]) => update(O(articles, tags))
+    ([articles, tags]) => O(articles, tags)
   )
 
   const loadArticle = slug => Promise.all([
@@ -20,25 +20,17 @@ export const actions = ({ update }) => {
     ([articleDetail, comments]) => ({ articleDetail: O(articleDetail, comments) })
   )
 
-  const navigateToHome = () => {
-    update({ pageId: HomePage })
-    loadArticles()
-  }
-  const navigateToLogin = () => {
-    update({ pageId: LoginPage })
-  }
-  const navigateToRegister = () => {
-    update({ pageId: RegisterPage })
-  }
-  const navigateToArticleDetail = ({ slug }) => {
+  const navigateToHome = () =>
+    loadArticles().then(data => update(O({ pageId: HomePage }, data)))
+
+  const navigateToLogin = () => update({ pageId: LoginPage })
+  const navigateToRegister = () => update({ pageId: RegisterPage })
+
+  const navigateToArticleDetail = ({ slug }) =>
     loadArticle(slug).then(data => update(O({ pageId: ArticleDetailPage }, data)))
-  }
-  const navigateToArticleEdit = () => {
-    update({ pageId: ArticleEditPage })
-  }
-  const navigateToSettings = () => {
-    update({ pageId: SettingsPage })
-  }
+
+  const navigateToArticleEdit = () => update({ pageId: ArticleEditPage })
+  const navigateToSettings = () => update({ pageId: SettingsPage })
 
   const router = createRouter([
     { route: "/", handler: navigateToHome, pageId: HomePage },
