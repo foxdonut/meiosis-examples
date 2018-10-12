@@ -1,18 +1,20 @@
 import O from "patchinko/constant"
 
 import { credentialsApi, setToken } from "../services"
+import { HomePage } from "../util/constants"
 import { pick } from "../util/fp"
 
-export const actions = ({ method }) => ({ update }) => ({
+export const actions = ({ update, actions }) => ({
   updateForm: (method, field) => text => update({ [method]: O({ [field]: text }) }),
 
-  sendCredentials: model => {
-    // FIXME: also need to include username for /register
-    credentialsApi[method]({ user: pick(["email", "password"], model[method]) }).
+  sendCredentials: method => model => {
+    const fields = ["email", "password"].concat(method === "register" ? ["username"] : [])
+    credentialsApi[method]({ user: pick(fields, model[method]) }).
       then(({ user }) => {
         setToken(user.token)
-        update({ context: O({ user }) })
+        update({ user })
+        actions.navigateTo(HomePage)
       }).
-      catch(err => update({ errors: err.errors }))
+      catch(err => update({ [method]: O({ errors: err.errors }) }))
   }
 })

@@ -2,6 +2,6 @@ import { actions } from "./actions"
 import { view } from "./view"
 
 export const Credentials = options => ({
-  actions: actions(options),
+  actions,
   view: view(options)
 })

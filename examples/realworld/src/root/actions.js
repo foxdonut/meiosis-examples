@@ -25,13 +25,19 @@ export const actions = ({ update }) => {
   const navigateToHome = obj =>
     loadArticles().then(data => update(O(obj, data)))
 
+  const navigateToLogin = obj =>
+    update(O(obj, { login: {} }))
+
+  const navigateToRegister = obj =>
+    update(O(obj, { register: {} }))
+
   const navigateToArticleDetail = obj =>
     loadArticle(obj.params.slug).then(data => update(O(obj, data)))
 
   const router = createRouter([
     { route: "/", handler: navigateToHome, pageId: HomePage },
-    { route: "/login", handler: defaultNavigateTo, pageId: LoginPage },
-    { route: "/register", handler: defaultNavigateTo, pageId: RegisterPage },
+    { route: "/login", handler: navigateToLogin, pageId: LoginPage },
+    { route: "/register", handler: navigateToRegister, pageId: RegisterPage },
     { route: "/article/:slug", handler: navigateToArticleDetail, pageId: ArticleDetailPage },
     { route: "/editor", handler: defaultNavigateTo, pageId: ArticleEditPage },
     { route: "/settings", handler: defaultNavigateTo, pageId: SettingsPage }

@@ -3,7 +3,7 @@ import { get, pipe } from "../util/fp"
 
 const checkSignIn = model => {
   const returnTo = get(model, ["returnTo"])
-  if (returnTo != null && model.context.user) {
+  if (returnTo != null && model.user) {
     return O(model, { navigateTo: returnTo, returnTo: O })
   }
   return model

@@ -21,7 +21,6 @@ export const view = options => ({ actions }) => {
               options.showUsername &&
                 ["fieldset.form-group",
                   ["input:text.form-control.form-control-lg[placeholder=Username]",
-                  //FIXME -- also, clear values when leave the page
                     { value: model[id].username || "", onInput: updateForm(id, "username") }]
                 ],
               ["fieldset.form-group",
@@ -33,7 +32,7 @@ export const view = options => ({ actions }) => {
                   { value: model[id].password || "", onInput: updateForm(id, "password") }]
               ],
               ["button.btn.btn-lg.btn-primary.pull-xs-right",
-                { onClick: compose(actions.sendCredentials, constant(model), preventDefault) },
+                { onClick: compose(actions.sendCredentials(id), constant(model), preventDefault) },
                 options.label
               ]
             ]

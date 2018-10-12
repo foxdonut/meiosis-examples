@@ -19,11 +19,13 @@ export const createRouter = routeMappings => {
 
   router.on(routes).resolve()
 
+  const getUrl = (id, params) => {
+    const result = router.generate(id, params)
+    return result === prefix ? prefix + "/" : result
+  }
+
   return {
-    getUrl: (id, params) => {
-      const result = router.generate(id, params)
-      return result === prefix ? prefix + "/" : result
-    },
-    navigateTo: (id, params) => router.navigate(router.getUrl(id, params))
+    getUrl,
+    navigateTo: (id, params) => router.navigate(getUrl(id, params))
   }
 }
