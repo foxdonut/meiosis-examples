@@ -1,10 +1,9 @@
-//import { articlesApi } from "../services";
+import O from "patchinko/constant"
 
-export const actions = ({ _update }) => ({
-  page: ({ _model, _pageNumber }) => null /* {
-    const articlesFilter = _.set(filter, "offset", (pageNumber - 1) * filter.limit)
-    articlesApi.getList(articlesFilter).then(
-      articles => update(model => _.merge(model, articles, { articlesFilter }))
-    )
-  }*/
+export const actions = ({ update, actions }) => ({
+  page: ({ model, pageNumber }) => {
+    const offset = (pageNumber - 1) * model.limit
+    actions.loadArticles({ offset, limit: model.limit })
+      .then(articles => update(Object.assign(articles, { articlesFilter: O({ offset }) })))
+  }
 })

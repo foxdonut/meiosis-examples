@@ -8,6 +8,14 @@ const get = (object, path) =>
 const asyncPipe = (...fns) => input =>
   fns.reduce((chain, fn) => chain.then(fn), Promise.resolve(input))
 
+const range = (start, end) => {
+  const arr = []
+  for (var i = start; i < end; i++) {
+    arr.push(i)
+  }
+  return arr
+}
+
 module.exports = {
   assoc,
   asyncPipe,
@@ -20,6 +28,7 @@ module.exports = {
   pick,
   pipe,
   preventDefault: tap(evt => evt.preventDefault()),
+  range,
   tap,
   thrush
 }
