@@ -1,11 +1,13 @@
-export const view = ({ articles, popularTags }) => model => {
+import { compose, preventDefault } from "../util/fp"
+
+export const view = ({ actions, articles, popularTags }) => model => {
   const content = model.tagFilter ? {
-    globalFeedClass: "",
+    globalFeed: false,
     tagFeedComponent: ["li.nav-item",
-      ["a.nav-link.active[href='']", "#" + model.tagFilter]
+      ["a.nav-link.active", "#" + model.tagFilter]
     ]
   } : {
-    globalFeedClass: ".active",
+    globalFeed: true,
     tagFeedComponent: null
   }
 
@@ -25,7 +27,11 @@ export const view = ({ articles, popularTags }) => model => {
                 ["a.nav-link[href='']", "Your Feed"]
               ],
               ["li.nav-item",
-                ["a.nav-link" + content.globalFeedClass + "[href='/']", "Global Feed"]
+                ["a.nav-link",
+                  { href: "#", className: { active: content.globalFeed },
+                    onClick: compose(actions.clearTagFilter, preventDefault)
+                  },
+                  "Global Feed"]
               ],
               content.tagFeedComponent
             ]

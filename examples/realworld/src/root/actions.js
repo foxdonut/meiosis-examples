@@ -6,8 +6,8 @@ import { ArticleDetailPage, ArticleEditPage, HomePage, LoginPage, RegisterPage,
   SettingsPage } from "../util/constants"
 
 export const actions = ({ update }) => {
-  const loadArticles = () => Promise.all([
-    articlesApi.getList(),
+  const loadArticles = params => Promise.all([
+    articlesApi.getList(params),
     popularTagsApi.getList()
   ]).then(
     ([articles, tags]) => O(articles, tags)
@@ -20,7 +20,7 @@ export const actions = ({ update }) => {
     ([articleDetail, comments]) => ({ articleDetail: O(articleDetail, comments) })
   )
 
-  const defaultNavigateTo = obj => update(obj)
+  const defaultNavigateTo = update
 
   const navigateToHome = obj =>
     loadArticles().then(data => update(O(obj, data)))
@@ -45,6 +45,7 @@ export const actions = ({ update }) => {
 
   return {
     getUrl: router.getUrl,
-    navigateTo: router.navigateTo
+    navigateTo: router.navigateTo,
+    loadArticles
   }
 }

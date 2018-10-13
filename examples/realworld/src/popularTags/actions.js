@@ -1,13 +1,6 @@
-//import { articlesApi, popularTagsApi } from "../services"
+import O from "patchinko/constant"
 
-export const actions = ({ _update }) => ({
-  loadPopularTags: () => null /* popularTagsApi.get().then(
-    popularTags => update({ tags: popularTags.tags })
-  )*/,
-
-  tagFilter: _tag => null /* {
-    articlesApi.getList({ tag, limit: 10 }).then(
-      articles => update(model => _.merge(model, { tagFilter: tag }, articles))
-    )
-  }*/
+export const actions = ({ update, actions }) => ({
+  tagFilter: tag => actions.loadArticles({ tag }).then(articles =>
+    update(O(articles, { tagFilter: tag })))
 })
