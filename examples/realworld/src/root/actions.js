@@ -34,12 +34,15 @@ export const actions = ({ update }) => {
   const navigateToArticleDetail = obj =>
     loadArticle(obj.params.slug).then(data => update(O(obj, data)))
 
+  const navigateToArticleEdit = obj =>
+    update(O(obj, { articleEdit: {} }))
+
   const router = createRouter([
     { route: "/", handler: navigateToHome, pageId: HomePage },
     { route: "/login", handler: navigateToLogin, pageId: LoginPage },
     { route: "/register", handler: navigateToRegister, pageId: RegisterPage },
     { route: "/article/:slug", handler: navigateToArticleDetail, pageId: ArticleDetailPage },
-    { route: "/editor", handler: defaultNavigateTo, pageId: ArticleEditPage },
+    { route: "/editor", handler: navigateToArticleEdit, pageId: ArticleEditPage },
     { route: "/settings", handler: defaultNavigateTo, pageId: SettingsPage }
   ])
 

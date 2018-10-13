@@ -5,7 +5,7 @@ import { HomePage } from "../util/constants"
 import { pick } from "../util/fp"
 
 export const actions = ({ update, actions }) => ({
-  updateForm: (method, field) => text => update({ [method]: O({ [field]: text }) }),
+  updateCredForm: (method, field) => text => update({ [method]: O({ [field]: text }) }),
 
   sendCredentials: method => model => {
     const fields = ["email", "password"].concat(method === "register" ? ["username"] : [])

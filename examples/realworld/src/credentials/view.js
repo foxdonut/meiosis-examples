@@ -1,7 +1,8 @@
 import { compose, constant, path, preventDefault } from "../util/fp"
 
 export const view = options => ({ actions }) => {
-  const updateForm = (method, field) => compose(actions.updateForm(method, field), path(["target", "value"]))
+  const updateCredForm = (method, field) =>
+    compose(actions.updateCredForm(method, field), path(["target", "value"]))
   const id = options.method
 
   return model => {
@@ -21,15 +22,15 @@ export const view = options => ({ actions }) => {
               options.showUsername &&
                 ["fieldset.form-group",
                   ["input:text.form-control.form-control-lg[placeholder=Username]",
-                    { value: model[id].username || "", onInput: updateForm(id, "username") }]
+                    { value: model[id].username || "", onInput: updateCredForm(id, "username") }]
                 ],
               ["fieldset.form-group",
                 ["input:text.form-control.form-control-lg[placeholder=Email]",
-                  { value: model[id].email || "", onInput: updateForm(id, "email") }]
+                  { value: model[id].email || "", onInput: updateCredForm(id, "email") }]
               ],
               ["fieldset.form-group",
                 ["input:password.form-control.form-control-lg[placeholder=Password]",
-                  { value: model[id].password || "", onInput: updateForm(id, "password") }]
+                  { value: model[id].password || "", onInput: updateCredForm(id, "password") }]
               ],
               ["button.btn.btn-lg.btn-primary.pull-xs-right",
                 { onClick: compose(actions.sendCredentials(id), constant(model), preventDefault) },

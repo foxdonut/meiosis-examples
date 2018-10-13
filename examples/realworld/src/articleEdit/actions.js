@@ -1,3 +1,4 @@
+import O from "patchinko/constant"
 import validate from "validate.js"
 
 import { articlesApi } from "../services"
@@ -11,23 +12,23 @@ const validationSpec = {
 }
 
 export const actions = ({ update, actions }) => ({
-  /* FIXME: name clash
-  updateForm: field => evt => update(model => {
-    model[field] = evt.target.value
-
-    model.tagList = (model.tags || "")
-      .split(",")
-      .map(str => str.trim())
-      .filter(str => str.length > 0)
-
-    return model
+  updateArticleForm: (field, value) => update({
+    articleEdit: O({ [field]: value })
   }),
-  */
+  updateArticleTags: tags => update({
+    articleEdit: O({
+      tags,
+      tagList: (tags || "")
+        .split(",")
+        .map(str => str.trim())
+        .filter(str => str.length > 0)
+    })
+  }),
 
   publish: article => evt => {
     evt.preventDefault()
     const validationErrors = validate(article, validationSpec)
-    update({ validationErrors })
+    update({ articleEdit: O({ validationErrors }) })
     if (!validationErrors) {
       articlesApi.publish({ article: omit(["tags"], article) })
         .then(() => actions.navigateTo(HomePage))
