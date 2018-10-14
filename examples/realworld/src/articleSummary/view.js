@@ -1,4 +1,4 @@
-export const view = () => model => {
+export const view = ({ actions }) => model => {
   const username = model.author.username
 
   return [".article-preview",
@@ -12,6 +12,7 @@ export const view = () => model => {
       ],
       [".pull-xs-right",
         ["button.btn.btn-sm.btn-outline-primary",
+          { onClick: () => actions.favoriteArticle(model.slug) },
           ["i.ion-heart"],
           ["span", " ", model.favoritesCount, " "]
         ]
