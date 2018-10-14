@@ -20,21 +20,28 @@ const authHeader = () => ({
 export const articlesApi = {
   getList: data => request("/articles", { data }),
 
-  getSingle: slug => request("/articles/" + slug),
+  getFeed: data => request("/articles/feed", O(authHeader(), { data })),
 
-  getComments: slug => request("/articles/" + slug + "/comments"),
+  getSingle: slug => request(`/articles/${slug}`),
 
-  addComment: (slug, data) => request("/articles/" + slug + "/comments",
+  getComments: slug => request(`/articles/${slug}/comments`),
+
+  addComment: (slug, data) => request(`/articles/${slug}/comments`,
     O(authHeader(), { data, method: "POST" })),
 
-  deleteComment: (slug, id) => request("/articles/" + slug + "/comments/" + id,
+  deleteComment: (slug, id) => request(`/articles/${slug}/comments/${id}`,
     O(authHeader(), { method: "DELETE" })),
 
   publish: data => request("/articles" + (data.article.slug ? "/" + data.article.slug : ""),
     O(authHeader(), { data, method: (data.article.slug ? "PUT" : "POST") })),
 
-  favorite: slug => request("/articles/" + slug + "/favorite",
-    O(authHeader(), { method: "POST" }))
+  unpublish: slug => request(`/articles/${slug}`, O(authHeader(), { method: "DELETE" })),
+
+  favorite: slug => request(`/articles/${slug}/favorite`,
+    O(authHeader(), { method: "POST" })),
+
+  unfavorite: slug => request(`/articles/${slug}/favorite`,
+    O(authHeader(), { method: "DELETE" }))
 }
 
 export const credentialsApi = {
@@ -58,5 +65,13 @@ export const popularTagsApi = {
 }
 
 export const profileApi = {
-  get: username => request("/profiles/" + username)
+  get: username => request(`/profiles/${username}`),
+
+  update: data => request("/user", O(authHeader(), { data, method: "PUT" })),
+
+  follow: username => request(`/profiles/${username}/follow`,
+    O(authHeader(), { method: "POST" })),
+
+  unfollow: username => request(`/profiles/${username}/follow`,
+    O(authHeader(), { method: "DELETE" }))
 }
