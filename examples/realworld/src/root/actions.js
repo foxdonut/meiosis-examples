@@ -5,13 +5,13 @@ import { createRouter } from "../util/router"
 import { ArticleDetailPage, ArticleEditPage, HomePage, LoginPage, RegisterPage,
   SettingsPage } from "../util/constants"
 
-export const actions = ({ update }) => {
-  const loadArticles = params => Promise.all([
-    articlesApi.getList(params),
+export const actions = ({ update, getState }) => {
+  const loadArticles = params => getState(state => Promise.all([
+    articlesApi.getList(O(state.articlesFilter, params)),
     popularTagsApi.getList()
   ]).then(
-    ([articles, tags]) => O(articles, tags)
-  )
+    ([articles, tags]) => update(Object.assign(articles, tags, { articlesFilter: O(params) }))
+  ))
 
   const loadArticle = slug => Promise.all([
     articlesApi.getSingle(slug),
@@ -22,8 +22,10 @@ export const actions = ({ update }) => {
 
   const defaultNavigateTo = update
 
-  const navigateToHome = obj =>
-    loadArticles().then(data => update(O(obj, data)))
+  const navigateToHome = obj => {
+    loadArticles()
+    update(obj)
+  }
 
   const navigateToLogin = obj =>
     update(O(obj, { login: {} }))

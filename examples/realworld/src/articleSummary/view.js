@@ -13,7 +13,7 @@ export const view = () => model => {
       [".pull-xs-right",
         ["button.btn.btn-sm.btn-outline-primary",
           ["i.ion-heart"],
-          ["span", model.favoritesCount]
+          ["span", " ", model.favoritesCount, " "]
         ]
       ]
     ],
