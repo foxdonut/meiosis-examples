@@ -5,34 +5,35 @@ import { createRouter } from "../util/router"
 import { ArticleDetailPage, ArticleEditPage, HomePage, LoginPage, RegisterPage,
   SettingsPage } from "../util/constants"
 
-export const actions = ({ update }) => {
-  const loadArticles = params => update(model => Promise.all([
-    articlesApi.getList(O(model.articlesFilter, params)),
+export const actions = ({ update, getState }) => {
+  const loadArticles = params => getState(state => Promise.all([
+    articlesApi.getList(Object.assign(state.articlesFilter, params)),
     popularTagsApi.getList()
   ]).then(
-    ([articles, tags]) => update(Object.assign(articles, tags, { articlesFilter: O(params) }))
+    ([articles, tags]) => update(Object.assign(articles, tags,
+      { articlesFilter: O(params), loading: false }))
   ))
 
   const loadArticle = slug => Promise.all([
     articlesApi.getSingle(slug),
     articlesApi.getComments(slug)
   ]).then(
-    ([articleDetail, comments]) => ({ articleDetail: O(articleDetail, comments) })
+    ([articleDetail, comments]) => ({ articleDetail: Object.assign(articleDetail, comments) })
   )
 
   const navigateToHome = update
 
   const navigateToLogin = obj =>
-    update(O(obj, { login: {} }))
+    update(Object.assign(obj, { login: {} }))
 
   const navigateToRegister = obj =>
-    update(O(obj, { register: {} }))
+    update(Object.assign(obj, { register: {} }))
 
   const navigateToArticleDetail = obj =>
-    loadArticle(obj.params.slug).then(data => update(O(obj, data)))
+    loadArticle(obj.params.slug).then(data => update(Object.assign(obj, data)))
 
   const navigateToArticleEdit = obj =>
-    update(O(obj, { articleEdit: {} }))
+    update(Object.assign(obj, { articleEdit: {} }))
 
   const navigateToSettings = update
 

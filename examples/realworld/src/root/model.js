@@ -1,7 +1,8 @@
-import { HomePage } from "../util/constants"
+import O from "patchinko/constant"
 
-export const model = ({ user }) => ({
-  pageId: HomePage,
+import { Home } from "../home"
+
+export const model = ({ user }) => O({
   articlesFilter: {
     limit: 10,
     offset: 0,
@@ -14,4 +15,4 @@ export const model = ({ user }) => ({
   login: {},
   register: {},
   user
-})
+}, Home.navigateTo())

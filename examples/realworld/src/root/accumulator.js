@@ -1,13 +1,11 @@
 import O from "patchinko/constant"
 
-import { HomePage, SettingsPage } from "../util/constants"
+import { SettingsPage } from "../util/constants"
+import { Home } from "../home"
 
 export const accumulator = (model, update) => {
-  if (typeof update === "function") {
-    return O(model, update(model))
-  }
   if (update.pageId === SettingsPage && !model.user) {
-    return O(model, { pageId: HomePage })
+    return O(model, Home.navigateTo())
   }
   return O(model, update)
 }

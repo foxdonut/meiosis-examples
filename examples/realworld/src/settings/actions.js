@@ -1,10 +1,10 @@
 import O from "patchinko/constant"
 
 import { profileApi, setToken } from "../services"
-import { HomePage } from "../util/constants"
+import { Home } from "../home"
 import { pick } from "../util/fp"
 
-export const actions = ({ update, actions }) => ({
+export const actions = ({ update }) => ({
   updateSettingsForm: (field, value) =>
     update({ user: O({ [field]: value }) }),
 
@@ -13,7 +13,6 @@ export const actions = ({ update, actions }) => ({
 
   logout: () => {
     setToken("")
-    actions.navigateTo(HomePage)
-    update({ user: O }) //FIXME
+    update(Object.assign(Home.navigateTo(), { user: O }))
   }
 })

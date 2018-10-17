@@ -1,7 +1,7 @@
-import { HomePage } from "../util/constants"
+import { Home } from "../home"
 
-export const nextAction = actions => (_state, update) => {
-  if (update.pageId === HomePage) {
+export const nextAction = actions => (model, _update) => {
+  if (model.pageId === Home.pageId && model.loading) {
     actions.loadArticles()
   }
 }
