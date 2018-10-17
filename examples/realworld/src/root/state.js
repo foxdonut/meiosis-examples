@@ -1,12 +1,11 @@
 import O from "patchinko/constant"
-import { get, pipe } from "../util/fp"
+import { get } from "../util/fp"
 
 const checkSignIn = model => {
   const returnTo = get(model, ["returnTo"])
   if (returnTo != null && model.user) {
-    return O(model, { navigateTo: returnTo, returnTo: O })
+    return { navigateTo: returnTo, returnTo: O }
   }
-  return model
 }
 
 const urlInLocationBar = model => {
@@ -15,13 +14,12 @@ const urlInLocationBar = model => {
   if (document.location.hash !== url) {
     window.history.pushState({}, "", url)
   }
-  return model
 }
 
-export const state = pipe(
+export const state = model => [
   //checkAuthentication,
   checkSignIn,
   //navigatingToHome,
   //navigatingToArticleDetail,
   urlInLocationBar
-)
+].reduce((x, f) => O(x, f(x)), model)

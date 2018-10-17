@@ -13,7 +13,7 @@ export const actions = ({ update, actions }) => ({
 
   logout: () => {
     setToken("")
-    update({ user: O })
     actions.navigateTo(HomePage)
+    update({ user: O }) //FIXME
   }
 })

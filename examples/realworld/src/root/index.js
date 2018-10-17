@@ -1,8 +1,12 @@
 import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage, SettingsPage }
   from "../util/constants"
 
+import { accumulator } from "./accumulator"
+import { model } from "./model"
 import { actions } from "./actions"
 import { state } from "./state"
+import { view } from "./view"
+import { nextAction } from "./nextAction"
 import { Header, Footer } from "../layout"
 import { Home } from "../home"
 import { Register } from "../register"
@@ -22,31 +26,10 @@ export const Root = {
     [ArticleEditPage]: ArticleEdit,
     [SettingsPage]: Settings
   },
-  model: ({ user }) => ({
-    pageId: HomePage,
-    articlesFilter: {
-      limit: 10,
-      offset: 0,
-      tag: "",
-      author: "",
-      favorited: ""
-    },
-    articleDetail: {},
-    articleEdit: {},
-    login: {},
-    register: {},
-    user
-  }),
+  accumulator,
+  model,
   actions,
   state,
-  view: components => model => {
-    const { header, footer } = components
-    const component = components[model.pageId]
-
-    return ["div",
-      header(model),
-      component(model),
-      footer(model)
-    ]
-  }
+  view,
+  nextAction
 }

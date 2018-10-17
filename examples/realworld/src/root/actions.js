@@ -5,9 +5,9 @@ import { createRouter } from "../util/router"
 import { ArticleDetailPage, ArticleEditPage, HomePage, LoginPage, RegisterPage,
   SettingsPage } from "../util/constants"
 
-export const actions = ({ update, getState }) => {
-  const loadArticles = params => getState(state => Promise.all([
-    articlesApi.getList(O(state.articlesFilter, params)),
+export const actions = ({ update }) => {
+  const loadArticles = params => update(model => Promise.all([
+    articlesApi.getList(O(model.articlesFilter, params)),
     popularTagsApi.getList()
   ]).then(
     ([articles, tags]) => update(Object.assign(articles, tags, { articlesFilter: O(params) }))
@@ -20,12 +20,7 @@ export const actions = ({ update, getState }) => {
     ([articleDetail, comments]) => ({ articleDetail: O(articleDetail, comments) })
   )
 
-  const defaultNavigateTo = update
-
-  const navigateToHome = obj => {
-    loadArticles()
-    update(obj)
-  }
+  const navigateToHome = update
 
   const navigateToLogin = obj =>
     update(O(obj, { login: {} }))
@@ -39,13 +34,15 @@ export const actions = ({ update, getState }) => {
   const navigateToArticleEdit = obj =>
     update(O(obj, { articleEdit: {} }))
 
+  const navigateToSettings = update
+
   const router = createRouter([
     { route: "/", handler: navigateToHome, pageId: HomePage },
     { route: "/login", handler: navigateToLogin, pageId: LoginPage },
     { route: "/register", handler: navigateToRegister, pageId: RegisterPage },
     { route: "/article/:slug", handler: navigateToArticleDetail, pageId: ArticleDetailPage },
     { route: "/editor", handler: navigateToArticleEdit, pageId: ArticleEditPage },
-    { route: "/settings", handler: defaultNavigateTo, pageId: SettingsPage }
+    { route: "/settings", handler: navigateToSettings, pageId: SettingsPage }
   ])
 
   return {
