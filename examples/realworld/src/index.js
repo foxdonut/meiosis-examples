@@ -1,3 +1,4 @@
+import O from "patchinko/constant"
 import stream from "mithril-stream"
 
 import { pipe } from "./util/fp"
@@ -5,15 +6,29 @@ import { render } from "./util/view"
 import { createApp } from "./app"
 
 const update = stream()
-const getState = stream()
-createApp(update, getState).then(app => {
-  const models = stream.scan(app.accumulator, app.model(), update)
+
+// This allows to call update(patch) or update(model => patch)
+const convert = (model, patch) => (typeof patch === "function") ? patch(model) : patch
+
+createApp(update).then(app => {
+  const models = stream()
+
+  // Stream of patches, some may be null
+  const patches = update.map(patch => {
+    const model = models()
+    const converted = convert(model, patch)
+    return converted && app.verify(model, converted)
+  })
+
+  // Only update the model for non-null patches
+  patches.map(patch => patch && models(O(models(), patch)))
 
   const states = models.map(app.state)
   states.map(pipe(app.view, render(document.getElementById("app"))))
+  states.map(state => app.nextAction(state, patches()))
 
-  models.map(model => app.nextAction(model, update()))
-  getState.map(f => f(states()))
+  // initial model
+  update(app.model())
 
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   const meiosisTracer = require("meiosis-tracer")
@@ -22,50 +37,3 @@ createApp(update, getState).then(app => {
     { stream: states, label: "states" }
   ] })
 })
-
-/*
-const models = m.stream()
-const update = m.stream()
-const actions = m.stream()
-
-update.map(incoming => {
-  const patch = (typeof incoming === "function")
-    ? incoming(models())
-    : incoming
-
-  if (patch) {
-    actions(patch)
-  }
-})
-
-const filter = (model, patch) => {
-  if (patch.pageId === "Settings" && !model.user) {
-    return { pageId: "Home" }
-  }
-  return patch
-}
-const patches = actions.map(patch => filter(models(), patch))
-patches.map(patch => models(O(models(), patch)))
-
-const state = models.map(x => x)
-const states = models.map(state)
-
-const nextAction = (state, patch) => {
-  if (patch.pageId === "Home") {
-    update({ loadArticles: true })
-  }
-}
-states.map(state => nextAction(state, patches()))
-
-models.map(p)
-
-update({ init: true })
-update({ duck: "quack" })
-update(null)
-update(false)
-update(undefined)
-
-update(model => ({ count: model.duck.length }))
-
-update({ pageId: "Settings" })
-*/

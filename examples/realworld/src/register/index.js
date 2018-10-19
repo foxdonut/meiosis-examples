@@ -1,4 +1,4 @@
-import { LoginPage } from "../util/constants"
+import { LoginPage } from "../util/router"
 import { Credentials } from "../credentials"
 
 export const Register = Credentials({

@@ -1,8 +1,8 @@
 import O from "patchinko/constant"
 
 import { profileApi, setToken } from "../services"
-import { Home } from "../home"
 import { pick } from "../util/fp"
+import { HomePage, navigateTo } from "../util/router"
 
 export const actions = ({ update }) => ({
   updateSettingsForm: (field, value) =>
@@ -13,6 +13,6 @@ export const actions = ({ update }) => ({
 
   logout: () => {
     setToken("")
-    update(Object.assign(Home.navigateTo(), { user: O }))
+    update(Object.assign(navigateTo(HomePage), { user: O }))
   }
 })

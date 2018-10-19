@@ -1,5 +1,5 @@
 import { articlesApi } from "../services"
-import { LoginPage } from "../util/constants"
+import { LoginPage, navigateTo } from "../util/router"
 
 export const actions = ({ update, actions }) => ({
   favoriteArticle: slug => update(model => {
@@ -7,7 +7,7 @@ export const actions = ({ update, actions }) => ({
       articlesApi.favorite(slug).then(() => actions.loadArticles())
     }
     else {
-      actions.navigateTo(LoginPage)
+      return navigateTo(LoginPage)
     }
   })
 })

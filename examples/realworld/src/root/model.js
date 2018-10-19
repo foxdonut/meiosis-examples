@@ -1,8 +1,4 @@
-import O from "patchinko/constant"
-
-import { Home } from "../home"
-
-export const model = ({ user }) => O({
+export const model = data => Object.assign({
   articlesFilter: {
     limit: 10,
     offset: 0,
@@ -13,6 +9,5 @@ export const model = ({ user }) => O({
   articleDetail: {},
   articleEdit: {},
   login: {},
-  register: {},
-  user
-}, Home.navigateTo())
+  register: {}
+}, data)

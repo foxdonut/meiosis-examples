@@ -1,7 +1,7 @@
 import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage, SettingsPage }
-  from "../util/constants"
+  from "../util/router"
 
-import { accumulator } from "./accumulator"
+import { verify } from "./verify"
 import { model } from "./model"
 import { actions } from "./actions"
 import { state } from "./state"
@@ -26,7 +26,7 @@ export const Root = {
     [ArticleEditPage]: ArticleEdit,
     [SettingsPage]: Settings
   },
-  accumulator,
+  verify,
   model,
   actions,
   state,

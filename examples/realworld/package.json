@@ -28,14 +28,13 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bss": "^1.2.9",
     "marked": "^0.5.0",
     "mithril": "^1.1.6",
     "mithril-stream": "^1.1.0",
-    "navigo": "^7.1.2",
     "patchinko": "^4.1.0",
     "seview": "^0.10.0",
     "tinyfunk": "^1.2.1",
+    "url-mapper": "^2.0.0",
     "validate.js": "^0.12.0"
   },
   "devDependencies": {

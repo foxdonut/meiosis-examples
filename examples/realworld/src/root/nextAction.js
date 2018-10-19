@@ -1,7 +1,7 @@
-import { Home } from "../home"
+import { HomePage } from "../util/router"
 
-export const nextAction = actions => (model, _update) => {
-  if (model.pageId === Home.pageId && model.loading) {
+export const nextAction = actions => (_state, patch) => {
+  if (patch.pageId === HomePage) {
     actions.loadArticles()
   }
 }

@@ -1,4 +1,5 @@
 import { compose, constant, path, preventDefault } from "../util/fp"
+import { getUrl } from "../util/router"
 
 export const view = options => ({ actions }) => {
   const updateCredForm = (method, field) =>
@@ -14,7 +15,7 @@ export const view = options => ({ actions }) => {
           [".col-md-6.offset-md-3.col-xs-12",
             ["h1.text-xs-center", options.label],
             ["p.text-xs-center",
-              ["a", { href: actions.getUrl(options.alternativePage) }, options.alternativeLabel]
+              ["a", { href: getUrl(options.alternativePage) }, options.alternativeLabel]
             ],
 
             ["ul.error-messages", errors.map(error => ["li", error])],

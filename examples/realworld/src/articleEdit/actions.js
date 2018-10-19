@@ -2,7 +2,7 @@ import O from "patchinko/constant"
 import validate from "validate.js"
 
 import { articlesApi } from "../services"
-import { HomePage } from "../util/constants"
+import { HomePage, navigateTo } from "../util/router"
 import { omit } from "../util/fp"
 
 const validationSpec = {
@@ -31,7 +31,7 @@ export const actions = ({ update, actions }) => ({
     update({ articleEdit: O({ validationErrors }) })
     if (!validationErrors) {
       articlesApi.publish({ article: omit(["tags"], article) })
-        .then(() => actions.navigateTo(HomePage))
+        .then(() => update(navigateTo(HomePage)))
     }
   }
 })

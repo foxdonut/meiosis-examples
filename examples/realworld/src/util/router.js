@@ -1,31 +1,45 @@
-import Navigo from "navigo"
+import Mapper from "url-mapper"
 
 import { assoc } from "./fp"
 
-const root = ""
-const useHash = true
+export const HomePage = "HomePage"
+export const LoginPage = "LoginPage"
+export const RegisterPage = "RegisterPage"
+export const ArticleDetailPage = "ArticleDetailPage"
+export const ArticleEditPage = "ArticleEditPage"
+export const SettingsPage = "SettingsPage"
+
 const prefix = "#"
 
-export const createRouter = routeMappings => {
-  const router = new Navigo(root, useHash, prefix)
+const routeMappings = {
+  "/": { pageId: HomePage, loading: true },
+  "/login": { pageId: LoginPage, login: {} },
+  "/register": { pageId: RegisterPage, register: {} },
+  "/article/:slug": { pageId: ArticleDetailPage },
+  "/editor": { pageId: ArticleEditPage, articleEdit: {} },
+  "/settings": { pageId: SettingsPage }
+}
 
-  const routes = routeMappings.reduce((result, { pageId, route, handler }) =>
-    assoc(route, {
-      as: pageId,
-      uses: (params, query) => handler({
-        pageId, params, query, url: document.location.hash
-      })
-    }, result), {})
+const urlMapper = Mapper({ query: true })
 
-  router.on(routes).resolve()
+const routeLookup = Object.keys(routeMappings).reduce((result, key) =>
+  assoc(routeMappings[key].pageId, key, result), {})
 
-  const getUrl = (id, params) => {
-    const result = router.generate(id, params)
-    return result === prefix ? prefix + "/" : result
-  }
-
-  return {
-    getUrl,
-    navigateTo: (id, params) => router.navigate(getUrl(id, params))
+export const parseUrl = (url = document.location.hash) => {
+  const mapped = urlMapper.map(url.substring(1), routeMappings)
+  if (mapped) {
+    const patch = mapped.match
+    return Object.assign(patch, { url, params: mapped.values })
   }
 }
+
+export const listenToRouteChanges = update =>
+  window.onpopstate = () => update(parseUrl())
+
+export const getUrl = (id, params = {}) => {
+  const route = routeLookup[id] || "/"
+  const result = urlMapper.stringify(route, params)
+  return prefix + result
+}
+
+export const navigateTo = (id, params) => parseUrl(getUrl(id, params))
