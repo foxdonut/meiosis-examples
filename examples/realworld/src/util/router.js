@@ -13,13 +13,13 @@ export const ProfilePage = "ProfilePage"
 const prefix = "#"
 
 const routeMappings = {
-  "/": { pageId: HomePage, loading: true },
+  "/": { pageId: HomePage, articles: null },
   "/login": { pageId: LoginPage, login: {} },
   "/register": { pageId: RegisterPage, register: {} },
-  "/article/:slug": { pageId: ArticleDetailPage, loading: true },
+  "/article/:slug": { pageId: ArticleDetailPage, articleDetail: null },
   "/editor": { pageId: ArticleEditPage, articleEdit: {} },
   "/settings": { pageId: SettingsPage },
-  "/profile/:username": { pageId: ProfilePage }
+  "/profile/:username": { pageId: ProfilePage, profile: null }
 }
 
 const urlMapper = Mapper({ query: true })

@@ -1,4 +1,5 @@
 import { compose, constant, preventDefault } from "../util/fp"
+import { ProfilePage, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 export const view = ({ actions }) => model => {
@@ -6,11 +7,11 @@ export const view = ({ actions }) => model => {
 
   return [".article-preview",
     [".article-meta",
-      ["a", /*profileLink(username),*/
+      ["a", { href: getUrl(ProfilePage, { username: model.author.username }) },
         ["img", { src: model.author.image || defaultImage }]
       ],
       [".info",
-        ["a.author", /*profileLink(username),*/ username],
+        ["a.author", { href: getUrl(ProfilePage, { username: model.author.username }) }, username],
         ["span.date", new Date(model.createdAt).toDateString()]
       ],
       [".pull-xs-right",

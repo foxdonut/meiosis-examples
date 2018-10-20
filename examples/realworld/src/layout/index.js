@@ -1,5 +1,6 @@
 import { HomePage, LoginPage, RegisterPage, ArticleEditPage, SettingsPage, ProfilePage, getUrl }
   from "../util/router"
+import { get } from "../util/fp"
 
 export const Header = {
   view: () => model => {
@@ -16,16 +17,20 @@ export const Header = {
             ["li.nav-item", active(ArticleEditPage),
               ["a.nav-link", { href: getUrl(ArticleEditPage) },
                 ["i.ion-compose"],
-                ["span", { innerHTML: "&nbsp;New Post" }]
+                " New Post"
               ]
             ],
             ["li.nav-item", active(SettingsPage),
               ["a.nav-link", { href: getUrl(SettingsPage) },
                 ["i.ion-gear-a"],
-                ["span", { innerHTML: "&nbsp;Settings" }]
+                " Settings"
               ]
             ],
-            ["li.nav-item", active("username"),
+            ["li.nav-item",
+              { className:
+                { active: model.pageId === ProfilePage &&
+                    get(model, ["user", "id"]) === get(model, ["profile", "id"]) }
+              },
               ["a.nav-link",
                 { href: getUrl(ProfilePage, { username: model.user.username }) },
                 model.user.username]

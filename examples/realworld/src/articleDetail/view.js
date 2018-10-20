@@ -44,7 +44,7 @@ export const view = ({ actions }) => model => {
   const article = get(model, ["articleDetail", "article"])
   const username = get(model, ["user", "username"])
 
-  return model.loading ? ["img", { src: "/assets/loading.gif" }] : [".article-page",
+  return !model.articleDetail ? ["img", { src: "/assets/loading.gif" }] : [".article-page",
     [".banner",
       [".container",
         ["h1", article.title],

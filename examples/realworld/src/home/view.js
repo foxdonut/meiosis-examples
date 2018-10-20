@@ -36,7 +36,7 @@ export const view = ({ actions, articles, popularTags }) => model => {
               content.tagFeedComponent
             ]
           ],
-          model.loading ? ["img", { src: "/assets/loading.gif" }] : articles(model)
+          model.articles ? articles(model) : ["img", { src: "/assets/loading.gif" }]
         ],
         [".col-md-3",
           [".sidebar", popularTags(model)]

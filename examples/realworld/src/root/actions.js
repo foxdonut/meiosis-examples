@@ -1,6 +1,6 @@
 import O from "patchinko/constant"
 
-import { articlesApi, popularTagsApi } from "../services"
+import { articlesApi, popularTagsApi, profileApi } from "../services"
 
 export const actions = ({ update }) => {
   const loadArticles = params => update(model => Promise.all([
@@ -8,7 +8,7 @@ export const actions = ({ update }) => {
     popularTagsApi.getList()
   ]).then(
     ([articles, tags]) => update(Object.assign(articles, tags,
-      { articlesFilter: O(params), loading: false }))
+      { articlesFilter: O(params) }))
   ))
 
   // FIXME: do actions call update or just return patches?
@@ -17,11 +17,14 @@ export const actions = ({ update }) => {
     articlesApi.getComments(slug)
   ]).then(
     ([articleDetail, comments]) =>
-      update({ articleDetail: Object.assign(articleDetail, comments), loading: false })
+      update({ articleDetail: Object.assign(articleDetail, comments) })
   )
+
+  const loadProfile = ({ username }) => profileApi.get(username).then(update)
 
   return {
     loadArticles,
-    loadArticle
+    loadArticle,
+    loadProfile
   }
 }
