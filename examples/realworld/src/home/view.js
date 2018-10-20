@@ -4,7 +4,7 @@ export const view = ({ actions, articles, popularTags }) => model => {
   const content = model.articlesFilter.tag ? {
     globalFeed: false,
     tagFeedComponent: ["li.nav-item",
-      ["a.nav-link.active", "#" + model.articlesFilter.tag]
+      ["a.nav-link.active", `#${model.articlesFilter.tag}`]
     ]
   } : {
     globalFeed: true,

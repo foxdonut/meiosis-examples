@@ -12,11 +12,12 @@ export const actions = ({ update }) => {
   ))
 
   // FIXME: do actions call update or just return patches?
-  const loadArticle = slug => Promise.all([
+  const loadArticle = ({ slug }) => Promise.all([
     articlesApi.getSingle(slug),
     articlesApi.getComments(slug)
   ]).then(
-    ([articleDetail, comments]) => update({ articleDetail: Object.assign(articleDetail, comments) })
+    ([articleDetail, comments]) =>
+      update({ articleDetail: Object.assign(articleDetail, comments), loading: false })
   )
 
   return {

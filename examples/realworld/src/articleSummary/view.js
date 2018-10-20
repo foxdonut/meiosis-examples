@@ -1,10 +1,13 @@
+import { compose, constant, preventDefault } from "../util/fp"
+import { defaultImage } from "../util/view"
+
 export const view = ({ actions }) => model => {
   const username = model.author.username
 
   return [".article-preview",
     [".article-meta",
       ["a", /*profileLink(username),*/
-        model.author.image && ["img", { src: model.author.image }]
+        ["img", { src: model.author.image || defaultImage }]
       ],
       [".info",
         ["a.author", /*profileLink(username),*/ username],
@@ -14,16 +17,27 @@ export const view = ({ actions }) => model => {
         ["button.btn.btn-sm.btn-outline-primary",
           { onClick: () => actions.favoriteArticle(model.slug) },
           ["i.ion-heart"],
-          ["span", " ", model.favoritesCount, " "]
+          ["span", ` ${model.favoritesCount} `]
         ]
       ]
     ],
-    ["a.preview-link", { href: `#/article/${model.slug}` },
-      ["h1", model.title],
-      ["p", model.description],
-      ["span", "Read more..."],
+    [".preview-link",
+      ["a.preview-link", { href: `#/article/${model.slug}` },
+        ["h1", model.title],
+        ["p", model.description],
+        ["span", "Read more..."]
+      ],
       ["ul.tag-list",
-        model.tagList.map(tag => ["li.tag-default.tag-pill.tag-outline", tag])
+        // FIXME: use a tag route
+        model.tagList.map(tag =>
+          ["li.tag-default.tag-pill.tag-outline",
+            ["a[href=#]",
+              { onClick: compose(actions.tagFilter, constant(tag), preventDefault) },
+              tag
+            ]
+          ]
+        )
+
       ]
     ]
   ]

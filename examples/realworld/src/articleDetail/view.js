@@ -1,11 +1,11 @@
 import marked from "marked"
 
-import { defaultTo, thrush } from "../util/fp"
+import { defaultTo, get, thrush } from "../util/fp"
 
 const isAuthor = (username, article) => article.author.username === username
 
 const authorMeta = article => [
-  ["a.btn.btn-outline-secondary.btn-sm[href='/editor/" + article.slug + "']",
+  [`a.btn.btn-outline-secondary.btn-sm[href='/editor/${article.slug}']`,
     ["i.ion-edit"],
     " Edit Article"
   ],
@@ -19,14 +19,14 @@ const nonAuthorMeta = article => [
   ["button.btn.btn-sm.btn-outline-secondary",
     ["i.ion-plus-round"],
     ["span", {innerHTML: "&nbsp"}],
-    "Follow " + article.author.username
+    `Follow ${article.author.username}`
   ],
   ["span", {innerHTML: "&nbsp;"}],
   ["button.btn.btn-sm.btn-outline-primary",
     ["i.ion-heart"],
     ["span", {innerHTML: "&nbsp;"}],
     "Favorite Post ",
-    ["span.counter", "(" + article.favoritesCount + ")"]
+    ["span.counter", `(${article.favoritesCount})`]
   ]
 ]
 
@@ -41,11 +41,10 @@ const articleMeta = (article, username) =>
   ]
 
 export const view = ({ actions }) => model => {
-  const article = model.articleDetail.article
-  //const username = path(["user", "username"], model) //FIXME
-  const username = "DUCK"
+  const article = get(model, ["articleDetail", "article"])
+  const username = get(model, ["user", "username"])
 
-  return [".article-page",
+  return model.loading ? ["img", { src: "/assets/loading.gif" }] : [".article-page",
     [".banner",
       [".container",
         ["h1", article.title],

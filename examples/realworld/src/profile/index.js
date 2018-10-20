@@ -1,14 +1,7 @@
-import { createActions } from "realworld-common/src/profile/actions";
-import { createView } from "./view";
+import { actions } from "./actions"
+import { view } from "./view"
 
-import { articles } from "../articles";
-
-export const profile = {
-  create: update => {
-    const components = {
-      Articles: articles.create(update)
-    };
-    const actions = createActions(update);
-    return createView(actions, components);
-  }
-};
+export const Profile = {
+  actions,
+  view
+}

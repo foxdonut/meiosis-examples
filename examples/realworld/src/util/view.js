@@ -21,3 +21,5 @@ const h = sv(node =>
 )
 
 export const render = element => view => m.render(element, h(view))
+
+export const defaultImage = "/assets/smiley-cyrus.jpg"

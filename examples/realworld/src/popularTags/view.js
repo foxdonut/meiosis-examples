@@ -4,7 +4,8 @@ export const view = ({ actions }) => model => [
   ["p", "Popular Tags"],
 
   [".tag-list", defaultTo([], path(["tags"], model)).map(tag =>
-    ["a.tag-pill.tag-default[href='']",
+    ["a.tag-pill.tag-default[href=#]",
+      // FIXME: use a tag route
       { onClick: compose(actions.tagFilter, constant(tag), preventDefault) },
       tag
     ]

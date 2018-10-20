@@ -1,4 +1,5 @@
-import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage, SettingsPage }
+import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage,
+  SettingsPage, ProfilePage }
   from "../util/router"
 
 import { verify } from "./verify"
@@ -14,6 +15,7 @@ import { Login } from "../login"
 import { ArticleDetail } from "../articleDetail"
 import { ArticleEdit } from "../articleEdit"
 import { Settings } from "../settings"
+import { Profile } from "../profile"
 
 export const Root = {
   dependencies: {
@@ -24,7 +26,8 @@ export const Root = {
     [LoginPage]: Login,
     [ArticleDetailPage]: ArticleDetail,
     [ArticleEditPage]: ArticleEdit,
-    [SettingsPage]: Settings
+    [SettingsPage]: Settings,
+    [ProfilePage]: Profile
   },
   verify,
   model,

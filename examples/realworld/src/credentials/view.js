@@ -7,7 +7,7 @@ export const view = options => ({ actions }) => {
   const id = options.method
 
   return model => {
-    const errors = Object.keys(model[id].errors || {}).map(key => key + " " + model[id].errors[key])
+    const errors = Object.keys(model[id].errors || {}).map(key => `${key} ${model[id].errors[key]}`)
 
     return [".auth-page",
       [".container page",

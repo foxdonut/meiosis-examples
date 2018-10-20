@@ -8,6 +8,7 @@ export const RegisterPage = "RegisterPage"
 export const ArticleDetailPage = "ArticleDetailPage"
 export const ArticleEditPage = "ArticleEditPage"
 export const SettingsPage = "SettingsPage"
+export const ProfilePage = "ProfilePage"
 
 const prefix = "#"
 
@@ -15,9 +16,10 @@ const routeMappings = {
   "/": { pageId: HomePage, loading: true },
   "/login": { pageId: LoginPage, login: {} },
   "/register": { pageId: RegisterPage, register: {} },
-  "/article/:slug": { pageId: ArticleDetailPage },
+  "/article/:slug": { pageId: ArticleDetailPage, loading: true },
   "/editor": { pageId: ArticleEditPage, articleEdit: {} },
-  "/settings": { pageId: SettingsPage }
+  "/settings": { pageId: SettingsPage },
+  "/profile/:username": { pageId: ProfilePage }
 }
 
 const urlMapper = Mapper({ query: true })
@@ -25,16 +27,13 @@ const urlMapper = Mapper({ query: true })
 const routeLookup = Object.keys(routeMappings).reduce((result, key) =>
   assoc(routeMappings[key].pageId, key, result), {})
 
-export const parseUrl = (url = document.location.hash) => {
+export const parseUrl = (url = document.location.hash || "#/") => {
   const mapped = urlMapper.map(url.substring(1), routeMappings)
   if (mapped) {
     const patch = mapped.match
     return Object.assign(patch, { url, params: mapped.values })
   }
 }
-
-export const listenToRouteChanges = update =>
-  window.onpopstate = () => update(parseUrl())
 
 export const getUrl = (id, params = {}) => {
   const route = routeLookup[id] || "/"
@@ -43,3 +42,6 @@ export const getUrl = (id, params = {}) => {
 }
 
 export const navigateTo = (id, params) => parseUrl(getUrl(id, params))
+
+export const listenToRouteChanges = update =>
+  window.onpopstate = () => update(parseUrl())

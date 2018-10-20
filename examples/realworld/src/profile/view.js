@@ -1,28 +1,28 @@
-import { profileLink } from "../util"
+import { defaultImage } from "../util/view"
 
-export const createView = (actions, components) => ({
+export const view = ({ actions, articles }) =>
+  /*
   init: (username, isFavorites) => {
     actions.loadProfile(username)
     actions.loadArticles(username, isFavorites)
   },
-  view: model => {
-    const username = model.profile.username
+  */
+  model => {
+    const username = model.user.username
     const isFavorites = false//vnode.attrs.favorites
-    const myActive = isFavorites ? "" : ".active"
-    const favActive = isFavorites ? ".active" : ""
 
     return [".profile-page",
       [".user-info",
         [".container",
           [".row",
             [".col-xs-12.col-md-10.offset-md-1",
-              ["img.user-img", { src: model.profile.image }],
+              ["img.user-img", { src: model.user.image || defaultImage }],
               ["h4", username],
-              ["p", model.profile.bio],
+              ["p", model.user.bio],
               ["button.btn.btn-sm.btn-outline-secondary.action-btn",
                 ["i.ion-plus-round"],
-                ["span", {innerHTML: "&nbsp;"}],
-                "Follow " + username
+                ["span", { innerHTML: "&nbsp;" }],
+                `Follow ${username}`
               ]
             ]
           ]
@@ -34,17 +34,16 @@ export const createView = (actions, components) => ({
             [".articles-toggle",
               ["ul.nav.nav-pills.outline-active",
                 ["li.nav-item",
-                  ["a.nav-link" + myActive, profileLink(username, false), "My Articles"]
+                  ["a.nav-link", { className: { active: !isFavorites } }, "My Articles"]
                 ],
                 ["li.nav-item",
-                  ["a.nav-link" + favActive, profileLink(username, true), "Favorited Articles"]
+                  ["a.nav-link", { className: { active: isFavorites } }, "Favorited Articles"]
                 ]
               ]
-            ],
-            [components.Articles, { model } ]
+            ]/*,
+            articles(model)*/
           ]
         ]
       ]
     ]
   }
-})

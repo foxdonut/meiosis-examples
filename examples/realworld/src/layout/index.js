@@ -1,4 +1,4 @@
-import { HomePage, LoginPage, RegisterPage, ArticleEditPage, SettingsPage, getUrl }
+import { HomePage, LoginPage, RegisterPage, ArticleEditPage, SettingsPage, ProfilePage, getUrl }
   from "../util/router"
 
 export const Header = {
@@ -26,7 +26,8 @@ export const Header = {
               ]
             ],
             ["li.nav-item", active("username"),
-              ["a.nav-link", { href: "/@" + model.user.username },
+              ["a.nav-link",
+                { href: getUrl(ProfilePage, { username: model.user.username }) },
                 model.user.username]
             ]
           ] : [
