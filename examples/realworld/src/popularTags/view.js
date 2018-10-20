@@ -1,13 +1,10 @@
-import { compose, constant, defaultTo, path, preventDefault } from "../util/fp"
+import { defaultTo, path } from "../util/fp"
+import { HomePage, getUrl } from "../util/router"
 
-export const view = ({ actions }) => model => [
+export const view = () => model => [
   ["p", "Popular Tags"],
 
   [".tag-list", defaultTo([], path(["tags"], model)).map(tag =>
-    ["a.tag-pill.tag-default[href=#]",
-      // FIXME: use a tag route
-      { onClick: compose(actions.tagFilter, constant(tag), preventDefault) },
-      tag
-    ]
+    ["a.tag-pill.tag-default", { href: getUrl(HomePage, { tag }) }, tag]
   )]
 ]

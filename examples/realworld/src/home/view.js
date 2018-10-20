@@ -1,6 +1,6 @@
-import { compose, preventDefault } from "../util/fp"
+import { HomePage, getUrl } from "../util/router"
 
-export const view = ({ actions, articles, popularTags }) => model => {
+export const view = ({ articles, popularTags }) => model => {
   const content = model.articlesFilter.tag ? {
     globalFeed: false,
     tagFeedComponent: ["li.nav-item",
@@ -28,9 +28,7 @@ export const view = ({ actions, articles, popularTags }) => model => {
               ],
               ["li.nav-item",
                 ["a.nav-link",
-                  { href: "#", className: { active: content.globalFeed },
-                    onClick: compose(actions.clearTagFilter, preventDefault)
-                  },
+                  { href: getUrl(HomePage), className: { active: content.globalFeed } },
                   "Global Feed"]
               ],
               content.tagFeedComponent

@@ -11,7 +11,6 @@ export const actions = ({ update }) => {
       { articlesFilter: O(params) }))
   ))
 
-  // FIXME: do actions call update or just return patches?
   const loadArticle = ({ slug }) => Promise.all([
     articlesApi.getSingle(slug),
     articlesApi.getComments(slug)

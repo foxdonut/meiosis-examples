@@ -1,5 +1,4 @@
-import { compose, constant, preventDefault } from "../util/fp"
-import { ProfilePage, getUrl } from "../util/router"
+import { HomePage, ProfilePage, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 export const view = ({ actions }) => model => {
@@ -29,16 +28,11 @@ export const view = ({ actions }) => model => {
         ["span", "Read more..."]
       ],
       ["ul.tag-list",
-        // FIXME: use a tag route
         model.tagList.map(tag =>
           ["li.tag-default.tag-pill.tag-outline",
-            ["a[href=#]",
-              { onClick: compose(actions.tagFilter, constant(tag), preventDefault) },
-              tag
-            ]
+            ["a", { href: getUrl(HomePage, { tag }) }, tag]
           ]
         )
-
       ]
     ]
   ]
