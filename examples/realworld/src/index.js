@@ -7,18 +7,11 @@ import { createApp } from "./app"
 
 const update = stream()
 
-// This allows to call update(patch) or update(model => patch)
-const convert = (model, patch) => (typeof patch === "function") ? patch(model) : patch
-
 createApp(update).then(app => {
   const models = stream()
 
   // Stream of patches, some may be null
-  const patches = update.map(patch => {
-    const model = models()
-    const converted = convert(model, patch)
-    return converted && app.verify(model, converted)
-  })
+  const patches = update.map(patch => app.verify(models(), patch))
 
   // Only update the model for non-null patches
   patches.map(patch => patch && models(O(models(), patch)))

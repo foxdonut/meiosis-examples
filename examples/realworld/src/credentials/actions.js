@@ -4,7 +4,7 @@ import { credentialsApi, setToken } from "../services"
 import { HomePage, navigateTo } from "../util/router"
 import { pick } from "../util/fp"
 
-export const actions = ({ update }) => ({
+export const actions = update => ({
   updateCredForm: (method, field) => text => update({ [method]: O({ [field]: text }) }),
 
   sendCredentials: method => model => {

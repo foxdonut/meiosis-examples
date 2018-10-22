@@ -2,11 +2,12 @@ import O from "patchinko/constant"
 
 import { articlesApi } from "../services"
 
-export const actions = ({ update }) => ({
+export const actions = update => ({
   updateCommentField: evt => update({ comment: evt.target.value }),
 
   addComment: (slug, body) => evt => {
     evt.preventDefault()
+    //FIXME
     articlesApi.addComment(slug, { comment: { body } }).then(data => update(model => {
       model.comment = ""
       model.comments.unshift(data.comment)

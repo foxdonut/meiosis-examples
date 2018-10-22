@@ -4,7 +4,6 @@ import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage,
 
 import { verify } from "./verify"
 import { model } from "./model"
-import { actions } from "./actions"
 import { state } from "./state"
 import { view } from "./view"
 import { nextAction } from "./nextAction"
@@ -31,7 +30,6 @@ export const Root = {
   },
   verify,
   model,
-  actions,
   state,
   view,
   nextAction

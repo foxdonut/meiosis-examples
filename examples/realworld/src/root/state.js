@@ -1,6 +1,7 @@
 import O from "patchinko/constant"
 import { get } from "../util/fp"
 
+// FIXME
 const checkSignIn = model => {
   const returnTo = get(model, ["returnTo"])
   if (returnTo != null && model.user) {
@@ -17,9 +18,6 @@ const urlInLocationBar = model => {
 }
 
 export const state = model => [
-  //checkAuthentication,
   checkSignIn,
-  //navigatingToHome,
-  //navigatingToArticleDetail,
   urlInLocationBar
 ].reduce((x, f) => O(x, f(x)), model)

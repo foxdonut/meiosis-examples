@@ -1,15 +1,16 @@
 import { HomePage, ArticleDetailPage, ProfilePage } from "../util/router"
+import { services } from "./services"
 
 // FIXME: compose nextAction into components
-export const nextAction = actions => (_state, patch) => {
+export const nextAction = update => (model, patch) => {
   if (patch.pageId === HomePage) {
     //FIXME: better handling of filter params
-    actions.loadArticles({ tag: patch.params.tag, offset: patch.params.offset })
+    services.loadArticles(model, patch.params).then(update)
   }
   else if (patch.pageId === ArticleDetailPage) {
-    actions.loadArticle(patch.params)
+    services.loadArticle(patch.params).then(update)
   }
   else if (patch.pageId === ProfilePage) {
-    actions.loadProfile(patch.params)
+    services.loadProfile(patch.params).then(update)
   }
 }

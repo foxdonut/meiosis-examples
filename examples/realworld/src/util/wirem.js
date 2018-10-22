@@ -1,15 +1,8 @@
 const getFn = (component, prop) => component[prop] || (() => null)
 
-export const wireActions = (component, update, actions = {}) => {
-  Object.assign(actions, getFn(component, "actions")({ update, actions }))
-  Object.keys(component.dependencies || {}).forEach(key => {
-    wireActions(component.dependencies[key], update, actions)
-  })
-  return actions
-}
-
-export const wireView = (component, actions) => {
+export const wireView = (component, update) => {
   const dependencies = {}
+  const actions = getFn(component, "actions")(update)
   Object.keys(component.dependencies || {}).forEach(key => {
     dependencies[key] = wireView(component.dependencies[key], actions)
   })
@@ -18,9 +11,8 @@ export const wireView = (component, actions) => {
 
 export const wirem = ({ component, data, update }) => {
   const model = component.model ? () => component.model(data) : () => null
-  const actions = wireActions(component, update)
-  const view = wireView(component, actions)
-  const nextAction = component.nextAction ? component.nextAction(actions) : () => null
+  const view = wireView(component, update)
+  const nextAction = component.nextAction ? component.nextAction(update) : () => null
 
-  return Object.assign({}, component, { model, actions, view, nextAction })
+  return Object.assign({}, component, { model, view, nextAction })
 }

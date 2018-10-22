@@ -11,7 +11,7 @@ const validationSpec = {
   title: { presence: true }
 }
 
-export const actions = ({ update, actions }) => ({
+export const actions = update => ({
   updateArticleForm: (field, value) => update({
     articleEdit: O({ [field]: value })
   }),
