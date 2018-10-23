@@ -1,4 +1,4 @@
-import { assoc, compose, constant, defaultTo, omit, path, pick, pipe, tap, thrush } from "tinyfunk"
+import { assoc, compose, constant, defaultTo, omit, path, pick, pipe, prepend, tap, thrush } from "tinyfunk"
 
 // Using reduce, courtesy Barney Carroll (https://github.com/barneycarroll)
 const get = (object, path) =>
@@ -27,6 +27,7 @@ module.exports = {
   path,
   pick,
   pipe,
+  prepend,
   preventDefault: tap(evt => evt.preventDefault()),
   range,
   tap,

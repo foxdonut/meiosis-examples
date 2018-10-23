@@ -1,5 +1,5 @@
-import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleEditPage,
-  SettingsPage, ProfilePage }
+import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage,
+  ArticleEditPage, SettingsPage, ProfilePage }
   from "../util/router"
 
 import { verify } from "./verify"
@@ -23,6 +23,7 @@ export const Root = {
     [RegisterPage]: Register,
     [LoginPage]: Login,
     [ArticleDetailPage]: ArticleDetail,
+    [ArticleCreatePage]: ArticleEdit,
     [ArticleEditPage]: ArticleEdit,
     [SettingsPage]: Settings,
     [ProfilePage]: Profile

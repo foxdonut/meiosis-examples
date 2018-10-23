@@ -1,11 +1,15 @@
 import marked from "marked"
 
-import { defaultTo, get, thrush } from "../util/fp"
+import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
+import { ArticleEditPage, getUrl } from "../util/router"
+import { defaultImage } from "../util/view"
 
 const isAuthor = (username, article) => article.author.username === username
 
 const authorMeta = article => [
-  [`a.btn.btn-outline-secondary.btn-sm[href='/editor/${article.slug}']`,
+  //FIXME: use getUrl
+  ["a.btn.btn-outline-secondary.btn-sm",
+    { href: getUrl(ArticleEditPage, { slug: article.slug }) },
     ["i.ion-edit"],
     " Edit Article"
   ],
@@ -18,14 +22,11 @@ const authorMeta = article => [
 const nonAuthorMeta = article => [
   ["button.btn.btn-sm.btn-outline-secondary",
     ["i.ion-plus-round"],
-    ["span", {innerHTML: "&nbsp"}],
-    `Follow ${article.author.username}`
+    ` Follow ${article.author.username} `
   ],
-  ["span", {innerHTML: "&nbsp;"}],
   ["button.btn.btn-sm.btn-outline-primary",
     ["i.ion-heart"],
-    ["span", {innerHTML: "&nbsp;"}],
-    "Favorite Post ",
+    " Favorite Post ",
     ["span.counter", `(${article.favoritesCount})`]
   ]
 ]
@@ -58,7 +59,7 @@ export const view = ({ actions }) => model => {
           [".tag-list",
             article.tagList.map(tag => ["span.tag-pill.tag-default", tag])
           ],
-          ["p", {innerHTML: marked(article.body, { sanitize: true })}]
+          ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
         ]
       ],
       ["hr"],
@@ -70,12 +71,14 @@ export const view = ({ actions }) => model => {
           ["form.card.comment-form",
             [".card-block",
               ["textarea.form-control", { placeholder: "Write a comment...", rows: "3",
-                onInput: actions.updateCommentField, value: model.comment }]
+                onInput: evt => actions.updateCommentField(evt.target.value),
+                value: model.articleDetail.comment }]
             ],
             [".card-footer",
-              ["img.comment-author-img", { src: "http://i.imgur.com/Qr71crq.jpg" }],
+              ["img.comment-author-img", { src: model.user.image || defaultImage }],
               ["button.btn.btn-sm.btn-primary",
-                { onClick: actions.addComment(article.slug, model.comment) }, "Post Comment"]
+                { onClick: compose(() => actions.addComment(article.slug, model.articleDetail.comment), preventDefault) },
+                "Post Comment"]
             ]
           ],
           defaultTo([], model.articleDetail.comments).map(comment =>
@@ -84,11 +87,11 @@ export const view = ({ actions }) => model => {
                 ["p.card-text", comment.body]
               ],
               [".card-footer",
-                ["a.comment-author[href='']",
-                  /*["img.comment-author-img", { src: comment.author.image }]*/
+                ["a.comment-author[href=#]",
+                  ["img.comment-author-img", { src: comment.author.image || defaultImage }]
                 ],
-                ["span", {innerHTML: "&nbsp;"}],
-                ["a.comment-author[href='']", comment.author.username],
+                " ",
+                ["a.comment-author[href=#]", comment.author.username],
                 ["span.date-posted", new Date(comment.createdAt).toDateString()],
                 ["span.mod-options",
                   ["i.ion-edit"],

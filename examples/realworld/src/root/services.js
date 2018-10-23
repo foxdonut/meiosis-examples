@@ -4,7 +4,7 @@ import { articlesApi, popularTagsApi, profileApi } from "../services"
 
 export const services = {
   loadArticles: (model, params) => Promise.all([
-    articlesApi.getList(Object.assign(model.articlesFilter, params)),
+    articlesApi.getList(Object.assign({}, model.articlesFilter, params, { tag: params.tag })),
     popularTagsApi.getList()
   ]).then(
     ([articles, tags]) => Object.assign(articles, tags,
@@ -15,8 +15,7 @@ export const services = {
     articlesApi.getSingle(slug),
     articlesApi.getComments(slug)
   ]).then(
-    ([articleDetail, comments]) =>
-      ({ articleDetail: Object.assign(articleDetail, comments) })
+    ([article, comments]) => Object.assign(article, comments)
   ),
 
   loadProfile: ({ username }) => profileApi.get(username)

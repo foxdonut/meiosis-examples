@@ -1,21 +1,23 @@
 import O from "patchinko/constant"
 
 import { articlesApi } from "../services"
+import { prepend } from "../util/fp"
 
 export const actions = update => ({
-  updateCommentField: evt => update({ comment: evt.target.value }),
+  // FIXME: use id for articleDetail
+  updateCommentField: comment => update({ articleDetail: O({ comment }) }),
 
-  addComment: (slug, body) => evt => {
-    evt.preventDefault()
-    //FIXME
-    articlesApi.addComment(slug, { comment: { body } }).then(data => update(model => {
-      model.comment = ""
-      model.comments.unshift(data.comment)
-      return model
+  addComment: (slug, body) => {
+    articlesApi.addComment(slug, { comment: { body } }).then(data => update({
+      articleDetail: O({ comment: "", comments: O(list => prepend(data.comment, list)) })
     }))
   },
 
   deleteComment: (slug, id) => () => articlesApi.deleteComment(slug, id).then(() =>
-    update({ comments: O(comments => comments.filter(comment => comment.id !== id)) })
+    update({
+      articleDetail: O({
+        comments: O(list => list.filter(comment => comment.id !== id))
+      })
+    })
   )
 })

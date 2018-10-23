@@ -1,4 +1,4 @@
-import { HomePage, LoginPage, RegisterPage, ArticleEditPage, SettingsPage, ProfilePage, getUrl }
+import { HomePage, LoginPage, RegisterPage, ArticleCreatePage, SettingsPage, ProfilePage, getUrl }
   from "../util/router"
 import { get } from "../util/fp"
 
@@ -14,8 +14,8 @@ export const Header = {
             ["a.nav-link", { href: getUrl(HomePage) }, "Home"]
           ],
           model.user ? [
-            ["li.nav-item", active(ArticleEditPage),
-              ["a.nav-link", { href: getUrl(ArticleEditPage) },
+            ["li.nav-item", active(ArticleCreatePage),
+              ["a.nav-link", { href: getUrl(ArticleCreatePage) },
                 ["i.ion-compose"],
                 " New Post"
               ]

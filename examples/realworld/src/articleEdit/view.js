@@ -1,15 +1,15 @@
-import { defaultTo, path, thrush } from "../util/fp"
+import { defaultTo, get, thrush } from "../util/fp"
 
 const displayFieldErrors = errors => ["ul.error-messages", errors.map(err => ["li", err])]
 
 const getFieldErrors = validationErrors => field =>
-  thrush(defaultTo([], path([field], defaultTo({}, validationErrors))), displayFieldErrors)
+  thrush(defaultTo([], get(defaultTo({}, validationErrors), [field])), displayFieldErrors)
 
 export const view = ({ actions }) => model => {
-  const article = model.articleEdit
-  const fieldErrors = getFieldErrors(article.validationErrors)
+  const article = get(model, ["articleEdit", "article"])
+  const fieldErrors = getFieldErrors(article && article.validationErrors)
 
-  return [".editor-page",
+  return !article ? ["img", { src: "/assets/loading.gif" }] : [".editor-page",
     [".container page",
       [".row",
         [".col-md-10.offset-md-1.col-xs-12",

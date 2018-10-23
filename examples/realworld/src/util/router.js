@@ -6,19 +6,20 @@ export const HomePage = "HomePage"
 export const LoginPage = "LoginPage"
 export const RegisterPage = "RegisterPage"
 export const ArticleDetailPage = "ArticleDetailPage"
+export const ArticleCreatePage = "ArticleCreatePage"
 export const ArticleEditPage = "ArticleEditPage"
 export const SettingsPage = "SettingsPage"
 export const ProfilePage = "ProfilePage"
 
 const prefix = "#"
 
-// Use functions to produce fresh objects every time, else they get clobbered
 const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
   "/login": () => ({ pageId: LoginPage, login: {} }),
   "/register": () => ({ pageId: RegisterPage, register: {} }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, articleDetail: null }),
-  "/editor": () => ({ pageId: ArticleEditPage, articleEdit: {} }),
+  "/editor/:slug": () => ({ pageId: ArticleEditPage, articleEdit: null }),
+  "/editor": () => ({ pageId: ArticleCreatePage, articleEdit: {} }),
   "/settings": () => ({ pageId: SettingsPage }),
   "/profile/:username": () => ({ pageId: ProfilePage, profile: null })
 }

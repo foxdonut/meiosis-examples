@@ -26,7 +26,6 @@ createApp(update).then(app => {
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   const meiosisTracer = require("meiosis-tracer")
   meiosisTracer({ streams: [
-    { stream: models, label: "models" },
-    { stream: states, label: "states" }
+    { stream: models, label: "models" }
   ] })
 })
