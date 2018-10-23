@@ -6,7 +6,6 @@ import { verify } from "./verify"
 import { model } from "./model"
 import { state } from "./state"
 import { view } from "./view"
-import { nextAction } from "./nextAction"
 import { Header, Footer } from "../layout"
 import { Home } from "../home"
 import { Register } from "../register"
@@ -31,6 +30,5 @@ export const Root = {
   verify,
   model,
   state,
-  view,
-  nextAction
+  view
 }

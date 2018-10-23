@@ -12,26 +12,27 @@ export const ProfilePage = "ProfilePage"
 
 const prefix = "#"
 
+// Use functions to produce fresh objects every time, else they get clobbered
 const routeMappings = {
-  "/": { pageId: HomePage, articles: null },
-  "/login": { pageId: LoginPage, login: {} },
-  "/register": { pageId: RegisterPage, register: {} },
-  "/article/:slug": { pageId: ArticleDetailPage, articleDetail: null },
-  "/editor": { pageId: ArticleEditPage, articleEdit: {} },
-  "/settings": { pageId: SettingsPage },
-  "/profile/:username": { pageId: ProfilePage, profile: null }
+  "/": () => ({ pageId: HomePage, articles: null }),
+  "/login": () => ({ pageId: LoginPage, login: {} }),
+  "/register": () => ({ pageId: RegisterPage, register: {} }),
+  "/article/:slug": () => ({ pageId: ArticleDetailPage, articleDetail: null }),
+  "/editor": () => ({ pageId: ArticleEditPage, articleEdit: {} }),
+  "/settings": () => ({ pageId: SettingsPage }),
+  "/profile/:username": () => ({ pageId: ProfilePage, profile: null })
 }
 
 const urlMapper = Mapper({ query: true })
 
 const routeLookup = Object.keys(routeMappings).reduce((result, key) =>
-  assoc(routeMappings[key].pageId, key, result), {})
+  assoc(routeMappings[key]().pageId, key, result), {})
 
 export const parseUrl = (url = document.location.hash || "#/") => {
   const mapped = urlMapper.map(url.substring(1), routeMappings)
   if (mapped) {
     const patch = mapped.match
-    return Object.assign(patch, { url, params: mapped.values })
+    return Object.assign({}, patch(), { url, params: mapped.values })
   }
 }
 

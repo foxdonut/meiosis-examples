@@ -1,4 +1,5 @@
 import { view } from "./view"
+import { nextAction } from "./nextAction"
 import { Articles } from "../articles"
 import { PopularTags } from "../popularTags"
 
@@ -7,5 +8,6 @@ export const Home = {
     articles: Articles,
     popularTags: PopularTags
   },
-  view
+  view,
+  nextAction
 }
