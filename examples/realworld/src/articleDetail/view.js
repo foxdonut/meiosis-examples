@@ -7,7 +7,6 @@ import { defaultImage } from "../util/view"
 const isAuthor = (username, article) => article.author.username === username
 
 const authorMeta = article => [
-  //FIXME: use getUrl
   ["a.btn.btn-outline-secondary.btn-sm",
     { href: getUrl(ArticleEditPage, { slug: article.slug }) },
     ["i.ion-edit"],
@@ -42,10 +41,10 @@ const articleMeta = (article, username) =>
   ]
 
 export const view = ({ actions }) => model => {
-  const article = get(model, ["articleDetail", "article"])
+  const article = model.article
   const username = get(model, ["user", "username"])
 
-  return !model.articleDetail ? ["img", { src: "/assets/loading.gif" }] : [".article-page",
+  return !article ? ["img", { src: "/assets/loading.gif" }] : [".article-page",
     [".banner",
       [".container",
         ["h1", article.title],
@@ -72,16 +71,16 @@ export const view = ({ actions }) => model => {
             [".card-block",
               ["textarea.form-control", { placeholder: "Write a comment...", rows: "3",
                 onInput: evt => actions.updateCommentField(evt.target.value),
-                value: model.articleDetail.comment }]
+                value: model.comment }]
             ],
             [".card-footer",
               ["img.comment-author-img", { src: model.user.image || defaultImage }],
               ["button.btn.btn-sm.btn-primary",
-                { onClick: compose(() => actions.addComment(article.slug, model.articleDetail.comment), preventDefault) },
+                { onClick: compose(() => actions.addComment(article.slug, model.comment), preventDefault) },
                 "Post Comment"]
             ]
           ],
-          defaultTo([], model.articleDetail.comments).map(comment =>
+          defaultTo([], model.comments).map(comment =>
             [".card",
               [".card-block",
                 ["p.card-text", comment.body]

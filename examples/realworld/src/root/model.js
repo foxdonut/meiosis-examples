@@ -5,9 +5,5 @@ export const model = data => Object.assign({
     tag: "",
     author: "",
     favorited: ""
-  },
-  articleDetail: {},
-  articleEdit: {},
-  login: {},
-  register: {}
+  }
 }, data)

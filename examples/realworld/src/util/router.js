@@ -17,9 +17,9 @@ const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
   "/login": () => ({ pageId: LoginPage, login: {} }),
   "/register": () => ({ pageId: RegisterPage, register: {} }),
-  "/article/:slug": () => ({ pageId: ArticleDetailPage, articleDetail: null }),
-  "/editor/:slug": () => ({ pageId: ArticleEditPage, articleEdit: null }),
-  "/editor": () => ({ pageId: ArticleCreatePage, articleEdit: {} }),
+  "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),
+  "/editor/:slug": () => ({ pageId: ArticleEditPage, article: null }),
+  "/editor": () => ({ pageId: ArticleCreatePage, article: {} }),
   "/settings": () => ({ pageId: SettingsPage }),
   "/profile/:username": () => ({ pageId: ProfilePage, profile: null })
 }

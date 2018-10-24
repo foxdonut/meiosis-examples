@@ -6,7 +6,7 @@ const getFieldErrors = validationErrors => field =>
   thrush(defaultTo([], get(defaultTo({}, validationErrors), [field])), displayFieldErrors)
 
 export const view = ({ actions }) => model => {
-  const article = get(model, ["articleEdit", "article"])
+  const article = model.article
   const fieldErrors = getFieldErrors(article && article.validationErrors)
 
   return !article ? ["img", { src: "/assets/loading.gif" }] : [".editor-page",

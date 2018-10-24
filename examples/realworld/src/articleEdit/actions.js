@@ -13,10 +13,10 @@ const validationSpec = {
 
 export const actions = update => ({
   updateArticleForm: (field, value) => update({
-    articleEdit: O({ [field]: value })
+    article: O({ [field]: value })
   }),
   updateArticleTags: tags => update({
-    articleEdit: O({
+    article: O({
       tags,
       tagList: (tags || "")
         .split(",")
@@ -28,7 +28,7 @@ export const actions = update => ({
   publish: article => evt => {
     evt.preventDefault()
     const validationErrors = validate(article, validationSpec)
-    update({ articleEdit: O({ validationErrors }) })
+    update({ article: O({ validationErrors }) })
     if (!validationErrors) {
       articlesApi.publish({ article: omit(["tags"], article) })
         .then(() => update(navigateTo(HomePage)))
