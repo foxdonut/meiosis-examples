@@ -1,43 +1,47 @@
 import marked from "marked"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
-import { ArticleEditPage, getUrl } from "../util/router"
+import { ArticleEditPage, ProfilePage, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 const isAuthor = (username, article) => article.author.username === username
 
-const authorMeta = article => [
+const authorMeta = actions => article => [
   ["a.btn.btn-outline-secondary.btn-sm",
     { href: getUrl(ArticleEditPage, { slug: article.slug }) },
     ["i.ion-edit"],
     " Edit Article"
   ],
   ["button.btn.btn-outline-danger.btn-sm",
+    { onClick: () => actions.deleteArticle(article.slug) },
     ["i.ion-trash-a"],
     " Delete Article"
   ]
 ]
 
-const nonAuthorMeta = article => [
+const nonAuthorMeta = (model, actions) => article => [
   ["button.btn.btn-sm.btn-outline-secondary",
     ["i.ion-plus-round"],
     ` Follow ${article.author.username} `
   ],
   ["button.btn.btn-sm.btn-outline-primary",
+    { onClick: () => actions.favoriteArticle(model, article.slug) },
     ["i.ion-heart"],
     " Favorite Post ",
     ["span.counter", `(${article.favoritesCount})`]
   ]
 ]
 
-const articleMeta = (article, username) =>
+const articleMeta = (model, actions, article, username) =>
   [".article-meta",
-    ["a", /*profileLink(article.author.username),*/ /*["img", { src: article.author.image }]*/],
+    ["a", { href: getUrl(ProfilePage, { username: article.author.username }) },
+      ["img", { src: article.author.image || defaultImage }]],
     [".info",
-      ["a.author", /*profileLink(article.author.username),*/ article.author.username],
+      ["a.author", { href: getUrl(ProfilePage, { username: article.author.username }) },
+        article.author.username],
       ["span.date", new Date(article.createdAt).toDateString()]
     ],
-    thrush(article, isAuthor(username, article) ? authorMeta : nonAuthorMeta)
+    thrush(article, isAuthor(username, article) ? authorMeta(actions) : nonAuthorMeta(model, actions))
   ]
 
 export const view = ({ actions }) => model => {
@@ -48,7 +52,7 @@ export const view = ({ actions }) => model => {
     [".banner",
       [".container",
         ["h1", article.title],
-        articleMeta(article, username)
+        articleMeta(model, actions, article, username)
       ]
     ],
     [".container page",
@@ -61,9 +65,10 @@ export const view = ({ actions }) => model => {
           ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
         ]
       ],
+      ["div", "TODO", ["ul", ["li", "Follow other user"], ["li", "Tag link"]]],
       ["hr"],
       [".article-actions",
-        articleMeta(article, username)
+        articleMeta(model, actions, article, username)
       ],
       [".row",
         [".col-xs-12.col-md-8.offset-md-2",

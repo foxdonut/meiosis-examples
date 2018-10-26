@@ -3,7 +3,7 @@ import validate from "validate.js"
 
 import { articlesApi } from "../services"
 import { HomePage, navigateTo } from "../util/router"
-import { omit } from "../util/fp"
+import { pick } from "../util/fp"
 
 const validationSpec = {
   body: { presence: true },
@@ -25,13 +25,13 @@ export const actions = update => ({
     })
   }),
 
-  publish: article => evt => {
-    evt.preventDefault()
+  publish: article => {
     const validationErrors = validate(article, validationSpec)
     update({ article: O({ validationErrors }) })
     if (!validationErrors) {
-      articlesApi.publish({ article: omit(["tags"], article) })
-        .then(() => update(navigateTo(HomePage)))
+      articlesApi.publish({
+        article: pick(["title", "description", "body", "tagList"], article)
+      }, article.slug).then(() => update(navigateTo(HomePage)))
     }
   }
 })

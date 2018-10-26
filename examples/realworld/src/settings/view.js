@@ -3,6 +3,8 @@ import { compose, preventDefault } from "../util/fp"
 export const view = ({ actions }) => model =>
   [".settings-page",
     [".container page",
+      [".row", [".col-md-6.offset-md-3.col-xs-12", ["div", "TODO", ["ul", ["li", "Don't modify username directly"],
+        ["li", "What happens after Update Settings?"]]]]],
       [".row",
         [".col-md-6.offset-md-3.col-xs-12",
           ["h1.text-xs-center", "Your Settings"],

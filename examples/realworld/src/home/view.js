@@ -15,10 +15,11 @@ export const view = ({ articles, popularTags }) => model => {
     !model.user && [".banner",
       [".container",
         ["h1.logo-font", "conduit"],
-        ["p", "A place to share your knowledge."]
+        ["p", "A place to share your ", ["i", "Meiosis"], " knowledge."]
       ]
     ],
     [".container page",
+      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed"], ["li", "Go from #tagged to Global Feed"]]]]],
       [".row",
         [".col-md-9",
           [".feed-toggle",

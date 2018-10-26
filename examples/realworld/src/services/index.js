@@ -32,8 +32,8 @@ export const articlesApi = {
   deleteComment: (slug, id) => request(`/articles/${slug}/comments/${id}`,
     O(authHeader(), { method: "DELETE" })),
 
-  publish: data => request("/articles" + (data.article.slug ? "/" + data.article.slug : ""),
-    O(authHeader(), { data, method: (data.article.slug ? "PUT" : "POST") })),
+  publish: (data, slug) => request("/articles" + (slug ? "/" + slug : ""),
+    O(authHeader(), { data, method: (slug ? "PUT" : "POST") })),
 
   unpublish: slug => request(`/articles/${slug}`, O(authHeader(), { method: "DELETE" })),
 
