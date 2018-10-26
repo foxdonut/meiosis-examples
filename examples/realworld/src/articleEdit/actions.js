@@ -6,9 +6,9 @@ import { HomePage, navigateTo } from "../util/router"
 import { pick } from "../util/fp"
 
 const validationSpec = {
-  body: { presence: true },
-  description: { presence: true },
-  title: { presence: true }
+  body: { presence: { allowEmpty: false } },
+  description: { presence: { allowEmpty: false } },
+  title: { presence: { allowEmpty: false } }
 }
 
 export const actions = update => ({

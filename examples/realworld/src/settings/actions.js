@@ -1,15 +1,19 @@
 import O from "patchinko/constant"
 
 import { profileApi, setToken } from "../services"
-import { pick } from "../util/fp"
-import { HomePage, navigateTo } from "../util/router"
+import { HomePage, ProfilePage, navigateTo } from "../util/router"
+import { omit } from "../util/fp"
 
 export const actions = update => ({
   updateSettingsForm: (field, value) =>
-    update({ user: O({ [field]: value }) }),
+    update({ settings: O({ [field]: value }) }),
 
-  updateSettings: user => profileApi.update(
-    { user: pick(["email", "username", "password", "image", "bio"], user) }),
+  updateSettings: settings => profileApi.update({ user: omit(["errors"], settings) })
+    .then(() => update(Object.assign(
+      { user: O(settings) },
+      navigateTo(ProfilePage, { username: settings.username })
+    )))
+    .catch(err => update({ settings: O({ errors: err.errors }) })),
 
   logout: () => {
     setToken("")

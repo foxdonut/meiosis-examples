@@ -11,7 +11,6 @@ export const view = ({ actions }) => model => {
 
   return !article ? ["img", { src: "/assets/loading.gif" }] : [".editor-page",
     [".container page",
-      ["row", [".col-md-10.offset-md-1.col-xs-12", ["div", "TODO", ["ul", ["li", "Validation errors"]]]]],
       [".row",
         [".col-md-10.offset-md-1.col-xs-12",
           ["form",
