@@ -6,7 +6,7 @@ export const actions = update => ({
   favoriteArticle: (model, slug) => {
     if (model.user) {
       articlesApi.favorite(slug)
-        .then(() => helpers.loadArticles(model))
+        .then(() => helpers.loadArticles())
         .then(update)
     }
     else {

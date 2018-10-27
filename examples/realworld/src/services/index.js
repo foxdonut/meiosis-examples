@@ -18,11 +18,11 @@ const authHeader = () => ({
 })
 
 export const articlesApi = {
-  getList: data => request("/articles", { data }),
+  getList: data => request("/articles", O(authHeader(), { data })),
 
   getFeed: data => request("/articles/feed", O(authHeader(), { data })),
 
-  getSingle: slug => request(`/articles/${slug}`),
+  getSingle: slug => request(`/articles/${slug}`, authHeader()),
 
   getComments: slug => request(`/articles/${slug}/comments`),
 
@@ -35,7 +35,8 @@ export const articlesApi = {
   publish: (data, slug) => request("/articles" + (slug ? "/" + slug : ""),
     O(authHeader(), { data, method: (slug ? "PUT" : "POST") })),
 
-  unpublish: slug => request(`/articles/${slug}`, O(authHeader(), { method: "DELETE" })),
+  unpublish: slug => request(`/articles/${slug}`,
+    O(authHeader(), { method: "DELETE" })),
 
   favorite: slug => request(`/articles/${slug}/favorite`,
     O(authHeader(), { method: "POST" })),

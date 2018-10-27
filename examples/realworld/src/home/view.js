@@ -19,8 +19,7 @@ export const view = ({ articles, popularTags }) => model => {
       ]
     ],
     [".container page",
-      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed"],
-        ["li", "Go from #tagged to Global Feed"], ["li", "Highlight favorited articles"]]]]],
+      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed: without FeedPage?"]]]]],
       [".row",
         [".col-md-9",
           [".feed-toggle",

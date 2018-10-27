@@ -3,8 +3,8 @@ import O from "patchinko/constant"
 import { articlesApi, popularTagsApi, profileApi } from "../services"
 
 export const helpers = {
-  loadArticles: (model, params) => Promise.all([
-    articlesApi.getList(Object.assign({}, model.articlesFilter, params, { tag: params.tag })),
+  loadArticles: params => Promise.all([
+    articlesApi.getList(params),
     popularTagsApi.getList()
   ]).then(
     ([articles, tags]) => Object.assign(articles, tags,
