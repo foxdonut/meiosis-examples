@@ -1,59 +1,67 @@
 import { get } from "../util/fp"
-import { SettingsPage, getUrl } from "../util/router"
+import { ProfilePage, SettingsPage, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
-export const view = ({ actions, articles }) =>
-  /*
-  init: (username, isFavorites) => {
-    actions.loadProfile(username)
-    actions.loadArticles(username, isFavorites)
-  },
-  */
-  model => {
-    const username = get(model, ["profile", "username"])
-    const isCurrentUser = get(model, ["profile", "id"]) === get(model, ["user", "id"])
-    const isFavorites = false//vnode.attrs.favorites
+export const view = ({ actions, articles }) => model => {
+  const username = get(model, ["profile", "username"])
+  const isCurrentUser = get(model, ["profile", "id"]) === get(model, ["user", "id"])
+  const isFavorites = !!model.articlesFilter.favorited
 
-    return !model.profile ? ["img", { src: "/assets/loading.gif" }] :
-      [".profile-page",
-        [".user-info",
-          [".container",
-            [".row",
-              [".col-xs-12.col-md-10.offset-md-1",
-                ["img.user-img", { src: model.user.image || defaultImage }],
-                ["h4", username],
-                ["p", model.user.bio],
-                isCurrentUser ?
-                  ["a.btn.btn-sm.btn-outline-secondary.action-btn",
-                    { href: getUrl(SettingsPage) },
-                    ["i.ion-gear-a"], " Edit Profile Settings"
-                  ] :
-                  ["button.btn.btn-sm.btn-outline-secondary.action-btn",
-                    ["i.ion-plus-round"], ` Follow ${username}`
-                  ]
-              ]
-            ]
-          ]
-        ],
+  return !model.profile ? ["img", { src: "/assets/loading.gif" }] :
+    [".profile-page",
+      [".user-info",
         [".container",
           [".row",
-            [".col-xs-12.col-md-10.offset-md-1"], ["div", "TODO", ["ul",
-              ["li", "My Articles"], ["li", "Favorited Articles"], ["li", "Follow other user"]]]],
-          [".row",
             [".col-xs-12.col-md-10.offset-md-1",
-              [".articles-toggle",
-                ["ul.nav.nav-pills.outline-active",
-                  ["li.nav-item",
-                    ["a.nav-link", { className: { active: !isFavorites } }, "My Articles"]
-                  ],
-                  ["li.nav-item",
-                    ["a.nav-link", { className: { active: isFavorites } }, "Favorited Articles"]
-                  ]
+              ["img.user-img", { src: model.profile.image || defaultImage }],
+              ["h4", username],
+              ["p", model.profile.bio],
+              isCurrentUser
+                ? ["a.btn.btn-sm.btn-outline-secondary.action-btn",
+                  { href: getUrl(SettingsPage) },
+                  ["i.ion-gear-a"], " Edit Profile Settings"
                 ]
-              ]/*,
-              articles(model)*/
+                : model.profile.following
+                  ? ["button.btn.btn-sm.btn-outline-secondary.action-btn",
+                    { onClick: () => actions.unfollow(username) },
+                    ["i.ion-plus-round"], ` Unfollow ${username}`
+                  ]
+                  : ["button.btn.btn-sm.btn-outline-secondary.action-btn",
+                    { onClick: () => actions.follow(username) },
+                    ["i.ion-plus-round"], ` Follow ${username}`
+                  ]
             ]
           ]
         ]
+      ],
+      [".container",
+        [".row",
+          [".col-xs-12.col-md-10.offset-md-1"], ["div", "TODO", ["ul",
+            ["li", "My Articles"], ["li", "Favorited Articles"], ["li", "Follow other user"],
+            ["li", "Suspend"]]]],
+        [".row",
+          [".col-xs-12.col-md-10.offset-md-1",
+            [".articles-toggle",
+              ["ul.nav.nav-pills.outline-active",
+                ["li.nav-item",
+                  ["a.nav-link",
+                    { className: { active: !isFavorites },
+                      href: getUrl(ProfilePage, { username, author: username })
+                    },
+                    "My Articles"]
+                ],
+                ["li.nav-item",
+                  ["a.nav-link",
+                    { className: { active: isFavorites },
+                      href: getUrl(ProfilePage, { username, favorited: username })
+                    },
+                    "Favorited Articles"]
+                ]
+              ]
+            ],
+            articles(model)
+          ]
+        ]
       ]
-  }
+    ]
+}

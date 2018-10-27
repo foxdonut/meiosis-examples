@@ -6,4 +6,4 @@ const urlInLocationBar = model => {
   }
 }
 
-export const state = urlInLocationBar
+export const service = urlInLocationBar

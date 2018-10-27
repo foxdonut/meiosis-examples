@@ -3,6 +3,7 @@ import Mapper from "url-mapper"
 import { assoc } from "./fp"
 
 export const HomePage = "HomePage"
+export const FeedPage = "FeedPage"
 export const LoginPage = "LoginPage"
 export const RegisterPage = "RegisterPage"
 export const ArticleDetailPage = "ArticleDetailPage"
@@ -15,6 +16,7 @@ const prefix = "#"
 
 const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
+  "/feed": () => ({ pageId: FeedPage, articles: null }),
   "/login": () => ({ pageId: LoginPage, login: {} }),
   "/register": () => ({ pageId: RegisterPage, register: {} }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),

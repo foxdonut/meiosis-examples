@@ -1,8 +1,8 @@
 import { ArticleDetailPage } from "../util/router"
-import { services } from "../root/services"
+import { helpers } from "../root/helpers"
 
 export const nextAction = update => (model, patch) => {
   if (patch.pageId === ArticleDetailPage) {
-    services.loadArticle(patch.params).then(update)
+    helpers.loadArticle(patch.params).then(update)
   }
 }

@@ -1,9 +1,9 @@
 import { actions } from "./actions"
 import { view } from "./view"
-import { verify } from "./verify"
+import { accept } from "./accept"
 
 export const Settings = {
   actions,
   view,
-  verify
+  accept
 }

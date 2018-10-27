@@ -1,7 +1,7 @@
 import O from "patchinko/constant"
 
 import { articlesApi } from "../services"
-import { services } from "../root/services"
+import { helpers } from "../root/helpers"
 import { prepend } from "../util/fp"
 import { HomePage, LoginPage, navigateTo } from "../util/router"
 
@@ -24,7 +24,7 @@ export const actions = update => ({
   favoriteArticle: (model, slug) => {
     if (model.user) {
       articlesApi.favorite(slug)
-        .then(() => services.loadArticle({ slug }))
+        .then(() => helpers.loadArticle({ slug }))
         .then(update)
     }
     else {

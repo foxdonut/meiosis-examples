@@ -13,8 +13,8 @@ const wireApp = (update, data) =>
       model: Root.model(data)
     },
     combinators: {
-      verify: list => (model, patch) => list.reduce((x, f) => f(model, x), patch),
-      state: list => model => list.reduce((x, f) => O(x, f(x)), model),
+      accept: list => (model, patch) => list.reduce((x, f) => f(model, x), patch),
+      service: list => model => list.reduce((x, f) => O(x, f(x)), model),
       nextAction: list => {
         const listWithUpdate = list.map(item => item(update))
         return (model, patch) => listWithUpdate.forEach(item => item(model, patch))

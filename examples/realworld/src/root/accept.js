@@ -1,6 +1,6 @@
 import { HomePage, SettingsPage, navigateTo } from "../util/router"
 
-export const verify = (model, patch) => {
+export const accept = (model, patch) => {
   if (patch.pageId === SettingsPage && !model.user) {
     return navigateTo(HomePage)
   }

@@ -1,10 +1,10 @@
-import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage,
+import { HomePage, FeedPage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage,
   ArticleEditPage, SettingsPage, ProfilePage }
   from "../util/router"
 
-import { verify } from "./verify"
+import { accept } from "./accept"
 import { model } from "./model"
-import { state } from "./state"
+import { service } from "./service"
 import { view } from "./view"
 import { Header, Footer } from "../layout"
 import { Home } from "../home"
@@ -20,6 +20,7 @@ export const Root = {
     header: Header,
     footer: Footer,
     [HomePage]: Home,
+    [FeedPage]: Home,
     [RegisterPage]: Register,
     [LoginPage]: Login,
     [ArticleDetailPage]: ArticleDetail,
@@ -28,8 +29,8 @@ export const Root = {
     [SettingsPage]: Settings,
     [ProfilePage]: Profile
   },
-  verify,
+  accept,
   model,
-  state,
+  service,
   view
 }

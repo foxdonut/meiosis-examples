@@ -65,7 +65,7 @@ export const popularTagsApi = {
 }
 
 export const profileApi = {
-  get: username => request(`/profiles/${username}`),
+  get: username => request(`/profiles/${username}`, authHeader()),
 
   update: data => request("/user", O(authHeader(), { data, method: "PUT" })),
 

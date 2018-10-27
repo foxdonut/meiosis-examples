@@ -1,4 +1,4 @@
-import { HomePage, getUrl } from "../util/router"
+import { HomePage, FeedPage, getUrl } from "../util/router"
 
 export const view = ({ articles, popularTags }) => model => {
   const content = model.articlesFilter.tag ? {
@@ -19,17 +19,28 @@ export const view = ({ articles, popularTags }) => model => {
       ]
     ],
     [".container page",
-      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed"], ["li", "Go from #tagged to Global Feed"]]]]],
+      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed"],
+        ["li", "Go from #tagged to Global Feed"], ["li", "Highlight favorited articles"]]]]],
       [".row",
         [".col-md-9",
           [".feed-toggle",
             ["ul.nav.nav-pills.outline-active",
               model.user && ["li.nav-item",
-                ["a.nav-link[href='']", "Your Feed"]
+                ["a.nav-link",
+                  { href: getUrl(FeedPage),
+                    className: {
+                      active: model.pageId === FeedPage
+                    }
+                  },
+                  "Your Feed"]
               ],
               ["li.nav-item",
                 ["a.nav-link",
-                  { href: getUrl(HomePage), className: { active: content.globalFeed } },
+                  { href: getUrl(HomePage),
+                    className: {
+                      active: model.pageId === HomePage && content.globalFeed
+                    }
+                  },
                   "Global Feed"]
               ],
               content.tagFeedComponent

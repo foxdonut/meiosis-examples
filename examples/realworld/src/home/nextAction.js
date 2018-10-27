@@ -1,8 +1,11 @@
-import { HomePage } from "../util/router"
-import { services } from "../root/services"
+import { HomePage, FeedPage } from "../util/router"
+import { helpers } from "../root/helpers"
 
 export const nextAction = update => (model, patch) => {
   if (patch.pageId === HomePage) {
-    services.loadArticles(model, patch.params).then(update)
+    helpers.loadArticles(model, patch.params).then(update)
+  }
+  else if (patch.pageId === FeedPage) {
+    helpers.loadFeed(patch.params).then(update)
   }
 }

@@ -1,7 +1,7 @@
 import marked from "marked"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
-import { ArticleEditPage, ProfilePage, getUrl } from "../util/router"
+import { ArticleEditPage, HomePage, ProfilePage, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 const isAuthor = (username, article) => article.author.username === username
@@ -60,12 +60,13 @@ export const view = ({ actions }) => model => {
         [".col-md-12",
           ["h2", article.description],
           [".tag-list",
-            article.tagList.map(tag => ["span.tag-pill.tag-default", tag])
+            article.tagList.map(tag =>
+              ["a.tag-pill.tag-default", { href: getUrl(HomePage, { tag }) }, tag])
           ],
           ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
         ]
       ],
-      ["div", "TODO", ["ul", ["li", "Follow other user"], ["li", "Tag link"]]],
+      ["div", "TODO", ["ul", ["li", "Follow other user"]]],
       ["hr"],
       [".article-actions",
         articleMeta(model, actions, article, username)
