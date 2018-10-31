@@ -1,5 +1,3 @@
-import O from "patchinko/constant"
-
 import { articlesApi, popularTagsApi, profileApi } from "../services"
 
 export const helpers = {
@@ -7,8 +5,7 @@ export const helpers = {
     articlesApi.getList(params),
     popularTagsApi.getList()
   ]).then(
-    ([articles, tags]) => Object.assign(articles, tags,
-      { articlesFilter: O(params) })
+    ([articles, tags]) => Object.assign(articles, tags)
   ),
 
   loadArticle: ({ slug }) => Promise.all([

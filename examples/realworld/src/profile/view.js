@@ -37,7 +37,7 @@ export const view = ({ actions, articles }) => model => {
       [".container",
         [".row",
           [".col-xs-12.col-md-10.offset-md-1"], ["div", "TODO", ["ul",
-            ["li", "Favorited Articles"], ["li", "Suspend"]]]],
+            ["li", "Favorited Articles"], ["li", "articlesFilter management"], ["li", "Suspend"]]]],
         [".row",
           [".col-xs-12.col-md-10.offset-md-1",
             [".articles-toggle",

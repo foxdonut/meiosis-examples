@@ -22,8 +22,9 @@ export const view = ({ actions }) => (model, article) => {
               "btn-primary": article.favorited,
               "btn-outline-primary": !article.favorited
             },
-            onClick: article.favorited ? null :
-              () => actions.favoriteArticle(model, article.slug)
+            onClick: article.favorited
+              ? () => actions.unfavoriteArticle(model, article.slug)
+              : () => actions.favoriteArticle(model, article.slug)
           },
           ["i.ion-heart"],
           ["span", ` ${article.favoritesCount} `]
