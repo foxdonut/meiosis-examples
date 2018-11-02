@@ -66,7 +66,7 @@ export const view = ({ actions }) => model => {
           ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
         ]
       ],
-      ["div", "TODO", ["ul", ["li", "Follow other user"]]],
+      ["div", "TODO", ["ul", ["li", "Follow other user"], ["li", "Validate comment"]]],
       ["hr"],
       [".article-actions",
         articleMeta(model, actions, article, username)

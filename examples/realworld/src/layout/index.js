@@ -17,7 +17,7 @@ export const Header = {
             ["li.nav-item", active(ArticleCreatePage),
               ["a.nav-link", { href: getUrl(ArticleCreatePage) },
                 ["i.ion-compose"],
-                " New Post"
+                " New Article"
               ]
             ],
             ["li.nav-item", active(SettingsPage),

@@ -19,7 +19,8 @@ export const view = ({ articles, popularTags }) => model => {
       ]
     ],
     [".container page",
-      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed: without FeedPage?"]]]]],
+      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed: without FeedPage?"],
+        ["li", "articlesFilter management"], ["li", "Suspend"]]]]],
       [".row",
         [".col-md-9",
           [".feed-toggle",
