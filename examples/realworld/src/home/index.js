@@ -1,3 +1,4 @@
+import { accept } from "./accept"
 import { view } from "./view"
 import { nextAction } from "./nextAction"
 import { Articles } from "../articles"
@@ -8,6 +9,7 @@ export const Home = {
     articles: Articles,
     popularTags: PopularTags
   },
+  accept,
   view,
   nextAction
 }

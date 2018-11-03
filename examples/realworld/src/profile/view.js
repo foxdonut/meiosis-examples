@@ -7,8 +7,11 @@ export const view = ({ actions, articles }) => model => {
   const isCurrentUser = get(model, ["profile", "id"]) === get(model, ["user", "id"])
   const isFavorites = !!model.articlesFilter.favorited
 
-  return !model.profile ? ["img", { src: "/assets/loading.gif" }] :
-    [".profile-page",
+  return !model.profile
+    ? ["div", { style: "height: 2000px" },
+      model.loading ? ["img", { src: "/assets/loading.gif" }] : null
+    ]
+    : [".profile-page",
       [".user-info",
         [".container",
           [".row",
