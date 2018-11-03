@@ -16,7 +16,7 @@ createApp(update).then(app => {
   // Only update the model for non-null patches
   patches.map(patch => patch && models(O(models(), patch)))
 
-  const states = models.map(app.service)
+  const states = models.map(model => app.service(model, patches()))
   states.map(pipe(app.view, render(document.getElementById("app"))))
   states.map(state => app.nextAction(state, patches()))
 

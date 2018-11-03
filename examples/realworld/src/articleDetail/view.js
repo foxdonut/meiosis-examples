@@ -58,6 +58,11 @@ export const view = ({ actions }) => model => {
     [".container page",
       [".row.article-content",
         [".col-md-12",
+          ["ul", ["li", "Loading mgt"]]
+        ]
+      ],
+      [".row.article-content",
+        [".col-md-12",
           ["h2", article.description],
           [".tag-list",
             article.tagList.map(tag =>

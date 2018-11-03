@@ -6,4 +6,3 @@ export const accept = (model, patch) => {
   }
   return patch
 }
-

@@ -20,7 +20,7 @@ export const view = ({ articles, popularTags }) => model => {
     ],
     [".container page",
       [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed: without FeedPage?"],
-        ["li", "articlesFilter management"], ["li", "Suspend"]]]]],
+        ["li", "articlesFilter management"], ["li", "Expired token"]]]]],
       [".row",
         [".col-md-9",
           [".feed-toggle",
