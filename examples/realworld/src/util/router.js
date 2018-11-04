@@ -11,6 +11,7 @@ export const ArticleCreatePage = "ArticleCreatePage"
 export const ArticleEditPage = "ArticleEditPage"
 export const SettingsPage = "SettingsPage"
 export const ProfilePage = "ProfilePage"
+export const ProfileFavoritesPage = "ProfileFavoritesPage"
 
 const prefix = "#"
 
@@ -25,7 +26,8 @@ const routeMappings = {
     article: { title: "", description: "", body: "", tags: "" }
   }),
   "/settings": () => ({ pageId: SettingsPage }),
-  "/profile/:username": () => ({ pageId: ProfilePage, profile: null })
+  "/profile/:username": () => ({ pageId: ProfilePage, profile: null }),
+  "/profile/:username/favorites": () => ({ pageId: ProfileFavoritesPage, profile: null })
 }
 
 const urlMapper = Mapper({ query: true })

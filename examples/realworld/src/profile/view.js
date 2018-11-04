@@ -1,11 +1,11 @@
 import { get } from "../util/fp"
-import { ProfilePage, SettingsPage, getUrl } from "../util/router"
+import { ProfilePage, ProfileFavoritesPage, SettingsPage, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 export const view = ({ actions, articles }) => model => {
   const username = get(model, ["profile", "username"])
   const isCurrentUser = get(model, ["profile", "id"]) === get(model, ["user", "id"])
-  const isFavorites = !!model.articlesFilter.favorited
+  const isFavorites = model.pageId === ProfileFavoritesPage
 
   return !model.profile
     ? ["div", { style: "height: 2000px" },
@@ -55,13 +55,13 @@ export const view = ({ actions, articles }) => model => {
                 ["li.nav-item",
                   ["a.nav-link",
                     { className: { active: isFavorites },
-                      href: getUrl(ProfilePage, { username, favorited: username })
+                      href: getUrl(ProfileFavoritesPage, { username })
                     },
                     "Favorited Articles"]
                 ]
               ]
             ],
-            articles(model)
+            articles(model),
           ]
         ]
       ]

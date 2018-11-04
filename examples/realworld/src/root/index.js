@@ -1,5 +1,5 @@
 import { HomePage, FeedPage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage,
-  ArticleEditPage, SettingsPage, ProfilePage }
+  ArticleEditPage, SettingsPage, ProfilePage, ProfileFavoritesPage }
   from "../util/router"
 
 import { accept } from "./accept"
@@ -27,7 +27,8 @@ export const Root = {
     [ArticleCreatePage]: ArticleEdit,
     [ArticleEditPage]: ArticleEdit,
     [SettingsPage]: Settings,
-    [ProfilePage]: Profile
+    [ProfilePage]: Profile,
+    [ProfileFavoritesPage]: Profile
   },
   accept,
   model,
