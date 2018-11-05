@@ -48,7 +48,7 @@ export const view = ({ articles, popularTags }) => model => {
           ],
           model.articles
             ? articles(model)
-            : ["div", { style: "height: 2000px" },
+            : ["div", { style: { height: "2000px" } },
               model.loading ? ["img", { src: "/assets/loading.gif" }] : null]
         ],
         [".col-md-3",

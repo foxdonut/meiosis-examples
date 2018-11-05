@@ -8,7 +8,7 @@ export const view = ({ actions, articles }) => model => {
   const isFavorites = model.pageId === ProfileFavoritesPage
 
   return !model.profile
-    ? ["div", { style: "height: 2000px" },
+    ? ["div", { style: { height: "2000px" } },
       model.loading ? ["img", { src: "/assets/loading.gif" }] : null
     ]
     : [".profile-page",
