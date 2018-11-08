@@ -1,6 +1,6 @@
 import { sv } from "seview"
 
-/*
+/* mithril */
 import m from "mithril"
 
 const processAttrs = (attrs = {}) => {
@@ -23,21 +23,9 @@ const h = sv(node =>
 )
 
 export const render = element => view => m.render(element, h(view))
-*/
+/* end mithril */
 
-/*
-import { h as hyper, render as dioRender } from "dio.js"
-
-const h = sv(node =>
-  (typeof node === "string")
-    ? node
-    : hyper(node.tag, node.attrs || {}, node.children || [])
-)
-
-export const render = element => view => dioRender(h(view), element)
-*/
-
-/*
+/* react
 import React from "react"
 import ReactDOM from "react-dom"
 
@@ -55,8 +43,9 @@ const h = sv(node => {
 })
 
 export const render = element => view => ReactDOM.render(h(view), element)
-*/
+end react */
 
+/* petit-dom
 import { h as hyper, mount, patch } from "petit-dom"
 
 const attrMappings = {
@@ -100,6 +89,6 @@ export const render = element => view => {
   }
   vnode = node
 }
-
+end petit-dom */
 
 export const defaultImage = "/assets/smiley-cyrus.jpg"

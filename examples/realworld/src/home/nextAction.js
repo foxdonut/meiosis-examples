@@ -1,4 +1,4 @@
-import { HomePage, FeedPage } from "../util/router"
+import { HomePage } from "../util/router"
 import { helpers } from "../root/helpers"
 
 const fakeDelay = () => new Promise(resolve => setTimeout(resolve, 1500))
@@ -12,13 +12,15 @@ export const nextAction = update => (model, patch) => {
       data => update(Object.assign({ loading: null }, data))
     )
     */
-    fakeDelay().then(() => helpers.loadArticles(
-      Object.assign({}, model.articlesFilter, patch.params)
-    ).then(
-      data => update(Object.assign({ loading: null }, data)))
-    )
-  }
-  else if (patch.pageId === FeedPage) {
-    helpers.loadFeed(patch.params).then(update)
+    if (patch.feed) {
+      helpers.loadFeed(patch.params).then(update)
+    }
+    else {
+      fakeDelay().then(() => helpers.loadArticles(
+        Object.assign({}, model.articlesFilter, patch.params)
+      ).then(
+        data => update(Object.assign({ loading: null }, data)))
+      )
+    }
   }
 }

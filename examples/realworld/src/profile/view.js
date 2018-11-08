@@ -48,7 +48,7 @@ export const view = ({ actions, articles }) => model => {
                 ["li.nav-item",
                   ["a.nav-link",
                     { className: { active: !isFavorites },
-                      href: getUrl(ProfilePage, { username, author: username })
+                      href: getUrl(ProfilePage, { username })
                     },
                     "My Articles"]
                 ],

@@ -1,4 +1,4 @@
-import { HomePage, FeedPage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage,
+import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage,
   ArticleEditPage, SettingsPage, ProfilePage, ProfileFavoritesPage }
   from "../util/router"
 
@@ -20,7 +20,6 @@ export const Root = {
     header: Header,
     footer: Footer,
     [HomePage]: Home,
-    [FeedPage]: Home,
     [RegisterPage]: Register,
     [LoginPage]: Login,
     [ArticleDetailPage]: ArticleDetail,

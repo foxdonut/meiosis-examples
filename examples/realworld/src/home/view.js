@@ -1,13 +1,14 @@
-import { HomePage, FeedPage, getUrl } from "../util/router"
+import { HomePage, getUrl } from "../util/router"
+import { compose, preventDefault } from "../util/fp"
 
-export const view = ({ articles, popularTags }) => model => {
+export const view = ({ actions, articles, popularTags }) => model => {
   const content = model.articlesFilter.tag ? {
     globalFeed: false,
     tagFeedComponent: ["li.nav-item",
       ["a.nav-link.active", `#${model.articlesFilter.tag}`]
     ]
   } : {
-    globalFeed: true,
+    globalFeed: !model.feed,
     tagFeedComponent: null
   }
 
@@ -19,7 +20,8 @@ export const view = ({ articles, popularTags }) => model => {
       ]
     ],
     [".container page",
-      [".row", [".col-md-9", ["div", "TODO", ["ul", ["li", "Your Feed: without FeedPage?"],
+      [".row", [".col-md-9", ["div", "TODO", ["ul",
+        ["li", "Your Feed by default, if logged in"],
         ["li", "articlesFilter management"], ["li", "Expired token"]]]]],
       [".row",
         [".col-md-9",
@@ -27,9 +29,10 @@ export const view = ({ articles, popularTags }) => model => {
             ["ul.nav.nav-pills.outline-active",
               model.user && ["li.nav-item",
                 ["a.nav-link",
-                  { href: getUrl(FeedPage),
+                  { href: getUrl(HomePage),
+                    onClick: compose(actions.navigateToFeedTab, preventDefault),
                     className: {
-                      active: model.pageId === FeedPage
+                      active: model.feed
                     }
                   },
                   "Your Feed"]
@@ -38,7 +41,7 @@ export const view = ({ articles, popularTags }) => model => {
                 ["a.nav-link",
                   { href: getUrl(HomePage),
                     className: {
-                      active: model.pageId === HomePage && content.globalFeed
+                      active: content.globalFeed
                     }
                   },
                   "Global Feed"]

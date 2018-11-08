@@ -10,11 +10,15 @@ const update = stream()
 createApp(update).then(app => {
   const models = stream()
 
-  // Stream of patches, some may be null
-  const patches = update.map(patch => app.accept(models() || patch, patch))
+  // Stream of patches, with nulls filtered out
+  const patches = stream()
 
-  // Only update the model for non-null patches
-  patches.map(patch => patch && models(O(models(), patch)))
+  update.map(patch => {
+    const result = app.accept(models() || patch, patch)
+    if (result) { patches(result) }
+  })
+
+  patches.map(patch => models(O(models(), patch)))
 
   const states = models.map(model => app.service(model, patches()))
   states.map(pipe(app.view, render(document.getElementById("app"))))
@@ -26,6 +30,7 @@ createApp(update).then(app => {
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   const meiosisTracer = require("meiosis-tracer")
   meiosisTracer({ streams: [
-    { stream: models, label: "models" }
+    //{ stream: models, label: "models" },
+    { stream: states, label: "states" }
   ] })
 })
