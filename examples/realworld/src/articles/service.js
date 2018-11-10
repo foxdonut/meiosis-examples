@@ -4,7 +4,7 @@ export const service = (model, patch) => patch.params ?
     articlesFilter: {
       limit: patch.params.limit || model.articlesFilter.limit,
       offset: patch.params.offset || 0,
-      tag: model.articlesFilter.tag || patch.params.tag,
+      tag: patch.params.tag,
       author: model.articlesFilter.author || patch.params.author,
       favorited: model.articlesFilter.favorited || patch.params.favorited
     }
