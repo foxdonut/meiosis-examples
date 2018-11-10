@@ -15,7 +15,7 @@ export const ProfileFavoritesPage = "ProfileFavoritesPage"
 const prefix = "#"
 
 const routeMappings = {
-  "/": () => ({ pageId: HomePage, articles: null, feed: false }),
+  "/": () => ({ pageId: HomePage, articles: null }),
   "/login": () => ({ pageId: LoginPage, login: {} }),
   "/register": () => ({ pageId: RegisterPage, register: {} }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),

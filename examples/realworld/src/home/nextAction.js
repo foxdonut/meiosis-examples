@@ -1,25 +1,21 @@
 import { HomePage } from "../util/router"
 import { helpers } from "../root/helpers"
-
-const fakeDelay = () => new Promise(resolve => setTimeout(resolve, 1500))
+import { pick } from "../util/fp"
 
 export const nextAction = update => (model, patch) => {
   if (patch.pageId === HomePage) {
     setTimeout(() => update({ loading: HomePage }), 300)
 
-    /*
-    helpers.loadArticles(patch.params).then(
-      data => update(Object.assign({ loading: null }, data))
-    )
-    */
-    if (patch.feed) {
-      helpers.loadFeed(patch.params).then(update)
+    if (model.feed) {
+      helpers.loadFeed(
+        Object.assign({}, pick(["limit", "offset"], model.articlesFilter), patch.params)
+      ).then(update)
     }
     else {
-      fakeDelay().then(() => helpers.loadArticles(
+      helpers.loadArticles(
         Object.assign({}, model.articlesFilter, patch.params)
       ).then(
-        data => update(Object.assign({ loading: null }, data)))
+        data => update(Object.assign({ loading: null }, data))
       )
     }
   }

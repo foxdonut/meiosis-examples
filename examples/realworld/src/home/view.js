@@ -22,7 +22,10 @@ export const view = ({ actions, articles, popularTags }) => model => {
     [".container page",
       [".row", [".col-md-9", ["div", "TODO", ["ul",
         ["li", "Your Feed by default, if logged in"],
-        ["li", "articlesFilter management"], ["li", "Expired token"]]]]],
+        ["li", "articlesFilter management"],
+        ["li", "go from one tag to another"],
+        ["li", "go from tag to logout"],
+        ["li", "Expired token"]]]]],
       [".row",
         [".col-md-9",
           [".feed-toggle",
@@ -30,19 +33,16 @@ export const view = ({ actions, articles, popularTags }) => model => {
               model.user && ["li.nav-item",
                 ["a.nav-link",
                   { href: getUrl(HomePage),
-                    onClick: compose(actions.navigateToFeedTab, preventDefault),
-                    className: {
-                      active: model.feed
-                    }
+                    onClick: compose(actions.navigateToYourFeed, preventDefault),
+                    className: { active: model.feed }
                   },
                   "Your Feed"]
               ],
               ["li.nav-item",
                 ["a.nav-link",
                   { href: getUrl(HomePage),
-                    className: {
-                      active: content.globalFeed
-                    }
+                    onClick: compose(actions.navigateToGlobalFeed, preventDefault),
+                    className: { active: content.globalFeed }
                   },
                   "Global Feed"]
               ],
