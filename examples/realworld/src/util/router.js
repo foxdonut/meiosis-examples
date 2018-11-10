@@ -24,8 +24,8 @@ const routeMappings = {
     article: { title: "", description: "", body: "", tags: "" }
   }),
   "/settings": () => ({ pageId: SettingsPage }),
-  "/profile/:username": () => ({ pageId: ProfilePage, profile: null }),
-  "/profile/:username/favorites": () => ({ pageId: ProfileFavoritesPage, profile: null })
+  "/profile/:username": () => ({ pageId: ProfilePage, profile: null, feed: false }),
+  "/profile/:username/favorites": () => ({ pageId: ProfileFavoritesPage, profile: null, feed: false })
 }
 
 const urlMapper = Mapper({ query: true })
