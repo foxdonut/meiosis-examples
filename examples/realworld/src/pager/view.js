@@ -14,7 +14,7 @@ export const view = () => model => {
             { href: getUrl(model.pageId,
               { offset: (pageNumber - 1) * filter.limit,
                 tag: filter.tag,
-                username: model.profile.username
+                username: model.profile && model.profile.username
               })
             },
             pageNumber
