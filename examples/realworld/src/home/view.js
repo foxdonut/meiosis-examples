@@ -20,8 +20,6 @@ export const view = ({ actions, articles, popularTags }) => model => {
       ]
     ],
     [".container page",
-      [".row", [".col-md-9", ["div", "TODO", ["ul",
-        ["li", "Your Feed by default, if logged in"]]]]],
       [".row",
         [".col-md-9",
           [".feed-toggle",
