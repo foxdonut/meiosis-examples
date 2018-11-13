@@ -1,7 +1,7 @@
 import O from "patchinko/constant"
 
 import { Root } from "../root"
-import { credentialsApi } from "../services"
+import { credentialsApi, clearToken } from "../services"
 import { listenToRouteChanges, parseUrl } from "../util/router"
 import { wirem } from "../util/wirem"
 
@@ -28,8 +28,10 @@ export const createApp = update => {
   // parse initial url
   const data = parseUrl()
 
-  return Promise.all([
-    credentialsApi.getUser()
-  ]).then(([user]) => wireApp(update, Object.assign(data, { user })))
-    .catch(() => wireApp(update, data))
+  return credentialsApi.getUser()
+    .then(user => wireApp(update, Object.assign(data, { user })))
+    .catch(() => {
+      clearToken()
+      return wireApp(update, data)
+    })
 }

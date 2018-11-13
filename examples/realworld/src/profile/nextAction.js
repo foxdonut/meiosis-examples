@@ -12,6 +12,7 @@ export const nextAction = update => (model, patch) => {
       helpers.loadProfile(patch.params),
       helpers.loadArticles({
         limit: model.articlesFilter.limit,
+        offset: model.articlesFilter.offset,
         author,
         favorited
       })

@@ -1,6 +1,6 @@
 import O from "patchinko/constant"
 
-import { profileApi, setToken } from "../services"
+import { profileApi, clearToken } from "../services"
 import { HomePage, ProfilePage, navigateTo } from "../util/router"
 import { omit } from "../util/fp"
 
@@ -16,7 +16,7 @@ export const actions = update => ({
     .catch(err => update({ settings: O({ errors: err.errors }) })),
 
   logout: () => {
-    setToken("")
+    clearToken()
     update(Object.assign(navigateTo(HomePage), { user: O }))
   }
 })

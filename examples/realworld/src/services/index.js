@@ -5,6 +5,7 @@ const API_ROOT = "http://localhost:4000/api"
 
 const getToken = () => window.localStorage.getItem("jwt")
 export const setToken = token => window.localStorage.setItem("jwt", token)
+export const clearToken = () => window.localStorage.removeItem("jwt")
 
 const authHeader = () => getToken() ? {
   headers: {
