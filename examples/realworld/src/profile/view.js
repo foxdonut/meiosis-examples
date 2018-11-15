@@ -24,15 +24,15 @@ export const view = ({ actions, articles }) => model => {
                   { href: getUrl(SettingsPage) },
                   ["i.ion-gear-a"], " Edit Profile Settings"
                 ]
-                : model.profile.following
-                  ? ["button.btn.btn-sm.btn-outline-secondary.action-btn",
-                    { onClick: () => actions.unfollow(username) },
-                    ["i.ion-plus-round"], ` Unfollow ${username}`
-                  ]
-                  : ["button.btn.btn-sm.btn-outline-secondary.action-btn",
-                    { onClick: () => actions.follow(username) },
-                    ["i.ion-plus-round"], ` Follow ${username}`
-                  ]
+                : ["button.btn.btn-sm.btn-outline-secondary.action-btn",
+                  { onClick: model.profile.following
+                    ? () => actions.unfollow(username)
+                    : () => actions.follow(username)
+                  },
+                  ["i.ion-plus-round"],
+                  model.profile.following ? " Unfollow " : " Follow ",
+                  username
+                ]
             ]
           ]
         ]

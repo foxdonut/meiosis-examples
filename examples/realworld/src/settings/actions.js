@@ -17,6 +17,6 @@ export const actions = update => ({
 
   logout: () => {
     clearToken()
-    update(Object.assign(navigateTo(HomePage), { user: O }))
+    update(Object.assign(navigateTo(HomePage), { user: O, logout: true }))
   }
 })

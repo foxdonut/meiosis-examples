@@ -22,6 +22,13 @@ export const view = ({ actions, articles, popularTags }) => model => {
     [".container page",
       [".row",
         [".col-md-9",
+          ["ul",
+            ["li", "Global Feed pagination"],
+          ]
+        ]
+      ],
+      [".row",
+        [".col-md-9",
           [".feed-toggle",
             ["ul.nav.nav-pills.outline-active",
               model.user && ["li.nav-item",

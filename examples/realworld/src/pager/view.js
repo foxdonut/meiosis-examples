@@ -26,6 +26,8 @@ export const view = () => model => {
         ]
       )
     ],
-    ["div", "Displaying ", from, " - ", to, " of ", model.articlesCount]
+    model.articlesCount > 0
+      ? ["div", "Displaying ", from, " - ", to, " of ", model.articlesCount]
+      : ["div", "No articles here... yet."]
   ]
 }

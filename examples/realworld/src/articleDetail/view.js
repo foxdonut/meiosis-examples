@@ -1,7 +1,7 @@
 import marked from "marked"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
-import { ArticleEditPage, HomePage, ProfilePage, getUrl } from "../util/router"
+import { ArticleEditPage, HomePage, LoginPage, ProfilePage, RegisterPage, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 const isAuthor = (username, article) => article.author.username === username
@@ -21,13 +21,22 @@ const authorMeta = actions => article => [
 
 const nonAuthorMeta = (model, actions) => article => [
   ["button.btn.btn-sm.btn-outline-secondary",
+    { onClick: article.author.following
+      ? () => actions.unfollowUser(model, article.author.username)
+      : () => actions.followUser(model, article.author.username)
+    },
     ["i.ion-plus-round"],
-    ` Follow ${article.author.username} `
+    article.author.following ? " Unfollow " : " Follow ",
+    article.author.username, " "
   ],
   ["button.btn.btn-sm.btn-outline-primary",
-    { onClick: () => actions.favoriteArticle(model, article.slug) },
+    { onClick: article.favorited
+      ? () => actions.unfavoriteArticle(article.slug)
+      : () => actions.favoriteArticle(model, article.slug)
+    },
     ["i.ion-heart"],
-    " Favorite Post ",
+    article.favorited ? " Unfavorite" : " Favorite",
+    " Article ",
     ["span.counter", `(${article.favoritesCount})`]
   ]
 ]
@@ -58,11 +67,6 @@ export const view = ({ actions }) => model => {
     [".container page",
       [".row.article-content",
         [".col-md-12",
-          ["ul", ["li", "Loading mgt"]]
-        ]
-      ],
-      [".row.article-content",
-        [".col-md-12",
           ["h2", article.description],
           [".tag-list",
             article.tagList.map(tag =>
@@ -71,14 +75,13 @@ export const view = ({ actions }) => model => {
           ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
         ]
       ],
-      ["div", "TODO", ["ul", ["li", "Follow other user"], ["li", "Validate comment"]]],
       ["hr"],
       [".article-actions",
         articleMeta(model, actions, article, username)
       ],
       [".row",
         [".col-xs-12.col-md-8.offset-md-2",
-          ["form.card.comment-form",
+          model.user ? ["form.card.comment-form",
             [".card-block",
               ["textarea.form-control", { placeholder: "Write a comment...", rows: "3",
                 onInput: evt => actions.updateCommentField(evt.target.value),
@@ -90,6 +93,11 @@ export const view = ({ actions }) => model => {
                 { onClick: compose(() => actions.addComment(article.slug, model.comment), preventDefault) },
                 "Post Comment"]
             ]
+          ] : ["p",
+            ["a", { href: getUrl(LoginPage) }, "Sign in"],
+            " or ",
+            ["a", { href: getUrl(RegisterPage) }, "sign up"],
+            " to add comments on this article."
           ],
           defaultTo([], model.comments).map(comment =>
             [".card",
@@ -104,7 +112,7 @@ export const view = ({ actions }) => model => {
                 ["a.comment-author[href=#]", comment.author.username],
                 ["span.date-posted", new Date(comment.createdAt).toDateString()],
                 ["span.mod-options",
-                  ["i.ion-edit"],
+                  model.user && (comment.author.id === model.user.id) &&
                   ["i.ion-trash-a", { onClick: actions.deleteComment(article.slug, comment.id) } ]
                 ]
               ]
