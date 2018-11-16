@@ -1,4 +1,4 @@
-import { HomePage, getUrl } from "../util/router"
+import { getUrl, Route } from "../util/router"
 import { compose, preventDefault } from "../util/fp"
 
 export const view = ({ actions, articles, popularTags }) => model => {
@@ -33,7 +33,7 @@ export const view = ({ actions, articles, popularTags }) => model => {
             ["ul.nav.nav-pills.outline-active",
               model.user && ["li.nav-item",
                 ["a.nav-link",
-                  { href: getUrl(HomePage),
+                  { href: getUrl(Route.of.Home),
                     onClick: compose(actions.navigateToYourFeed, preventDefault),
                     className: { active: model.feed }
                   },
@@ -41,7 +41,7 @@ export const view = ({ actions, articles, popularTags }) => model => {
               ],
               ["li.nav-item",
                 ["a.nav-link",
-                  { href: getUrl(HomePage),
+                  { href: getUrl(Route.of.Home),
                     onClick: compose(actions.navigateToGlobalFeed, preventDefault),
                     className: { active: content.globalFeed }
                   },

@@ -1,5 +1,5 @@
 import { range } from "../util/fp"
-import { getUrl, ProfilePage, ProfileFavoritesPage } from "../util/router"
+import { Route, getUrl, ProfilePage, ProfileFavoritesPage } from "../util/router"
 
 export const view = () => model => {
   const filter = model.articlesFilter
@@ -15,7 +15,9 @@ export const view = () => model => {
       pageList.map(pageNumber =>
         ["li.page-item", { className: { "active": pageNumber === currentPageNumber } },
           ["a.page-link",
-            { href: getUrl(model.pageId,
+            //FIXME
+            { href: getUrl(Route.of.Home, //FIXME
+              {},
               { offset: (pageNumber - 1) * filter.limit,
                 tag: filter.tag,
                 username

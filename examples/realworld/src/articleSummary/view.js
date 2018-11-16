@@ -1,4 +1,4 @@
-import { HomePage, ProfilePage, getUrl } from "../util/router"
+import { Route, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 export const view = ({ actions }) => (model, article) => {
@@ -6,12 +6,12 @@ export const view = ({ actions }) => (model, article) => {
 
   return [".article-preview",
     [".article-meta",
-      ["a", { href: getUrl(ProfilePage, { username: article.author.username }) },
+      ["a", { href: getUrl(Route.of.Profile, { username: article.author.username }) },
         ["img", { src: article.author.image || defaultImage }]
       ],
       [".info",
         ["a.author",
-          { href: getUrl(ProfilePage, { username: article.author.username }) },
+          { href: getUrl(Route.of.Profile, { username: article.author.username }) },
           username],
         ["span.date", new Date(article.createdAt).toDateString()]
       ],
@@ -40,7 +40,7 @@ export const view = ({ actions }) => (model, article) => {
       ["ul.tag-list",
         article.tagList.map(tag =>
           ["li.tag-default.tag-pill.tag-outline",
-            ["a", { href: getUrl(HomePage, { tag }) }, tag]
+            ["a", { href: getUrl(Route.of.Home, {}, { tag }) }, tag]
           ]
         )
       ]
