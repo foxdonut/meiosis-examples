@@ -1,14 +1,14 @@
 import marked from "marked"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
-import { ArticleEditPage, HomePage, LoginPage, ProfilePage, RegisterPage, getUrl } from "../util/router"
+import { Route, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 const isAuthor = (username, article) => article.author.username === username
 
 const authorMeta = actions => article => [
   ["a.btn.btn-outline-secondary.btn-sm",
-    { href: getUrl(ArticleEditPage, { slug: article.slug }) },
+    { href: getUrl(Route.of.ArticleEdit, { slug: article.slug }) },
     ["i.ion-edit"],
     " Edit Article"
   ],
@@ -43,10 +43,10 @@ const nonAuthorMeta = (model, actions) => article => [
 
 const articleMeta = (model, actions, article, username) =>
   [".article-meta",
-    ["a", { href: getUrl(ProfilePage, { username: article.author.username }) },
+    ["a", { href: getUrl(Route.of.Profile, { username: article.author.username }) },
       ["img", { src: article.author.image || defaultImage }]],
     [".info",
-      ["a.author", { href: getUrl(ProfilePage, { username: article.author.username }) },
+      ["a.author", { href: getUrl(Route.of.Profile, { username: article.author.username }) },
         article.author.username],
       ["span.date", new Date(article.createdAt).toDateString()]
     ],
@@ -70,7 +70,7 @@ export const view = ({ actions }) => model => {
           ["h2", article.description],
           [".tag-list",
             article.tagList.map(tag =>
-              ["a.tag-pill.tag-default", { href: getUrl(HomePage, { tag }) }, tag])
+              ["a.tag-pill.tag-default", { href: getUrl(Route.of.Home, {}, { tag }) }, tag])
           ],
           ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
         ]
@@ -94,9 +94,9 @@ export const view = ({ actions }) => model => {
                 "Post Comment"]
             ]
           ] : ["p",
-            ["a", { href: getUrl(LoginPage) }, "Sign in"],
+            ["a", { href: getUrl(Route.of.Login) }, "Sign in"],
             " or ",
-            ["a", { href: getUrl(RegisterPage) }, "sign up"],
+            ["a", { href: getUrl(Route.of.Register) }, "sign up"],
             " to add comments on this article."
           ],
           defaultTo([], model.comments).map(comment =>

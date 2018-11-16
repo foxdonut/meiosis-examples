@@ -1,5 +1,5 @@
 import { get } from "../util/fp"
-import { ProfilePage, ProfileFavoritesPage, SettingsPage, getUrl } from "../util/router"
+import { ProfileFavoritesPage, Route, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 export const view = ({ actions, articles }) => model => {
@@ -21,7 +21,7 @@ export const view = ({ actions, articles }) => model => {
               ["p", model.profile.bio],
               isCurrentUser
                 ? ["a.btn.btn-sm.btn-outline-secondary.action-btn",
-                  { href: getUrl(SettingsPage) },
+                  { href: getUrl(Route.of.Settings) },
                   ["i.ion-gear-a"], " Edit Profile Settings"
                 ]
                 : ["button.btn.btn-sm.btn-outline-secondary.action-btn",
@@ -45,14 +45,14 @@ export const view = ({ actions, articles }) => model => {
                 ["li.nav-item",
                   ["a.nav-link",
                     { className: { active: !isFavorites },
-                      href: getUrl(ProfilePage, { username })
+                      href: getUrl(Route.of.Profile, { username })
                     },
                     "My Articles"]
                 ],
                 ["li.nav-item",
                   ["a.nav-link",
                     { className: { active: isFavorites },
-                      href: getUrl(ProfileFavoritesPage, { username })
+                      href: getUrl(Route.of.ProfileFavorites, { username })
                     },
                     "Favorited Articles"]
                 ]

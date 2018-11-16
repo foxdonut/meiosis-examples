@@ -1,9 +1,9 @@
-import { RegisterPage } from "../util/router"
+import { Route } from "../util/router"
 import { Credentials } from "../credentials"
 
 export const Login = Credentials({
   method: "login",
-  alternativePage: RegisterPage,
+  alternativePage: Route.of.Register,
   alternativeLabel: "Need an account?",
   label: "Sign in",
   showUsername: false
