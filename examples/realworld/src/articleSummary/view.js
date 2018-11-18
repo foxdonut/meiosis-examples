@@ -6,12 +6,12 @@ export const view = ({ actions }) => (model, article) => {
 
   return [".article-preview",
     [".article-meta",
-      ["a", { href: getUrl(Route.of.Profile, { username: article.author.username }) },
+      ["a", { href: getUrl(Route.of.Profile({ username: article.author.username })) },
         ["img", { src: article.author.image || defaultImage }]
       ],
       [".info",
         ["a.author",
-          { href: getUrl(Route.of.Profile, { username: article.author.username }) },
+          { href: getUrl(Route.of.Profile({ username: article.author.username })) },
           username],
         ["span.date", new Date(article.createdAt).toDateString()]
       ],
@@ -40,7 +40,7 @@ export const view = ({ actions }) => (model, article) => {
       ["ul.tag-list",
         article.tagList.map(tag =>
           ["li.tag-default.tag-pill.tag-outline",
-            ["a", { href: getUrl(Route.of.Home, {}, { tag }) }, tag]
+            ["a", { href: getUrl(Route.of.Home(), { tag }) }, tag]
           ]
         )
       ]

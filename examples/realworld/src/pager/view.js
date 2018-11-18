@@ -16,7 +16,7 @@ export const view = () => model => {
         ["li.page-item", { className: { "active": pageNumber === currentPageNumber } },
           ["a.page-link",
             //FIXME
-            { href: getUrl(Route.of.Home, //FIXME
+            { href: getUrl(Route.of.Home(), //FIXME
               {},
               { offset: (pageNumber - 1) * filter.limit,
                 tag: filter.tag,

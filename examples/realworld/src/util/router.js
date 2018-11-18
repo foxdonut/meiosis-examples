@@ -96,8 +96,8 @@ export const getUrl = (id, params = {}) => {
 }
 */
 
-export const getUrl = (id, params = {}, query) => {
-  let result = Route.toURL(id(params))
+export const getUrl = (route, query) => {
+  let result = Route.toURL(route)
   if (query) {
     result += "?" + m.buildQueryString(query)
   }

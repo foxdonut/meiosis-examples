@@ -45,14 +45,14 @@ export const view = ({ actions, articles }) => model => {
                 ["li.nav-item",
                   ["a.nav-link",
                     { className: { active: !isFavorites },
-                      href: getUrl(Route.of.Profile, { username })
+                      href: getUrl(Route.of.Profile({ username }))
                     },
                     "My Articles"]
                 ],
                 ["li.nav-item",
                   ["a.nav-link",
                     { className: { active: isFavorites },
-                      href: getUrl(Route.of.ProfileFavorites, { username })
+                      href: getUrl(Route.of.ProfileFavorites({ username }))
                     },
                     "Favorited Articles"]
                 ]
