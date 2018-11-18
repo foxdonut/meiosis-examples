@@ -2,7 +2,6 @@ import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage
   ArticleEditPage, SettingsPage, ProfilePage, ProfileFavoritesPage }
   from "../util/router"
 
-import { accept } from "./accept"
 import { model } from "./model"
 import { service } from "./service"
 import { view } from "./view"
@@ -29,7 +28,6 @@ export const Root = {
     [ProfilePage]: Profile,
     [ProfileFavoritesPage]: Profile
   },
-  accept,
   model,
   service,
   view
