@@ -1,7 +1,7 @@
 {
-  "name": "realworld-meiosis",
+  "name": "superouter-setup",
   "version": "1.0.0",
-  "description": "meiosis-examples realworld",
+  "description": "meiosis-examples superouter",
   "main": "index.js",
   "scripts": {
     "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
@@ -18,8 +18,8 @@
     "example",
     "meiosis",
     "reactive",
-    "realworld",
-    "seview"
+    "seview",
+    "superouter"
   ],
   "author": "foxdonut",
   "license": "MIT",
@@ -28,14 +28,12 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "marked": "^0.5.0",
     "mithril": "^2.0.0-rc.0",
     "mithril-stream": "^1.1.0",
     "patchinko": "^4.1.0",
     "seview": "^0.10.0",
     "superouter": "^0.1.3",
-    "tinyfunk": "^1.2.1",
-    "validate.js": "^0.12.0"
+    "tinyfunk": "^1.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
