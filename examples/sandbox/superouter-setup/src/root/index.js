@@ -9,8 +9,8 @@ export const Root = {
   dependencies: {
     header: Header,
     footer: Footer,
-    home: Home,
-    settings: Settings,
+    Home,
+    Settings,
   },
   model,
   service,

@@ -13,7 +13,7 @@ export const Header = {
           ],
           model.user ? [
             ["li.nav-item", active("Settings"),
-              ["a.nav-link", { href: getUrl(Route.of.Settings()) },
+              ["a.nav-link", { href: getUrl(Route.of.Settings({ username: "quack" })) },
                 ["i.ion-gear-a"],
                 " Settings"
               ]
@@ -23,7 +23,8 @@ export const Header = {
               ["a.nav-link", { href: getUrl(Route.of.Login()) }, "Sign in"]
             ]
           ]
-        ]
+        ],
+        ["hr"]
       ]
     ]
   }
@@ -33,9 +34,10 @@ export const Footer = {
   view: () => _model =>
     ["footer",
       [".container",
+        ["hr"],
         ["a.logo-font", { href: getUrl(Route.of.Home()) }, "conduit"],
         ["span.attribution",
-          "An interactive learning project from ",
+          " - An interactive learning project from ",
           ["a[href=https://thinkster.io]", "Thinkster"],
           ["span", { innerHTML: ". Code &amp; design licensed under MIT." }]
         ]

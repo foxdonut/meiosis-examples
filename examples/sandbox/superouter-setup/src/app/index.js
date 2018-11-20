@@ -21,12 +21,13 @@ export const createApp = (update, navigate) => {
   listenToRouteChanges(navigate)
 
   // parse initial url
-  const data = parseUrl()
+  const route = parseUrl()
+  navigate(route)
 
   return credentialsApi.getUser()
-    .then(user => wireApp(update, Object.assign(data, { user })))
+    .then(user => wireApp(update, { route, user }))
     .catch(() => {
       clearToken()
-      return wireApp(update, data)
+      return wireApp(update, { route })
     })
 }
