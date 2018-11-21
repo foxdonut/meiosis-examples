@@ -15,9 +15,10 @@ createApp(update, navigate).then(app => {
   states.map(pipe(app.view, render(document.getElementById("app"))))
 
   navigate.map(route => {
-    Route.fold(Object.assign({
-      Home: () => ({ route }) => update({ route })
-    }, require("./settings/navigate").navigate))(route)({ model: models(), route, update })
+    Route.fold(Object.assign({},
+      require("./home/navigate").navigate,
+      require("./settings/navigate").navigate
+    ))(route)({ model: models(), route, update })
   })
 
   // Only for development, to use the Meiosis Tracer as a Chrome extension.

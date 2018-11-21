@@ -5,17 +5,15 @@ import { credentialsApi, clearToken } from "../services"
 import { listenToRouteChanges, parseUrl } from "../util/router"
 import { wirem } from "../util/wirem"
 
-const wireApp = (update, data) =>
-  wirem({
+const wireApp = (update, navigate, data) => ({
+  view: wirem({
     component: Root,
     update,
-    properties: {
-      model: Root.model(data)
-    },
-    combinators: {
-      service: list => model => list.reduce((x, f) => O(x, f(x)), model)
-    }
-  })
+    navigate
+  }),
+  model: Root.model(data),
+  service: model => [Root.service].reduce((x, f) => O(x, f(x)), model)
+})
 
 export const createApp = (update, navigate) => {
   listenToRouteChanges(navigate)
@@ -25,9 +23,9 @@ export const createApp = (update, navigate) => {
   navigate(route)
 
   return credentialsApi.getUser()
-    .then(user => wireApp(update, { route, user }))
+    .then(user => wireApp(update, navigate, { route, user }))
     .catch(() => {
       clearToken()
-      return wireApp(update, { route })
+      return wireApp(update, navigate, { route })
     })
 }

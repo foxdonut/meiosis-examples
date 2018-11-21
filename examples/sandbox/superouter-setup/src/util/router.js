@@ -3,12 +3,10 @@ import m from "mithril"
 
 const prefix = "#"
 
-const routes = Object.assign({},
-  require("../home/route").route,
-  require("../settings/route").route
-)
-
-export const Route = superouter.type("Route", routes)
+export const Route = superouter.type("Route", {
+  Home: "/",
+  Settings: "/settings/:username"
+})
 
 export const parseUrl = (hash = document.location.hash || "#/") => {
   const [ url, queryString ] = hash.substring(1).split("?")
