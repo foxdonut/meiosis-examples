@@ -3,17 +3,22 @@ import O from "patchinko/constant"
 import { Root } from "../root"
 import { credentialsApi, clearToken } from "../services"
 import { listenToRouteChanges, parseUrl } from "../util/router"
-import { wirem } from "../util/wirem"
+import { findProperties, wirem } from "../util/wirem"
 
-const wireApp = (update, navigate, data) => ({
-  view: wirem({
-    component: Root,
-    update,
-    navigate
-  }),
-  model: Root.model(data),
-  service: model => [Root.service].reduce((x, f) => O(x, f(x)), model)
-})
+const wireApp = (update, navigate, data) => {
+  const properties = findProperties(Root, ["navigate", "service"])
+
+  return {
+    view: wirem({
+      component: Root,
+      update,
+      navigate
+    }),
+    model: Root.model(data),
+    service: model => properties.service.reduce((x, f) => O(x, f(x)), model),
+    navigate: Object.assign.apply(null, properties.navigate)
+  }
+}
 
 export const createApp = (update, navigate) => {
   listenToRouteChanges(navigate)

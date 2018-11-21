@@ -1,7 +1,7 @@
 import O from "patchinko/constant"
 import stream from "mithril-stream"
 
-import { pipe } from "./util/fp"
+import { assoc, pipe } from "./util/fp"
 import { render } from "./util/view"
 import { createApp } from "./app"
 import { Route } from "./util/router"
@@ -14,12 +14,12 @@ createApp(update, navigate).then(app => {
   const states = models.map(app.service)
   states.map(pipe(app.view, render(document.getElementById("app"))))
 
-  navigate.map(route => {
-    Route.fold(Object.assign({},
-      require("./home/navigate").navigate,
-      require("./settings/navigate").navigate
-    ))(route)({ model: models(), route, update })
-  })
+  const defaultNavigateFn = () => ({ route, update }) => update({ route })
+  const navigateFn = Route.fold(Object.assign(
+    Object.keys(Route.of).reduce((result, key) => assoc(key, defaultNavigateFn, result), {}),
+    app.navigate))
+
+  navigate.map(route => navigateFn(route)({ model: models(), route, update }))
 
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   const meiosisTracer = require("meiosis-tracer")

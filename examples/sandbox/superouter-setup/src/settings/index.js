@@ -1,7 +1,7 @@
-import { actions } from "./actions"
 import { view } from "./view"
+import { navigate } from "./navigate"
 
 export const Settings = {
-  actions,
-  view
+  view,
+  navigate
 }
