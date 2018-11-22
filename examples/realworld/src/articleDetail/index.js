@@ -1,9 +1,9 @@
 import { actions } from "./actions"
 import { view } from "./view"
-import { nextAction } from "./nextAction"
+import { navigate } from "./navigate"
 
 export const ArticleDetail = {
   actions,
   view,
-  nextAction
+  navigate
 }

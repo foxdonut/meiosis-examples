@@ -5,7 +5,7 @@ import { helpers } from "../root/helpers"
 import { prepend } from "../util/fp"
 import { HomePage, RegisterPage, navigateTo } from "../util/router"
 
-export const actions = update => ({
+export const actions = ({ update }) => ({
   updateCommentField: comment => update({ comment }),
 
   addComment: (slug, body) => {

@@ -3,35 +3,34 @@ import O from "patchinko/constant"
 import { Root } from "../root"
 import { credentialsApi, clearToken } from "../services"
 import { listenToRouteChanges, parseUrl } from "../util/router"
-import { wirem } from "../util/wirem"
+import { findProperties, wirem } from "../util/wirem"
 
-const wireApp = (update, data) =>
-  wirem({
-    component: Root,
-    update,
-    properties: {
-      model: Root.model(data)
-    },
-    combinators: {
-      accept: list => (model, patch) => list.reduce((x, f) => x && f(model, x), patch),
-      service: list => (model, patch) => list.reduce((x, f) => O(x, f(x, patch)), model),
-      nextAction: list => {
-        const listWithUpdate = list.map(item => item(update))
-        return (model, patch) => listWithUpdate.forEach(item => item(model, patch))
-      }
-    }
-  })
+const wireApp = (update, navigate, data) => {
+  const properties = findProperties(Root, ["navigate", "service"])
 
-export const createApp = update => {
-  listenToRouteChanges(update)
+  return {
+    view: wirem({
+      component: Root,
+      update,
+      navigate
+    }),
+    model: Root.model(data),
+    service: model => properties.service.reduce((x, f) => O(x, f(x)), model),
+    navigate: Object.assign.apply(null, properties.navigate)
+  }
+}
+
+export const createApp = (update, navigate) => {
+  listenToRouteChanges(navigate)
 
   // parse initial url
-  const data = parseUrl()
+  const route = parseUrl()
+  navigate(route)
 
   return credentialsApi.getUser()
-    .then(user => wireApp(update, Object.assign(data, { user })))
+    .then(user => wireApp(update, navigate, { route, user }))
     .catch(() => {
       clearToken()
-      return wireApp(update, data)
+      return wireApp(update, navigate, { route })
     })
 }
