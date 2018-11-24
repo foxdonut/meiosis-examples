@@ -10,11 +10,11 @@ const processAttrs = (attrs = {}) => {
       delete attrs[key];
       attrs["for"] = value;
     }
-    else if (attrs.innerHTML) {
-      attrs.dangerouslySetInnerHTML = { __html: attrs.innerHTML };
-      delete attrs.innerHTML;
-    }
   })
+  if (attrs.innerHTML) {
+    attrs.dangerouslySetInnerHTML = { __html: attrs.innerHTML };
+    delete attrs.innerHTML;
+  }
   return attrs;
 };
 
