@@ -1,10 +1,10 @@
 import O from "patchinko/constant"
 
 import { credentialsApi, setToken } from "../services"
-import { HomePage, navigateTo } from "../util/router"
+import { Route } from "../util/router"
 import { pick } from "../util/fp"
 
-export const actions = update => ({
+export const actions = ({ update, navigate }) => ({
   updateCredForm: (method, field) => text => update({ [method]: O({ [field]: text }) }),
 
   sendCredentials: method => model => {
@@ -12,8 +12,8 @@ export const actions = update => ({
     credentialsApi[method]({ user: pick(fields, model[method]) }).
       then(({ user }) => {
         setToken(user.token)
-        update(Object.assign(navigateTo(HomePage), { user }))
+        navigate(Object.assign(Route.of.Home(), { user }))
       }).
-      catch(err => update({ [method]: O({ errors: err.errors }) }))
+      catch(err => update({ [method]: O({ errors: err.response.errors }) }))
   }
 })
