@@ -1,9 +1,9 @@
 import { actions } from "./actions"
 import { view } from "./view"
-import { nextAction } from "./nextAction"
+import { onNavigate } from "./onNavigate"
 
 export const ArticleEdit = {
   actions,
   view,
-  nextAction
+  onNavigate
 }

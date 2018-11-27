@@ -1,9 +1,9 @@
 import { actions } from "./actions"
 import { view } from "./view"
-import { accept } from "./accept"
+import { onNavigate } from "./onNavigate"
 
 export const Settings = {
   actions,
   view,
-  accept
+  onNavigate
 }

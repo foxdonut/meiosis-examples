@@ -1,7 +1,7 @@
 import { accept } from "./accept"
 import { actions } from "./actions"
 import { view } from "./view"
-import { navigate } from "./navigate"
+import { onNavigate } from "./onNavigate"
 import { Articles } from "../articles"
 import { PopularTags } from "../popularTags"
 
@@ -13,5 +13,5 @@ export const Home = {
   accept,
   actions,
   view,
-  navigate
+  onNavigate
 }

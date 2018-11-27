@@ -12,7 +12,7 @@ export const actions = ({ update, navigate }) => ({
     credentialsApi[method]({ user: pick(fields, model[method]) }).
       then(({ user }) => {
         setToken(user.token)
-        navigate(Object.assign(Route.of.Home(), { user }))
+        navigate({ route: Route.of.Home(), user })
       }).
       catch(err => update({ [method]: O({ errors: err.response.errors }) }))
   }

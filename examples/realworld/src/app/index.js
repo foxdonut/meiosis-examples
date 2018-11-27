@@ -6,7 +6,7 @@ import { listenToRouteChanges, parseUrl } from "../util/router"
 import { findProperties, wirem } from "../util/wirem"
 
 const wireApp = (update, navigate, data) => {
-  const properties = findProperties(Root, ["navigate", "service"])
+  const properties = findProperties(Root, ["onNavigate", "service"])
 
   return {
     view: wirem({
@@ -16,7 +16,7 @@ const wireApp = (update, navigate, data) => {
     }),
     model: Root.model(data),
     service: model => properties.service.reduce((x, f) => O(x, f(x)), model),
-    navigate: Object.assign.apply(null, properties.navigate)
+    onNavigate: Object.assign.apply(null, properties.onNavigate)
   }
 }
 
@@ -25,7 +25,7 @@ export const createApp = (update, navigate) => {
 
   // parse initial url
   const route = parseUrl()
-  navigate(route)
+  navigate({ route })
 
   return credentialsApi.getUser()
     .then(user => wireApp(update, navigate, { route, user }))

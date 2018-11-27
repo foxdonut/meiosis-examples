@@ -33,7 +33,7 @@ export const getUrl = (route, query = route.query) => {
 }
 
 export const listenToRouteChanges = navigate =>
-  window.onpopstate = () => navigate(parseUrl())
+  window.onpopstate = () => navigate({ route: parseUrl() })
 
 /*
 const routeMappings = {
