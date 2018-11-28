@@ -16,9 +16,14 @@ const range = (start, end) => {
   return arr
 }
 
+// Similar to pick, but don't return keys that are not in the object.
+const choose = (keys, obj) => !obj ? {} : keys.reduce((result, key) =>
+  obj.hasOwnProperty(key) ? assoc(key, obj[key], result) : result, {})
+
 module.exports = {
   assoc,
   asyncPipe,
+  choose,
   compose,
   constant,
   defaultTo,

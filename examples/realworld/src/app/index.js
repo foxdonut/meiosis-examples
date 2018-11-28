@@ -24,13 +24,13 @@ export const createApp = (update, navigate) => {
   listenToRouteChanges(navigate)
 
   // parse initial url
-  const route = parseUrl()
-  navigate({ route })
+  const navigation = parseUrl()
+  navigate(navigation)
 
   return credentialsApi.getUser()
-    .then(user => wireApp(update, navigate, { route, user }))
+    .then(user => wireApp(update, navigate, Object.assign({ user }, navigation)))
     .catch(() => {
       clearToken()
-      return wireApp(update, navigate, { route })
+      return wireApp(update, navigate, navigation)
     })
 }

@@ -18,13 +18,13 @@ export const Route = superouter.type("Route", {
 export const parseUrl = (hash = document.location.hash || "#/") => {
   const [ url, queryString ] = hash.substring(1).split("?")
   const route = Route.matchOr(() => Route.of.Home(), url)
-  route.query = queryString
+  const query = queryString
     ? m.parseQueryString(queryString)
     : {}
-  return route
+  return { route, query }
 }
 
-export const getUrl = (route, query = route.query) => {
+export const getUrl = (route, query) => {
   let result = Route.toURL(route)
   if (query && Object.keys(query).length > 0) {
     result += "?" + m.buildQueryString(query)
@@ -33,13 +33,11 @@ export const getUrl = (route, query = route.query) => {
 }
 
 export const listenToRouteChanges = navigate =>
-  window.onpopstate = () => navigate({ route: parseUrl() })
+  window.onpopstate = () => navigate(parseUrl())
 
 /*
 const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
-  "/login": () => ({ pageId: LoginPage, login: {} }),
-  "/register": () => ({ pageId: RegisterPage, register: {} }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),
   "/editor/:slug": () => ({ pageId: ArticleEditPage, article: null }),
   "/editor": () => ({ pageId: ArticleCreatePage,

@@ -1,12 +1,12 @@
-export const service = model => model.route.params ?
-  // synchronize articlesFilter
-  ({
-    articlesFilter: {
-      limit: model.route.params.limit || model.articlesFilter.limit,
-      offset: model.route.params.offset || 0,
-      tag: model.route.params.tag,
-      author: model.articlesFilter.author || model.route.params.author,
-      favorited: model.articlesFilter.favorited || model.route.params.favorited
-    }
+import O from "patchinko/constant"
+import { choose } from "../util/fp"
+
+// synchronize articlesFilter
+export const service = model => model.query ?
+  ({ articlesFilter: O(
+    Object.assign(
+      choose(["offset", "author", "favorited"], model.query),
+      { tag: model.query.tag }
+    ))
   })
   : null

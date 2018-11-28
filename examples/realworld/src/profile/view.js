@@ -1,11 +1,11 @@
 import { get } from "../util/fp"
-import { ProfileFavoritesPage, Route, getUrl } from "../util/router"
+import { Route, getUrl } from "../util/router"
 import { defaultImage } from "../util/view"
 
 export const view = ({ actions, articles }) => model => {
   const username = get(model, ["profile", "username"])
   const isCurrentUser = get(model, ["profile", "id"]) === get(model, ["user", "id"])
-  const isFavorites = model.pageId === ProfileFavoritesPage
+  const isFavorites = model.route.case === "ProfileFavorites"
 
   return !model.profile
     ? ["div", { style: { height: "2000px" } },
