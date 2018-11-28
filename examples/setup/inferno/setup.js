@@ -4,13 +4,10 @@ import { setup } from "../common";
 import { sv } from "seview";
 
 const processAttrs = (attrs = {}) => {
-  Object.keys(attrs).forEach(key => {
-    if (key === "htmlFor") {
-      const value = attrs[key];
-      delete attrs[key];
-      attrs["for"] = value;
-    }
-  })
+  if (attrs.htmlFor) {
+    attrs.for = attrs.htmlFor;
+    delete attrs.htmlFor;
+  }
   if (attrs.innerHTML) {
     attrs.dangerouslySetInnerHTML = { __html: attrs.innerHTML };
     delete attrs.innerHTML;
