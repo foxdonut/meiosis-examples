@@ -30,7 +30,6 @@
   "dependencies": {
     "marked": "^0.5.0",
     "mithril": "^2.0.0-rc.0",
-    "mithril-stream": "^1.1.0",
     "patchinko": "^4.1.0",
     "seview": "^0.10.0",
     "superouter": "^0.1.3",

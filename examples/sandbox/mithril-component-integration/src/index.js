@@ -1,6 +1,6 @@
 /* global dateRange */
 import m from "mithril";
-import stream from "mithril-stream";
+import stream from "mithril/stream";
 import O from "patchinko/overloaded";
 
 const DateRange = dateRange.default;

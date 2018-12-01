@@ -1,5 +1,5 @@
 import O from "patchinko/constant"
-import stream from "mithril-stream"
+import stream from "mithril/stream"
 
 import { pipe } from "./util/fp"
 import { render } from "./util/view"
