@@ -36,21 +36,13 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "dio.js": "^9.1.1",
-    "domvm": "^3.4.3",
     "flyd": "^0.2.8",
-    "hyperhtml": "^2.13.0",
-    "inferno": "^5.3.0",
-    "inferno-create-element": "^5.3.0",
-    "inferno-hyperscript": "^5.3.0",
     "lit-html": "^0.10.2",
-    "mithril": "^1.1.6",
-    "petit-dom": "0.2.0",
-    "preact": "^8.3.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "seview": "^0.10.0",
-    "snabbdom": "^0.7.1"
+    "mithril": "^2.0.0-rc.1",
+    "preact": "^8.3.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "seview": "^0.10.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",
@@ -60,10 +52,9 @@
     "babel-preset-env": "^1.7.0",
     "browser-env": "^3.2.5",
     "jquery": "^3.3.1",
-    "meiosis-tracer": "^2.0.0",
-    "raf": "^3.4.0",
-    "snabbdom-jsx": "^0.4.2",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0"
+    "meiosis-tracer": "^2.0.3",
+    "raf": "^3.4.1",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
   }
 }
