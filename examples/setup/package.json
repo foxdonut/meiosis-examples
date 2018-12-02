@@ -37,7 +37,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "flyd": "^0.2.8",
-    "lit-html": "^0.10.2",
+    "lit-html": "^0.14.0",
     "mithril": "^2.0.0-rc.1",
     "preact": "^8.3.1",
     "react": "^16.6.3",

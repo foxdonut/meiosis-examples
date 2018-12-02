@@ -1,5 +1,5 @@
 import flyd from "flyd";
-import { render } from "lit-html/lib/lit-extended";
+import { render } from "lit-html";
 
 import { createTemperature } from "./temperature";
 
