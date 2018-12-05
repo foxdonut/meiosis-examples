@@ -1,23 +1,23 @@
 import _ from "lodash";
 
-export const createActions = update => ({
-  increase: amount => evt => {
+export const actions = update => ({
+  increase: (id, amount) => evt => {
     evt.preventDefault();
 
-    update(model => _.update(model, "value", value => value + amount));
+    update(model => _.update(model, [id, "value"], value => value + amount));
   },
 
-  changeUnits: evt => {
+  changeUnits: id => evt => {
     evt.preventDefault();
 
     update(model => {
-      if (model.units === "F") {
-        return _.update(_.set(model, "units", "C"),
-          "value", value => Math.round( (value - 32) / 9 * 5 ));
+      if (model[id].units === "F") {
+        return _.update(_.set(model, [id, "units"], "C"),
+          [id, "value"], value => Math.round( (value - 32) / 9 * 5 ));
       }
       else {
-        return _.update(_.set(model, "units", "F"),
-          "value", value => Math.round( value * 9 / 5 + 32 ));
+        return _.update(_.set(model, [id, "units"], "F"),
+          [id, "value"], value => Math.round( value * 9 / 5 + 32 ));
       }
     })
   }

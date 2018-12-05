@@ -1,54 +1,50 @@
-import _ from "lodash";
-import { createView } from "./view.jsx";
-import { createEntryDate } from "../entryDate";
-import { createEntryNumber } from "../entryNumber";
-import { createTemperature } from "../temperature";
-import { validateModel } from "../validation";
-import { nest } from "../util/nest";
+import preact, { Component } from "preact";
+import { actions } from "./actions";
+import { entryDate, EntryDate } from "../entryDate";
+import { entryNumber, EntryNumber } from "../entryNumber";
+import { temperature, Temperature } from "../temperature";
 
-const createActions = update => ({
-  save: evt => {
-    evt.preventDefault();
+export const app = {
+  model: () => Object.assign({}, {
+    "entry:date:from": entryDate.model("From Date:"),
+    "entry:date:to": entryDate.model("From To:"),
+    "entry:number": entryNumber.model(),
+    "temperature:air": temperature.model("Air temperature"),
+    "temperature:water": temperature.model("Water temperature")
+  }),
+  actions: update => Object.assign({},
+    actions(update),
+    temperature.actions(update)
+  )
+};
 
-    update(model => {
-      const errors = validateModel(model);
-      model.errors = errors;
-
-      if (_.isEmpty(errors)) {
-        const air = model.temperature.air;
-        const water = model.temperature.water;
-
-        model.saved =
-          "Entry #" + model.entryNumber.value +
-          " from " + model.entryDate.from.value +
-          " to " + model.entryDate.to.value + ":" +
-          " Air: " + air.value + "\xB0" + air.units +
-          " Water: " + water.value + "\xB0" + water.units;
-
-        model.entryDate.from.value = "";
-        model.entryDate.to.value = "";
-        model.entryNumber.value = "";
-      }
-      return model;
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.props.models.map(model => {
+      this.setState({ model });
     });
   }
-});
 
-export const createApp = update => {
-  const components = {
-    entryNumber: nest(createEntryNumber, update, ["entryNumber"]),
-    entryDateFrom: nest(createEntryDate("From Date:"), update, ["entryDate", "from"]),
-    entryDateTo: nest(createEntryDate("To Date:"), update, ["entryDate", "to"]),
-    airTemperature: nest(createTemperature("Air temperature"), update, ["temperature", "air"]),
-    waterTemperature: nest(createTemperature("Water temperature"), update, ["temperature", "water"])
-  };
+  render(props, state) {
+    const actions = props.actions;
+    const model = state.model;
 
-  return {
-    model: () => _.reduce(
-      _.values(components),
-      (result, component) => _.merge(result, component.model()),
-      { }
-    ),
-    view: createView(createActions(update), components)
-  };
-};
+    return (
+      <form className="pure-form pure-form-aligned">
+        <fieldset>
+          <EntryNumber id="entry:number" model={model} actions={actions}/>
+          <EntryDate id="entry:date:from" model={model} actions={actions}/>
+          <EntryDate id="entry:date:to" model={model} actions={actions}/>
+          <Temperature id="temperature:air" model={model} actions={actions}/>
+          <Temperature id="temperature:water" model={model} actions={actions}/>
+
+          <button className="pure-button pure-button-primary"
+            onClick={actions.save}>Save</button>
+        </fieldset>
+
+        <span>Saved: {model.saved}</span>
+      </form>
+    );
+  }
+}

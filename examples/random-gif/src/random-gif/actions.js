@@ -7,19 +7,18 @@ const { Loaded, Success, Image } = require("./types")
 const gif_new_url = "https://api.giphy.com/v1/gifs/random"
 const api_key = "dc6zaTOxFJmzC"
 
-exports.actions = ({ update, actions }) => ({
+exports.actions = (update, newGifGenerated) => ({
   editTag: (id, tag) => update(R.objOf(id, O({ tag }))),
 
   newGif: (id, model) => {
     update(R.objOf(id, O({ image: Loaded.N() })))
     m.request({ url: gif_new_url, data: { api_key, tag: model[id].tag }}).
       then(response => {
-        update({
+        update(Object.assign({
           [id]: O({
             image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
           })
-        })
-        actions.newGifGenerated(model)
+        }, newGifGenerated(model)))
       }).
       catch(() => update(R.objOf(id, O({ image: Loaded.Y(Success.N()) }))))
   },

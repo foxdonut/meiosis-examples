@@ -1,10 +1,28 @@
 module.exports = {
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["react"],
+  "extends": ["eslint:recommended", "react:recommended"],
   "rules": {
-    "react/display-name": [0],
-    "react/no-render-return-value": [0],
-    "react/prop-types": [0],
-    "react/react-in-jsx-scope": [0]
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ]
   }
 };

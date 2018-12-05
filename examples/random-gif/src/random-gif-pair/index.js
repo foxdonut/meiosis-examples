@@ -1,13 +1,17 @@
-const RandomGif = require("../random-gif")
+const m = require("mithril")
+const { randomGif, RandomGif } = require("../random-gif")
 
-module.exports = {
+exports.randomGifPair = {
   model: id => ({
-    [id + "First"]: RandomGif.model(),
-    [id + "Second"]: RandomGif.model()
-  }),
-  dependencies: { randomGif: RandomGif },
-  view: ({ randomGif }) => (model, id) => ["div.ba.b--purple.pa2.mt2",
-    ["div.dib", randomGif(model, id + "First")],
-    ["div.dib.ml2", randomGif(model, id + "Second")]
-  ]
+    [id + "First"]: randomGif.model(),
+    [id + "Second"]: randomGif.model()
+  })
+}
+
+exports.RandomGifPair = {
+  view: ({ attrs: { model, id, actions } }) =>
+    m("div.ba.b--purple.pa2.mt2",
+      m("div.dib", m(RandomGif, { model, id: id + "First", actions })),
+      m("div.dib.ml2", m(RandomGif, { model, id: id + "Second", actions }))
+    )
 }

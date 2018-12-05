@@ -4,8 +4,8 @@
   "description": "meiosis-examples temperatures",
   "main": "index.js",
   "scripts": {
-    "start": "rollup -c",
-    "watch": "rollup -c --watch"
+    "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
+    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v"
   },
   "repository": {
     "type": "git",
@@ -28,16 +28,16 @@
     "joi": "^13.5.2",
     "joi-browser": "^13.4.0",
     "joi-date-extensions": "^1.2.0",
-    "lodash": "^4.17.10",
-    "preact": "^8.3.0"
+    "lodash": "^4.17.11",
+    "preact": "^8.3.1"
   },
   "devDependencies": {
-    "buble": "^0.19.3",
-    "meiosis-tracer": "^2.0.0",
-    "react-jsx": "^1.0.0",
-    "rollup": "^0.64.1",
-    "rollup-plugin-buble": "^0.19.2",
-    "rollup-plugin-commonjs": "^9.1.4",
-    "rollup-plugin-node-resolve": "^3.3.0"
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "meiosis-tracer": "^2.0.3",
+    "watchify": "^3.11.0"
   }
 }

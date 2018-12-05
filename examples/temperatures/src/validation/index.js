@@ -5,15 +5,13 @@ import _ from "lodash";
 const Joi = BaseJoi.extend(DateExtensions);
 
 const schema = {
-  entryDate: {
-    from: {
-      value: Joi.date().format("YYYY-MM-DD").required()
-    },
-    to: {
-      value: Joi.date().format("YYYY-MM-DD").required()
-    }
+  "entry:date:from": {
+    value: Joi.date().format("YYYY-MM-DD").required()
   },
-  entryNumber: {
+  "entry:date:to": {
+    value: Joi.date().format("YYYY-MM-DD").required()
+  },
+  "entry:number": {
     value: Joi.number().integer().min(0).required()
   }
 };

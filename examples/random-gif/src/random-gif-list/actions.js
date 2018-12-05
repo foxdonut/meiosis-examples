@@ -2,12 +2,12 @@ const O = require("patchinko/constant")
 const R = require("ramda")
 const uuid = require("uuid")
 
-const RandomGif = require("../random-gif")
+const { randomGif } = require("../random-gif")
 
-exports.actions = ({ update, actions }) => ({
+exports.actions = update => ({
   add: id => {
     const newId = "randomGifList:" + uuid.v1()
-    const randomGifModel = RandomGif.model()
+    const randomGifModel = randomGif.model()
 
     update({
       [newId]: randomGifModel,
@@ -20,7 +20,5 @@ exports.actions = ({ update, actions }) => ({
       randomGifIds: O(list => R.remove(list.indexOf(subId), 1, list))
     }),
     [subId]: O
-  }),
-
-  resetAll: ids => ids.forEach(actions.reset)
+  })
 })

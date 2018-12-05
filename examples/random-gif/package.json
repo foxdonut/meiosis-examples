@@ -4,9 +4,8 @@
   "description": "meiosis-examples random-gif",
   "main": "index.js",
   "scripts": {
-    "start": "browserify src/index.js -p [ tsify ] -o build/generated-app.js",
-    "watch": "watchify src/index.js -p [ tsify ] -o build/generated-app.js -v",
-    "test": "node test/run"
+    "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
+    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v"
   },
   "repository": {
     "type": "git",
@@ -25,24 +24,18 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "mithril": "^1.1.6",
+    "mithril": "^2.0.0-rc.1",
     "patchinko": "^4.1.0",
-    "ramda": "0.25.0",
-    "seview": "^0.10.0",
+    "ramda": "0.26.1",
     "static-sum-type": "^0.18.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "browser-env": "^3.2.5",
-    "browserify": "^16.2.2",
-    "glob": "^7.1.3",
-    "jquery": "^3.3.1",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
     "meiosis-tracer": "^2.0.3",
-    "onchange": "^4.1.0",
-    "ospec": "^3.0.1",
-    "reify": "^0.17.3",
-    "tsify": "^4.0.0",
-    "typescript": "^3.0.3",
     "watchify": "^3.11.0"
   }
 }

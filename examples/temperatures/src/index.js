@@ -1,15 +1,14 @@
 import flyd from "flyd";
-import { render } from "preact";
+import preact, { render } from "preact";
 
-import { createApp } from "./app";
+import { app, App } from "./app";
 
 const update = flyd.stream();
-const app = createApp(update);
 const models = flyd.scan((model, func) => func(model),
   app.model(), update);
+const actions = app.actions(update);
 
-const element = document.getElementById("app");
-models.map(model => render(app.view(model), element, element.lastElementChild));
+render(<App models={models} actions={actions}/>, document.getElementById("app"));
 
 // Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer"

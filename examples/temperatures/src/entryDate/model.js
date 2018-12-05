@@ -1,4 +1,4 @@
-export const model = label => () => ({
+export const model = label => ({
   label,
   value: ""
 });
