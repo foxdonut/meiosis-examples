@@ -10,9 +10,10 @@ export const app = {
 }
 
 export class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { model: props.models() }
+  componentWillMount() {
+    this.props.models.map(model => {
+      this.setState({ model })
+    })
   }
 
   render() {
@@ -20,11 +21,5 @@ export class App extends Component {
     const { actions } = this.props
 
     return view(model, actions)
-  }
-
-  componentDidMount() {
-    this.props.models.map(model => {
-      this.setState({ model })
-    })
   }
 }
