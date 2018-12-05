@@ -5,7 +5,7 @@ const precipitationOption = ({ model, actions, id, value, label }) => html`
     <input type="radio" id=${id} name="precipitation" value=${value}
       .checked=${model.precipitation === value}
       @click=${actions.changePrecipitation}/>
-    <label htmlFor=${id}>${label}</label>
+    <label for=${id}>${label}</label>
   </span>
 `
 
