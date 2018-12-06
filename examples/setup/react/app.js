@@ -13,7 +13,8 @@ export const app = {
 export class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { model: props.models(), skippedFirst: false }
+    this.state = { model: props.models() }
+    this.skippedFirst = false
   }
 
   render() {
@@ -25,11 +26,11 @@ export class App extends Component {
 
   componentDidMount() {
     this.props.models.map(model => {
-      if (this.state.skippedFirst) {
+      if (this.skippedFirst) {
         this.setState({ model })
       }
       else {
-        this.state.skippedFirst = true
+        this.skippedFirst = true
       }
     })
   }
