@@ -1,15 +1,15 @@
 import React, { Component } from "react"
-import { Menu } from "semantic-ui-react"
+import { Button, Menu, Modal } from "semantic-ui-react"
 
+import { model } from "./model"
+import { patches } from "./patches"
 import { actions } from "./actions"
 import { Todos } from "../todos"
 import { Projects } from "../projects"
 
 export const root = {
-  model: () => ({
-    pageId: "TodoListPage",
-    message: ""
-  }),
+  model,
+  patches,
   actions
 }
 
@@ -33,6 +33,15 @@ export class Root extends Component {
           {model.pageId === "TodoListPage" && <Todos model={model} actions={actions} />}
           {model.pageId === "ProjectPage" && <Projects model={model} actions={actions} />}
         </div>
+        <Modal open={model.message != null} size="small">
+          <Modal.Content>{model.message}</Modal.Content>
+        </Modal>
+        <Modal open={model.error != null} size="small">
+          <Modal.Content>{model.error}</Modal.Content>
+          <Modal.Actions>
+            <Button onClick={actions.clearError}>Ok</Button>
+          </Modal.Actions>
+        </Modal>
       </div>
     )
   }

@@ -2,7 +2,6 @@ import O from "patchinko/constant"
 import * as R from "ramda"
 
 import { ajaxServices } from "../util/ajax-services"
-//import { showMessage, clearMessage, showError } from "../util/ui"
 
 const updateList = (todo, model) => {
   return {
@@ -30,18 +29,18 @@ const updateList = (todo, model) => {
 
 export const effects = ({ update, patches }) => ({
   saveTodo: (id, todo, model) => {
-    //showMessage("Saving, please wait...")
+    update(patches.showMessage("Saving, please wait..."))
 
     return ajaxServices.saveTodo(todo)
       .then(todo => update(Object.assign({},
         updateList(todo, model),
-        //clearMessage(),
+        patches.clearMessage(),
         { [`todoItem:${todo.id}`]: O({ editing: false }) },
         patches.clearForm(id)
       )))
       .catch(() => update(Object.assign({},
-        //clearMessage(),
-        //showError("Sorry, an error occurred. Please try again.")
+        patches.clearMessage(),
+        patches.showError("Sorry, an error occurred. Please try again.")
       )))
   }
 })

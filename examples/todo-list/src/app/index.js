@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 
-//import { nextAction } from "./nextAction"
 import { root, Root } from "../root"
 import { todos } from "../todos"
 import { todoForm } from "../todos/todoForm"
@@ -8,6 +7,7 @@ import { ajaxServices } from "../util/ajax-services"
 
 export const createApp = update => ajaxServices.loadTodos().then(initialTodoList => {
   const patches = Object.assign({},
+    root.patches,
     todoForm.patches
   )
 
