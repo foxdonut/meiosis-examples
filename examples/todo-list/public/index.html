@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/semantic/dist/semantic.min.css">
+    <script src="%PUBLIC_URL%/lib/jquery.min.js"></script>
+    <script src="%PUBLIC_URL%/semantic/dist/semantic.min.js"></script>
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div style="margin-top: 10px; margin-bottom: 10px; margin-right: 28rem; margin-left: 5rem;">
+      <a href="http://meiosis.js.org"><img src="%PUBLIC_URL%/images/meiosis.png" style="margin-right: 8px" width="53px"></a>
+      <h2 style="display: inline">Meiosis Todo List</h2>
+      <div><a href="/index.html">Back to list of examples</a></div>
+      <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/todo-list" target="_blank">Source code</a></div>
+      <hr>
+      <div id="app">Loading...</div>
+      <div className="ui small modal message">
+        <div className="content">
+          <p id="message"></p>
+        </div>
+      </div>
+      <div className="ui small modal error">
+        <div className="content">
+          <p id="error"></p>
+        </div>
+        <div className="actions">
+          <div className="ui ok right button">
+            Ok
+          </div>
+        </div>
+      </div>
+      <div id="tracer" style="position: fixed; top: 0px; right: 0px; font-size: 9pt;"></div>
+    </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

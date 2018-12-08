@@ -1,76 +1,39 @@
-import R from "ramda";
+import O from "patchinko/constant"
 
-import { ajaxServices } from "../util/ajax-services";
-import { TodoForm } from "./todoForm"
+import { ajaxServices } from "../util/ajax-services"
+import { showMessage, clearMessage, showError } from "../util/ui"
+import { todoForm } from "./todoForm"
 
-export const actions = ({ update, actions, updates }) => {
-  const updateList = todo => model => {
-    model.todos[todo.id] = todo;
-    const idx = model.todoIds.indexOf(todo.id);
-    if (idx >= 0) {
-      model.todoIds.splice(idx, 1);
-    }
-    if (model.todos[R.last(model.todoIds)].priority <= todo.priority) {
-      model.todoIds.push(todo.id);
-    }
-    else {
-      for (let i = 0; i < model.todoIds.length; i++) {
-        if (model.todos[model.todoIds[i]].priority > todo.priority) {
-          model.todoIds.splice(i, 0, todo.id);
-          break;
-        }
-      }
-    }
-    return model;
-  };
-
-  const clearForm = id => R.over(R.lensProp(id),
-    model => R.merge(model, ({ todo: { }, validationErrors: { } }))
-  );
-
+export const actions = ({ update, patches }) => {
   return {
-    editTodo: (id, todo) => update(R.compose(
-      R.assocPath([id, "editing"], true),
-      R.assoc(`todoForm:${todo.id}`, TodoForm.model({ todo }))
+    editTodo: (id, todo) => update(Object.assign({},
+      { [id]: O({ editing: true }) },
+      { [`todoForm:${todo.id}`]: todoForm.model({ todo: Object.assign({}, todo) }) }
     )),
 
-    cancelEditTodo: (id, todo) => update(R.compose(
-      R.assocPath([`todoItem:${todo.id}`, "editing"], false),
-      clearForm(id)
+    cancelEditTodo: (id, todo) => update(Object.assign({},
+      { [`todoItem:${todo.id}`]: O({ editing: false }) },
+      patches.clearForm(id)
     )),
-
-    saveTodo: (id, todo) => {
-      actions.showMessage("Saving, please wait...");
-
-      return ajaxServices.saveTodo(todo).
-        then(todo => update(R.compose(
-          updateList(todo),
-          updates.clearMessage(),
-          R.assocPath([`todoItem:${todo.id}`, "editing"], false),
-          clearForm(id)
-        ))).
-        catch(() => update(R.compose(
-          updates.clearMessage(),
-          updates.showError("Sorry, an error occurred. Please try again.")
-        )));
-    },
 
     deleteTodo: todo => {
-      actions.showMessage("Deleting, please wait...");
+      showMessage("Deleting, please wait...")
 
-      ajaxServices.deleteTodo(todo.id).
-        then(() => {
-          update(model => {
-            delete model.todos[todo.id];
-            model.todoIds.splice(model.todoIds.indexOf(todo.id), 1);
-            return model;
-          });
-          actions.clearMessage();
-        }).
-        catch(() => update(R.compose(
-          updates.clearMessage(),
-          updates.showError("Sorry, an error occurred. Please try again.")
-        )));
+      ajaxServices.deleteTodo(todo.id)
+        .then(() => {
+          update({
+            todos: O({ [todo.id]: O }),
+            todoIds: O(todoIds => {
+              todoIds.splice(todoIds.indexOf(todo.id), 1)
+              return todoIds
+            })
+          })
+          clearMessage()
+        })
+        .catch(() => update(Object.assign({},
+          clearMessage(),
+          showError("Sorry, an error occurred. Please try again.")
+        )))
     }
   }
-};
+}

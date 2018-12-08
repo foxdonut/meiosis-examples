@@ -4,19 +4,10 @@
   "description": "meiosis-examples todo-list",
   "main": "index.js",
   "scripts": {
-    "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
-    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v",
-    "test": "ava"
-  },
-  "ava": {
-    "require": [
-      "babel-core/register",
-      "./test/setup-browser-env.js"
-    ],
-    "files": [
-      "test/**/*-tests.js"
-    ],
-    "verbose": true
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -24,8 +15,8 @@
   },
   "keywords": [
     "example",
-    "inferno",
     "meiosis",
+    "react",
     "reactive"
   ],
   "author": "foxdonut",
@@ -38,27 +29,26 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "flyd": "^0.2.8",
-    "inferno": "^5.6.1",
+    "patchinko": "^4.1.0",
     "prevent-default": "^1.0.0",
-    "ramda": "^0.25.0",
-    "semantic-ui": "^2.4.0",
+    "ramda": "^0.26.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1",
+    "semantic-ui": "^2.4.2",
     "sinon": "^6.3.4",
     "validate.js": "^0.12.0"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "babel-core": "^6.26.3",
-    "babel-plugin-import": "^1.9.1",
-    "babel-plugin-inferno": "^5.1.0",
-    "babel-preset-env": "^1.7.0",
-    "babelify": "^8.0.0",
-    "browser-env": "^3.2.5",
-    "browserify": "^16.2.2",
-    "eslint": "^5.6.0",
-    "eslint-plugin-inferno": "^7.10.0",
-    "gulp": "^3.9.1",
-    "jquery": "^3.3.1",
-    "meiosis-tracer": "^2.0.3",
-    "watchify": "^3.11.0"
-  }
+    "meiosis-tracer": "^2.0.3"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

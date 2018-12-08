@@ -1,19 +1,18 @@
-import R from "ramda";
+import O from "patchinko/constant"
 
-import { validateModel } from "./validation";
+import { validateModel } from "./validation"
 
-export const actions = ({ update, actions }) => ({
-  editingTodo: (id, field, value) => update(R.over(R.lensProp(id),
-    model => R.assoc("todo", R.assoc(field, value, model.todo), model))),
+export const actions = ({ update, effects }) => ({
+  editingTodo: (id, field, value) => update({ [id]: O({ todo: O({ [field]: value }) }) }),
 
-  onSaveTodo: (id, todo) => {
-    const validationErrors = validateModel(todo);
+  onSaveTodo: (id, todo, model) => {
+    const validationErrors = validateModel(todo)
 
     if (Object.keys(validationErrors).length === 0) {
-      actions.saveTodo(id, todo);
+      effects.saveTodo(id, todo, model)
     }
     else {
-      update(R.over(R.lensProp(id), R.assoc("validationErrors", validationErrors)));
+      update({ [id]: O({ validationErrors }) })
     }
   }
-});
+})

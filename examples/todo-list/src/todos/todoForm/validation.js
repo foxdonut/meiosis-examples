@@ -1,4 +1,4 @@
-import validate from "validate.js";
+import validate from "validate.js"
 
 let validationSpec = {
   description: {
@@ -16,8 +16,8 @@ let validationSpec = {
       lessThanOrEqualTo: 10
     }
   }
-};
+}
 
 export function validateModel(model) {
-  return validate(model, validationSpec) || {};
+  return validate(model, validationSpec) || {}
 }
