@@ -1,7 +1,7 @@
 import O from "patchinko/constant"
 
 import { ajaxServices } from "../util/ajax-services"
-import { showMessage, clearMessage, showError } from "../util/ui"
+//import { showMessage, clearMessage, showError } from "../util/ui"
 import { todoForm } from "./todoForm"
 
 export const actions = ({ update, patches }) => {
@@ -17,7 +17,7 @@ export const actions = ({ update, patches }) => {
     )),
 
     deleteTodo: todo => {
-      showMessage("Deleting, please wait...")
+      //showMessage("Deleting, please wait...")
 
       ajaxServices.deleteTodo(todo.id)
         .then(() => {
@@ -28,11 +28,11 @@ export const actions = ({ update, patches }) => {
               return todoIds
             })
           })
-          clearMessage()
+          //clearMessage()
         })
         .catch(() => update(Object.assign({},
-          clearMessage(),
-          showError("Sorry, an error occurred. Please try again.")
+          //clearMessage(),
+          //showError("Sorry, an error occurred. Please try again.")
         )))
     }
   }

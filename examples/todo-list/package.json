@@ -35,7 +35,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
-    "semantic-ui": "^2.4.2",
+    "semantic-ui-react": "^0.83.0",
     "sinon": "^6.3.4",
     "validate.js": "^0.12.0"
   },

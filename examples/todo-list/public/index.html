@@ -19,9 +19,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/semantic/dist/semantic.min.css">
-    <script src="%PUBLIC_URL%/lib/jquery.min.js"></script>
-    <script src="%PUBLIC_URL%/semantic/dist/semantic.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css">
     <title>React App</title>
   </head>
   <body>
@@ -35,21 +33,6 @@
       <div><a href="https://github.com/foxdonut/meiosis-examples/tree/master/examples/todo-list" target="_blank">Source code</a></div>
       <hr>
       <div id="app">Loading...</div>
-      <div className="ui small modal message">
-        <div className="content">
-          <p id="message"></p>
-        </div>
-      </div>
-      <div className="ui small modal error">
-        <div className="content">
-          <p id="error"></p>
-        </div>
-        <div className="actions">
-          <div className="ui ok right button">
-            Ok
-          </div>
-        </div>
-      </div>
       <div id="tracer" style="position: fixed; top: 0px; right: 0px; font-size: 9pt;"></div>
     </div>
     <!--
