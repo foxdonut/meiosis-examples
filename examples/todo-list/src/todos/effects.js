@@ -7,18 +7,23 @@ const updateList = (todo, model) => {
   return {
     todos: O({ [todo.id]: todo }),
     todoIds: O(todoIds => {
-      const idx = todoIds.indexOf(todo.id)
-      if (idx >= 0) {
-        todoIds.splice(idx, 1)
-      }
-      if (model.todos[R.last(model.todoIds)].priority <= todo.priority) {
+      if (todoIds.length === 0) {
         todoIds.push(todo.id)
       }
       else {
-        for (let i = 0; i < model.todoIds.length; i++) {
-          if (model.todos[model.todoIds[i]].priority > todo.priority) {
-            todoIds.splice(i, 0, todo.id)
-            break
+        const idx = todoIds.indexOf(todo.id)
+        if (idx >= 0) {
+          todoIds.splice(idx, 1)
+        }
+        if (todoIds.length === 0 || model.todos[R.last(todoIds)].priority <= todo.priority) {
+          todoIds.push(todo.id)
+        }
+        else {
+          for (let i = 0; i < todoIds.length; i++) {
+            if (model.todos[todoIds[i]].priority > todo.priority) {
+              todoIds.splice(i, 0, todo.id)
+              break
+            }
           }
         }
       }
