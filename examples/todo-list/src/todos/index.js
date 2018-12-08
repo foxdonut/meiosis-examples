@@ -1,14 +1,12 @@
 import React, { Component } from "react"
 
 import { model } from "./model"
-import { effects } from "./effects"
 import { actions } from "./actions"
 import { TodoForm } from "./todoForm"
 import { TodoList } from "./todoList"
 
 export const todos = {
   model,
-  effects,
   actions
 }
 

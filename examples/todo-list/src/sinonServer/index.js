@@ -23,12 +23,10 @@ module.exports = function() {
 
   var createTodoList = function() {
     return [
-      /*
       {id: "t5", priority: 1, description: "Buy more beer"},
       {id: "t2", priority: 1, description: "Order pizza"},
       {id: "t3", priority: 2, description: "Eat pie"},
       {id: "t4", priority: 4, description: "Watch TV"},
-      */
       {id: "t1", priority: 5, description: "Sleep"}
     ]
   }
