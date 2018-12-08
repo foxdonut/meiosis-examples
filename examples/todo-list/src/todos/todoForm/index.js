@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import preventDefault from "prevent-default"
-import classNames from "classnames"
 import * as R from "ramda"
+import { Button, Form, Label } from "semantic-ui-react"
 
 import { model } from "./model"
 import { patches } from "./patches"
@@ -13,21 +13,18 @@ export const todoForm = {
   actions
 }
 
-const inputField = (id, name, value, actions) =>
-  <input type="text" className="form-control" value={value}
-    onChange={evt => actions.editingTodo(id, name, evt.target.value)}/>
+const inputDiv = (id, field, label, model, actions) => {
+  const errors = R.path([id, "validationErrors", field], model)
 
-const errorMessage = errors => errors ?
-  <div className="ui red label pointing">{errors[0]}</div> : null
-
-const inputDiv = (id, field, label, model, actions) =>
-  <div className={
-    classNames("field", { "error": R.path([id, "validationErrors", field, 0], model) })
-  }>
-    <label htmlFor={field}>{label}</label>
-    {inputField(id, field, R.path([id, "todo", field], model), actions)}
-    {errorMessage(R.path([id, "validationErrors", field], model))}
-  </div>
+  return (
+    <Form.Field error={R.path([id, "validationErrors", field, 0], model) != null}>
+      <label>{label}</label>
+      <input type="text" value={R.path([id, "todo", field], model)}
+        onChange={evt => actions.editingTodo(id, field, evt.target.value)}/>
+      {errors && <Label color="red" pointing>{errors[0]}</Label>}
+    </Form.Field>
+  )
+}
 
 export class TodoForm extends Component {
   render() {
@@ -36,17 +33,20 @@ export class TodoForm extends Component {
 
     return (<div>
       {model[id].label && <h4>{model[id].label}</h4>}
-      <form className="ui form">
+      <Form>
         {inputDiv(id, "priority", "Priority:", model, actions)}
         {inputDiv(id, "description", "Description:", model, actions)}
         <div>
-          <button className="ui primary basic small button"
-            onClick={preventDefault(() => actions.onSaveTodo(id, todo, model))}>Save</button>
-
-          <button className="ui basic small button"
-            onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>Cancel</button>
+          <Button primary size="small"
+            onClick={preventDefault(() => actions.onSaveTodo(id, todo, model))}>
+            Save
+          </Button>
+          <Button size="small"
+             onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>
+            Cancel
+          </Button>
         </div>
-      </form>
+      </Form>
     </div>)
   }
 }

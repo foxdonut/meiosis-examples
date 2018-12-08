@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import classNames from "classnames"
+import { Menu } from "semantic-ui-react"
 
 import { actions } from "./actions"
 import { Todos } from "../todos"
@@ -19,16 +19,16 @@ export class Root extends Component {
 
     return (
       <div>
-        <div className="ui two item menu">
-          <button className={classNames("item", { "active": model.pageId === "TodoListPage" })}
+        <Menu widths={2}>
+          <Menu.Item active={model.pageId === "TodoListPage"}
             onClick={() => actions.navigateTo("TodoListPage")}>
             Todo List
-          </button>
-          <button className={classNames("item", { "active": model.pageId === "ProjectPage" })}
+          </Menu.Item>
+          <Menu.Item active={model.pageId === "ProjectPage"}
             onClick={() => actions.navigateTo("ProjectPage")}>
             Projects
-          </button>
-        </div>
+          </Menu.Item>
+        </Menu>
         <div>
           {model.pageId === "TodoListPage" && <Todos model={model} actions={actions} />}
           {model.pageId === "ProjectPage" && <Projects model={model} actions={actions} />}

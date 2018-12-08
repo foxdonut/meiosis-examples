@@ -27,7 +27,6 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "classnames": "^2.2.6",
     "flyd": "^0.2.8",
     "patchinko": "^4.1.0",
     "prevent-default": "^1.0.0",

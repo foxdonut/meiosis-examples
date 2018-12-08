@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Button, Table } from "semantic-ui-react"
 import * as R from "ramda"
 
 import { TodoForm } from "../../todoForm"
@@ -7,25 +8,25 @@ export class TodoItem extends Component {
   render() {
     const { model, id, todo, actions } = this.props
     const result = [
-      <tr key={todo.id}>
-        <td>{todo.priority}</td>
-        <td>{todo.description}</td>
-        <td>
-          <button className="ui primary basic tiny button"
-            onClick={() => actions.editTodo(id, todo)}>Edit</button>
+      <Table.Row key={todo.id}>
+        <Table.Cell>{todo.priority}</Table.Cell>
+        <Table.Cell>{todo.description}</Table.Cell>
+        <Table.Cell>
+          <Button primary basic size="mini"
+            onClick={() => actions.editTodo(id, todo)}>Edit</Button>
 
-          <button className="ui negative basic tiny button"
-            onClick={() => actions.deleteTodo(todo)}>Delete</button>
-        </td>
-      </tr>
+          <Button negative basic size="mini"
+            onClick={() => actions.deleteTodo(todo)}>Delete</Button>
+        </Table.Cell>
+      </Table.Row>
     ]
     if (R.path([id, "editing"], model)) {
       result.push(
-        <tr key={`${todo.id}_editing`}>
-          <td colSpan={3}>
+        <Table.Row key={`${todo.id}_editing`}>
+          <Table.Cell colSpan={3}>
             <TodoForm model={model} id={`todoForm:${todo.id}`} actions={actions} />
-          </td>
-        </tr>
+          </Table.Cell>
+        </Table.Row>
       )
     }
     return result
