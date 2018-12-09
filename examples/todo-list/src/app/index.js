@@ -14,18 +14,16 @@ export const createApp = update => ajaxServices.loadTodos().then(initialTodoList
   const actionParams = { update, patches }
   const todosActions = todos.actions(actionParams)
 
-  const actions = Object.assign({},
-    root.actions(actionParams),
-    todosActions,
-    todoForm.actions(Object.assign({ actions: todosActions}, actionParams))
-  )
-
   return {
     model: () => Object.assign({},
       root.model(),
       todos.model(initialTodoList)
     ),
-    actions
+    actions: Object.assign({},
+      root.actions(actionParams),
+      todosActions,
+      todoForm.actions(Object.assign({ actions: todosActions}, actionParams))
+    )
   }
 })
 
