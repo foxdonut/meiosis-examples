@@ -3,6 +3,7 @@ import * as R from "ramda"
 
 import { ajaxServices } from "../util/ajax-services"
 import { todoForm } from "./todoForm"
+import { validateModel } from "./validation"
 
 const updateList = (todo, model) => {
   return {
@@ -33,19 +34,21 @@ const updateList = (todo, model) => {
   }
 }
 
-export const actions = ({ update, patches }) => {
-  return {
-    editTodo: (id, todo) => update(Object.assign({},
-      { [id]: O({ editing: true }) },
-      { [`todoForm:${todo.id}`]: todoForm.model({ todo: Object.assign({}, todo) }) }
-    )),
+export const actions = ({ update, patches }) => ({
+  editTodo: (id, todo) => update(Object.assign({},
+    { [id]: O({ editing: true }) },
+    { [`todoForm:${todo.id}`]: todoForm.model({ todo: Object.assign({}, todo) }) }
+  )),
 
-    cancelEditTodo: (id, todo) => update(Object.assign({},
-      { [`todoItem:${todo.id}`]: O({ editing: false }) },
-      patches.clearForm(id)
-    )),
+  cancelEditTodo: (id, todo) => update(Object.assign({},
+    { [`todoItem:${todo.id}`]: O({ editing: false }) },
+    patches.clearForm(id)
+  )),
 
-    saveTodo: (id, todo, model) => {
+  saveTodo: (id, todo, model) => {
+    const validationErrors = validateModel(todo)
+
+    if (Object.keys(validationErrors).length === 0) {
       update(patches.showMessage("Saving, please wait..."))
 
       return ajaxServices.saveTodo(todo)
@@ -59,25 +62,28 @@ export const actions = ({ update, patches }) => {
           patches.clearMessage(),
           patches.showError("Sorry, an error occurred. Please try again.")
         )))
-    },
-
-    deleteTodo: todo => {
-      update(patches.showMessage("Deleting, please wait..."))
-
-      ajaxServices.deleteTodo(todo.id)
-        .then(() => {
-          update(Object.assign({
-            todos: O({ [todo.id]: O }),
-            todoIds: O(todoIds => {
-              todoIds.splice(todoIds.indexOf(todo.id), 1)
-              return todoIds
-            })
-          }, patches.clearMessage()))
-        })
-        .catch(() => update(Object.assign({},
-          patches.clearMessage(),
-          patches.showError("Sorry, an error occurred. Please try again.")
-        )))
     }
+    else {
+      update({ [id]: O({ validationErrors }) })
+    }
+  },
+
+  deleteTodo: todo => {
+    update(patches.showMessage("Deleting, please wait..."))
+
+    ajaxServices.deleteTodo(todo.id)
+      .then(() => {
+        update(Object.assign({
+          todos: O({ [todo.id]: O }),
+          todoIds: O(todoIds => {
+            todoIds.splice(todoIds.indexOf(todo.id), 1)
+            return todoIds
+          })
+        }, patches.clearMessage()))
+      })
+      .catch(() => update(Object.assign({},
+        patches.clearMessage(),
+        patches.showError("Sorry, an error occurred. Please try again.")
+      )))
   }
-}
+})

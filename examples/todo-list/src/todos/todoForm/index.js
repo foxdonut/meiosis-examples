@@ -38,7 +38,7 @@ export class TodoForm extends Component {
         {inputDiv(id, "description", "Description:", model, actions)}
         <div>
           <Button primary size="small"
-            onClick={preventDefault(() => actions.onSaveTodo(id, todo, model))}>
+            onClick={preventDefault(() => actions.saveTodo(id, todo, model))}>
             Save
           </Button>
           <Button size="small"
