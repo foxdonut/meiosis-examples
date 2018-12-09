@@ -3,9 +3,9 @@ import * as R from "ramda"
 
 import { ajaxServices } from "../util/ajax-services"
 import { todoForm } from "./todoForm"
-import { validateModel } from "./validation"
+import { validateTodo } from "./validation"
 
-const updateList = (todo, model) => {
+const updateList = (todo, state) => {
   return {
     todos: O({ [todo.id]: todo }),
     todoIds: O(todoIds => {
@@ -17,12 +17,12 @@ const updateList = (todo, model) => {
         if (idx >= 0) {
           todoIds.splice(idx, 1)
         }
-        if (todoIds.length === 0 || model.todos[R.last(todoIds)].priority <= todo.priority) {
+        if (todoIds.length === 0 || state.todos[R.last(todoIds)].priority <= todo.priority) {
           todoIds.push(todo.id)
         }
         else {
           for (let i = 0; i < todoIds.length; i++) {
-            if (model.todos[todoIds[i]].priority > todo.priority) {
+            if (state.todos[todoIds[i]].priority > todo.priority) {
               todoIds.splice(i, 0, todo.id)
               break
             }
@@ -37,7 +37,7 @@ const updateList = (todo, model) => {
 export const actions = ({ update, patches }) => ({
   editTodo: (id, todo) => update(Object.assign({},
     { [id]: O({ editing: true }) },
-    { [`todoForm:${todo.id}`]: todoForm.model({ todo: Object.assign({}, todo) }) }
+    { [`todoForm:${todo.id}`]: todoForm.state({ todo: Object.assign({}, todo) }) }
   )),
 
   cancelEditTodo: (id, todo) => update(Object.assign({},
@@ -45,15 +45,15 @@ export const actions = ({ update, patches }) => ({
     patches.clearForm(id)
   )),
 
-  saveTodo: (id, todo, model) => {
-    const validationErrors = validateModel(todo)
+  saveTodo: (id, todo, state) => {
+    const validationErrors = validateTodo(todo)
 
     if (Object.keys(validationErrors).length === 0) {
       update(patches.showMessage("Saving, please wait..."))
 
       return ajaxServices.saveTodo(todo)
         .then(todo => update(Object.assign({},
-          updateList(todo, model),
+          updateList(todo, state),
           patches.clearMessage(),
           { [`todoItem:${todo.id}`]: O({ editing: false }) },
           patches.clearForm(id)

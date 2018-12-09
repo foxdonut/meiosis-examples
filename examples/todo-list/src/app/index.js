@@ -14,9 +14,9 @@ export const createApp = update => ajaxServices.loadTodos().then(initialTodoList
   const actionParams = { update, patches }
 
   return {
-    model: () => Object.assign({},
-      root.model(),
-      todos.model(initialTodoList)
+    state: () => Object.assign({},
+      root.state(),
+      todos.state(initialTodoList)
     ),
     actions: Object.assign({},
       root.actions(actionParams),
@@ -29,20 +29,20 @@ export const createApp = update => ajaxServices.loadTodos().then(initialTodoList
 export class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { model: props.states() }
+    this.state = props.states()
     this.skippedFirst = false
   }
 
   componentDidMount() {
-    this.props.states.map(model =>
-      (this.skippedFirst) ? this.setState({ model }) : this.skippedFirst = true
+    this.props.states.map(state =>
+      (this.skippedFirst) ? this.setState(state) : this.skippedFirst = true
     )
   }
 
   render() {
-    const { model } = this.state
+    const state = this.state
     const { actions } = this.props
 
-    return (<Root model={model} actions={actions} />)
+    return (<Root state={state} actions={actions} />)
   }
 }

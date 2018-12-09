@@ -10,7 +10,7 @@ createServer()
 
 const update = flyd.stream()
 createApp(update).then(app => {
-  const states = flyd.scan(O, app.model(), update)
+  const states = flyd.scan(O, app.state(), update)
 
   // Only for using Meiosis Tracer in development.
   require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [ states ]})

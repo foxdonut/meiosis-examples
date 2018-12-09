@@ -18,6 +18,6 @@ let validationSpec = {
   }
 }
 
-export function validateModel(model) {
-  return validate(model, validationSpec) || {}
+export function validateTodo(todo) {
+  return validate(todo, validationSpec) || {}
 }

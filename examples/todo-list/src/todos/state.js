@@ -2,7 +2,7 @@ import * as R from "ramda"
 
 import { todoForm } from "./todoForm"
 
-export const model = initialTodoList => {
+export const state = initialTodoList => {
   const todos = initialTodoList.reduce((result, todo) =>
     R.assoc(todo.id, todo, result), {})
 
@@ -11,6 +11,6 @@ export const model = initialTodoList => {
   return {
     todos,
     todoIds,
-    todoForm: todoForm.model({ label: "New Todo:" })
+    todoForm: todoForm.state({ label: "New Todo:" })
   }
 }

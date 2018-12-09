@@ -1,22 +1,22 @@
 import React, { Component } from "react"
 
-import { model } from "./model"
+import { state } from "./state"
 import { actions } from "./actions"
 import { TodoForm } from "./todoForm"
 import { TodoList } from "./todoList"
 
 export const todos = {
-  model,
+  state,
   actions
 }
 
 export class Todos extends Component {
   render() {
-    const { model, actions } = this.props
+    const { state, actions } = this.props
     return (
       <div>
-        <TodoForm model={model} actions={actions} id="todoForm" />
-        <TodoList model={model} actions={actions} />
+        <TodoForm state={state} actions={actions} id="todoForm" />
+        <TodoList state={state} actions={actions} />
       </div>
     )
   }

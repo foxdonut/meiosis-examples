@@ -5,7 +5,7 @@ import { TodoItem } from "./todoItem"
 
 export class TodoList extends Component {
   render() {
-    const { model, actions } = this.props
+    const { state, actions } = this.props
     return (
       <Table striped celled>
         <Table.Header>
@@ -16,9 +16,9 @@ export class TodoList extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {model.todoIds.map(todoId => (
-            <TodoItem key={`todoItem_${todoId}`} model={model} id={`todoItem:${todoId}`}
-              todo={model.todos[todoId]} actions={actions} />
+          {state.todoIds.map(todoId => (
+            <TodoItem key={`todoItem_${todoId}`} state={state} id={`todoItem:${todoId}`}
+              todo={state.todos[todoId]} actions={actions} />
           ))}
         </Table.Body>
       </Table>

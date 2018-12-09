@@ -6,7 +6,7 @@ import { TodoForm } from "../../todoForm"
 
 export class TodoItem extends Component {
   render() {
-    const { model, id, todo, actions } = this.props
+    const { state, id, todo, actions } = this.props
     const result = [
       <Table.Row key={todo.id}>
         <Table.Cell>{todo.priority}</Table.Cell>
@@ -20,11 +20,11 @@ export class TodoItem extends Component {
         </Table.Cell>
       </Table.Row>
     ]
-    if (R.path([id, "editing"], model)) {
+    if (R.path([id, "editing"], state)) {
       result.push(
         <Table.Row key={`${todo.id}_editing`}>
           <Table.Cell colSpan={3}>
-            <TodoForm model={model} id={`todoForm:${todo.id}`} actions={actions} />
+            <TodoForm state={state} id={`todoForm:${todo.id}`} actions={actions} />
           </Table.Cell>
         </Table.Row>
       )
