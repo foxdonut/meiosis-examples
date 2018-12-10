@@ -13,10 +13,10 @@
   },
   "keywords": [
     "example",
+    "lit-html",
     "meiosis",
     "reactive",
     "routing",
-    "snabbdom",
     "todomvc"
   ],
   "author": "foxdonut",
@@ -26,20 +26,19 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "classnames": "^2.2.6",
-    "es6-promise": "^4.2.4",
+    "es6-promise": "^4.2.5",
     "flyd": "^0.2.8",
-    "lodash": "^4.17.10",
-    "snabbdom": "^0.7.1",
+    "lit-html": "^0.14.0",
+    "lodash": "^4.17.11",
+    "patchinko": "^4.1.0",
     "url-mapper": "^2.0.0"
   },
   "devDependencies": {
-    "@types/classnames": "2.2.6",
-    "@types/lodash": "^4.14.116",
-    "@types/node": "^10.5.7",
-    "meiosis-tracer": "^2.0.0",
-    "parcel-bundler": "^1.9.7",
-    "tslint": "^5.11.0",
-    "typescript": "^3.0.1"
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "meiosis-tracer": "^2.0.3",
+    "watchify": "^3.11.0"
   }
 }

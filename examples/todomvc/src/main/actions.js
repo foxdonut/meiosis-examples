@@ -1,3 +1,7 @@
+import { Promise } from "es6-promise";
+
+import { todoStorage } from "../util";
+
 import { Model, Todo, UpdateFunction } from "../util";
 
 export const createUpdates = (update: UpdateFunction) => ({
@@ -6,4 +10,9 @@ export const createUpdates = (update: UpdateFunction) => ({
     model.editTodo = { };
     return model;
   })
+});
+
+export const createActions = (updates: any) => ({
+  toggleAllTodos: (evt: any) =>
+    todoStorage.setAllCompleted(evt.target.checked).then(updates.displayTodos)
 });

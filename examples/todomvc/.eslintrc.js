@@ -1,17 +1,5 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "mocha": true
-  },
   "extends": ["eslint:recommended"],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "sourceType": "module"
-  },
   "rules": {
     "indent": [
       "error",
@@ -37,4 +25,4 @@ module.exports = {
       "never"
     ]
   }
-};
+}
