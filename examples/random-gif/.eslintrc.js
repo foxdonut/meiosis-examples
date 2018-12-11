@@ -8,7 +8,6 @@ module.exports = {
   "parserOptions": {
     "sourceType": "module"
   },
-  "extends": ["eslint:recommended"],
   "rules": {
     "indent": [
       "error",
@@ -34,4 +33,4 @@ module.exports = {
       "never"
     ]
   }
-};
+}

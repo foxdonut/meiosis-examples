@@ -1,5 +1,5 @@
 import { flowRight } from "lodash"
-import { todoStorage } from "../util"
+import { todoStorage } from "../util/todo-storage"
 
 const displayTodosFn = todos => state => {
   state.todoIds = []
@@ -26,7 +26,7 @@ const updates = update => ({
   filter: by => update(filterFn(by))
 })
 
-export const actions = update => ({
+export const actions = ({ update }) => ({
   loadAll: () => todoStorage.loadAll().then(updates.displayTodos),
   filter: by => {
     const updateFn = todos =>

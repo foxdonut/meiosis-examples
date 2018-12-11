@@ -31,16 +31,18 @@
     "ramda": "^0.26.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "semantic-ui-react": "^0.83.0",
-    "sinon": "^7.1.1",
+    "semantic-ui-react": "^0.84.0",
+    "sinon": "^7.2.0",
     "validate.js": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "babelify": "^10.0.0",
     "browserify": "^16.2.3",
+    "eslint": "^5.10.0",
+    "eslint-plugin-react": "^7.11.1",
     "meiosis-tracer": "^2.0.3",
     "watchify": "^3.11.0"
   }

@@ -1,5 +1,13 @@
 module.exports = {
   "extends": ["eslint:recommended"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "rules": {
     "indent": [
       "error",

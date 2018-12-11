@@ -1,11 +1,11 @@
 {
-  "name": "random-gif",
+  "name": "todomvc",
   "version": "1.0.0",
-  "description": "meiosis-examples random-gif",
+  "description": "meiosis-examples todomvc",
   "main": "index.js",
   "scripts": {
-    "start": "webpack",
-    "watch": "webpack --progress --colors --watch"
+    "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
+    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v"
   },
   "repository": {
     "type": "git",
@@ -13,9 +13,11 @@
   },
   "keywords": [
     "example",
+    "lit-html",
     "meiosis",
-    "mithril",
-    "reactive"
+    "reactive",
+    "routing",
+    "todomvc"
   ],
   "author": "foxdonut",
   "license": "MIT",
@@ -24,19 +26,20 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "mithril": "^2.0.0-rc.1",
+    "es6-promise": "^4.2.5",
+    "flyd": "^0.2.8",
+    "lit-html": "^0.14.0",
+    "lodash": "^4.17.11",
     "patchinko": "^4.1.0",
-    "ramda": "0.26.1",
-    "static-sum-type": "^0.18.1",
-    "uuid": "^3.3.2"
+    "url-mapper": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "babel-loader": "^8.0.4",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
     "eslint": "^5.10.0",
     "meiosis-tracer": "^2.0.3",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
+    "watchify": "^3.11.0"
   }
 }

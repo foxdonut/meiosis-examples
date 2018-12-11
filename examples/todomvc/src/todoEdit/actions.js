@@ -1,41 +1,41 @@
-import { Promise } from "es6-promise";
-import { Model, Todo, todoStorage } from "../util";
+import _ from "lodash"
 
-const ENTER_KEY = 13;
-const ESCAPE_KEY = 27;
+import { todoStorage } from "../util/todo-storage"
 
-import * as _ from "lodash";
-import { Model, Todo, UpdateFunction } from "../util";
+const ENTER_KEY = 13
+const ESCAPE_KEY = 27
 
-export const createUpdates = (update: UpdateFunction) => ({
-  cancelEdit: () => update((model: Model) =>
-    _.set(model, "editTodo", { })),
+const patches = {
+  updateTodo: todo => model => {
+    model.todosById[todo.id] = todo
+    model.editTodo = { }
+    return model
+  }
+}
 
-  editingTodo: (id: string, title: string) => update((model: Model) =>
-    _.set(model, "editTodo", { id, title }))
-});
+export const actions = ({ update }) => ({
+  editBlur: id => evt =>
+    todoStorage.saveTodo({ id, title: evt.currentTarget.value })
+      .then(todo => update(patches.updateTodo(todo))),
 
-export const createActions = (updates: any) => ({
-  editBlur: (id: string) => (evt: any) =>
-    todoStorage.saveTodo({ id, title: evt.currentTarget.value }).then(updates.updateTodo),
-
-  editKeyUp: (id: string) => (evt: any) => {
-    const title: string = evt.currentTarget.value;
+  editKeyUp: id => evt => {
+    const title = evt.currentTarget.value
 
     if (evt.keyCode === ESCAPE_KEY || evt.which === ESCAPE_KEY) {
-      updates.cancelEdit();
+      update(model => _.set(model, "editTodo", { }))
     }
     else if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-      const todo = { id, title };
-      const editing = !!todo.id;
-      todo.title = todo.title.trim();
+      const todo = { id, title }
+      const editing = !!todo.id
+      todo.title = todo.title.trim()
 
       if (editing && todo.title) {
-        todoStorage.saveTodo(todo).then(updates.updateTodo);
+        todoStorage.saveTodo(todo)
+          .then(updatedTodo => update(patches.updateTodo(updatedTodo)))
       }
     }
     else {
-      updates.editingTodo(id, title);
+      update(model => _.set(model, "editTodo", { id, title }))
     }
   }
-});
+})

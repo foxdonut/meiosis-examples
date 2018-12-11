@@ -4,7 +4,7 @@ import { todoEdit } from "../todoEdit"
 
 const getTodoClassMap = (state, todo) => ({
   completed: todo.completed,
-  editing: state.editing(state, todo)
+  editing: (todo.id === state.editTodo.id)
 })
 
 export const view = (state, todoId, actions) => {

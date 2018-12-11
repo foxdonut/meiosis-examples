@@ -9,6 +9,6 @@ export const view = (state, actions) => html`
       @change=${actions.toggleAllTodos}
       .checked=${state.allCompleted}>
     <label for="toggle-all">Mark all as complete</label>
-    <ul class="todo-list">${state.todoIds.map(todoItem.view(state, actions))}</ul>
+    <ul class="todo-list">${state.todoIds.map(id => todoItem.view(state, id, actions))}</ul>
   </section>
 `

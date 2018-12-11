@@ -1,51 +1,53 @@
-import * as _ from "lodash";
-import { Model, Todo, todoStorage } from "../util";
+import _ from "lodash"
 
-const ENTER_KEY = 13;
+import { todoStorage } from "../util/todo-storage"
 
-export const createUpdates = (update: UpdateFunction) => ({
-  editingNewTodo: (title: string) =>
-    update((model: Model) => _.set(model, "newTodo", title)),
+const ENTER_KEY = 13
 
-  saveNewTodo: (todo: Todo) =>
-    update((model: Model) => {
-      model.todosById[todo.id] = todo;
-      model.todoIds.push(todo.id);
-      model.newTodo = "";
-      return model;
-    })
-});
+const patches = {
+  editingNewTodo: title =>
+    model => _.set(model, "newTodo", title),
 
-export const createActions = (updates: any) => {
-  const saveNewTodo = (rawTitle: string) => {
-    const title: string = rawTitle.trim();
+  saveNewTodo: todo =>
+    model => {
+      model.todosById[todo.id] = todo
+      model.todoIds.push(todo.id)
+      model.newTodo = ""
+      return model
+    }
+}
+
+export const actions = ({ update }) => {
+  const saveNewTodo = rawTitle => {
+    const title = rawTitle.trim()
 
     if (title) {
-      todoStorage.saveTodo({ title }).then(updates.saveNewTodo);
+      todoStorage.saveTodo({ title })
+        .then(todo => update(patches.saveNewTodo(todo)))
     }
-  };
+  }
 
-  const newTodoKeyUp: any = (evt: any) => {
+  const newTodoKeyUp = evt => {
     if (evt.keyCode === ENTER_KEY) {
-      saveNewTodo(evt.currentTarget.value);
+      saveNewTodo(evt.currentTarget.value)
     }
     else {
-      updates.editingNewTodo(evt.currentTarget.value);
+      update(patches.editingNewTodo(evt.currentTarget.value))
     }
-  };
+  }
 
-  const newTodoKeyUpEnterOnly: any = (evt: any) => {
+  const newTodoKeyUpEnterOnly = evt => {
     if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-      saveNewTodo(evt.currentTarget.value);
+      saveNewTodo(evt.currentTarget.value)
     }
-  };
+  }
 
-  const newTodoChange: any = (evt: any) =>
-    updates.editingNewTodo(evt.currentTarget.value);
+  const newTodoChange = evt =>
+    update(patches.editingNewTodo(evt.currentTarget.value))
 
   return {
     newTodoKeyUp,
     newTodoKeyUpEnterOnly,
     newTodoChange
-  };
-};
+  }
+}

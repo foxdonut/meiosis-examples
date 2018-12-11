@@ -1,12 +1,12 @@
 import flyd from "flyd"
-import O from "patchinko/constant"
+//import O from "patchinko/constant"
 import { render } from "lit-html"
 
-import { createApp } from "./app"
+import { loadInitialState, app } from "./app"
 
-const update = flyd.stream()
-createApp().then(app => {
-  const states = flyd.scan(O, app.state(), update)
+loadInitialState().then(initialState => {
+  const update = flyd.stream()
+  const states = flyd.scan((x, f) => f(x), initialState, update)
 
   // Only for using Meiosis Tracer in development.
   require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [ states ]})

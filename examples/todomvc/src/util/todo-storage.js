@@ -3,8 +3,6 @@ These functions return Promises and use setTimeout to simulate async behaviour. 
 example more realistic. Indeed, a real-world application would make async AJAX requests to a
 backend server.
 */
-import { Promise } from "es6-promise"
-
 const STORAGE_KEY = "meiosis-todomvc"
 
 const findIndex = (todos, todoId) => {
