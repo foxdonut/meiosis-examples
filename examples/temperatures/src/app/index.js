@@ -1,8 +1,8 @@
-import preact, { Component } from "preact";
-import { actions } from "./actions";
-import { entryDate, EntryDate } from "../entryDate";
-import { entryNumber, EntryNumber } from "../entryNumber";
-import { temperature, Temperature } from "../temperature";
+import preact, { Component } from "preact"
+import { actions } from "./actions"
+import { entryDate, EntryDate } from "../entryDate"
+import { entryNumber, EntryNumber } from "../entryNumber"
+import { temperature, Temperature } from "../temperature"
 
 export const app = {
   model: () => Object.assign({}, {
@@ -16,19 +16,19 @@ export const app = {
     actions(update),
     temperature.actions(update)
   )
-};
+}
 
 export class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.props.models.map(model => {
-      this.setState({ model });
-    });
+      this.setState({ model })
+    })
   }
 
   render(props, state) {
-    const actions = props.actions;
-    const model = state.model;
+    const actions = props.actions
+    const model = state.model
 
     return (
       <form className="pure-form pure-form-aligned">
@@ -45,6 +45,6 @@ export class App extends Component {
 
         <span>Saved: {model.saved}</span>
       </form>
-    );
+    )
   }
 }

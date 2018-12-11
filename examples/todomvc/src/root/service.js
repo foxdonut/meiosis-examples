@@ -32,7 +32,7 @@ const computeState = model => {
   return result
 }
 
-export const service = _currentModel => {
+export const service = () => {
   return model => {
     const newState = computeState(model)
     return _.merge(model, newState)

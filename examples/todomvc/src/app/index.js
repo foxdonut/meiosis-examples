@@ -1,7 +1,10 @@
-import { patches } from "./patches"
-import { actions } from "./actions"
-import { view } from "./view"
-import { service } from "./service"
+//import O from "patchinko/constant"
+
+import { root } from "../root"
+import { main } from "../main"
+import { header } from "../header"
+import { todoItem } from "../todoItem"
+import { todoEdit } from "../todoEdit"
 
 import { todoStorage } from "../util/todo-storage"
 
@@ -29,9 +32,29 @@ const createAppRouter = update => {
 }
 */
 
+const patches = Object.assign({},
+  root.patches
+  // could have more patches here
+)
+
+const actions = update => {
+  const actionParams = ({ update, patches })
+  return Object.assign({},
+    root.actions(actionParams),
+    main.actions(actionParams),
+    header.actions(actionParams),
+    todoItem.actions(actionParams),
+    todoEdit.actions(actionParams)
+  )
+}
+
+const service = model => [
+  root.service
+//].reduce((x, f) => O(x, f(x)), model)
+].reduce((x, f) => f(x)(x), model)
+
 export const app = {
-  patches,
   actions,
-  view,
+  view: root.view,
   service
 }

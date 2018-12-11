@@ -1,19 +1,19 @@
-import preact, { Component } from "preact";
-import { model } from "./model";
-import { actions } from "./actions";
+import preact, { Component } from "preact"
+import { model } from "./model"
+import { actions } from "./actions"
 
 const marginRight = {
   marginRight: "4px"
-};
+}
 
 export const temperature = {
   model,
   actions
-};
+}
 
 export class Temperature extends Component {
   render(props) {
-    const { model, id, actions } = props;
+    const { model, id, actions } = props
     return (
       <div className="pure-control-group">
         <label>{model[id].label}</label>
@@ -28,6 +28,6 @@ export class Temperature extends Component {
           -
         </button>
       </div>
-    );
+    )
   }
 }

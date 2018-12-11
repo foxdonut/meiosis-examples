@@ -1,8 +1,8 @@
-import BaseJoi from "joi-browser";
-import DateExtensions from "joi-date-extensions";
-import _ from "lodash";
+import BaseJoi from "joi-browser"
+import DateExtensions from "joi-date-extensions"
+import _ from "lodash"
 
-const Joi = BaseJoi.extend(DateExtensions);
+const Joi = BaseJoi.extend(DateExtensions)
 
 const schema = {
   "entry:date:from": {
@@ -14,7 +14,7 @@ const schema = {
   "entry:number": {
     value: Joi.number().integer().min(0).required()
   }
-};
+}
 
 const options = {
   abortEarly: false,
@@ -25,20 +25,20 @@ const options = {
       base: "invalid date"
     }
   }
-};
+}
 
 export const validateModel = model => {
-  const result = Joi.validate(model, schema, options);
+  const result = Joi.validate(model, schema, options)
 
-  const errors = {};
-  const details = _.get(result, ["error", "details"], []);
+  const errors = {}
+  const details = _.get(result, ["error", "details"], [])
 
   for (let i = 0, t = details.length; i < t; i++) {
-    const path = details[i].path;
+    const path = details[i].path
 
     if (!_.get(errors, path)) {
-      _.set(errors, path, details[i].message);
+      _.set(errors, path, details[i].message)
     }
   }
-  return errors;
-};
+  return errors
+}

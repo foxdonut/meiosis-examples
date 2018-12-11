@@ -1,14 +1,14 @@
-import preact, { Component } from "preact";
-import _ from "lodash";
-import { model } from "./model";
+import preact, { Component } from "preact"
+import _ from "lodash"
+import { model } from "./model"
 
 export const entryNumber = {
   model
-};
+}
 
 export class EntryNumber extends Component {
   render(props) {
-    const { model, id, actions } = props;
+    const { model, id, actions } = props
     return (
       <div className="pure-control-group">
         <label htmlFor="entry">Entry number:</label>
@@ -18,6 +18,6 @@ export class EntryNumber extends Component {
           {_.get(model, ["errors", id, "value"])}
         </span>
       </div>
-    );
+    )
   }
 }

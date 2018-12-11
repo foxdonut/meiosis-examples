@@ -11,6 +11,7 @@ import { html } from "lit-html"
 export const view = (todo, actions) => html`
   <input class="edit"
     type="text"
-    @keyup=${actions.editKeyUp(todo.id)} @blur=${actions.editBlur(todo.id)}
+    @keyup=${actions.editKeyUp(todo.id)}
+    @blur=${actions.editBlur(todo.id)}
     .value=${todo.title}>
 `

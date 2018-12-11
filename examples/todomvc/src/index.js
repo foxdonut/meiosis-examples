@@ -3,6 +3,7 @@ import flyd from "flyd"
 import { render } from "lit-html"
 
 import { loadInitialState, app } from "./app"
+import { createRouter } from "./router"
 
 loadInitialState().then(initialState => {
   const update = flyd.stream()
@@ -12,6 +13,11 @@ loadInitialState().then(initialState => {
   require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [ states ]})
 
   const actions = app.actions(update)
+  const router = createRouter(actions)
+
   const element = document.getElementById("app")
-  states.map(state => render(app.view(state, actions), element))
+  states
+    .map(app.service)
+    .map(router.routeSync)
+    .map(state => render(app.view(state, actions), element))
 })

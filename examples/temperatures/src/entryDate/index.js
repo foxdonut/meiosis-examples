@@ -1,14 +1,14 @@
-import preact, { Component } from "preact";
-import _ from "lodash";
-import { model } from "./model";
+import preact, { Component } from "preact"
+import _ from "lodash"
+import { model } from "./model"
 
 export const entryDate = {
   model
-};
+}
 
 export class EntryDate extends Component {
   render(props) {
-    const { model, id, actions } = props;
+    const { model, id, actions } = props
     return (
       <div className="pure-control-group">
         <label htmlFor="date">{model[id].label}</label>
@@ -18,6 +18,6 @@ export class EntryDate extends Component {
           {_.get(model, ["errors", id, "value"])}
         </span>
       </div>
-    );
+    )
   }
 }

@@ -18,7 +18,7 @@ export const view = (state, actions) => html`
     <ul class="filters">
       <li><a href="#/" class=${classMap({ selected: state.allSelected })}>All</a>
       <li><a href="#/active" class=${classMap({ selected: state.activeSelected })}>Active</a>
-      <li><a href="javascript://" @click=${actions.filter("completed")}
+      <li><a href="javascript://" @click=${() => actions.filter("completed")}
         class=${classMap({ selected: state.completedSelected })}>Completed</a>
     </ul>
     ${clearCompleted(state, actions)}
