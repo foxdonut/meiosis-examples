@@ -4,8 +4,8 @@
   "description": "meiosis-examples temperatures",
   "main": "index.js",
   "scripts": {
-    "start": "browserify src/index.js -t [ babelify ] -o build/generated-app.js",
-    "watch": "watchify src/index.js -t [ babelify ] -o build/generated-app.js -v"
+    "start": "webpack",
+    "watch": "webpack --progress --colors --watch"
   },
   "repository": {
     "type": "git",
@@ -35,11 +35,11 @@
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
-    "babelify": "^10.0.0",
-    "browserify": "^16.2.3",
+    "babel-loader": "^8.0.4",
     "eslint": "^5.10.0",
     "eslint-plugin-react": "^7.11.1",
     "meiosis-tracer": "^2.0.3",
-    "watchify": "^3.11.0"
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
   }
 }
