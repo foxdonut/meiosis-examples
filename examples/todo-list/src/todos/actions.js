@@ -1,4 +1,4 @@
-import O from "patchinko/constant"
+import { PS, S, D } from "patchinko/explicit"
 import * as R from "ramda"
 
 import { ajaxServices } from "../util/ajax-services"
@@ -7,8 +7,8 @@ import { validateTodo } from "./validation"
 
 const updateList = (todo, state) => {
   return {
-    todos: O({ [todo.id]: todo }),
-    todoIds: O(todoIds => {
+    todos: PS({ [todo.id]: todo }),
+    todoIds: S(todoIds => {
       if (todoIds.length === 0) {
         todoIds.push(todo.id)
       }
@@ -36,12 +36,12 @@ const updateList = (todo, state) => {
 
 export const actions = ({ update, patches }) => ({
   editTodo: (id, todo) => update(Object.assign({},
-    { [id]: O({ editing: true }) },
+    { [id]: PS({ editing: true }) },
     { [`todoForm:${todo.id}`]: todoForm.state({ todo: Object.assign({}, todo) }) }
   )),
 
   cancelEditTodo: (id, todo) => update(Object.assign({},
-    { [`todoItem:${todo.id}`]: O({ editing: false }) },
+    { [`todoItem:${todo.id}`]: PS({ editing: false }) },
     patches.clearForm(id)
   )),
 
@@ -55,7 +55,7 @@ export const actions = ({ update, patches }) => ({
         .then(todo => update(Object.assign({},
           updateList(todo, state),
           patches.clearMessage(),
-          { [`todoItem:${todo.id}`]: O({ editing: false }) },
+          { [`todoItem:${todo.id}`]: PS({ editing: false }) },
           patches.clearForm(id)
         )))
         .catch(() => update(Object.assign({},
@@ -64,7 +64,7 @@ export const actions = ({ update, patches }) => ({
         )))
     }
     else {
-      update({ [id]: O({ validationErrors }) })
+      update({ [id]: PS({ validationErrors }) })
     }
   },
 
@@ -74,8 +74,8 @@ export const actions = ({ update, patches }) => ({
     ajaxServices.deleteTodo(todo.id)
       .then(() => {
         update(Object.assign({
-          todos: O({ [todo.id]: O }),
-          todoIds: O(todoIds => {
+          todos: PS({ [todo.id]: D }),
+          todoIds: S(todoIds => {
             todoIds.splice(todoIds.indexOf(todo.id), 1)
             return todoIds
           })

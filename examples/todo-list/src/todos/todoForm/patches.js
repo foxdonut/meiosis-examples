@@ -1,5 +1,10 @@
-import O from "patchinko/constant"
+import { PS } from "patchinko/explicit"
 
 export const patches = {
-  clearForm: id => ({ [id]: O({ todo: { priority: "", description: "" }, validationErrors: { } }) })
+  clearForm: id => ({
+    [id]: PS({
+      todo: { priority: "", description: "" },
+      validationErrors: { }
+    })
+  })
 }
