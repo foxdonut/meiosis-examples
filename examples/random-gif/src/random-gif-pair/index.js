@@ -1,14 +1,14 @@
-const m = require("mithril")
-const { randomGif, RandomGif } = require("../random-gif")
+import m from "mithril"
+import { randomGif, RandomGif } from "../random-gif"
 
-exports.randomGifPair = {
+export const randomGifPair = {
   model: id => ({
     [id + "First"]: randomGif.model(),
     [id + "Second"]: randomGif.model()
   })
 }
 
-exports.RandomGifPair = {
+export const RandomGifPair = {
   view: ({ attrs: { model, id, actions } }) =>
     m("div.ba.b--purple.pa2.mt2",
       m("div.dib", m(RandomGif, { model, id: id + "First", actions })),

@@ -1,7 +1,5 @@
-const yslashn = require("static-sum-type/modules/yslashn")
+import yslashn from "static-sum-type/modules/yslashn"
 
-module.exports = {
-  Loaded: yslashn.maybe("Loaded"),
-  Success: yslashn.maybe("Success"),
-  Image: yslashn.maybe("Image")
-}
+export const Loaded = yslashn.maybe("Loaded")
+export const Success = yslashn.maybe("Success")
+export const Image = yslashn.maybe("Image")

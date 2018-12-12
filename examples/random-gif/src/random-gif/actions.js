@@ -1,27 +1,26 @@
-const m = require("mithril")
-const O = require("patchinko/constant")
-const R = require("ramda")
+import m from "mithril"
+import { PS } from "patchinko/explicit"
 
-const { Loaded, Success, Image } = require("./types")
+import { Loaded, Success, Image } from "./types"
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random"
 const api_key = "dc6zaTOxFJmzC"
 
-exports.actions = (update, newGifGenerated) => ({
-  editTag: (id, tag) => update(R.objOf(id, O({ tag }))),
+export const actions = (update, newGifGenerated) => ({
+  editTag: (id, tag) => update({ [id]: PS({ tag }) }),
 
   newGif: (id, model) => {
-    update(R.objOf(id, O({ image: Loaded.N() })))
+    update({ [id]: PS({ image: Loaded.N() }) })
     m.request({ url: gif_new_url, data: { api_key, tag: model[id].tag }}).
       then(response => {
         update(Object.assign({
-          [id]: O({
+          [id]: PS({
             image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
           })
         }, newGifGenerated(model)))
       }).
-      catch(() => update(R.objOf(id, O({ image: Loaded.Y(Success.N()) }))))
+      catch(() => update({ [id]: PS({ image: Loaded.Y(Success.N()) }) }))
   },
 
-  reset: id => update(R.objOf(id, O({ image: Loaded.Y(Success.Y(Image.N())) })))
+  reset: id => update({ [id]: PS({ image: Loaded.Y(Success.Y(Image.N())) }) })
 })

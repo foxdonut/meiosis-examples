@@ -1,24 +1,24 @@
-const O = require("patchinko/constant")
-const R = require("ramda")
-const uuid = require("uuid")
+import { PS, S, D } from "patchinko/explicit"
+import * as R from "ramda"
+import uuid from "uuid"
 
-const { randomGif } = require("../random-gif")
+import { randomGif } from "../random-gif"
 
-exports.actions = update => ({
+export const actions = update => ({
   add: id => {
     const newId = "randomGifList:" + uuid.v1()
     const randomGifModel = randomGif.model()
 
     update({
       [newId]: randomGifModel,
-      [id]: O({ randomGifIds: O(R.append(newId)) })
+      [id]: PS({ randomGifIds: S(R.append(newId)) })
     })
   },
 
   remove: (id, subId) => update({
-    [id]: O({
-      randomGifIds: O(list => R.remove(list.indexOf(subId), 1, list))
+    [id]: PS({
+      randomGifIds: S(list => R.remove(list.indexOf(subId), 1, list))
     }),
-    [subId]: O
+    [subId]: D
   })
 })

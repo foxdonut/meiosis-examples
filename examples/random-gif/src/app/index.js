@@ -1,19 +1,19 @@
-const m = require("mithril")
-const O = require("patchinko/constant")
+import m from "mithril"
+import { P, PS, S } from "patchinko/explicit"
 
-const { button, Button } = require("../button")
-const { counter, Counter } = require("../counter")
-const { randomGif, RandomGif } = require("../random-gif")
-const { randomGifPair, RandomGifPair } = require("../random-gif-pair")
-const { randomGifPairPair, RandomGifPairPair } = require("../random-gif-pair-pair")
-const { randomGifList, RandomGifList } = require("../random-gif-list")
+import { button, Button } from "../button"
+import { counter, Counter } from "../counter"
+import { randomGif, RandomGif } from "../random-gif"
+import { randomGifPair, RandomGifPair } from "../random-gif-pair"
+import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
+import { randomGifList, RandomGifList } from "../random-gif-list"
 
 const newGifGenerated = model => {
   const increment = model.counter.value > 3 && model.button.active ? 2 : 1
-  return { counter: O({ value: O(x => x + increment) }) }
+  return { counter: PS({ value: S(x => x + increment) }) }
 }
 
-exports.app = {
+export const app = {
   model: () => Object.assign(
     {
       button: button.model(),
@@ -33,10 +33,10 @@ exports.app = {
   state: model => [
     randomGifList.state
     // could have more functions here
-  ].reduce((x, f) => O(x, f(x)), model)
+  ].reduce((x, f) => P(x, f(x)), model)
 }
 
-exports.App = {
+export const App = {
   view: ({ attrs: { model, actions } }) =>
     m("div",
       m(Counter, { model, id: "counter", actions }),

@@ -1,11 +1,11 @@
-const O = require("patchinko/constant")
-const m = require("mithril")
-const stream = require("mithril/stream")
+import { P } from "patchinko/explicit"
+import m from "mithril"
+import stream from "mithril/stream"
 
-const { app, App } = require("./app")
+import { app, App } from "./app"
 
 const update = stream()
-const models = stream.scan(O, app.model(), update)
+const models = stream.scan(P, app.model(), update)
 const states = models.map(app.state)
 
 // Only for using Meiosis Tracer in development.

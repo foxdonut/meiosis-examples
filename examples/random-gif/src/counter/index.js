@@ -1,12 +1,12 @@
-const m = require("mithril")
+import m from "mithril"
 
-exports.counter = {
+export const counter = {
   model: ({ label }) => ({
     label,
     value: 0
   })
 }
 
-exports.Counter = {
+export const Counter = {
   view: ({ attrs: { model, id } }) => m("div", model[id].label + " " + model[id].value)
 }
