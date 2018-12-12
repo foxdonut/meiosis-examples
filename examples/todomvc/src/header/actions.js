@@ -29,25 +29,18 @@ export const actions = ({ update }) => {
 
   const newTodoKeyUp = evt => {
     if (evt.keyCode === ENTER_KEY) {
-      saveNewTodo(evt.currentTarget.value)
+      saveNewTodo(evt.target.value)
     }
     else {
-      update(patches.editingNewTodo(evt.currentTarget.value))
-    }
-  }
-
-  const newTodoKeyUpEnterOnly = evt => {
-    if (evt.keyCode === ENTER_KEY || evt.which === ENTER_KEY) {
-      saveNewTodo(evt.currentTarget.value)
+      update(patches.editingNewTodo(evt.target.value))
     }
   }
 
   const newTodoChange = evt =>
-    update(patches.editingNewTodo(evt.currentTarget.value))
+    update(patches.editingNewTodo(evt.target.value))
 
   return {
     newTodoKeyUp,
-    newTodoKeyUpEnterOnly,
     newTodoChange
   }
 }

@@ -7,6 +7,6 @@ export const view = (state, actions) => html`
       placeholder="What needs to be done?"
       @keyup=${actions.newTodoKeyUp}
       .value=${state.newTodo}
-      .autofocus="true">
+      autofocus>
   </header>
 `

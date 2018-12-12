@@ -11,7 +11,10 @@ export const actions = ({ update }) => ({
     })
   ),
 
-  editTodo: todo => () => update(model => _.set(model, "editTodo", todo)),
+  editTodo: todo => evt => {
+    update(model => _.set(model, "editTodo", todo))
+    evt.target.parentElement.parentElement.getElementsByClassName("edit")[0].focus()
+  },
 
   toggleTodo: todoId => evt => {
     const completed = evt.target.checked
