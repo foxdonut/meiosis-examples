@@ -1,4 +1,4 @@
-import _ from "lodash"
+import { PS, S, D } from "patchinko/explicit"
 
 import { patches } from "./patches"
 import { todoStorage } from "../util/todo-storage"
@@ -13,10 +13,14 @@ export const actions = ({ update }) => ({
     .then(todos => update(patches.displayTodos(todos))),
 
   deleteTodo: todoId => () => todoStorage.deleteTodoId(todoId).then(
-    () => update(state => {
-      delete state.todosById[todoId]
-      state.todoIds.splice(state.todoIds.indexOf(todoId), 1)
-      return state
+    () => update({
+      todosById: PS({
+        [todoId]: D
+      }),
+      todoIds: S(todoIds => {
+        todoIds.splice(todoIds.indexOf(todoId), 1)
+        return todoIds
+      })
     })
   ),
 
@@ -27,7 +31,13 @@ export const actions = ({ update }) => ({
   toggleTodo: todoId => evt => {
     const completed = evt.target.checked
     todoStorage.setCompleted(todoId, completed).then(
-      () => update(state => _.set(state, ["todosById", todoId, "completed"], completed))
+      () => update({
+        todosById: PS({
+          [todoId]: PS({
+            completed
+          })
+        })
+      })
     )
   },
 
@@ -46,7 +56,7 @@ export const actions = ({ update }) => ({
   },
 
   editTodo: todo => evt => {
-    update(state => _.set(state, "editTodo", todo))
+    update({ editTodo: todo })
     evt.target.parentElement.parentElement.getElementsByClassName("edit")[0].focus()
   },
 
@@ -64,7 +74,7 @@ export const actions = ({ update }) => ({
     const title = evt.target.value
 
     if (evt.keyCode === ESCAPE_KEY) {
-      update(state => _.set(state, "editTodo", { }))
+      update({ editTodo: {} })
     }
     else if (evt.keyCode === ENTER_KEY) {
       const todo = { id, title }
@@ -77,7 +87,7 @@ export const actions = ({ update }) => ({
       }
     }
     else {
-      update(state => _.set(state, "editTodo", { id, title }))
+      update({ editTodo: { id, title } })
     }
   }
 })

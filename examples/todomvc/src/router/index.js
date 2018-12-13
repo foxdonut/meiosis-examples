@@ -1,5 +1,4 @@
 import Mapper from "url-mapper"
-import _ from "lodash"
 
 export const createRouter = ({ update }) => {
   const extractRoute = hash => (hash && hash.substring(1)) || "/"
@@ -7,9 +6,9 @@ export const createRouter = ({ update }) => {
   const urlMapper = Mapper()
 
   const routes = {
-    "/": () => update(state => _.set(state, "filterBy", "all")),
-    "/active": () => update(state => _.set(state, "filterBy", "active")),
-    "/completed": () => update(state => _.set(state, "filterBy", "completed")),
+    "/": () => update({ filterBy: "all" }),
+    "/active": () => update({ filterBy: "active" }),
+    "/completed": () => update({ filterBy: "completed" }),
   }
 
   const resolveRoute = route => {

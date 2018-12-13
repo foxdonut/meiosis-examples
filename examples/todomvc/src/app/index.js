@@ -1,5 +1,6 @@
-import { root } from "../root"
+import { P } from "patchinko/explicit"
 
+import { root } from "../root"
 import { todoStorage } from "../util/todo-storage"
 
 export const loadInitialState = () => todoStorage.loadAll().then(todos => ({
@@ -15,7 +16,7 @@ export const loadInitialState = () => todoStorage.loadAll().then(todos => ({
 
 const service = state => [
   root.service
-].reduce((x, f) => f(x)(x), state)
+].reduce((x, f) => P(x, f(x)), state)
 
 export const app = {
   actions: root.actions,

@@ -1,32 +1,33 @@
-import _ from "lodash"
+import { S } from "patchinko/explicit"
 
 export const patches = {
-  displayTodos: todos => state => {
-    state.todoIds = []
-    state.todosById = {}
+  displayTodos: todos => ({
+    todoIds: todos.map(todo => todo.id),
+    todosById: todos.reduce((result, todo) => {
+      result[todo.id] = todo
+      return result
+    }, {})
+  }),
 
-    todos.forEach(todo => {
-      state.todoIds.push(todo.id)
-      state.todosById[todo.id] = todo
-    })
+  editingNewTodo: title => ({ newTodo: title }),
 
-    return state
-  },
+  updateTodo: todo => ({
+    todosById: S(todosById => {
+      todosById[todo.id] = todo
+      return todosById
+    }),
+    editTodo: {}
+  }),
 
-  editingNewTodo: title =>
-    state => _.set(state, "newTodo", title),
-
-  updateTodo: todo => state => {
-    state.todosById[todo.id] = todo
-    state.editTodo = { }
-    return state
-  },
-
-  saveNewTodo: todo =>
-    state => {
-      state.todosById[todo.id] = todo
-      state.todoIds.push(todo.id)
-      state.newTodo = ""
-      return state
-    }
+  saveNewTodo: todo => ({
+    todosById: S(todosById => {
+      todosById[todo.id] = todo
+      return todosById
+    }),
+    todoIds: S(todoIds => {
+      todoIds.push(todo.id)
+      return todoIds
+    }),
+    newTodo: ""
+  })
 }

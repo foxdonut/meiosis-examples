@@ -31,9 +31,4 @@ const computeState = state => {
   return result
 }
 
-export const service = () => {
-  return state => {
-    const newState = computeState(state)
-    return Object.assign(state, newState)
-  }
-}
+export const service = state => computeState(state)
