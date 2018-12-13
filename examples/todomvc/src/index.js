@@ -12,7 +12,7 @@ loadInitialState().then(initialState => {
   // Only for using Meiosis Tracer in development.
   require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [ states ]})
 
-  const actions = app.actions(update)
+  const actions = app.actions({ update })
   const router = createRouter(actions)
 
   const element = document.getElementById("app")
