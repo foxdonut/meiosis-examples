@@ -6,14 +6,14 @@ const getTodoClassMap = (state, todo) => ({
   editing: (todo.id === state.editTodo.id)
 })
 
-const todoEdit = (state, actions) => html`
+const todoEdit = ({ state, actions }) => html`
   <input class="edit" type="text"
     .value=${state.editTodo.title}
     @keyup=${actions.editKeyUp(state.editTodo.id)}
     @blur=${() => actions.editBlur(state.editTodo)}>
 `
 
-const todoItem =  (state, todoId, actions) => {
+const todoItem = ({ state, todoId, actions }) => {
   const todo = state.todosById[todoId]
   const editing = (todo.id === state.editTodo.id)
 
@@ -26,20 +26,20 @@ const todoItem =  (state, todoId, actions) => {
         <label @dblclick=${actions.editTodo(todo)}>${todo.title}</label>
         <button class="destroy" @click=${actions.deleteTodo(todo.id)}></button>
       </div>
-      ${editing ? todoEdit(state, actions) : null}
+      ${editing ? todoEdit({ state, actions }) : null}
     </li>
   `
 }
 
 export const main = {
-  view: (state, actions) => html`
+  view: ({ state, actions }) => html`
     <section class="main">
       <input class="toggle-all" type="checkbox"
         @change=${actions.toggleAllTodos}
         .checked=${state.allCompleted}>
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        ${state.filteredTodoIds.map(id => todoItem(state, id, actions))}
+        ${state.filteredTodoIds.map(todoId => todoItem({ state, todoId, actions }))}
       </ul>
     </section>
   `

@@ -1,7 +1,7 @@
 import { html } from "lit-html"
 
 export const header = {
-  view: (state, actions) => html`
+  view: ({ state, actions }) => html`
     <header class="header">
       <h1>todos</h1>
       <input class="new-todo"

@@ -4,12 +4,12 @@ import { header } from "../header"
 import { main } from "../main"
 import { footer } from "../footer"
 
-export const view = (state, actions) => html`
+export const view = ({ state, actions }) => html`
   <div>
     <section class="todoapp">
-      ${header.view(state, actions)}
-      ${main.view(state, actions)}
-      ${footer.view(state, actions)}
+      ${header.view({ state, actions })}
+      ${main.view({ state, actions })}
+      ${footer.view({ state, actions })}
     </section>
     <footer class="info">
       <p>Double-click to edit a todo</p>,

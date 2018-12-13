@@ -8,7 +8,7 @@ const clearCompleted = actions => html`
 `
 
 export const footer = {
-  view: (state, actions) => html`
+  view: ({ state, actions }) => html`
     <footer class="footer">
       <span class="todo-count">${state.itemsLeftText}</span>
       <ul class="filters">

@@ -19,5 +19,5 @@ loadInitialState().then(initialState => {
   states
     .map(app.service)
     .map(router.routeSync)
-    .map(state => render(app.view(state, actions), element))
+    .map(state => render(app.view({ state, actions }), element))
 })
