@@ -5,7 +5,7 @@ import { todoStorage } from "../util/todo-storage"
 export const loadInitialState = () => todoStorage.loadAll().then(todos => ({
   editTodo: {},
   newTodo: "",
-  filterBy: "",
+  filterBy: "all",
   todoIds: todos.map(todo => todo.id),
   todosById: todos.reduce((acc, todo) => {
     acc[todo.id] = todo
@@ -13,9 +13,9 @@ export const loadInitialState = () => todoStorage.loadAll().then(todos => ({
   }, {})
 }))
 
-const service = model => [
+const service = state => [
   root.service
-].reduce((x, f) => f(x)(x), model)
+].reduce((x, f) => f(x)(x), state)
 
 export const app = {
   actions: root.actions,

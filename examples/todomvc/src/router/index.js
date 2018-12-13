@@ -1,14 +1,15 @@
 import Mapper from "url-mapper"
+import _ from "lodash"
 
-export const createRouter = actions => {
+export const createRouter = ({ update }) => {
   const extractRoute = hash => (hash && hash.substring(1)) || "/"
 
   const urlMapper = Mapper()
 
   const routes = {
-    "/": () => actions.filter(""),
-    "/active": () => actions.filter("active"),
-    "/completed": () => actions.filter("completed")
+    "/": () => update(state => _.set(state, "filterBy", "all")),
+    "/active": () => update(state => _.set(state, "filterBy", "active")),
+    "/completed": () => update(state => _.set(state, "filterBy", "completed")),
   }
 
   const resolveRoute = route => {
@@ -28,12 +29,12 @@ export const createRouter = actions => {
   // Initial route.
   resolveRoute(extractRoute(window.location.hash))
 
-  const routeSync = model => {
-    const route = "/" + model.filterBy
+  const routeSync = state => {
+    const route = "/" + (state.filterBy === "all" ? "" : state.filterBy)
     if (document.location.hash.substring(1) !== route) {
       window.history.pushState({}, "", "#" + route)
     }
-    return model
+    return state
   }
 
   return { routeSync }

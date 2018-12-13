@@ -66,16 +66,6 @@ export const todoStorage = {
         }
       }))
   },
-  filter: by => {
-    const completedSelected = by === "completed"
-    const filterBy = todo => (!!todo.completed) === completedSelected
-
-    return new Promise(resolve =>
-      loadAll().then(todos => {
-        const filteredTodos = todos.filter(filterBy)
-        resolve(filteredTodos)
-      }))
-  },
   loadAll,
   saveAll,
   saveTodo: todo => {

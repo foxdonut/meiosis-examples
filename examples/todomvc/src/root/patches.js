@@ -13,25 +13,20 @@ export const patches = {
     return state
   },
 
-  filter: by => state => {
-    state.filterBy = by
+  editingNewTodo: title =>
+    state => _.set(state, "newTodo", title),
+
+  updateTodo: todo => state => {
+    state.todosById[todo.id] = todo
+    state.editTodo = { }
     return state
   },
 
-  editingNewTodo: title =>
-    model => _.set(model, "newTodo", title),
-
-  updateTodo: todo => model => {
-    model.todosById[todo.id] = todo
-    model.editTodo = { }
-    return model
-  },
-
   saveNewTodo: todo =>
-    model => {
-      model.todosById[todo.id] = todo
-      model.todoIds.push(todo.id)
-      model.newTodo = ""
-      return model
+    state => {
+      state.todosById[todo.id] = todo
+      state.todoIds.push(todo.id)
+      state.newTodo = ""
+      return state
     }
 }

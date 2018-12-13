@@ -1,10 +1,8 @@
-import _ from "lodash"
-
-const allCompleted = model => {
+const allCompleted = state => {
   let result = true
 
-  for (let i = 0, t = model.todoIds.length; i < t; i++) {
-    if (!model.todosById[model.todoIds[i]].completed) {
+  for (let i = 0, t = state.todoIds.length; i < t; i++) {
+    if (!state.todosById[state.todoIds[i]].completed) {
       result = false
       break
     }
@@ -12,29 +10,30 @@ const allCompleted = model => {
   return result
 }
 
-const computeState = model => {
+const computeState = state => {
   const result = {}
 
-  result.allSelected = model.filterBy === ""
-  result.activeSelected = model.filterBy === "active"
-  result.completedSelected = model.filterBy === "completed"
+  result.allCompleted = allCompleted(state)
 
-  result.allCompleted = allCompleted(model)
-
-  const notCompleted = todoId => !model.todosById[todoId].completed
-  const itemsLeft = model.todoIds.filter(notCompleted).length
+  const notCompleted = todoId => !state.todosById[todoId].completed
+  const itemsLeft = state.todoIds.filter(notCompleted).length
 
   result.itemsLeftText = itemsLeft > 0 ?
     (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : ""
 
-  result.clearCompletedVisible = (model.todoIds.length - itemsLeft) > 0
+  result.clearCompletedVisible = (state.todoIds.length - itemsLeft) > 0
+
+  const all = state.filterBy === "all"
+  const completed = state.filterBy === "completed"
+  result.filteredTodoIds = state.todoIds.filter(id =>
+    all || (state.todosById[id].completed === completed))
 
   return result
 }
 
 export const service = () => {
-  return model => {
-    const newState = computeState(model)
-    return _.merge(model, newState)
+  return state => {
+    const newState = computeState(state)
+    return Object.assign(state, newState)
   }
 }

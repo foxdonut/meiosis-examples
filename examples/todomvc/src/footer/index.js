@@ -12,10 +12,9 @@ export const footer = {
     <footer class="footer">
       <span class="todo-count">${state.itemsLeftText}</span>
       <ul class="filters">
-        <li><a href="#/" class=${classMap({ selected: state.allSelected })}>All</a>
-        <li><a href="#/active" class=${classMap({ selected: state.activeSelected })}>Active</a>
-        <li><a href="javascript://" @click=${() => actions.filter("completed")}
-          class=${classMap({ selected: state.completedSelected })}>Completed</a>
+        <li><a href="#/" class=${classMap({ selected: state.filterBy === "all" })}>All</a>
+        <li><a href="#/active" class=${classMap({ selected: state.filterBy === "active" })}>Active</a>
+        <li><a href="#/completed" class=${classMap({ selected: state.filterBy === "completed" })}>Completed</a>
       </ul>
       ${state.clearCompletedVisible ? clearCompleted(actions) : null}
     </footer>

@@ -9,26 +9,14 @@ const ESCAPE_KEY = 27
 export const actions = ({ update }) => ({
   loadAll: () => todoStorage.loadAll().then(todos => update(patches.displayTodos(todos))),
 
-  filter: by => {
-    const updateFn = todos =>
-      update(_.flow([patches.displayTodos(todos), patches.filter(by)]))
-
-    if (by) {
-      todoStorage.filter(by).then(updateFn)
-    }
-    else {
-      todoStorage.loadAll().then(updateFn)
-    }
-  },
-
   clearCompleted: () => todoStorage.clearCompleted()
     .then(todos => update(patches.displayTodos(todos))),
 
   deleteTodo: todoId => () => todoStorage.deleteTodoId(todoId).then(
-    () => update(model => {
-      delete model.todosById[todoId]
-      model.todoIds.splice(model.todoIds.indexOf(todoId), 1)
-      return model
+    () => update(state => {
+      delete state.todosById[todoId]
+      state.todoIds.splice(state.todoIds.indexOf(todoId), 1)
+      return state
     })
   ),
 
@@ -39,7 +27,7 @@ export const actions = ({ update }) => ({
   toggleTodo: todoId => evt => {
     const completed = evt.target.checked
     todoStorage.setCompleted(todoId, completed).then(
-      () => update(model => _.set(model, ["todosById", todoId, "completed"], completed))
+      () => update(state => _.set(state, ["todosById", todoId, "completed"], completed))
     )
   },
 
@@ -58,7 +46,7 @@ export const actions = ({ update }) => ({
   },
 
   editTodo: todo => evt => {
-    update(model => _.set(model, "editTodo", todo))
+    update(state => _.set(state, "editTodo", todo))
     evt.target.parentElement.parentElement.getElementsByClassName("edit")[0].focus()
   },
 
@@ -76,7 +64,7 @@ export const actions = ({ update }) => ({
     const title = evt.target.value
 
     if (evt.keyCode === ESCAPE_KEY) {
-      update(model => _.set(model, "editTodo", { }))
+      update(state => _.set(state, "editTodo", { }))
     }
     else if (evt.keyCode === ENTER_KEY) {
       const todo = { id, title }
@@ -89,7 +77,7 @@ export const actions = ({ update }) => ({
       }
     }
     else {
-      update(model => _.set(model, "editTodo", { id, title }))
+      update(state => _.set(state, "editTodo", { id, title }))
     }
   }
 })

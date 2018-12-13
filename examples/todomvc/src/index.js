@@ -10,10 +10,10 @@ loadInitialState().then(initialState => {
   const states = flyd.scan((x, f) => f(x), initialState, update)
 
   // Only for using Meiosis Tracer in development.
-  require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [ states ]})
+  require("meiosis-tracer")({ selector: "#tracer", rows: 35, streams: [ states ]})
 
   const actions = app.actions({ update })
-  const router = createRouter(actions)
+  const router = createRouter({ update })
 
   const element = document.getElementById("app")
   states

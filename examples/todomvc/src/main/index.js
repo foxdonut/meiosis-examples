@@ -39,7 +39,7 @@ export const main = {
         .checked=${state.allCompleted}>
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        ${state.todoIds.map(id => todoItem(state, id, actions))}
+        ${state.filteredTodoIds.map(id => todoItem(state, id, actions))}
       </ul>
     </section>
   `
