@@ -1,32 +1,32 @@
 import { Component } from "react"
 
-import { model } from "../common/model"
+import { initialState } from "../common/initialState"
 import { actions } from "../common/actions"
 import { view } from "../common/view.jsx"
 
 export const app = {
-  model,
+  initialState,
   actions
 }
 
 export class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { model: props.models() }
+    this.state = props.states()
     this.skippedFirst = false
   }
 
   render() {
-    const { model } = this.state
+    const state = this.state
     const { actions } = this.props
 
-    return view(model, actions)
+    return view({ state, actions })
   }
 
   componentDidMount() {
-    this.props.models.map(model => {
+    this.props.states.map(state => {
       if (this.skippedFirst) {
-        this.setState({ model })
+        this.setState(state)
       }
       else {
         this.skippedFirst = true

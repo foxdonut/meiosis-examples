@@ -11,7 +11,8 @@ export const createRouter = ({ update }) => {
     "/completed": () => update({ filterBy: "completed" }),
   }
 
-  const resolveRoute = route => {
+  const resolveRoute = () => {
+    const route = extractRoute(document.location.hash)
     const resolved = urlMapper.map(route, routes)
     if (resolved) {
       const action = resolved.match
@@ -20,13 +21,10 @@ export const createRouter = ({ update }) => {
   }
 
   // Listen for route changes.
-  window.onpopstate = () => {
-    const route = extractRoute(document.location.hash)
-    resolveRoute(route)
-  }
+  window.onpopstate = resolveRoute
 
-  // Initial route.
-  resolveRoute(extractRoute(window.location.hash))
+  // Resolve initial route.
+  resolveRoute()
 
   const routeSync = state => {
     const route = "/" + (state.filterBy === "all" ? "" : state.filterBy)

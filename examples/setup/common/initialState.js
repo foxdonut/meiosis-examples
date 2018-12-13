@@ -1,4 +1,4 @@
-export const model = () => ({
+export const initialState = () => ({
   precipitations: false,
   precipitation: null,
   date: "",
