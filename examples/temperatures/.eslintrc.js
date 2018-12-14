@@ -12,8 +12,14 @@ module.exports = {
     },
     "sourceType": "module"
   },
+  "settings": {
+    "react": {
+      "pragma": "h"
+    }
+  },
   "rules": {
     "react/display-name": [ 0 ],
+    "react/no-deprecated": [ 0 ],
     "react/prop-types": [ 0 ],
     "indent": [ "error", 2 ],
     "linebreak-style": [ "error", "unix" ],
@@ -26,10 +32,5 @@ module.exports = {
     ],
     "quotes": [ "error", "double" ],
     "semi": [ "error", "never" ]
-  },
-  "settings": {
-    "react": {
-      "pragma": "h"
-    }
   }
 }

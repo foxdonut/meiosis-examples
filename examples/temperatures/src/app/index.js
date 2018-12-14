@@ -7,10 +7,10 @@ import { temperature, Temperature } from "../temperature"
 export const app = {
   initialState: () => Object.assign({}, {
     "entry:date:from": entryDate.initialState("From Date:"),
-    "entry:date:to": entryDate.initialState("From To:"),
+    "entry:date:to": entryDate.initialState("To Date:"),
     "entry:number": entryNumber.initialState(),
-    "temperature:air": temperature.initialState("Air temperature"),
-    "temperature:water": temperature.initialState("Water temperature")
+    "temperature:air": temperature.initialState("Air temperature:"),
+    "temperature:water": temperature.initialState("Water temperature:")
   }),
   actions: update => Object.assign({},
     actions(update),
@@ -19,8 +19,7 @@ export const app = {
 }
 
 export class App extends Component {
-  constructor(props) {
-    super(props)
+  componentWillMount() {
     this.props.states.map(state => {
       this.setState(state)
     })
