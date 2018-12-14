@@ -1,10 +1,10 @@
-export const view = components => model => {
+export const view = components => state => {
   const { header, footer } = components
-  const component = components[model.pageId]
+  const component = components[state.route.case]
 
   return ["div",
-    header(model),
-    component(model),
-    footer(model)
+    header(state),
+    component(state),
+    footer(state)
   ]
 }

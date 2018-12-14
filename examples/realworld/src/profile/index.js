@@ -1,7 +1,7 @@
 import { accept } from "./accept"
 import { actions } from "./actions"
 import { view } from "./view"
-import { nextAction } from "./nextAction"
+import { onNavigate } from "./onNavigate"
 import { Articles } from "../articles"
 
 export const Profile = {
@@ -9,5 +9,5 @@ export const Profile = {
   accept,
   actions,
   view,
-  nextAction
+  onNavigate
 }

@@ -1,7 +1,7 @@
 import { compose, preventDefault } from "../util/fp"
 
-export const view = ({ actions }) => model => {
-  const errors = Object.keys(model.settings.errors || {}).map(key => `${key} ${model.settings.errors[key]}`)
+export const view = ({ actions }) => state => {
+  const errors = Object.keys(state.settings.errors || {}).map(key => `${key} ${state.settings.errors[key]}`)
 
   return [".settings-page",
     [".container page",
@@ -13,31 +13,31 @@ export const view = ({ actions }) => model => {
             ["fieldset",
               ["fieldset.form-group",
                 ["input:text.form-control[placeholder=URL of profile picture]",
-                  { value: model.settings.image,
+                  { value: state.settings.image,
                     onInput: evt => actions.updateSettingsForm("image", evt.target.value) }]
               ],
               ["fieldset.form-group",
                 ["input:text.form-control.form-control-lg[placeholder=Your Name]",
-                  { value: model.settings.username,
+                  { value: state.settings.username,
                     onInput: evt => actions.updateSettingsForm("username", evt.target.value) }]
               ],
               ["fieldset.form-group",
                 ["textarea.form-control.form-control-lg[rows=8][placeholder=Short bio about you]",
-                  { value: model.settings.bio,
+                  { value: state.settings.bio,
                     onInput: evt => actions.updateSettingsForm("bio", evt.target.value) }]
               ],
               ["fieldset.form-group",
                 ["input:text.form-control.form-control-lg[placeholder=Email]",
-                  { value: model.settings.email,
+                  { value: state.settings.email,
                     onInput: evt => actions.updateSettingsForm("email", evt.target.value) }]
               ],
               ["fieldset.form-group",
                 ["input:password.form-control.form-control-lg[placeholder=New Password]",
-                  { value: model.settings.password,
+                  { value: state.settings.password,
                     onInput: evt => actions.updateSettingsForm("password", evt.target.value) }]
               ],
               ["button.btn.btn-lg.btn-primary.pull-xs-right",
-                { onClick: compose(() => actions.updateSettings(model.settings), preventDefault) },
+                { onClick: compose(() => actions.updateSettings(state.settings), preventDefault) },
                 "Update Settings",]
             ]
           ],

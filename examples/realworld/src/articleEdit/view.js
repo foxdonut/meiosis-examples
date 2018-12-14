@@ -5,8 +5,8 @@ const displayFieldErrors = errors => ["ul.error-messages", errors.map(err => ["l
 const getFieldErrors = validationErrors => field =>
   thrush(defaultTo([], get(defaultTo({}, validationErrors), [field])), displayFieldErrors)
 
-export const view = ({ actions }) => model => {
-  const article = model.article
+export const view = ({ actions }) => state => {
+  const article = state.article
   const fieldErrors = getFieldErrors(article && article.validationErrors)
 
   return !article ? ["img", { src: "/assets/loading.gif" }] : [".editor-page",

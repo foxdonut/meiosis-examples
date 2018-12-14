@@ -3,10 +3,10 @@ import { LoginPage, navigateTo } from "../util/router"
 import { helpers } from "../root/helpers"
 
 export const actions = update => ({
-  favoriteArticle: (model, slug) => {
-    if (model.user) {
+  favoriteArticle: (state, slug) => {
+    if (state.user) {
       articlesApi.favorite(slug)
-        .then(() => helpers.loadArticles(model.articlesFilter))
+        .then(() => helpers.loadArticles(state.articlesFilter))
         .then(update)
     }
     else {
@@ -14,10 +14,10 @@ export const actions = update => ({
     }
   },
 
-  unfavoriteArticle: (model, slug) => {
-    if (model.user) {
+  unfavoriteArticle: (state, slug) => {
+    if (state.user) {
       articlesApi.unfavorite(slug)
-        .then(() => helpers.loadArticles(model.articlesFilter))
+        .then(() => helpers.loadArticles(state.articlesFilter))
         .then(update)
     }
     else {

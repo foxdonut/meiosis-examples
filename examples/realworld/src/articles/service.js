@@ -1,12 +1,12 @@
-export const service = (model, patch) => patch.params ?
-  // synchronize articlesFilter
-  ({
-    articlesFilter: {
-      limit: patch.params.limit || model.articlesFilter.limit,
-      offset: patch.params.offset || 0,
-      tag: patch.params.tag,
-      author: model.articlesFilter.author || patch.params.author,
-      favorited: model.articlesFilter.favorited || patch.params.favorited
-    }
+import { P, PS } from "patchinko/explicit"
+import { choose } from "../util/fp"
+
+// synchronize articlesFilter
+export const service = state => state.query ?
+  ({ articlesFilter: PS(
+    P(
+      choose(["offset", "author", "favorited"], state.query),
+      { tag: state.query.tag }
+    ))
   })
   : null

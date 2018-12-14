@@ -1,19 +1,19 @@
-import { HomePage, getUrl } from "../util/router"
+import { getUrl, Route } from "../util/router"
 import { compose, preventDefault } from "../util/fp"
 
-export const view = ({ actions, articles, popularTags }) => model => {
-  const content = model.articlesFilter.tag ? {
+export const view = ({ actions, articles, popularTags }) => state => {
+  const content = state.articlesFilter.tag ? {
     globalFeed: false,
     tagFeedComponent: ["li.nav-item",
-      ["a.nav-link.active", `#${model.articlesFilter.tag}`]
+      ["a.nav-link.active", `#${state.articlesFilter.tag}`]
     ]
   } : {
-    globalFeed: !model.feed,
+    globalFeed: !state.feed,
     tagFeedComponent: null
   }
 
   return [".home-page",
-    !model.user && [".banner",
+    !state.user && [".banner",
       [".container",
         ["h1.logo-font", "conduit"],
         ["p", "A place to share your ", ["i", "Meiosis"], " knowledge."]
@@ -31,17 +31,17 @@ export const view = ({ actions, articles, popularTags }) => model => {
         [".col-md-9",
           [".feed-toggle",
             ["ul.nav.nav-pills.outline-active",
-              model.user && ["li.nav-item",
+              state.user && ["li.nav-item",
                 ["a.nav-link",
-                  { href: getUrl(HomePage),
+                  { href: getUrl(Route.of.Home()),
                     onClick: compose(actions.navigateToYourFeed, preventDefault),
-                    className: { active: model.feed }
+                    className: { active: state.feed }
                   },
                   "Your Feed"]
               ],
               ["li.nav-item",
                 ["a.nav-link",
-                  { href: getUrl(HomePage),
+                  { href: getUrl(Route.of.Home()),
                     onClick: compose(actions.navigateToGlobalFeed, preventDefault),
                     className: { active: content.globalFeed }
                   },
@@ -50,13 +50,13 @@ export const view = ({ actions, articles, popularTags }) => model => {
               content.tagFeedComponent
             ]
           ],
-          model.articles
-            ? articles(model)
+          state.articles
+            ? articles(state)
             : ["div", { style: { height: "2000px" } },
-              model.loading ? ["img", { src: "/assets/loading.gif" }] : null]
+              state.loading ? ["img", { src: "/assets/loading.gif" }] : null]
         ],
         [".col-md-3",
-          [".sidebar", popularTags(model)]
+          [".sidebar", popularTags(state)]
         ]
       ]
     ]

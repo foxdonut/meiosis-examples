@@ -1,8 +1,8 @@
-import O from "patchinko/constant"
+import { PS } from "patchinko/explicit"
 import validate from "validate.js"
 
 import { articlesApi } from "../services"
-import { HomePage, navigateTo } from "../util/router"
+import { Route } from "../util/router"
 import { pick } from "../util/fp"
 
 const validationSpec = {
@@ -11,12 +11,13 @@ const validationSpec = {
   title: { presence: { allowEmpty: false } }
 }
 
-export const actions = update => ({
+export const actions = ({ update, navigate }) => ({
   updateArticleForm: (field, value) => update({
-    article: O({ [field]: value })
+    article: PS({ [field]: value })
   }),
+
   updateArticleTags: tags => update({
-    article: O({
+    article: PS({
       tags,
       tagList: (tags || "")
         .split(",")
@@ -27,11 +28,11 @@ export const actions = update => ({
 
   publish: article => {
     const validationErrors = validate(article, validationSpec)
-    update({ article: O({ validationErrors }) })
+    update({ article: PS({ validationErrors }) })
     if (!validationErrors) {
       articlesApi.publish({
         article: pick(["title", "description", "body", "tagList"], article)
-      }, article.slug).then(() => update(navigateTo(HomePage)))
+      }, article.slug).then(() => navigate({ route: Route.of.Home() }))
     }
   }
 })

@@ -1,22 +1,16 @@
 module.exports = {
+  "extends": ["eslint:recommended"],
   "env": {
     "browser": true,
     "commonjs": true,
     "es6": true
   },
-  "extends": ["eslint:recommended"],
   "parserOptions": {
     "sourceType": "module"
   },
   "rules": {
-    "indent": [
-      "error",
-      2
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+    "indent": [ "error", 2 ],
+    "linebreak-style": [ "error", "unix" ],
     "no-unused-vars": [
       "error",
       {
@@ -24,13 +18,7 @@ module.exports = {
         "argsIgnorePattern": "^_"
       }
     ],
-    "quotes": [
-      "error",
-      "double"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ]
+    "quotes": [ "error", "double" ],
+    "semi": [ "error", "never" ]
   }
-};
+}

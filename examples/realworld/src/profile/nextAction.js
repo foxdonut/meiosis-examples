@@ -1,7 +1,7 @@
 import { ProfilePage, ProfileFavoritesPage } from "../util/router"
 import { helpers } from "../root/helpers"
 
-export const nextAction = update => (model, patch) => {
+export const nextAction = update => (state, patch) => {
   if (patch.pageId === ProfilePage || patch.pageId === ProfileFavoritesPage) {
     setTimeout(() => update({ loading: patch.pageId }), 300)
 
@@ -11,8 +11,8 @@ export const nextAction = update => (model, patch) => {
     Promise.all([
       helpers.loadProfile(patch.params),
       helpers.loadArticles({
-        limit: model.articlesFilter.limit,
-        offset: model.articlesFilter.offset,
+        limit: state.articlesFilter.limit,
+        offset: state.articlesFilter.offset,
         author,
         favorited
       })

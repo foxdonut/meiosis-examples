@@ -1,8 +1,4 @@
-import { HomePage, LoginPage, RegisterPage, ArticleDetailPage, ArticleCreatePage,
-  ArticleEditPage, SettingsPage, ProfilePage, ProfileFavoritesPage }
-  from "../util/router"
-
-import { model } from "./model"
+import { initialState } from "./initialState"
 import { service } from "./service"
 import { view } from "./view"
 import { Header, Footer } from "../layout"
@@ -18,17 +14,17 @@ export const Root = {
   dependencies: {
     header: Header,
     footer: Footer,
-    [HomePage]: Home,
-    [RegisterPage]: Register,
-    [LoginPage]: Login,
-    [ArticleDetailPage]: ArticleDetail,
-    [ArticleCreatePage]: ArticleEdit,
-    [ArticleEditPage]: ArticleEdit,
-    [SettingsPage]: Settings,
-    [ProfilePage]: Profile,
-    [ProfileFavoritesPage]: Profile
+    Home,
+    Register,
+    Login,
+    ArticleDetail,
+    ArticleEdit,
+    ArticleCreate: ArticleEdit,
+    Settings,
+    Profile,
+    ProfileFavorites: Profile
   },
-  model,
+  initialState,
   service,
   view
 }

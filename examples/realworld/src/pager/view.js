@@ -1,33 +1,29 @@
 import { range } from "../util/fp"
-import { getUrl, ProfilePage, ProfileFavoritesPage } from "../util/router"
 
-export const view = () => model => {
-  const filter = model.articlesFilter
+export const view = ({ actions }) => state => {
+  const filter = state.articlesFilter
   const currentPageNumber = (filter.offset / filter.limit) + 1
-  const pageList = range(1, Math.ceil(model.articlesCount / filter.limit) + 1)
+  const pageList = range(1, Math.ceil(state.articlesCount / filter.limit) + 1)
   const from = filter.offset + 1
-  const to = Math.min(from + filter.limit - 1, model.articlesCount)
-  const username = (model.pageId === ProfilePage || model.pageId === ProfileFavoritesPage) &&
-    model.profile ? model.profile.username : undefined
+  const to = Math.min(from + filter.limit - 1, state.articlesCount)
 
   return ["nav",
     ["ul.pagination",
       pageList.map(pageNumber =>
         ["li.page-item", { className: { "active": pageNumber === currentPageNumber } },
           ["a.page-link",
-            { href: getUrl(model.pageId,
-              { offset: (pageNumber - 1) * filter.limit,
-                tag: filter.tag,
-                username
-              })
-            },
+            { onClick: () => actions.loadArticles({
+              offset: (pageNumber - 1) * filter.limit,
+              tag: filter.tag,
+              limit: filter.limit
+            }) },
             pageNumber
           ]
         ]
       )
     ],
-    model.articlesCount > 0
-      ? ["div", "Displaying ", from, " - ", to, " of ", model.articlesCount]
+    state.articlesCount > 0
+      ? ["div", "Displaying ", from, " - ", to, " of ", state.articlesCount]
       : ["div", "No articles here... yet."]
   ]
 }

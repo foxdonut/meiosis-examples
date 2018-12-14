@@ -6,8 +6,8 @@ export const view = options => ({ actions }) => {
     compose(actions.updateCredForm(method, field), path(["target", "value"]))
   const id = options.method
 
-  return model => {
-    const errors = Object.keys(model[id].errors || {}).map(key => `${key} ${model[id].errors[key]}`)
+  return state => {
+    const errors = Object.keys(state[id].errors || {}).map(key => `${key} ${state[id].errors[key]}`)
 
     return [".auth-page",
       [".container page",
@@ -23,18 +23,18 @@ export const view = options => ({ actions }) => {
               options.showUsername &&
                 ["fieldset.form-group",
                   ["input:text.form-control.form-control-lg[placeholder=Username]",
-                    { value: model[id].username || "", onInput: updateCredForm(id, "username") }]
+                    { value: state[id].username || "", onInput: updateCredForm(id, "username") }]
                 ],
               ["fieldset.form-group",
                 ["input:text.form-control.form-control-lg[placeholder=Email]",
-                  { value: model[id].email || "", onInput: updateCredForm(id, "email") }]
+                  { value: state[id].email || "", onInput: updateCredForm(id, "email") }]
               ],
               ["fieldset.form-group",
                 ["input:password.form-control.form-control-lg[placeholder=Password]",
-                  { value: model[id].password || "", onInput: updateCredForm(id, "password") }]
+                  { value: state[id].password || "", onInput: updateCredForm(id, "password") }]
               ],
               ["button.btn.btn-lg.btn-primary.pull-xs-right",
-                { onClick: compose(actions.sendCredentials(id), constant(model), preventDefault) },
+                { onClick: compose(actions.sendCredentials(id), constant(state), preventDefault) },
                 options.label
               ]
             ]

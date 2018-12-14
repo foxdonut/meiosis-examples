@@ -1,23 +1,43 @@
-import Mapper from "url-mapper"
-
-import { assoc } from "./fp"
-
-export const HomePage = "HomePage"
-export const LoginPage = "LoginPage"
-export const RegisterPage = "RegisterPage"
-export const ArticleDetailPage = "ArticleDetailPage"
-export const ArticleCreatePage = "ArticleCreatePage"
-export const ArticleEditPage = "ArticleEditPage"
-export const SettingsPage = "SettingsPage"
-export const ProfilePage = "ProfilePage"
-export const ProfileFavoritesPage = "ProfileFavoritesPage"
+import superouter from "superouter"
+import m from "mithril"
 
 const prefix = "#"
 
+export const Route = superouter.type("Route", {
+  Home: "/",
+  Login: "/login",
+  Register: "/register",
+  ArticleDetail: "/article/:slug",
+  ArticleEdit: "/editor/:slug",
+  ArticleCreate: "/editor",
+  Settings: "/settings",
+  Profile: "/profile/:username",
+  ProfileFavorites: "/profile/:username/favorites"
+})
+
+export const parseUrl = (hash = document.location.hash || "#/") => {
+  const [ url, queryString ] = hash.substring(1).split("?")
+  const route = Route.matchOr(() => Route.of.Home(), url)
+  const query = queryString
+    ? m.parseQueryString(queryString)
+    : {}
+  return { route, query }
+}
+
+export const getUrl = (route, query) => {
+  let result = Route.toURL(route)
+  if (query && Object.keys(query).length > 0) {
+    result += "?" + m.buildQueryString(query)
+  }
+  return prefix + result
+}
+
+export const listenToRouteChanges = navigate =>
+  window.onpopstate = () => navigate(parseUrl())
+
+/*
 const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
-  "/login": () => ({ pageId: LoginPage, login: {} }),
-  "/register": () => ({ pageId: RegisterPage, register: {} }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),
   "/editor/:slug": () => ({ pageId: ArticleEditPage, article: null }),
   "/editor": () => ({ pageId: ArticleCreatePage,
@@ -27,27 +47,4 @@ const routeMappings = {
   "/profile/:username": () => ({ pageId: ProfilePage, profile: null, feed: false }),
   "/profile/:username/favorites": () => ({ pageId: ProfileFavoritesPage, profile: null, feed: false })
 }
-
-const urlMapper = Mapper({ query: true })
-
-const routeLookup = Object.keys(routeMappings).reduce((result, key) =>
-  assoc(routeMappings[key]().pageId, key, result), {})
-
-export const parseUrl = (url = document.location.hash || "#/") => {
-  const mapped = urlMapper.map(url.substring(1), routeMappings)
-  if (mapped) {
-    const patch = mapped.match
-    return Object.assign({}, patch(), { url, params: mapped.values })
-  }
-}
-
-export const getUrl = (id, params = {}) => {
-  const route = routeLookup[id] || "/"
-  const result = urlMapper.stringify(route, params)
-  return prefix + result
-}
-
-export const navigateTo = (id, params) => parseUrl(getUrl(id, params))
-
-export const listenToRouteChanges = update =>
-  window.onpopstate = () => update(parseUrl())
+*/

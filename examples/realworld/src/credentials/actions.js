@@ -1,19 +1,19 @@
-import O from "patchinko/constant"
+import { PS } from "patchinko/explicit"
 
 import { credentialsApi, setToken } from "../services"
-import { HomePage, navigateTo } from "../util/router"
+import { Route } from "../util/router"
 import { pick } from "../util/fp"
 
-export const actions = update => ({
-  updateCredForm: (method, field) => text => update({ [method]: O({ [field]: text }) }),
+export const actions = ({ update, navigate }) => ({
+  updateCredForm: (method, field) => text => update({ [method]: PS({ [field]: text }) }),
 
-  sendCredentials: method => model => {
+  sendCredentials: method => state => {
     const fields = ["email", "password"].concat(method === "register" ? ["username"] : [])
-    credentialsApi[method]({ user: pick(fields, model[method]) }).
+    credentialsApi[method]({ user: pick(fields, state[method]) }).
       then(({ user }) => {
         setToken(user.token)
-        update(Object.assign(navigateTo(HomePage), { user }))
+        navigate({ route: Route.of.Home(), user })
       }).
-      catch(err => update({ [method]: O({ errors: err.errors }) }))
+      catch(err => update({ [method]: PS({ errors: err.response.errors }) }))
   }
 })
