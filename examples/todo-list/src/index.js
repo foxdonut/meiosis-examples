@@ -4,16 +4,17 @@ import flyd from "flyd"
 import { P } from "patchinko/explicit"
 
 import createServer from "./sinonServer"
-import { createApp, App } from "./app"
+import { app, App } from "./app"
 
 createServer()
 
-const update = flyd.stream()
-createApp(update).then(app => {
-  const states = flyd.scan(P, app.state(), update)
+app.initialState().then(initialState => {
+  const update = flyd.stream()
+  const states = flyd.scan(P, initialState, update)
 
   // Only for using Meiosis Tracer in development.
   require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [ states ]})
 
-  render(<App states={states} actions={app.actions} />, document.getElementById("app"))
+  const actions = app.actions({ update })
+  render(<App states={states} actions={actions} />, document.getElementById("app"))
 })

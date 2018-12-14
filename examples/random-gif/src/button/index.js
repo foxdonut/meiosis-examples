@@ -3,21 +3,19 @@ import { PS, S } from "patchinko/explicit"
 
 import { buttonStyle } from "../util/ui"
 
-const actions = update => ({
-  toggle: id => _evt => update({ [id]: PS({ active: S(x => !x) }) })
-})
-
 export const button = {
-  model: () => ({
+  initialState: () => ({
     active: false
   }),
-  actions
+  actions: ({ update }) => ({
+    toggle: id => _evt => update({ [id]: PS({ active: S(x => !x) }) })
+  })
 }
 
 export const Button = {
-  view: ({ attrs: { model, id, actions } }) => {
-    const bc = model[id].active ? "green" : "red"
-    const label = model[id].active ? "Active" : "Inactive"
+  view: ({ attrs: { state, id, actions } }) => {
+    const bc = state[id].active ? "green" : "red"
+    const label = state[id].active ? "Active" : "Inactive"
     return m("button.bg-" + bc + buttonStyle, { onclick: actions.toggle(id) }, label)
   }
 }

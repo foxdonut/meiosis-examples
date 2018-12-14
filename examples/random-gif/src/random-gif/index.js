@@ -8,7 +8,7 @@ import { buttonStyle } from "../util/ui"
 const IMG_PREFIX = "/examples/random-gif/images/"
 
 export const randomGif = {
-  model: () => ({
+  initialState: () => ({
     image: Loaded.Y(Success.Y(Image.N())),
     tag: ""
   }),
@@ -28,14 +28,14 @@ const imgsrc = image =>
   })(image)
 
 export const RandomGif = {
-  view: ({ attrs: { model, id, actions } }) =>
+  view: ({ attrs: { state, id, actions } }) =>
     m("div.ba.b--green.pa2.mt2",
       m("span.mr2", "Tag:"),
-      m("input[type=text]", { value: model[id].tag,
+      m("input[type=text]", { value: state[id].tag,
         onkeyup: evt => actions.editTag(id, evt.target.value) }),
-      m("button.bg-blue" + buttonStyle, { onclick: () => actions.newGif(id, model) },
+      m("button.bg-blue" + buttonStyle, { onclick: () => actions.newGif(id, state) },
         "Random Gif"),
       m("button.bg-red" + buttonStyle, { onclick: () => actions.reset(id) }, "Reset"),
-      m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(model[id].image) }))
+      m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(state[id].image) }))
     )
 }

@@ -27,8 +27,8 @@ const options = {
   }
 }
 
-export const validateModel = model => {
-  const result = Joi.validate(model, schema, options)
+export const validateInput = input => {
+  const result = Joi.validate(input, schema, options)
 
   const errors = {}
   const details = _.get(result, ["error", "details"], [])

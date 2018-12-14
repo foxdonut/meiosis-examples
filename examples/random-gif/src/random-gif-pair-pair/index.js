@@ -2,16 +2,16 @@ import m from "mithril"
 import { randomGifPair, RandomGifPair } from "../random-gif-pair"
 
 export const randomGifPairPair = {
-  model: id => Object.assign(
-    randomGifPair.model(id + "One"),
-    randomGifPair.model(id + "Two")
+  initialState: id => Object.assign(
+    randomGifPair.initialState(id + "One"),
+    randomGifPair.initialState(id + "Two")
   )
 }
 
 export const RandomGifPairPair = {
-  view: ({ attrs: { model, id, actions } }) =>
+  view: ({ attrs: { state, id, actions } }) =>
     m("div.ba.b--orange.pa2.mt2",
-      m(RandomGifPair, { model, id: id + "One", actions }),
-      m(RandomGifPair, { model, id: id + "Two", actions })
+      m(RandomGifPair, { state, id: id + "One", actions }),
+      m(RandomGifPair, { state, id: id + "Two", actions })
     )
 }

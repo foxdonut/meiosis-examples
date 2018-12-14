@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "mithril": "^2.0.0-rc.1",
+    "mithril": "^2.0.0-rc.3",
     "patchinko": "^4.1.0",
     "ramda": "0.26.1",
     "static-sum-type": "^0.18.1",

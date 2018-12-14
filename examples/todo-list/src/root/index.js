@@ -1,14 +1,14 @@
 import React, { Component } from "react"
 import { Button, Menu, Modal } from "semantic-ui-react"
 
-import { state } from "./state"
+import { initialState } from "./initialState"
 import { patches } from "./patches"
 import { actions } from "./actions"
 import { Todos } from "../todos"
 import { Projects } from "../projects"
 
 export const root = {
-  state,
+  initialState,
   patches,
   actions
 }

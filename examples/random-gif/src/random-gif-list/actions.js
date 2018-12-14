@@ -4,13 +4,13 @@ import uuid from "uuid"
 
 import { randomGif } from "../random-gif"
 
-export const actions = update => ({
+export const actions = ({ update }) => ({
   add: id => {
     const newId = "randomGifList:" + uuid.v1()
-    const randomGifModel = randomGif.model()
+    const randomGifState = randomGif.initialState()
 
     update({
-      [newId]: randomGifModel,
+      [newId]: randomGifState,
       [id]: PS({ randomGifIds: S(R.append(newId)) })
     })
   },

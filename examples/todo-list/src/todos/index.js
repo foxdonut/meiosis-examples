@@ -1,12 +1,12 @@
 import React, { Component } from "react"
 
-import { state } from "./state"
+import { initialState } from "./initialState"
 import { actions } from "./actions"
 import { TodoForm } from "./todoForm"
 import { TodoList } from "./todoList"
 
 export const todos = {
-  state,
+  initialState,
   actions
 }
 

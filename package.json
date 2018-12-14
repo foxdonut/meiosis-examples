@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "static-server -p ${PORT:-3000}",
-    "reload": "reload -w examples/random-gif/build,examples/setup/build,examples/temperatures/build,examples/todo-list/build,examples/todomvc/build -p ${PORT:-3000}"
+    "reload": "reload -w examples/random-gif/build,examples/setup/lit-html/build,examples/setup/mithril/build,examples/setup/preact/build,examples/setup/react/build,examples/temperatures/build,examples/todo-list/build,examples/todomvc/build -p ${PORT:-3000}"
   },
   "repository": {
     "type": "git",

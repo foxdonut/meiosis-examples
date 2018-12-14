@@ -3,12 +3,12 @@ import preventDefault from "prevent-default"
 import * as R from "ramda"
 import { Button, Form, Label } from "semantic-ui-react"
 
-import { state } from "./state"
+import { initialState } from "./initialState"
 import { patches } from "./patches"
 import { actions } from "./actions"
 
 export const todoForm = {
-  state,
+  initialState,
   patches,
   actions
 }

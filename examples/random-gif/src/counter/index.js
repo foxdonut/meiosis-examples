@@ -1,12 +1,12 @@
 import m from "mithril"
 
 export const counter = {
-  model: ({ label }) => ({
+  initialState: ({ label }) => ({
     label,
     value: 0
   })
 }
 
 export const Counter = {
-  view: ({ attrs: { model, id } }) => m("div", model[id].label + " " + model[id].value)
+  view: ({ attrs: { state, id } }) => m("div", state[id].label + " " + state[id].value)
 }

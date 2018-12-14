@@ -37,7 +37,7 @@ const updateList = (todo, state) => {
 export const actions = ({ update, patches }) => ({
   editTodo: (id, todo) => update(Object.assign({},
     { [id]: PS({ editing: true }) },
-    { [`todoForm:${todo.id}`]: todoForm.state({ todo: Object.assign({}, todo) }) }
+    { [`todoForm:${todo.id}`]: todoForm.initialState({ todo: Object.assign({}, todo) }) }
   )),
 
   cancelEditTodo: (id, todo) => update(Object.assign({},

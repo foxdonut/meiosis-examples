@@ -14,49 +14,49 @@ const newGifGenerated = model => {
 }
 
 export const app = {
-  model: () => Object.assign(
+  initialState: () => Object.assign(
     {
-      button: button.model(),
-      counter: counter.model({ label: "Counter:" }),
-      randomGif1: randomGif.model(),
-      randomGif2: randomGif.model(),
-      randomGifList: randomGifList.model()
+      button: button.initialState(),
+      counter: counter.initialState({ label: "Counter:" }),
+      randomGif1: randomGif.initialState(),
+      randomGif2: randomGif.initialState(),
+      randomGifList: randomGifList.initialState()
     },
-    randomGifPair.model("randomGifPair"),
-    randomGifPairPair.model("randomGifPairPair")
+    randomGifPair.initialState("randomGifPair"),
+    randomGifPairPair.initialState("randomGifPairPair")
   ),
-  actions: update => Object.assign({},
-    button.actions(update),
-    randomGif.actions(update, newGifGenerated),
-    randomGifList.actions(update)
+  actions: ({ update }) => Object.assign({},
+    button.actions({ update }),
+    randomGif.actions({ update, newGifGenerated }),
+    randomGifList.actions({ update })
   ),
-  state: model => [
-    randomGifList.state
+  service: state => [
+    randomGifList.service
     // could have more functions here
-  ].reduce((x, f) => P(x, f(x)), model)
+  ].reduce((x, f) => P(x, f(x)), state)
 }
 
 export const App = {
-  view: ({ attrs: { model, actions } }) =>
+  view: ({ attrs: { state, actions } }) =>
     m("div",
-      m(Counter, { model, id: "counter", actions }),
+      m(Counter, { state, id: "counter", actions }),
 
       m("div.mt2", "Button:"),
-      m(Button, { model, id: "button", actions }),
+      m(Button, { state, id: "button", actions }),
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { model, id: "randomGif1", actions }),
+      m(RandomGif, { state, id: "randomGif1", actions }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { model, id: "randomGif2", actions }),
+      m(RandomGif, { state, id: "randomGif2", actions }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { model, id: "randomGifPair", actions }),
+      m(RandomGifPair, { state, id: "randomGifPair", actions }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { model, id: "randomGifPairPair", actions }),
+      m(RandomGifPairPair, { state, id: "randomGifPairPair", actions }),
 
       m("div.mt2", "Random Gif List:"),
-      m(RandomGifList, { model, id: "randomGifList", actions })
+      m(RandomGifList, { state, id: "randomGifList", actions })
     )
 }

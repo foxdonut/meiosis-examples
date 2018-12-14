@@ -1,8 +1,6 @@
 module.exports = {
   "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -16,20 +14,10 @@ module.exports = {
     "sourceType": "module"
   },
   "rules": {
-    "react/display-name": [
-      0
-    ],
-    "react/prop-types": [
-      0
-    ],
-    "indent": [
-      "error",
-      2
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+    "react/display-name": [ 0 ],
+    "react/prop-types": [ 0 ],
+    "indent": [ "error", 2 ],
+    "linebreak-style": [ "error", "unix" ],
     "no-unused-vars": [
       "error",
       {
@@ -37,13 +25,7 @@ module.exports = {
         "argsIgnorePattern": "^_"
       }
     ],
-    "quotes": [
-      "error",
-      "double"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ]
+    "quotes": [ "error", "double" ],
+    "semi": [ "error", "never" ]
   }
 }
