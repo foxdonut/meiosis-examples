@@ -35,10 +35,12 @@ export const getUrl = (route, query) => {
 export const listenToRouteChanges = navigate =>
   window.onpopstate = () => navigate(parseUrl())
 
-export const service = state => {
-  const url = getUrl(state.route, state.query)
-  if (document.location.hash !== url) {
-    window.history.pushState({}, "", url)
+export const router = {
+  service: state => {
+    const url = getUrl(state.route, state.query)
+    if (document.location.hash !== url) {
+      window.history.pushState({}, "", url)
+    }
   }
 }
 /*
