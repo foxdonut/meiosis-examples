@@ -1,38 +1,28 @@
 import Mapper from "url-mapper"
 
-export const createRouter = ({ update }) => {
-  const extractRoute = hash => (hash && hash.substring(1)) || "/"
+const routes = {
+  "/": ({ filterBy: "all" }),
+  "/active": ({ filterBy: "active" }),
+  "/completed": ({ filterBy: "completed" }),
+}
 
-  const urlMapper = Mapper()
+const urlMapper = Mapper()
 
-  const routes = {
-    "/": () => update({ filterBy: "all" }),
-    "/active": () => update({ filterBy: "active" }),
-    "/completed": () => update({ filterBy: "completed" }),
-  }
+const parseUrl = (hash = document.location.hash || "#/") => {
+  const resolved = urlMapper.map(hash.substring(1), routes)
+  return resolved && resolved.match
+}
 
-  const resolveRoute = () => {
-    const route = extractRoute(document.location.hash)
-    const resolved = urlMapper.map(route, routes)
-    if (resolved) {
-      const action = resolved.match
-      action()
+export const router = {
+  parseUrl,
+
+  listenToRouteChanges: update =>
+    window.onpopstate = () => update(parseUrl()),
+
+  service: state => {
+    const route = "#/" + (state.filterBy === "all" ? "" : state.filterBy)
+    if (document.location.hash !== route) {
+      window.history.pushState({}, "", route)
     }
   }
-
-  // Listen for route changes.
-  window.onpopstate = resolveRoute
-
-  // Resolve initial route.
-  resolveRoute()
-
-  const routeSync = state => {
-    const route = "/" + (state.filterBy === "all" ? "" : state.filterBy)
-    if (document.location.hash.substring(1) !== route) {
-      window.history.pushState({}, "", "#" + route)
-    }
-    return state
-  }
-
-  return { routeSync }
 }

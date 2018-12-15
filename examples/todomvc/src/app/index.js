@@ -1,9 +1,10 @@
 import { P } from "patchinko/explicit"
 
 import { root } from "../root"
+import { router } from "../router"
 import { todoStorage } from "../util/todo-storage"
 
-export const loadInitialState = () => todoStorage.loadAll().then(todos => ({
+export const loadInitialState = () => todoStorage.loadAll().then(todos => P({
   editTodo: {},
   newTodo: "",
   filterBy: "all",
@@ -12,10 +13,11 @@ export const loadInitialState = () => todoStorage.loadAll().then(todos => ({
     acc[todo.id] = todo
     return acc
   }, {})
-}))
+}, router.parseUrl()))
 
 const service = state => [
-  root.service
+  root.service,
+  router.service
 ].reduce((x, f) => P(x, f(x)), state)
 
 export const app = {

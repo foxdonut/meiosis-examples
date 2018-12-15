@@ -3,7 +3,7 @@ import { P } from "patchinko/explicit"
 import { render } from "lit-html"
 
 import { loadInitialState, app } from "./app"
-import { createRouter } from "./router"
+import { router } from "./router"
 
 loadInitialState().then(initialState => {
   const update = flyd.stream()
@@ -13,11 +13,11 @@ loadInitialState().then(initialState => {
   require("meiosis-tracer")({ selector: "#tracer", rows: 35, streams: [ states ]})
 
   const actions = app.actions({ update })
-  const router = createRouter({ update })
 
   const element = document.getElementById("app")
   states
     .map(app.service)
-    .map(router.routeSync)
     .map(state => render(app.view({ state, actions }), element))
+
+  router.listenToRouteChanges(update)
 })
