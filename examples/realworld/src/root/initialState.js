@@ -6,7 +6,7 @@ export const initialState = data => Object.assign({
     author: "",
     favorited: ""
   },
-  login: {},
+  //login: {},
   register: {},
   settings: {}
 }, data)

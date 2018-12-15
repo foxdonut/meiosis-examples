@@ -12,7 +12,8 @@ export const onNavigate = {
     }
     else {
       helpers.loadArticles(
-        Object.assign({}, state.articlesFilter, navigation.query, { tag: navigation.query.tag }) // FIXME
+        // FIXME
+        Object.assign({}, state.articlesFilter, navigation.query, { tag: navigation.query && navigation.query.tag })
       ).then(
         data => update(Object.assign(data, navigation))
         // data => update(Object.assign({ loading: null }, data))

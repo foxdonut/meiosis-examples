@@ -14,6 +14,6 @@ export const actions = ({ update, navigate }) => ({
         setToken(user.token)
         navigate({ route: Route.of.Home(), user })
       }).
-      catch(err => update({ [method]: PS({ errors: err.response.errors }) }))
+      catch(err => update({ [method]: PS({ errors: err.response && err.response.errors }) }))
   }
 })
