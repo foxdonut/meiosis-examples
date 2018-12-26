@@ -20,12 +20,12 @@ export const app = {
   actions
 }
 
-const precipitationOption = ({ state, actions, id, value, label }) => (
+const conditionsOption = ({ state, actions, value, label }) => (
   <Formfield>
-    <Radio id={id} name="precipitation" value={value}
-      checked={state.precipitation === value}
-      onChange={actions.changePrecipitation}/>
-    <label htmlFor={id}>{label}</label>
+    <Radio id={value} name="conditions" value={value}
+      checked={state.conditions === value}
+      onChange={actions.changeConditions}/>
+    <label htmlFor={value}>{label}</label>
   </Formfield>
 )
 
@@ -48,9 +48,9 @@ export class App extends Component {
           <label htmlFor="precipitations">Precipitations</label>
         </Formfield>
         <div>
-          {precipitationOption({ state, actions, id: "rain", value: "RAIN", label: "Rain"})}
-          {precipitationOption({ state, actions, id: "snow", value: "SNOW", label: "Snow"})}
-          {precipitationOption({ state, actions, id: "sleet", value: "SLEET", label: "Sleet"})}
+          {conditionsOption({ state, actions, value: "SUNNY", label: "Sunny"})}
+          {conditionsOption({ state, actions, value: "CLOUDY", label: "Cloudy"})}
+          {conditionsOption({ state, actions, value: "MIX", label: "Mix of sun and clouds"})}
         </div>
         <Formfield>
           <label style={{marginRight: "0.4rem"}}>Date:</label>

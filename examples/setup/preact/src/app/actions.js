@@ -5,9 +5,9 @@ export const actions = ({ update }) => ({
       return model
     }),
 
-  changePrecipitation: evt =>
+  changeConditions: evt =>
     update(model => {
-      model.precipitation = evt.target.value
+      model.conditions = evt.target.value
       return model
     }),
 
