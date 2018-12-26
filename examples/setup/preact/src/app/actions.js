@@ -17,7 +17,7 @@ export const actions = ({ update }) => ({
       return model
     }),
 
-  increase: amount =>
+  increment: amount =>
     update(model => {
       model.value = model.value + amount
       return model

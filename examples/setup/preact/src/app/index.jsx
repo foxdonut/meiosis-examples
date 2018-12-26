@@ -1,4 +1,16 @@
 import { h, Component } from "preact"
+import Button from "preact-material-components/Button"
+import Checkbox from "preact-material-components/Checkbox"
+import Formfield from "preact-material-components/FormField"
+import Radio from "preact-material-components/Radio"
+import TextField from "preact-material-components/TextField"
+
+import "preact-material-components/Button/style.css"
+import "preact-material-components/Checkbox/style.css"
+import "preact-material-components/FormField/style.css"
+import "preact-material-components/Radio/style.css"
+import "preact-material-components/TextField/style.css"
+import "preact-material-components/Theme/style.css"
 
 import { initialState } from "./initialState"
 import { actions } from "./actions"
@@ -9,12 +21,12 @@ export const app = {
 }
 
 const precipitationOption = ({ state, actions, id, value, label }) => (
-  <span>
-    <input type="radio" id={id} name="precipitation" value={value}
+  <Formfield>
+    <Radio id={id} name="precipitation" value={value}
       checked={state.precipitation === value}
       onChange={actions.changePrecipitation}/>
     <label htmlFor={id}>{label}</label>
-  </span>
+  </Formfield>
 )
 
 export class App extends Component {
@@ -30,30 +42,33 @@ export class App extends Component {
 
     return (
       <div>
-        <div>
-          <input type="checkbox" checked={state.precipitations}
-            onChange={actions.togglePrecipitations} id="precipitations"/>
+        <Formfield>
+          <Checkbox id="precipitations" checked={state.precipitations}
+            onChange={actions.togglePrecipitations}/>
           <label htmlFor="precipitations">Precipitations</label>
-        </div>
+        </Formfield>
         <div>
           {precipitationOption({ state, actions, id: "rain", value: "RAIN", label: "Rain"})}
           {precipitationOption({ state, actions, id: "snow", value: "SNOW", label: "Snow"})}
           {precipitationOption({ state, actions, id: "sleet", value: "SLEET", label: "Sleet"})}
         </div>
-        <div>
-          Date:
-          <input type="text" size="10" value={state.date} onChange={actions.editDate}/>
+        <Formfield>
+          <label style={{marginRight: "0.4rem"}}>Date:</label>
+          <TextField type="date" size="10" value={state.date} onChange={actions.editDate}/>
+        </Formfield>
+        <div style={{marginTop: "0.8rem"}}>
+          <Formfield>
+            <label>
+              Temperature: {state.value}&deg;{state.units}
+            </label>
+          </Formfield>
         </div>
-        <span>Temperature: </span>
-        <span className="tempValue">{state.value}</span>
-        &deg;
-        <span className="tempUnits">{state.units}</span>
-        <div>
-          <button className="btn btn-default increase" onClick={() => actions.increase( 1)}>Increase</button>
-          <button className="btn btn-default decrease" onClick={() => actions.increase(-1)}>Decrease</button>
-        </div>
-        <div>
-          <button className="btn btn-primary changeUnits" onClick={actions.changeUnits}>Change Units</button>
+        <div style={{marginTop: "0.8rem"}}>
+          <Button raised onClick={() => actions.increment( 1)}
+            style={{marginRight: "0.4rem"}}>Increment</Button>
+          <Button raised onClick={() => actions.increment(-1)}
+            style={{marginRight: "0.4rem"}}>Decrement</Button>
+          <Button outlined onClick={actions.changeUnits}>Change Units</Button>
         </div>
       </div>
     )
