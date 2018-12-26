@@ -21,18 +21,15 @@ export class DateTime extends Component {
     return (
       <div>
         <Formfield>
-          <label style={{marginRight: "0.4rem"}}>Date:</label>
-          <TextField type="date" size="10" value={state.dateTime.date}
+          <TextField label="Date:" type="date" value={state.dateTime.date}
             onChange={evt => actions.editDate(evt.target.value)}/>
         </Formfield>
         <Formfield>
-          <label style={{marginRight: "0.4rem"}}>Hour:</label>
-          <TextField size="3" value={state.dateTime.hour}
+          <TextField label="Hour:" value={state.dateTime.hour}
             onChange={evt => actions.editHour(evt.target.value)}/>
         </Formfield>
         <Formfield>
-          <label style={{marginRight: "0.4rem"}}>Minute:</label>
-          <TextField size="3" value={state.dateTime.minute}
+          <TextField label="Minute:" value={state.dateTime.minute}
             onChange={evt => actions.editMinute(evt.target.value)}/>
         </Formfield>
       </div>
