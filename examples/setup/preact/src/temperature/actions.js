@@ -1,9 +1,8 @@
+import _ from "lodash"
+
 export const actions = update => ({
   increment: (id, amount) =>
-    update(state => {
-      state[id].value += amount
-      return state
-    }),
+    update(state => _.update(state, [id, "value"], x => x + amount)),
 
   changeUnits: id => update(state => {
     if (state[id].units === "C") {

@@ -26,6 +26,10 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "flyd": "^0.2.8",
+    "joi": "^14.3.0",
+    "joi-browser": "^13.4.0",
+    "joi-date-extensions": "^1.2.0",
+    "lodash": "^4.17.11",
     "preact": "^8.4.2",
     "preact-material-components": "^1.5.5"
   },
