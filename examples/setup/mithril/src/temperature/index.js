@@ -18,11 +18,11 @@ export const Temperature = {
 
     return (
       m("div",
-        m("div", { style: { marginTop: "0.8rem" } },
+        m("div" + b.mt(8),
           m("label",
             "Temperature: ", state[id].value, m.trust("&deg;"), state[id].units)
         ),
-        m("div", { style: { marginTop: "0.8rem" } },
+        m("div" + b.mt(8),
           m("button" + buttonStyle, { onclick: () => actions.increment(id, 1) },
             "Increment"),
           m("button" + buttonStyle, { onclick: () => actions.increment(id,-1) },

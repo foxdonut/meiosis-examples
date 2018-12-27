@@ -39,10 +39,10 @@ export const DateTime = {
           }),
           m("span" + b.ml(4).c("red"), getErrorMessage(state, "minute"))
         ),
-        m("div" + b.mt(4),
+        m("div" + b.mt(8),
           m("button" + b.bc("lightgray").fs("1rem").pl(12).pr(12).pt(4).pb(4).br("0.25rem"),
             { onclick: () => actions.validate(state) }, "Validate"),
-          m("span", { style: { marginLeft: "0.4rem" } }, state.conditions.message)
+          m("span" + b.ml(8), state.conditions.message)
         )
       )
     )
