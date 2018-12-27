@@ -3,9 +3,9 @@ import { Button, StyleSheet, Text, View } from "react-native";
 import flyd from "flyd";
 
 const createActions = update => ({
-  increase: () => update(model => {
-    model.value = model.value + 1;
-    return model;
+  increase: () => update(state => {
+    state.value = state.value + 1;
+    return state;
   })
 });
 
@@ -18,26 +18,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const createView = actions => model => (
+const createView = actions => state => (
   <View style={styles.container}>
-    <Text>Temperature: {model.value}&deg;C</Text>
+    <Text>Temperature: {state.value}&deg;C</Text>
     <Button onPress={actions.increase} title="Increase"/>
   </View>
 );
 
 const update = flyd.stream();
-const models = flyd.scan((model, func) => func(model), { value: 20 }, update);
+const states = flyd.scan((state, func) => func(state), { value: 20 }, update);
 
 const view = createView(createActions(update));
 
 export default class App extends React.Component {
   componentWillMount() {
     const self = this;
-    models.map(model => self.setState({ model }));
+    states.map(state => self.setState(state));
   }
 
   render() {
-    const model = this.state.model;
-    return view(model);
+    const state = this.state;
+    return view(state);
   }
 }

@@ -8,8 +8,8 @@ import { randomGifPair, RandomGifPair } from "../random-gif-pair"
 import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
 import { randomGifList, RandomGifList } from "../random-gif-list"
 
-const newGifGenerated = model => {
-  const increment = model.counter.value > 3 && model.button.active ? 2 : 1
+const newGifGenerated = state => {
+  const increment = state.counter.value > 3 && state.button.active ? 2 : 1
   return { counter: PS({ value: S(x => x + increment) }) }
 }
 
