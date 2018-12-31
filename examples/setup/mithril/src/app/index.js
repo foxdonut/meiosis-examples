@@ -1,8 +1,12 @@
 import m from "mithril"
+import b from "bss"
 
 import { conditions, Conditions } from "../conditions"
 import { dateTime, DateTime } from "../dateTime"
 import { temperature, Temperature } from "../temperature"
+
+import "polythene-css/dist/polythene.css"
+import "polythene-css/dist/polythene-typography.css"
 
 export const app = {
   initialState: () => Object.assign({},
@@ -24,10 +28,14 @@ export const App = {
 
     return (
       m("div",
-        m(DateTime, { state, actions }),
-        m(Conditions, { state, actions }),
-        m(Temperature, { state, id: "air", actions }),
-        m(Temperature, { state, id: "water", actions })
+        m("div" + b.f("left").w("40%").pr(40),
+          m(DateTime, { state, actions })
+        ),
+        m("div" + b.f("left"),
+          m(Conditions, { state, actions }),
+          m(Temperature, { state, id: "air", actions }),
+          m(Temperature, { state, id: "water", actions })
+        )
       )
     )
   }

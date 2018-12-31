@@ -1,5 +1,6 @@
 import m from "mithril"
 import b from "bss"
+import { Button, ButtonGroup } from "polythene-mithril"
 
 import { initialState } from "./initialState"
 import { actions } from "./actions"
@@ -8,10 +9,6 @@ export const temperature = {
   initialState,
   actions
 }
-
-const buttonStyle = b.fs("1rem").w("8rem").pl(12).pr(12).pt(4).pb(4)
-  .c("white").bc("RoyalBlue").$hover(b.bc("blue")).$active(b.bc("darkblue"))
-  .outline("none").borderColor("blue").br("0.25rem").mr(4)
 
 export const Temperature = {
   view: vnode => {
@@ -24,14 +21,20 @@ export const Temperature = {
             "Temperature: ", state[id].value, m.trust("&deg;"), state[id].units)
         ),
         m("div" + b.mt(8),
-          m("button" + buttonStyle, { onclick: () => actions.increment(id, 1) },
-            "Increment"),
-          m("button" + buttonStyle, { onclick: () => actions.increment(id,-1) },
-            "Decrement"),
-          m("button" + buttonStyle.bc("MediumSeaGreen").borderColor("lightgreen")
-            .$hover(b.bc("green")).$active(b.bc("darkgreen")),
-          { onclick: () => actions.changeUnits(id) },
-          "Change Units")
+          m(ButtonGroup, [
+            m(Button, { label: "Increment", raised: true,
+              style: { color: "white", backgroundColor: "DodgerBlue" },
+              events: { onclick: () => actions.increment(id, 1) }
+            }),
+            m(Button, { label: "Decrement", raised: true,
+              style: { color: "white", backgroundColor: "DodgerBlue" },
+              events: { onclick: () => actions.increment(id,-1) }
+            }),
+            m(Button, { label: "Change Units", raised: true,
+              style: { color: "white", backgroundColor: "MediumSeaGreen" },
+              events: { onclick: () => actions.changeUnits(id) }
+            })
+          ])
         )
       )
     )

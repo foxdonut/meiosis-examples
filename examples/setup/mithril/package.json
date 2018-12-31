@@ -30,14 +30,18 @@
     "joi-browser": "^13.4.0",
     "joi-date-extensions": "^1.2.0",
     "mithril": "^2.0.0-rc.3",
-    "patchinko": "^4.1.0"
+    "patchinko": "^4.1.0",
+    "polythene-css": "^1.4.1",
+    "polythene-mithril": "^1.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "babel-loader": "^8.0.4",
+    "css-loader": "^2.1.0",
     "eslint": "^5.11.1",
     "meiosis-tracer": "^2.0.3",
+    "style-loader": "^0.23.1",
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2"
   }

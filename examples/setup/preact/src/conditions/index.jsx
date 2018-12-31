@@ -37,9 +37,9 @@ export class Conditions extends Component {
           <label htmlFor="precipitations">Precipitations</label>
         </Formfield>
         <div>
-          {conditionsOption({ state, actions, value: "SUNNY", label: "Sunny"})}
-          {conditionsOption({ state, actions, value: "CLOUDY", label: "Cloudy"})}
-          {conditionsOption({ state, actions, value: "MIX", label: "Mix of sun and clouds"})}
+          {conditionsOption({ state, actions, value: "SUNNY", label: "Sunny" })}
+          {conditionsOption({ state, actions, value: "CLOUDY", label: "Cloudy" })}
+          {conditionsOption({ state, actions, value: "MIX", label: "Mix of sun and clouds" })}
         </div>
       </div>
     )
