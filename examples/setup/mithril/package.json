@@ -29,10 +29,10 @@
     "joi": "^14.3.0",
     "joi-browser": "^13.4.0",
     "joi-date-extensions": "^1.2.0",
-    "mithril": "^2.0.0-rc.3",
+    "mithril": "^1.1.6",
     "patchinko": "^4.1.0",
-    "polythene-css": "^1.4.1",
-    "polythene-mithril": "^1.4.1"
+    "polythene-css": "^1.4.2",
+    "polythene-mithril": "^1.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
