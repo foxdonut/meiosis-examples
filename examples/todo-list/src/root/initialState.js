@@ -1,3 +1,4 @@
 export const initialState = () => ({
-  pageId: "TodoListPage"
+  pageId: "TodoListPage",
+  message: null
 })
