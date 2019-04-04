@@ -15,10 +15,11 @@ export const actions = ({ update }) => ({
     })
   },
 
-  remove: (id, subId) => update({
-    [id]: PS({
-      randomGifIds: S(list => R.remove(list.indexOf(subId), 1, list))
-    }),
-    [subId]: D
-  })
+  remove: (id, subId) =>
+    update({
+      [id]: PS({
+        randomGifIds: S(list => R.remove(list.indexOf(subId), 1, list))
+      }),
+      [subId]: D
+    })
 })

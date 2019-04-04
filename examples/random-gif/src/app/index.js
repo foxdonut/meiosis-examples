@@ -14,31 +14,36 @@ const newGifGenerated = state => {
 }
 
 export const app = {
-  initialState: () => Object.assign(
-    {
-      button: button.initialState(),
-      counter: counter.initialState({ label: "Counter:" }),
-      randomGif1: randomGif.initialState(),
-      randomGif2: randomGif.initialState(),
-      randomGifList: randomGifList.initialState()
-    },
-    randomGifPair.initialState("randomGifPair"),
-    randomGifPairPair.initialState("randomGifPairPair")
-  ),
-  actions: ({ update }) => Object.assign({},
-    button.actions({ update }),
-    randomGif.actions({ update, newGifGenerated }),
-    randomGifList.actions({ update })
-  ),
-  service: state => [
-    randomGifList.service
-    // could have more functions here
-  ].reduce((x, f) => P(x, f(x)), state)
+  initialState: () =>
+    Object.assign(
+      {
+        button: button.initialState(),
+        counter: counter.initialState({ label: "Counter:" }),
+        randomGif1: randomGif.initialState(),
+        randomGif2: randomGif.initialState(),
+        randomGifList: randomGifList.initialState()
+      },
+      randomGifPair.initialState("randomGifPair"),
+      randomGifPairPair.initialState("randomGifPairPair")
+    ),
+  actions: ({ update }) =>
+    Object.assign(
+      {},
+      button.actions({ update }),
+      randomGif.actions({ update, newGifGenerated }),
+      randomGifList.actions({ update })
+    ),
+  service: state =>
+    [
+      randomGifList.service
+      // could have more functions here
+    ].reduce((x, f) => P(x, f(x)), state)
 }
 
 export const App = {
   view: ({ attrs: { state, actions } }) =>
-    m("div",
+    m(
+      "div",
       m(Counter, { state, id: "counter", actions }),
 
       m("div.mt2", "Button:"),

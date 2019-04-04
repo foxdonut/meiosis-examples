@@ -11,15 +11,20 @@ export const actions = ({ update, newGifGenerated }) => ({
 
   newGif: (id, state) => {
     update({ [id]: PS({ image: Loaded.N() }) })
-    m.request({ url: gif_new_url, data: { api_key, tag: state[id].tag }}).
-      then(response => {
-        update(Object.assign({
-          [id]: PS({
-            image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
-          })
-        }, newGifGenerated(state)))
-      }).
-      catch(() => update({ [id]: PS({ image: Loaded.Y(Success.N()) }) }))
+    m.request({ url: gif_new_url, data: { api_key, tag: state[id].tag } })
+      .then(response => {
+        update(
+          Object.assign(
+            {
+              [id]: PS({
+                image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
+              })
+            },
+            newGifGenerated(state)
+          )
+        )
+      })
+      .catch(() => update({ [id]: PS({ image: Loaded.Y(Success.N()) }) }))
   },
 
   reset: id => update({ [id]: PS({ image: Loaded.Y(Success.Y(Image.N())) }) })

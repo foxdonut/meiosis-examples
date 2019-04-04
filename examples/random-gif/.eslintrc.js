@@ -1,5 +1,8 @@
 module.exports = {
-  "extends": ["eslint:recommended"],
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
   "env": {
     "browser": true,
     "commonjs": true,
@@ -9,8 +12,6 @@ module.exports = {
     "sourceType": "module"
   },
   "rules": {
-    "indent": [ "error", 2 ],
-    "linebreak-style": [ "error", "unix" ],
     "no-unused-vars": [
       "error",
       {
@@ -18,7 +19,16 @@ module.exports = {
         "argsIgnorePattern": "^_"
       }
     ],
-    "quotes": [ "error", "double" ],
-    "semi": [ "error", "never" ]
-  }
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 100,
+        "semi": false,
+        "singleQuote": false
+      }
+    ]
+  },
+  "plugins": [
+    "prettier"
+  ]
 }

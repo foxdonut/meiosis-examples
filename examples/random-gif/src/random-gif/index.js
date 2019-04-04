@@ -29,12 +29,14 @@ const imgsrc = image =>
 
 export const RandomGif = {
   view: ({ attrs: { state, id, actions } }) =>
-    m("div.ba.b--green.pa2.mt2",
+    m(
+      "div.ba.b--green.pa2.mt2",
       m("span.mr2", "Tag:"),
-      m("input[type=text]", { value: state[id].tag,
-        onkeyup: evt => actions.editTag(id, evt.target.value) }),
-      m("button.bg-blue" + buttonStyle, { onclick: () => actions.newGif(id, state) },
-        "Random Gif"),
+      m("input[type=text]", {
+        value: state[id].tag,
+        onkeyup: evt => actions.editTag(id, evt.target.value)
+      }),
+      m("button.bg-blue" + buttonStyle, { onclick: () => actions.newGif(id, state) }, "Random Gif"),
       m("button.bg-red" + buttonStyle, { onclick: () => actions.reset(id) }, "Reset"),
       m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(state[id].image) }))
     )
