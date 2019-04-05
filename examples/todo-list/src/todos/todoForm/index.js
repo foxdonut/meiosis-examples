@@ -19,9 +19,16 @@ const inputDiv = (id, field, label, state, actions) => {
   return (
     <Form.Field error={R.path([id, "validationErrors", field, 0], state) != null}>
       <label>{label}</label>
-      <input type="text" value={R.path([id, "todo", field], state)}
-        onChange={evt => actions.editingTodo(id, field, evt.target.value)}/>
-      {errors && <Label color="red" pointing>{errors[0]}</Label>}
+      <input
+        type="text"
+        value={R.path([id, "todo", field], state)}
+        onChange={evt => actions.editingTodo(id, field, evt.target.value)}
+      />
+      {errors && (
+        <Label color="red" pointing>
+          {errors[0]}
+        </Label>
+      )}
     </Form.Field>
   )
 }
@@ -31,22 +38,26 @@ export class TodoForm extends Component {
     const { state, id, actions } = this.props
     const todo = state[id].todo
 
-    return (<div>
-      {state[id].label && <h4>{state[id].label}</h4>}
-      <Form>
-        {inputDiv(id, "priority", "Priority:", state, actions)}
-        {inputDiv(id, "description", "Description:", state, actions)}
-        <div>
-          <Button primary size="small"
-            onClick={preventDefault(() => actions.saveTodo(id, todo, state))}>
-            Save
-          </Button>
-          <Button size="small"
-            onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>
-            Cancel
-          </Button>
-        </div>
-      </Form>
-    </div>)
+    return (
+      <div>
+        {state[id].label && <h4>{state[id].label}</h4>}
+        <Form>
+          {inputDiv(id, "priority", "Priority:", state, actions)}
+          {inputDiv(id, "description", "Description:", state, actions)}
+          <div>
+            <Button
+              primary
+              size="small"
+              onClick={preventDefault(() => actions.saveTodo(id, todo, state))}
+            >
+              Save
+            </Button>
+            <Button size="small" onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>
+              Cancel
+            </Button>
+          </div>
+        </Form>
+      </div>
+    )
   }
 }

@@ -18,7 +18,10 @@ const findIndex = (todos, todoId) => {
 }
 
 const replaceTodoAtIndex = (todos, todo, index) => {
-  return todos.slice(0, index).concat([todo]).concat(todos.slice(index + 1))
+  return todos
+    .slice(0, index)
+    .concat([todo])
+    .concat(todos.slice(index + 1))
 }
 
 const deleteTodoAtIndex = (todos, index) => {
@@ -26,21 +29,23 @@ const deleteTodoAtIndex = (todos, index) => {
 }
 
 const loadAll = () => {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")), 10))
+  return new Promise(resolve =>
+    setTimeout(() => resolve(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")), 10)
+  )
 }
 
 const saveAll = todos => {
-  return new Promise((resolve) =>
+  return new Promise(resolve =>
     setTimeout(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
       resolve(todos)
-    }, 10))
+    }, 10)
+  )
 }
 
 export const todoStorage = {
   clearCompleted: () => {
-    return new Promise((resolve) =>
+    return new Promise(resolve =>
       loadAll().then(todos => {
         const updatedTodos = []
 
@@ -50,7 +55,8 @@ export const todoStorage = {
           }
         }
         saveAll(updatedTodos).then(resolve)
-      }))
+      })
+    )
   },
   deleteTodoId: todoId => {
     return new Promise((resolve, reject) =>
@@ -60,11 +66,11 @@ export const todoStorage = {
         if (index >= 0) {
           todos = deleteTodoAtIndex(todos, index)
           saveAll(todos).then(resolve)
-        }
-        else {
+        } else {
           reject()
         }
-      }))
+      })
+    )
   },
   loadAll,
   saveAll,
@@ -77,13 +83,13 @@ export const todoStorage = {
           const index = findIndex(todos, id)
           todo.completed = todos[index].completed
           todos = replaceTodoAtIndex(todos, todo, index)
-        }
-        else {
+        } else {
           todo = { title: todo.title, id: String(new Date().getTime()), completed: false }
           todos = todos.concat([todo])
         }
         saveAll(todos).then(() => resolve(todo))
-      }))
+      })
+    )
   },
   setAllCompleted: completed => {
     return new Promise(resolve =>
@@ -92,7 +98,8 @@ export const todoStorage = {
           todo.completed = completed
         })
         saveAll(todos).then(resolve)
-      }))
+      })
+    )
   },
   setCompleted: (id, completed) => {
     return new Promise((resolve, reject) =>
@@ -104,10 +111,10 @@ export const todoStorage = {
           todo.completed = completed
           todos = replaceTodoAtIndex(todos, todo, index)
           saveAll(todos).then(resolve)
-        }
-        else {
+        } else {
           reject()
         }
-      }))
+      })
+    )
   }
 }

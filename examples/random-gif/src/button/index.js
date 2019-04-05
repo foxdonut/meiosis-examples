@@ -8,7 +8,7 @@ export const button = {
     active: false
   }),
   actions: {
-    toggle: () => O({ active: O(x => !x) })
+    toggle: () => ({ active: O(x => !x) })
   }
 }
 

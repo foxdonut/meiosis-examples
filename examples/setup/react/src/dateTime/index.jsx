@@ -11,27 +11,41 @@ export const dateTime = {
   actions
 }
 
-const getErrorMessage = (state, field) =>
-  _.get(state, ["errors", "dateTime", field]) || " "
+const getErrorMessage = (state, field) => _.get(state, ["errors", "dateTime", field]) || " "
 
 export class DateTime extends Component {
   render() {
-    const { state, actions } = this.props
+    const { root } = this.props
 
     return (
       <div>
-        <TextField label="Date:" type="date" value={state.dateTime.date} required
-          helperText={getErrorMessage(state, "date")}
-          onChange={evt => actions.editDate(evt.target.value)}/>
-        <TextField label="Hour:" value={state.dateTime.hour} required
-          helperText={getErrorMessage(state, "hour")}
-          onChange={evt => actions.editHour(evt.target.value)}/>
-        <TextField label="Minute:" value={state.dateTime.minute} required
-          helperText={getErrorMessage(state, "minute")}
-          onChange={evt => actions.editMinute(evt.target.value)}/>
+        <TextField
+          label="Date:"
+          type="date"
+          value={root.state.dateTime.date}
+          required
+          helperText={getErrorMessage(root.state, "date")}
+          onChange={evt => root.update(actions.editDate(evt.target.value))}
+        />
+        <TextField
+          label="Hour:"
+          value={root.state.dateTime.hour}
+          required
+          helperText={getErrorMessage(root.state, "hour")}
+          onChange={evt => root.update(actions.editHour(evt.target.value))}
+        />
+        <TextField
+          label="Minute:"
+          value={root.state.dateTime.minute}
+          required
+          helperText={getErrorMessage(root.state, "minute")}
+          onChange={evt => root.update(actions.editMinute(evt.target.value))}
+        />
         <div>
-          <Button variant="outlined" onClick={() => actions.validate()}>Validate</Button>
-          <span style={{marginLeft: "0.4rem"}}>{state.conditions.message}</span>
+          <Button variant="outlined" onClick={() => root.update(actions.validate())}>
+            Validate
+          </Button>
+          <span style={{ marginLeft: "0.4rem" }}>{root.state.conditions.message}</span>
         </div>
       </div>
     )

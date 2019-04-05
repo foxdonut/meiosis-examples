@@ -27,7 +27,8 @@ export const createApp = (update, navigate) => {
   const navigation = parseUrl()
   navigate(navigation)
 
-  return credentialsApi.getUser()
+  return credentialsApi
+    .getUser()
     .then(user => wireApp(update, navigate, Object.assign({ user }, navigation)))
     .catch(() => {
       clearToken()

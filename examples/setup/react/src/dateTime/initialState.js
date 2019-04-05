@@ -1,6 +1,6 @@
 export const initialState = () => ({
   dateTime: {
-    date: " ",
+    date: "",
     hour: "",
     minute: ""
   }

@@ -7,14 +7,18 @@ const getToken = () => window.localStorage.getItem("jwt")
 export const setToken = token => window.localStorage.setItem("jwt", token)
 export const clearToken = () => window.localStorage.removeItem("jwt")
 
-const authHeader = () => getToken() ? {
-  headers: {
-    "Authorization": "Token " + getToken()
-  }
-} : {}
+const authHeader = () =>
+  getToken()
+    ? {
+        headers: {
+          Authorization: "Token " + getToken()
+        }
+      }
+    : {}
 
 const request = (url, options) =>
-  m.request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
+  m
+    .request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
     .then(response => (response && response.data) || response)
 
 export const articlesApi = {
@@ -26,14 +30,12 @@ export const articlesApi = {
 
   getComments: slug => request(`/articles/${slug}/comments`),
 
-  addComment: (slug, data) => request(`/articles/${slug}/comments`,
-    { data, method: "POST" }),
+  addComment: (slug, data) => request(`/articles/${slug}/comments`, { data, method: "POST" }),
 
-  deleteComment: (slug, id) => request(`/articles/${slug}/comments/${id}`,
-    { method: "DELETE" }),
+  deleteComment: (slug, id) => request(`/articles/${slug}/comments/${id}`, { method: "DELETE" }),
 
-  publish: (data, slug) => request("/articles" + (slug ? "/" + slug : ""),
-    { data, method: (slug ? "PUT" : "POST") }),
+  publish: (data, slug) =>
+    request("/articles" + (slug ? "/" + slug : ""), { data, method: slug ? "PUT" : "POST" }),
 
   unpublish: slug => request(`/articles/${slug}`, { method: "DELETE" }),
 
@@ -47,15 +49,16 @@ export const credentialsApi = {
 
   login: data => request("/users/login", { data, method: "POST" }),
 
-  getUser: () => new Promise((resolve, reject) => {
-    if (getToken()) {
-      return request("/user", authHeader()).then(user => resolve(user.user))
-        .catch(reject)
-    }
-    else {
-      resolve(null)
-    }
-  })
+  getUser: () =>
+    new Promise((resolve, reject) => {
+      if (getToken()) {
+        return request("/user", authHeader())
+          .then(user => resolve(user.user))
+          .catch(reject)
+      } else {
+        resolve(null)
+      }
+    })
 }
 
 export const popularTagsApi = {

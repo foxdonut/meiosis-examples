@@ -1,45 +1,56 @@
 import { html } from "lit-html"
 import { classMap } from "lit-html/directives/class-map"
 
+import { actions } from "../root/actions"
+
 const getTodoClassMap = (state, todo) => ({
   completed: todo.completed,
-  editing: (todo.id === state.editTodo.id)
+  editing: todo.id === state.editTodo.id
 })
 
-const todoEdit = ({ state, actions }) => html`
-  <input class="edit" type="text"
-    .value=${state.editTodo.title}
-    @keyup=${actions.editKeyUp(state.editTodo.id)}
-    @blur=${() => actions.editBlur(state.editTodo)}>
+const todoEdit = ({ root }) => html`
+  <input
+    class="edit"
+    type="text"
+    .value=${root.state.editTodo.title}
+    @keyup=${evt => actions.editKeyUp(root.update, root.state.editTodo.id, evt)}
+    @blur=${() => actions.editBlur(root.update, root.state.editTodo)}
+  />
 `
 
-const todoItem = ({ state, todoId, actions }) => {
-  const todo = state.todosById[todoId]
-  const editing = (todo.id === state.editTodo.id)
+const todoItem = ({ root, todoId }) => {
+  const todo = root.state.todosById[todoId]
+  const editing = todo.id === root.state.editTodo.id
 
   return html`
-    <li class=${classMap(getTodoClassMap(state, todo))}>
+    <li class=${classMap(getTodoClassMap(root.state, todo))}>
       <div class="view">
-        <input class="toggle" type="checkbox"
+        <input
+          class="toggle"
+          type="checkbox"
           .checked=${todo.completed}
-          @change=${actions.toggleTodo(todo.id)}>
-        <label @dblclick=${actions.editTodo(todo)}>${todo.title}</label>
-        <button class="destroy" @click=${actions.deleteTodo(todo.id)}></button>
+          @change=${evt => actions.toggleTodo(root.update, todo.id, evt.target.checked)}
+        />
+        <label @dblclick=${evt => actions.editTodo(root.update, todo, evt)}>${todo.title}</label>
+        <button class="destroy" @click=${() => actions.deleteTodo(root.update, todo.id)}></button>
       </div>
-      ${editing ? todoEdit({ state, actions }) : null}
+      ${editing ? todoEdit({ root }) : null}
     </li>
   `
 }
 
 export const main = {
-  view: ({ state, actions }) => html`
+  view: ({ root }) => html`
     <section class="main">
-      <input class="toggle-all" type="checkbox"
-        @change=${actions.toggleAllTodos}
-        .checked=${state.allCompleted}>
+      <input
+        class="toggle-all"
+        type="checkbox"
+        @change=${evt => actions.toggleAllTodos(root.update, evt.target.checked)}
+        .checked=${root.state.allCompleted}
+      />
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        ${state.filteredTodoIds.map(todoId => todoItem({ state, todoId, actions }))}
+        ${root.state.filteredTodoIds.map(todoId => todoItem({ root, todoId }))}
       </ul>
     </section>
   `

@@ -16,11 +16,9 @@ export const Route = superouter.type("Route", {
 })
 
 export const parseUrl = (hash = document.location.hash || "#/") => {
-  const [ url, queryString ] = hash.substring(1).split("?")
+  const [url, queryString] = hash.substring(1).split("?")
   const route = Route.matchOr(() => Route.of.Home(), url)
-  const query = queryString
-    ? m.parseQueryString(queryString)
-    : {}
+  const query = queryString ? m.parseQueryString(queryString) : {}
   return { route, query }
 }
 
@@ -32,8 +30,7 @@ export const getUrl = (route, query) => {
   return prefix + result
 }
 
-export const listenToRouteChanges = navigate =>
-  window.onpopstate = () => navigate(parseUrl())
+export const listenToRouteChanges = navigate => (window.onpopstate = () => navigate(parseUrl()))
 
 export const router = {
   service: state => {

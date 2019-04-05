@@ -15,46 +15,49 @@ const getErrorMessage = (state, field) =>
 
 export const DateTime = {
   view: vnode => {
-    const { state, actions } = vnode.attrs
+    const { root } = vnode.attrs
 
-    return (
-      m("div",
+    return m(
+      "div",
+      m(TextField, {
+        label: "Date:",
+        type: "date",
+        value: root.state.dateTime.date,
+        events: {
+          oninput: evt => root.update(actions.editDate(evt.target.value))
+        },
+        help: getErrorMessage(root.state, "date")
+      }),
+      m(
+        "div" + b.mt(4),
         m(TextField, {
-          label: "Date:",
-          type: "date",
-          value: state.dateTime.date,
+          label: "Hour:",
+          value: root.state.dateTime.hour,
           events: {
-            oninput: evt => actions.editDate(evt.target.value)
+            oninput: evt => root.update(actions.editHour(evt.target.value))
           },
-          help: getErrorMessage(state, "date")
+          help: getErrorMessage(root.state, "hour")
+        })
+      ),
+      m(
+        "div" + b.mt(4),
+        m(TextField, {
+          label: "Minute:",
+          value: root.state.dateTime.minute,
+          events: {
+            oninput: evt => root.update(actions.editMinute(evt.target.value))
+          },
+          help: getErrorMessage(root.state, "minute")
+        })
+      ),
+      m(
+        "div" + b.mt(8),
+        m(Button, {
+          label: "Validate",
+          border: true,
+          events: { onclick: () => root.update(actions.validate(root.state)) }
         }),
-        m("div" + b.mt(4),
-          m(TextField, {
-            label: "Hour:",
-            value: state.dateTime.hour,
-            events: {
-              oninput: evt => actions.editHour(evt.target.value)
-            },
-            help: getErrorMessage(state, "hour")
-          })
-        ),
-        m("div" + b.mt(4),
-          m(TextField, {
-            label: "Minute:",
-            value: state.dateTime.minute,
-            events: {
-              oninput: evt => actions.editMinute(evt.target.value)
-            },
-            help: getErrorMessage(state, "minute")
-          })
-        ),
-        m("div" + b.mt(8),
-          m(Button, {
-            label: "Validate", border: true,
-            events: { onclick: () => actions.validate(state) }
-          }),
-          m("span" + b.ml(8), state.conditions.message)
-        )
+        m("span" + b.ml(8), root.state.conditions.message)
       )
     )
   }

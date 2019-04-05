@@ -11,7 +11,7 @@ const states = stream
 
 // Only for using Meiosis Tracer in development.
 const meiosisTracer = require("meiosis-tracer")
-meiosisTracer({ selector: "#tracer", streams: [{ label: "states", stream: states }] })
+meiosisTracer({ selector: "#tracer", streams: [{ label: "states", stream: states }], rows: 35 })
 states.map(() => m.redraw())
 // End of code for using Meiosis Tracer in development.
 

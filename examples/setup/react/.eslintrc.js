@@ -1,11 +1,14 @@
 module.exports = {
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["react"],
   "env": {
     "browser": true,
     "commonjs": true,
     "es6": true
   },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -13,10 +16,6 @@ module.exports = {
     "sourceType": "module"
   },
   "rules": {
-    "react/display-name": [ 0 ],
-    "react/prop-types": [ 0 ],
-    "indent": [ "error", 2 ],
-    "linebreak-style": [ "error", "unix" ],
     "no-unused-vars": [
       "error",
       {
@@ -24,7 +23,32 @@ module.exports = {
         "argsIgnorePattern": "^_"
       }
     ],
-    "quotes": [ "error", "double" ],
-    "semi": [ "error", "never" ]
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 100,
+        "semi": false,
+        "singleQuote": false
+      }
+    ],
+    "react/display-name": [
+      0
+    ],
+    "react/jsx-no-undef": [
+      1,
+      { "allowGlobals": true }
+    ],
+    "react/prop-types": [
+      0
+    ]
+  },
+  "plugins": [
+    "prettier",
+    "react"
+  ],
+  "settings": {
+    "react": {
+      "pragma": "React"
+    }
   }
 }

@@ -5,7 +5,8 @@ export const nextAction = update => (state, patch) => {
   if (patch.pageId === ProfilePage || patch.pageId === ProfileFavoritesPage) {
     setTimeout(() => update({ loading: patch.pageId }), 300)
 
-    const author = patch.pageId === ProfilePage ? patch.params.author || patch.params.username : null
+    const author =
+      patch.pageId === ProfilePage ? patch.params.author || patch.params.username : null
     const favorited = patch.pageId === ProfileFavoritesPage ? patch.params.username : null
 
     Promise.all([
@@ -16,8 +17,6 @@ export const nextAction = update => (state, patch) => {
         author,
         favorited
       })
-    ]).then(
-      ([profile, articles]) => update(Object.assign({ loading: null }, profile, articles))
-    )
+    ]).then(([profile, articles]) => update(Object.assign({ loading: null }, profile, articles)))
   }
 }

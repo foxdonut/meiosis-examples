@@ -12,27 +12,34 @@ const validationSpec = {
 }
 
 export const actions = ({ update, navigate }) => ({
-  updateArticleForm: (field, value) => update({
-    article: PS({ [field]: value })
-  }),
+  updateArticleForm: (field, value) =>
+    update({
+      article: PS({ [field]: value })
+    }),
 
-  updateArticleTags: tags => update({
-    article: PS({
-      tags,
-      tagList: (tags || "")
-        .split(",")
-        .map(str => str.trim())
-        .filter(str => str.length > 0)
-    })
-  }),
+  updateArticleTags: tags =>
+    update({
+      article: PS({
+        tags,
+        tagList: (tags || "")
+          .split(",")
+          .map(str => str.trim())
+          .filter(str => str.length > 0)
+      })
+    }),
 
   publish: article => {
     const validationErrors = validate(article, validationSpec)
     update({ article: PS({ validationErrors }) })
     if (!validationErrors) {
-      articlesApi.publish({
-        article: pick(["title", "description", "body", "tagList"], article)
-      }, article.slug).then(() => navigate({ route: Route.of.Home() }))
+      articlesApi
+        .publish(
+          {
+            article: pick(["title", "description", "body", "tagList"], article)
+          },
+          article.slug
+        )
+        .then(() => navigate({ route: Route.of.Home() }))
     }
   }
 })

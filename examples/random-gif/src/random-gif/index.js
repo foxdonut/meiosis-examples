@@ -1,6 +1,7 @@
 import m from "mithril"
 import { identity } from "ramda"
 import { fold } from "static-sum-type"
+
 import { Loaded, Success, Image } from "./types"
 import { actions } from "./actions"
 import { buttonStyle } from "../util/ui"
@@ -28,7 +29,7 @@ const imgsrc = image =>
   })(image)
 
 export const RandomGif = {
-  view: ({ attrs: { local } }) =>
+  view: ({ attrs: { root, local } }) =>
     m(
       "div.ba.b--green.pa2.mt2",
       m("span.mr2", "Tag:"),
@@ -38,7 +39,7 @@ export const RandomGif = {
       }),
       m(
         "button.bg-blue" + buttonStyle,
-        { onclick: () => local.update(actions.newGif(local.state)) },
+        { onclick: () => actions.newGif({ root, local }) },
         "Random Gif"
       ),
       m("button.bg-red" + buttonStyle, { onclick: () => local.update(actions.reset()) }, "Reset"),

@@ -12,11 +12,13 @@ export class TodoItem extends Component {
         <Table.Cell>{todo.priority}</Table.Cell>
         <Table.Cell>{todo.description}</Table.Cell>
         <Table.Cell>
-          <Button primary basic size="mini"
-            onClick={() => actions.editTodo(id, todo)}>Edit</Button>
+          <Button primary basic size="mini" onClick={() => actions.editTodo(id, todo)}>
+            Edit
+          </Button>
 
-          <Button negative basic size="mini"
-            onClick={() => actions.deleteTodo(todo)}>Delete</Button>
+          <Button negative basic size="mini" onClick={() => actions.deleteTodo(todo)}>
+            Delete
+          </Button>
         </Table.Cell>
       </Table.Row>
     ]

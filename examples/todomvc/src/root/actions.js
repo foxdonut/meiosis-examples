@@ -1,39 +1,66 @@
-import { PS, S, D } from "patchinko/explicit"
+import O from "patchinko/constant"
 
-import { patches } from "./patches"
 import { todoStorage } from "../util/todo-storage"
 
 const ENTER_KEY = 13
 const ESCAPE_KEY = 27
 
-export const actions = ({ update }) => ({
-  loadAll: () => todoStorage.loadAll().then(todos => update(patches.displayTodos(todos))),
+const displayTodos = todos => ({
+  todoIds: todos.map(todo => todo.id),
+  todosById: todos.reduce((result, todo) => {
+    result[todo.id] = todo
+    return result
+  }, {})
+})
 
-  clearCompleted: () => todoStorage.clearCompleted()
-    .then(todos => update(patches.displayTodos(todos))),
+const editingNewTodo = title => ({ newTodo: title })
 
-  deleteTodo: todoId => () => todoStorage.deleteTodoId(todoId).then(
-    () => update({
-      todosById: PS({
-        [todoId]: D
-      }),
-      todoIds: S(todoIds => {
-        todoIds.splice(todoIds.indexOf(todoId), 1)
-        return todoIds
+const updateTodo = todo => ({
+  todosById: O(todosById => {
+    todosById[todo.id] = todo
+    return todosById
+  }),
+  editTodo: {}
+})
+
+const saveNewTodo = todo => ({
+  todosById: O(todosById => {
+    todosById[todo.id] = todo
+    return todosById
+  }),
+  todoIds: O(todoIds => {
+    todoIds.push(todo.id)
+    return todoIds
+  }),
+  newTodo: ""
+})
+
+export const actions = {
+  loadAll: update => todoStorage.loadAll().then(todos => update(displayTodos(todos))),
+
+  clearCompleted: update => todoStorage.clearCompleted().then(todos => update(displayTodos(todos))),
+
+  deleteTodo: (update, todoId) =>
+    todoStorage.deleteTodoId(todoId).then(() =>
+      update({
+        todosById: O({
+          [todoId]: O
+        }),
+        todoIds: O(todoIds => {
+          todoIds.splice(todoIds.indexOf(todoId), 1)
+          return todoIds
+        })
       })
-    })
-  ),
+    ),
 
-  toggleAllTodos: evt =>
-    todoStorage.setAllCompleted(evt.target.checked)
-      .then(todos => update(patches.displayTodos(todos))),
+  toggleAllTodos: (update, checked) =>
+    todoStorage.setAllCompleted(checked).then(todos => update(displayTodos(todos))),
 
-  toggleTodo: todoId => evt => {
-    const completed = evt.target.checked
-    todoStorage.setCompleted(todoId, completed).then(
-      () => update({
-        todosById: PS({
-          [todoId]: PS({
+  toggleTodo: (update, todoId, completed) => {
+    todoStorage.setCompleted(todoId, completed).then(() =>
+      update({
+        todosById: O({
+          [todoId]: O({
             completed
           })
         })
@@ -41,53 +68,47 @@ export const actions = ({ update }) => ({
     )
   },
 
-  newTodoKeyUp: evt => {
+  newTodoKeyUp: (update, evt) => {
     if (evt.keyCode === ENTER_KEY) {
       const title = evt.target.value.trim()
 
       if (title) {
-        todoStorage.saveTodo({ title })
-          .then(todo => update(patches.saveNewTodo(todo)))
+        todoStorage.saveTodo({ title }).then(todo => update(saveNewTodo(todo)))
       }
-    }
-    else {
-      update(patches.editingNewTodo(evt.target.value))
+    } else {
+      update(editingNewTodo(evt.target.value))
     }
   },
 
-  editTodo: todo => evt => {
+  editTodo: (update, todo, evt) => {
     update({ editTodo: todo })
     evt.target.parentElement.parentElement.getElementsByClassName("edit")[0].focus()
   },
 
-  editBlur: editTodo => {
+  editBlur: (update, editTodo) => {
     if (editTodo.id) {
       editTodo.title = editTodo.title.trim()
       if (editTodo.title) {
-        todoStorage.saveTodo(editTodo)
-          .then(todo => update(patches.updateTodo(todo)))
+        todoStorage.saveTodo(editTodo).then(todo => update(updateTodo(todo)))
       }
     }
   },
 
-  editKeyUp: id => evt => {
+  editKeyUp: (update, id, evt) => {
     const title = evt.target.value
 
     if (evt.keyCode === ESCAPE_KEY) {
       update({ editTodo: {} })
-    }
-    else if (evt.keyCode === ENTER_KEY) {
+    } else if (evt.keyCode === ENTER_KEY) {
       const todo = { id, title }
       const editing = !!todo.id
       todo.title = todo.title.trim()
 
       if (editing && todo.title) {
-        todoStorage.saveTodo(todo)
-          .then(updatedTodo => update(patches.updateTodo(updatedTodo)))
+        todoStorage.saveTodo(todo).then(updatedTodo => update(updateTodo(updatedTodo)))
       }
-    }
-    else {
+    } else {
       update({ editTodo: { id, title } })
     }
   }
-})
+}

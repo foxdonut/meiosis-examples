@@ -9,9 +9,7 @@ const loadProfileAndArticles = ({ state, update, navigation, username, author, f
       author,
       favorited
     })
-  ]).then(
-    ([profile, articles]) => update(Object.assign({}, profile, articles, navigation))
-  )
+  ]).then(([profile, articles]) => update(Object.assign({}, profile, articles, navigation)))
 
 export const onNavigate = {
   Profile: ({ username }) => ({ state, update, navigation }) =>

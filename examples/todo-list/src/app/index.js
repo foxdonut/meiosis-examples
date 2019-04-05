@@ -6,21 +6,19 @@ import { todoForm } from "../todos/todoForm"
 import { ajaxServices } from "../util/ajax-services"
 
 export const app = {
-  initialState: () => ajaxServices.loadTodos().then(initialTodoList =>
-    Object.assign({},
-      root.initialState(),
-      todos.initialState(initialTodoList)
-    )
-  ),
+  initialState: () =>
+    ajaxServices
+      .loadTodos()
+      .then(initialTodoList =>
+        Object.assign({}, root.initialState(), todos.initialState(initialTodoList))
+      ),
   actions: ({ update }) => {
-    const patches = Object.assign({},
-      root.patches,
-      todoForm.patches
-    )
+    const patches = Object.assign({}, root.patches, todoForm.patches)
 
     const actionParams = { update, patches }
 
-    return Object.assign({},
+    return Object.assign(
+      {},
       root.actions(actionParams),
       todos.actions(actionParams),
       todoForm.actions(actionParams)
@@ -37,7 +35,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.props.states.map(state =>
-      (this.skippedFirst) ? this.setState(state) : this.skippedFirst = true
+      this.skippedFirst ? this.setState(state) : (this.skippedFirst = true)
     )
   }
 
@@ -45,6 +43,6 @@ export class App extends Component {
     const state = this.state
     const { actions } = this.props
 
-    return (<Root state={state} actions={actions} />)
+    return <Root state={state} actions={actions} />
   }
 }

@@ -10,45 +10,53 @@ export const actions = ({ update }) => ({
 
   addComment: (slug, body) => {
     if (body && body.trim().length > 0) {
-      articlesApi.addComment(slug, { comment: { body } }).then(data => update({
-        comment: "", comments: S(list => prepend(data.comment, list))
-      }))
+      articlesApi.addComment(slug, { comment: { body } }).then(data =>
+        update({
+          comment: "",
+          comments: S(list => prepend(data.comment, list))
+        })
+      )
     }
   },
 
-  deleteComment: (slug, id) => () => articlesApi.deleteComment(slug, id).then(() =>
-    update({ comments: S(list => list.filter(comment => comment.id !== id)) })
-  ),
+  deleteComment: (slug, id) => () =>
+    articlesApi
+      .deleteComment(slug, id)
+      .then(() => update({ comments: S(list => list.filter(comment => comment.id !== id)) })),
 
-  deleteArticle: slug => articlesApi.unpublish(slug).then(() =>
-    update(navigateTo(HomePage))),
+  deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(navigateTo(HomePage))),
 
   followUser: (state, username) => {
     if (state.user) {
-      profileApi.follow(username).then(
-        () => helpers.loadArticle({ slug: state.params.slug })).then(update)
-    }
-    else {
+      profileApi
+        .follow(username)
+        .then(() => helpers.loadArticle({ slug: state.params.slug }))
+        .then(update)
+    } else {
       update(navigateTo(RegisterPage))
     }
   },
 
-  unfollowUser: (state, username) => profileApi.unfollow(username).then(
-    () => helpers.loadArticle({ slug: state.params.slug })).then(update),
+  unfollowUser: (state, username) =>
+    profileApi
+      .unfollow(username)
+      .then(() => helpers.loadArticle({ slug: state.params.slug }))
+      .then(update),
 
   favoriteArticle: (state, slug) => {
     if (state.user) {
-      articlesApi.favorite(slug)
+      articlesApi
+        .favorite(slug)
         .then(() => helpers.loadArticle({ slug }))
         .then(update)
-    }
-    else {
+    } else {
       update(navigateTo(RegisterPage))
     }
   },
 
   unfavoriteArticle: slug =>
-    articlesApi.unfavorite(slug)
+    articlesApi
+      .unfavorite(slug)
       .then(() => helpers.loadArticle({ slug }))
       .then(update)
 })

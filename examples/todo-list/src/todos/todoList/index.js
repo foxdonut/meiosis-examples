@@ -17,8 +17,13 @@ export class TodoList extends Component {
         </Table.Header>
         <Table.Body>
           {state.todoIds.map(todoId => (
-            <TodoItem key={`todoItem_${todoId}`} state={state} id={`todoItem:${todoId}`}
-              todo={state.todos[todoId]} actions={actions} />
+            <TodoItem
+              key={`todoItem_${todoId}`}
+              state={state}
+              id={`todoItem:${todoId}`}
+              todo={state.todos[todoId]}
+              actions={actions}
+            />
           ))}
         </Table.Body>
       </Table>

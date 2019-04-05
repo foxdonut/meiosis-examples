@@ -12,28 +12,30 @@ export const conditions = {
 
 export const Conditions = {
   view: vnode => {
-    const { state, actions } = vnode.attrs
+    const { root } = vnode.attrs
 
-    return (
-      m("div" + b.mt(8),
-        m("div",
-          m(Checkbox, { label: "Precipitations",
-            checked: state.conditions.precipitations,
-            onChange: ({ checked }) => actions.togglePrecipitations(checked)
-          })
-        ),
-        m("div" + b.mt(4),
-          m(RadioGroup, {
-            name: "conditions",
-            checkedValue: state.conditions.sky,
-            onChange: ({ value }) => actions.changeSky(value),
-            buttons: [
-              { value: "SUNNY", label: "Sunny" },
-              { value: "CLOUDY", label: "Cloudy", style: { marginLeft: "32px" } },
-              { value: "MIX", label: "Mix of sun and clouds", style: { marginLeft: "32px" } }
-            ]
-          })
-        )
+    return m(
+      "div" + b.mt(8),
+      m(
+        "div",
+        m(Checkbox, {
+          label: "Precipitations",
+          checked: root.state.conditions.precipitations,
+          onChange: ({ checked }) => root.update(actions.togglePrecipitations(checked))
+        })
+      ),
+      m(
+        "div" + b.mt(4),
+        m(RadioGroup, {
+          name: "conditions",
+          checkedValue: root.state.conditions.sky,
+          onChange: ({ value }) => root.update(actions.changeSky(value)),
+          buttons: [
+            { value: "SUNNY", label: "Sunny" },
+            { value: "CLOUDY", label: "Cloudy", style: { marginLeft: "32px" } },
+            { value: "MIX", label: "Mix of sun and clouds", style: { marginLeft: "32px" } }
+          ]
+        })
       )
     )
   }

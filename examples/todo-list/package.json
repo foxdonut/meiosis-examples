@@ -29,22 +29,25 @@
     "patchinko": "^4.1.0",
     "prevent-default": "^1.0.0",
     "ramda": "^0.26.1",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "semantic-ui-react": "^0.84.0",
-    "sinon": "^7.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "semantic-ui-react": "^0.86.0",
+    "sinon": "^7.3.1",
     "validate.js": "^0.12.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.4",
-    "eslint": "^5.10.0",
-    "eslint-plugin-react": "^7.11.1",
+    "babel-loader": "^8.0.5",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
     "meiosis-tracer": "^2.0.3",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
+    "prettier": "1.16.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }

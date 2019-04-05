@@ -16,23 +16,35 @@ export const temperature = {
 
 export class Temperature extends Component {
   render() {
-    const { state, id, actions } = this.props
+    const { local } = this.props
 
     return (
       <div>
-        <div style={{marginTop: "0.8rem"}}>
+        <div style={{ marginTop: "0.8rem" }}>
           <Formfield>
             <label>
-              Temperature: {state[id].value}&deg;{state[id].units}
+              {local.state.label} Temperature: {local.state.value}&deg;{local.state.units}
             </label>
           </Formfield>
         </div>
-        <div style={{marginTop: "0.8rem"}}>
-          <Button raised onClick={() => actions.increment(id, 1)}
-            style={{marginRight: "0.4rem"}}>Increment</Button>
-          <Button raised onClick={() => actions.increment(id,-1)}
-            style={{marginRight: "0.4rem"}}>Decrement</Button>
-          <Button outlined onClick={() => actions.changeUnits(id)}>Change Units</Button>
+        <div style={{ marginTop: "0.8rem" }}>
+          <Button
+            raised
+            onClick={() => local.update(actions.increment(1))}
+            style={{ marginRight: "0.4rem" }}
+          >
+            Increment
+          </Button>
+          <Button
+            raised
+            onClick={() => local.update(actions.increment(-1))}
+            style={{ marginRight: "0.4rem" }}
+          >
+            Decrement
+          </Button>
+          <Button outlined onClick={() => local.update(actions.changeUnits())}>
+            Change Units
+          </Button>
         </div>
       </div>
     )

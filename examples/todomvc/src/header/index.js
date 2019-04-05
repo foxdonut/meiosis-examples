@@ -1,14 +1,18 @@
 import { html } from "lit-html"
 
+import { actions } from "../root/actions"
+
 export const header = {
-  view: ({ state, actions }) => html`
+  view: ({ root }) => html`
     <header class="header">
       <h1>todos</h1>
-      <input class="new-todo"
+      <input
+        class="new-todo"
         placeholder="What needs to be done?"
-        @keyup=${actions.newTodoKeyUp}
-        .value=${state.newTodo}
-        autofocus>
+        @keyup=${evt => actions.newTodoKeyUp(root.update, evt)}
+        .value=${root.state.newTodo}
+        autofocus
+      />
     </header>
   `
 }

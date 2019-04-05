@@ -9,11 +9,11 @@ export const actions = ({ update, navigate }) => ({
 
   sendCredentials: method => state => {
     const fields = ["email", "password"].concat(method === "register" ? ["username"] : [])
-    credentialsApi[method]({ user: pick(fields, state[method]) }).
-      then(({ user }) => {
+    credentialsApi[method]({ user: pick(fields, state[method]) })
+      .then(({ user }) => {
         setToken(user.token)
         navigate({ route: Route.of.Home(), user })
-      }).
-      catch(err => update({ [method]: PS({ errors: err.response && err.response.errors }) }))
+      })
+      .catch(err => update({ [method]: PS({ errors: err.response && err.response.errors }) }))
   }
 })

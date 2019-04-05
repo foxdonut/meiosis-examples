@@ -1,9 +1,9 @@
 import Mapper from "url-mapper"
 
 const routes = {
-  "/": ({ filterBy: "all" }),
-  "/active": ({ filterBy: "active" }),
-  "/completed": ({ filterBy: "completed" }),
+  "/": { filterBy: "all" },
+  "/active": { filterBy: "active" },
+  "/completed": { filterBy: "completed" }
 }
 
 const urlMapper = Mapper()
@@ -16,8 +16,7 @@ const parseUrl = (hash = document.location.hash || "#/") => {
 export const router = {
   parseUrl,
 
-  listenToRouteChanges: update =>
-    window.onpopstate = () => update(parseUrl()),
+  listenToRouteChanges: update => (window.onpopstate = () => update(parseUrl())),
 
   service: state => {
     const route = "#/" + (state.filterBy === "all" ? "" : state.filterBy)

@@ -20,12 +20,16 @@ export class Root extends Component {
     return (
       <div>
         <Menu widths={2}>
-          <Menu.Item active={state.pageId === "TodoListPage"}
-            onClick={() => actions.navigateTo("TodoListPage")}>
+          <Menu.Item
+            active={state.pageId === "TodoListPage"}
+            onClick={() => actions.navigateTo("TodoListPage")}
+          >
             Todo List
           </Menu.Item>
-          <Menu.Item active={state.pageId === "ProjectPage"}
-            onClick={() => actions.navigateTo("ProjectPage")}>
+          <Menu.Item
+            active={state.pageId === "ProjectPage"}
+            onClick={() => actions.navigateTo("ProjectPage")}
+          >
             Projects
           </Menu.Item>
         </Menu>

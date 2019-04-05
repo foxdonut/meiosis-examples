@@ -1,4 +1,3 @@
 export const onNavigate = {
-  Register: () => ({ update, navigation }) =>
-    update(Object.assign({ register: {} }, navigation))
+  Register: () => ({ update, navigation }) => update(Object.assign({ register: {} }, navigation))
 }

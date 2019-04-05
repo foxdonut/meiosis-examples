@@ -25,19 +25,22 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "flyd": "^0.2.8",
-    "joi": "^14.3.0",
+    "joi": "^14.3.1",
     "joi-browser": "^13.4.0",
     "joi-date-extensions": "^1.2.0",
-    "lit-html": "^0.14.0",
+    "lit-html": "^1.0.0",
     "patchinko": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "babel-loader": "^8.0.4",
-    "eslint": "^5.11.1",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-loader": "^8.0.5",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "meiosis-tracer": "^2.0.3",
-    "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.2"
+    "prettier": "1.16.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }

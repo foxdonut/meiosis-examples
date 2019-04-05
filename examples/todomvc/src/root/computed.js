@@ -10,7 +10,7 @@ const allCompleted = state => {
   return result
 }
 
-const computeState = state => {
+export const computed = state => {
   const result = {}
 
   result.allCompleted = allCompleted(state)
@@ -18,17 +18,16 @@ const computeState = state => {
   const notCompleted = todoId => !state.todosById[todoId].completed
   const itemsLeft = state.todoIds.filter(notCompleted).length
 
-  result.itemsLeftText = itemsLeft > 0 ?
-    (String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left") : ""
+  result.itemsLeftText =
+    itemsLeft > 0 ? String(itemsLeft) + " item" + (itemsLeft === 1 ? "" : "s") + " left" : ""
 
-  result.clearCompletedVisible = (state.todoIds.length - itemsLeft) > 0
+  result.clearCompletedVisible = state.todoIds.length - itemsLeft > 0
 
   const all = state.filterBy === "all"
   const completed = state.filterBy === "completed"
-  result.filteredTodoIds = state.todoIds.filter(id =>
-    all || (state.todosById[id].completed === completed))
+  result.filteredTodoIds = state.todoIds.filter(
+    id => all || state.todosById[id].completed === completed
+  )
 
   return result
 }
-
-export const service = state => computeState(state)

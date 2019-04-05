@@ -1,8 +1,8 @@
-import { PS } from "patchinko/explicit"
+import O from "patchinko/constant"
 
 export const actions = ({ update }) => ({
   editingTodo: (id, field, value) =>
     update({
-      [id]: PS({ todo: PS({ [field]: value }) })
+      [id]: O({ todo: O({ [field]: value }) })
     })
 })

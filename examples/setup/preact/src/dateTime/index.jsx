@@ -17,36 +17,53 @@ export const dateTime = {
   actions
 }
 
-const getErrorMessage = (state, field) =>
-  _.get(state, ["errors", "dateTime", field]) || " "
+const getErrorMessage = (state, field) => _.get(state, ["errors", "dateTime", field]) || " "
 
 export class DateTime extends Component {
   render() {
-    const { state, actions } = this.props
+    const { root } = this.props
 
     return (
       <div>
         <Formfield>
-          <TextField label="Date:" type="date" value={state.dateTime.date} required
-            helperText={getErrorMessage(state, "date")} helperTextPersistent={true}
+          <TextField
+            label="Date:"
+            type="date"
+            value={root.state.dateTime.date}
+            required
+            helperText={getErrorMessage(root.state, "date")}
+            helperTextPersistent={true}
             helperTextValidationMsg={true}
-            onChange={evt => actions.editDate(evt.target.value)}/>
+            onChange={evt => root.update(actions.editDate(evt.target.value))}
+          />
         </Formfield>
         <Formfield>
-          <TextField label="Hour:" value={state.dateTime.hour} required
-            helperText={getErrorMessage(state, "hour")} helperTextPersistent={true}
+          <TextField
+            label="Hour:"
+            value={root.state.dateTime.hour}
+            required
+            helperText={getErrorMessage(root.state, "hour")}
+            helperTextPersistent={true}
             helperTextValidationMsg={true}
-            onChange={evt => actions.editHour(evt.target.value)}/>
+            onChange={evt => root.update(actions.editHour(evt.target.value))}
+          />
         </Formfield>
         <Formfield>
-          <TextField label="Minute:" value={state.dateTime.minute} required
-            helperText={getErrorMessage(state, "minute")} helperTextPersistent={true}
+          <TextField
+            label="Minute:"
+            value={root.state.dateTime.minute}
+            required
+            helperText={getErrorMessage(root.state, "minute")}
+            helperTextPersistent={true}
             helperTextValidationMsg={true}
-            onChange={evt => actions.editMinute(evt.target.value)}/>
+            onChange={evt => root.update(actions.editMinute(evt.target.value))}
+          />
         </Formfield>
         <div>
-          <Button ripple onClick={() => actions.validate()}>Validate</Button>
-          <span style={{marginLeft: "0.4rem"}}>{state.conditions.message}</span>
+          <Button ripple onClick={() => root.update(actions.validate())}>
+            Validate
+          </Button>
+          <span style={{ marginLeft: "0.4rem" }}>{root.state.conditions.message}</span>
         </div>
       </div>
     )

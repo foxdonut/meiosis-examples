@@ -1,23 +1,30 @@
 import flyd from "flyd"
-import { P } from "patchinko/explicit"
+import O from "patchinko/constant"
 import { render } from "lit-html"
 
-import { loadInitialState, app } from "./app"
+import { app } from "./app"
 import { router } from "./router"
 
-loadInitialState().then(initialState => {
-  const update = flyd.stream()
-  const states = flyd.scan(P, initialState, update)
+Promise.resolve()
+  .then(app.initialState)
+  .then(initialState => {
+    const update = flyd.stream()
+    const reducer = (x, f) => O(x, f(x))
 
-  // Only for using Meiosis Tracer in development.
-  require("meiosis-tracer")({ selector: "#tracer", rows: 35, streams: [ states ]})
+    const states = flyd
+      .scan(O, initialState, update)
+      .map(state => app.computed.reduce(reducer, state))
 
-  const actions = app.actions({ update })
+    // Only for using Meiosis Tracer in development.
+    require("meiosis-tracer")({ selector: "#tracer", rows: 35, streams: [states] })
 
-  const element = document.getElementById("app")
-  states
-    .map(app.service)
-    .map(state => render(app.view({ state, actions }), element))
+    const element = document.getElementById("app")
 
-  router.listenToRouteChanges(update)
-})
+    states.map(state => {
+      const root = { state, update }
+      render(app.view({ root }), element)
+      app.services.forEach(service => service({ root: { state, update } }))
+    })
+
+    router.listenToRouteChanges(update)
+  })

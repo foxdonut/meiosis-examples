@@ -6,9 +6,19 @@ const Joi = BaseJoi.extend(DateExtensions)
 
 const schema = {
   dateTime: {
-    date: Joi.date().format("YYYY-MM-DD").required(),
-    hour: Joi.number().integer().min(0).max(23).required(),
-    minute: Joi.number().integer().min(0).max(59).required()
+    date: Joi.date()
+      .format("YYYY-MM-DD")
+      .required(),
+    hour: Joi.number()
+      .integer()
+      .min(0)
+      .max(23)
+      .required(),
+    minute: Joi.number()
+      .integer()
+      .min(0)
+      .max(59)
+      .required()
   }
 }
 

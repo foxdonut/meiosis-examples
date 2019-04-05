@@ -9,8 +9,7 @@ export const wireView = (component, update, navigate) => {
   return getFn(component, "view")(Object.assign({ actions }, dependencies))
 }
 
-export const wirem = ({ component, update, navigate }) =>
-  wireView(component, update, navigate)
+export const wirem = ({ component, update, navigate }) => wireView(component, update, navigate)
 
 const extractProperties = (component, properties) => {
   Object.keys(properties).forEach(prop => {
@@ -19,12 +18,16 @@ const extractProperties = (component, properties) => {
     }
   })
   Object.keys(component.dependencies || {}).forEach(key =>
-    extractProperties(component.dependencies[key], properties))
+    extractProperties(component.dependencies[key], properties)
+  )
   return properties
 }
 
 export const findProperties = (component, properties) =>
-  extractProperties(component, properties.reduce((result, prop) => {
-    result[prop] = []
-    return result
-  }, {}))
+  extractProperties(
+    component,
+    properties.reduce((result, prop) => {
+      result[prop] = []
+      return result
+    }, {})
+  )
