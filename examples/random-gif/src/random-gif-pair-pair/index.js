@@ -1,16 +1,20 @@
 import m from "mithril"
+
 import { randomGifPair, RandomGifPair } from "../random-gif-pair"
+import { lens } from "../util"
 
 export const randomGifPairPair = {
-  initialState: id =>
-    Object.assign(randomGifPair.initialState(id + "One"), randomGifPair.initialState(id + "Two"))
+  initialState: () => ({
+    One: randomGifPair.initialState(),
+    Two: randomGifPair.initialState()
+  })
 }
 
 export const RandomGifPairPair = {
-  view: ({ attrs: { state, id, actions } }) =>
+  view: ({ attrs: { local } }) =>
     m(
       "div.ba.b--orange.pa2.mt2",
-      m(RandomGifPair, { state, id: id + "One", actions }),
-      m(RandomGifPair, { state, id: id + "Two", actions })
+      m(RandomGifPair, { local: lens(local, ["One"]) }),
+      m(RandomGifPair, { local: lens(local, ["Two"]) })
     )
 }

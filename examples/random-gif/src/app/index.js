@@ -1,5 +1,5 @@
 import m from "mithril"
-import { P, PS, S } from "patchinko/explicit"
+import O from "patchinko/constant"
 
 import { button, Button } from "../button"
 import { counter, Counter } from "../counter"
@@ -8,60 +8,52 @@ import { randomGifPair, RandomGifPair } from "../random-gif-pair"
 import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
 import { randomGifList, RandomGifList } from "../random-gif-list"
 
+import { lens } from "../util"
+
 const newGifGenerated = state => {
   const increment = state.counter.value > 3 && state.button.active ? 2 : 1
-  return { counter: PS({ value: S(x => x + increment) }) }
+  return { counter: O({ value: O(x => x + increment) }) }
 }
 
 export const app = {
-  initialState: () =>
-    Object.assign(
-      {
-        button: button.initialState(),
-        counter: counter.initialState({ label: "Counter:" }),
-        randomGif1: randomGif.initialState(),
-        randomGif2: randomGif.initialState(),
-        randomGifList: randomGifList.initialState()
-      },
-      randomGifPair.initialState("randomGifPair"),
-      randomGifPairPair.initialState("randomGifPairPair")
-    ),
-  actions: ({ update }) =>
-    Object.assign(
-      {},
-      button.actions({ update }),
-      randomGif.actions({ update, newGifGenerated }),
-      randomGifList.actions({ update })
-    ),
-  service: state =>
-    [
-      randomGifList.service
-      // could have more functions here
-    ].reduce((x, f) => P(x, f(x)), state)
+  initialState: () => ({
+    button: button.initialState(),
+    counter: counter.initialState({ label: "Counter:" }),
+    randomGif1: randomGif.initialState(),
+    randomGif2: randomGif.initialState(),
+    randomGifList: randomGifList.initialState(),
+    randomGifPair: randomGifPair.initialState(),
+    randomGifPairPair: randomGifPairPair.initialState()
+  }),
+
+  computed: [
+    randomGifList.computed
+    // could have more functions here
+  ]
 }
 
 export const App = {
-  view: ({ attrs: { state, actions } }) =>
+  view: ({ attrs: { root } }) =>
     m(
       "div",
-      m(Counter, { state, id: "counter", actions }),
+      m(Counter, { root, local: lens(root, ["counter"]) }),
 
       m("div.mt2", "Button:"),
-      m(Button, { state, id: "button", actions }),
+      m(Button, { root, local: lens(root, ["button"]) }),
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { state, id: "randomGif1", actions }),
+      m(RandomGif, { root, local: lens(root, ["randomGif1"]) }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { state, id: "randomGif2", actions }),
+      m(RandomGif, { root, local: lens(root, ["randomGif2"]) }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { state, id: "randomGifPair", actions }),
+      m(RandomGifPair, { root, local: lens(root, ["randomGifPair"]) }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { state, id: "randomGifPairPair", actions }),
+      m(RandomGifPairPair, { root, local: lens(root, ["randomGifPairPair"]) }),
 
       m("div.mt2", "Random Gif List:"),
-      m(RandomGifList, { state, id: "randomGifList", actions })
+      m(RandomGifList, { root, local: lens(root, ["randomGifList"]) })
     )
 }

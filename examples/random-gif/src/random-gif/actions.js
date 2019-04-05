@@ -1,5 +1,5 @@
 import m from "mithril"
-import { PS } from "patchinko/explicit"
+import O from "patchinko/constant"
 
 import { Loaded, Success, Image } from "./types"
 
@@ -7,25 +7,21 @@ const gif_new_url = "https://api.giphy.com/v1/gifs/random"
 const api_key = "dc6zaTOxFJmzC"
 
 export const actions = ({ update, newGifGenerated }) => ({
-  editTag: (id, tag) => update({ [id]: PS({ tag }) }),
+  editTag: tag => O({ tag }),
 
-  newGif: (id, state) => {
-    update({ [id]: PS({ image: Loaded.N() }) })
-    m.request({ url: gif_new_url, data: { api_key, tag: state[id].tag } })
+  newGif: ({ root, local }) => {
+    local.update(O({ image: Loaded.N() }))
+    m.request({ url: gif_new_url, data: { api_key, tag: local.state.tag } })
       .then(response => {
-        update(
-          Object.assign(
-            {
-              [id]: PS({
-                image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
-              })
-            },
-            newGifGenerated(state)
-          )
+        local.update(
+          O({
+            image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
+          })
         )
+        root.update(newGifGenerated(root.state))
       })
-      .catch(() => update({ [id]: PS({ image: Loaded.Y(Success.N()) }) }))
+      .catch(() => local.update(O({ image: Loaded.Y(Success.N()) })))
   },
 
-  reset: id => update({ [id]: PS({ image: Loaded.Y(Success.Y(Image.N())) }) })
+  reset: id => update({ [id]: O({ image: Loaded.Y(Success.Y(Image.N())) }) })
 })

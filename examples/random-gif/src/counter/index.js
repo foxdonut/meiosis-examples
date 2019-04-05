@@ -8,5 +8,5 @@ export const counter = {
 }
 
 export const Counter = {
-  view: ({ attrs: { state, id } }) => m("div", state[id].label + " " + state[id].value)
+  view: ({ attrs: { local } }) => m("div", local.state.label + " " + local.state.value)
 }
