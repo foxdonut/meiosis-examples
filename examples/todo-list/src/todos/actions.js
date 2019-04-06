@@ -49,13 +49,7 @@ export const actions = {
       todoForm.initialState({ todo: Object.assign({}, todo) })
     ),
 
-  cancelEditTodo: () =>
-    Object.assign(
-      {
-        editing: false
-      },
-      actions.clearForm()
-    ),
+  cancelEditTodo: () => O,
 
   saveTodo: ({ root, local, todo }) => {
     const validationErrors = validateTodo(todo)
@@ -63,11 +57,17 @@ export const actions = {
     if (Object.keys(validationErrors).length === 0) {
       root.update(rootActions.showMessage("Saving, please wait..."))
 
+      const isExisting = todo.id != null
+
       return ajaxServices
         .saveTodo(todo)
         .then(todo => {
           root.update(Object.assign({}, updateList(todo, root.state), rootActions.clearMessage()))
-          local.update(actions.cancelEditTodo())
+          if (isExisting) {
+            local.update(actions.cancelEditTodo())
+          } else {
+            local.update(actions.clearForm())
+          }
         })
         .catch(() =>
           root.update(
