@@ -65,17 +65,10 @@ export const actions = {
 
       return ajaxServices
         .saveTodo(todo)
-        .then(todo =>
-          root.update(
-            Object.assign(
-              {},
-              updateList(todo, root.state),
-              rootActions.clearMessage(),
-              // { [`todoItem:${todo.id}`]: O({ editing: false }) },
-              actions.clearForm()
-            )
-          )
-        )
+        .then(todo => {
+          root.update(Object.assign({}, updateList(todo, root.state), rootActions.clearMessage()))
+          local.update(actions.cancelEditTodo())
+        })
         .catch(() =>
           root.update(
             Object.assign(
