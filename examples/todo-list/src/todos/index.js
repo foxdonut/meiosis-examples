@@ -14,9 +14,15 @@ export const todos = {
 export class Todos extends Component {
   render() {
     const { root } = this.props
+
     return (
       <div>
-        <TodoForm root={root} local={lensProp(root, "todoForm")} />
+        <TodoForm
+          root={root}
+          local={lensProp(root, "todoForm")}
+          actions={actions}
+          label="New Todo:"
+        />
         <TodoList root={root} />
       </div>
     )

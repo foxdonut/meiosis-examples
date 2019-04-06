@@ -1,5 +1,4 @@
-export const initialState = ({ label, todo = { priority: "", description: "" } }) => ({
-  label,
+export const initialState = (todo = { priority: "", description: "" }) => ({
   todo,
   validationErrors: {}
 })

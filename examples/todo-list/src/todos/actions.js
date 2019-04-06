@@ -39,19 +39,19 @@ export const actions = {
     validationErrors: {}
   }),
 
-  editingTodo: ({ field, value }) => ({ todo: O({ [field]: value }) }),
-
   editTodo: todo =>
     Object.assign(
       {
         editing: true
       },
-      todoForm.initialState({ todo: Object.assign({}, todo) })
+      todoForm.initialState(Object.assign({}, todo))
     ),
 
-  cancelEditTodo: () => O,
+  cancelEditTodo: ({ local }) => local.update(todoForm.initialState()),
 
-  saveTodo: ({ root, local, todo }) => {
+  editingTodo: ({ local, field, value }) => local.update({ todo: O({ [field]: value }) }),
+
+  saveTodo: ({ root, form, todo }) => {
     const validationErrors = validateTodo(todo)
 
     if (Object.keys(validationErrors).length === 0) {
@@ -64,9 +64,9 @@ export const actions = {
         .then(todo => {
           root.update(Object.assign({}, updateList(todo, root.state), rootActions.clearMessage()))
           if (isExisting) {
-            local.update(actions.cancelEditTodo())
+            form.update(actions.cancelEditTodo())
           } else {
-            local.update(actions.clearForm())
+            form.update(actions.clearForm())
           }
         })
         .catch(() =>
@@ -79,7 +79,7 @@ export const actions = {
           )
         )
     } else {
-      root.update({ validationErrors })
+      form.update({ validationErrors })
     }
   },
 

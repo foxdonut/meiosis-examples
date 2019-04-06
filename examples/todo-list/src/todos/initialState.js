@@ -10,6 +10,6 @@ export const initialState = initialTodoList => {
   return {
     todos,
     todoIds,
-    todoForm: todoForm.initialState({ label: "New Todo:" })
+    todoForm: todoForm.initialState()
   }
 }

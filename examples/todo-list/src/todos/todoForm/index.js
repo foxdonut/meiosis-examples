@@ -3,14 +3,12 @@ import preventDefault from "prevent-default"
 import { Button, Form, Label } from "semantic-ui-react"
 
 import { initialState } from "./initialState"
-import { actions } from "../actions"
 
 export const todoForm = {
-  initialState,
-  actions
+  initialState
 }
 
-const inputDiv = ({ local, field, label }) => {
+const InputDiv = ({ local, actions, field, label }) => {
   const errors = local.state.validationErrors[field] || []
 
   return (
@@ -19,7 +17,7 @@ const inputDiv = ({ local, field, label }) => {
       <input
         type="text"
         value={local.state.todo[field]}
-        onChange={evt => local.update(actions.editingTodo({ field, value: evt.target.value }))}
+        onChange={evt => actions.editingTodo({ local, field, value: evt.target.value })}
       />
       {errors[0] && (
         <Label color="red" pointing>
@@ -32,15 +30,15 @@ const inputDiv = ({ local, field, label }) => {
 
 export class TodoForm extends Component {
   render() {
-    const { root, local } = this.props
+    const { root, local, actions } = this.props
     const todo = local.state.todo
 
     return (
       <div>
-        {local.state.label && <h4>{local.state.label}</h4>}
+        {this.props.label && <h4>{this.props.label}</h4>}
         <Form>
-          {inputDiv({ local, field: "priority", label: "Priority:" })}
-          {inputDiv({ local, field: "description", label: "Description:" })}
+          <InputDiv local={local} actions={actions} field="priority" label="Priority:" />
+          <InputDiv local={local} actions={actions} field="description" label="Description:" />
           <div>
             <Button
               primary
@@ -49,10 +47,7 @@ export class TodoForm extends Component {
             >
               Save
             </Button>
-            <Button
-              size="small"
-              onClick={preventDefault(() => local.update(actions.cancelEditTodo()))}
-            >
+            <Button size="small" onClick={preventDefault(() => actions.cancelEditTodo({ local }))}>
               Cancel
             </Button>
           </div>

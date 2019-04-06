@@ -27,7 +27,7 @@ export class TodoItem extends Component {
       result.push(
         <Table.Row key={`${todo.id}_editing`}>
           <Table.Cell colSpan={3}>
-            <TodoForm root={root} local={local} />
+            <TodoForm root={root} local={local} actions={actions} />
           </Table.Cell>
         </Table.Row>
       )
