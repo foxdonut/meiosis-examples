@@ -4,6 +4,7 @@ import * as R from "ramda"
 import { ajaxServices } from "../util/ajax-services"
 import { todoForm } from "./todoForm"
 import { validateTodo } from "./validation"
+import { actions as rootActions } from "../root/actions"
 
 const updateList = (todo, state) => {
   return {
@@ -32,56 +33,65 @@ const updateList = (todo, state) => {
   }
 }
 
-export const actions = ({ update, patches }) => ({
-  editTodo: (id, todo) =>
-    update(
-      Object.assign(
-        {},
-        { [id]: O({ editing: true }) },
-        { [`todoForm:${todo.id}`]: todoForm.initialState({ todo: Object.assign({}, todo) }) }
-      )
+export const actions = {
+  clearForm: () => ({
+    todo: { priority: "", description: "" },
+    validationErrors: {}
+  }),
+
+  editingTodo: ({ field, value }) => ({ todo: O({ [field]: value }) }),
+
+  editTodo: todo =>
+    Object.assign(
+      {
+        editing: true
+      },
+      todoForm.initialState({ todo: Object.assign({}, todo) })
     ),
 
-  cancelEditTodo: (id, todo) =>
-    update(
-      Object.assign({}, { [`todoItem:${todo.id}`]: O({ editing: false }) }, patches.clearForm(id))
+  cancelEditTodo: () =>
+    Object.assign(
+      {
+        editing: false
+      },
+      actions.clearForm()
     ),
 
-  saveTodo: (id, todo, state) => {
+  saveTodo: ({ root, local, todo }) => {
     const validationErrors = validateTodo(todo)
 
     if (Object.keys(validationErrors).length === 0) {
-      update(patches.showMessage("Saving, please wait..."))
+      root.update(rootActions.showMessage("Saving, please wait..."))
 
       return ajaxServices
         .saveTodo(todo)
         .then(todo =>
-          update(
+          root.update(
             Object.assign(
               {},
-              updateList(todo, state),
-              patches.clearMessage(),
-              { [`todoItem:${todo.id}`]: O({ editing: false }) },
-              patches.clearForm(id)
+              updateList(todo, root.state),
+              rootActions.clearMessage(),
+              // { [`todoItem:${todo.id}`]: O({ editing: false }) },
+              actions.clearForm()
             )
           )
         )
         .catch(() =>
-          update(
+          root.update(
             Object.assign(
               {},
-              patches.clearMessage(),
-              patches.showError("Sorry, an error occurred. Please try again.")
+              rootActions.clearMessage(),
+              rootActions.showError("Sorry, an error occurred. Please try again.")
             )
           )
         )
     } else {
-      update({ [id]: O({ validationErrors }) })
+      root.update({ validationErrors })
     }
   },
 
-  deleteTodo: todo => {
-    update(patches.showMessage("Deleting, please wait..."))
+  deleteTodo: (update, todo) => {
+    update(rootActions.showMessage("Deleting, please wait..."))
 
     ajaxServices
       .deleteTodo(todo.id)
@@ -95,7 +105,7 @@ export const actions = ({ update, patches }) => ({
                 return todoIds
               })
             },
-            patches.clearMessage()
+            rootActions.clearMessage()
           )
         )
       })
@@ -103,10 +113,10 @@ export const actions = ({ update, patches }) => ({
         update(
           Object.assign(
             {},
-            patches.clearMessage(),
-            patches.showError("Sorry, an error occurred. Please try again.")
+            rootActions.clearMessage(),
+            rootActions.showError("Sorry, an error occurred. Please try again.")
           )
         )
       )
   }
-})
+}

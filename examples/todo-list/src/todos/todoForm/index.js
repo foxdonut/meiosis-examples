@@ -1,30 +1,27 @@
 import React, { Component } from "react"
 import preventDefault from "prevent-default"
-import * as R from "ramda"
 import { Button, Form, Label } from "semantic-ui-react"
 
 import { initialState } from "./initialState"
-import { patches } from "./patches"
-import { actions } from "./actions"
+import { actions } from "../actions"
 
 export const todoForm = {
   initialState,
-  patches,
   actions
 }
 
-const inputDiv = (id, field, label, state, actions) => {
-  const errors = R.path([id, "validationErrors", field], state)
+const inputDiv = ({ local, field, label }) => {
+  const errors = local.state.validationErrors[field] || []
 
   return (
-    <Form.Field error={R.path([id, "validationErrors", field, 0], state) != null}>
+    <Form.Field error={errors[0] != null}>
       <label>{label}</label>
       <input
         type="text"
-        value={R.path([id, "todo", field], state)}
-        onChange={evt => actions.editingTodo(id, field, evt.target.value)}
+        value={local.state.todo[field]}
+        onChange={evt => local.update(actions.editingTodo({ field, value: evt.target.value }))}
       />
-      {errors && (
+      {errors[0] && (
         <Label color="red" pointing>
           {errors[0]}
         </Label>
@@ -35,24 +32,27 @@ const inputDiv = (id, field, label, state, actions) => {
 
 export class TodoForm extends Component {
   render() {
-    const { state, id, actions } = this.props
-    const todo = state[id].todo
+    const { root, local } = this.props
+    const todo = local.state.todo
 
     return (
       <div>
-        {state[id].label && <h4>{state[id].label}</h4>}
+        {local.state.label && <h4>{local.state.label}</h4>}
         <Form>
-          {inputDiv(id, "priority", "Priority:", state, actions)}
-          {inputDiv(id, "description", "Description:", state, actions)}
+          {inputDiv({ local, field: "priority", label: "Priority:" })}
+          {inputDiv({ local, field: "description", label: "Description:" })}
           <div>
             <Button
               primary
               size="small"
-              onClick={preventDefault(() => actions.saveTodo(id, todo, state))}
+              onClick={preventDefault(() => actions.saveTodo({ root, local, todo }))}
             >
               Save
             </Button>
-            <Button size="small" onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>
+            <Button
+              size="small"
+              onClick={preventDefault(() => local.update(actions.cancelEditTodo()))}
+            >
               Cancel
             </Button>
           </div>

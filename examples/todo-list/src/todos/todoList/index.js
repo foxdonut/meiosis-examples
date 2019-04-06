@@ -2,10 +2,12 @@ import React, { Component } from "react"
 import { Table } from "semantic-ui-react"
 
 import { TodoItem } from "./todoItem"
+import { lensProp } from "../../util"
 
 export class TodoList extends Component {
   render() {
-    const { state, actions } = this.props
+    const { root } = this.props
+
     return (
       <Table striped celled>
         <Table.Header>
@@ -16,15 +18,11 @@ export class TodoList extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {state.todoIds.map(todoId => (
-            <TodoItem
-              key={`todoItem_${todoId}`}
-              state={state}
-              id={`todoItem:${todoId}`}
-              todo={state.todos[todoId]}
-              actions={actions}
-            />
-          ))}
+          {root.state.todoIds.map(todoId => {
+            const todo = root.state.todos[todoId]
+            const key = `todoItem_${todoId}`
+            return <TodoItem key={key} root={root} local={lensProp(root, key)} todo={todo} />
+          })}
         </Table.Body>
       </Table>
     )

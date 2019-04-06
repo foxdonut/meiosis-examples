@@ -2,7 +2,6 @@ import React, { Component } from "react"
 
 import { root, Root } from "../root"
 import { todos } from "../todos"
-import { todoForm } from "../todos/todoForm"
 import { ajaxServices } from "../util/ajax-services"
 
 export const app = {
@@ -11,19 +10,7 @@ export const app = {
       .loadTodos()
       .then(initialTodoList =>
         Object.assign({}, root.initialState(), todos.initialState(initialTodoList))
-      ),
-  actions: ({ update }) => {
-    const patches = Object.assign({}, root.patches, todoForm.patches)
-
-    const actionParams = { update, patches }
-
-    return Object.assign(
-      {},
-      root.actions(actionParams),
-      todos.actions(actionParams),
-      todoForm.actions(actionParams)
-    )
-  }
+      )
 }
 
 export class App extends Component {
@@ -40,9 +27,8 @@ export class App extends Component {
   }
 
   render() {
-    const state = this.state
-    const { actions } = this.props
+    const root = { state: this.state, update: this.props.update }
 
-    return <Root state={state} actions={actions} />
+    return <Root root={root} />
   }
 }

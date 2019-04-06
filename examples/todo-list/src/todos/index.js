@@ -4,6 +4,7 @@ import { initialState } from "./initialState"
 import { actions } from "./actions"
 import { TodoForm } from "./todoForm"
 import { TodoList } from "./todoList"
+import { lensProp } from "../util"
 
 export const todos = {
   initialState,
@@ -12,11 +13,11 @@ export const todos = {
 
 export class Todos extends Component {
   render() {
-    const { state, actions } = this.props
+    const { root } = this.props
     return (
       <div>
-        <TodoForm state={state} actions={actions} id="todoForm" />
-        <TodoList state={state} actions={actions} />
+        <TodoForm root={root} local={lensProp(root, "todoForm")} />
+        <TodoList root={root} />
       </div>
     )
   }
