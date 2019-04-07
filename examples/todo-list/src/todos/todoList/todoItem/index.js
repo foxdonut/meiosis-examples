@@ -3,7 +3,7 @@ import { Button, Table } from "semantic-ui-react"
 import * as R from "ramda"
 
 import { TodoForm } from "../../todoForm"
-import { actions } from "../../actions"
+import { deleteTodo, editTodo, itemFormActions } from "../../actions"
 
 export class TodoItem extends Component {
   render() {
@@ -13,11 +13,11 @@ export class TodoItem extends Component {
         <Table.Cell>{todo.priority}</Table.Cell>
         <Table.Cell>{todo.description}</Table.Cell>
         <Table.Cell>
-          <Button primary basic size="mini" onClick={() => local.update(actions.editTodo(todo))}>
+          <Button primary basic size="mini" onClick={() => local.update(editTodo(todo))}>
             Edit
           </Button>
 
-          <Button negative basic size="mini" onClick={() => actions.deleteTodo(root.update, todo)}>
+          <Button negative basic size="mini" onClick={() => deleteTodo(root.update, todo)}>
             Delete
           </Button>
         </Table.Cell>
@@ -27,7 +27,7 @@ export class TodoItem extends Component {
       result.push(
         <Table.Row key={`${todo.id}_editing`}>
           <Table.Cell colSpan={3}>
-            <TodoForm root={root} local={local} actions={actions} />
+            <TodoForm root={root} local={local} actions={itemFormActions} />
           </Table.Cell>
         </Table.Row>
       )

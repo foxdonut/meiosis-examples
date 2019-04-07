@@ -1,14 +1,13 @@
 import React, { Component } from "react"
 
 import { initialState } from "./initialState"
-import { actions } from "./actions"
+import { formActions } from "./actions"
 import { TodoForm } from "./todoForm"
 import { TodoList } from "./todoList"
 import { lensProp } from "../util"
 
 export const todos = {
-  initialState,
-  actions
+  initialState
 }
 
 export class Todos extends Component {
@@ -20,7 +19,7 @@ export class Todos extends Component {
         <TodoForm
           root={root}
           local={lensProp(root, "todoForm")}
-          actions={actions}
+          actions={formActions}
           label="New Todo:"
         />
         <TodoList root={root} />

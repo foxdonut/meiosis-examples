@@ -4,9 +4,9 @@ import * as R from "ramda"
 import { ajaxServices } from "../util/ajax-services"
 import { todoForm } from "./todoForm"
 import { validateTodo } from "./validation"
-import { actions as rootActions } from "../root/actions"
+import { clearMessage, showError, showMessage } from "../root/actions"
 
-const updateList = (todo, state) => {
+export const updateList = (todo, state) => {
   return {
     todos: O({ [todo.id]: todo }),
     todoIds: O(todoIds => {
@@ -33,83 +33,90 @@ const updateList = (todo, state) => {
   }
 }
 
-export const actions = {
-  clearForm: () => ({
-    todo: { priority: "", description: "" },
-    validationErrors: {}
-  }),
+export const clearForm = () => ({
+  todo: { priority: "", description: "" },
+  validationErrors: {}
+})
 
-  editTodo: todo =>
-    Object.assign(
-      {
-        editing: true
-      },
-      todoForm.initialState(Object.assign({}, todo))
-    ),
+export const editTodo = todo =>
+  Object.assign(
+    {
+      editing: true
+    },
+    todoForm.initialState(Object.assign({}, todo))
+  )
 
-  cancelEditTodo: ({ local }) => local.update(todoForm.initialState()),
+export const cancelEditTodo = ({ local }) => local.update(todoForm.initialState())
 
-  editingTodo: ({ local, field, value }) => local.update({ todo: O({ [field]: value }) }),
+export const editingTodo = ({ local, field, value }) =>
+  local.update({ todo: O({ [field]: value }) })
 
-  saveTodo: ({ root, form, todo }) => {
-    const validationErrors = validateTodo(todo)
+export const saveTodo = ({ root, form, todo }) => {
+  const validationErrors = validateTodo(todo)
 
-    if (Object.keys(validationErrors).length === 0) {
-      root.update(rootActions.showMessage("Saving, please wait..."))
+  if (Object.keys(validationErrors).length === 0) {
+    root.update(showMessage("Saving, please wait..."))
 
-      const isExisting = todo.id != null
+    const isExisting = todo.id != null
 
-      return ajaxServices
-        .saveTodo(todo)
-        .then(todo => {
-          root.update(Object.assign({}, updateList(todo, root.state), rootActions.clearMessage()))
-          if (isExisting) {
-            form.update(actions.cancelEditTodo())
-          } else {
-            form.update(actions.clearForm())
-          }
-        })
-        .catch(() =>
-          root.update(
-            Object.assign(
-              {},
-              rootActions.clearMessage(),
-              rootActions.showError("Sorry, an error occurred. Please try again.")
-            )
-          )
-        )
-    } else {
-      form.update({ validationErrors })
-    }
-  },
-
-  deleteTodo: (update, todo) => {
-    update(rootActions.showMessage("Deleting, please wait..."))
-
-    ajaxServices
-      .deleteTodo(todo.id)
-      .then(() => {
-        update(
-          Object.assign(
-            {
-              todos: O({ [todo.id]: O }),
-              todoIds: O(todoIds => {
-                todoIds.splice(todoIds.indexOf(todo.id), 1)
-                return todoIds
-              })
-            },
-            rootActions.clearMessage()
-          )
-        )
+    return ajaxServices
+      .saveTodo(todo)
+      .then(todo => {
+        root.update(Object.assign({}, updateList(todo, root.state), clearMessage()))
+        if (isExisting) {
+          form.update(cancelEditTodo())
+        } else {
+          form.update(clearForm())
+        }
       })
       .catch(() =>
-        update(
+        root.update(
           Object.assign(
             {},
-            rootActions.clearMessage(),
-            rootActions.showError("Sorry, an error occurred. Please try again.")
+            clearMessage(),
+            showError("Sorry, an error occurred. Please try again.")
           )
         )
       )
+  } else {
+    form.update({ validationErrors })
   }
+}
+
+export const deleteTodo = (update, todo) => {
+  update(showMessage("Deleting, please wait..."))
+
+  ajaxServices
+    .deleteTodo(todo.id)
+    .then(() => {
+      update(
+        Object.assign(
+          {
+            todos: O({ [todo.id]: O }),
+            todoIds: O(todoIds => {
+              todoIds.splice(todoIds.indexOf(todo.id), 1)
+              return todoIds
+            })
+          },
+          clearMessage()
+        )
+      )
+    })
+    .catch(() =>
+      update(
+        Object.assign({}, clearMessage(), showError("Sorry, an error occurred. Please try again."))
+      )
+    )
+}
+
+export const formActions = {
+  editingTodo,
+  saveTodo,
+  cancelEditTodo
+}
+
+export const itemFormActions = {
+  editingTodo,
+  saveTodo,
+  cancelEditTodo: ({ local }) => local.update(O)
 }
