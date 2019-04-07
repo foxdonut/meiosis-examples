@@ -33,11 +33,6 @@ export const updateList = (todo, state) => {
   }
 }
 
-export const clearForm = () => ({
-  todo: { priority: "", description: "" },
-  validationErrors: {}
-})
-
 export const editTodo = todo =>
   Object.assign(
     {
@@ -46,28 +41,22 @@ export const editTodo = todo =>
     todoForm.initialState(Object.assign({}, todo))
   )
 
-export const cancelEditTodo = ({ local }) => local.update(todoForm.initialState())
+export const clearForm = ({ local }) => local.update(todoForm.initialState())
 
 export const editingTodo = ({ local, field, value }) =>
   local.update({ todo: O({ [field]: value }) })
 
-export const saveTodo = ({ root, form, todo }) => {
+export const saveTodo = ({ root, local, actions, todo }) => {
   const validationErrors = validateTodo(todo)
 
   if (Object.keys(validationErrors).length === 0) {
     root.update(showMessage("Saving, please wait..."))
 
-    const isExisting = todo.id != null
-
     return ajaxServices
       .saveTodo(todo)
       .then(todo => {
         root.update(Object.assign({}, updateList(todo, root.state), clearMessage()))
-        if (isExisting) {
-          form.update(cancelEditTodo())
-        } else {
-          form.update(clearForm())
-        }
+        actions.clearForm({ local })
       })
       .catch(() =>
         root.update(
@@ -79,7 +68,7 @@ export const saveTodo = ({ root, form, todo }) => {
         )
       )
   } else {
-    form.update({ validationErrors })
+    local.update({ validationErrors })
   }
 }
 
@@ -112,11 +101,9 @@ export const deleteTodo = (update, todo) => {
 export const formActions = {
   editingTodo,
   saveTodo,
-  cancelEditTodo
+  clearForm
 }
 
-export const itemFormActions = {
-  editingTodo,
-  saveTodo,
-  cancelEditTodo: ({ local }) => local.update(O)
-}
+export const itemFormActions = Object.assign({}, formActions, {
+  clearForm: ({ local }) => local.update(O)
+})
