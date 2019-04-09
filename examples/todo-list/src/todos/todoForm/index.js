@@ -17,7 +17,7 @@ const InputDiv = ({ local, actions, field, label }) => {
       <input
         type="text"
         value={local.state.todo[field]}
-        onChange={evt => actions.editingTodo({ local, field, value: evt.target.value })}
+        onChange={evt => local.update(actions.editingTodo({ field, value: evt.target.value }))}
       />
       {errors[0] && (
         <Label color="red" pointing>
@@ -43,11 +43,14 @@ export class TodoForm extends Component {
             <Button
               primary
               size="small"
-              onClick={preventDefault(() => actions.saveTodo({ root, local, actions, todo }))}
+              onClick={preventDefault(() => actions.saveTodo({ root, local, todo }))}
             >
               Save
             </Button>
-            <Button size="small" onClick={preventDefault(() => actions.clearForm({ local }))}>
+            <Button
+              size="small"
+              onClick={preventDefault(() => local.update(actions.clearForm(todo)))}
+            >
               Cancel
             </Button>
           </div>

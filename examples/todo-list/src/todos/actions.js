@@ -39,12 +39,11 @@ export const editTodo = todo =>
     todoForm.initialState(Object.assign({}, todo))
   )
 
-export const clearForm = ({ local }) => local.update(todoForm.initialState())
+export const clearForm = todo => (todo.id ? O : todoForm.initialState())
 
-export const editingTodo = ({ local, field, value }) =>
-  local.update({ todo: O({ [field]: value }) })
+export const editingTodo = ({ field, value }) => ({ todo: O({ [field]: value }) })
 
-export const saveTodo = ({ root, local, actions, todo }) => {
+export const saveTodo = ({ root, local, todo }) => {
   const validationErrors = validateTodo(todo)
 
   if (Object.keys(validationErrors).length === 0) {
@@ -52,9 +51,9 @@ export const saveTodo = ({ root, local, actions, todo }) => {
 
     return ajaxServices
       .saveTodo(todo)
-      .then(todo => {
-        root.update(Object.assign({}, updateList(todo, root.state), clearMessage()))
-        actions.clearForm({ local })
+      .then(updatedTodo => {
+        root.update(Object.assign({}, updateList(updatedTodo, root.state), clearMessage()))
+        local.update(clearForm(todo))
       })
       .catch(() =>
         root.update(
@@ -100,7 +99,3 @@ export const formActions = {
   saveTodo,
   clearForm
 }
-
-export const itemFormActions = Object.assign({}, formActions, {
-  clearForm: ({ local }) => local.update(O)
-})

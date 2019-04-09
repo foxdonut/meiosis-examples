@@ -3,7 +3,7 @@ import { Button, Table } from "semantic-ui-react"
 import * as R from "ramda"
 
 import { TodoForm } from "../../todoForm"
-import { deleteTodo, editTodo, itemFormActions } from "../../actions"
+import { deleteTodo, editTodo, formActions } from "../../actions"
 
 export class TodoItem extends Component {
   render() {
@@ -27,7 +27,7 @@ export class TodoItem extends Component {
       result.push(
         <Table.Row key={`${todo.id}_editing`}>
           <Table.Cell colSpan={3}>
-            <TodoForm root={root} local={local} actions={itemFormActions} />
+            <TodoForm root={root} local={local} actions={formActions} />
           </Table.Cell>
         </Table.Row>
       )
