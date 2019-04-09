@@ -69,13 +69,13 @@ export const saveTodo = ({ root, local, todo }) => {
   }
 }
 
-export const deleteTodo = (update, todo) => {
-  update(showMessage("Deleting, please wait..."))
+export const deleteTodo = ({ root, todo }) => {
+  root.update(showMessage("Deleting, please wait..."))
 
   ajaxServices
     .deleteTodo(todo.id)
     .then(() => {
-      update(
+      root.update(
         Object.assign(
           {
             todos: O(todos => {
@@ -88,7 +88,7 @@ export const deleteTodo = (update, todo) => {
       )
     })
     .catch(() =>
-      update(
+      root.update(
         Object.assign({}, clearMessage(), showError("Sorry, an error occurred. Please try again."))
       )
     )

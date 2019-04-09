@@ -17,7 +17,7 @@ export class TodoItem extends Component {
             Edit
           </Button>
 
-          <Button negative basic size="mini" onClick={() => deleteTodo(root.update, todo)}>
+          <Button negative basic size="mini" onClick={() => deleteTodo({ root, todo })}>
             Delete
           </Button>
         </Table.Cell>
