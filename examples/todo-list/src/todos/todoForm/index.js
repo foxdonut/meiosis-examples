@@ -8,7 +8,7 @@ export const todoForm = {
   initialState
 }
 
-const InputDiv = ({ local, actions, field, label }) => {
+const InputDiv = ({ root, local, actions, field, label }) => {
   const errors = local.state.validationErrors[field] || []
 
   return (
@@ -17,7 +17,9 @@ const InputDiv = ({ local, actions, field, label }) => {
       <input
         type="text"
         value={local.state.todo[field]}
-        onChange={evt => local.update(actions.editingTodo({ field, value: evt.target.value }))}
+        onChange={evt =>
+          root.update(local.lens(actions.editingTodo({ field, value: evt.target.value })))
+        }
       />
       {errors[0] && (
         <Label color="red" pointing>
@@ -37,8 +39,20 @@ export class TodoForm extends Component {
       <div>
         {this.props.label && <h4>{this.props.label}</h4>}
         <Form>
-          <InputDiv local={local} actions={actions} field="priority" label="Priority:" />
-          <InputDiv local={local} actions={actions} field="description" label="Description:" />
+          <InputDiv
+            root={root}
+            local={local}
+            actions={actions}
+            field="priority"
+            label="Priority:"
+          />
+          <InputDiv
+            root={root}
+            local={local}
+            actions={actions}
+            field="description"
+            label="Description:"
+          />
           <div>
             <Button
               primary
@@ -49,7 +63,7 @@ export class TodoForm extends Component {
             </Button>
             <Button
               size="small"
-              onClick={preventDefault(() => local.update(actions.clearForm(todo)))}
+              onClick={preventDefault(() => root.update(local.lens(actions.clearForm(todo))))}
             >
               Cancel
             </Button>

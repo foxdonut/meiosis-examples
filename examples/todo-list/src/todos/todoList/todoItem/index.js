@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { Button, Table } from "semantic-ui-react"
-import * as R from "ramda"
 
 import { TodoForm } from "../../todoForm"
 import { deleteTodo, editTodo, formActions } from "../../actions"
+import { get } from "../../../util"
 
 export class TodoItem extends Component {
   render() {
@@ -13,7 +13,7 @@ export class TodoItem extends Component {
         <Table.Cell>{todo.priority}</Table.Cell>
         <Table.Cell>{todo.description}</Table.Cell>
         <Table.Cell>
-          <Button primary basic size="mini" onClick={() => local.update(editTodo(todo))}>
+          <Button primary basic size="mini" onClick={() => root.update(local.lens(editTodo(todo)))}>
             Edit
           </Button>
 
@@ -23,7 +23,7 @@ export class TodoItem extends Component {
         </Table.Cell>
       </Table.Row>
     ]
-    if (R.prop("editing", local.state)) {
+    if (get(local.state, ["editing"])) {
       result.push(
         <Table.Row key={`${todo.id}_editing`}>
           <Table.Cell colSpan={3}>

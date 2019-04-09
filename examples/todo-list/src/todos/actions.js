@@ -52,8 +52,14 @@ export const saveTodo = ({ root, local, todo }) => {
     return ajaxServices
       .saveTodo(todo)
       .then(updatedTodo => {
-        root.update(Object.assign({}, updateList(updatedTodo, root.state), clearMessage()))
-        local.update(clearForm(todo))
+        root.update(
+          Object.assign(
+            {},
+            updateList(updatedTodo, root.state),
+            clearMessage(),
+            local.lens(clearForm(todo))
+          )
+        )
       })
       .catch(() =>
         root.update(
@@ -65,7 +71,7 @@ export const saveTodo = ({ root, local, todo }) => {
         )
       )
   } else {
-    local.update({ validationErrors })
+    root.update(local.lens({ validationErrors }))
   }
 }
 
