@@ -8,18 +8,16 @@ export const todoForm = {
   initialState
 }
 
-const InputDiv = ({ root, local, actions, field, label }) => {
-  const errors = local.state.validationErrors[field] || []
+const InputDiv = ({ state, actions, field, label }) => {
+  const errors = state.validationErrors[field] || []
 
   return (
     <Form.Field error={errors[0] != null}>
       <label>{label}</label>
       <input
         type="text"
-        value={local.state.todo[field]}
-        onChange={evt =>
-          root.update(local.lens(actions.editingTodo({ field, value: evt.target.value })))
-        }
+        value={state.todo[field]}
+        onChange={evt => actions.editingTodo({ field, value: evt.target.value })}
       />
       {errors[0] && (
         <Label color="red" pointing>
@@ -32,39 +30,20 @@ const InputDiv = ({ root, local, actions, field, label }) => {
 
 export class TodoForm extends Component {
   render() {
-    const { root, local, actions } = this.props
-    const todo = local.state.todo
+    const { state, actions } = this.props
+    const todo = state.todo
 
     return (
       <div>
         {this.props.label && <h4>{this.props.label}</h4>}
         <Form>
-          <InputDiv
-            root={root}
-            local={local}
-            actions={actions}
-            field="priority"
-            label="Priority:"
-          />
-          <InputDiv
-            root={root}
-            local={local}
-            actions={actions}
-            field="description"
-            label="Description:"
-          />
+          <InputDiv state={state} actions={actions} field="priority" label="Priority:" />
+          <InputDiv state={state} actions={actions} field="description" label="Description:" />
           <div>
-            <Button
-              primary
-              size="small"
-              onClick={preventDefault(() => actions.saveTodo({ root, local, todo }))}
-            >
+            <Button primary size="small" onClick={preventDefault(() => actions.saveTodo({ todo }))}>
               Save
             </Button>
-            <Button
-              size="small"
-              onClick={preventDefault(() => root.update(local.lens(actions.clearForm(todo))))}
-            >
+            <Button size="small" onClick={preventDefault(() => actions.clearForm({ todo }))}>
               Cancel
             </Button>
           </div>
