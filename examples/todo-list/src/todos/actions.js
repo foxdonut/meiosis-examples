@@ -1,5 +1,4 @@
 import O from "patchinko/constant"
-import * as R from "ramda"
 
 import { ajaxServices } from "../util/ajax-services"
 import { todoForm } from "./todoForm"
@@ -8,27 +7,26 @@ import { clearMessage, showError, showMessage } from "../root/actions"
 
 export const updateList = (todo, state) => {
   return {
-    todos: O({ [todo.id]: todo }),
-    todoIds: O(todoIds => {
-      if (todoIds.length === 0) {
-        todoIds.push(todo.id)
+    todos: O(todos => {
+      if (todos.length === 0) {
+        todos.push(todo)
       } else {
-        const idx = todoIds.indexOf(todo.id)
+        const idx = todos.findIndex(t => t.id === todo.id)
         if (idx >= 0) {
-          todoIds.splice(idx, 1)
+          todos.splice(idx, 1)
         }
-        if (todoIds.length === 0 || state.todos[R.last(todoIds)].priority <= todo.priority) {
-          todoIds.push(todo.id)
+        if (todos.length === 0 || state.todos[todos.length - 1].priority <= todo.priority) {
+          todos.push(todo)
         } else {
-          for (let i = 0; i < todoIds.length; i++) {
-            if (state.todos[todoIds[i]].priority > todo.priority) {
-              todoIds.splice(i, 0, todo.id)
+          for (let i = 0; i < todos.length; i++) {
+            if (state.todos[i].priority > todo.priority) {
+              todos.splice(i, 0, todo)
               break
             }
           }
         }
       }
-      return todoIds
+      return todos
     })
   }
 }
@@ -81,10 +79,9 @@ export const deleteTodo = (update, todo) => {
       update(
         Object.assign(
           {
-            todos: O({ [todo.id]: O }),
-            todoIds: O(todoIds => {
-              todoIds.splice(todoIds.indexOf(todo.id), 1)
-              return todoIds
+            todos: O(todos => {
+              todos.splice(todos.findIndex(t => t.id === todo.id), 1)
+              return todos
             })
           },
           clearMessage()

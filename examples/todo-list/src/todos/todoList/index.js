@@ -18,9 +18,8 @@ export class TodoList extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {root.state.todoIds.map(todoId => {
-            const todo = root.state.todos[todoId]
-            const key = `todoItem_${todoId}`
+          {root.state.todos.map(todo => {
+            const key = `todoItem_${todo.id}`
             return <TodoItem key={key} root={root} local={lensProp(root, key)} todo={todo} />
           })}
         </Table.Body>
