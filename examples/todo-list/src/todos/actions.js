@@ -5,7 +5,7 @@ import { todoForm } from "./todoForm"
 import { validateTodo } from "./validation"
 import { clearMessage, showError, showMessage } from "../root/actions"
 
-export const updateList = (todo, state) => {
+export const updateList = todo => {
   return {
     todos: O(todos => {
       if (todos.length === 0) {
@@ -15,11 +15,11 @@ export const updateList = (todo, state) => {
         if (idx >= 0) {
           todos.splice(idx, 1)
         }
-        if (todos.length === 0 || state.todos[todos.length - 1].priority <= todo.priority) {
+        if (todos.length === 0 || todos[todos.length - 1].priority <= todo.priority) {
           todos.push(todo)
         } else {
           for (let i = 0; i < todos.length; i++) {
-            if (state.todos[i].priority > todo.priority) {
+            if (todos[i].priority > todo.priority) {
               todos.splice(i, 0, todo)
               break
             }
@@ -53,12 +53,7 @@ export const saveTodo = ({ root, local, todo }) => {
       .saveTodo(todo)
       .then(updatedTodo => {
         root.update(
-          Object.assign(
-            {},
-            updateList(updatedTodo, root.state),
-            clearMessage(),
-            local.lens(clearForm(todo))
-          )
+          Object.assign({}, updateList(updatedTodo), clearMessage(), local.lens(clearForm(todo)))
         )
       })
       .catch(() =>
