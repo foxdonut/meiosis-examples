@@ -12,13 +12,17 @@ export const todos = {
 
 export class Todos extends Component {
   render() {
-    const { root } = this.props
-    const local = lensProp(root, "todoForm")
+    const { context } = this.props
+    const formContext = lensProp(context, "todoForm")
 
     return (
       <div>
-        <TodoForm state={local.state} actions={formActions({ root, local })} label="New Todo:" />
-        <TodoList root={root} />
+        <TodoForm
+          state={formContext.local.state}
+          actions={formActions(formContext)}
+          label="New Todo:"
+        />
+        <TodoList context={context} />
       </div>
     )
   }

@@ -27,8 +27,8 @@ export class App extends Component {
   }
 
   render() {
-    const root = { state: this.state, update: this.props.update }
+    const context = { state: this.state, update: this.props.update }
 
-    return <Root root={root} />
+    return <Root context={context} />
   }
 }

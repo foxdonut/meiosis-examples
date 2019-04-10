@@ -31,21 +31,26 @@ const updateList = todo => {
   }
 }
 
-const saveTodo = ({ root, local }) => todo => {
+const saveTodo = context => todo => {
   const validationErrors = validateTodo(todo)
 
   if (Object.keys(validationErrors).length === 0) {
-    root.update(showMessage("Saving, please wait..."))
+    context.update(showMessage("Saving, please wait..."))
 
     ajaxServices
       .saveTodo(todo)
       .then(updatedTodo => {
-        root.update(
-          Object.assign({}, updateList(updatedTodo), clearMessage(), local.lens(clearForm(todo)))
+        context.update(
+          Object.assign(
+            {},
+            updateList(updatedTodo),
+            clearMessage(),
+            context.local.lens(clearForm(todo))
+          )
         )
       })
       .catch(() =>
-        root.update(
+        context.update(
           Object.assign(
             {},
             clearMessage(),
@@ -54,17 +59,17 @@ const saveTodo = ({ root, local }) => todo => {
         )
       )
   } else {
-    root.update(local.lens({ validationErrors }))
+    context.update(context.local.lens({ validationErrors }))
   }
 }
 
-const deleteTodo = ({ root }) => todo => {
-  root.update(showMessage("Deleting, please wait..."))
+const deleteTodo = context => todo => {
+  context.update(showMessage("Deleting, please wait..."))
 
   ajaxServices
     .deleteTodo(todo.id)
     .then(() => {
-      root.update(
+      context.update(
         Object.assign(
           {
             todos: O(todos => {
@@ -77,21 +82,22 @@ const deleteTodo = ({ root }) => todo => {
       )
     })
     .catch(() =>
-      root.update(
+      context.update(
         Object.assign({}, clearMessage(), showError("Sorry, an error occurred. Please try again."))
       )
     )
 }
 
-export const itemActions = ({ root, local }) => ({
-  editTodo: todo => root.update(local.lens(editTodo(todo))),
-  deleteTodo: deleteTodo({ root })
+export const itemActions = context => ({
+  editTodo: todo => context.update(context.local.lens(editTodo(todo))),
+  deleteTodo: deleteTodo(context)
 })
 
-export const formActions = ({ root, local }) => ({
-  editingTodo: ({ field, value }) => root.update(local.lens(editingTodo({ field, value }))),
+export const formActions = context => ({
+  editingTodo: ({ field, value }) =>
+    context.update(context.local.lens(editingTodo({ field, value }))),
 
-  saveTodo: saveTodo({ root, local }),
+  saveTodo: saveTodo(context),
 
-  clearForm: todo => root.update(local.lens(clearForm(todo)))
+  clearForm: todo => context.update(context.local.lens(clearForm(todo)))
 })

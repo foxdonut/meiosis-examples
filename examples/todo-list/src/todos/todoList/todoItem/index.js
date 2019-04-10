@@ -7,7 +7,7 @@ import { get } from "../../../util"
 
 export class TodoItem extends Component {
   render() {
-    const { root, local, actions, todo } = this.props
+    const { context, actions, todo } = this.props
     const result = [
       <Table.Row key={todo.id}>
         <Table.Cell>{todo.priority}</Table.Cell>
@@ -23,11 +23,11 @@ export class TodoItem extends Component {
         </Table.Cell>
       </Table.Row>
     ]
-    if (get(local.state, ["editing"])) {
+    if (get(context.local.state, ["editing"])) {
       result.push(
         <Table.Row key={`${todo.id}_editing`}>
           <Table.Cell colSpan={3}>
-            <TodoForm state={local.state} actions={formActions({ root, local })} />
+            <TodoForm state={context.local.state} actions={formActions(context)} />
           </Table.Cell>
         </Table.Row>
       )

@@ -3,10 +3,13 @@ import O from "patchinko/constant"
 export const get = (object, path) =>
   path.reduce((obj, prop) => (obj == null ? null : obj[prop]), object)
 
-export const lensProp = ({ state, lens }, prop) => ({
-  state: state[prop],
-  lens: patch => (lens || (x => x))({ [prop]: O(patch) })
-})
+export const lensProp = (context, prop) =>
+  Object.assign({}, context, {
+    local: {
+      state: (context.local || context.state)[prop],
+      lens: patch => ((context.local && context.local.lens) || (x => x))({ [prop]: O(patch) })
+    }
+  })
 
 /*
 export const patchPath = (patch, path) => ({

@@ -7,7 +7,7 @@ import { lensProp } from "../../util"
 
 export class TodoList extends Component {
   render() {
-    const { root } = this.props
+    const { context } = this.props
 
     return (
       <Table striped celled>
@@ -19,16 +19,15 @@ export class TodoList extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {root.state.todos.map(todo => {
+          {context.state.todos.map(todo => {
             const key = `todoItem_${todo.id}`
-            const local = lensProp(root, key)
+            const itemContext = lensProp(context, key)
 
             return (
               <TodoItem
                 key={key}
-                root={root}
-                local={local}
-                actions={itemActions({ root, local })}
+                context={itemContext}
+                actions={itemActions(itemContext)}
                 todo={todo}
               />
             )
