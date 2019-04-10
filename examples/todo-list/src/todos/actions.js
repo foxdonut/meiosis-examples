@@ -1,11 +1,11 @@
 import O from "patchinko/constant"
 
 import { ajaxServices } from "../util/ajax-services"
-import { todoForm } from "./todoForm"
 import { validateTodo } from "./validation"
-import { clearMessage, showError, showMessage } from "../root/actions"
+import { clearMessage, showError, showMessage } from "../root/patches"
+import { clearForm, editingTodo, editTodo } from "./patches"
 
-export const updateList = todo => {
+const updateList = todo => {
   return {
     todos: O(todos => {
       if (todos.length === 0) {
@@ -31,21 +31,7 @@ export const updateList = todo => {
   }
 }
 
-export const editTodo = todo =>
-  Object.assign(
-    {
-      editing: true
-    },
-    todoForm.initialState(Object.assign({}, todo))
-  )
-
-export const clearForm = ({ root, local }) => ({ todo }) =>
-  root.update(local.lens(todo.id ? O : todoForm.initialState()))
-
-export const editingTodo = ({ root, local }) => ({ field, value }) =>
-  root.update(local.lens({ todo: O({ [field]: value }) }))
-
-export const saveTodo = ({ root, local }) => ({ todo }) => {
+const saveTodo = ({ root, local }) => todo => {
   const validationErrors = validateTodo(todo)
 
   if (Object.keys(validationErrors).length === 0) {
@@ -55,12 +41,7 @@ export const saveTodo = ({ root, local }) => ({ todo }) => {
       .saveTodo(todo)
       .then(updatedTodo => {
         root.update(
-          Object.assign(
-            {},
-            updateList(updatedTodo),
-            clearMessage(),
-            clearForm({ root, local })(todo) // FIXME
-          )
+          Object.assign({}, updateList(updatedTodo), clearMessage(), local.lens(clearForm(todo)))
         )
       })
       .catch(() =>
@@ -77,7 +58,7 @@ export const saveTodo = ({ root, local }) => ({ todo }) => {
   }
 }
 
-export const deleteTodo = ({ root, todo }) => {
+const deleteTodo = ({ root }) => todo => {
   root.update(showMessage("Deleting, please wait..."))
 
   ajaxServices
@@ -102,8 +83,15 @@ export const deleteTodo = ({ root, todo }) => {
     )
 }
 
+export const itemActions = ({ root, local }) => ({
+  editTodo: todo => root.update(local.lens(editTodo(todo))),
+  deleteTodo: deleteTodo({ root })
+})
+
 export const formActions = ({ root, local }) => ({
-  editingTodo: editingTodo({ root, local }),
+  editingTodo: ({ field, value }) => root.update(local.lens(editingTodo({ field, value }))),
+
   saveTodo: saveTodo({ root, local }),
-  clearForm: clearForm({ root, local })
+
+  clearForm: todo => root.update(local.lens(clearForm(todo)))
 })

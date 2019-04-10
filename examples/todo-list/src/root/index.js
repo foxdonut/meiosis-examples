@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Button, Menu, Modal } from "semantic-ui-react"
 
 import { initialState } from "./initialState"
-import { clearError, navigateTo } from "./actions"
+import { clearError, navigateTo } from "./patches"
 import { Todos } from "../todos"
 import { Projects } from "../projects"
 

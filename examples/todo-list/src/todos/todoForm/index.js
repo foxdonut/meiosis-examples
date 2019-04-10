@@ -40,10 +40,10 @@ export class TodoForm extends Component {
           <InputDiv state={state} actions={actions} field="priority" label="Priority:" />
           <InputDiv state={state} actions={actions} field="description" label="Description:" />
           <div>
-            <Button primary size="small" onClick={preventDefault(() => actions.saveTodo({ todo }))}>
+            <Button primary size="small" onClick={preventDefault(() => actions.saveTodo(todo))}>
               Save
             </Button>
-            <Button size="small" onClick={preventDefault(() => actions.clearForm({ todo }))}>
+            <Button size="small" onClick={preventDefault(() => actions.clearForm(todo))}>
               Cancel
             </Button>
           </div>

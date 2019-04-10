@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Table } from "semantic-ui-react"
 
 import { TodoItem } from "./todoItem"
+import { itemActions } from "../actions"
 import { lensProp } from "../../util"
 
 export class TodoList extends Component {
@@ -20,7 +21,17 @@ export class TodoList extends Component {
         <Table.Body>
           {root.state.todos.map(todo => {
             const key = `todoItem_${todo.id}`
-            return <TodoItem key={key} root={root} local={lensProp(root, key)} todo={todo} />
+            const local = lensProp(root, key)
+
+            return (
+              <TodoItem
+                key={key}
+                root={root}
+                local={local}
+                actions={itemActions({ root, local })}
+                todo={todo}
+              />
+            )
           })}
         </Table.Body>
       </Table>
