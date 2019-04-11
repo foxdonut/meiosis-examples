@@ -43,7 +43,7 @@ export class TodoForm extends Component {
             <Button primary size="small" onClick={preventDefault(() => actions.saveTodo(todo))}>
               Save
             </Button>
-            <Button size="small" onClick={preventDefault(() => actions.clearForm(todo))}>
+            <Button size="small" onClick={preventDefault(() => actions.cancelEdit(todo))}>
               Cancel
             </Button>
           </div>

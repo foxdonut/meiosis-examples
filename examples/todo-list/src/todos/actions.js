@@ -3,7 +3,7 @@ import O from "patchinko/constant"
 import { ajaxServices } from "../util/ajax-services"
 import { validateTodo } from "./validation"
 import { clearMessage, showError, showMessage } from "../root/patches"
-import { clearForm, editingTodo, editTodo } from "./patches"
+import { cancelEdit, editingTodo, editTodo } from "./patches"
 
 const updateList = todo => {
   return {
@@ -45,7 +45,7 @@ const saveTodo = context => todo => {
             {},
             updateList(updatedTodo),
             clearMessage(),
-            context.local.lens(clearForm(todo))
+            context.local.lens(cancelEdit(todo))
           )
         )
       })
@@ -99,5 +99,20 @@ export const formActions = context => ({
 
   saveTodo: saveTodo(context),
 
-  clearForm: todo => context.update(context.local.lens(clearForm(todo)))
+  cancelEdit: todo => context.update(context.local.lens(cancelEdit(todo)))
 })
+
+/*
+
+view needs { state, local, actions }
+actions need { update, lens }
+
+root =
+  { update, state, lens = x => x, local = state, actions = createActions(update, lens) }
+
+lens(root) =
+  { update, state, lens = lens(l), local = local[prop], actions = createActions(update, lens) }
+
+createActions = (update, lens) => { f(x) }
+
+*/

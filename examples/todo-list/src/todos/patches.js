@@ -10,6 +10,6 @@ export const editTodo = todo =>
     todoForm.initialState(Object.assign({}, todo))
   )
 
-export const clearForm = todo => (todo.id ? O : todoForm.initialState())
+export const cancelEdit = todo => (todo.id ? O : todoForm.initialState())
 
 export const editingTodo = ({ field, value }) => ({ todo: O({ [field]: value }) })
