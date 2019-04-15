@@ -12,20 +12,14 @@ export const temperature = {
 
 export const Temperature = {
   view: vnode => {
-    const { local } = vnode.attrs
+    const { context } = vnode.attrs,
+      { state } = context
 
     return m(
       "div",
       m(
         "div" + b.mt(8),
-        m(
-          "label",
-          local.state.label,
-          "Temperature: ",
-          local.state.value,
-          m.trust("&deg;"),
-          local.state.units
-        )
+        m("label", state.label, " Temperature: ", state.value, m.trust("&deg;"), state.units)
       ),
       m(
         "div" + b.mt(8),
@@ -34,19 +28,19 @@ export const Temperature = {
             label: "Increment",
             raised: true,
             style: { color: "white", backgroundColor: "DodgerBlue" },
-            events: { onclick: () => local.update(actions.increment(1)) }
+            events: { onclick: () => actions.increment(context, 1) }
           }),
           m(Button, {
             label: "Decrement",
             raised: true,
             style: { color: "white", backgroundColor: "DodgerBlue" },
-            events: { onclick: () => local.update(actions.increment(-1)) }
+            events: { onclick: () => actions.increment(context, -1) }
           }),
           m(Button, {
             label: "Change Units",
             raised: true,
             style: { color: "white", backgroundColor: "MediumSeaGreen" },
-            events: { onclick: () => local.update(actions.changeUnits()) }
+            events: { onclick: () => actions.changeUnits(context) }
           })
         ])
       )

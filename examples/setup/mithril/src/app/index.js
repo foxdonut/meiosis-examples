@@ -22,7 +22,7 @@ export const app = {
 
 export const App = {
   view: vnode => {
-    const { root } = vnode.attrs
+    const { context } = vnode.attrs
 
     return m(
       "div",
@@ -32,13 +32,13 @@ export const App = {
             .f("left")
             .w("40%")
             .pr(40),
-        m(DateTime, { root })
+        m(DateTime, { context })
       ),
       m(
         "div" + b.f("left"),
-        m(Conditions, { root }),
-        m(Temperature, { root, local: lensProp(root, "air") }),
-        m(Temperature, { root, local: lensProp(root, "water") })
+        m(Conditions, { context }),
+        m(Temperature, { context: lensProp(context, "air") }),
+        m(Temperature, { context: lensProp(context, "water") })
       )
     )
   }

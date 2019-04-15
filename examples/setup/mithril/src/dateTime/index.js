@@ -15,39 +15,40 @@ const getErrorMessage = (state, field) =>
 
 export const DateTime = {
   view: vnode => {
-    const { root } = vnode.attrs
+    const { context } = vnode.attrs,
+      { state } = context
 
     return m(
       "div",
       m(TextField, {
         label: "Date:",
         type: "date",
-        value: root.state.dateTime.date,
+        value: state.dateTime.date,
         events: {
-          oninput: evt => root.update(actions.editDate(evt.target.value))
+          oninput: evt => actions.editDate(context, evt.target.value)
         },
-        help: getErrorMessage(root.state, "date")
+        help: getErrorMessage(state, "date")
       }),
       m(
         "div" + b.mt(4),
         m(TextField, {
           label: "Hour:",
-          value: root.state.dateTime.hour,
+          value: state.dateTime.hour,
           events: {
-            oninput: evt => root.update(actions.editHour(evt.target.value))
+            oninput: evt => actions.editHour(context, evt.target.value)
           },
-          help: getErrorMessage(root.state, "hour")
+          help: getErrorMessage(state, "hour")
         })
       ),
       m(
         "div" + b.mt(4),
         m(TextField, {
           label: "Minute:",
-          value: root.state.dateTime.minute,
+          value: state.dateTime.minute,
           events: {
-            oninput: evt => root.update(actions.editMinute(evt.target.value))
+            oninput: evt => actions.editMinute(context, evt.target.value)
           },
-          help: getErrorMessage(root.state, "minute")
+          help: getErrorMessage(state, "minute")
         })
       ),
       m(
@@ -55,9 +56,9 @@ export const DateTime = {
         m(Button, {
           label: "Validate",
           border: true,
-          events: { onclick: () => root.update(actions.validate(root.state)) }
+          events: { onclick: () => actions.validate(context) }
         }),
-        m("span" + b.ml(8), root.state.conditions.message)
+        m("span" + b.ml(8), state.conditions.message)
       )
     )
   }

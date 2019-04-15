@@ -1,16 +1,17 @@
 import O from "patchinko/constant"
 
 export const actions = {
-  increment: amount => ({ value: O(x => x + amount) }),
+  increment: ({ update, lens }, amount) => update(lens({ value: O(x => x + amount) })),
 
-  changeUnits: () => state => {
+  changeUnits: ({ state, update, lens }) => {
+    const patch = {}
     if (state.units === "C") {
-      state.units = "F"
-      state.value = Math.round((state.value * 9) / 5 + 32)
+      patch.units = "F"
+      patch.value = Math.round((state.value * 9) / 5 + 32)
     } else {
-      state.units = "C"
-      state.value = Math.round(((state.value - 32) / 9) * 5)
+      patch.units = "C"
+      patch.value = Math.round(((state.value - 32) / 9) * 5)
     }
-    return state
+    update(lens(patch))
   }
 }

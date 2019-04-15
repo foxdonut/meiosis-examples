@@ -12,7 +12,8 @@ export const conditions = {
 
 export const Conditions = {
   view: vnode => {
-    const { root } = vnode.attrs
+    const { context } = vnode.attrs
+    const { state } = context
 
     return m(
       "div" + b.mt(8),
@@ -20,16 +21,16 @@ export const Conditions = {
         "div",
         m(Checkbox, {
           label: "Precipitations",
-          checked: root.state.conditions.precipitations,
-          onChange: ({ checked }) => root.update(actions.togglePrecipitations(checked))
+          checked: state.conditions.precipitations,
+          onChange: ({ checked }) => actions.togglePrecipitations(context, checked)
         })
       ),
       m(
         "div" + b.mt(4),
         m(RadioGroup, {
           name: "conditions",
-          checkedValue: root.state.conditions.sky,
-          onChange: ({ value }) => root.update(actions.changeSky(value)),
+          checkedValue: state.conditions.sky,
+          onChange: ({ value }) => actions.changeSky(context, value),
           buttons: [
             { value: "SUNNY", label: "Sunny" },
             { value: "CLOUDY", label: "Cloudy", style: { marginLeft: "32px" } },
