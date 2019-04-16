@@ -17,14 +17,20 @@ export const app = {
       conditions.initialState(),
       { air: temperature.initialState("Air") },
       { water: temperature.initialState("Water") }
+    ),
+
+  actions: update =>
+    Object.assign(
+      {},
+      conditions.actions(update),
+      dateTime.actions(update),
+      temperature.actions(update)
     )
 }
 
 export const App = {
-  view: vnode => {
-    const { context } = vnode.attrs
-
-    return m(
+  view: ({ attrs: { context, actions } }) =>
+    m(
       "div",
       m(
         "div" +
@@ -32,14 +38,13 @@ export const App = {
             .f("left")
             .w("40%")
             .pr(40),
-        m(DateTime, { context })
+        m(DateTime, { context, actions })
       ),
       m(
         "div" + b.f("left"),
-        m(Conditions, { context }),
-        m(Temperature, { context: lensProp(context, "air") }),
-        m(Temperature, { context: lensProp(context, "water") })
+        m(Conditions, { context, actions }),
+        m(Temperature, { context: lensProp(context, "air"), actions }),
+        m(Temperature, { context: lensProp(context, "water"), actions })
       )
     )
-  }
 }

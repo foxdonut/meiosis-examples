@@ -10,7 +10,9 @@ export const app = {
       .loadTodos()
       .then(initialTodoList =>
         Object.assign({}, root.initialState(), todos.initialState(initialTodoList))
-      )
+      ),
+
+  actions: update => Object.assign({}, root.actions(update), todos.actions(update))
 }
 
 export class App extends Component {
@@ -27,8 +29,8 @@ export class App extends Component {
   }
 
   render() {
-    const context = { state: this.state, update: this.props.update }
+    const context = { root: this.state, state: this.state, path: [], lens: x => x }
 
-    return <Root context={context} />
+    return <Root context={context} actions={this.props.actions} />
   }
 }

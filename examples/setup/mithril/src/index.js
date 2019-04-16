@@ -10,16 +10,18 @@ const states = stream.scan(O, app.initialState(), update)
 // Only for using Meiosis Tracer in development.
 require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [states] })
 
+const actions = app.actions(update)
+
 m.mount(document.getElementById("app"), {
   view: () =>
     m(App, {
       context: {
         root: states(),
         state: states(),
-        update,
         path: [],
         lens: x => x
-      }
+      },
+      actions
     })
 })
 

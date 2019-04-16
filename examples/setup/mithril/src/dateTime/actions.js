@@ -2,14 +2,14 @@ import O from "patchinko/constant"
 
 import { validateInput } from "../validation"
 
-export const actions = {
-  editDate: ({ update }, value) => update({ dateTime: O({ date: value }) }),
+export const actions = update => ({
+  editDate: value => update({ dateTime: O({ date: value }) }),
 
-  editHour: ({ update }, value) => update({ dateTime: O({ hour: value }) }),
+  editHour: value => update({ dateTime: O({ hour: value }) }),
 
-  editMinute: ({ update }, value) => update({ dateTime: O({ minute: value }) }),
+  editMinute: value => update({ dateTime: O({ minute: value }) }),
 
-  validate: ({ update, state }) => {
+  validate: state => {
     const errors = validateInput(state)
     update({
       errors,
@@ -18,4 +18,4 @@ export const actions = {
       })
     })
   }
-}
+})

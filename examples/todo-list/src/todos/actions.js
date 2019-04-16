@@ -2,8 +2,18 @@ import O from "patchinko/constant"
 
 import { ajaxServices } from "../util/ajax-services"
 import { validateTodo } from "./validation"
-import { clearMessage, showError, showMessage } from "../root/patches"
-import { cancelEdit, editingTodo, editTodo } from "./patches"
+import { clearMessage, showError, showMessage } from "../root/actions"
+import { todoForm } from "./todoForm"
+
+const editTodo = todo =>
+  Object.assign(
+    {
+      editing: true
+    },
+    todoForm.initialState(Object.assign({}, todo))
+  )
+
+const cancelEditTodo = todo => (todo.id ? O : todoForm.initialState())
 
 const updateList = todo => {
   return {
@@ -31,26 +41,63 @@ const updateList = todo => {
   }
 }
 
-const saveTodo = context => todo => {
-  const validationErrors = validateTodo(todo)
+export const actions = update => ({
+  editTodo: (context, todo) => update(context.lens(editTodo(todo))),
+  editingTodo: (context, field, value) => update(context.lens({ todo: O({ [field]: value }) })),
+  cancelEditTodo: (context, todo) => update(context.lens(cancelEditTodo(todo))),
 
-  if (Object.keys(validationErrors).length === 0) {
-    context.update(showMessage("Saving, please wait..."))
+  saveTodo: (context, todo) => {
+    const validationErrors = validateTodo(todo)
+
+    if (Object.keys(validationErrors).length === 0) {
+      update(showMessage("Saving, please wait..."))
+
+      ajaxServices
+        .saveTodo(todo)
+        .then(updatedTodo => {
+          update(
+            Object.assign(
+              {},
+              updateList(updatedTodo),
+              clearMessage(),
+              context.lens(cancelEditTodo(todo))
+            )
+          )
+        })
+        .catch(() =>
+          update(
+            Object.assign(
+              {},
+              clearMessage(),
+              showError("Sorry, an error occurred. Please try again.")
+            )
+          )
+        )
+    } else {
+      update(context.lens({ validationErrors }))
+    }
+  },
+
+  deleteTodo: (_context, todo) => {
+    update(showMessage("Deleting, please wait..."))
 
     ajaxServices
-      .saveTodo(todo)
-      .then(updatedTodo => {
-        context.update(
+      .deleteTodo(todo.id)
+      .then(() => {
+        update(
           Object.assign(
-            {},
-            updateList(updatedTodo),
-            clearMessage(),
-            context.local.lens(cancelEdit(todo))
+            {
+              todos: O(todos => {
+                todos.splice(todos.findIndex(t => t.id === todo.id), 1)
+                return todos
+              })
+            },
+            clearMessage()
           )
         )
       })
       .catch(() =>
-        context.update(
+        update(
           Object.assign(
             {},
             clearMessage(),
@@ -58,61 +105,5 @@ const saveTodo = context => todo => {
           )
         )
       )
-  } else {
-    context.update(context.local.lens({ validationErrors }))
   }
-}
-
-const deleteTodo = context => todo => {
-  context.update(showMessage("Deleting, please wait..."))
-
-  ajaxServices
-    .deleteTodo(todo.id)
-    .then(() => {
-      context.update(
-        Object.assign(
-          {
-            todos: O(todos => {
-              todos.splice(todos.findIndex(t => t.id === todo.id), 1)
-              return todos
-            })
-          },
-          clearMessage()
-        )
-      )
-    })
-    .catch(() =>
-      context.update(
-        Object.assign({}, clearMessage(), showError("Sorry, an error occurred. Please try again."))
-      )
-    )
-}
-
-export const itemActions = context => ({
-  editTodo: todo => context.update(context.local.lens(editTodo(todo))),
-  deleteTodo: deleteTodo(context)
 })
-
-export const formActions = context => ({
-  editingTodo: ({ field, value }) =>
-    context.update(context.local.lens(editingTodo({ field, value }))),
-
-  saveTodo: saveTodo(context),
-
-  cancelEdit: todo => context.update(context.local.lens(cancelEdit(todo)))
-})
-
-/*
-
-view needs { state, local, actions }
-actions need { update, lens }
-
-root =
-  { update, state, lens = x => x, local = state, actions = createActions(update, lens) }
-
-lens(root) =
-  { update, state, lens = lens(l), local = local[prop], actions = createActions(update, lens) }
-
-createActions = (update, lens) => { f(x) }
-
-*/
