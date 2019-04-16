@@ -1,25 +1,10 @@
-import m from "mithril"
-import O from "patchinko/constant"
-
-import { buttonStyle } from "../util/ui"
+import { actions } from "./actions"
 
 export const button = {
   initialState: () => ({
     active: false
   }),
-  actions: {
-    toggle: () => ({ active: O(x => !x) })
-  }
+  actions
 }
 
-export const Button = {
-  view: ({ attrs: { local } }) => {
-    const bc = local.state.active ? "green" : "red"
-    const label = local.state.active ? "Active" : "Inactive"
-    return m(
-      "button.bg-" + bc + buttonStyle,
-      { onclick: () => local.update(button.actions.toggle()) },
-      label
-    )
-  }
-}
+export { Button } from "./view"

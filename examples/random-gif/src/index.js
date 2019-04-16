@@ -10,11 +10,25 @@ const states = stream
   .map(state => app.computed.reduce((x, f) => O(x, f(x)), state))
 
 // Only for using Meiosis Tracer in development.
-const meiosisTracer = require("meiosis-tracer")
-meiosisTracer({ selector: "#tracer", streams: [{ label: "states", stream: states }], rows: 35 })
-states.map(() => m.redraw())
-// End of code for using Meiosis Tracer in development.
+require("meiosis-tracer")({
+  selector: "#tracer",
+  streams: [{ label: "states", stream: states }],
+  rows: 35
+})
+
+const actions = app.actions(update)
 
 m.mount(document.getElementById("app"), {
-  view: () => m(App, { root: { state: states(), update } })
+  view: () =>
+    m(App, {
+      context: {
+        root: states(),
+        state: states(),
+        path: [],
+        lens: x => x
+      },
+      actions
+    })
 })
+
+states.map(() => m.redraw())

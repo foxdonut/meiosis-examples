@@ -14,7 +14,7 @@ export const lensPath = (context, lensPath) => {
   const lens = pathPatch(path)
 
   return Object.assign({}, context, {
-    state: get(context.state, path),
+    state: get(context.root, path),
     path,
     lens
   })

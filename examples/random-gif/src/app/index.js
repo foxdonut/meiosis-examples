@@ -20,6 +20,14 @@ export const app = {
     randomGifPairPair: randomGifPairPair.initialState()
   }),
 
+  actions: update =>
+    Object.assign(
+      {},
+      button.actions(update),
+      randomGif.actions(update),
+      randomGifList.actions(update)
+    ),
+
   computed: [
     randomGifList.computed
     // could have more functions here
@@ -27,27 +35,27 @@ export const app = {
 }
 
 export const App = {
-  view: ({ attrs: { root } }) =>
+  view: ({ attrs: { context, actions } }) =>
     m(
       "div",
-      m(Counter, { root, local: lensProp(root, "counter") }),
+      m(Counter, { context: lensProp(context, "counter"), actions }),
 
       m("div.mt2", "Button:"),
-      m(Button, { root, local: lensProp(root, "button") }),
+      m(Button, { context: lensProp(context, "button"), actions }),
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { root, local: lensProp(root, "randomGif1") }),
+      m(RandomGif, { context: lensProp(context, "randomGif1"), actions }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { root, local: lensProp(root, "randomGif2") }),
+      m(RandomGif, { context: lensProp(context, "randomGif2"), actions }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { root, local: lensProp(root, "randomGifPair") }),
+      m(RandomGifPair, { context: lensProp(context, "randomGifPair"), actions }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { root, local: lensProp(root, "randomGifPairPair") }),
+      m(RandomGifPairPair, { context: lensProp(context, "randomGifPairPair"), actions }),
 
       m("div.mt2", "Random Gif List:"),
-      m(RandomGifList, { root, local: lensProp(root, "randomGifList") })
+      m(RandomGifList, { context: lensProp(context, "randomGifList"), actions })
     )
 }
