@@ -20,7 +20,7 @@ export const actions = update => ({
             image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
           })
         )
-        // update(events.actions.newGifGenerated(context.root))
+        update({ newGifGenerated: true })
       })
       .catch(() => update(context.lens({ image: Loaded.Y(Success.N()) })))
   },

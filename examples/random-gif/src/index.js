@@ -32,3 +32,4 @@ m.mount(document.getElementById("app"), {
 })
 
 states.map(() => m.redraw())
+states.map(state => app.services.forEach(service => service(state, update)))

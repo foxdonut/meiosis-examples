@@ -1,5 +1,6 @@
 import m from "mithril"
 
+import { service } from "./service"
 import { button, Button } from "../button"
 import { counter, Counter } from "../counter"
 import { randomGif, RandomGif } from "../random-gif"
@@ -31,7 +32,9 @@ export const app = {
   computed: [
     randomGifList.computed
     // could have more functions here
-  ]
+  ],
+
+  services: [service]
 }
 
 export const App = {
