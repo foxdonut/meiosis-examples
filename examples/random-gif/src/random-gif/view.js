@@ -20,7 +20,7 @@ const imgsrc = image =>
   })(image)
 
 export const RandomGif = {
-  view: ({ attrs: { context, actions } }) => console.log('context:', context) ||
+  view: ({ attrs: { context, actions } }) =>
     m(
       "div.ba.b--green.pa2.mt2",
       m("span.mr2", "Tag:"),

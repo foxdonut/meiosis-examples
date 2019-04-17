@@ -3,7 +3,6 @@ import * as R from "ramda"
 import uuid from "uuid"
 
 import { randomGif } from "../random-gif"
-import { patchProp } from "../util"
 
 export const actions = update => ({
   add: context => {
@@ -27,10 +26,7 @@ export const actions = update => ({
 
     update(
       context.lens(
-        ids.reduce(
-          (result, id) => Object.assign(result, patchProp(randomGif.actions.reset(), id)),
-          {}
-        )
+        ids.reduce((result, id) => Object.assign(result, { [id]: randomGif.reset() }), {})
       )
     )
   }

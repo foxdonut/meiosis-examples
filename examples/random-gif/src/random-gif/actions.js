@@ -5,6 +5,8 @@ import { Loaded, Success, Image } from "./types"
 const gif_new_url = "https://api.giphy.com/v1/gifs/random"
 const api_key = "dc6zaTOxFJmzC"
 
+export const reset = () => ({ image: Loaded.Y(Success.Y(Image.N())) })
+
 export const actions = update => ({
   editTag: (context, tag) => update(context.lens({ tag })),
 
@@ -23,5 +25,5 @@ export const actions = update => ({
       .catch(() => update(context.lens({ image: Loaded.Y(Success.N()) })))
   },
 
-  reset: context => update(context.lens({ image: Loaded.Y(Success.Y(Image.N())) }))
+  reset: context => update(context.lens(reset()))
 })

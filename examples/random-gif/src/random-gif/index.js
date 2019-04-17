@@ -1,12 +1,13 @@
 import { Loaded, Success, Image } from "./types"
-import { actions } from "./actions"
+import { actions, reset } from "./actions"
 
 export const randomGif = {
   initialState: () => ({
     image: Loaded.Y(Success.Y(Image.N())),
     tag: ""
   }),
-  actions
+  actions,
+  reset
 }
 
 export { RandomGif } from "./view"
