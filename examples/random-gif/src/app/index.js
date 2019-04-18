@@ -18,7 +18,8 @@ export const app = {
     randomGif2: randomGif.initialState(),
     randomGifList: randomGifList.initialState(),
     randomGifPair: randomGifPair.initialState(),
-    randomGifPairPair: randomGifPairPair.initialState()
+    randomGifPairPair: randomGifPairPair.initialState(),
+    event: {}
   }),
 
   actions: update =>
