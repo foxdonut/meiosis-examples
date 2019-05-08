@@ -1,9 +1,9 @@
-import { initialState } from "./initialState"
-import { actions } from "./actions"
+import { Initial } from "./initial"
+import { Actions } from "./actions"
 
 export const conditions = {
-  initialState,
-  actions
+  Initial,
+  Actions
 }
 
 export { Conditions } from "./view"

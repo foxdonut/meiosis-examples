@@ -3,16 +3,15 @@ import React, { Component } from "react"
 import { conditions, Conditions } from "../conditions"
 import { dateTime, DateTime } from "../dateTime"
 import { temperature, Temperature } from "../temperature"
-import { lensProp } from "../util"
 
 export const app = {
-  initialState: () =>
+  Initial: () => Object.assign({}, dateTime.Initial(), conditions.Initial(), temperature.Initial()),
+  Actions: update =>
     Object.assign(
       {},
-      dateTime.initialState(),
-      conditions.initialState(),
-      { air: temperature.initialState("Air") },
-      { water: temperature.initialState("Water") }
+      conditions.Actions(update),
+      dateTime.Actions(update),
+      temperature.Actions(update)
     )
 }
 
@@ -29,14 +28,14 @@ export class App extends Component {
   }
 
   render() {
-    const root = { state: this.state, update: this.props.update }
+    const state = this.state
+    const { actions } = this.props
 
     return (
       <div>
-        <DateTime root={root} />
-        <Conditions root={root} />
-        <Temperature root={root} local={lensProp(root, "air")} />
-        <Temperature root={root} local={lensProp(root, "water")} />
+        <DateTime state={state} actions={actions} />
+        <Conditions state={state} actions={actions} />
+        <Temperature state={state} actions={actions} />
       </div>
     )
   }

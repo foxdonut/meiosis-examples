@@ -1,16 +1,17 @@
 import _ from "lodash"
 
-export const actions = {
-  increment: amount => state => _.update(state, "value", x => x + amount),
+export const Actions = update => ({
+  increment: amount => update(state => _.update(state, ["temperature", "value"], x => x + amount)),
 
-  changeUnits: () => state => {
-    if (state.units === "C") {
-      state.units = "F"
-      state.value = Math.round((state.value * 9) / 5 + 32)
-    } else {
-      state.units = "C"
-      state.value = Math.round(((state.value - 32) / 9) * 5)
-    }
-    return state
-  }
-}
+  changeUnits: () =>
+    update(state => {
+      if (state.temperature.units === "C") {
+        state.temperature.units = "F"
+        state.temperature.value = Math.round((state.temperature.value * 9) / 5 + 32)
+      } else {
+        state.temperature.units = "C"
+        state.temperature.value = Math.round(((state.temperature.value - 32) / 9) * 5)
+      }
+      return state
+    })
+})

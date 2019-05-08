@@ -1,16 +1,20 @@
 import O from "patchinko/constant"
 
-export const actions = {
-  increment: amount => ({ value: O(x => x + amount) }),
+export const Actions = update => ({
+  increment: amount => update({ temperature: O({ value: O(x => x + amount) }) }),
 
-  changeUnits: () => state => {
-    if (state.units === "C") {
-      state.units = "F"
-      state.value = Math.round((state.value * 9) / 5 + 32)
-    } else {
-      state.units = "C"
-      state.value = Math.round(((state.value - 32) / 9) * 5)
-    }
-    return state
+  changeUnits: () => {
+    update({
+      temperature: O(temperature => {
+        if (temperature.units === "C") {
+          temperature.units = "F"
+          temperature.value = Math.round((temperature.value * 9) / 5 + 32)
+        } else {
+          temperature.units = "C"
+          temperature.value = Math.round(((temperature.value - 32) / 9) * 5)
+        }
+        return temperature
+      })
+    })
   }
-}
+})

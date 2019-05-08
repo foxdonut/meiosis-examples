@@ -1,11 +1,11 @@
 import { html } from "lit-html"
 
-import { initialState } from "./initialState"
-import { actions } from "./actions"
+import { Initial } from "./initial"
+import { Actions } from "./actions"
 
 export const dateTime = {
-  initialState,
-  actions
+  Initial,
+  Actions
 }
 
 const getErrorMessage = (state, field) =>
@@ -13,43 +13,43 @@ const getErrorMessage = (state, field) =>
 
 const hasError = (state, field) => getErrorMessage(state, field).trim().length > 0
 
-export const DateTime = ({ root }) => html`
+export const DateTime = ({ state, actions }) => html`
   <div>
-    <div class="form-group ${hasError(root.state, "date") ? "has-error" : ""}">
+    <div class="form-group ${hasError(state, "date") ? "has-error" : ""}">
       <label>Date:</label>
       <input
         type="date"
         class="form-control"
-        value=${root.state.dateTime.date}
-        @change=${evt => root.update(actions.editDate(evt.target.value))}
+        value=${state.dateTime.date}
+        @change=${evt => actions.editDate(evt.target.value)}
       />
-      <span class="help-block">${getErrorMessage(root.state, "date")}</span>
+      <span class="help-block">${getErrorMessage(state, "date")}</span>
     </div>
-    <div class="form-group ${hasError(root.state, "hour") ? "has-error" : ""}">
+    <div class="form-group ${hasError(state, "hour") ? "has-error" : ""}">
       <label>Hour:</label>
       <input
         type="text"
         class="form-control"
-        value=${root.state.dateTime.hour}
-        @change=${evt => root.update(actions.editHour(evt.target.value))}
+        value=${state.dateTime.hour}
+        @change=${evt => actions.editHour(evt.target.value)}
       />
-      <span class="help-block">${getErrorMessage(root.state, "hour")}</span>
+      <span class="help-block">${getErrorMessage(state, "hour")}</span>
     </div>
-    <div class="form-group ${hasError(root.state, "minute") ? "has-error" : ""}">
+    <div class="form-group ${hasError(state, "minute") ? "has-error" : ""}">
       <label>Minute:</label>
       <input
         type="text"
         class="form-control"
-        value=${root.state.dateTime.minute}
-        @change=${evt => root.update(actions.editMinute(evt.target.value))}
+        value=${state.dateTime.minute}
+        @change=${evt => actions.editMinute(evt.target.value)}
       />
-      <span class="help-block">${getErrorMessage(root.state, "minute")}</span>
+      <span class="help-block">${getErrorMessage(state, "minute")}</span>
     </div>
     <div>
-      <button class="btn btn-default" @click=${() => root.update(actions.validate(root.state))}>
+      <button class="btn btn-default" @click=${() => actions.validate(state)}>
         Validate
       </button>
-      <span style="margin-left: 0.4rem">${root.state.conditions.message}</span>
+      <span style="margin-left: 0.4rem">${state.conditions.message}</span>
     </div>
   </div>
 `

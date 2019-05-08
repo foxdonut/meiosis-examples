@@ -3,14 +3,14 @@ import b from "bss"
 import { Checkbox, RadioGroup } from "polythene-mithril"
 
 export const Conditions = {
-  view: ({ attrs: { context, actions } }) =>
+  view: ({ attrs: { state, actions } }) =>
     m(
       "div" + b.mt(8),
       m(
         "div",
         m(Checkbox, {
           label: "Precipitations",
-          checked: context.state.conditions.precipitations,
+          checked: state.conditions.precipitations,
           onChange: ({ checked }) => actions.togglePrecipitations(checked)
         })
       ),
@@ -18,7 +18,7 @@ export const Conditions = {
         "div" + b.mt(4),
         m(RadioGroup, {
           name: "conditions",
-          checkedValue: context.state.conditions.sky,
+          checkedValue: state.conditions.sky,
           onChange: ({ value }) => actions.changeSky(value),
           buttons: [
             { value: "SUNNY", label: "Sunny" },

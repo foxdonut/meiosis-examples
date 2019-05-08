@@ -3,27 +3,26 @@ import { html } from "lit-html"
 import { conditions, Conditions } from "../conditions"
 import { dateTime, DateTime } from "../dateTime"
 import { temperature, Temperature } from "../temperature"
-import { lensProp } from "../util"
 
 export const app = {
-  initialState: () =>
+  Initial: () => Object.assign({}, dateTime.Initial(), conditions.Initial(), temperature.Initial()),
+
+  Actions: update =>
     Object.assign(
       {},
-      dateTime.initialState(),
-      conditions.initialState(),
-      { air: temperature.initialState("Air") },
-      { water: temperature.initialState("Water") }
+      conditions.Actions(update),
+      dateTime.Actions(update),
+      temperature.Actions(update)
     )
 }
 
-export const App = ({ root }) => html`
+export const App = ({ state, actions }) => html`
   <div class="row">
     <div class="col-md-4">
-      ${DateTime({ root })}
+      ${DateTime({ state, actions })}
     </div>
     <div class="col-md-4">
-      ${Conditions({ root })} ${Temperature({ root, local: lensProp(root, "air") })}
-      ${Temperature({ root, local: lensProp(root, "water") })}
+      ${Conditions({ state, actions })} ${Temperature({ state, actions })}
     </div>
   </div>
 `

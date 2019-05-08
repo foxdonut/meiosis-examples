@@ -15,31 +15,29 @@ const editTodo = todo =>
 
 const cancelEditTodo = todo => (todo.id ? O : todoForm.initialState())
 
-const updateList = todo => {
-  return {
-    todos: O(todos => {
-      if (todos.length === 0) {
+const updateList = todo => ({
+  todos: O(todos => {
+    if (todos.length === 0) {
+      todos.push(todo)
+    } else {
+      const idx = todos.findIndex(t => t.id === todo.id)
+      if (idx >= 0) {
+        todos.splice(idx, 1)
+      }
+      if (todos.length === 0 || todos[todos.length - 1].priority <= todo.priority) {
         todos.push(todo)
       } else {
-        const idx = todos.findIndex(t => t.id === todo.id)
-        if (idx >= 0) {
-          todos.splice(idx, 1)
-        }
-        if (todos.length === 0 || todos[todos.length - 1].priority <= todo.priority) {
-          todos.push(todo)
-        } else {
-          for (let i = 0; i < todos.length; i++) {
-            if (todos[i].priority > todo.priority) {
-              todos.splice(i, 0, todo)
-              break
-            }
+        for (let i = 0; i < todos.length; i++) {
+          if (todos[i].priority > todo.priority) {
+            todos.splice(i, 0, todo)
+            break
           }
         }
       }
-      return todos
-    })
-  }
-}
+    }
+    return todos
+  })
+})
 
 export const actions = update => ({
   editTodo: (context, todo) => update(context.lens(editTodo(todo))),

@@ -1,4 +1,4 @@
-export const initialState = () => ({
+export const Initial = () => ({
   dateTime: {
     date: "",
     hour: "",

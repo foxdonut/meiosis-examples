@@ -2,7 +2,7 @@ import O from "patchinko/constant"
 
 import { validateInput } from "../validation"
 
-export const actions = update => ({
+export const Actions = update => ({
   editDate: value => update({ dateTime: O({ date: value }) }),
 
   editHour: value => update({ dateTime: O({ hour: value }) }),

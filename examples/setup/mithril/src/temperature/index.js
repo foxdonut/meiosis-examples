@@ -1,9 +1,9 @@
-import { initialState } from "./initialState"
-import { actions } from "./actions"
+import { Initial } from "./initial"
+import { Actions } from "./actions"
 
 export const temperature = {
-  initialState,
-  actions
+  Initial,
+  Actions
 }
 
 export { Temperature } from "./view"

@@ -1,4 +1,4 @@
-import { h, Component } from "preact"
+import { h } from "preact"
 import Checkbox from "preact-material-components/Checkbox"
 import Formfield from "preact-material-components/FormField"
 import Radio from "preact-material-components/Radio"
@@ -8,47 +8,41 @@ import "preact-material-components/FormField/style.css"
 import "preact-material-components/Radio/style.css"
 import "preact-material-components/Theme/style.css"
 
-import { initialState } from "./initialState"
-import { actions } from "./actions"
+import { Initial } from "./initial"
+import { Actions } from "./actions"
 
 export const conditions = {
-  initialState,
-  actions
+  Initial,
+  Actions
 }
 
-const conditionsOption = ({ root, value, label }) => (
+const conditionsOption = ({ state, actions, value, label }) => (
   <Formfield>
     <Radio
       id={value}
       name="conditions"
       value={value}
-      checked={root.state.conditions.sky === value}
-      onChange={evt => root.update(actions.changeSky(evt.target.value))}
+      checked={state.conditions.sky === value}
+      onChange={evt => actions.changeSky(evt.target.value)}
     />
     <label htmlFor={value}>{label}</label>
   </Formfield>
 )
 
-export class Conditions extends Component {
-  render() {
-    const { root } = this.props
-
-    return (
-      <div>
-        <Formfield>
-          <Checkbox
-            id="precipitations"
-            checked={root.state.conditions.precipitations}
-            onChange={evt => root.update(actions.togglePrecipitations(evt.target.checked))}
-          />
-          <label htmlFor="precipitations">Precipitations</label>
-        </Formfield>
-        <div>
-          {conditionsOption({ root, value: "SUNNY", label: "Sunny" })}
-          {conditionsOption({ root, value: "CLOUDY", label: "Cloudy" })}
-          {conditionsOption({ root, value: "MIX", label: "Mix of sun and clouds" })}
-        </div>
-      </div>
-    )
-  }
-}
+export const Conditions = ({ state, actions }) => (
+  <div>
+    <Formfield>
+      <Checkbox
+        id="precipitations"
+        checked={state.conditions.precipitations}
+        onChange={evt => actions.togglePrecipitations(evt.target.checked)}
+      />
+      <label htmlFor="precipitations">Precipitations</label>
+    </Formfield>
+    <div>
+      {conditionsOption({ state, actions, value: "SUNNY", label: "Sunny" })}
+      {conditionsOption({ state, actions, value: "CLOUDY", label: "Cloudy" })}
+      {conditionsOption({ state, actions, value: "MIX", label: "Mix of sun and clouds" })}
+    </div>
+  </div>
+)

@@ -1,7 +1,7 @@
 import O from "patchinko/constant"
 
-export const actions = {
-  togglePrecipitations: value => ({ conditions: O({ precipitations: value }) }),
+export const Actions = update => ({
+  togglePrecipitations: value => update({ conditions: O({ precipitations: value }) }),
 
-  changeSky: value => ({ conditions: O({ sky: value }) })
-}
+  changeSky: value => update({ conditions: O({ sky: value }) })
+})
