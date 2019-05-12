@@ -2,7 +2,7 @@ import { root } from "../root"
 import { router } from "../router"
 import { todoStorage } from "../util/todo-storage"
 
-const initialState = () =>
+const Initial = () =>
   todoStorage.loadAll().then(todos =>
     Object.assign(
       {
@@ -20,8 +20,9 @@ const initialState = () =>
   )
 
 export const app = {
-  initialState,
-  computed: [root.computed],
+  Initial,
+  Actions: root.Actions,
+  accept: [root.accept],
   view: root.view,
   services: [router.service]
 }

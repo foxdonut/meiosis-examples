@@ -1,7 +1,7 @@
-import { initialState } from "./initialState"
+import { Initial } from "./initial"
 
 export const randomGifPairPair = {
-  initialState
+  Initial
 }
 
 export { RandomGifPairPair } from "./view"

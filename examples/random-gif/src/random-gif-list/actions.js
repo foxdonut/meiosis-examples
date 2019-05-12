@@ -4,10 +4,10 @@ import uuid from "uuid"
 
 import { randomGif } from "../random-gif"
 
-export const actions = update => ({
+export const Actions = update => ({
   add: context => {
     const newId = uuid.v1()
-    const randomGifState = randomGif.initialState()
+    const randomGifState = randomGif.Initial()
 
     update(context.lens({ [newId]: randomGifState, randomGifIds: O(R.append(newId)) }))
   },

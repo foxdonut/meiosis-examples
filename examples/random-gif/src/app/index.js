@@ -11,27 +11,27 @@ import { randomGifList, RandomGifList } from "../random-gif-list"
 import { lensProp } from "../util"
 
 export const app = {
-  initialState: () => ({
-    button: button.initialState(),
-    counter: counter.initialState({ label: "Counter:" }),
-    randomGif1: randomGif.initialState(),
-    randomGif2: randomGif.initialState(),
-    randomGifList: randomGifList.initialState(),
-    randomGifPair: randomGifPair.initialState(),
-    randomGifPairPair: randomGifPairPair.initialState(),
+  Initial: () => ({
+    button: button.Initial(),
+    counter: counter.Initial({ label: "Counter:" }),
+    randomGif1: randomGif.Initial(),
+    randomGif2: randomGif.Initial(),
+    randomGifList: randomGifList.Initial(),
+    randomGifPair: randomGifPair.Initial(),
+    randomGifPairPair: randomGifPairPair.Initial(),
     event: {}
   }),
 
-  actions: update =>
+  Actions: update =>
     Object.assign(
       {},
-      button.actions(update),
-      randomGif.actions(update),
-      randomGifList.actions(update)
+      button.Actions(update),
+      randomGif.Actions(update),
+      randomGifList.Actions(update)
     ),
 
-  computed: [
-    randomGifList.computed
+  accept: [
+    randomGifList.accept
     // could have more functions here
   ],
 

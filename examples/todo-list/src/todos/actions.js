@@ -10,10 +10,10 @@ const editTodo = todo =>
     {
       editing: true
     },
-    todoForm.initialState(Object.assign({}, todo))
+    todoForm.Initial(Object.assign({}, todo))
   )
 
-const cancelEditTodo = todo => (todo.id ? O : todoForm.initialState())
+const cancelEditTodo = todo => (todo.id ? O : todoForm.Initial())
 
 const updateList = todo => ({
   todos: O(todos => {
@@ -39,7 +39,7 @@ const updateList = todo => ({
   })
 })
 
-export const actions = update => ({
+export const Actions = update => ({
   editTodo: (context, todo) => update(context.lens(editTodo(todo))),
   editingTodo: (context, field, value) => update(context.lens({ todo: O({ [field]: value }) })),
   cancelEditTodo: (context, todo) => update(context.lens(cancelEditTodo(todo))),

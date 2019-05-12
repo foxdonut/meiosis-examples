@@ -5,14 +5,12 @@ import { todos } from "../todos"
 import { ajaxServices } from "../util/ajax-services"
 
 export const app = {
-  initialState: () =>
+  Initial: () =>
     ajaxServices
       .loadTodos()
-      .then(initialTodoList =>
-        Object.assign({}, root.initialState(), todos.initialState(initialTodoList))
-      ),
+      .then(initialTodoList => Object.assign({}, root.Initial(), todos.Initial(initialTodoList))),
 
-  actions: update => Object.assign({}, root.actions(update), todos.actions(update))
+  Actions: update => Object.assign({}, root.Actions(update), todos.Actions(update))
 }
 
 export class App extends Component {

@@ -8,7 +8,7 @@ export const showError = error => ({ error })
 
 export const clearError = () => ({ error: null })
 
-export const actions = update => ({
+export const Actions = update => ({
   navigateTo: pageId => update(navigateTo(pageId)),
 
   showMessage: message => update(showMessage(message)),

@@ -1,11 +1,11 @@
-import { initialState } from "./initialState"
-import { actions } from "./actions"
-import { computed } from "./computed"
+import { Initial } from "./initial"
+import { Actions } from "./actions"
+import { accept } from "./accept"
 
 export const randomGifList = {
-  initialState,
-  actions,
-  computed
+  Initial,
+  Actions,
+  accept
 }
 
 export { RandomGifList } from "./view"

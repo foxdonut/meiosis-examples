@@ -1,10 +1,10 @@
-import { actions } from "./actions"
+import { Actions } from "./actions"
 
 export const button = {
-  initialState: () => ({
+  Initial: () => ({
     active: false
   }),
-  actions
+  Actions
 }
 
 export { Button } from "./view"

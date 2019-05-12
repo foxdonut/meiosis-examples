@@ -1,5 +1,5 @@
 import O from "patchinko/constant"
 
-export const actions = update => ({
+export const Actions = update => ({
   buttonToggle: context => update(context.lens({ active: O(x => !x) }))
 })

@@ -1,8 +1,7 @@
 import O from "patchinko/constant"
 import * as R from "ramda"
 
-// FIXME
-export const computed = state => ({
+export const accept = state => ({
   randomGifList: O({
     hasGifs: R.any(
       R.equals("Y"),

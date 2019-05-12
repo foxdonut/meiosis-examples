@@ -8,7 +8,7 @@ const api_key = "HMUbJEROIPi2Dodeq0thL28emz5CMCRX"
 
 export const reset = () => ({ image: Loaded.Y(Success.Y(Image.N())) })
 
-export const actions = update => ({
+export const Actions = update => ({
   editTag: (context, tag) => update(context.lens({ tag })),
 
   newGif: context => {

@@ -1,5 +1,5 @@
 export const counter = {
-  initialState: ({ label }) => ({
+  Initial: ({ label }) => ({
     label,
     value: 0
   })

@@ -35,12 +35,12 @@ const saveNewTodo = todo => ({
   newTodo: ""
 })
 
-export const actions = {
-  loadAll: update => todoStorage.loadAll().then(todos => update(displayTodos(todos))),
+export const Actions = update => ({
+  loadAll: () => todoStorage.loadAll().then(todos => update(displayTodos(todos))),
 
-  clearCompleted: update => todoStorage.clearCompleted().then(todos => update(displayTodos(todos))),
+  clearCompleted: () => todoStorage.clearCompleted().then(todos => update(displayTodos(todos))),
 
-  deleteTodo: (update, todoId) =>
+  deleteTodo: todoId =>
     todoStorage.deleteTodoId(todoId).then(() =>
       update({
         todosById: O({
@@ -53,10 +53,10 @@ export const actions = {
       })
     ),
 
-  toggleAllTodos: (update, checked) =>
+  toggleAllTodos: checked =>
     todoStorage.setAllCompleted(checked).then(todos => update(displayTodos(todos))),
 
-  toggleTodo: (update, todoId, completed) => {
+  toggleTodo: (todoId, completed) => {
     todoStorage.setCompleted(todoId, completed).then(() =>
       update({
         todosById: O({
@@ -68,7 +68,7 @@ export const actions = {
     )
   },
 
-  newTodoKeyUp: (update, evt) => {
+  newTodoKeyUp: evt => {
     if (evt.keyCode === ENTER_KEY) {
       const title = evt.target.value.trim()
 
@@ -80,12 +80,12 @@ export const actions = {
     }
   },
 
-  editTodo: (update, todo, evt) => {
+  editTodo: (todo, evt) => {
     update({ editTodo: todo })
     evt.target.parentElement.parentElement.getElementsByClassName("edit")[0].focus()
   },
 
-  editBlur: (update, editTodo) => {
+  editBlur: editTodo => {
     if (editTodo.id) {
       editTodo.title = editTodo.title.trim()
       if (editTodo.title) {
@@ -94,7 +94,7 @@ export const actions = {
     }
   },
 
-  editKeyUp: (update, id, evt) => {
+  editKeyUp: (id, evt) => {
     const title = evt.target.value
 
     if (evt.keyCode === ESCAPE_KEY) {
@@ -111,4 +111,4 @@ export const actions = {
       update({ editTodo: { id, title } })
     }
   }
-}
+})

@@ -10,7 +10,7 @@ const allCompleted = state => {
   return result
 }
 
-export const computed = state => {
+export const accept = state => {
   const result = {}
 
   result.allCompleted = allCompleted(state)

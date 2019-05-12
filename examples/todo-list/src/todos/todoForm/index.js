@@ -1,7 +1,7 @@
-import { initialState } from "./initialState"
+import { Initial } from "./initial"
 
 export const todoForm = {
-  initialState
+  Initial
 }
 
 export { TodoForm } from "./view"

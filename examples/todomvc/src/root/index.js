@@ -1,9 +1,9 @@
-import { actions } from "./actions"
+import { Actions } from "./actions"
 import { view } from "./view"
-import { computed } from "./computed"
+import { accept } from "./accept"
 
 export const root = {
-  actions,
+  Actions,
   view,
-  computed
+  accept
 }

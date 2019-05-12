@@ -6,8 +6,8 @@ import { app, App } from "./app"
 
 const update = stream()
 const states = stream
-  .scan(O, app.initialState(), update)
-  .map(state => app.computed.reduce((x, f) => O(x, f(x)), state))
+  .scan(O, app.Initial(), update)
+  .map(state => app.accept.reduce((x, f) => O(x, f(x)), state))
 
 // Only for using Meiosis Tracer in development.
 require("meiosis-tracer")({
@@ -16,7 +16,7 @@ require("meiosis-tracer")({
   rows: 35
 })
 
-const actions = app.actions(update)
+const actions = app.Actions(update)
 
 m.mount(document.getElementById("app"), {
   view: () =>
