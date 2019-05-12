@@ -3,7 +3,8 @@ import m from "mithril"
 import { Loaded, Success, Image } from "./types"
 
 const gif_new_url = "https://api.giphy.com/v1/gifs/random"
-const api_key = "dc6zaTOxFJmzC"
+const api_key = "HMUbJEROIPi2Dodeq0thL28emz5CMCRX"
+// const api_key = "dc6zaTOxFJmzC"
 
 export const reset = () => ({ image: Loaded.Y(Success.Y(Image.N())) })
 
