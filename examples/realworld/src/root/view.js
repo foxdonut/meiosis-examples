@@ -1,6 +1,9 @@
-export const view = components => state => {
-  const { header, footer } = components
-  const component = components[state.route.case]
+import { Header, Footer } from "../layout"
 
-  return ["div", header(state), component(state), footer(state)]
+export const Root = ({ state, actions }) => {
+  // const Component = components[state.route.case]
+
+  // return ["div", header(state), component(state), footer(state)]
+  return ["div", Header({ state }), Footer()]
 }
+

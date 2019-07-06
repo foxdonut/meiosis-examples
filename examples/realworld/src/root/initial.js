@@ -1,4 +1,4 @@
-export const initialState = data =>
+export const Initial = data =>
   Object.assign(
     {
       articlesFilter: {

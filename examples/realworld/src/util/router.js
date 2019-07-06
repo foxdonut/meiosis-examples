@@ -1,8 +1,15 @@
-import superouter from "superouter"
-import m from "mithril"
+import { createRouteSegments } from "meiosis-routing/state"
 
-const prefix = "#"
+export const Route = createRouteSegments([
+  "Home",
+  "Login",
+  "Register",
+  "ArticleCreate",
+  "Settings",
+  "Profile"
+])
 
+/*
 export const Route = superouter.type("Route", {
   Home: "/",
   Login: "/login",
@@ -40,7 +47,6 @@ export const router = {
     }
   }
 }
-/*
 const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),

@@ -1,4 +1,6 @@
-import { initialState } from "./initialState"
+import { Initial } from "./initial"
+import { Root } from "./view"
+/*
 import { service } from "./service"
 import { view } from "./view"
 import { Header, Footer } from "../layout"
@@ -9,7 +11,14 @@ import { ArticleDetail } from "../articleDetail"
 import { ArticleEdit } from "../articleEdit"
 import { Settings } from "../settings"
 import { Profile } from "../profile"
+*/
 
+export const root = {
+  Initial
+}
+
+export { Root } from "./view"
+/*
 export const Root = {
   dependencies: {
     header: Header,
@@ -24,7 +33,9 @@ export const Root = {
     Profile,
     ProfileFavorites: Profile
   },
-  initialState,
+  Initial,
   service,
   view
 }
+*/
+
