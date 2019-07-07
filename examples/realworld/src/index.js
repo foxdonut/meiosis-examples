@@ -5,6 +5,7 @@ import merge from "mergerino"
 import { assoc, pipe } from "./util/fp"
 import { render } from "./util/view"
 import { app } from "./app"
+import { router } from "./router"
 
 meiosisMergerino({ stream, merge, app }).then(({ update, states, actions }) => {
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
@@ -23,5 +24,8 @@ meiosisMergerino({ stream, merge, app }).then(({ update, states, actions }) => {
       render(document.getElementById("app"))
     )
   )
+
+  router.start({ navigateTo: actions.navigateTo })
+  states.map(state => router.locationBarSync(state.route.current))
 })
 

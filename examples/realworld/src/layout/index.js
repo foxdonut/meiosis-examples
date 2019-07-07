@@ -1,7 +1,6 @@
-import { Route } from "../util/router"
+import { Route } from "../routes"
+import { router } from "../router"
 import { get } from "../util/fp"
-
-const getUrl = () => "FIXME"
 
 export const Header = ({ state }) => {
   //FIXME
@@ -12,13 +11,13 @@ export const Header = ({ state }) => {
     "nav.navbar.navbar-light",
     [
       ".container",
-      ["a.navbar-brand", { href: getUrl(Route.Home()) }, "conduit"],
+      ["a.navbar-brand", { href: router.toPath([Route.Home()]) }, "conduit"],
       [
         "ul.nav.navbar-nav.pull-xs-right",
         [
           "li.nav-item",
           active("Home"),
-          ["a.nav-link", { href: getUrl(Route.Home()) }, "Home"]
+          ["a.nav-link", { href: router.toPath([Route.Home()]) }, "Home"]
         ],
         state.user
           ? [
@@ -27,7 +26,7 @@ export const Header = ({ state }) => {
                 active("ArticleCreate"),
                 [
                   "a.nav-link",
-                  { href: getUrl(Route.ArticleCreate()) },
+                  { href: router.toPath([Route.ArticleCreate()]) },
                   ["i.ion-compose"],
                   " New Article"
                 ]
@@ -37,7 +36,7 @@ export const Header = ({ state }) => {
                 active("Settings"),
                 [
                   "a.nav-link",
-                  { href: getUrl(Route.Settings()) },
+                  { href: router.toPath([Route.Settings()]) },
                   ["i.ion-gear-a"],
                   " Settings"
                 ]
@@ -53,7 +52,7 @@ export const Header = ({ state }) => {
                 },
                 [
                   "a.nav-link",
-                  { href: getUrl(Route.Profile({ username: state.user.username })) },
+                  { href: router.toPath([Route.Profile({ username: state.user.username })]) },
                   state.user.username
                 ]
               ]
@@ -62,12 +61,12 @@ export const Header = ({ state }) => {
               [
                 "li.nav-item",
                 active("Login"),
-                ["a.nav-link", { href: getUrl(Route.Login()) }, "Sign in"]
+                ["a.nav-link", { href: router.toPath([Route.Login()]) }, "Sign in"]
               ],
               [
                 "li.nav-item",
                 active("Register"),
-                ["a.nav-link", { href: getUrl(Route.Register()) }, "Sign up"]
+                ["a.nav-link", { href: router.toPath([Route.Register()]) }, "Sign up"]
               ]
             ]
       ]
@@ -79,7 +78,7 @@ export const Footer = () => [
   "footer",
   [
     ".container",
-    ["a.logo-font", { href: getUrl(Route.Home()) }, "conduit"],
+    ["a.logo-font", { href: router.toPath([Route.Home()]) }, "conduit"],
     [
       "span.attribution",
       "An interactive learning project from ",

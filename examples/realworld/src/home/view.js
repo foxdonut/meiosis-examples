@@ -1,7 +1,13 @@
-import { getUrl, Route } from "../util/router"
+import { Route } from "../routes"
+import { router } from "../router"
 import { compose, preventDefault } from "../util/fp"
 
-export const view = ({ actions, articles, popularTags }) => state => {
+/*
+import { Articles } from "../articles"
+import { PopularTags } from "../popularTags"
+*/
+
+export const Home = ({ state, actions }) => {
   const content = state.articlesFilter.tag
     ? {
         globalFeed: false,
@@ -38,7 +44,7 @@ export const view = ({ actions, articles, popularTags }) => state => {
                 [
                   "a.nav-link",
                   {
-                    href: getUrl(Route.of.Home()),
+                    href: router.toPath([Route.Home()]),
                     onClick: compose(
                       actions.navigateToYourFeed,
                       preventDefault
@@ -53,7 +59,7 @@ export const view = ({ actions, articles, popularTags }) => state => {
                 [
                   "a.nav-link",
                   {
-                    href: getUrl(Route.of.Home()),
+                    href: router.toPath([Route.Home()]),
                     onClick: compose(
                       actions.navigateToGlobalFeed,
                       preventDefault
@@ -67,14 +73,14 @@ export const view = ({ actions, articles, popularTags }) => state => {
             ]
           ],
           state.articles
-            ? articles(state)
+            ? null //Articles({ state, actions })
             : [
                 "div",
                 { style: { height: "2000px" } },
                 state.loading ? ["img", { src: "/assets/loading.gif" }] : null
               ]
-        ],
-        [".col-md-3", [".sidebar", popularTags(state)]]
+        ]/*,
+        [".col-md-3", [".sidebar", PopularTags({ state, actions })]]*/
       ]
     ]
   ]

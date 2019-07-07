@@ -1,7 +1,9 @@
 import { root, Root } from "../root"
 import { credentialsApi, clearToken } from "../services"
+import { Route, routes, navigateTo } from "../routes"
 
-const navigation = {} // FIXME
+const navigation = navigateTo([Route.Home()]) // FIXME
+// Initial: () => navigateTo(initialRoute || [Route.Home()]),
 
 export const app = {
   Initial: () => credentialsApi
@@ -11,6 +13,13 @@ export const app = {
       clearToken()
       return root.Initial(navigation)
     }),
+
+  Actions: update =>
+    Object.assign({}, routes.Actions(update)),
+
+  acceptors: [],
+
+  services: [],
 
   view: Root
 }

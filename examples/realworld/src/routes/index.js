@@ -1,4 +1,7 @@
-import { createRouteSegments } from "meiosis-routing/state"
+import { createRouteSegments } from "meiosis-routing/state";
+
+import { Actions } from "./actions";
+import { accept } from "./accept";
 
 export const Route = createRouteSegments([
   "Home",
@@ -8,6 +11,21 @@ export const Route = createRouteSegments([
   "Settings",
   "Profile"
 ])
+
+export const routeConfig = {
+  Home: "/",
+  Login: "/login",
+  Register: "/register",
+  Settings: "/settings",
+  Profile: "/profile/:username"
+};
+
+export { navigateTo } from "./actions";
+
+export const routes = {
+  Actions,
+  accept
+};
 
 /*
 export const Route = superouter.type("Route", {
