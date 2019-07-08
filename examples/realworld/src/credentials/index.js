@@ -1,7 +1,7 @@
-import { actions } from "./actions"
-import { view } from "./view"
+import { Actions } from "./actions"
 
-export const Credentials = options => ({
-  actions,
-  view: view(options)
+export const credentials = options => ({
+  Actions
 })
+
+export { Credentials } from "./view"

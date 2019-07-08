@@ -1,14 +1,16 @@
-import { Route } from "../util/router"
-import { Credentials } from "../credentials"
-import { onNavigate } from "./onNavigate"
+import { Route } from "../routes"
+import { credentials, Credentials } from "../credentials"
+import { accept } from "./accept"
 
-export const Login = Object.assign(
-  { onNavigate },
-  Credentials({
-    method: "login",
-    alternativePage: Route.of.Register(),
-    alternativeLabel: "Need an account?",
-    label: "Sign in",
-    showUsername: false
-  })
-)
+const options = {
+  method: "login",
+  alternativePage: Route.Register(),
+  alternativeLabel: "Need an account?",
+  label: "Sign in",
+  showUsername: false
+}
+
+export const login = Object.assign({ accept }, credentials(options))
+
+export const Login = Credentials(options)
+
