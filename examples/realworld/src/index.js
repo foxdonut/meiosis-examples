@@ -27,5 +27,6 @@ meiosisMergerino({ stream, merge, app }).then(({ update, states, actions }) => {
 
   router.start({ navigateTo: actions.navigateTo })
   states.map(state => router.locationBarSync(state.route.current))
+  //states.map(s => console.log(JSON.stringify(s)))
 })
 

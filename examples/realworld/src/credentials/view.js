@@ -1,11 +1,11 @@
-import { compose, constant, path, preventDefault } from "../util/fp"
+import { constant, path, pipe, preventDefault } from "../util/fp"
 import { router } from "../router"
 
 export const Credentials = options => ({ state, actions }) => {
   const updateCredForm = (method, field) =>
-    compose(
-      actions.updateCredForm(method, field),
-      path(["target", "value"])
+    pipe(
+      path(["target", "value"]),
+      actions.updateCredForm(method, field)
     )
   const id = options.method
 
@@ -52,10 +52,10 @@ export const Credentials = options => ({ state, actions }) => {
             [
               "button.btn.btn-lg.btn-primary.pull-xs-right",
               {
-                onClick: compose(
-                  actions.sendCredentials(id),
+                onClick: pipe(
+                  preventDefault,
                   constant(state),
-                  preventDefault
+                  actions.sendCredentials(id)
                 )
               },
               options.label

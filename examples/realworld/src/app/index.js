@@ -1,16 +1,14 @@
 import { root, Root } from "../root"
 import { credentialsApi, clearToken } from "../services"
 import { Route, routes, navigateTo } from "../routes"
+import { router } from "../router"
 import { register } from "../register"
 import { login } from "../login"
-
-const navigation = navigateTo([Route.Home()]) // FIXME
-// Initial: () => navigateTo(initialRoute || [Route.Home()]),
 
 export const app = {
   Initial: () => credentialsApi
     .getUser()
-    .then(user => root.Initial(Object.assign({ user }, navigation)))
+    .then(user => root.Initial({ user, route: { current: router.initialRoute } }))
     .catch(() => {
       clearToken()
       return root.Initial(navigation)
