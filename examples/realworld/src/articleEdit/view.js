@@ -1,11 +1,11 @@
-import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
+import { defaultTo, get, pipe, preventDefault, thrush } from "../util/fp"
 
 const displayFieldErrors = errors => ["ul.error-messages", errors.map(err => ["li", err])]
 
 const getFieldErrors = validationErrors => field =>
   thrush(defaultTo([], get(defaultTo({}, validationErrors), [field])), displayFieldErrors)
 
-export const view = ({ actions }) => state => {
+export const ArticleEdit = ({ state, actions }) => {
   const article = state.article
   const fieldErrors = getFieldErrors(article && article.validationErrors)
 
@@ -73,9 +73,9 @@ export const view = ({ actions }) => state => {
                   [
                     "button:button.btn.btn-lg.pull-xs-right.btn-primary",
                     {
-                      onClick: compose(
-                        () => actions.publish(article),
-                        preventDefault
+                      onClick: pipe(
+                        preventDefault,
+                        () => actions.publish(article)
                       )
                     },
                     "Publish Article"

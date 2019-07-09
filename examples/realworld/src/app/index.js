@@ -4,6 +4,7 @@ import { Route, routes, navigateTo } from "../routes"
 import { router } from "../router"
 import { register } from "../register"
 import { login } from "../login"
+import { articleEdit } from "../articleEdit"
 
 export const app = {
   Initial: () => credentialsApi
@@ -18,13 +19,15 @@ export const app = {
     Object.assign({},
       routes.Actions(update),
       register.Actions(update),
-      login.Actions(update)
+      login.Actions(update),
+      articleEdit.Actions(update)
     ),
 
   acceptors: [
     routes.accept,
     register.accept,
-    login.accept
+    login.accept,
+    articleEdit.accept
   ],
 
   services: [],

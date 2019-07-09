@@ -1,9 +1,10 @@
-import { actions } from "./actions"
-import { view } from "./view"
-import { onNavigate } from "./onNavigate"
+import { Actions } from "./actions"
+import { accept } from "./accept"
 
-export const ArticleEdit = {
-  actions,
-  view,
-  onNavigate
+export const articleEdit = {
+  Actions,
+  accept
 }
+
+export { ArticleEdit } from "./view"
+

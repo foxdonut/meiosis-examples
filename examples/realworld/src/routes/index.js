@@ -8,6 +8,7 @@ export const Route = createRouteSegments([
   "Login",
   "Register",
   "ArticleCreate",
+  "ArticleEdit",
   "Settings",
   "Profile"
 ])
@@ -16,6 +17,8 @@ export const routeConfig = {
   Home: "/",
   Login: "/login",
   Register: "/register",
+  ArticleCreate: "/editor",
+  ArticleEdit: "/editor/:slug",
   Settings: "/settings",
   Profile: "/profile/:username"
 };

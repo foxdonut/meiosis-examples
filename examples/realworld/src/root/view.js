@@ -4,11 +4,14 @@ import { Header, Footer } from "../layout"
 import { Home } from "../home"
 import { Register } from "../register"
 import { Login } from "../login"
+import { ArticleEdit } from "../articleEdit"
 
 const componentMap = {
   Home,
   Register,
-  Login
+  Login,
+  ArticleCreate: ArticleEdit,
+  ArticleEdit
 }
 
 export const Root = ({ state, actions }) => {

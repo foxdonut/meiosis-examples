@@ -1,8 +1,7 @@
-import { PS } from "patchinko/explicit"
 import validate from "validate.js"
 
 import { articlesApi } from "../services"
-import { Route } from "../util/router"
+import { Route } from "../routes"
 import { pick } from "../util/fp"
 
 const validationSpec = {
@@ -11,26 +10,26 @@ const validationSpec = {
   title: { presence: { allowEmpty: false } }
 }
 
-export const actions = ({ update, navigate }) => ({
+export const Actions = update => ({
   updateArticleForm: (field, value) =>
     update({
-      article: PS({ [field]: value })
+      article: { [field]: value }
     }),
 
   updateArticleTags: tags =>
     update({
-      article: PS({
+      article: {
         tags,
         tagList: (tags || "")
           .split(",")
           .map(str => str.trim())
           .filter(str => str.length > 0)
-      })
+      }
     }),
 
   publish: article => {
     const validationErrors = validate(article, validationSpec)
-    update({ article: PS({ validationErrors }) })
+    update({ article: { validationErrors } })
     if (!validationErrors) {
       articlesApi
         .publish(
