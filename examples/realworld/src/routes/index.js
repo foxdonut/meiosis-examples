@@ -1,7 +1,6 @@
-import { createRouteSegments } from "meiosis-routing/state";
+import { Actions, accept, createRouteSegments } from "meiosis-routing/state"
 
-import { Actions } from "./actions";
-import { accept } from "./accept";
+export { navigateTo } from "meiosis-routing/state"
 
 export const Route = createRouteSegments([
   "Home",
@@ -21,14 +20,12 @@ export const routeConfig = {
   ArticleEdit: "/editor/:slug",
   Settings: "/settings",
   Profile: "/profile/:username"
-};
-
-export { navigateTo } from "./actions";
+}
 
 export const routes = {
   Actions,
   accept
-};
+}
 
 /*
 export const Route = superouter.type("Route", {
@@ -43,31 +40,6 @@ export const Route = superouter.type("Route", {
   ProfileFavorites: "/profile/:username/favorites"
 })
 
-export const parseUrl = (hash = document.location.hash || "#/") => {
-  const [url, queryString] = hash.substring(1).split("?")
-  const route = Route.matchOr(() => Route.of.Home(), url)
-  const query = queryString ? m.parseQueryString(queryString) : {}
-  return { route, query }
-}
-
-export const getUrl = (route, query) => {
-  let result = Route.toURL(route)
-  if (query && Object.keys(query).length > 0) {
-    result += "?" + m.buildQueryString(query)
-  }
-  return prefix + result
-}
-
-export const listenToRouteChanges = navigate => (window.onpopstate = () => navigate(parseUrl()))
-
-export const router = {
-  service: state => {
-    const url = getUrl(state.route, state.query)
-    if (document.location.hash !== url) {
-      window.history.pushState({}, "", url)
-    }
-  }
-}
 const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),
