@@ -1,9 +1,9 @@
-import { actions } from "./actions"
-import { view } from "./view"
-import { onNavigate } from "./onNavigate"
+import { Actions } from "./actions"
+import { accept } from "./accept"
 
-export const Settings = {
-  actions,
-  view,
-  onNavigate
+export const settings = {
+  Actions,
+  accept
 }
+
+export { Settings } from "./view"

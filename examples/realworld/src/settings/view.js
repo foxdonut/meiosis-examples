@@ -1,6 +1,6 @@
 import { compose, preventDefault } from "../util/fp"
 
-export const view = ({ actions }) => state => {
+export const Settings = ({ state, actions }) => {
   const errors = Object.keys(state.settings.errors || {}).map(
     key => `${key} ${state.settings.errors[key]}`
   )

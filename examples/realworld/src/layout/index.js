@@ -2,10 +2,8 @@ import { Route } from "../routes"
 import { router } from "../router"
 import { get } from "../util/fp"
 
-export const Header = ({ state }) => {
-  //FIXME
-  //const active = pageId => ({ className: { active: state.route.case === pageId } })
-  const active = () => ({})
+export const Header = ({ state, routing }) => {
+  const active = pageId => ({ className: { active: routing.localSegment.id === pageId } })
 
   return [
     "nav.navbar.navbar-light",
@@ -46,7 +44,7 @@ export const Header = ({ state }) => {
                 {
                   className: {
                     active:
-                      //state.route.case === "Profile" && //FIXME
+                      routing.localSegment.id === "Profile" &&
                       get(state, ["user", "id"]) === get(state, ["profile", "id"])
                   }
                 },

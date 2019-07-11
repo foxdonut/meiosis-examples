@@ -5,6 +5,7 @@ import { router } from "../router"
 import { register } from "../register"
 import { login } from "../login"
 import { articleEdit } from "../articleEdit"
+import { settings } from "../settings"
 
 const route = { current: router.initialRoute }
 
@@ -22,14 +23,16 @@ export const app = {
       routes.Actions(update),
       register.Actions(update),
       login.Actions(update),
-      articleEdit.Actions(update)
+      articleEdit.Actions(update),
+      settings.Actions(update)
     ),
 
   acceptors: [
+    settings.accept,
     routes.accept,
+    articleEdit.accept,
     register.accept,
-    login.accept,
-    articleEdit.accept
+    login.accept
   ],
 
   services: [],

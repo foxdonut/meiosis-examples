@@ -1,25 +1,27 @@
-import { PS, D } from "patchinko/explicit"
-
 import { profileApi, clearToken } from "../services"
-import { Route } from "../util/router"
+import { Route, navigateTo } from "../routes"
 import { omit } from "../util/fp"
 
-export const actions = ({ update, navigate }) => ({
-  updateSettingsForm: (field, value) => update({ settings: PS({ [field]: value }) }),
+export const Actions = update => ({
+  updateSettingsForm: (field, value) => update({ settings: { [field]: value } }),
 
   updateSettings: settings =>
     profileApi
       .update({ user: omit(["errors"], settings) })
       .then(() =>
-        navigate({
-          route: Route.of.Profile({ username: settings.username }),
-          user: PS(settings)
-        })
+        update([
+          navigateTo(Route.Profile({ username: settings.username })),
+          { user: settings }
+        ])
       )
-      .catch(err => update({ settings: PS({ errors: err.errors }) })),
+      .catch(err => update({ settings: { errors: err.errors } })),
 
   logout: () => {
     clearToken()
-    navigate({ route: Route.of.Home(), user: D, logout: true })
+    update([
+      navigateTo(Route.Home()),
+      { user: null, logout: true }
+    ])
   }
 })
+
