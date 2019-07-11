@@ -28,11 +28,12 @@ export const app = {
     ),
 
   acceptors: [
-    settings.accept,
+    settings.guard,
     routes.accept,
     articleEdit.accept,
     register.accept,
-    login.accept
+    login.accept,
+    settings.accept
   ],
 
   services: [],

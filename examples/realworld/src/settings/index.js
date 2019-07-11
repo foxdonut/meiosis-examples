@@ -1,9 +1,10 @@
 import { Actions } from "./actions"
-import { accept } from "./accept"
+import { accept, guard } from "./accept"
 
 export const settings = {
   Actions,
-  accept
+  accept,
+  guard
 }
 
 export { Settings } from "./view"
