@@ -1,9 +1,8 @@
-import { PS } from "patchinko/explicit"
 import { helpers } from "../root/helpers"
 
-export const actions = ({ update }) => ({
+export const Actions = update => ({
   loadArticles: params =>
     helpers
       .loadArticles(params)
-      .then(data => update(Object.assign({ articlesFilter: PS(params) }, data)))
+      .then(data => update([{ articlesFilter: params }, data]))
 })

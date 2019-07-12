@@ -1,7 +1,8 @@
-import { Route, getUrl } from "../util/router"
+import { Route } from "../routes"
+import { router } from "../router"
 import { defaultImage } from "../util/view"
 
-export const view = ({ actions }) => (state, article) => {
+export const ArticleSummary = ({ state, actions, article }) => {
   const username = article.author.username
 
   return [
@@ -10,14 +11,14 @@ export const view = ({ actions }) => (state, article) => {
       ".article-meta",
       [
         "a",
-        { href: getUrl(Route.of.Profile({ username: article.author.username })) },
+        { href: router.toPath(Route.Profile({ username: article.author.username })) },
         ["img", { src: article.author.image || defaultImage }]
       ],
       [
         ".info",
         [
           "a.author",
-          { href: getUrl(Route.of.Profile({ username: article.author.username })) },
+          { href: router.toPath(Route.Profile({ username: article.author.username })) },
           username
         ],
         ["span.date", new Date(article.createdAt).toDateString()]
@@ -53,7 +54,7 @@ export const view = ({ actions }) => (state, article) => {
         "ul.tag-list",
         article.tagList.map(tag => [
           "li.tag-default.tag-pill.tag-outline",
-          ["a", { href: getUrl(Route.of.Home(), { tag }) }, tag]
+          ["a", { href: router.toPath(Route.Home(), { tag }) }, tag]
         ])
       ]
     ]

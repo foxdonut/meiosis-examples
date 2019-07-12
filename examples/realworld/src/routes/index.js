@@ -9,7 +9,8 @@ export const Route = createRouteSegments([
   "ArticleCreate",
   "ArticleEdit",
   "Settings",
-  "Profile"
+  "Profile",
+  "ProfileFavorites"
 ])
 
 export const routeConfig = {
@@ -19,7 +20,8 @@ export const routeConfig = {
   ArticleCreate: "/editor",
   ArticleEdit: "/editor/:slug",
   Settings: "/settings",
-  Profile: "/profile/:username"
+  Profile: "/profile/:username",
+  ProfileFavorites: "/profile/:username/favorites"
 }
 
 export const routes = {

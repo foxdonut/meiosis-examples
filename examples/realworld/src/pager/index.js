@@ -1,7 +1,7 @@
-import { actions } from "./actions"
-import { view } from "./view"
+import { Actions } from "./actions"
 
-export const Pager = {
-  actions,
-  view
+export const pager = {
+  Actions
 }
+
+export { Pager } from "./view"

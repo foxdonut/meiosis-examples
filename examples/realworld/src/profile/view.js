@@ -1,11 +1,13 @@
 import { get } from "../util/fp"
-import { Route, getUrl } from "../util/router"
+import { Route } from "../routes"
+import { router } from "../router"
 import { defaultImage } from "../util/view"
+//import { Articles } from "../articles"
 
-export const view = ({ actions, articles }) => state => {
+export const Profile = ({ state, actions, routing }) => {
   const username = get(state, ["profile", "username"])
   const isCurrentUser = get(state, ["profile", "id"]) === get(state, ["user", "id"])
-  const isFavorites = state.route.case === "ProfileFavorites"
+  const isFavorites = routing.localSegment.id === "ProfileFavorites"
 
   return !state.profile
     ? [
@@ -29,7 +31,7 @@ export const view = ({ actions, articles }) => state => {
                 isCurrentUser
                   ? [
                       "a.btn.btn-sm.btn-outline-secondary.action-btn",
-                      { href: getUrl(Route.of.Settings) },
+                      { href: router.toPath(Route.Settings()) },
                       ["i.ion-gear-a"],
                       " Edit Profile Settings"
                     ]
@@ -64,7 +66,7 @@ export const view = ({ actions, articles }) => state => {
                       "a.nav-link",
                       {
                         className: { active: !isFavorites },
-                        href: getUrl(Route.of.Profile({ username }))
+                        href: router.toPath(Route.Profile({ username }))
                       },
                       "My Articles"
                     ]
@@ -75,14 +77,14 @@ export const view = ({ actions, articles }) => state => {
                       "a.nav-link",
                       {
                         className: { active: isFavorites },
-                        href: getUrl(Route.of.ProfileFavorites({ username }))
+                        href: router.toPath(Route.ProfileFavorites({ username }))
                       },
                       "Favorited Articles"
                     ]
                   ]
                 ]
-              ],
-              articles(state)
+              ]/*,
+              Articles({ state, actions })*/
             ]
           ]
         ]

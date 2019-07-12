@@ -1,6 +1,6 @@
 import { range } from "../util/fp"
 
-export const view = ({ actions }) => state => {
+export const Pager = ({ state, actions }) => {
   const filter = state.articlesFilter
   const currentPageNumber = filter.offset / filter.limit + 1
   const pageList = range(1, Math.ceil(state.articlesCount / filter.limit) + 1)

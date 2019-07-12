@@ -1,8 +1,9 @@
-import { Route, navigateTo } from "../util/router"
+import { Route, navigateTo } from "../routes"
 
-export const actions = update => ({
+export const Actions = update => ({
   navigateToYourFeed: () =>
-    update(Object.assign(navigateTo(Route.of.Home), { tag: null, feed: true })),
+    update([navigateTo(Route.Home()), { tag: null, feed: true }]),
   navigateToGlobalFeed: () =>
-    update(Object.assign(navigateTo(Route.of.Home), { tag: null, feed: false }))
+    update([navigateTo(Route.Home()), { tag: null, feed: false }])
 })
+

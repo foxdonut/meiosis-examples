@@ -1,7 +1,7 @@
-import { actions } from "./actions"
-import { view } from "./view"
+import { Actions } from "./actions"
 
-export const ArticleSummary = {
-  actions,
-  view
+export const articleSummary = {
+  Actions
 }
+
+export { ArticleSummary } from "./view"

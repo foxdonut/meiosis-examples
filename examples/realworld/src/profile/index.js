@@ -1,13 +1,11 @@
 import { accept } from "./accept"
-import { actions } from "./actions"
-import { view } from "./view"
-import { onNavigate } from "./onNavigate"
-import { Articles } from "../articles"
+import { Actions } from "./actions"
+import { service } from "./service"
 
-export const Profile = {
-  dependencies: { articles: Articles },
+export const profile = {
   accept,
-  actions,
-  view,
-  onNavigate
+  Actions,
+  service
 }
+
+export { Profile } from "./view"

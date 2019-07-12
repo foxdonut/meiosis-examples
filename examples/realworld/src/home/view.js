@@ -2,8 +2,8 @@ import { Route } from "../routes"
 import { router } from "../router"
 import { compose, preventDefault } from "../util/fp"
 
-/*
 import { Articles } from "../articles"
+/*
 import { PopularTags } from "../popularTags"
 */
 
@@ -73,7 +73,7 @@ export const Home = ({ state, actions }) => {
             ]
           ],
           state.articles
-            ? null //Articles({ state, actions })
+            ? Articles({ state, actions })
             : [
                 "div",
                 { style: { height: "2000px" } },

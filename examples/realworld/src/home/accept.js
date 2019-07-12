@@ -1,6 +1,4 @@
-import { HomePage } from "../util/router"
-
-export const accept = (state, patch) => {
+export const accept = state => null /*(state, patch) => {
   if (patch.loading === HomePage && state.articles) {
     return null
   } else if (
@@ -14,3 +12,4 @@ export const accept = (state, patch) => {
   }
   return patch
 }
+*/

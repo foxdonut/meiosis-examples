@@ -1,8 +1,8 @@
 import { articlesApi } from "../services"
-import { LoginPage, navigateTo } from "../util/router"
+import { Route, navigateTo } from "../routes"
 import { helpers } from "../root/helpers"
 
-export const actions = update => ({
+export const Actions = update => ({
   favoriteArticle: (state, slug) => {
     if (state.user) {
       articlesApi
@@ -10,7 +10,7 @@ export const actions = update => ({
         .then(() => helpers.loadArticles(state.articlesFilter))
         .then(update)
     } else {
-      return navigateTo(LoginPage)
+      update(navigateTo(Route.Login()))
     }
   },
 
@@ -21,7 +21,7 @@ export const actions = update => ({
         .then(() => helpers.loadArticles(state.articlesFilter))
         .then(update)
     } else {
-      return navigateTo(LoginPage)
+      update(navigateTo(Route.Login()))
     }
   }
 })
