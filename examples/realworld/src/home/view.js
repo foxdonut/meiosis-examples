@@ -3,9 +3,7 @@ import { router } from "../router"
 import { compose, preventDefault } from "../util/fp"
 
 import { Articles } from "../articles"
-/*
 import { PopularTags } from "../popularTags"
-*/
 
 export const Home = ({ state, actions }) => {
   const content = state.articlesFilter.tag
@@ -79,8 +77,8 @@ export const Home = ({ state, actions }) => {
                 { style: { height: "2000px" } },
                 state.loading ? ["img", { src: "/assets/loading.gif" }] : null
               ]
-        ]/*,
-        [".col-md-3", [".sidebar", PopularTags({ state, actions })]]*/
+        ],
+        [".col-md-3", [".sidebar", PopularTags({ state })]]
       ]
     ]
   ]

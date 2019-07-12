@@ -1,5 +1,2 @@
-import { view } from "./view"
+export { PopularTags } from "./view"
 
-export const PopularTags = {
-  view
-}
