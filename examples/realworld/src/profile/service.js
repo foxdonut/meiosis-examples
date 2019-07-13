@@ -11,11 +11,13 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
       author,
       favorited
     })
-  ]).then(([profile, articles]) => update([profile, articles]))
+  ]).then(update)
 
 export const service = ({ state, update }) => {
   whenPresent(findRouteSegment(state.route.arrive, "Profile"), arrive => {
-    const { username } = arrive.params
+    // const { username } = arrive.params
+    const username = decodeURI(arrive.params.username) // FIXME
+    console.log("username:", username)
     loadProfileAndArticles({ state, update, username, author: username })// FIXME: or params.author?
   })
 
