@@ -1,11 +1,9 @@
-import { S } from "patchinko/explicit"
-
 import { articlesApi, profileApi } from "../services"
 import { helpers } from "../root/helpers"
 import { prepend } from "../util/fp"
-import { HomePage, RegisterPage, navigateTo } from "../util/router"
+import { Route, navigateTo } from "../routes"
 
-export const actions = ({ update }) => ({
+export const Actions = ({ update }) => ({
   updateCommentField: comment => update({ comment }),
 
   addComment: (slug, body) => {
@@ -13,7 +11,7 @@ export const actions = ({ update }) => ({
       articlesApi.addComment(slug, { comment: { body } }).then(data =>
         update({
           comment: "",
-          comments: S(list => prepend(data.comment, list))
+          comments: list => prepend(data.comment, list)
         })
       )
     }
@@ -22,9 +20,9 @@ export const actions = ({ update }) => ({
   deleteComment: (slug, id) => () =>
     articlesApi
       .deleteComment(slug, id)
-      .then(() => update({ comments: S(list => list.filter(comment => comment.id !== id)) })),
+      .then(() => update({ comments: list => list.filter(comment => comment.id !== id) })),
 
-  deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(navigateTo(HomePage))),
+  deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(navigateTo(Route.Home()))),
 
   followUser: (state, username) => {
     if (state.user) {
@@ -33,7 +31,7 @@ export const actions = ({ update }) => ({
         .then(() => helpers.loadArticle({ slug: state.params.slug }))
         .then(update)
     } else {
-      update(navigateTo(RegisterPage))
+      update(navigateTo(Route.Register()))
     }
   },
 
@@ -50,7 +48,7 @@ export const actions = ({ update }) => ({
         .then(() => helpers.loadArticle({ slug }))
         .then(update)
     } else {
-      update(navigateTo(RegisterPage))
+      update(navigateTo(Route.Register()))
     }
   },
 

@@ -1,9 +1,10 @@
-import { actions } from "./actions"
-import { view } from "./view"
-import { onNavigate } from "./onNavigate"
+import { Actions } from "./actions"
+import { service } from "./service"
 
-export const ArticleDetail = {
+export const articleDetail = {
   actions,
-  view,
-  onNavigate
+  service
 }
+
+export { ArticleDetail } from "./view"
+

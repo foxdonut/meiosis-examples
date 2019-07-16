@@ -1,7 +1,8 @@
 import marked from "marked"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
-import { Route, getUrl } from "../util/router"
+import { Route } from "../routes"
+import { router } from "../router"
 import { defaultImage } from "../util/view"
 
 const isAuthor = (username, article) => article.author.username === username
@@ -9,7 +10,7 @@ const isAuthor = (username, article) => article.author.username === username
 const authorMeta = actions => article => [
   [
     "a.btn.btn-outline-secondary.btn-sm",
-    { href: getUrl(Route.of.ArticleEdit({ slug: article.slug })) },
+    { href: router.toPath(Route.ArticleEdit({ slug: article.slug })) },
     ["i.ion-edit"],
     " Edit Article"
   ],
@@ -52,14 +53,14 @@ const articleMeta = (state, actions, article, username) => [
   ".article-meta",
   [
     "a",
-    { href: getUrl(Route.of.Profile({ username: article.author.username })) },
+    { href: router.toPath(Route.Profile({ username: article.author.username })) },
     ["img", { src: article.author.image || defaultImage }]
   ],
   [
     ".info",
     [
       "a.author",
-      { href: getUrl(Route.of.Profile({ username: article.author.username })) },
+      { href: router.toPath(Route.Profile({ username: article.author.username })) },
       article.author.username
     ],
     ["span.date", new Date(article.createdAt).toDateString()]
@@ -67,7 +68,7 @@ const articleMeta = (state, actions, article, username) => [
   thrush(article, isAuthor(username, article) ? authorMeta(actions) : nonAuthorMeta(state, actions))
 ]
 
-export const view = ({ actions }) => state => {
+export const ArticleDetail = ({ state, actions }) => {
   const article = state.article
   const username = get(state, ["user", "username"])
 
@@ -90,7 +91,7 @@ export const view = ({ actions }) => state => {
                 ".tag-list",
                 article.tagList.map(tag => [
                   "a.tag-pill.tag-default",
-                  { href: getUrl(Route.of.Home(), { tag }) },
+                  { href: router.toPath(Route.Home(), { tag }) },
                   tag
                 ])
               ],
@@ -135,9 +136,9 @@ export const view = ({ actions }) => state => {
                   ]
                 : [
                     "p",
-                    ["a", { href: getUrl(Route.of.Login()) }, "Sign in"],
+                    ["a", { href: router.toPath(Route.Login()) }, "Sign in"],
                     " or ",
-                    ["a", { href: getUrl(Route.of.Register()) }, "sign up"],
+                    ["a", { href: router.toPath(Route.Register()) }, "sign up"],
                     " to add comments on this article."
                   ],
               defaultTo([], state.comments).map(comment => [

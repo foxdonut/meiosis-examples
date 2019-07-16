@@ -8,6 +8,7 @@ import { login } from "../login"
 import { articles } from "../articles"
 import { articleSummary } from "../articleSummary"
 import { articleEdit } from "../articleEdit"
+import { articleDetail } from "../articleDetail"
 import { pager } from "../pager"
 import { settings } from "../settings"
 import { profile } from "../profile"
@@ -50,7 +51,9 @@ export const app = {
 
   services: [
     home.service,
-    profile.service
+    profile.service,
+    articleDetail.service,
+    articleEdit.service,
   ],
 
   view: Root
