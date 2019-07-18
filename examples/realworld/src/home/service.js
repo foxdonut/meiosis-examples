@@ -12,7 +12,7 @@ export const service = ({ state, update }) => {
         .loadFeed(
           Object.assign(
             {},
-            pick(["limit", "offset"], state.articlesFilter)/*,
+            pick(["limit", "offset"], state.articlesFilter) /*,
             navigation.route.params*/
           )
         )
@@ -21,13 +21,15 @@ export const service = ({ state, update }) => {
       helpers
         .loadArticles(
           // FIXME
-          Object.assign({}, state.articlesFilter/*, navigation.query, {
+          Object.assign(
+            {},
+            state.articlesFilter /*, navigation.query, {
             tag: navigation.query && navigation.query.tag
-          }*/)
+          }*/
+          )
         )
         .then(update)
-          // data => update(Object.assign({ loading: null }, data))
+      // data => update(Object.assign({ loading: null }, data))
     }
   })
 }
-

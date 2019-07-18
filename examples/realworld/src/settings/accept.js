@@ -14,8 +14,9 @@ export const guard = state => {
 export const accept = state => {
   if (findRouteSegment(state.route.arrive, "Settings")) {
     const settings = fields.reduce(
-      (result, field) => assoc(field, defaultTo("", state.user[field]), result), {})
+      (result, field) => assoc(field, defaultTo("", state.user[field]), result),
+      {}
+    )
     return { settings }
   }
 }
-

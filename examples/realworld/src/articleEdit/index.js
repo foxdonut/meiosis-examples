@@ -9,4 +9,3 @@ export const articleEdit = {
 }
 
 export { ArticleEdit } from "./view"
-

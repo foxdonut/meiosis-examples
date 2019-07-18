@@ -5,4 +5,3 @@ export const articles = {
 }
 
 export { Articles } from "./view"
-

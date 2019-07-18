@@ -13,4 +13,3 @@ const options = {
 export const register = Object.assign({ accept }, credentials(options))
 
 export const Register = Credentials(options)
-

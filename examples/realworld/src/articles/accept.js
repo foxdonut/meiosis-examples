@@ -4,9 +4,8 @@ import { choose } from "../util/fp"
 export const accept = state =>
   state.query
     ? {
-        articlesFilter: Object.assign(
-          choose(["offset", "author", "favorited"], state.query),
-          { tag: state.query.tag }
-        )
+        articlesFilter: Object.assign(choose(["offset", "author", "favorited"], state.query), {
+          tag: state.query.tag
+        })
       }
     : null

@@ -1,7 +1,7 @@
 import validate from "validate.js"
 
 import { articlesApi } from "../services"
-import { Route } from "../routes"
+import { Route, navigateTo } from "../routes"
 import { pick } from "../util/fp"
 
 const validationSpec = {
@@ -38,7 +38,7 @@ export const Actions = update => ({
           },
           article.slug
         )
-        .then(() => navigate({ route: Route.of.Home() }))
+        .then(() => update(navigateTo({ route: Route.Home() })))
     }
   }
 })

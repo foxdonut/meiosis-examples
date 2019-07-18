@@ -8,4 +8,3 @@ export const service = ({ state, update }) => {
     helpers.loadArticle({ slug }).then(update)
   })
 }
-

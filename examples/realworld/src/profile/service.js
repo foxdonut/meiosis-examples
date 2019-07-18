@@ -16,7 +16,7 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
 export const service = ({ state, update }) => {
   whenPresent(findRouteSegment(state.route.arrive, "Profile"), arrive => {
     const { username } = arrive.params
-    loadProfileAndArticles({ state, update, username, author: username })// FIXME: or params.author?
+    loadProfileAndArticles({ state, update, username, author: username }) // FIXME: or params.author?
   })
 
   whenPresent(findRouteSegment(state.route.arrive, "ProfileFavorites"), arrive => {
@@ -24,4 +24,3 @@ export const service = ({ state, update }) => {
     loadProfileAndArticles({ state, update, username, favorited: username })
   })
 }
-

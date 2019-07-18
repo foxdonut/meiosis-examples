@@ -1,4 +1,5 @@
-export const accept = state => null /*(state, patch) => {
+export const accept = () =>
+  null /*(state, patch) => {
   if (patch.loading === HomePage && state.articles) {
     return null
   } else if (

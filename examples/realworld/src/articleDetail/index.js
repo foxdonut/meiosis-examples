@@ -2,9 +2,8 @@ import { Actions } from "./actions"
 import { service } from "./service"
 
 export const articleDetail = {
-  actions,
+  Actions,
   service
 }
 
 export { ArticleDetail } from "./view"
-

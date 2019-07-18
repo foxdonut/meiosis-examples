@@ -1,6 +1,6 @@
 import { Actions } from "./actions"
 
-export const credentials = options => ({
+export const credentials = () => ({
   Actions
 })
 

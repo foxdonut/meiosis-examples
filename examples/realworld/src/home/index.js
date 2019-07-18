@@ -9,4 +9,3 @@ export const home = {
 }
 
 export { Home } from "./view"
-
