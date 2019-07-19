@@ -22,24 +22,30 @@ const authorMeta = actions => article => [
   ]
 ]
 
-const nonAuthorMeta = (state, actions) => article => [
+const nonAuthorMeta = (state, actions, routing) => article => [
   [
-    "button.btn.btn-sm.btn-outline-secondary",
+    "button.btn.btn-sm",
     {
+      className: {
+        "btn-outline-secondary": !article.author.following,
+        "btn-secondary": article.author.following
+      },
       onClick: article.author.following
-        ? () => actions.unfollowUser(state, article.author.username)
-        : () => actions.followUser(state, article.author.username)
+        ? () => actions.unfollowUser(state, article.author.username, routing)
+        : () => actions.followUser(state, article.author.username, routing)
     },
     ["i.ion-plus-round"],
     article.author.following ? " Unfollow " : " Follow ",
     article.author.username,
     " "
   ],
+  " ",
   [
-    "button.btn.btn-sm.btn-outline-primary",
+    "button.btn.btn-sm",
     {
+      className: { "btn-outline-primary": !article.favorited, "btn-primary": article.favorited },
       onClick: article.favorited
-        ? () => actions.unfavoriteArticle(article.slug)
+        ? () => actions.unfavoriteArticle(state, article.slug)
         : () => actions.favoriteArticle(state, article.slug)
     },
     ["i.ion-heart"],
@@ -49,7 +55,7 @@ const nonAuthorMeta = (state, actions) => article => [
   ]
 ]
 
-const articleMeta = (state, actions, article, username) => [
+const articleMeta = (state, actions, routing, article, username) => [
   ".article-meta",
   [
     "a",
@@ -65,106 +71,113 @@ const articleMeta = (state, actions, article, username) => [
     ],
     ["span.date", new Date(article.createdAt).toDateString()]
   ],
-  thrush(article, isAuthor(username, article) ? authorMeta(actions) : nonAuthorMeta(state, actions))
+  thrush(
+    article,
+    isAuthor(username, article) ? authorMeta(actions) : nonAuthorMeta(state, actions, routing)
+  )
 ]
 
-export const ArticleDetail = ({ state, actions }) => {
+export const ArticleDetail = ({ state, actions, routing }) => {
   const article = state.article
   const username = get(state, ["user", "username"])
 
-  return !article
-    ? ["img", { src: "/assets/loading.gif" }]
-    : [
-        ".article-page",
+  return [
+    ".article-page",
+    !state.loading && [
+      ".banner",
+      [".container", ["h1", article.title], articleMeta(state, actions, routing, article, username)]
+    ],
+    [
+      ".container page",
+      [
+        ".row.article-content",
         [
-          ".banner",
-          [".container", ["h1", article.title], articleMeta(state, actions, article, username)]
-        ],
+          ".col-md-12",
+          state.loading
+            ? "Loading..."
+            : [
+                ["h2", article.description],
+                [
+                  ".tag-list",
+                  article.tagList.map(tag => [
+                    "a.tag-pill.tag-default",
+                    { href: router.toPath(Route.Home(), { tag }) },
+                    tag
+                  ])
+                ],
+                ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
+              ]
+        ]
+      ],
+      !state.loading && [
+        ["hr"],
+        [".article-actions", articleMeta(state, actions, routing, article, username)],
         [
-          ".container page",
+          ".row",
           [
-            ".row.article-content",
-            [
-              ".col-md-12",
-              ["h2", article.description],
-              [
-                ".tag-list",
-                article.tagList.map(tag => [
-                  "a.tag-pill.tag-default",
-                  { href: router.toPath(Route.Home(), { tag }) },
-                  tag
-                ])
-              ],
-              ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
-            ]
-          ],
-          ["hr"],
-          [".article-actions", articleMeta(state, actions, article, username)],
-          [
-            ".row",
-            [
-              ".col-xs-12.col-md-8.offset-md-2",
-              state.user
-                ? [
-                    "form.card.comment-form",
+            ".col-xs-12.col-md-8.offset-md-2",
+            state.user
+              ? [
+                  "form.card.comment-form",
+                  [
+                    ".card-block",
                     [
-                      ".card-block",
-                      [
-                        "textarea.form-control",
-                        {
-                          placeholder: "Write a comment...",
-                          rows: "3",
-                          onInput: evt => actions.updateCommentField(evt.target.value),
-                          value: state.comment
-                        }
-                      ]
-                    ],
+                      "textarea.form-control",
+                      {
+                        placeholder: "Write a comment...",
+                        rows: "3",
+                        onInput: evt => actions.updateCommentField(evt.target.value),
+                        value: state.comment
+                      }
+                    ]
+                  ],
+                  [
+                    ".card-footer",
+                    ["img.comment-author-img", { src: state.user.image || defaultImage }],
                     [
-                      ".card-footer",
-                      ["img.comment-author-img", { src: state.user.image || defaultImage }],
-                      [
-                        "button.btn.btn-sm.btn-primary",
-                        {
-                          onClick: compose(
-                            () => actions.addComment(article.slug, state.comment),
-                            preventDefault
-                          )
-                        },
-                        "Post Comment"
-                      ]
+                      "button.btn.btn-sm.btn-primary",
+                      {
+                        onClick: compose(
+                          () => actions.addComment(article.slug, state.comment),
+                          preventDefault
+                        )
+                      },
+                      "Post Comment"
                     ]
                   ]
-                : [
-                    "p",
-                    ["a", { href: router.toPath(Route.Login()) }, "Sign in"],
-                    " or ",
-                    ["a", { href: router.toPath(Route.Register()) }, "sign up"],
-                    " to add comments on this article."
-                  ],
-              defaultTo([], state.comments).map(comment => [
-                ".card",
-                [".card-block", ["p.card-text", comment.body]],
-                [
-                  ".card-footer",
-                  [
-                    "a.comment-author[href=#]",
-                    ["img.comment-author-img", { src: comment.author.image || defaultImage }]
-                  ],
-                  " ",
-                  ["a.comment-author[href=#]", comment.author.username],
-                  ["span.date-posted", new Date(comment.createdAt).toDateString()],
-                  [
-                    "span.mod-options",
-                    state.user &&
-                      comment.author.id === state.user.id && [
-                        "i.ion-trash-a",
-                        { onClick: actions.deleteComment(article.slug, comment.id) }
-                      ]
-                  ]
                 ]
-              ])
-            ]
+              : [
+                  "p",
+                  ["a", { href: router.toPath(Route.Login()) }, "Sign in"],
+                  " or ",
+                  ["a", { href: router.toPath(Route.Register()) }, "sign up"],
+                  " to add comments on this article."
+                ],
+            defaultTo([], state.comments).map(comment => [
+              ".card",
+              [".card-block", ["p.card-text", comment.body]],
+              [
+                ".card-footer",
+                [
+                  "a.comment-author[href=#]",
+                  ["img.comment-author-img", { src: comment.author.image || defaultImage }]
+                ],
+                " ",
+                ["a.comment-author[href=#]", comment.author.username],
+                ["span.date-posted", new Date(comment.createdAt).toDateString()],
+                [
+                  "span.mod-options",
+                  state.user &&
+                    comment.author.id === state.user.id && [
+                      "i.ion-trash-a",
+                      { onClick: actions.deleteComment(article.slug, comment.id) }
+                    ]
+                ]
+              ]
+            ])
           ]
         ]
       ]
+    ]
+  ]
 }

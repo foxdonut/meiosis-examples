@@ -7,6 +7,7 @@ export const PopularTags = ({ state }) => [
 
   [
     ".tag-list",
+    state.tags == null ? ["span", "Loading tags..."] : null,
     defaultTo([], path(["tags"], state)).map(tag => [
       "a.tag-pill.tag-default",
       { href: router.toPath(Route.Home({ tag })) },

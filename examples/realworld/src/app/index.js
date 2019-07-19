@@ -33,6 +33,7 @@ export const app = {
       register.Actions(update),
       login.Actions(update),
       articleSummary.Actions(update),
+      articleDetail.Actions(update),
       articleEdit.Actions(update),
       pager.Actions(update),
       settings.Actions(update),

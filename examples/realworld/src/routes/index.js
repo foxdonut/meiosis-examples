@@ -6,6 +6,7 @@ export const Route = createRouteSegments([
   "Home",
   "Login",
   "Register",
+  "ArticleDetail",
   "ArticleCreate",
   "ArticleEdit",
   "Settings",
@@ -17,6 +18,7 @@ export const routeConfig = {
   Home: "/?tag",
   Login: "/login",
   Register: "/register",
+  ArticleDetail: "/article/:slug",
   ArticleCreate: "/editor",
   ArticleEdit: "/editor/:slug",
   Settings: "/settings",
@@ -30,18 +32,6 @@ export const routes = {
 }
 
 /*
-export const Route = superouter.type("Route", {
-  Home: "/",
-  Login: "/login",
-  Register: "/register",
-  ArticleDetail: "/article/:slug",
-  ArticleEdit: "/editor/:slug",
-  ArticleCreate: "/editor",
-  Settings: "/settings",
-  Profile: "/profile/:username",
-  ProfileFavorites: "/profile/:username/favorites"
-})
-
 const routeMappings = {
   "/": () => ({ pageId: HomePage, articles: null }),
   "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),

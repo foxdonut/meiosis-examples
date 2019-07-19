@@ -5,31 +5,19 @@ import { pick } from "../util/fp"
 
 export const service = ({ state, update }) => {
   whenPresent(findRouteSegment(state.route.arrive, "Home"), arrive => {
-    // setTimeout(() => update({ loading: HomePage }), 300)
+    update({ loading: true })
 
     if (arrive.params.feed) {
       helpers
-        .loadFeed(
-          Object.assign(
-            {},
-            pick(["limit", "offset"], state.articlesFilter) /*,
-            navigation.route.params*/
-          )
-        )
-        .then(update)
+        .loadFeed(Object.assign({}, pick(["limit", "offset"], state.articlesFilter)))
+        .then(data => update([data, { loading: false }]))
     } else {
       helpers
         .loadArticles(
           // FIXME
-          Object.assign(
-            {},
-            state.articlesFilter /*, navigation.query, {
-            tag: navigation.query && navigation.query.tag
-          }*/
-          )
+          state.articlesFilter
         )
-        .then(update)
-      // data => update(Object.assign({ loading: null }, data))
+        .then(data => update([data, { loading: false }]))
     }
   })
 }

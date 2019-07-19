@@ -45,7 +45,7 @@ export const ArticleSummary = ({ state, actions, article }) => {
       ".preview-link",
       [
         "a.preview-link",
-        { href: `#/article/${article.slug}` },
+        { href: router.toPath(Route.ArticleDetail({ slug: article.slug })) },
         ["h1", article.title],
         ["p", article.description],
         ["span", "Read more..."]
@@ -54,7 +54,7 @@ export const ArticleSummary = ({ state, actions, article }) => {
         "ul.tag-list",
         article.tagList.map(tag => [
           "li.tag-default.tag-pill.tag-outline",
-          ["a", { href: router.toPath(Route.Home(), { tag }) }, tag]
+          ["a", { href: router.toPath(Route.Home({ tag })) }, tag]
         ])
       ]
     ]

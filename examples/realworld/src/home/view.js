@@ -9,7 +9,10 @@ export const Home = ({ state, actions }) => {
   const content = state.articlesFilter.tag
     ? {
         globalFeed: false,
-        tagFeedComponent: ["li.nav-item", ["a.nav-link.active", `#${state.articlesFilter.tag}`]]
+        tagFeedComponent: [
+          "li.nav-item",
+          ["a.nav-link.active", ["i.ion-pound"], " ", state.articlesFilter.tag]
+        ]
       }
     : {
         globalFeed: !state.feed,
@@ -28,7 +31,6 @@ export const Home = ({ state, actions }) => {
     ],
     [
       ".container page",
-      [".row", [".col-md-9", ["ul", ["li", "Global Feed pagination"]]]],
       [
         ".row",
         [
@@ -70,13 +72,9 @@ export const Home = ({ state, actions }) => {
               content.tagFeedComponent
             ]
           ],
-          state.articles
-            ? Articles({ state, actions })
-            : [
-                "div",
-                { style: { height: "2000px" } },
-                state.loading ? ["img", { src: "/assets/loading.gif" }] : null
-              ]
+          state.loading || !state.articles
+            ? [".article-preview", "Loading articles..."]
+            : Articles({ state, actions })
         ],
         [".col-md-3", [".sidebar", PopularTags({ state })]]
       ]

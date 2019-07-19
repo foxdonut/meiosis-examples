@@ -3,7 +3,7 @@ import { helpers } from "../root/helpers"
 import { prepend } from "../util/fp"
 import { Route, navigateTo } from "../routes"
 
-export const Actions = ({ update }) => ({
+export const Actions = update => ({
   updateCommentField: comment => update({ comment }),
 
   addComment: (slug, body) => {
@@ -24,37 +24,20 @@ export const Actions = ({ update }) => ({
 
   deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(navigateTo(Route.Home()))),
 
-  followUser: (state, username) => {
+  followUser: (state, username, routing) => {
     if (state.user) {
       profileApi
         .follow(username)
-        .then(() => helpers.loadArticle({ slug: state.params.slug }))
+        .then(() => helpers.loadArticle({ slug: routing.localSegment.params.slug }))
         .then(update)
     } else {
-      update(navigateTo(Route.Register()))
+      update(navigateTo(Route.Login()))
     }
   },
 
-  unfollowUser: (state, username) =>
+  unfollowUser: (state, username, routing) =>
     profileApi
       .unfollow(username)
-      .then(() => helpers.loadArticle({ slug: state.params.slug }))
-      .then(update),
-
-  favoriteArticle: (state, slug) => {
-    if (state.user) {
-      articlesApi
-        .favorite(slug)
-        .then(() => helpers.loadArticle({ slug }))
-        .then(update)
-    } else {
-      update(navigateTo(Route.Register()))
-    }
-  },
-
-  unfavoriteArticle: slug =>
-    articlesApi
-      .unfavorite(slug)
-      .then(() => helpers.loadArticle({ slug }))
+      .then(() => helpers.loadArticle({ slug: routing.localSegment.params.slug }))
       .then(update)
 })

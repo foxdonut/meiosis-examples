@@ -22,20 +22,20 @@ const request = (url, options) =>
     .then(response => (response && response.data) || response)
 
 export const articlesApi = {
-  getList: data => request("/articles", { data }),
+  getList: params => request("/articles", { params }),
 
-  getFeed: data => request("/articles/feed", { data }),
+  getFeed: params => request("/articles/feed", { params }),
 
   getSingle: slug => request(`/articles/${slug}`),
 
   getComments: slug => request(`/articles/${slug}/comments`),
 
-  addComment: (slug, data) => request(`/articles/${slug}/comments`, { data, method: "POST" }),
+  addComment: (slug, params) => request(`/articles/${slug}/comments`, { params, method: "POST" }),
 
   deleteComment: (slug, id) => request(`/articles/${slug}/comments/${id}`, { method: "DELETE" }),
 
-  publish: (data, slug) =>
-    request("/articles" + (slug ? "/" + slug : ""), { data, method: slug ? "PUT" : "POST" }),
+  publish: (params, slug) =>
+    request("/articles" + (slug ? "/" + slug : ""), { params, method: slug ? "PUT" : "POST" }),
 
   unpublish: slug => request(`/articles/${slug}`, { method: "DELETE" }),
 
@@ -45,9 +45,9 @@ export const articlesApi = {
 }
 
 export const credentialsApi = {
-  register: data => request("/users", { data, method: "POST" }),
+  register: params => request("/users", { params, method: "POST" }),
 
-  login: data => request("/users/login", { data, method: "POST" }),
+  login: params => request("/users/login", { params, method: "POST" }),
 
   getUser: () =>
     new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ export const popularTagsApi = {
 export const profileApi = {
   get: username => request(`/profiles/${username}`),
 
-  update: data => request("/user", { data, method: "PUT" }),
+  update: params => request("/user", { params, method: "PUT" }),
 
   follow: username => request(`/profiles/${username}/follow`, { method: "POST" }),
 

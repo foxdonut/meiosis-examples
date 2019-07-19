@@ -8,7 +8,8 @@ export const Initial = data =>
         author: "",
         favorited: ""
       },
-      //login: {},
+      loading: true,
+      login: {},
       register: {},
       settings: {}
     },

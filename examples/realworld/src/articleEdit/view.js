@@ -10,7 +10,7 @@ export const ArticleEdit = ({ state, actions }) => {
   const fieldErrors = getFieldErrors(article && article.validationErrors)
 
   return !article
-    ? ["img", { src: "/assets/loading.gif" }]
+    ? ["div", "Loading article..."]
     : [
         ".editor-page",
         [
