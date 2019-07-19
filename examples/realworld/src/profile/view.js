@@ -8,7 +8,7 @@ import { Articles } from "../articles"
 
 export const Profile = ({ state, actions, routing }) => {
   const username = get(state, ["profile", "username"])
-  const isCurrentUser = get(state, ["profile", "id"]) === get(state, ["user", "id"])
+  const isCurrentUser = get(state, ["profile", "username"]) === get(state, ["user", "username"])
   const isFavorites = routing.localSegment.id === "ProfileFavorites"
 
   return [

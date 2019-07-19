@@ -1,6 +1,5 @@
 import { Route } from "../routes"
 import { router } from "../router"
-import { compose, preventDefault } from "../util/fp"
 
 import { Articles } from "../articles"
 import { PopularTags } from "../popularTags"
@@ -15,7 +14,7 @@ export const Home = ({ state, actions }) => {
         ]
       }
     : {
-        globalFeed: !state.feed,
+        globalFeed: !state.articlesFilter.feed,
         tagFeedComponent: null
       }
 
@@ -44,12 +43,8 @@ export const Home = ({ state, actions }) => {
                 [
                   "a.nav-link",
                   {
-                    href: router.toPath([Route.Home()]),
-                    onClick: compose(
-                      actions.navigateToYourFeed,
-                      preventDefault
-                    ),
-                    className: { active: state.feed }
+                    href: router.toPath([Route.Home({ feed: true })]),
+                    className: { active: state.articlesFilter.feed }
                   },
                   "Your Feed"
                 ]
@@ -59,11 +54,7 @@ export const Home = ({ state, actions }) => {
                 [
                   "a.nav-link",
                   {
-                    href: router.toPath([Route.Home()]),
-                    onClick: compose(
-                      actions.navigateToGlobalFeed,
-                      preventDefault
-                    ),
+                    href: router.toPath([Route.Home({ feed: null })]),
                     className: { active: content.globalFeed }
                   },
                   "Global Feed"

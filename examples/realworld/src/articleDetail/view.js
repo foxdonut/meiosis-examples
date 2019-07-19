@@ -159,16 +159,21 @@ export const ArticleDetail = ({ state, actions, routing }) => {
               [
                 ".card-footer",
                 [
-                  "a.comment-author[href=#]",
+                  "a.comment-author",
+                  { href: router.toPath(Route.Profile({ username: comment.author.username })) },
                   ["img.comment-author-img", { src: comment.author.image || defaultImage }]
                 ],
                 " ",
-                ["a.comment-author[href=#]", comment.author.username],
+                [
+                  "a.comment-author",
+                  { href: router.toPath(Route.Profile({ username: comment.author.username })) },
+                  comment.author.username
+                ],
                 ["span.date-posted", new Date(comment.createdAt).toDateString()],
                 [
                   "span.mod-options",
                   state.user &&
-                    comment.author.id === state.user.id && [
+                    comment.author.username === state.user.username && [
                       "i.ion-trash-a",
                       { onClick: actions.deleteComment(article.slug, comment.id) }
                     ]

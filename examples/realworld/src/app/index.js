@@ -29,7 +29,6 @@ export const app = {
     Object.assign(
       {},
       routes.Actions(update),
-      home.Actions(update),
       register.Actions(update),
       login.Actions(update),
       articleSummary.Actions(update),

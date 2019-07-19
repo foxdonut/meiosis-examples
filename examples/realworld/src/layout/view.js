@@ -44,8 +44,9 @@ export const Header = ({ state, routing }) => {
                 {
                   className: {
                     active:
-                      routing.localSegment.id === "Profile" &&
-                      get(state, ["user", "id"]) === get(state, ["profile", "id"])
+                      (routing.localSegment.id === "Profile" ||
+                        routing.localSegment.id === "ProfileFavorites") &&
+                      get(state, ["user", "username"]) === get(state, ["profile", "username"])
                   }
                 },
                 [

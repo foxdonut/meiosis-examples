@@ -12,12 +12,7 @@ export const service = ({ state, update }) => {
         .loadFeed(Object.assign({}, pick(["limit", "offset"], state.articlesFilter)))
         .then(data => update([data, { loading: false }]))
     } else {
-      helpers
-        .loadArticles(
-          // FIXME
-          state.articlesFilter
-        )
-        .then(data => update([data, { loading: false }]))
+      helpers.loadArticles(state.articlesFilter).then(data => update([data, { loading: false }]))
     }
   })
 }

@@ -1,3 +1,5 @@
+import { SUB } from "mergerino"
+
 import { articlesApi, profileApi } from "../services"
 import { helpers } from "../root/helpers"
 import { prepend } from "../util/fp"
@@ -11,7 +13,7 @@ export const Actions = update => ({
       articlesApi.addComment(slug, { comment: { body } }).then(data =>
         update({
           comment: "",
-          comments: list => prepend(data.comment, list)
+          comments: SUB(list => prepend(data.comment, list))
         })
       )
     }
@@ -20,7 +22,7 @@ export const Actions = update => ({
   deleteComment: (slug, id) => () =>
     articlesApi
       .deleteComment(slug, id)
-      .then(() => update({ comments: list => list.filter(comment => comment.id !== id) })),
+      .then(() => update({ comments: SUB(list => list.filter(comment => comment.id !== id)) })),
 
   deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(navigateTo(Route.Home()))),
 

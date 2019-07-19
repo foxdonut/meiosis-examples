@@ -15,7 +15,7 @@ export const Route = createRouteSegments([
 ])
 
 export const routeConfig = {
-  Home: "/?tag",
+  Home: "/?tag&feed",
   Login: "/login",
   Register: "/register",
   ArticleDetail: "/article/:slug",
