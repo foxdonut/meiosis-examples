@@ -29,10 +29,10 @@
   "dependencies": {
     "feather-route-matcher": "^3.1.0",
     "marked": "^0.6.2",
-    "meiosis-routing": "^1.7.0",
+    "meiosis-routing": "^1.8.0",
     "meiosis-setup": "^2.0.0",
     "mergerino": "^0.2.1",
-    "mithril": "^2.0.0-rc.3",
+    "mithril": "^2.0.0-rc.9",
     "query-string": "^6.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

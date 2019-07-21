@@ -15,15 +15,15 @@ export const Route = createRouteSegments([
 ])
 
 export const routeConfig = {
-  Home: "/?tag&feed",
+  Home: "/?tag&feed&offset",
   Login: "/login",
   Register: "/register",
   ArticleDetail: "/article/:slug",
   ArticleCreate: "/editor",
   ArticleEdit: "/editor/:slug",
   Settings: "/settings",
-  Profile: "/profile/:username",
-  ProfileFavorites: "/profile/:username/favorites"
+  Profile: "/profile/:username?offset",
+  ProfileFavorites: "/profile/:username/favorites?offset"
 }
 
 export const routes = {

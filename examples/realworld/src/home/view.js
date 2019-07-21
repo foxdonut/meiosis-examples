@@ -4,7 +4,7 @@ import { router } from "../router"
 import { Articles } from "../articles"
 import { PopularTags } from "../popularTags"
 
-export const Home = ({ state, actions }) => {
+export const Home = ({ state, actions, routing }) => {
   const content = state.articlesFilter.tag
     ? {
         globalFeed: false,
@@ -65,7 +65,7 @@ export const Home = ({ state, actions }) => {
           ],
           state.loading || !state.articles
             ? [".article-preview", "Loading articles..."]
-            : Articles({ state, actions })
+            : Articles({ state, actions, routing })
         ],
         [".col-md-3", [".sidebar", PopularTags({ state })]]
       ]

@@ -9,7 +9,6 @@ import { articles } from "../articles"
 import { articleSummary } from "../articleSummary"
 import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
-import { pager } from "../pager"
 import { settings } from "../settings"
 import { profile } from "../profile"
 
@@ -34,7 +33,6 @@ export const app = {
       articleSummary.Actions(update),
       articleDetail.Actions(update),
       articleEdit.Actions(update),
-      pager.Actions(update),
       settings.Actions(update),
       profile.Actions(update)
     ),

@@ -21,6 +21,31 @@ const request = (url, options) =>
     .request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
     .then(response => (response && response.data) || response)
 
+/*
+Parameters:
+
+Filter by tag:
+?tag=AngularJS
+
+Filter by author:
+?author=jake
+
+Favorited by user:
+?favorited=jake
+
+Limit number of articles (default is 20):
+?limit=20
+
+Offset/skip number of articles (default is 0):
+?offset=0
+
+Returns:
+
+{
+  articles,
+  articlesCount
+}
+ */
 export const articlesApi = {
   getList: params => request("/articles", { params }),
 
@@ -30,12 +55,12 @@ export const articlesApi = {
 
   getComments: slug => request(`/articles/${slug}/comments`),
 
-  addComment: (slug, params) => request(`/articles/${slug}/comments`, { params, method: "POST" }),
+  addComment: (slug, body) => request(`/articles/${slug}/comments`, { body, method: "POST" }),
 
   deleteComment: (slug, id) => request(`/articles/${slug}/comments/${id}`, { method: "DELETE" }),
 
-  publish: (params, slug) =>
-    request("/articles" + (slug ? "/" + slug : ""), { params, method: slug ? "PUT" : "POST" }),
+  publish: (body, slug) =>
+    request("/articles" + (slug ? "/" + slug : ""), { body, method: slug ? "PUT" : "POST" }),
 
   unpublish: slug => request(`/articles/${slug}`, { method: "DELETE" }),
 
@@ -45,9 +70,9 @@ export const articlesApi = {
 }
 
 export const credentialsApi = {
-  register: params => request("/users", { params, method: "POST" }),
+  register: body => request("/users", { body, method: "POST" }),
 
-  login: params => request("/users/login", { params, method: "POST" }),
+  login: body => request("/users/login", { body, method: "POST" }),
 
   getUser: () =>
     new Promise((resolve, reject) => {
@@ -68,7 +93,7 @@ export const popularTagsApi = {
 export const profileApi = {
   get: username => request(`/profiles/${username}`),
 
-  update: params => request("/user", { params, method: "PUT" }),
+  update: body => request("/user", { body, method: "PUT" }),
 
   follow: username => request(`/profiles/${username}/follow`, { method: "POST" }),
 

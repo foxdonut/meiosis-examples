@@ -84,7 +84,7 @@ export const Profile = ({ state, actions, routing }) => {
               ]
             ]
           ],
-          Articles({ state, actions })
+          Articles({ state, actions, routing })
         ]
       ]
     ]
