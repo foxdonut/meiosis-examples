@@ -5,7 +5,6 @@ import { router } from "../router"
 import { home } from "../home"
 import { register } from "../register"
 import { login } from "../login"
-import { articles } from "../articles"
 import { articleSummary } from "../articleSummary"
 import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
@@ -41,7 +40,6 @@ export const app = {
     settings.guard,
     routes.accept,
     home.accept,
-    articles.accept,
     articleEdit.accept,
     register.accept,
     login.accept,

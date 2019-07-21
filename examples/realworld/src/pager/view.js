@@ -21,7 +21,7 @@ export const Pager = ({ state, routing }) => {
           {
             href: router.toPath(
               routing.sameRoute(
-                Object.assign(params, {
+                Object.assign({}, params, {
                   offset: (pageNumber - 1) * filter.limit
                 })
               )
