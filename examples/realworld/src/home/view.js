@@ -1,20 +1,19 @@
-import { Route } from "../routes"
+import { Route, getArticlesFilter } from "../routes"
 import { router } from "../router"
 
 import { Articles } from "../articles"
 import { PopularTags } from "../popularTags"
 
 export const Home = ({ state, actions, routing }) => {
-  const content = state.articlesFilter.tag
+  const filter = getArticlesFilter(state.route.current)
+
+  const content = filter.tag
     ? {
         globalFeed: false,
-        tagFeedComponent: [
-          "li.nav-item",
-          ["a.nav-link.active", ["i.ion-pound"], " ", state.articlesFilter.tag]
-        ]
+        tagFeedComponent: ["li.nav-item", ["a.nav-link.active", ["i.ion-pound"], " ", filter.tag]]
       }
     : {
-        globalFeed: !state.articlesFilter.feed,
+        globalFeed: !filter.feed,
         tagFeedComponent: null
       }
 
@@ -44,7 +43,7 @@ export const Home = ({ state, actions, routing }) => {
                   "a.nav-link",
                   {
                     href: router.toPath([Route.Home({ feed: true })]),
-                    className: { active: state.articlesFilter.feed }
+                    className: { active: filter.feed }
                   },
                   "Your Feed"
                 ]

@@ -1,5 +1,7 @@
 import { Actions, accept, createRouteSegments } from "meiosis-routing/state"
 
+import { assoc } from "../util/fp"
+
 export { navigateTo } from "meiosis-routing/state"
 
 export const Route = createRouteSegments([
@@ -31,16 +33,14 @@ export const routes = {
   accept
 }
 
-/*
-const routeMappings = {
-  "/": () => ({ pageId: HomePage, articles: null }),
-  "/article/:slug": () => ({ pageId: ArticleDetailPage, article: null }),
-  "/editor/:slug": () => ({ pageId: ArticleEditPage, article: null }),
-  "/editor": () => ({ pageId: ArticleCreatePage,
-    article: { title: "", description: "", body: "", tags: "" }
-  }),
-  "/settings": () => ({ pageId: SettingsPage }),
-  "/profile/:username": () => ({ pageId: ProfilePage, profile: null, feed: false }),
-  "/profile/:username/favorites": () => ({ pageId: ProfileFavoritesPage, profile: null, feed: false })
+export const getArticlesFilter = route => {
+  const filter = ["feed", "offset", "tag"].reduce(
+    (result, param) =>
+      assoc(param, route.map(segment => segment.params[param]).filter(Boolean)[0], result),
+    {}
+  )
+  filter.offset = Number(filter.offset) || 0
+  filter.limit = 10
+
+  return filter
 }
-*/

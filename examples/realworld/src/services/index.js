@@ -34,7 +34,7 @@ Favorited by user:
 ?favorited=jake
 
 Limit number of articles (default is 20):
-?limit=20
+?limit=10
 
 Offset/skip number of articles (default is 0):
 ?offset=0

@@ -39,7 +39,6 @@ export const app = {
   acceptors: [
     settings.guard,
     routes.accept,
-    home.accept,
     articleEdit.accept,
     register.accept,
     login.accept,

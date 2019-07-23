@@ -1,17 +1,21 @@
 import { findRouteSegment, whenPresent } from "meiosis-routing/state"
 
+import { getArticlesFilter } from "../routes"
 import { helpers } from "../root/helpers"
 
-const loadProfileAndArticles = ({ state, update, username, author, favorited }) =>
-  Promise.all([
+const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
+  const filter = getArticlesFilter(state.route.current)
+
+  return Promise.all([
     helpers.loadProfile({ username }),
     helpers.loadArticles({
-      limit: state.articlesFilter.limit,
-      offset: state.articlesFilter.offset,
+      limit: filter.limit,
+      offset: filter.offset,
       author,
       favorited
     })
   ]).then(update)
+}
 
 export const service = ({ state, update }) => {
   whenPresent(findRouteSegment(state.route.arrive, "Profile"), arrive => {
