@@ -38,7 +38,7 @@ export const Actions = update => ({
           },
           article.slug
         )
-        .then(() => update(navigateTo({ route: Route.Home() })))
+        .then(() => update(navigateTo(Route.Home())))
     }
   }
 })

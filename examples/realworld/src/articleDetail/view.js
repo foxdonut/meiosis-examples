@@ -14,6 +14,7 @@ const authorMeta = actions => article => [
     ["i.ion-edit"],
     " Edit Article"
   ],
+  " ",
   [
     "button.btn.btn-outline-danger.btn-sm",
     { onClick: () => actions.deleteArticle(article.slug) },

@@ -62,9 +62,7 @@ export const Home = ({ state, actions, routing }) => {
               content.tagFeedComponent
             ]
           ],
-          state.loading || !state.articles
-            ? [".article-preview", "Loading articles..."]
-            : Articles({ state, actions, routing })
+          Articles({ state, actions, routing })
         ],
         [".col-md-3", [".sidebar", PopularTags({ state })]]
       ]

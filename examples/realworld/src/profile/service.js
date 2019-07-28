@@ -4,6 +4,8 @@ import { getArticlesFilter } from "../routes"
 import { helpers } from "../root/helpers"
 
 const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
+  update({ loading: true })
+
   const filter = getArticlesFilter(state.route.current)
 
   return Promise.all([
@@ -14,13 +16,13 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
       author,
       favorited
     })
-  ]).then(update)
+  ]).then(data => update([data, { loading: false }]))
 }
 
 export const service = ({ state, update }) => {
   whenPresent(findRouteSegment(state.route.arrive, "Profile"), arrive => {
     const { username } = arrive.params
-    loadProfileAndArticles({ state, update, username, author: username }) // FIXME: or params.author?
+    loadProfileAndArticles({ state, update, username, author: username })
   })
 
   whenPresent(findRouteSegment(state.route.arrive, "ProfileFavorites"), arrive => {
