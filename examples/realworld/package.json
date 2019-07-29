@@ -32,8 +32,9 @@
     "meiosis-routing": "^1.8.0",
     "meiosis-setup": "^2.0.0",
     "mergerino": "^0.2.1",
-    "mithril": "^2.0.0-rc.9",
-    "query-string": "^6.8.1",
+    "mithril": "^2.0.3",
+    "preact": "^8.4.2",
+    "query-string": "^6.8.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "seview": "^1.0.0",
@@ -41,8 +42,8 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^5.1.0",
@@ -51,7 +52,7 @@
     "prettier": "1.18.2",
     "reload": "^3.0.1",
     "static-server": "^2.2.1",
-    "webpack": "^4.35.0",
-    "webpack-cli": "^3.3.5"
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
   }
 }
