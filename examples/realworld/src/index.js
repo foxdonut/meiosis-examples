@@ -23,9 +23,3 @@ meiosisMergerino({ stream, merge, app }).then(({ states, actions }) => {
 
   router.start({ navigateTo: actions.navigateTo })
 })
-
-/*
-FIXME:
-- profile favorites pager
-- improve Profile vs Favorites routing
-*/
