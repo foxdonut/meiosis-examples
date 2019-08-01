@@ -9,7 +9,7 @@ import { ArticleList } from "../articleList"
 export const Profile = ({ state, actions, routing }) => {
   const username = get(state, ["profile", "username"])
   const isCurrentUser = get(state, ["profile", "username"]) === get(state, ["user", "username"])
-  const isFavorites = get(routing, ["childSegment", "id"]) === "Favorites"
+  const isFavorites = routing.localSegment.id === "ProfileFavorites"
 
   return [
     ".profile-page",
@@ -77,7 +77,7 @@ export const Profile = ({ state, actions, routing }) => {
                   "a.nav-link",
                   {
                     className: { active: isFavorites },
-                    href: router.toPath([Route.Profile({ username }), Route.Favorites()])
+                    href: router.toPath(Route.ProfileFavorites({ username }))
                   },
                   "Favorited Articles"
                 ]
