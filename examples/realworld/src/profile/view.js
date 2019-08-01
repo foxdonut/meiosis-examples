@@ -2,7 +2,7 @@ import { get } from "../util/fp"
 import { Route } from "../routes"
 import { router } from "../router"
 import { defaultImage } from "../util/view"
-import { Articles } from "../articles"
+import { ArticleList } from "../articleList"
 
 // http://localhost:3000/#/profile/Roman Lonskiy
 
@@ -84,7 +84,7 @@ export const Profile = ({ state, actions, routing }) => {
               ]
             ]
           ],
-          Articles({ state, actions, routing })
+          ArticleList({ state, actions, routing })
         ]
       ]
     ]

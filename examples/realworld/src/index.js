@@ -26,7 +26,6 @@ meiosisMergerino({ stream, merge, app }).then(({ states, actions }) => {
 
 /*
 FIXME:
-
-- check ArticleCreate vs ArticleEdit
-- articles vs articleSummary
+- profile favorites pager
+- improve Profile vs Favorites routing
 */

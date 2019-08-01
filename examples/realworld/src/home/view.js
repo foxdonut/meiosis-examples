@@ -1,7 +1,7 @@
 import { Route, getArticlesFilter } from "../routes"
 import { router } from "../router"
 
-import { Articles } from "../articles"
+import { ArticleList } from "../articleList"
 import { PopularTags } from "../popularTags"
 
 export const Home = ({ state, actions, routing }) => {
@@ -75,7 +75,7 @@ export const Home = ({ state, actions, routing }) => {
               content.tagFeedComponent
             ]
           ],
-          Articles({ state, actions, routing })
+          ArticleList({ state, actions, routing })
         ],
         [".col-md-3", [".sidebar", PopularTags({ state })]]
       ]

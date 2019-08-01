@@ -4,7 +4,7 @@ import { routes } from "../routes"
 import { home } from "../home"
 import { register } from "../register"
 import { login } from "../login"
-import { articleSummary } from "../articleSummary"
+import { articleList } from "../articleList"
 import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
@@ -19,7 +19,7 @@ export const app = {
       routes.Actions(update),
       register.Actions(update),
       login.Actions(update),
-      articleSummary.Actions(update),
+      articleList.Actions(update),
       articleDetail.Actions(update),
       articleEdit.Actions(update),
       settings.Actions(update),
