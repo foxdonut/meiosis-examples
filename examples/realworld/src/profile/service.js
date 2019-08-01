@@ -1,7 +1,7 @@
-import { findRouteSegment, whenPresent } from "meiosis-routing/state"
+import { findRouteSegment } from "meiosis-routing/state"
 
 import { getArticlesFilter } from "../routes"
-import { helpers } from "../root/helpers"
+import { loadArticles, profileApi } from "../services"
 
 const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
   update({ loading: true })
@@ -9,8 +9,8 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
   const filter = getArticlesFilter(state.route.current)
 
   return Promise.all([
-    helpers.loadProfile({ username }),
-    helpers.loadArticles({
+    profileApi.get(username),
+    loadArticles({
       limit: filter.limit,
       offset: filter.offset,
       author,
@@ -20,13 +20,16 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
 }
 
 export const service = ({ state, update }) => {
-  whenPresent(findRouteSegment(state.route.arrive, "Profile"), arrive => {
-    const { username } = arrive.params
-    loadProfileAndArticles({ state, update, username, author: username })
-  })
+  const segment = state.route.current[0]
+  const inProfile = segment.id === "Profile"
+  const arriveProfile = findRouteSegment(state.route.arrive, "Profile")
+  const arriveFavorites = findRouteSegment(state.route.arrive, "Favorites")
+  const leaveFavorites = findRouteSegment(state.route.leave, "Favorites")
+  const { username } = segment.params
 
-  whenPresent(findRouteSegment(state.route.arrive, "ProfileFavorites"), arrive => {
-    const { username } = arrive.params
+  if (arriveFavorites) {
     loadProfileAndArticles({ state, update, username, favorited: username })
-  })
+  } else if (arriveProfile || (leaveFavorites && inProfile)) {
+    loadProfileAndArticles({ state, update, username, author: username })
+  }
 }

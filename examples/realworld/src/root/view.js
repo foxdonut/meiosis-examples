@@ -17,8 +17,7 @@ const componentMap = {
   ArticleCreate: ArticleEdit,
   ArticleEdit,
   Settings,
-  Profile,
-  ProfileFavorites: Profile
+  Profile
 }
 
 export const Root = ({ state, actions }) => {

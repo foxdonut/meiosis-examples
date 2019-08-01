@@ -1,7 +1,6 @@
 import { SUB } from "mergerino"
 
-import { articlesApi, profileApi } from "../services"
-import { helpers } from "../root/helpers"
+import { articlesApi, loadArticle, profileApi } from "../services"
 import { prepend } from "../util/fp"
 import { Route, navigateTo } from "../routes"
 
@@ -30,7 +29,7 @@ export const Actions = update => ({
     if (state.user) {
       profileApi
         .follow(username)
-        .then(() => helpers.loadArticle({ slug: routing.localSegment.params.slug }))
+        .then(() => loadArticle({ slug: routing.localSegment.params.slug }))
         .then(update)
     } else {
       update(navigateTo(Route.Login()))
@@ -40,6 +39,6 @@ export const Actions = update => ({
   unfollowUser: (state, username, routing) =>
     profileApi
       .unfollow(username)
-      .then(() => helpers.loadArticle({ slug: routing.localSegment.params.slug }))
+      .then(() => loadArticle({ slug: routing.localSegment.params.slug }))
       .then(update)
 })

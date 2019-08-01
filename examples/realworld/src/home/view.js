@@ -32,7 +32,7 @@ export const Home = ({ state, actions, routing }) => {
             {
               href: "https://meiosis.js.org",
               target: "_blank",
-              style: "color: #fff; text-decoration: underline"
+              style: { color: "#fff", textDecoration: "underline" }
             },
             "Meiosis"
           ],

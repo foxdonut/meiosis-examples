@@ -2,7 +2,6 @@ import meiosisMergerino from "meiosis-setup/mergerino"
 import stream from "meiosis-setup/simple-stream"
 import merge from "mergerino"
 
-import { pipe } from "./util/fp"
 import { render } from "./util/view"
 import { app } from "./app"
 import { router } from "./router"
@@ -15,14 +14,19 @@ meiosisMergerino({ stream, merge, app }).then(({ states, actions }) => {
   })
   // End of code for using Meiosis Tracer in development.
 
-  states.map(
-    pipe(
-      state => ({ state, actions }),
-      app.view,
-      render(document.getElementById("app"))
-    )
-  )
+  const element = document.getElementById("app")
+
+  states.map(state => {
+    render(app.view({ state, actions }), element)
+    router.locationBarSync(state.route.current)
+  })
 
   router.start({ navigateTo: actions.navigateTo })
-  states.map(state => router.locationBarSync(state.route.current))
 })
+
+/*
+FIXME:
+
+- check ArticleCreate vs ArticleEdit
+- articles vs articleSummary
+*/

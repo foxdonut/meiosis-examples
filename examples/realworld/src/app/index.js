@@ -1,7 +1,6 @@
-import { root, Root } from "../root"
-import { credentialsApi, clearToken } from "../services"
+import { Initial } from "./initial"
+import { Root } from "../root"
 import { routes } from "../routes"
-import { router } from "../router"
 import { home } from "../home"
 import { register } from "../register"
 import { login } from "../login"
@@ -11,17 +10,8 @@ import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
 
-const route = { current: router.initialRoute }
-
 export const app = {
-  Initial: () =>
-    credentialsApi
-      .getUser()
-      .then(user => root.Initial({ user, route }))
-      .catch(() => {
-        clearToken()
-        return root.Initial({ route })
-      }),
+  Initial,
 
   Actions: update =>
     Object.assign(

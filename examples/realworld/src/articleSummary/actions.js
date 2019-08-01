@@ -1,13 +1,12 @@
 import { findRouteSegment } from "meiosis-routing/state"
 
-import { articlesApi } from "../services"
+import { articlesApi, loadArticle, loadArticles } from "../services"
 import { Route, getArticlesFilter, navigateTo } from "../routes"
-import { helpers } from "../root/helpers"
 
 const refresh = (state, slug) =>
   findRouteSegment(state.route.current, "ArticleDetail")
-    ? helpers.loadArticle({ slug })
-    : helpers.loadArticles(getArticlesFilter(state.route.current))
+    ? loadArticle({ slug })
+    : loadArticles(getArticlesFilter(state.route.current))
 
 export const Actions = update => ({
   favoriteArticle: (state, slug) => {

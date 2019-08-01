@@ -1,13 +1,11 @@
 import { findRouteSegment, whenPresent } from "meiosis-routing/state"
 
-import { helpers } from "../root/helpers"
+import { loadArticle } from "../services"
 
 export const service = ({ state, update }) => {
   whenPresent(findRouteSegment(state.route.arrive, "ArticleEdit"), ({ params: { slug } }) => {
-    helpers
-      .loadArticle({ slug })
-      .then(data =>
-        update(Object.assign(data, { article: { tags: (data.article.tagList || []).join(", ") } }))
-      )
+    loadArticle({ slug }).then(data =>
+      update(Object.assign(data, { article: { tags: (data.article.tagList || []).join(", ") } }))
+    )
   })
 }

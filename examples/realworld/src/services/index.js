@@ -99,3 +99,13 @@ export const profileApi = {
 
   unfollow: username => request(`/profiles/${username}/follow`, { method: "DELETE" })
 }
+
+export const loadArticles = params =>
+  Promise.all([articlesApi.getList(params), popularTagsApi.getList()]).then(([articles, tags]) =>
+    Object.assign(articles, tags)
+  )
+
+export const loadArticle = ({ slug }) =>
+  Promise.all([articlesApi.getSingle(slug), articlesApi.getComments(slug)]).then(
+    ([article, comments]) => Object.assign(article, comments)
+  )
