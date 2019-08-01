@@ -11,6 +11,14 @@ export const Header = ({ state, routing }) => {
       ".container",
       ["a.navbar-brand", { href: router.toPath(Route.Home()) }, "conduit"],
       [
+        "a",
+        {
+          href: "https://github.com/foxdonut/meiosis-examples/tree/master/examples/realworld",
+          target: "_blank"
+        },
+        "source code"
+      ],
+      [
         "ul.nav.navbar-nav.pull-xs-right",
         [
           "li.nav-item",

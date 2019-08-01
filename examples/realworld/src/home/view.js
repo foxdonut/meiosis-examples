@@ -24,7 +24,20 @@ export const Home = ({ state, actions, routing }) => {
       [
         ".container",
         ["h1.logo-font", "conduit"],
-        ["p", "A place to share your ", ["i", "Meiosis"], " knowledge."]
+        [
+          "p",
+          "A place to share your ",
+          [
+            "a",
+            {
+              href: "https://meiosis.js.org",
+              target: "_blank",
+              style: "color: #fff; text-decoration: underline"
+            },
+            "Meiosis"
+          ],
+          " knowledge."
+        ]
       ]
     ],
     [
