@@ -2,7 +2,7 @@ import { findRouteSegment, whenPresent } from "meiosis-routing/state"
 
 import { articlesApi, loadArticles } from "../services"
 import { getArticlesFilter } from "../routes"
-import { identity, ifElse, pick } from "../util/fp"
+import { pick } from "../util/fp"
 
 export const service = ({ state, update }) => {
   whenPresent(findRouteSegment(state.route.arrive, "Home"), arrive => {
@@ -10,17 +10,10 @@ export const service = ({ state, update }) => {
 
     const filter = getArticlesFilter(state.route.current)
 
-    return ifElse(
-      identity,
-
-      () =>
-        articlesApi
+    return arrive.params.feed
+      ? articlesApi
           .getFeed(pick(["limit", "offset"], filter))
-          .then(data => update([data, { loading: false }])),
-
-      () => loadArticles(filter).then(data => update([data, { loading: false }])),
-
-      arrive.params.feed
-    )
+          .then(data => update([data, { loading: false }]))
+      : loadArticles(filter).then(data => update([data, { loading: false }]))
   })
 }

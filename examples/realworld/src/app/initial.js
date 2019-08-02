@@ -1,4 +1,3 @@
-import { root } from "../root"
 import { credentialsApi, clearToken } from "../services"
 import { router } from "../router"
 
@@ -7,9 +6,9 @@ export const Initial = () => {
 
   return credentialsApi
     .getUser()
-    .then(user => root.Initial({ user, route }))
+    .then(user => ({ user, route }))
     .catch(() => {
       clearToken()
-      return root.Initial({ route })
+      return { route }
     })
 }
