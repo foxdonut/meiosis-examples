@@ -4,8 +4,6 @@ import { router } from "../router"
 import { defaultImage } from "../util/view"
 import { ArticleList } from "../articleList"
 
-// http://localhost:3000/#/profile/Roman Lonskiy
-
 export const Profile = ({ state, actions, routing }) => {
   const username = get(state, ["profile", "username"])
   const isCurrentUser = get(state, ["profile", "username"]) === get(state, ["user", "username"])
