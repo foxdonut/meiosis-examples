@@ -2,7 +2,7 @@ import { Route } from "../routes"
 import { router } from "../router"
 import { get } from "../util/fp"
 
-export const Header = ({ state, routing }) => {
+const Header = ({ state, routing }) => {
   const active = pageId => ({ className: { active: routing.localSegment.id === pageId } })
 
   return [
@@ -81,7 +81,7 @@ export const Header = ({ state, routing }) => {
   ]
 }
 
-export const Footer = () => [
+const Footer = () => [
   "footer",
   [
     ".container",
@@ -93,4 +93,11 @@ export const Footer = () => [
       ["span", { innerHTML: ". Code &amp; design licensed under MIT." }]
     ]
   ]
+]
+
+export const Layout = ({ state, actions, routing, Component }) => [
+  "div",
+  Header({ state, routing }),
+  Component({ state, actions, routing }),
+  Footer()
 ]

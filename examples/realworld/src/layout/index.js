@@ -1,1 +1,1 @@
-export { Header, Footer } from "./view"
+export { Layout } from "./view"
