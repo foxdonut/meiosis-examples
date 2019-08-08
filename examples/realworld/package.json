@@ -31,7 +31,7 @@
     "marked": "^0.6.2",
     "meiosis-routing": "^1.8.0",
     "meiosis-setup": "^2.0.0",
-    "mergerino": "^0.2.1",
+    "mergerino": "^0.3.0",
     "mithril": "^2.0.3",
     "preact": "^8.4.2",
     "query-string": "^6.8.2",
