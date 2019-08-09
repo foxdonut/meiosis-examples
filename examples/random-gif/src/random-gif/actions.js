@@ -14,7 +14,7 @@ export const Actions = update => ({
   newGif: context => {
     update(context.lens({ image: Loaded.N() }))
 
-    m.request({ url: gif_new_url, data: { api_key, tag: context.state.tag } })
+    m.request({ url: gif_new_url, params: { api_key, tag: context.state.tag } })
       .then(response => {
         update(
           context.lens({

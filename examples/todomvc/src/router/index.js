@@ -18,7 +18,7 @@ export const router = {
 
   listenToRouteChanges: update => (window.onpopstate = () => update(parseUrl())),
 
-  service: state => {
+  service: ({ state }) => {
     const route = "#/" + (state.filterBy === "all" ? "" : state.filterBy)
     if (document.location.hash !== route) {
       window.history.pushState({}, "", route)

@@ -1,11 +1,11 @@
 import m from "mithril"
-import O from "patchinko/constant"
+import merge from "mergerino"
 import stream from "mithril/stream"
 
 import { app, App } from "./app"
 
 const update = stream()
-const states = stream.scan(O, app.Initial(), update)
+const states = stream.scan(merge, app.Initial(), update)
 
 // Only for using Meiosis Tracer in development.
 require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [states] })

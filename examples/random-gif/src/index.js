@@ -1,4 +1,4 @@
-import O from "patchinko/constant"
+import merge from "mergerino"
 import m from "mithril"
 import stream from "mithril/stream"
 
@@ -6,8 +6,8 @@ import { app, App } from "./app"
 
 const update = stream()
 const states = stream
-  .scan(O, app.Initial(), update)
-  .map(state => app.accept.reduce((x, f) => O(x, f(x)), state))
+  .scan(merge, app.Initial(), update)
+  .map(state => app.accept.reduce((x, f) => merge(x, f(x)), state))
 
 // Only for using Meiosis Tracer in development.
 require("meiosis-tracer")({
@@ -32,4 +32,4 @@ m.mount(document.getElementById("app"), {
 })
 
 states.map(() => m.redraw())
-states.map(state => app.services.forEach(service => service(state, update)))
+states.map(state => app.services.forEach(service => service({ state, update })))

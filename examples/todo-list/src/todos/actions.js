@@ -1,5 +1,3 @@
-import O from "patchinko/constant"
-
 import { ajaxServices } from "../util/ajax-services"
 import { validateTodo } from "./validation"
 import { clearMessage, showError, showMessage } from "../root/actions"
@@ -13,10 +11,10 @@ const editTodo = todo =>
     todoForm.Initial(Object.assign({}, todo))
   )
 
-const cancelEditTodo = todo => (todo.id ? O : todoForm.Initial())
+const cancelEditTodo = todo => (todo.id ? null : todoForm.Initial())
 
 const updateList = todo => ({
-  todos: O(todos => {
+  todos: todos => {
     if (todos.length === 0) {
       todos.push(todo)
     } else {
@@ -36,19 +34,22 @@ const updateList = todo => ({
       }
     }
     return todos
-  })
+  }
 })
 
 export const Actions = update => ({
   editTodo: (context, todo) => update(context.lens(editTodo(todo))),
-  editingTodo: (context, field, value) => update(context.lens({ todo: O({ [field]: value }) })),
+  editingTodo: (context, field, value) => update(context.lens({ todo: { [field]: value } })),
   cancelEditTodo: (context, todo) => update(context.lens(cancelEditTodo(todo))),
 
   saveTodo: (context, todo) => {
     const validationErrors = validateTodo(todo)
 
     if (Object.keys(validationErrors).length === 0) {
-      update(showMessage("Saving, please wait..."))
+      update([
+        showMessage("Saving, please wait..."),
+        context.lens({ validationErrors: () => ({}) })
+      ])
 
       ajaxServices
         .saveTodo(todo)
@@ -72,7 +73,7 @@ export const Actions = update => ({
           )
         )
     } else {
-      update(context.lens({ validationErrors }))
+      update(context.lens({ validationErrors: () => validationErrors }))
     }
   },
 
@@ -85,10 +86,10 @@ export const Actions = update => ({
         update(
           Object.assign(
             {
-              todos: O(todos => {
+              todos: todos => {
                 todos.splice(todos.findIndex(t => t.id === todo.id), 1)
                 return todos
-              })
+              }
             },
             clearMessage()
           )

@@ -30,10 +30,7 @@ export const app = {
       randomGifList.Actions(update)
     ),
 
-  accept: [
-    randomGifList.accept
-    // could have more functions here
-  ],
+  accept: [randomGifList.accept],
 
   services: [service]
 }

@@ -22,8 +22,8 @@ export const Conditions = {
           onChange: ({ value }) => actions.changeSky(value),
           buttons: [
             { value: "SUNNY", label: "Sunny" },
-            { value: "CLOUDY", label: "Cloudy", style: { marginLeft: "32px" } },
-            { value: "MIX", label: "Mix of sun and clouds", style: { marginLeft: "32px" } }
+            { value: "CLOUDY", label: "Cloudy" },
+            { value: "MIX", label: "Mix of sun and clouds" }
           ]
         })
       )

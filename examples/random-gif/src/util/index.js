@@ -1,10 +1,8 @@
-import O from "patchinko/constant"
-
 export const get = (object, path) =>
   path.reduce((obj, prop) => (obj == null ? null : obj[prop]), object)
 
 export const pathPatch = path => patch => ({
-  [path[0]]: path.slice(1).reduceRight((result, prop) => O({ [prop]: result }), O(patch))
+  [path[0]]: path.slice(1).reduceRight((result, prop) => ({ [prop]: result }), patch)
 })
 
 export const lensProp = (context, prop) => lensPath(context, [prop])

@@ -1,4 +1,3 @@
-import O from "patchinko/constant"
 import * as R from "ramda"
 import uuid from "uuid"
 
@@ -9,14 +8,14 @@ export const Actions = update => ({
     const newId = uuid.v1()
     const randomGifState = randomGif.Initial()
 
-    update(context.lens({ [newId]: randomGifState, randomGifIds: O(R.append(newId)) }))
+    update(context.lens({ [newId]: randomGifState, randomGifIds: R.append(newId) }))
   },
 
   remove: (context, id) => {
     update(
       context.lens({
-        randomGifIds: O(list => R.remove(list.indexOf(id), 1, list)),
-        [id]: O
+        randomGifIds: list => R.remove(list.indexOf(id), 1, list),
+        [id]: undefined
       })
     )
   },

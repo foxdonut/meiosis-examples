@@ -12,7 +12,7 @@ const todoEdit = ({ state, actions }) => html`
     type="text"
     .value=${state.editTodo.title}
     @keyup=${evt => actions.editKeyUp(state.editTodo.id, evt)}
-    @blur=${() => actions.editBlur(state.editTodo)}
+    @blur=${() => actions.editBlur()}
   />
 `
 
@@ -40,13 +40,10 @@ const todoItem = ({ state, actions, todoId }) => {
 export const main = {
   view: ({ state, actions }) => html`
     <section class="main">
-      <input
-        class="toggle-all"
-        type="checkbox"
-        @change=${evt => actions.toggleAllTodos(evt.target.checked)}
-        .checked=${state.allCompleted}
-      />
-      <label for="toggle-all">Mark all as complete</label>
+      <input class="toggle-all" type="checkbox" .checked=${state.allCompleted} />
+      <label for="toggle-all" @click=${() => actions.toggleAllTodos(!state.allCompleted)}>
+        Mark all as complete
+      </label>
       <ul class="todo-list">
         ${state.filteredTodoIds.map(todoId => todoItem({ state, actions, todoId }))}
       </ul>

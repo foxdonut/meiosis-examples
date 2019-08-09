@@ -1,5 +1,3 @@
-import O from "patchinko/constant"
-
 import { todoStorage } from "../util/todo-storage"
 
 const ENTER_KEY = 13
@@ -16,22 +14,22 @@ const displayTodos = todos => ({
 const editingNewTodo = title => ({ newTodo: title })
 
 const updateTodo = todo => ({
-  todosById: O(todosById => {
+  todosById: todosById => {
     todosById[todo.id] = todo
     return todosById
-  }),
-  editTodo: {}
+  },
+  editTodo: () => ({})
 })
 
 const saveNewTodo = todo => ({
-  todosById: O(todosById => {
+  todosById: todosById => {
     todosById[todo.id] = todo
     return todosById
-  }),
-  todoIds: O(todoIds => {
+  },
+  todoIds: todoIds => {
     todoIds.push(todo.id)
     return todoIds
-  }),
+  },
   newTodo: ""
 })
 
@@ -43,13 +41,13 @@ export const Actions = update => ({
   deleteTodo: todoId =>
     todoStorage.deleteTodoId(todoId).then(() =>
       update({
-        todosById: O({
-          [todoId]: O
-        }),
-        todoIds: O(todoIds => {
+        todosById: {
+          [todoId]: undefined
+        },
+        todoIds: todoIds => {
           todoIds.splice(todoIds.indexOf(todoId), 1)
           return todoIds
-        })
+        }
       })
     ),
 
@@ -59,11 +57,11 @@ export const Actions = update => ({
   toggleTodo: (todoId, completed) => {
     todoStorage.setCompleted(todoId, completed).then(() =>
       update({
-        todosById: O({
-          [todoId]: O({
+        todosById: {
+          [todoId]: {
             completed
-          })
-        })
+          }
+        }
       })
     )
   },
@@ -85,20 +83,23 @@ export const Actions = update => ({
     evt.target.parentElement.parentElement.getElementsByClassName("edit")[0].focus()
   },
 
-  editBlur: editTodo => {
-    if (editTodo.id) {
-      editTodo.title = editTodo.title.trim()
-      if (editTodo.title) {
-        todoStorage.saveTodo(editTodo).then(todo => update(updateTodo(todo)))
+  editBlur: () => {
+    update(state => {
+      if (state.editTodo.id) {
+        const title = state.editTodo.title.trim()
+        if (title) {
+          todoStorage.saveTodo(state.editTodo).then(todo => update(updateTodo(todo)))
+        }
       }
-    }
+      return state
+    })
   },
 
   editKeyUp: (id, evt) => {
     const title = evt.target.value
 
     if (evt.keyCode === ESCAPE_KEY) {
-      update({ editTodo: {} })
+      update({ editTodo: () => ({}) })
     } else if (evt.keyCode === ENTER_KEY) {
       const todo = { id, title }
       const editing = !!todo.id

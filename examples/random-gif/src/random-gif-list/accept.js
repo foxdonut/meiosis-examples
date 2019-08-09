@@ -1,8 +1,7 @@
-import O from "patchinko/constant"
 import * as R from "ramda"
 
 export const accept = state => ({
-  randomGifList: O({
+  randomGifList: {
     hasGifs: R.any(
       R.equals("Y"),
       R.map(
@@ -10,5 +9,5 @@ export const accept = state => ({
         R.map(id => R.prop(id, state.randomGifList), state.randomGifList.randomGifIds)
       )
     )
-  })
+  }
 })

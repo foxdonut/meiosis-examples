@@ -1,5 +1,5 @@
 import flyd from "flyd"
-import O from "patchinko/constant"
+import merge from "mergerino"
 import { render } from "lit-html"
 
 import { app } from "./app"
@@ -9,10 +9,10 @@ Promise.resolve()
   .then(app.Initial)
   .then(initialState => {
     const update = flyd.stream()
-    const reducer = (x, f) => O(x, f(x))
+    const reducer = (x, f) => merge(x, f(x))
 
     const states = flyd
-      .scan(O, initialState, update)
+      .scan(merge, initialState, update)
       .map(state => app.accept.reduce(reducer, state))
 
     // Only for using Meiosis Tracer in development.
