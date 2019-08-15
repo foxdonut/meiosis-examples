@@ -19,4 +19,4 @@ import { h } from "seview/react"
 export const render = (view, element) => ReactDOM.render(h(view), element)
 end react */
 
-export const defaultImage = "/assets/smiley-cyrus.jpg"
+export const defaultImage = "assets/smiley-cyrus.jpg"
