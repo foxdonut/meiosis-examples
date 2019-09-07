@@ -1,9 +1,9 @@
 export const Actions = update => ({
-  increment: amount => update({ temperature: { value: x => x + amount } }),
+  increment: (id, amount) => update({ [id]: { value: x => x + amount } }),
 
-  changeUnits: () => {
+  changeUnits: id => {
     update({
-      temperature: temperature => {
+      [id]: temperature => {
         if (temperature.units === "C") {
           temperature.units = "F"
           temperature.value = Math.round((temperature.value * 9) / 5 + 32)

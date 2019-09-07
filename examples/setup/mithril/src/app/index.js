@@ -9,7 +9,12 @@ import "polythene-css/dist/polythene.css"
 import "polythene-css/dist/polythene-typography.css"
 
 export const app = {
-  Initial: () => Object.assign({}, dateTime.Initial(), conditions.Initial(), temperature.Initial()),
+  Initial: () => ({
+    dateTime: dateTime.Initial(),
+    conditions: conditions.Initial(),
+    "temperature:air": temperature.Initial(),
+    "temperature:water": temperature.Initial()
+  }),
 
   Actions: update =>
     Object.assign(
@@ -30,8 +35,13 @@ export const App = {
             .f("left")
             .w("40%")
             .pr(40),
-        m(DateTime, { state, actions })
+        m(DateTime, { state, id: "dateTime", actions })
       ),
-      m("div" + b.f("left"), m(Conditions, { state, actions }), m(Temperature, { state, actions }))
+      m(
+        "div" + b.f("left"),
+        m(Conditions, { state, id: "conditions", actions }),
+        m(Temperature, { state, id: "temperature:air", actions }),
+        m(Temperature, { state, id: "temperature:water", actions })
+      )
     )
 }

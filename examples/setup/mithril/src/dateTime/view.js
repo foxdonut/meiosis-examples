@@ -6,15 +6,15 @@ const getErrorMessage = (state, field) =>
   (state.errors && state.errors.dateTime && state.errors.dateTime[field]) || " "
 
 export const DateTime = {
-  view: ({ attrs: { state, actions } }) =>
+  view: ({ attrs: { state, id, actions } }) =>
     m(
       "div",
       m(TextField, {
         label: "Date:",
         type: "date",
-        value: state.dateTime.date,
+        value: state[id].date,
         events: {
-          oninput: evt => actions.editDate(evt.target.value)
+          oninput: evt => actions.editDate(id, evt.target.value)
         },
         help: getErrorMessage(state, "date")
       }),
@@ -22,9 +22,9 @@ export const DateTime = {
         "div" + b.mt(4),
         m(TextField, {
           label: "Hour:",
-          value: state.dateTime.hour,
+          value: state[id].hour,
           events: {
-            oninput: evt => actions.editHour(evt.target.value)
+            oninput: evt => actions.editHour(id, evt.target.value)
           },
           help: getErrorMessage(state, "hour")
         })
@@ -33,9 +33,9 @@ export const DateTime = {
         "div" + b.mt(4),
         m(TextField, {
           label: "Minute:",
-          value: state.dateTime.minute,
+          value: state[id].minute,
           events: {
-            oninput: evt => actions.editMinute(evt.target.value)
+            oninput: evt => actions.editMinute(id, evt.target.value)
           },
           help: getErrorMessage(state, "minute")
         })
@@ -47,7 +47,7 @@ export const DateTime = {
           border: true,
           events: { onclick: () => actions.validate(state) }
         }),
-        m("span" + b.ml(8), state.conditions.message)
+        m("span" + b.ml(8), state.message)
       )
     )
 }

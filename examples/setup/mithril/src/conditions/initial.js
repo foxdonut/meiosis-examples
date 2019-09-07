@@ -1,6 +1,4 @@
 export const Initial = () => ({
-  conditions: {
-    precipitations: false,
-    sky: null
-  }
+  precipitations: false,
+  sky: null
 })
