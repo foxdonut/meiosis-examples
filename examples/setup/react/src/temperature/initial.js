@@ -1,6 +1,4 @@
 export const Initial = () => ({
-  temperature: {
-    value: 22,
-    units: "C"
-  }
+  value: 22,
+  units: "C"
 })

@@ -5,7 +5,13 @@ import { dateTime, DateTime } from "../dateTime"
 import { temperature, Temperature } from "../temperature"
 
 export const app = {
-  Initial: () => Object.assign({}, dateTime.Initial(), conditions.Initial(), temperature.Initial()),
+  Initial: () => ({
+    dateTime: dateTime.Initial(),
+    conditions: conditions.Initial(),
+    "temperature:air": temperature.Initial(),
+    "temperature:water": temperature.Initial()
+  }),
+
   Actions: update =>
     Object.assign(
       {},
@@ -33,9 +39,10 @@ export class App extends Component {
 
     return (
       <div>
-        <DateTime state={state} actions={actions} />
-        <Conditions state={state} actions={actions} />
-        <Temperature state={state} actions={actions} />
+        <DateTime state={state} id="dateTime" actions={actions} />
+        <Conditions state={state} id="conditions" actions={actions} />
+        <Temperature state={state} id="temperature:air" actions={actions} />
+        <Temperature state={state} id="temperature:water" actions={actions} />
       </div>
     )
   }

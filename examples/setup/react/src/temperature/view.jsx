@@ -1,25 +1,17 @@
 import React from "react"
 import Button from "@material-ui/core/Button"
 
-import { Initial } from "./initial"
-import { Actions } from "./actions"
-
-export const temperature = {
-  Initial,
-  Actions
-}
-
-export const Temperature = ({ state, actions }) => (
+export const Temperature = ({ state, id, actions }) => (
   <div>
     <div style={{ marginTop: "0.8rem" }}>
       <label>
-        Temperature: {state.temperature.value}&deg; {state.temperature.units}
+        Temperature: {state[id].value}&deg; {state[id].units}
       </label>
     </div>
     <div style={{ marginTop: "0.8rem" }}>
       <Button
         variant="contained"
-        onClick={() => actions.increment(1)}
+        onClick={() => actions.increment(id, 1)}
         color="primary"
         style={{ marginRight: "0.4rem" }}
       >
@@ -27,13 +19,13 @@ export const Temperature = ({ state, actions }) => (
       </Button>
       <Button
         variant="contained"
-        onClick={() => actions.increment(-1)}
+        onClick={() => actions.increment(id, -1)}
         color="primary"
         style={{ marginRight: "0.4rem" }}
       >
         Decrement
       </Button>
-      <Button variant="contained" onClick={() => actions.changeUnits()} color="secondary">
+      <Button variant="contained" onClick={() => actions.changeUnits(id)} color="secondary">
         Change Units
       </Button>
     </div>
