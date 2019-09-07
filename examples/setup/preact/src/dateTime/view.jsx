@@ -9,57 +9,49 @@ import "preact-material-components/FormField/style.css"
 import "preact-material-components/TextField/style.css"
 import "preact-material-components/Theme/style.css"
 
-import { Initial } from "./initial"
-import { Actions } from "./actions"
-
-export const dateTime = {
-  Initial,
-  Actions
-}
-
 const getErrorMessage = (state, field) => _.get(state, ["errors", "dateTime", field]) || " "
 
-export const DateTime = ({ state, actions }) => (
+export const DateTime = ({ state, id, actions }) => (
   <div>
     <Formfield>
       <TextField
         label="Date:"
         type="date"
-        value={state.dateTime.date}
+        value={state[id].date}
         required
         helperText={getErrorMessage(state, "date")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onChange={evt => actions.editDate(evt.target.value)}
+        onChange={evt => actions.editDate(id, evt.target.value)}
       />
     </Formfield>
     <Formfield>
       <TextField
         label="Hour:"
-        value={state.dateTime.hour}
+        value={state[id].hour}
         required
         helperText={getErrorMessage(state, "hour")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onChange={evt => actions.editHour(evt.target.value)}
+        onChange={evt => actions.editHour(id, evt.target.value)}
       />
     </Formfield>
     <Formfield>
       <TextField
         label="Minute:"
-        value={state.dateTime.minute}
+        value={state[id].minute}
         required
         helperText={getErrorMessage(state, "minute")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onChange={evt => actions.editMinute(evt.target.value)}
+        onChange={evt => actions.editMinute(id, evt.target.value)}
       />
     </Formfield>
     <div>
       <Button ripple onClick={() => actions.validate()}>
         Validate
       </Button>
-      <span style={{ marginLeft: "0.4rem" }}>{state.conditions.message}</span>
+      <span style={{ marginLeft: "0.4rem" }}>{state.message}</span>
     </div>
   </div>
 )
