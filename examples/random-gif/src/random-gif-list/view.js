@@ -1,26 +1,29 @@
 import m from "mithril"
 
 import { RandomGif } from "../random-gif"
-import { lensProp } from "../util"
 import { buttonStyle } from "../util/ui"
 
 const RandomGifItem = {
-  view: ({ attrs: { context, actions, id } }) =>
+  view: ({ attrs: { state, id, actions, subId } }) =>
     m(
       "div.dib.mr2",
-      { key: id },
-      m(RandomGif, { context: lensProp(context, id), actions }),
-      m("button.bg-red" + buttonStyle, { onclick: () => actions.remove(context, id) }, "Remove")
+      { key: subId },
+      m(RandomGif, { state, id: subId, actions }),
+      m("button.bg-red" + buttonStyle, { onclick: () => actions.remove(id, subId) }, "Remove")
     )
 }
 
 export const RandomGifList = {
-  view: ({ attrs: { context, actions } }) =>
+  view: ({ attrs: { state, id, actions } }) =>
     m(
       "div.ba.b--blue.pa2.mt2",
-      m("div", "Has gifs: ", context.state.hasGifs ? "Yes" : "No"),
-      m("button.bg-green" + buttonStyle, { onclick: () => actions.add(context) }, "Add"),
-      m("button.bg-red" + buttonStyle, { onclick: () => actions.resetAll(context) }, "Reset All"),
-      m("div", context.state.randomGifIds.map(id => m(RandomGifItem, { context, actions, id })))
+      m("div", "Has gifs: ", state[id].hasGifs ? "Yes" : "No"),
+      m("button.bg-green" + buttonStyle, { onclick: () => actions.add(id) }, "Add"),
+      m(
+        "button.bg-red" + buttonStyle,
+        { onclick: () => state[id].randomGifIds.map(subId => actions.reset(subId)) },
+        "Reset All"
+      ),
+      m("div", state[id].randomGifIds.map(subId => m(RandomGifItem, { state, id, actions, subId })))
     )
 }

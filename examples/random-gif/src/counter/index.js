@@ -1,8 +1,7 @@
+import { Initial } from "./initial"
+
 export const counter = {
-  Initial: ({ label }) => ({
-    label,
-    value: 0
-  })
+  Initial
 }
 
 export { Counter } from "./view"

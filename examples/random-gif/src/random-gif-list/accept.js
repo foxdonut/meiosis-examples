@@ -1,12 +1,12 @@
 import * as R from "ramda"
 
-export const accept = state => ({
-  randomGifList: {
+export const accept = id => state => ({
+  [id]: {
     hasGifs: R.any(
       R.equals("Y"),
       R.map(
         R.path(["image", "value", "value", "case"]),
-        R.map(id => R.prop(id, state.randomGifList), state.randomGifList.randomGifIds)
+        R.map(subId => R.prop(subId, state), state[id].randomGifIds)
       )
     )
   }

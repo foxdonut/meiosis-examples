@@ -1,13 +1,12 @@
 import m from "mithril"
 
 import { RandomGif } from "../random-gif"
-import { lensProp } from "../util"
 
 export const RandomGifPair = {
-  view: ({ attrs: { context, actions } }) =>
+  view: ({ attrs: { state, id, actions } }) =>
     m(
       "div.ba.b--purple.pa2.mt2",
-      m("div.dib", m(RandomGif, { context: lensProp(context, "First"), actions })),
-      m("div.dib.ml2", m(RandomGif, { context: lensProp(context, "Second"), actions }))
+      m("div.dib", m(RandomGif, { state, id: id + ":First", actions })),
+      m("div.dib.ml2", m(RandomGif, { state, id: id + ":Second", actions }))
     )
 }

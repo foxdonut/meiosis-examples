@@ -8,19 +8,20 @@ import { randomGifPair, RandomGifPair } from "../random-gif-pair"
 import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
 import { randomGifList, RandomGifList } from "../random-gif-list"
 
-import { lensProp } from "../util"
-
 export const app = {
-  Initial: () => ({
-    button: button.Initial(),
-    counter: counter.Initial({ label: "Counter:" }),
-    randomGif1: randomGif.Initial(),
-    randomGif2: randomGif.Initial(),
-    randomGifList: randomGifList.Initial(),
-    randomGifPair: randomGifPair.Initial(),
-    randomGifPairPair: randomGifPairPair.Initial(),
-    event: {}
-  }),
+  Initial: () =>
+    Object.assign(
+      {
+        button: button.Initial(),
+        counter: counter.Initial({ label: "Counter:" }),
+        randomGif1: randomGif.Initial(),
+        randomGif2: randomGif.Initial(),
+        randomGifList: randomGifList.Initial(),
+        event: {}
+      },
+      randomGifPair.Initial("randomGifPair"),
+      randomGifPairPair.Initial("randomGifPairPair")
+    ),
 
   Actions: update =>
     Object.assign(
@@ -30,33 +31,33 @@ export const app = {
       randomGifList.Actions(update)
     ),
 
-  accept: [randomGifList.accept],
+  accept: [randomGifList.accept("randomGifList")],
 
   services: [service]
 }
 
 export const App = {
-  view: ({ attrs: { context, actions } }) =>
+  view: ({ attrs: { state, actions } }) =>
     m(
       "div",
-      m(Counter, { context: lensProp(context, "counter"), actions }),
+      m(Counter, { state, id: "counter", actions }),
 
       m("div.mt2", "Button:"),
-      m(Button, { context: lensProp(context, "button"), actions }),
+      m(Button, { state, id: "button", actions }),
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { context: lensProp(context, "randomGif1"), actions }),
+      m(RandomGif, { state, id: "randomGif1", actions }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { context: lensProp(context, "randomGif2"), actions }),
+      m(RandomGif, { state, id: "randomGif2", actions }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { context: lensProp(context, "randomGifPair"), actions }),
+      m(RandomGifPair, { state, id: "randomGifPair", actions }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { context: lensProp(context, "randomGifPairPair"), actions }),
+      m(RandomGifPairPair, { state, id: "randomGifPairPair", actions }),
 
       m("div.mt2", "Random Gif List:"),
-      m(RandomGifList, { context: lensProp(context, "randomGifList"), actions })
+      m(RandomGifList, { state, id: "randomGifList", actions })
     )
 }

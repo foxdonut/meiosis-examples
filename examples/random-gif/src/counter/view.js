@@ -1,5 +1,5 @@
 import m from "mithril"
 
 export const Counter = {
-  view: ({ attrs: { context } }) => m("div", context.state.label + " " + context.state.value)
+  view: ({ attrs: { state, id } }) => m("div", state[id].label + " " + state[id].value)
 }

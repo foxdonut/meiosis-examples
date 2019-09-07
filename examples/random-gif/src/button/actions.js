@@ -1,3 +1,3 @@
 export const Actions = update => ({
-  buttonToggle: context => update(context.lens({ active: x => !x }))
+  buttonToggle: id => update({ [id]: { active: x => !x } })
 })

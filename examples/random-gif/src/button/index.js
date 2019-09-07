@@ -1,9 +1,8 @@
+import { Initial } from "./initial"
 import { Actions } from "./actions"
 
 export const button = {
-  Initial: () => ({
-    active: false
-  }),
+  Initial,
   Actions
 }
 

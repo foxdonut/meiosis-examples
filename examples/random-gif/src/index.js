@@ -21,12 +21,7 @@ const actions = app.Actions(update)
 m.mount(document.getElementById("app"), {
   view: () =>
     m(App, {
-      context: {
-        root: states(),
-        state: states(),
-        path: [],
-        lens: x => x
-      },
+      state: states(),
       actions
     })
 })

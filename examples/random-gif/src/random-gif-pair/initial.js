@@ -1,6 +1,6 @@
 import { randomGif } from "../random-gif"
 
-export const Initial = () => ({
-  First: randomGif.Initial(),
-  Second: randomGif.Initial()
+export const Initial = id => ({
+  [id + ":First"]: randomGif.Initial(),
+  [id + ":Second"]: randomGif.Initial()
 })
