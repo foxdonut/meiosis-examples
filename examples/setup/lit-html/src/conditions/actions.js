@@ -1,5 +1,5 @@
 export const Actions = update => ({
-  togglePrecipitations: value => update({ conditions: { precipitations: value } }),
+  togglePrecipitations: (id, value) => update({ [id]: { precipitations: value } }),
 
-  changeSky: value => update({ conditions: { sky: value } })
+  changeSky: (id, value) => update({ [id]: { sky: value } })
 })

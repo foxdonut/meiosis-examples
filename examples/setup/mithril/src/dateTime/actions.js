@@ -10,7 +10,7 @@ export const Actions = update => ({
   validate: state => {
     const errors = validateInput(state)
     update({
-      errors,
+      errors: () => errors,
       message: (errors && Object.keys(errors).length > 0 && "Invalid!") || "Valid!"
     })
   }
