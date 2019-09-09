@@ -3,15 +3,15 @@ import { validateTodo } from "./validation"
 import { clearMessage, showError, showMessage } from "../root/actions"
 import { todoForm } from "./todoForm"
 
-const editTodo = todo =>
-  Object.assign(
-    {
-      editing: true
-    },
-    todoForm.Initial(Object.assign({}, todo))
-  )
+const editTodo = (id, todo) => [
+  { editing: todo.id },
+  { [id]: todoForm.Initial(Object.assign({}, todo)) }
+]
 
-const cancelEditTodo = todo => (todo.id ? null : todoForm.Initial())
+const cancelEditTodo = (id, todo) => [
+  { editing: null },
+  { [id]: todo.id ? undefined : todoForm.Initial() }
+]
 
 const updateList = todo => ({
   todos: todos => {
@@ -38,46 +38,30 @@ const updateList = todo => ({
 })
 
 export const Actions = update => ({
-  editTodo: (context, todo) => update(context.lens(editTodo(todo))),
-  editingTodo: (context, field, value) => update(context.lens({ todo: { [field]: value } })),
-  cancelEditTodo: (context, todo) => update(context.lens(cancelEditTodo(todo))),
+  editTodo: (id, todo) => update(editTodo(id, todo)),
+  editingTodo: (id, field, value) => update({ [id]: { todo: { [field]: value } } }),
+  cancelEditTodo: (id, todo) => update(cancelEditTodo(id, todo)),
 
-  saveTodo: (context, todo) => {
+  saveTodo: (id, todo) => {
     const validationErrors = validateTodo(todo)
 
     if (Object.keys(validationErrors).length === 0) {
-      update([
-        showMessage("Saving, please wait..."),
-        context.lens({ validationErrors: () => ({}) })
-      ])
+      update([showMessage("Saving, please wait..."), { [id]: { validationErrors: () => ({}) } }])
 
       ajaxServices
         .saveTodo(todo)
         .then(updatedTodo => {
-          update(
-            Object.assign(
-              {},
-              updateList(updatedTodo),
-              clearMessage(),
-              context.lens(cancelEditTodo(todo))
-            )
-          )
+          update([updateList(updatedTodo), clearMessage(), cancelEditTodo(id, todo)])
         })
         .catch(() =>
-          update(
-            Object.assign(
-              {},
-              clearMessage(),
-              showError("Sorry, an error occurred. Please try again.")
-            )
-          )
+          update([clearMessage(), showError("Sorry, an error occurred. Please try again.")])
         )
     } else {
-      update(context.lens({ validationErrors: () => validationErrors }))
+      update({ [id]: { validationErrors: () => validationErrors } })
     }
   },
 
-  deleteTodo: (_context, todo) => {
+  deleteTodo: todo => {
     update(showMessage("Deleting, please wait..."))
 
     ajaxServices

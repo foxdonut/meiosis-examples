@@ -2,16 +2,15 @@ import React, { Component } from "react"
 
 import { TodoForm } from "./todoForm"
 import { TodoList } from "./todoList"
-import { lensProp } from "../util"
 
 export class Todos extends Component {
   render() {
-    const { context, actions } = this.props
+    const { state, actions } = this.props
 
     return (
       <div>
-        <TodoForm context={lensProp(context, "todoForm")} actions={actions} label="New Todo:" />
-        <TodoList context={context} actions={actions} />
+        <TodoForm state={state} actions={actions} id="todoForm" label="New Todo:" />
+        <TodoList state={state} actions={actions} />
       </div>
     )
   }

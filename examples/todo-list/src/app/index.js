@@ -27,8 +27,9 @@ export class App extends Component {
   }
 
   render() {
-    const context = { root: this.state, state: this.state, path: [], lens: x => x }
+    const state = this.state
+    const { actions } = this.props
 
-    return <Root context={context} actions={this.props.actions} />
+    return <Root state={state} actions={actions} />
   }
 }

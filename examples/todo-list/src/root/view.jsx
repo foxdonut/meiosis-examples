@@ -6,35 +6,33 @@ import { Projects } from "../projects"
 
 export class Root extends Component {
   render() {
-    const { context, actions } = this.props
+    const { state, actions } = this.props
 
     return (
       <div>
         <Menu widths={2}>
           <Menu.Item
-            active={context.state.pageId === "TodoListPage"}
+            active={state.pageId === "TodoListPage"}
             onClick={() => actions.navigateTo("TodoListPage")}
           >
             Todo List
           </Menu.Item>
           <Menu.Item
-            active={context.state.pageId === "ProjectPage"}
+            active={state.pageId === "ProjectPage"}
             onClick={() => actions.navigateTo("ProjectPage")}
           >
             Projects
           </Menu.Item>
         </Menu>
         <div>
-          {context.state.pageId === "TodoListPage" && <Todos context={context} actions={actions} />}
-          {context.state.pageId === "ProjectPage" && (
-            <Projects context={context} actions={actions} />
-          )}
+          {state.pageId === "TodoListPage" && <Todos state={state} actions={actions} />}
+          {state.pageId === "ProjectPage" && <Projects state={state} actions={actions} />}
         </div>
-        <Modal open={context.state.message != null} size="small">
-          <Modal.Content>{context.state.message}</Modal.Content>
+        <Modal open={state.message != null} size="small">
+          <Modal.Content>{state.message}</Modal.Content>
         </Modal>
-        <Modal open={context.state.error != null} size="small">
-          <Modal.Content>{context.state.error}</Modal.Content>
+        <Modal open={state.error != null} size="small">
+          <Modal.Content>{state.error}</Modal.Content>
           <Modal.Actions>
             <Button onClick={() => actions.clearError()}>Ok</Button>
           </Modal.Actions>
