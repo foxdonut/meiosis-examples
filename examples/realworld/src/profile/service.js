@@ -1,7 +1,7 @@
 import { findRouteSegment, whenPresent } from "meiosis-routing/state"
 
 import { getArticlesFilter } from "../routes"
-import { loadArticles, profileApi } from "../services"
+import { articlesApi, profileApi } from "../services"
 
 const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
   update({ loading: true })
@@ -9,8 +9,8 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
   const filter = getArticlesFilter(state.route.current)
 
   return Promise.all([
-    profileApi.get(username),
-    loadArticles({
+    !state.profile || state.profile.username !== username ? profileApi.get(username) : null,
+    articlesApi.getList({
       limit: filter.limit,
       offset: filter.offset,
       author,

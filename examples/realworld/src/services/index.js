@@ -1,7 +1,9 @@
 import m from "mithril"
 
-const API_ROOT = "https://conduit.productionready.io/api"
-// const API_ROOT = "http://localhost:4000/api"
+import { omit } from "../util/fp"
+
+// const API_ROOT = "https://conduit.productionready.io/api"
+const API_ROOT = "http://localhost:4000/api"
 
 const getToken = () => window.localStorage.getItem("jwt")
 export const setToken = token => window.localStorage.setItem("jwt", token)
@@ -47,9 +49,9 @@ Returns:
 }
  */
 export const articlesApi = {
-  getList: params => request("/articles", { params }),
+  getList: params => request("/articles", { params: omit(["feed"], params) }),
 
-  getFeed: params => request("/articles/feed", { params }),
+  getFeed: params => request("/articles/feed", { params: omit(["feed"], params) }),
 
   getSingle: slug => request(`/articles/${slug}`),
 
@@ -100,12 +102,12 @@ export const profileApi = {
   unfollow: username => request(`/profiles/${username}/follow`, { method: "DELETE" })
 }
 
-export const loadArticles = params =>
+export const loadArticlesAndTags = params =>
   Promise.all([articlesApi.getList(params), popularTagsApi.getList()]).then(([articles, tags]) =>
     Object.assign(articles, tags)
   )
 
-export const loadArticle = ({ slug }) =>
+export const loadArticleAndComments = ({ slug }) =>
   Promise.all([articlesApi.getSingle(slug), articlesApi.getComments(slug)]).then(
     ([article, comments]) => Object.assign(article, comments)
   )

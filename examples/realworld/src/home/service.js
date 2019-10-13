@@ -1,6 +1,6 @@
 import { findRouteSegment, whenPresent } from "meiosis-routing/state"
 
-import { articlesApi, loadArticles } from "../services"
+import { articlesApi, loadArticlesAndTags } from "../services"
 import { getArticlesFilter } from "../routes"
 import { pick } from "../util/fp"
 
@@ -14,6 +14,6 @@ export const service = ({ state, update }) => {
       ? articlesApi
           .getFeed(pick(["limit", "offset"], filter))
           .then(data => update([data, { loading: false }]))
-      : loadArticles(filter).then(data => update([data, { loading: false }]))
+      : loadArticlesAndTags(filter).then(data => update([data, { loading: false }]))
   })
 }
