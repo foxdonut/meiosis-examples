@@ -1,4 +1,4 @@
-export const Initial = () => ({
+export const initial = {
   value: 22,
   units: "C"
-})
+}

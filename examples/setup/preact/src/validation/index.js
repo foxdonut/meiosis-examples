@@ -1,6 +1,6 @@
 import BaseJoi from "joi-browser"
 import DateExtensions from "joi-date-extensions"
-import _ from "lodash"
+import _ from "lodash/fp"
 
 const Joi = BaseJoi.extend(DateExtensions)
 
@@ -36,14 +36,14 @@ const options = {
 export const validateInput = input => {
   const result = Joi.validate(input, schema, options)
 
-  const errors = {}
-  const details = _.get(result, ["error", "details"], [])
+  let errors = {}
+  const details = _.getOr([], ["error", "details"], result)
 
   for (let i = 0, t = details.length; i < t; i++) {
     const path = details[i].path
 
-    if (!_.get(errors, path)) {
-      _.set(errors, path, details[i].message)
+    if (!_.get(path, errors)) {
+      errors = _.set(path, details[i].message, errors)
     }
   }
   return errors

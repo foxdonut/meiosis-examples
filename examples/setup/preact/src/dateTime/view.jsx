@@ -1,4 +1,4 @@
-import _ from "lodash"
+import _ from "lodash/fp"
 import { h } from "preact"
 import Button from "preact-material-components/Button"
 import Formfield from "preact-material-components/FormField"
@@ -9,7 +9,7 @@ import "preact-material-components/FormField/style.css"
 import "preact-material-components/TextField/style.css"
 import "preact-material-components/Theme/style.css"
 
-const getErrorMessage = (state, field) => _.get(state, ["errors", "dateTime", field]) || " "
+const getErrorMessage = (state, field) => _.get(["errors", "dateTime", field], state) || " "
 
 export const DateTime = ({ state, id, actions }) => (
   <div>
@@ -22,7 +22,7 @@ export const DateTime = ({ state, id, actions }) => (
         helperText={getErrorMessage(state, "date")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onChange={evt => actions.editDate(id, evt.target.value)}
+        onInput={evt => actions.editDate(id, evt.target.value)}
       />
     </Formfield>
     <Formfield>
@@ -33,7 +33,7 @@ export const DateTime = ({ state, id, actions }) => (
         helperText={getErrorMessage(state, "hour")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onChange={evt => actions.editHour(id, evt.target.value)}
+        onInput={evt => actions.editHour(id, evt.target.value)}
       />
     </Formfield>
     <Formfield>
@@ -44,7 +44,7 @@ export const DateTime = ({ state, id, actions }) => (
         helperText={getErrorMessage(state, "minute")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onChange={evt => actions.editMinute(id, evt.target.value)}
+        onInput={evt => actions.editMinute(id, evt.target.value)}
       />
     </Formfield>
     <div>

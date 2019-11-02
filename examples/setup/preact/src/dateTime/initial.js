@@ -1,7 +1,5 @@
-export const Initial = () => ({
-  dateTime: {
-    date: "",
-    hour: "",
-    minute: ""
-  }
-})
+export const initial = {
+  date: "",
+  hour: "",
+  minute: ""
+}

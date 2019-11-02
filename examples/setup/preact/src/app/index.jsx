@@ -5,12 +5,12 @@ import { dateTime, DateTime } from "../dateTime"
 import { temperature, Temperature } from "../temperature"
 
 export const app = {
-  Initial: () => ({
-    dateTime: dateTime.Initial(),
-    conditions: conditions.Initial(),
-    "temperature:air": temperature.Initial(),
-    "temperature:water": temperature.Initial()
-  }),
+  initial: {
+    dateTime: dateTime.initial,
+    conditions: conditions.initial,
+    "temperature:air": temperature.initial,
+    "temperature:water": temperature.initial
+  },
 
   Actions: update =>
     Object.assign(

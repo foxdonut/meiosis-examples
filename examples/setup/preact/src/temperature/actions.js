@@ -1,17 +1,20 @@
-import _ from "lodash"
+import _ from "lodash/fp"
 
 export const Actions = update => ({
-  increment: (id, amount) => update(state => _.update(state, [id, "value"], x => x + amount)),
+  increment: (id, amount) => update(state => _.update([id, "value"], x => x + amount, state)),
 
   changeUnits: id =>
-    update(state => {
-      if (state[id].units === "C") {
-        state[id].units = "F"
-        state[id].value = Math.round((state[id].value * 9) / 5 + 32)
-      } else {
-        state[id].units = "C"
-        state[id].value = Math.round(((state[id].value - 32) / 9) * 5)
-      }
-      return state
-    })
+    update(state =>
+      state[id].units === "C"
+        ? _.set(
+            [id, "units"],
+            "F",
+            _.update([id, "value"], value => Math.round((value * 9) / 5 + 32), state)
+          )
+        : _.set(
+            [id, "units"],
+            "C",
+            _.update([id, "value"], value => Math.round(((value - 32) / 9) * 5), state)
+          )
+    )
 })

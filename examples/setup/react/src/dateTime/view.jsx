@@ -1,9 +1,9 @@
-import _ from "lodash"
+import _ from "lodash/fp"
 import React from "react"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
 
-const getErrorMessage = (state, field) => _.get(state, ["errors", "dateTime", field]) || " "
+const getErrorMessage = (state, field) => _.get(["errors", "dateTime", field], state) || " "
 
 export const DateTime = ({ state, id, actions }) => (
   <div>

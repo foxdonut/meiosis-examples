@@ -26,6 +26,6 @@
     "static-server": "^2.2.1"
   },
   "devDependencies": {
-    "reload": "^2.4.0"
+    "reload": "^3.0.3"
   }
 }

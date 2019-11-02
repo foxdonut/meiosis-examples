@@ -1,7 +1,7 @@
-import _ from "lodash"
+import _ from "lodash/fp"
 
 export const Actions = update => ({
-  togglePrecipitations: (id, value) => update(state => _.set(state, [id, "precipitations"], value)),
+  togglePrecipitations: (id, value) => update(_.set([id, "precipitations"], value)),
 
-  changeSky: (id, value) => update(state => _.set(state, [id, "sky"], value))
+  changeSky: (id, value) => update(_.set([id, "sky"], value))
 })
