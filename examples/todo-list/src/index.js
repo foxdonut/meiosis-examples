@@ -6,6 +6,9 @@ import merge from "mergerino"
 import createServer from "./sinonServer"
 import { app, App } from "./app"
 
+// Only for using Meiosis Tracer in development.
+import meiosisTracer from "meiosis-tracer"
+
 createServer()
 
 app.Initial().then(initialState => {
@@ -13,7 +16,7 @@ app.Initial().then(initialState => {
   const states = flyd.scan(merge, initialState, update)
 
   // Only for using Meiosis Tracer in development.
-  require("meiosis-tracer")({ selector: "#tracer", rows: 25, streams: [states] })
+  meiosisTracer({ selector: "#tracer", rows: 25, streams: [states] })
 
   const actions = app.Actions(update)
 

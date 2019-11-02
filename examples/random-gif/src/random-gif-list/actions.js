@@ -6,7 +6,7 @@ import { randomGif } from "../random-gif"
 export const Actions = update => ({
   add: id => {
     const subId = id + ":" + uuid.v1()
-    const randomGifState = randomGif.Initial()
+    const randomGifState = randomGif.initial
 
     update({ [id]: { randomGifIds: R.append(subId) }, [subId]: randomGifState })
   },

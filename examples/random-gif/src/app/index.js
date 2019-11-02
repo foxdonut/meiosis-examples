@@ -9,19 +9,18 @@ import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
 import { randomGifList, RandomGifList } from "../random-gif-list"
 
 export const app = {
-  Initial: () =>
-    Object.assign(
-      {
-        button: button.Initial(),
-        counter: counter.Initial({ label: "Counter:" }),
-        randomGif1: randomGif.Initial(),
-        randomGif2: randomGif.Initial(),
-        randomGifList: randomGifList.Initial(),
-        event: {}
-      },
-      randomGifPair.Initial("randomGifPair"),
-      randomGifPairPair.Initial("randomGifPairPair")
-    ),
+  initial: Object.assign(
+    {
+      button: button.initial,
+      counter: counter.Initial({ label: "Counter:" }),
+      randomGif1: randomGif.initial,
+      randomGif2: randomGif.initial,
+      randomGifList: randomGifList.initial,
+      event: {}
+    },
+    randomGifPair.Initial("randomGifPair"),
+    randomGifPairPair.Initial("randomGifPairPair")
+  ),
 
   Actions: update =>
     Object.assign(

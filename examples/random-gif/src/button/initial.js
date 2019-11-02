@@ -1,3 +1,3 @@
-export const Initial = () => ({
+export const initial = {
   active: false
-})
+}

@@ -5,6 +5,9 @@ import { render } from "lit-html"
 import { app } from "./app"
 import { router } from "./router"
 
+// Only for using Meiosis Tracer in development.
+import meiosisTracer from "meiosis-tracer"
+
 Promise.resolve()
   .then(app.Initial)
   .then(initialState => {
@@ -16,7 +19,7 @@ Promise.resolve()
       .map(state => app.accept.reduce(reducer, state))
 
     // Only for using Meiosis Tracer in development.
-    require("meiosis-tracer")({ selector: "#tracer", rows: 35, streams: [states] })
+    meiosisTracer({ selector: "#tracer", rows: 35, streams: [states] })
 
     const actions = app.Actions(update)
     const element = document.getElementById("app")

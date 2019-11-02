@@ -4,13 +4,16 @@ import stream from "mithril/stream"
 
 import { app, App } from "./app"
 
+// Only for using Meiosis Tracer in development.
+import meiosisTracer from "meiosis-tracer"
+
 const update = stream()
 const states = stream
-  .scan(merge, app.Initial(), update)
+  .scan(merge, app.initial, update)
   .map(state => app.accept.reduce((x, f) => merge(x, f(x)), state))
 
 // Only for using Meiosis Tracer in development.
-require("meiosis-tracer")({
+meiosisTracer({
   selector: "#tracer",
   streams: [{ label: "states", stream: states }],
   rows: 35

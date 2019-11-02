@@ -1,6 +1,6 @@
 import { Loaded, Success, Image } from "./types"
 
-export const Initial = () => ({
+export const initial = {
   image: Loaded.Y(Success.Y(Image.N())),
   tag: ""
-})
+}
