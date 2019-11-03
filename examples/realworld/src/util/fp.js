@@ -21,7 +21,8 @@ export const choose = (keys, obj) =>
   !obj
     ? {}
     : keys.reduce(
-        (result, key) => (obj.hasOwnProperty(key) ? assoc(key, obj[key], result) : result),
+        (result, key) =>
+          Object.prototype.hasOwnProperty.call(obj, key) ? assoc(key, obj[key], result) : result,
         {}
       )
 

@@ -4,9 +4,9 @@ import { articlesApi, loadArticleAndComments, loadArticlesAndTags } from "../ser
 import { Route, getArticlesFilter, navigateTo } from "../routes"
 
 const refresh = (state, slug) =>
-  findRouteSegment(state.route.current, "ArticleDetail")
+  findRouteSegment(state.route, "ArticleDetail")
     ? loadArticleAndComments({ slug })
-    : loadArticlesAndTags(getArticlesFilter(state.route.current))
+    : loadArticlesAndTags(getArticlesFilter(state.route))
 
 export const Actions = update => ({
   favoriteArticle: (state, slug) => {

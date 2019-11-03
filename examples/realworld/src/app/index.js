@@ -10,33 +10,33 @@ import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
 
-export const app = {
-  Initial,
+export const createApp = () =>
+  Initial().then(patch => ({
+    patch,
 
-  Actions: update =>
-    Object.assign(
-      {},
-      routes.Actions(update),
-      register.Actions(update),
-      login.Actions(update),
-      articleList.Actions(update),
-      articleDetail.Actions(update),
-      articleEdit.Actions(update),
-      settings.Actions(update),
-      profile.Actions(update)
-    ),
+    Actions: update =>
+      Object.assign(
+        {},
+        routes.Actions(update),
+        register.Actions(update),
+        login.Actions(update),
+        articleList.Actions(update),
+        articleDetail.Actions(update),
+        articleEdit.Actions(update),
+        settings.Actions(update),
+        profile.Actions(update)
+      ),
 
-  acceptors: [
-    settings.guard,
-    routes.accept,
-    articleEdit.accept,
-    register.accept,
-    login.accept,
-    settings.accept,
-    profile.accept
-  ],
+    services: [
+      routes.service,
+      settings.service,
+      register.service,
+      login.service,
+      home.service,
+      profile.service,
+      articleDetail.service,
+      articleEdit.service
+    ],
 
-  services: [home.service, profile.service, articleDetail.service, articleEdit.service],
-
-  view: Root
-}
+    view: Root
+  }))

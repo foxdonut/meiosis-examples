@@ -1,5 +1,6 @@
-import { Actions, accept, createRouteSegments } from "meiosis-routing/state"
+import { Actions, createRouteSegments } from "meiosis-routing/state"
 
+import { service } from "./service"
 import { assoc } from "../util/fp"
 
 export { navigateTo } from "meiosis-routing/state"
@@ -30,7 +31,7 @@ export const routeConfig = {
 
 export const routes = {
   Actions,
-  accept
+  service
 }
 
 export const getArticlesFilter = route => {

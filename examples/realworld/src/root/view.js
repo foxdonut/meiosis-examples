@@ -22,7 +22,7 @@ const componentMap = {
 }
 
 export const Root = ({ state, actions }) => {
-  const routing = Routing(state.route.current)
+  const routing = Routing(state.route)
   const Component = componentMap[routing.localSegment.id]
   return Layout({ state, actions, routing, Component })
 }

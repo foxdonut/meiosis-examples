@@ -1,8 +1,8 @@
-import { Initial } from "./initial"
+import { initial } from "./initial"
 import { Actions } from "./actions"
 
 export const root = {
-  Initial,
+  initial,
   Actions
 }
 

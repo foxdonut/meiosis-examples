@@ -1,16 +1,16 @@
-/* mithril
+/* mithril */
 import m from "mithril"
 import { h } from "seview/mithril"
 
 export const render = (view, element) => m.render(element, h(view))
-end mithril */
+/* end mithril */
 
-/* preact */
-import preact from "preact"
+/* preact
+import { render as preactRender } from "preact"
 import { h } from "seview/preact"
 
-export const render = (view, element) => preact.render(h(view), element, element.lastElementChild)
-/* end preact */
+export const render = (view, element) => preactRender(h(view), element, element.lastElementChild)
+end preact */
 
 /* react
 import ReactDOM from "react-dom"

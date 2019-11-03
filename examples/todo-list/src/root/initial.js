@@ -1,4 +1,4 @@
-export const Initial = () => ({
+export const initial = {
   pageId: "TodoListPage",
   message: null
-})
+}

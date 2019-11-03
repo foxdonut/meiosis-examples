@@ -3,7 +3,7 @@ import { getArticlesFilter } from "../routes"
 import { router } from "../router"
 
 export const Pager = ({ state, routing }) => {
-  const filter = getArticlesFilter(state.route.current)
+  const filter = getArticlesFilter(state.route)
   const currentPageNumber = filter.offset / filter.limit + 1
   const pageList = range(1, Math.ceil(state.articlesCount / filter.limit) + 1)
   const from = filter.offset + 1

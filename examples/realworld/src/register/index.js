@@ -1,6 +1,6 @@
 import { Route } from "../routes"
 import { credentials, Credentials } from "../credentials"
-import { accept } from "./accept"
+import { service } from "./service"
 
 const options = {
   method: "register",
@@ -10,6 +10,6 @@ const options = {
   showUsername: true
 }
 
-export const register = Object.assign({ accept }, credentials(options))
+export const register = Object.assign({ service }, credentials(options))
 
 export const Register = Credentials(options)

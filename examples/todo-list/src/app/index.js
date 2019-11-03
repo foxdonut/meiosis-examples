@@ -8,7 +8,7 @@ export const app = {
   Initial: () =>
     ajaxServices
       .loadTodos()
-      .then(initialTodoList => Object.assign({}, root.Initial(), todos.Initial(initialTodoList))),
+      .then(initialTodoList => Object.assign({}, root.initial, todos.Initial(initialTodoList))),
 
   Actions: update => Object.assign({}, root.Actions(update), todos.Actions(update))
 }

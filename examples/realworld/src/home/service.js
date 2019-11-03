@@ -1,19 +1,20 @@
-import { findRouteSegment, whenPresent } from "meiosis-routing/state"
-
 import { articlesApi, loadArticlesAndTags } from "../services"
 import { getArticlesFilter } from "../routes"
 import { pick } from "../util/fp"
 
-export const service = ({ state, update }) => {
-  whenPresent(findRouteSegment(state.route.arrive, "Home"), arrive => {
-    update({ loading: true })
+export const service = ({ state }) => {
+  if (state.routeTransition.arrive.Home) {
+    return {
+      state: { loading: true },
+      next: ({ update }) => {
+        const filter = getArticlesFilter(state.route)
 
-    const filter = getArticlesFilter(state.route.current)
-
-    return arrive.params.feed
-      ? articlesApi
-          .getFeed(pick(["limit", "offset"], filter))
-          .then(data => update([data, { loading: false }]))
-      : loadArticlesAndTags(filter).then(data => update([data, { loading: false }]))
-  })
+        return state.routeTransition.arrive.Home.params.feed
+          ? articlesApi
+              .getFeed(pick(["limit", "offset"], filter))
+              .then(data => update([data, { loading: false }]))
+          : loadArticlesAndTags(filter).then(data => update([data, { loading: false }]))
+      }
+    }
+  }
 }

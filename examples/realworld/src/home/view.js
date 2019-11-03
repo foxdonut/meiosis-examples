@@ -5,7 +5,7 @@ import { ArticleList } from "../articleList"
 import { PopularTags } from "../popularTags"
 
 export const Home = ({ state, actions, routing }) => {
-  const filter = getArticlesFilter(state.route.current)
+  const filter = getArticlesFilter(state.route)
 
   const content = filter.tag
     ? {

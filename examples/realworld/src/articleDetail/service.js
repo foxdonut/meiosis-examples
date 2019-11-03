@@ -1,11 +1,13 @@
-import { findRouteSegment, whenPresent } from "meiosis-routing/state"
-
 import { loadArticleAndComments } from "../services"
 
-export const service = ({ state, update }) => {
-  whenPresent(findRouteSegment(state.route.arrive, "ArticleDetail"), arrive => {
-    update({ loading: true })
-    const { slug } = arrive.params
-    loadArticleAndComments({ slug }).then(data => update([data, { loading: false }]))
-  })
+export const service = ({ state }) => {
+  if (state.routeTransition.arrive.ArticleDetail) {
+    return {
+      state: { loading: true },
+      next: ({ update }) => {
+        const { slug } = state.routeTransition.arrive.ArticleDetail.params
+        loadArticleAndComments({ slug }).then(data => update([data, { loading: false }]))
+      }
+    }
+  }
 }
