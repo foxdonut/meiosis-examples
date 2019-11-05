@@ -15,8 +15,7 @@ export const app = {
       counter: counter.Initial({ label: "Counter:" }),
       randomGif1: randomGif.initial,
       randomGif2: randomGif.initial,
-      randomGifList: randomGifList.initial,
-      event: {}
+      randomGifList: randomGifList.initial
     },
     randomGifPair.Initial("randomGifPair"),
     randomGifPairPair.Initial("randomGifPairPair")
@@ -30,9 +29,7 @@ export const app = {
       randomGifList.Actions(update)
     ),
 
-  accept: [randomGifList.accept("randomGifList")],
-
-  services: [service]
+  services: [service, randomGifList.service("randomGifList")]
 }
 
 export const App = {

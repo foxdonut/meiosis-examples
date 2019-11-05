@@ -1,33 +1,25 @@
 import flyd from "flyd"
 import merge from "mergerino"
+import meiosis from "meiosis-setup/mergerino"
 import { render } from "lit-html"
 
-import { app } from "./app"
+import { createApp } from "./app"
 import { router } from "./router"
 
 // Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer"
 
-Promise.resolve()
-  .then(app.Initial)
-  .then(initialState => {
-    const update = flyd.stream()
-    const reducer = (x, f) => merge(x, f(x))
+createApp().then(app => {
+  const { states, update, actions } = meiosis({ stream: flyd, merge, app })
 
-    const states = flyd
-      .scan(merge, initialState, update)
-      .map(state => app.accept.reduce(reducer, state))
+  // Only for using Meiosis Tracer in development.
+  meiosisTracer({ selector: "#tracer", rows: 35, streams: [states] })
 
-    // Only for using Meiosis Tracer in development.
-    meiosisTracer({ selector: "#tracer", rows: 35, streams: [states] })
+  const element = document.getElementById("app")
 
-    const actions = app.Actions(update)
-    const element = document.getElementById("app")
-
-    states.map(state => {
-      render(app.view({ state, actions }), element)
-      app.services.forEach(service => service({ state, update, actions }))
-    })
-
-    router.listenToRouteChanges(update)
+  states.map(state => {
+    render(app.view({ state, actions }), element)
   })
+
+  router.listenToRouteChanges(update)
+})

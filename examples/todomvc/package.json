@@ -28,6 +28,7 @@
   "dependencies": {
     "flyd": "^0.2.8",
     "lit-html": "^1.1.2",
+    "meiosis-setup": "^3.1.0",
     "mergerino": "^0.4.0",
     "url-mapper": "^2.0.0"
   },

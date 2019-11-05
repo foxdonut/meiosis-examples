@@ -1,4 +1,4 @@
-import meiosisMergerino from "meiosis-setup/mergerino"
+import meiosis from "meiosis-setup/mergerino"
 import stream from "meiosis-setup/simple-stream"
 import merge from "mergerino"
 
@@ -10,7 +10,7 @@ import { router } from "./router"
 import meiosisTracer from "meiosis-tracer"
 
 createApp().then(app => {
-  const { states, actions } = meiosisMergerino({ stream, merge, app })
+  const { states, actions } = meiosis({ stream, merge, app })
 
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   meiosisTracer({

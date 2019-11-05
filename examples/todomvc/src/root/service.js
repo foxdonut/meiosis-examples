@@ -10,7 +10,7 @@ const allCompleted = state => {
   return result
 }
 
-export const accept = state => {
+export const service = ({ state }) => {
   const result = {}
 
   result.allCompleted = allCompleted(state)
@@ -29,5 +29,5 @@ export const accept = state => {
     id => all || state.todosById[id].completed === completed
   )
 
-  return result
+  return { state: result }
 }

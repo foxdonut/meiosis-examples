@@ -14,14 +14,12 @@ export const Actions = update => ({
 
     m.request({ url: gif_new_url, params: { api_key, tag: state[id].tag } })
       .then(response => {
-        update([
-          {
-            [id]: {
-              image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
-            }
+        update({
+          [id]: {
+            image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
           },
-          { event: { id: "newGifGenerated" } }
-        ])
+          eventId: "newGifGenerated"
+        })
       })
       .catch(() => update({ [id]: { image: Loaded.Y(Success.N()) } }))
   },

@@ -4,14 +4,11 @@ import { root, Root } from "../root"
 import { todos } from "../todos"
 import { ajaxServices } from "../util/ajax-services"
 
-export const app = {
-  Initial: () =>
-    ajaxServices
-      .loadTodos()
-      .then(initialTodoList => Object.assign({}, root.initial, todos.Initial(initialTodoList))),
-
-  Actions: update => Object.assign({}, root.Actions(update), todos.Actions(update))
-}
+export const createApp = () =>
+  ajaxServices.loadTodos().then(initialTodoList => ({
+    initial: Object.assign({}, root.initial, todos.Initial(initialTodoList)),
+    Actions: update => Object.assign({}, root.Actions(update), todos.Actions(update))
+  }))
 
 export class App extends Component {
   constructor(props) {

@@ -1,11 +1,11 @@
 import { initial } from "./initial"
 import { Actions } from "./actions"
-import { accept } from "./accept"
+import { service } from "./service"
 
 export const randomGifList = {
   initial,
   Actions,
-  accept
+  service
 }
 
 export { RandomGifList } from "./view"

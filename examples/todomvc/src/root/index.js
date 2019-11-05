@@ -1,9 +1,9 @@
 import { Actions } from "./actions"
 import { view } from "./view"
-import { accept } from "./accept"
+import { service } from "./service"
 
 export const root = {
   Actions,
   view,
-  accept
+  service
 }
