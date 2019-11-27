@@ -1,0 +1,46 @@
+{
+  "name": "meiosis-gitter-search",
+  "version": "1.0.0",
+  "description": "meiosis-examples gitter search",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "gitter",
+    "meiosis",
+    "mithril",
+    "reactive",
+    "search",
+    "virtual dom"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "date-fns": "^2.8.1",
+    "meiosis-setup": "^3.1.0",
+    "mergerino": "^0.4.0",
+    "mithril": "^2.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.7.1",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "1.19.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
