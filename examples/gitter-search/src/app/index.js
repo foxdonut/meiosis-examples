@@ -9,8 +9,9 @@ export const app = {
     channel: "mithriljs/mithril.js",
     user: "@JAForbes",
     term: "superouter",
-    startDate: "2018-11-01",
-    endDate: "2018-11-05",
+    year: "2018",
+    month: "11",
+    noOfMonths: "1",
     results: []
   },
 
