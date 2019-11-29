@@ -3,13 +3,15 @@ import { eachDayOfInterval, format, parse } from "date-fns"
 
 export const searchForm = {
   Actions: update => ({
-    changeInput: (field, value) => update({ [field]: value.trim() }),
+    changeInput: (field, value) => update({ [field]: value }),
     search: state => {
-      update({ results: [] })
-      const error =
-        ["channel", "user", "term", "startDate", "endDate"].filter(
-          field => state[field].length === 0
-        ).length > 0
+      const fields = ["channel", "user", "term", "startDate", "endDate"].reduce((result, field) => {
+        result[field] = state[field].trim()
+        return result
+      }, {})
+      update(Object.assign({ results: [] }, fields))
+
+      const error = false
 
       if (error) {
         update({ status: "Please enter a value for all inputs." })
@@ -32,7 +34,10 @@ export const searchForm = {
                 responseType: "text"
               }).then(response => {
                 processed++
-                update({ status: `Searching ${processed} of ${total}` })
+                update({
+                  status:
+                    processed < total ? `Searching ${processed} of ${total}` : "Search completed"
+                })
                 Array.from(
                   new DOMParser()
                     .parseFromString(response, "text/html")
