@@ -47,12 +47,18 @@ export const searchForm = {
               responseType: "text"
             }).then(response => {
               processed++
+
               update({
                 status:
                   processed < total
                     ? `Searching... ${Math.round((processed * 100) / total)}%`
                     : "Search completed"
               })
+
+              let name = null
+              let username = null
+              let dateTime = null
+
               const resultArray = Array.from(
                 new DOMParser()
                   .parseFromString(response, "text/html")
@@ -64,20 +70,20 @@ export const searchForm = {
                   )
                   const user = node.querySelector(".chat-item__from")
 
+                  if (user) {
+                    name = node.querySelector(".chat-item__from.js-chat-item-from").innerHTML
+                    username = node.querySelector(".chat-item__username.js-chat-item-from").innerHTML
+                    dateTime = node.querySelector(".chat-item__time.js-chat-time").innerHTML
+                  }
+
                   return {
                     messageId:
                       linkIdClass.length === 1
                         ? linkIdClass[0].split("-")[2]
                         : new Date().getTime(),
-                    name: user
-                      ? node.querySelector(".chat-item__from.js-chat-item-from").innerHTML
-                      : "N/A",
-                    username: user
-                      ? node.querySelector(".chat-item__username.js-chat-item-from").innerHTML
-                      : "N/A",
-                    dateTime: user
-                      ? node.querySelector(".chat-item__time.js-chat-time").innerHTML
-                      : "N/A",
+                    name,
+                    username,
+                    dateTime,
                     text: node.querySelector(".chat-item__text.js-chat-item-text").innerHTML
                   }
                 })
