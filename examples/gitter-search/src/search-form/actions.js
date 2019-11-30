@@ -27,7 +27,7 @@ export const Actions = update => ({
         dates.forEach((dt, index) => {
           const dateString = format(dt, "yyyy/MM/dd")
           m.request({
-            url: `https://cors-new.now.sh/https://gitter.im/${state.channel}/archives/${dateString}`,
+            url: `https://cors-new.now.sh/https://gitter.im/${fields.channel}/archives/${dateString}`,
             responseType: "text"
           }).then(response => {
             processed++
@@ -69,8 +69,8 @@ export const Actions = update => ({
                   text: node.querySelector(".chat-item__text.js-chat-item-text").innerHTML
                 }
               })
-              .filter(chat => new RegExp(state.user).test(chat.username))
-              .filter(chat => new RegExp(state.term, "i").test(chat.text))
+              .filter(chat => new RegExp(fields.user).test(chat.username))
+              .filter(chat => new RegExp(fields.term, "i").test(chat.text))
 
             update({
               results: arr => {
