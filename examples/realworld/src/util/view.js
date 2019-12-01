@@ -9,7 +9,7 @@ export const render = (view, element) => m.render(element, h(view))
 import { render as preactRender } from "preact"
 import { h } from "seview/preact"
 
-export const render = (view, element) => preactRender(h(view), element, element.lastElementChild)
+export const render = (view, element) => preactRender(h(view), element)
 end preact */
 
 /* react
