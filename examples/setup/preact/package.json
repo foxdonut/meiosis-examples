@@ -1,5 +1,5 @@
 {
-  "name": "meiosis-setup-preact",
+  "name": "meiosis-example-setup-preact",
   "version": "1.0.0",
   "description": "meiosis-examples setup preact",
   "main": "index.js",

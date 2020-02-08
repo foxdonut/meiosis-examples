@@ -29,5 +29,5 @@ export const service = ({ state }) => {
     id => all || state.todosById[id].completed === completed
   )
 
-  return { state: result }
+  return result
 }

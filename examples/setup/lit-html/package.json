@@ -1,5 +1,5 @@
 {
-  "name": "meiosis-setup-lit-html",
+  "name": "meiosis-example-setup-lit-html",
   "version": "1.0.0",
   "description": "meiosis-examples setup lit-html",
   "main": "src/index.js",

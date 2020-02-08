@@ -6,6 +6,7 @@ export const service = ({ state }) => {
   if (state.routeTransition.arrive.Home) {
     return {
       state: { loading: true },
+      // FIXME
       next: ({ update }) => {
         const filter = getArticlesFilter(state.route)
 

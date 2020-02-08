@@ -1,5 +1,5 @@
 {
-  "name": "meiosis-setup-react",
+  "name": "meiosis-example-setup-react",
   "version": "1.0.0",
   "description": "meiosis-examples setup react",
   "main": "src/index.jsx",

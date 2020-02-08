@@ -23,9 +23,10 @@ export const service = ({ state }) => {
     (state.routeTransition.leave.Profile || state.routeTransition.leave.ProfileFavorites) &&
     !(state.routeTransition.arrive.Profile || state.routeTransition.arrive.ProfileFavorites)
   ) {
-    return { state: { profile: null } }
+    return { profile: null }
   }
 
+  // FIXME
   if (state.routeTransition.arrive.Profile) {
     return {
       next: ({ state, update }) => {

@@ -1,5 +1,5 @@
 export const service = ({ state }) => {
   if (state.routeTransition.arrive.Login) {
-    return { state: { login: {} } }
+    return { login: {} }
   }
 }

@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "meiosis-setup": "^3.1.0",
+    "meiosis-setup": "file:../../../meiosis/helpers/setup/meiosis-setup-4.0.0.tgz",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",
     "ramda": "0.26.1",

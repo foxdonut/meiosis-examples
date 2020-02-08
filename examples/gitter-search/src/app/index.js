@@ -11,9 +11,7 @@ export const app = {
     results: []
   },
 
-  Actions: searchForm.Actions,
-
-  services: []
+  Actions: searchForm.Actions
 }
 
 export { App } from "./view"

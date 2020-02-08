@@ -1,5 +1,5 @@
 {
-  "name": "meiosis-setup-mithril",
+  "name": "meiosis-example-setup-mithril",
   "version": "1.0.0",
   "description": "meiosis-examples setup mithril",
   "main": "src/index.js",
