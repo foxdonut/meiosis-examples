@@ -28,19 +28,19 @@
     "joi": "^14.3.1",
     "joi-browser": "^13.4.0",
     "joi-date-extensions": "^1.2.0",
-    "lit-html": "^1.1.2",
+    "lit-html": "^1.2.1",
     "mergerino": "^0.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "babel-loader": "^8.0.6",
-    "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "meiosis-tracer": "^3.0.0",
-    "prettier": "1.18.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "prettier": "1.19.1",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   }
 }
