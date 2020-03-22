@@ -2,6 +2,7 @@
   "name": "meiosis-example-setup-mithril",
   "version": "1.0.0",
   "description": "meiosis-examples setup mithril",
+  "private": true,
   "main": "src/index.js",
   "scripts": {
     "start": "webpack",

@@ -2,6 +2,7 @@
   "name": "todomvc",
   "version": "1.0.0",
   "description": "meiosis-examples todomvc",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "webpack",

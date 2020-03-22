@@ -2,6 +2,7 @@
   "name": "random-gif",
   "version": "1.0.0",
   "description": "meiosis-examples random-gif",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "webpack",

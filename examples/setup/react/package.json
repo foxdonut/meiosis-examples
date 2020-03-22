@@ -2,6 +2,7 @@
   "name": "meiosis-example-setup-react",
   "version": "1.0.0",
   "description": "meiosis-examples setup react",
+  "private": true,
   "main": "src/index.jsx",
   "scripts": {
     "start": "webpack",

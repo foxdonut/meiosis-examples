@@ -2,6 +2,7 @@
   "name": "realworld-meiosis",
   "version": "1.0.0",
   "description": "meiosis-examples realworld",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "webpack",

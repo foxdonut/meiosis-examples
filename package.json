@@ -2,6 +2,7 @@
   "name": "meiosis-examples",
   "version": "1.0.0",
   "description": "meiosis-examples",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "start": "static-server -p ${PORT:-3000}",
