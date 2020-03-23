@@ -11,8 +11,8 @@ import { settings } from "../settings"
 import { profile } from "../profile"
 
 export const createApp = () =>
-  Initial().then(patch => ({
-    patch,
+  Initial().then(initial => ({
+    initial,
 
     Actions: update =>
       Object.assign(
@@ -37,6 +37,8 @@ export const createApp = () =>
       articleDetail.service,
       articleEdit.service
     ],
+
+    effects: [home.effect, profile.effect, articleDetail.effect, articleEdit.effect],
 
     view: Root
   }))
