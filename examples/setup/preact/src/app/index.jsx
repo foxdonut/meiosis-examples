@@ -1,4 +1,5 @@
-import { h, Component } from "preact"
+import { h } from "preact"
+import { useState } from "preact/hooks"
 
 import { conditions, Conditions } from "../conditions"
 import { dateTime, DateTime } from "../dateTime"
@@ -21,24 +22,16 @@ export const app = {
     )
 }
 
-export class App extends Component {
-  componentWillMount() {
-    this.props.states.map(state => {
-      this.setState(state)
-    })
-  }
+export const App = ({ states, actions }) => {
+  const [state, setState] = useState(states())
+  states.map(setState)
 
-  render() {
-    const state = this.state
-    const { actions } = this.props
-
-    return (
-      <div>
-        <DateTime state={state} id="dateTime" actions={actions} />
-        <Conditions state={state} id="conditions" actions={actions} />
-        <Temperature state={state} id="temperature:air" actions={actions} />
-        <Temperature state={state} id="temperature:water" actions={actions} />
-      </div>
-    )
-  }
+  return (
+    <div>
+      <DateTime state={state} id="dateTime" actions={actions} />
+      <Conditions state={state} id="conditions" actions={actions} />
+      <Temperature state={state} id="temperature:air" actions={actions} />
+      <Temperature state={state} id="temperature:water" actions={actions} />
+    </div>
+  )
 }

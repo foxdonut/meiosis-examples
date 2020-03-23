@@ -28,20 +28,20 @@
     "meiosis-setup": "file:../../../meiosis/helpers/setup/meiosis-setup-4.0.0.tgz",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",
-    "ramda": "0.26.1",
+    "ramda": "0.27.0",
     "static-sum-type": "^0.18.1",
-    "uuid": "^3.3.3"
+    "uuid": "^7.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "babel-loader": "^8.0.6",
-    "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.5.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "meiosis-tracer": "^3.0.0",
-    "prettier": "1.18.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "prettier": "2.0.1",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   }
 }

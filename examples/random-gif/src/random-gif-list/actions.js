@@ -1,11 +1,11 @@
 import * as R from "ramda"
-import uuid from "uuid"
+import { v1 as uuid } from "uuid"
 
 import { randomGif } from "../random-gif"
 
 export const Actions = update => ({
   add: id => {
-    const subId = id + ":" + uuid.v1()
+    const subId = id + ":" + uuid()
     const randomGifState = randomGif.initial
 
     update({ [id]: { randomGifIds: R.append(subId) }, [subId]: randomGifState })
