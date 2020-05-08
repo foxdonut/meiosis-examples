@@ -10,7 +10,7 @@ const allCompleted = state => {
   return result
 }
 
-export const service = ({ state }) => {
+export const service = state => {
   const result = {}
 
   result.allCompleted = allCompleted(state)

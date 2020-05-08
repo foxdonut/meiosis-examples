@@ -1,6 +1,6 @@
 import * as R from "ramda"
 
-export const service = id => ({ state }) => ({
+export const service = id => state => ({
   [id]: {
     hasGifs: R.any(
       R.equals("Y"),

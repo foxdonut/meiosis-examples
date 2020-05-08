@@ -1,8 +1,8 @@
 import merge from "mergerino"
 import m from "mithril"
 import stream from "mithril/stream"
-import meiosis from "meiosis-setup/mergerino"
 
+import { meiosis } from "./util/meiosis"
 import { app, App } from "./app"
 
 // Only for using Meiosis Tracer in development.

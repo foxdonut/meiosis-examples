@@ -12,8 +12,7 @@ export const Actions = update => ({
   validate: () =>
     update(state => {
       const errors = validateInput(state)
-      state.errors = errors
-      state.message = _.isEmpty(errors) ? "Valid!" : "Invalid!"
-      return state
+      const message = _.isEmpty(errors) ? "Valid!" : "Invalid!"
+      return Object.assign({}, state, { errors, message })
     })
 })
