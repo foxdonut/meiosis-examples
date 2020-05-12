@@ -1,5 +1,7 @@
-export const service = ({ state }) => {
-  if (state.routeTransition.arrive.ArticleCreate) {
+import { Route } from "../router"
+
+export const service = state => {
+  if (state.route.page === Route.ArticleCreate) {
     return {
       article: {
         title: "",
@@ -12,7 +14,7 @@ export const service = ({ state }) => {
     }
   }
 
-  if (state.routeTransition.arrive.ArticleEdit) {
+  if (state.route.page === Route.ArticleEdit) {
     return {
       article: { validationErrors: [] }
     }

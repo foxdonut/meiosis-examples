@@ -1,19 +1,20 @@
 import { assoc, defaultTo } from "../util/fp"
-import { Route, navigateTo } from "../routes"
+import { Route, router } from "../router"
 
 const fields = ["email", "username", "image", "bio"]
 
-export const service = ({ state }) => {
-  if (state.routeTransition.arrive.Settings) {
+export const service = state => {
+  if (state.route.page === Route.Settings) {
     if (!state.user) {
-      // FIXME
-      return { patch: { route: navigateTo(Route.Home()) } }
+      return { route: () => router.getRoute(Route.Home()) }
     }
 
-    const settings = fields.reduce(
-      (result, field) => assoc(field, defaultTo("", state.user[field]), result),
-      {}
-    )
-    return { settings }
+    if (!state.settings) {
+      const settings = fields.reduce(
+        (result, field) => assoc(field, defaultTo("", state.user[field]), result),
+        {}
+      )
+      return { settings }
+    }
   }
 }

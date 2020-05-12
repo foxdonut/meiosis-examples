@@ -1,9 +1,8 @@
-import { Route } from "../routes"
-import { router } from "../router"
+import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
 import { Pager } from "../pager"
 
-export const ArticleList = ({ state, actions, routing }) => [
+export const ArticleList = ({ state, actions }) => [
   state.loading
     ? [".article-preview", "Loading articles..."]
     : state.articles.map(article => {
@@ -15,14 +14,14 @@ export const ArticleList = ({ state, actions, routing }) => [
             ".article-meta",
             [
               "a",
-              { href: router.toPath(Route.Profile({ username: article.author.username })) },
+              { href: router.toPath(Route.Profile, { username: article.author.username }) },
               ["img", { src: article.author.image || defaultImage }]
             ],
             [
               ".info",
               [
                 "a.author",
-                { href: router.toPath(Route.Profile({ username: article.author.username })) },
+                { href: router.toPath(Route.Profile, { username: article.author.username }) },
                 username
               ],
               ["span.date", new Date(article.createdAt).toDateString()]
@@ -49,7 +48,7 @@ export const ArticleList = ({ state, actions, routing }) => [
             ".preview-link",
             [
               "a.preview-link",
-              { href: router.toPath(Route.ArticleDetail({ slug: article.slug })) },
+              { href: router.toPath(Route.ArticleDetail, { slug: article.slug }) },
               ["h1", article.title],
               ["p", article.description],
               ["span", "Read more..."]
@@ -58,12 +57,12 @@ export const ArticleList = ({ state, actions, routing }) => [
               "ul.tag-list",
               article.tagList.map(tag => [
                 "li.tag-default.tag-pill.tag-outline",
-                ["a", { href: router.toPath(Route.Home({ tag })) }, tag]
+                ["a", { href: router.toPath(Route.Home, { queryParams: { tag } }) }, tag]
               ])
             ]
           ]
         ]
       }),
 
-  Pager({ state, routing })
+  Pager({ state })
 ]

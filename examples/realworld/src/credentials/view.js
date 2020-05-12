@@ -3,10 +3,7 @@ import { router } from "../router"
 
 export const Credentials = options => ({ state, actions }) => {
   const updateCredForm = (method, field) =>
-    pipe(
-      path(["target", "value"]),
-      actions.updateCredForm(method, field)
-    )
+    pipe(path(["target", "value"]), actions.updateCredForm(method, field))
   const id = options.method
 
   const errors = Object.keys(state[id].errors || {}).map(key => `${key} ${state[id].errors[key]}`)
@@ -52,11 +49,7 @@ export const Credentials = options => ({ state, actions }) => {
             [
               "button.btn.btn-lg.btn-primary.pull-xs-right",
               {
-                onClick: pipe(
-                  preventDefault,
-                  constant(state),
-                  actions.sendCredentials(id)
-                )
+                onClick: pipe(preventDefault, constant(state), actions.sendCredentials(id))
               },
               options.label
             ]

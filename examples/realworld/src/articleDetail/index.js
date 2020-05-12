@@ -1,11 +1,11 @@
 import { Actions } from "./actions"
 import { service } from "./service"
-import { effect } from "./effect"
+import { Effect } from "./effect"
 
 export const articleDetail = {
   Actions,
   service,
-  effect
+  Effect
 }
 
 export { ArticleDetail } from "./view"

@@ -1,10 +1,10 @@
-import { Route } from "../routes"
+import { Route } from "../router"
 import { credentials, Credentials } from "../credentials"
 import { service } from "./service"
 
 const options = {
   method: "login",
-  alternativePage: Route.Register(),
+  alternativePage: Route.Register,
   alternativeLabel: "Need an account?",
   label: "Sign in",
   showUsername: false

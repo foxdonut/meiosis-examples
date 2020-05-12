@@ -1,5 +1,3 @@
-import { Routing } from "meiosis-routing/state"
-
 import { Layout } from "../layout"
 import { Home } from "../home"
 import { Register } from "../register"
@@ -22,7 +20,6 @@ const componentMap = {
 }
 
 export const Root = ({ state, actions }) => {
-  const routing = Routing(state.route)
-  const Component = componentMap[routing.localSegment.id]
-  return Layout({ state, actions, routing, Component })
+  const Component = componentMap[state.route.page]
+  return Layout({ state, actions, Component })
 }

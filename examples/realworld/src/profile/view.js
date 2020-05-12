@@ -1,13 +1,12 @@
 import { get } from "../util/fp"
-import { Route } from "../routes"
-import { router } from "../router"
+import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
 import { ArticleList } from "../articleList"
 
-export const Profile = ({ state, actions, routing }) => {
+export const Profile = ({ state, actions }) => {
   const username = get(state, ["profile", "username"])
   const isCurrentUser = get(state, ["profile", "username"]) === get(state, ["user", "username"])
-  const isFavorites = routing.localSegment.id === "ProfileFavorites"
+  const isFavorites = state.route.page === Route.ProfileFavorites
 
   return [
     ".profile-page",
@@ -28,7 +27,7 @@ export const Profile = ({ state, actions, routing }) => {
                   isCurrentUser
                     ? [
                         "a.btn.btn-sm.btn-outline-secondary.action-btn",
-                        { href: router.toPath(Route.Settings()) },
+                        { href: router.toPath(Route.Settings) },
                         ["i.ion-gear-a"],
                         " Edit Profile Settings"
                       ]
@@ -64,7 +63,7 @@ export const Profile = ({ state, actions, routing }) => {
                   "a.nav-link",
                   {
                     className: { active: !isFavorites },
-                    href: router.toPath(Route.Profile({ username }))
+                    href: router.toPath(Route.Profile, { username })
                   },
                   "My Articles"
                 ]
@@ -75,14 +74,14 @@ export const Profile = ({ state, actions, routing }) => {
                   "a.nav-link",
                   {
                     className: { active: isFavorites },
-                    href: router.toPath(Route.ProfileFavorites({ username }))
+                    href: router.toPath(Route.ProfileFavorites, { username })
                   },
                   "Favorited Articles"
                 ]
               ]
             ]
           ],
-          ArticleList({ state, actions, routing })
+          ArticleList({ state, actions })
         ]
       ]
     ]

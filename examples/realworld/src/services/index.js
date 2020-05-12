@@ -108,6 +108,7 @@ export const loadArticlesAndTags = params =>
   )
 
 export const loadArticleAndComments = ({ slug }) =>
-  Promise.all([articlesApi.getSingle(slug), articlesApi.getComments(slug)]).then(
-    ([article, comments]) => Object.assign(article, comments)
-  )
+  Promise.all([
+    articlesApi.getSingle(slug),
+    articlesApi.getComments(slug)
+  ]).then(([article, comments]) => Object.assign(article, comments))

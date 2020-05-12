@@ -1,4 +1,5 @@
-import { getArticlesFilter } from "../routes"
+import { Route } from "../router"
+import { getArticlesFilter } from "../util/filter"
 import { articlesApi, profileApi } from "../services"
 
 const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
@@ -17,14 +18,14 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
   ]).then(data => update([data, { loading: false }]))
 }
 
-export const effect = ({ state, update }) => {
-  if (state.routeTransition.arrive.Profile) {
-    const { username } = state.routeTransition.arrive.Profile.params
-    loadProfileAndArticles({ state, update, username, author: username })
-  }
-
-  if (state.routeTransition.arrive.ProfileFavorites) {
-    const { username } = state.routeTransition.arrive.ProfileFavorites.params
-    loadProfileAndArticles({ state, update, username, favorited: username })
+export const Effect = update => state => {
+  if (!state.profile) {
+    if (state.route.page === Route.Profile) {
+      const { username } = state.route.params
+      loadProfileAndArticles({ state, update, username, author: username })
+    } else if (state.route.page === Route.ProfileFavorites) {
+      const { username } = state.route.params
+      loadProfileAndArticles({ state, update, username, favorited: username })
+    }
   }
 }

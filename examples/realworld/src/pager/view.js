@@ -1,14 +1,14 @@
 import { range } from "../util/fp"
-import { getArticlesFilter } from "../routes"
+import { getArticlesFilter } from "../util/filter"
 import { router } from "../router"
 
-export const Pager = ({ state, routing }) => {
+export const Pager = ({ state }) => {
   const filter = getArticlesFilter(state.route)
   const currentPageNumber = filter.offset / filter.limit + 1
   const pageList = range(1, Math.ceil(state.articlesCount / filter.limit) + 1)
   const from = filter.offset + 1
   const to = Math.min(from + filter.limit - 1, state.articlesCount)
-  const params = routing.localSegment.params
+  const params = state.route.params
 
   return [
     "nav",
@@ -21,11 +21,12 @@ export const Pager = ({ state, routing }) => {
           "a.page-link",
           {
             href: router.toPath(
-              routing.sameRoute(
-                Object.assign({}, params, {
+              state.route.page,
+              Object.assign({}, params, {
+                queryParams: Object.assign({}, params.queryParams, {
                   offset: (pageNumber - 1) * filter.limit
                 })
-              )
+              })
             )
           },
           pageNumber

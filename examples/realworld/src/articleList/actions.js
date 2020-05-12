@@ -1,10 +1,9 @@
-import { findRouteSegment } from "meiosis-routing/state"
-
 import { articlesApi, loadArticleAndComments, loadArticlesAndTags } from "../services"
-import { Route, getArticlesFilter, navigateTo } from "../routes"
+import { Route, routeTo } from "../router"
+import { getArticlesFilter } from "../util/filter"
 
 const refresh = (state, slug) =>
-  findRouteSegment(state.route, "ArticleDetail")
+  state.route.page === Route.ArticleDetail
     ? loadArticleAndComments({ slug })
     : loadArticlesAndTags(getArticlesFilter(state.route))
 
@@ -16,7 +15,7 @@ export const Actions = update => ({
         .then(() => refresh(state, slug))
         .then(update)
     } else {
-      update(navigateTo(Route.Login()))
+      update(routeTo(Route.Login))
     }
   },
 
@@ -27,7 +26,7 @@ export const Actions = update => ({
         .then(() => refresh(state, slug))
         .then(update)
     } else {
-      update(navigateTo(Route.Login()))
+      update(routeTo(Route.Login))
     }
   }
 })

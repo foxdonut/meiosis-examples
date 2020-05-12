@@ -1,8 +1,7 @@
 import marked from "marked"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
-import { Route } from "../routes"
-import { router } from "../router"
+import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
 
 const isAuthor = (username, article) => article.author.username === username
@@ -10,7 +9,7 @@ const isAuthor = (username, article) => article.author.username === username
 const authorMeta = actions => article => [
   [
     "a.btn.btn-outline-secondary.btn-sm",
-    { href: router.toPath(Route.ArticleEdit({ slug: article.slug })) },
+    { href: router.toPath(Route.ArticleEdit, { slug: article.slug }) },
     ["i.ion-edit"],
     " Edit Article"
   ],
@@ -23,7 +22,7 @@ const authorMeta = actions => article => [
   ]
 ]
 
-const nonAuthorMeta = (state, actions, routing) => article => [
+const nonAuthorMeta = (state, actions) => article => [
   [
     "button.btn.btn-sm",
     {
@@ -32,8 +31,8 @@ const nonAuthorMeta = (state, actions, routing) => article => [
         "btn-secondary": article.author.following
       },
       onClick: article.author.following
-        ? () => actions.unfollowUser(state, article.author.username, routing)
-        : () => actions.followUser(state, article.author.username, routing)
+        ? () => actions.unfollowUser(state, article.author.username)
+        : () => actions.followUser(state, article.author.username)
     },
     ["i.ion-plus-round"],
     article.author.following ? " Unfollow " : " Follow ",
@@ -56,29 +55,26 @@ const nonAuthorMeta = (state, actions, routing) => article => [
   ]
 ]
 
-const articleMeta = (state, actions, routing, article, username) => [
+const articleMeta = (state, actions, article, username) => [
   ".article-meta",
   [
     "a",
-    { href: router.toPath(Route.Profile({ username: article.author.username })) },
+    { href: router.toPath(Route.Profile, { username: article.author.username }) },
     ["img", { src: article.author.image || defaultImage }]
   ],
   [
     ".info",
     [
       "a.author",
-      { href: router.toPath(Route.Profile({ username: article.author.username })) },
+      { href: router.toPath(Route.Profile, { username: article.author.username }) },
       article.author.username
     ],
     ["span.date", new Date(article.createdAt).toDateString()]
   ],
-  thrush(
-    article,
-    isAuthor(username, article) ? authorMeta(actions) : nonAuthorMeta(state, actions, routing)
-  )
+  thrush(article, isAuthor(username, article) ? authorMeta(actions) : nonAuthorMeta(state, actions))
 ]
 
-export const ArticleDetail = ({ state, actions, routing }) => {
+export const ArticleDetail = ({ state, actions }) => {
   const article = state.article
   const username = get(state, ["user", "username"])
   const loading = state.loading || !article
@@ -87,7 +83,7 @@ export const ArticleDetail = ({ state, actions, routing }) => {
     ".article-page",
     !loading && [
       ".banner",
-      [".container", ["h1", article.title], articleMeta(state, actions, routing, article, username)]
+      [".container", ["h1", article.title], articleMeta(state, actions, article, username)]
     ],
     [
       ".container page",
@@ -103,7 +99,7 @@ export const ArticleDetail = ({ state, actions, routing }) => {
                   ".tag-list",
                   article.tagList.map(tag => [
                     "a.tag-pill.tag-default",
-                    { href: router.toPath(Route.Home(), { tag }) },
+                    { href: router.toPath(Route.Home(), { queryParams: { tag } }) },
                     tag
                   ])
                 ],
@@ -113,7 +109,7 @@ export const ArticleDetail = ({ state, actions, routing }) => {
       ],
       !loading && [
         ["hr"],
-        [".article-actions", articleMeta(state, actions, routing, article, username)],
+        [".article-actions", articleMeta(state, actions, article, username)],
         [
           ".row",
           [
@@ -150,9 +146,9 @@ export const ArticleDetail = ({ state, actions, routing }) => {
                 ]
               : [
                   "p",
-                  ["a", { href: router.toPath(Route.Login()) }, "Sign in"],
+                  ["a", { href: router.toPath(Route.Login) }, "Sign in"],
                   " or ",
-                  ["a", { href: router.toPath(Route.Register()) }, "sign up"],
+                  ["a", { href: router.toPath(Route.Register) }, "sign up"],
                   " to add comments on this article."
                 ],
             defaultTo([], state.comments).map(comment => [
@@ -162,13 +158,13 @@ export const ArticleDetail = ({ state, actions, routing }) => {
                 ".card-footer",
                 [
                   "a.comment-author",
-                  { href: router.toPath(Route.Profile({ username: comment.author.username })) },
+                  { href: router.toPath(Route.Profile, { username: comment.author.username }) },
                   ["img.comment-author-img", { src: comment.author.image || defaultImage }]
                 ],
                 " ",
                 [
                   "a.comment-author",
-                  { href: router.toPath(Route.Profile({ username: comment.author.username })) },
+                  { href: router.toPath(Route.Profile, { username: comment.author.username }) },
                   comment.author.username
                 ],
                 ["span.date-posted", new Date(comment.createdAt).toDateString()],

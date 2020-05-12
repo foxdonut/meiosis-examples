@@ -29,13 +29,11 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "feather-route-matcher": "^3.1.0",
-    "marked": "^0.8.2",
-    "meiosis-routing": "^2.0.1",
-    "meiosis-setup": "^4.0.2",
+    "marked": "^1.0.0",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",
-    "preact": "^10.3.4",
-    "query-string": "^6.11.1",
+    "preact": "^10.4.1",
+    "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "seview": "^1.0.1",
@@ -43,13 +41,13 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "babel-loader": "^8.1.0",
     "meiosis-tracer": "^3.0.0",
     "reload": "^3.0.4",
     "static-server": "^2.2.1",
-    "webpack": "^4.42.0",
+    "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
 }

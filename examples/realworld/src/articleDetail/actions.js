@@ -1,6 +1,6 @@
 import { articlesApi, loadArticleAndComments, profileApi } from "../services"
 import { prepend } from "../util/fp"
-import { Route, navigateTo } from "../routes"
+import { Route, routeTo } from "../router"
 
 export const Actions = update => ({
   updateCommentField: comment => update({ comment }),
@@ -21,22 +21,22 @@ export const Actions = update => ({
       .deleteComment(slug, id)
       .then(() => update({ comments: list => list.filter(comment => comment.id !== id) })),
 
-  deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(navigateTo(Route.Home()))),
+  deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(routeTo(Route.Home))),
 
-  followUser: (state, username, routing) => {
+  followUser: (state, username) => {
     if (state.user) {
       profileApi
         .follow(username)
-        .then(() => loadArticleAndComments({ slug: routing.localSegment.params.slug }))
+        .then(() => loadArticleAndComments({ slug: state.route.params.slug }))
         .then(update)
     } else {
-      update(navigateTo(Route.Login()))
+      update(routeTo(Route.Login))
     }
   },
 
-  unfollowUser: (state, username, routing) =>
+  unfollowUser: (state, username) =>
     profileApi
       .unfollow(username)
-      .then(() => loadArticleAndComments({ slug: routing.localSegment.params.slug }))
+      .then(() => loadArticleAndComments({ slug: state.route.params.slug }))
       .then(update)
 })

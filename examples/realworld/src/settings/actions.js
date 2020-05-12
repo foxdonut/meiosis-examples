@@ -1,5 +1,5 @@
 import { profileApi, clearToken } from "../services"
-import { Route, navigateTo } from "../routes"
+import { Route, routeTo } from "../router"
 import { omit } from "../util/fp"
 
 export const Actions = update => ({
@@ -9,12 +9,12 @@ export const Actions = update => ({
     profileApi
       .update({ user: omit(["errors"], settings) })
       .then(() =>
-        update([navigateTo(Route.Profile({ username: settings.username })), { user: settings }])
+        update([routeTo(Route.Profile, { username: settings.username }), { user: settings }])
       )
       .catch(err => update({ settings: { errors: err.errors } })),
 
   logout: () => {
     clearToken()
-    update([navigateTo(Route.Home()), { user: null, logout: true }])
+    update([routeTo(Route.Home), { user: null, logout: true }])
   }
 })

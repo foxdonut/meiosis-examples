@@ -1,10 +1,10 @@
-import { Route, getArticlesFilter } from "../routes"
-import { router } from "../router"
+import { getArticlesFilter } from "../util/filter"
+import { Route, router } from "../router"
 
 import { ArticleList } from "../articleList"
 import { PopularTags } from "../popularTags"
 
-export const Home = ({ state, actions, routing }) => {
+export const Home = ({ state, actions }) => {
   const filter = getArticlesFilter(state.route)
 
   const content = filter.tag
@@ -55,7 +55,7 @@ export const Home = ({ state, actions, routing }) => {
                 [
                   "a.nav-link",
                   {
-                    href: router.toPath([Route.Home({ feed: true })]),
+                    href: router.toPath(Route.Home, { queryParams: { feed: true } }),
                     className: { active: filter.feed }
                   },
                   "Your Feed"
@@ -66,7 +66,7 @@ export const Home = ({ state, actions, routing }) => {
                 [
                   "a.nav-link",
                   {
-                    href: router.toPath([Route.Home({ feed: null })]),
+                    href: router.toPath(Route.Home),
                     className: { active: content.globalFeed }
                   },
                   "Global Feed"
@@ -75,7 +75,7 @@ export const Home = ({ state, actions, routing }) => {
               content.tagFeedComponent
             ]
           ],
-          ArticleList({ state, actions, routing })
+          ArticleList({ state, actions })
         ],
         [".col-md-3", [".sidebar", PopularTags({ state })]]
       ]

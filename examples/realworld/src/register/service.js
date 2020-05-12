@@ -1,5 +1,7 @@
-export const service = ({ state }) => {
-  if (state.routeTransition.arrive.Register) {
+import { Route } from "../router"
+
+export const service = state => {
+  if (state.route.page === Route.Register && !state.register) {
     return { register: {} }
   }
 }

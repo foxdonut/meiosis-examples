@@ -1,8 +1,10 @@
-export const service = ({ state }) => {
-  // Leaving either profile page and not arriving at the other
+import { Route } from "../router"
+
+export const service = state => {
   if (
-    (state.routeTransition.leave.Profile || state.routeTransition.leave.ProfileFavorites) &&
-    !(state.routeTransition.arrive.Profile || state.routeTransition.arrive.ProfileFavorites)
+    state.route.page !== Route.Profile &&
+    state.route.page !== Route.ProfileFavorites &&
+    state.profile
   ) {
     return { profile: null }
   }

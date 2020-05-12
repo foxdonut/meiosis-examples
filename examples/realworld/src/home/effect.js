@@ -1,12 +1,13 @@
 import { articlesApi, loadArticlesAndTags } from "../services"
-import { getArticlesFilter } from "../routes"
+import { Route } from "../router"
 import { pick } from "../util/fp"
+import { getArticlesFilter } from "../util/filter"
 
-export const effect = ({ state, update }) => {
-  if (state.routeTransition.arrive.Home) {
+export const Effect = update => state => {
+  if (state.route.page === Route.Home && state.loading) {
     const filter = getArticlesFilter(state.route)
 
-    state.routeTransition.arrive.Home.params.feed
+    state.route.params.feed
       ? articlesApi
           .getFeed(pick(["limit", "offset"], filter))
           .then(data => update([data, { loading: false }]))

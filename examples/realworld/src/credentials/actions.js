@@ -1,5 +1,5 @@
 import { credentialsApi, setToken } from "../services"
-import { Route, navigateTo } from "../routes"
+import { Route, routeTo } from "../router"
 import { pick } from "../util/fp"
 
 export const Actions = update => ({
@@ -10,7 +10,7 @@ export const Actions = update => ({
     credentialsApi[method]({ user: pick(fields, state[method]) })
       .then(({ user }) => {
         setToken(user.token)
-        update([navigateTo(Route.Home()), { user }])
+        update([routeTo(Route.Home), { user }])
       })
       .catch(err => update({ [method]: { errors: err.response && err.response.errors } }))
   }
