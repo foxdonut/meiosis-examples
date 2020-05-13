@@ -3,6 +3,7 @@ import { Root } from "../root"
 import { home } from "../home"
 import { register } from "../register"
 import { login } from "../login"
+import { article } from "../article"
 import { articleList } from "../articleList"
 import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
@@ -30,16 +31,15 @@ export const createApp = () =>
       settings.service,
       register.service,
       login.service,
+      home.service,
       profile.service,
-      articleDetail.service,
-      articleEdit.service
+      article.service
     ],
 
     Effects: update => [
       home.Effect(update),
       profile.Effect(update),
-      articleDetail.Effect(update),
-      articleEdit.Effect(update),
+      article.Effect(update),
       router.effect
     ],
 

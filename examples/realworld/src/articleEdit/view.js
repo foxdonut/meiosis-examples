@@ -73,10 +73,7 @@ export const ArticleEdit = ({ state, actions }) => {
                   [
                     "button:button.btn.btn-lg.pull-xs-right.btn-primary",
                     {
-                      onClick: pipe(
-                        preventDefault,
-                        () => actions.publish(article)
-                      )
+                      onClick: pipe(preventDefault, () => actions.publish(article))
                     },
                     "Publish Article"
                   ]

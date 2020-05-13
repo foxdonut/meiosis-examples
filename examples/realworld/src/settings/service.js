@@ -1,12 +1,12 @@
 import { assoc, defaultTo } from "../util/fp"
-import { Route, router } from "../router"
+import { Route, routeTo } from "../router"
 
 const fields = ["email", "username", "image", "bio"]
 
 export const service = state => {
   if (state.route.page === Route.Settings) {
     if (!state.user) {
-      return { route: () => router.getRoute(Route.Home()) }
+      return routeTo(Route.Home)
     }
 
     if (!state.settings) {

@@ -3,8 +3,6 @@ import { getArticlesFilter } from "../util/filter"
 import { articlesApi, profileApi } from "../services"
 
 const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
-  update({ loading: true })
-
   const filter = getArticlesFilter(state.route)
 
   return Promise.all([
@@ -19,7 +17,7 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
 }
 
 export const Effect = update => state => {
-  if (!state.profile) {
+  if (state.loading) {
     if (state.route.page === Route.Profile) {
       const { username } = state.route.params
       loadProfileAndArticles({ state, update, username, author: username })

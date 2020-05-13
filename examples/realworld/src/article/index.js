@@ -1,9 +1,7 @@
 import { service } from "./service"
 import { Effect } from "./effect"
 
-export const home = {
+export const article = {
   service,
   Effect
 }
-
-export { Home } from "./view"
