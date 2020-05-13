@@ -30,7 +30,6 @@ export const createApp = () =>
       settings.service,
       register.service,
       login.service,
-      home.service,
       profile.service,
       articleDetail.service,
       articleEdit.service

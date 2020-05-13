@@ -40,3 +40,4 @@ export const prepend = tf.prepend
 export const preventDefault = tf.tap(evt => evt.preventDefault())
 export const tap = tf.tap
 export const thrush = tf.thrush
+export const when = tf.when
