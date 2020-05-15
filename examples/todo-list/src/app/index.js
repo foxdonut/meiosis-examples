@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 
 import { root, Root } from "../root"
 import { todos } from "../todos"
@@ -10,23 +10,14 @@ export const createApp = () =>
     Actions: update => Object.assign({}, root.Actions(update), todos.Actions(update))
   }))
 
-export class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = props.states()
-    this.skippedFirst = false
+export const App = ({ states, actions }) => {
+  const [init, setInit] = React.useState(false)
+  const [state, setState] = React.useState(states())
+
+  if (!init) {
+    setInit(true)
+    states.map(setState)
   }
 
-  componentDidMount() {
-    this.props.states.map(state =>
-      this.skippedFirst ? this.setState(state) : (this.skippedFirst = true)
-    )
-  }
-
-  render() {
-    const state = this.state
-    const { actions } = this.props
-
-    return <Root state={state} actions={actions} />
-  }
+  return <Root state={state} actions={actions} />
 }

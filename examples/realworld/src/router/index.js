@@ -1,4 +1,5 @@
 import { createRouter } from "../meiosis/router"
+import { compose } from "../util/fp"
 
 export const Route = {
   Home: "Home",
@@ -24,11 +25,6 @@ const routeConfig = {
   "/profile/:username/favorites": Route.ProfileFavorites
 }
 
-export const router = createRouter(routeConfig)
-
-export const navigateTo = route => ({ route: () => route })
-export const routeTo = (page, params = {}) => navigateTo(router.getRoute(page, params))
-
 /*
 you can also npm install meiosis-router-setup and use it as shown below:
 
@@ -37,3 +33,13 @@ export const router = createFeatherRouter({ createRouteMatcher, queryString, rou
 
 See https://meiosis.js.org/router for details.
 */
+export const router = createRouter(routeConfig)
+
+export const navigateTo = route => ({ route: () => route, routeChanged: true })
+export const routeTo = compose(navigateTo, router.getRoute)
+
+export const routerService = state => {
+  if (state.routeChanged) {
+    return { routeChanged: false }
+  }
+}

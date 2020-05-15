@@ -9,7 +9,7 @@ import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
-import { router } from "../router"
+import { router, routerService } from "../router"
 
 export const createApp = () =>
   Initial().then(initial => ({
@@ -33,7 +33,8 @@ export const createApp = () =>
       login.service,
       home.service,
       profile.service,
-      article.service
+      article.service,
+      routerService
     ],
 
     Effects: update => [
