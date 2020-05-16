@@ -1,7 +1,3 @@
-import React, { Component } from "react"
+import React from "react"
 
-export class Projects extends Component {
-  render() {
-    return <div>Coming soon.</div>
-  }
-}
+export const Projects = () => <div>Coming soon.</div>

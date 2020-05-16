@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import preventDefault from "prevent-default"
 import * as R from "ramda"
 import { Button, Form, Label } from "semantic-ui-react"
@@ -23,33 +23,30 @@ const InputDiv = ({ state, id, actions, field, label }) => {
   )
 }
 
-export class TodoForm extends Component {
-  render() {
-    const { state, id, actions } = this.props
-    const todo = state[id].todo
+export const TodoForm = ({ state, id, actions, label }) => {
+  const todo = state[id].todo
 
-    return (
-      <div>
-        {this.props.label && <h4>{this.props.label}</h4>}
-        <Form>
-          <InputDiv state={state} id={id} actions={actions} field="priority" label="Priority:" />
-          <InputDiv
-            state={state}
-            id={id}
-            actions={actions}
-            field="description"
-            label="Description:"
-          />
-          <div>
-            <Button primary size="small" onClick={preventDefault(() => actions.saveTodo(id, todo))}>
-              Save
-            </Button>
-            <Button size="small" onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>
-              Cancel
-            </Button>
-          </div>
-        </Form>
-      </div>
-    )
-  }
+  return (
+    <div>
+      {label && <h4>{label}</h4>}
+      <Form>
+        <InputDiv state={state} id={id} actions={actions} field="priority" label="Priority:" />
+        <InputDiv
+          state={state}
+          id={id}
+          actions={actions}
+          field="description"
+          label="Description:"
+        />
+        <div>
+          <Button primary size="small" onClick={preventDefault(() => actions.saveTodo(id, todo))}>
+            Save
+          </Button>
+          <Button size="small" onClick={preventDefault(() => actions.cancelEditTodo(id, todo))}>
+            Cancel
+          </Button>
+        </div>
+      </Form>
+    </div>
+  )
 }
