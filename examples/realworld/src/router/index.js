@@ -35,8 +35,8 @@ See https://meiosis.js.org/router for details.
 */
 export const router = createRouter(routeConfig)
 
-export const navigateTo = route => ({ route: () => route, routeChanged: true })
-export const routeTo = compose(navigateTo, router.getRoute)
+export const getRoutePatch = route => ({ route: () => route, routeChanged: true })
+export const routeTo = compose(getRoutePatch, router.getRoute)
 
 export const routerService = state => {
   if (state.routeChanged) {
