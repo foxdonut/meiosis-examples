@@ -9,7 +9,7 @@ const isAuthor = (username, article) => article.author.username === username
 const authorMeta = actions => article => [
   [
     "a.btn.btn-outline-secondary.btn-sm",
-    { href: router.toPath(Route.ArticleEdit, { slug: article.slug }) },
+    { href: router.toUrl(Route.ArticleEdit, { slug: article.slug }) },
     ["i.ion-edit"],
     " Edit Article"
   ],
@@ -59,14 +59,14 @@ const articleMeta = (state, actions, article, username) => [
   ".article-meta",
   [
     "a",
-    { href: router.toPath(Route.Profile, { username: article.author.username }) },
+    { href: router.toUrl(Route.Profile, { username: article.author.username }) },
     ["img", { src: article.author.image || defaultImage }]
   ],
   [
     ".info",
     [
       "a.author",
-      { href: router.toPath(Route.Profile, { username: article.author.username }) },
+      { href: router.toUrl(Route.Profile, { username: article.author.username }) },
       article.author.username
     ],
     ["span.date", new Date(article.createdAt).toDateString()]
@@ -99,7 +99,7 @@ export const ArticleDetail = ({ state, actions }) => {
                   ".tag-list",
                   article.tagList.map(tag => [
                     "a.tag-pill.tag-default",
-                    { href: router.toPath(Route.Home, { queryParams: { tag } }) },
+                    { href: router.toUrl(Route.Home, { queryParams: { tag } }) },
                     tag
                   ])
                 ],
@@ -146,9 +146,9 @@ export const ArticleDetail = ({ state, actions }) => {
                 ]
               : [
                   "p",
-                  ["a", { href: router.toPath(Route.Login) }, "Sign in"],
+                  ["a", { href: router.toUrl(Route.Login) }, "Sign in"],
                   " or ",
-                  ["a", { href: router.toPath(Route.Register) }, "sign up"],
+                  ["a", { href: router.toUrl(Route.Register) }, "sign up"],
                   " to add comments on this article."
                 ],
             defaultTo([], state.comments).map(comment => [
@@ -158,13 +158,13 @@ export const ArticleDetail = ({ state, actions }) => {
                 ".card-footer",
                 [
                   "a.comment-author",
-                  { href: router.toPath(Route.Profile, { username: comment.author.username }) },
+                  { href: router.toUrl(Route.Profile, { username: comment.author.username }) },
                   ["img.comment-author-img", { src: comment.author.image || defaultImage }]
                 ],
                 " ",
                 [
                   "a.comment-author",
-                  { href: router.toPath(Route.Profile, { username: comment.author.username }) },
+                  { href: router.toUrl(Route.Profile, { username: comment.author.username }) },
                   comment.author.username
                 ],
                 ["span.date-posted", new Date(comment.createdAt).toDateString()],

@@ -20,7 +20,7 @@ export const Pager = ({ state }) => {
         [
           "a.page-link",
           {
-            href: router.toPath(
+            href: router.toUrl(
               state.route.page,
               Object.assign({}, params, {
                 queryParams: Object.assign({}, params.queryParams, {

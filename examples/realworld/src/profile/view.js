@@ -27,7 +27,7 @@ export const Profile = ({ state, actions }) => {
                   isCurrentUser
                     ? [
                         "a.btn.btn-sm.btn-outline-secondary.action-btn",
-                        { href: router.toPath(Route.Settings) },
+                        { href: router.toUrl(Route.Settings) },
                         ["i.ion-gear-a"],
                         " Edit Profile Settings"
                       ]
@@ -63,7 +63,7 @@ export const Profile = ({ state, actions }) => {
                   "a.nav-link",
                   {
                     className: { active: !isFavorites },
-                    href: router.toPath(Route.Profile, { username })
+                    href: router.toUrl(Route.Profile, { username })
                   },
                   "My Articles"
                 ]
@@ -74,7 +74,7 @@ export const Profile = ({ state, actions }) => {
                   "a.nav-link",
                   {
                     className: { active: isFavorites },
-                    href: router.toPath(Route.ProfileFavorites, { username })
+                    href: router.toUrl(Route.ProfileFavorites, { username })
                   },
                   "Favorited Articles"
                 ]

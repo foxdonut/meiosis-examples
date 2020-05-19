@@ -19,7 +19,7 @@ export const Credentials = options => ({ state, actions }) => {
           ["h1.text-xs-center", options.label],
           [
             "p.text-xs-center",
-            ["a", { href: router.toPath(options.alternativePage) }, options.alternativeLabel]
+            ["a", { href: router.toUrl(options.alternativePage) }, options.alternativeLabel]
           ],
 
           ["ul.error-messages", errors.map(error => ["li", error])],

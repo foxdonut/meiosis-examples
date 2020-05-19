@@ -8,7 +8,7 @@ const Header = ({ state }) => {
     "nav.navbar.navbar-light",
     [
       ".container",
-      ["a.navbar-brand", { href: router.toPath(Route.Home) }, "conduit"],
+      ["a.navbar-brand", { href: router.toUrl(Route.Home) }, "conduit"],
       [
         "a",
         {
@@ -22,7 +22,7 @@ const Header = ({ state }) => {
         [
           "li.nav-item",
           active("Home"),
-          ["a.nav-link", { href: router.toPath(Route.Home) }, "Home"]
+          ["a.nav-link", { href: router.toUrl(Route.Home) }, "Home"]
         ],
         state.user
           ? [
@@ -31,7 +31,7 @@ const Header = ({ state }) => {
                 active("ArticleCreate"),
                 [
                   "a.nav-link",
-                  { href: router.toPath(Route.ArticleCreate) },
+                  { href: router.toUrl(Route.ArticleCreate) },
                   ["i.ion-compose"],
                   " New Article"
                 ]
@@ -41,7 +41,7 @@ const Header = ({ state }) => {
                 active("Settings"),
                 [
                   "a.nav-link",
-                  { href: router.toPath(Route.Settings) },
+                  { href: router.toUrl(Route.Settings) },
                   ["i.ion-gear-a"],
                   " Settings"
                 ]
@@ -57,7 +57,7 @@ const Header = ({ state }) => {
                 },
                 [
                   "a.nav-link",
-                  { href: router.toPath(Route.Profile, { username: state.user.username }) },
+                  { href: router.toUrl(Route.Profile, { username: state.user.username }) },
                   state.user.username
                 ]
               ]
@@ -66,12 +66,12 @@ const Header = ({ state }) => {
               [
                 "li.nav-item",
                 active("Login"),
-                ["a.nav-link", { href: router.toPath(Route.Login) }, "Sign in"]
+                ["a.nav-link", { href: router.toUrl(Route.Login) }, "Sign in"]
               ],
               [
                 "li.nav-item",
                 active("Register"),
-                ["a.nav-link", { href: router.toPath(Route.Register) }, "Sign up"]
+                ["a.nav-link", { href: router.toUrl(Route.Register) }, "Sign up"]
               ]
             ]
       ]
@@ -83,7 +83,7 @@ const Footer = () => [
   "footer",
   [
     ".container",
-    ["a.logo-font", { href: router.toPath(Route.Home) }, "conduit"],
+    ["a.logo-font", { href: router.toUrl(Route.Home) }, "conduit"],
     [
       "span.attribution",
       "An interactive learning project from ",

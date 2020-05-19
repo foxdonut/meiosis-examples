@@ -14,14 +14,14 @@ export const ArticleList = ({ state, actions }) => [
             ".article-meta",
             [
               "a",
-              { href: router.toPath(Route.Profile, { username: article.author.username }) },
+              { href: router.toUrl(Route.Profile, { username: article.author.username }) },
               ["img", { src: article.author.image || defaultImage }]
             ],
             [
               ".info",
               [
                 "a.author",
-                { href: router.toPath(Route.Profile, { username: article.author.username }) },
+                { href: router.toUrl(Route.Profile, { username: article.author.username }) },
                 username
               ],
               ["span.date", new Date(article.createdAt).toDateString()]
@@ -48,7 +48,7 @@ export const ArticleList = ({ state, actions }) => [
             ".preview-link",
             [
               "a.preview-link",
-              { href: router.toPath(Route.ArticleDetail, { slug: article.slug }) },
+              { href: router.toUrl(Route.ArticleDetail, { slug: article.slug }) },
               ["h1", article.title],
               ["p", article.description],
               ["span", "Read more..."]
@@ -57,7 +57,7 @@ export const ArticleList = ({ state, actions }) => [
               "ul.tag-list",
               article.tagList.map(tag => [
                 "li.tag-default.tag-pill.tag-outline",
-                ["a", { href: router.toPath(Route.Home, { queryParams: { tag } }) }, tag]
+                ["a", { href: router.toUrl(Route.Home, { queryParams: { tag } }) }, tag]
               ])
             ]
           ]

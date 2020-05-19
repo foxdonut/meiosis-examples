@@ -55,7 +55,7 @@ export const Home = ({ state, actions }) => {
                 [
                   "a.nav-link",
                   {
-                    href: router.toPath(Route.Home, { queryParams: { feed: true } }),
+                    href: router.toUrl(Route.Home, { queryParams: { feed: true } }),
                     className: { active: filter.feed }
                   },
                   "Your Feed"
@@ -66,7 +66,7 @@ export const Home = ({ state, actions }) => {
                 [
                   "a.nav-link",
                   {
-                    href: router.toPath(Route.Home),
+                    href: router.toUrl(Route.Home),
                     className: { active: content.globalFeed }
                   },
                   "Global Feed"
