@@ -22,5 +22,5 @@ createApp().then(app => {
     render(app.view({ state, actions }), element)
   })
 
-  router.start({ onRouteChange: compose(update, getRoutePatch) })
+  router.start(compose(update, getRoutePatch))
 })
