@@ -23,8 +23,13 @@ export const app = {
 }
 
 export const App = ({ states, actions }) => {
+  const [init, setInit] = useState(false)
   const [state, setState] = useState(states())
-  states.map(setState)
+
+  if (!init) {
+    setInit(true)
+    states.map(setState)
+  }
 
   return (
     <div>
