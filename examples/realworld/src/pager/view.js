@@ -1,14 +1,15 @@
 import { range } from "../util/fp"
 import { getArticlesFilter } from "../util/filter"
 import { router } from "../router"
+import { selectors } from "../state"
 
 export const Pager = ({ state }) => {
-  const filter = getArticlesFilter(state.route)
+  const filter = getArticlesFilter(state)
   const currentPageNumber = filter.offset / filter.limit + 1
   const pageList = range(1, Math.ceil(state.articlesCount / filter.limit) + 1)
   const from = filter.offset + 1
   const to = Math.min(from + filter.limit - 1, state.articlesCount)
-  const params = state.route.params
+  const params = selectors.params(state)
 
   return [
     "nav",
@@ -21,7 +22,7 @@ export const Pager = ({ state }) => {
           "a.page-link",
           {
             href: router.toUrl(
-              state.route.page,
+              selectors.page(state),
               Object.assign({}, params, {
                 queryParams: Object.assign({}, params.queryParams, {
                   offset: (pageNumber - 1) * filter.limit

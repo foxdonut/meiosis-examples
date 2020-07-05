@@ -1,11 +1,12 @@
 import { articlesApi, loadArticleAndComments, loadArticlesAndTags } from "../services"
 import { Route, routeTo } from "../router"
 import { getArticlesFilter } from "../util/filter"
+import { selectors } from "../state"
 
 const refresh = (state, slug) =>
-  state.route.page === Route.ArticleDetail
+  selectors.page(state) === Route.ArticleDetail
     ? loadArticleAndComments({ slug })
-    : loadArticlesAndTags(getArticlesFilter(state.route))
+    : loadArticlesAndTags(getArticlesFilter(state))
 
 export const Actions = update => ({
   favoriteArticle: (state, slug) => {

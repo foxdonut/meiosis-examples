@@ -1,9 +1,10 @@
 import { Route } from "../router"
 import { getArticlesFilter } from "../util/filter"
 import { articlesApi, profileApi } from "../services"
+import { selectors } from "../state"
 
 const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
-  const filter = getArticlesFilter(state.route)
+  const filter = getArticlesFilter(state)
 
   return Promise.all([
     !state.profile || state.profile.username !== username ? profileApi.get(username) : null,
@@ -18,11 +19,11 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
 
 export const Effect = update => state => {
   if (state.loading) {
-    if (state.route.page === Route.Profile) {
-      const { username } = state.route.params
+    if (selectors.page(state) === Route.Profile) {
+      const { username } = selectors.params(state)
       loadProfileAndArticles({ state, update, username, author: username })
-    } else if (state.route.page === Route.ProfileFavorites) {
-      const { username } = state.route.params
+    } else if (selectors.page(state) === Route.ProfileFavorites) {
+      const { username } = selectors.params(state)
       loadProfileAndArticles({ state, update, username, favorited: username })
     }
   }

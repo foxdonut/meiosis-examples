@@ -2,9 +2,10 @@
 /* See https://meiosis.js.org/router for details. */
 import createRouteMatcher from "feather-route-matcher"
 import queryString from "query-string"
+import { selectors } from "../state"
 
 export const createRouter = routeConfig => {
-  const prefix = "#"
+  const prefix = "#!"
 
   const getUrl = () => decodeURI(window.location.hash || prefix + "/")
   const getPath = () => getUrl().substring(prefix.length)
@@ -21,12 +22,12 @@ export const createRouter = routeConfig => {
   }
 
   const pathLookup = Object.entries(routeConfig).reduce(
-    (result, [path, id]) => Object.assign(result, { [id]: path }),
+    (result, [path, page]) => Object.assign(result, { [page]: path }),
     {}
   )
 
-  const toUrl = (id, params = {}) => {
-    const path = prefix + pathLookup[id]
+  const toUrl = (page, params = {}) => {
+    const path = prefix + pathLookup[page]
 
     return (
       (path.match(/(:[^/]*)/g) || []).reduce(
@@ -48,11 +49,12 @@ export const createRouter = routeConfig => {
     return Object.assign(match, { params, url })
   }
 
-  const getRoute = (page, params = {}) => ({
-    page,
-    params,
-    url: toUrl(page, params)
-  })
+  const getRoute = (page, params = {}) =>
+    selectors.toRoute({
+      page,
+      params,
+      url: toUrl(page, params)
+    })
 
   const initialRoute = routeMatcher(getPath())
 
@@ -60,15 +62,12 @@ export const createRouter = routeConfig => {
     window.onpopstate = () => onRouteChange(routeMatcher(getPath()))
   }
 
-  const locationBarSync = route => {
-    if (route.url !== getUrl()) {
-      window.history.pushState({}, "", route.url)
+  const effect = state => {
+    const url = selectors.url(state)
+    if (url !== getUrl()) {
+      window.history.pushState({}, "", url)
     }
   }
 
-  const effect = state => {
-    locationBarSync(state.route)
-  }
-
-  return { initialRoute, getRoute, start, locationBarSync, toUrl, effect }
+  return { initialRoute, getRoute, start, toUrl, effect }
 }

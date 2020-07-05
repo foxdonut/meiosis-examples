@@ -1,7 +1,8 @@
 import { Route } from "../router"
+import { selectors } from "../state"
 
 export const service = state => {
-  if (state.route.page === Route.ArticleCreate) {
+  if (selectors.page(state) === Route.ArticleCreate) {
     if (!state.article) {
       return {
         article: {
@@ -14,7 +15,7 @@ export const service = state => {
         }
       }
     }
-  } else if ([Route.ArticleDetail, Route.ArticleEdit].includes(state.route.page)) {
+  } else if ([Route.ArticleDetail, Route.ArticleEdit].includes(selectors.page(state))) {
     if (!state.article) {
       return { loading: true }
     }

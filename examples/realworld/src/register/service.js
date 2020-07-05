@@ -1,7 +1,8 @@
 import { Route } from "../router"
+import { selectors } from "../state"
 
 export const service = state => {
-  if (state.route.page === Route.Register) {
+  if (selectors.page(state) === Route.Register) {
     if (!state.register) {
       return { register: {} }
     }

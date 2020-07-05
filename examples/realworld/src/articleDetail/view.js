@@ -1,4 +1,5 @@
 import marked from "marked"
+import { sanitize } from "dompurify"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
 import { Route, router } from "../router"
@@ -103,7 +104,7 @@ export const ArticleDetail = ({ state, actions }) => {
                     tag
                   ])
                 ],
-                ["p", { innerHTML: marked(article.body, { sanitize: true }) }]
+                ["p", { innerHTML: marked(article.body, { sanitizer: sanitize }) }]
               ]
         ]
       ],
