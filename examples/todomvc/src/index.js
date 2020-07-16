@@ -13,7 +13,7 @@ createApp().then(app => {
   const { states, update, actions } = meiosis({ stream: flyd, merge, app })
 
   // Only for using Meiosis Tracer in development.
-  meiosisTracer({ selector: "#tracer", rows: 35, streams: [states] })
+  meiosisTracer({ streams: [states] })
 
   const element = document.getElementById("app")
 
