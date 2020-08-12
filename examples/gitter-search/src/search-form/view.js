@@ -1,5 +1,6 @@
 import m from "mithril"
 import { getYear } from "date-fns"
+import queryString from "query-string"
 
 const years = []
 let year = 2015
@@ -107,11 +108,30 @@ export const SearchForm = {
       m(
         ".row",
         m(
-          ".col-md-4",
+          ".col-md-1",
           m(
             "button.btn.btn-primary[type=button]",
             { onclick: () => actions.search(state) },
             "Search"
+          )
+        ),
+        m(
+          ".col-md-11",
+          m(
+            "span",
+            window.location.protocol,
+            "//",
+            window.location.host,
+            window.location.pathname,
+            "?",
+            queryString.stringify({
+              channel: state.channel,
+              user: state.user,
+              term: state.term,
+              year: state.year,
+              month: state.month,
+              noOfMonths: state.noOfMonths
+            })
           )
         )
       )

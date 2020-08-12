@@ -31,7 +31,8 @@
     "date-fns": "^2.13.0",
     "meiosis-setup": "^5.0.0",
     "mergerino": "^0.4.0",
-    "mithril": "^2.0.4"
+    "mithril": "^2.0.4",
+    "query-string": "^6.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
