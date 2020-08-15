@@ -21,14 +21,10 @@ export const Pager = ({ state }) => {
         [
           "a.page-link",
           {
-            href: router.toUrl(
-              selectors.page(state),
-              Object.assign({}, params, {
-                queryParams: Object.assign({}, params.queryParams, {
-                  offset: (pageNumber - 1) * filter.limit
-                })
-              })
-            )
+            href: router.toUrl(selectors.page(state), {
+              ...params,
+              offset: (pageNumber - 1) * filter.limit
+            })
           },
           pageNumber
         ]

@@ -55,7 +55,7 @@ export const Home = ({ state, actions }) => {
                 [
                   "a.nav-link",
                   {
-                    href: router.toUrl(Route.Home, { queryParams: { feed: true } }),
+                    href: router.toUrl(Route.Home, { feed: true }),
                     className: { active: filter.feed }
                   },
                   "Your Feed"

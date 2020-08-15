@@ -57,7 +57,7 @@ export const ArticleList = ({ state, actions }) => [
               "ul.tag-list",
               article.tagList.map(tag => [
                 "li.tag-default.tag-pill.tag-outline",
-                ["a", { href: router.toUrl(Route.Home, { queryParams: { tag } }) }, tag]
+                ["a", { href: router.toUrl(Route.Home, { tag }) }, tag]
               ])
             ]
           ]

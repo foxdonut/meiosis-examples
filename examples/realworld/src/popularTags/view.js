@@ -9,7 +9,7 @@ export const PopularTags = ({ state }) => [
     state.tags == null ? ["span", "Loading tags..."] : null,
     defaultTo([], path(["tags"], state)).map(tag => [
       "a.tag-pill.tag-default",
-      { href: router.toUrl(Route.Home, { queryParams: { tag } }) },
+      { href: router.toUrl(Route.Home, { tag }) },
       tag
     ])
   ]

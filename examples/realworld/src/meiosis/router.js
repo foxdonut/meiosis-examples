@@ -9,7 +9,6 @@ export const createRouter = routeConfig => {
 
   const getUrl = () => decodeURI(window.location.hash || prefix + "/")
   const getPath = () => getUrl().substring(prefix.length)
-  const getPathWithoutQuery = path => path.replace(/\?.*/, "")
 
   const getQuery = path => {
     const idx = path.indexOf("?")
@@ -28,33 +27,31 @@ export const createRouter = routeConfig => {
 
   const toUrl = (page, params = {}) => {
     const path = prefix + pathLookup[page]
+    const pathParams = []
 
-    return (
-      (path.match(/(:[^/]*)/g) || []).reduce(
-        (result, pathParam) =>
-          result.replace(new RegExp(pathParam), encodeURI(params[pathParam.substring(1)])),
-        path
-      ) + getQueryString(params.queryParams)
-    )
+    const result = (path.match(/(:[^/]*)/g) || []).reduce((result, pathParam) => {
+      pathParams.push(pathParam.substring(1))
+      return result.replace(new RegExp(pathParam), encodeURI(params[pathParam.substring(1)]))
+    }, path)
+
+    const queryParams = Object.entries(params).reduce((result, [key, value]) => {
+      if (pathParams.indexOf(key) < 0) {
+        result[key] = value
+      }
+      return result
+    }, {})
+
+    return result + getQueryString(queryParams)
   }
 
   const matcher = createRouteMatcher(routeConfig)
 
   const routeMatcher = path => {
-    const match = matcher(getPathWithoutQuery(path))
-    const params = Object.assign(match.params, {
-      queryParams: queryString.parse(getQuery(path))
-    })
-    const url = prefix + match.url + getQueryString(params.queryParams)
-    return Object.assign(match, { params, url })
+    const pathWithoutQuery = path.replace(/\?.*/, "")
+    const match = matcher(pathWithoutQuery)
+    const queryParams = queryString.parse(getQuery(path))
+    return Object.assign(match, { params: Object.assign(match.params, queryParams) })
   }
-
-  const getRoute = (page, params = {}) =>
-    selectors.toRoute({
-      page,
-      params,
-      url: toUrl(page, params)
-    })
 
   const initialRoute = routeMatcher(getPath())
 
@@ -62,12 +59,14 @@ export const createRouter = routeConfig => {
     window.onpopstate = () => onRouteChange(routeMatcher(getPath()))
   }
 
-  const effect = state => {
-    const url = selectors.url(state)
+  const syncLocationBar = route => {
+    const { page, params } = selectors.fromRoute(route)
+    const url = toUrl(page, params)
     if (url !== getUrl()) {
-      window.history.pushState({}, "", url)
+      const fn = route.replace ? "replaceState" : "pushState"
+      window.history[fn].call(window.history, {}, "", url)
     }
   }
 
-  return { initialRoute, getRoute, start, toUrl, effect }
+  return { initialRoute, toUrl, start, syncLocationBar }
 }

@@ -10,6 +10,8 @@ import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
 import { router, routerService } from "../router"
+import { locationBar } from "../locationBar"
+import { selectors } from "../state"
 
 export const createApp = () =>
   Initial().then(initial => ({
@@ -41,7 +43,7 @@ export const createApp = () =>
       home.Effect(update),
       profile.Effect(update),
       article.Effect(update),
-      router.effect
+      locationBar.Effect(router, selectors)
     ],
 
     view: Root

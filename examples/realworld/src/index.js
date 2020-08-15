@@ -5,7 +5,7 @@ import { meiosis } from "./meiosis"
 import { compose } from "./util/fp"
 import { render } from "./util/view"
 import { createApp } from "./app"
-import { router, getRoutePatch } from "./router"
+import { router, toRoutePatch } from "./router"
 
 // Only for development, to use the Meiosis Tracer as a Chrome extension.
 import meiosisTracer from "meiosis-tracer"
@@ -22,5 +22,5 @@ createApp().then(app => {
     render(app.view({ state, actions }), element)
   })
 
-  router.start(compose(update, getRoutePatch))
+  router.start(compose(update, toRoutePatch))
 })
