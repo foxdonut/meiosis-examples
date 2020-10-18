@@ -18,7 +18,9 @@ export const Actions = update => ({
           [id]: {
             image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
           },
-          eventId: "newGifGenerated"
+          events: {
+            newGifGenerated: true
+          }
         })
       })
       .catch(() => update({ [id]: { image: Loaded.Y(Success.N()) } }))

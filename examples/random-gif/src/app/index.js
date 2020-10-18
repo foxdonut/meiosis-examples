@@ -9,8 +9,11 @@ import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
 import { randomGifList, RandomGifList } from "../random-gif-list"
 
 export const app = {
+  // Note: using the same initial state multiple times only works with immutability.
   initial: Object.assign(
     {
+      events: {},
+      triggers: {},
       button: button.initial,
       counter: counter.Initial({ label: "Counter:" }),
       randomGif1: randomGif.initial,
@@ -29,7 +32,7 @@ export const app = {
       randomGifList.Actions(update)
     ),
 
-  services: [service, randomGifList.service("randomGifList")]
+  services: [service, counter.service, randomGifList.service("randomGifList")]
 }
 
 export const App = {
