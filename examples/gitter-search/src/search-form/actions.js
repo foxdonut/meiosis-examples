@@ -26,7 +26,7 @@ export const Actions = update => ({
       dates.forEach((dt, index) => {
         const dateString = format(dt, "yyyy/MM/dd")
         m.request({
-          url: `https://cors-new.now.sh/https://gitter.im/${fields.channel}/archives/${dateString}`,
+          url: `https://cors-anywhere.herokuapp.com/https://gitter.im/${fields.channel}/archives/${dateString}`,
           responseType: "text"
         })
           .then(response => {
