@@ -24,6 +24,9 @@ export const RandomGifList = {
         { onclick: () => state[id].randomGifIds.map(subId => actions.reset(subId)) },
         "Reset All"
       ),
-      m("div", state[id].randomGifIds.map(subId => m(RandomGifItem, { state, id, actions, subId })))
+      m(
+        "div",
+        state[id].randomGifIds.map(subId => m(RandomGifItem, { state, id, actions, subId }))
+      )
     )
 }
