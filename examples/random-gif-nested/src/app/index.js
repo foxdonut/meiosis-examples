@@ -1,6 +1,6 @@
 import m from "mithril"
 
-import { nestState } from "../util/nest"
+import { nest } from "../util/nest"
 import { service } from "./service"
 import { button, Button } from "../button"
 import { counter, Counter } from "../counter"
@@ -30,32 +30,31 @@ export const app = {
       randomGifList.Actions(update)
     ),
 
-  services: [service, counter.service, randomGifList.service(nestState({}, ["randomGifList"]))]
-  // FIXME: nestState({}, [...])
+  services: [service, counter.service, randomGifList.service(nest("randomGifList"))]
 }
 
 export const App = {
   view: ({ attrs: { state, actions } }) =>
     m(
       "div",
-      m(Counter, { state, local: nestState(state, ["counter"]), actions }),
+      m(Counter, { state, local: nest("counter"), actions }),
 
       m("div.mt2", "Button:"),
-      m(Button, { state, local: nestState(state, ["button"]), actions }),
+      m(Button, { state, local: nest("button"), actions }),
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { state, local: nestState(state, ["randomGif1"]), actions }),
+      m(RandomGif, { state, local: nest("randomGif1"), actions }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { state, local: nestState(state, ["randomGif2"]), actions }),
+      m(RandomGif, { state, local: nest("randomGif2"), actions }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { state, local: nestState(state, ["randomGifPair"]), actions }),
+      m(RandomGifPair, { state, local: nest("randomGifPair"), actions }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { state, local: nestState(state, ["randomGifPairPair"]), actions }),
+      m(RandomGifPairPair, { state, local: nest("randomGifPairPair"), actions }),
 
       m("div.mt2", "Random Gif List:"),
-      m(RandomGifList, { state, local: nestState(state, ["randomGifList"]), actions })
+      m(RandomGifList, { state, local: nest("randomGifList"), actions })
     )
 }

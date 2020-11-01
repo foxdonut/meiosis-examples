@@ -1,5 +1,6 @@
 import m from "mithril"
 
 export const Counter = {
-  view: ({ attrs: { local } }) => m("div", local.state.label + " " + local.state.value)
+  view: ({ attrs: { state, local } }) =>
+    m("div", local.get(state).label + " " + local.get(state).value)
 }
