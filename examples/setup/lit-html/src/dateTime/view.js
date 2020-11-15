@@ -12,7 +12,7 @@ export const DateTime = ({ state, id, actions }) => html`
       <input
         type="date"
         class="form-control"
-        value=${state[id].date}
+        .value=${state[id].date}
         @input=${evt => actions.editDate(id, evt.target.value)}
       />
       <span class="help-block">${getErrorMessage(state, "date")}</span>
@@ -22,7 +22,7 @@ export const DateTime = ({ state, id, actions }) => html`
       <input
         type="text"
         class="form-control"
-        value=${state[id].hour}
+        .value=${state[id].hour}
         @input=${evt => actions.editHour(id, evt.target.value)}
       />
       <span class="help-block">${getErrorMessage(state, "hour")}</span>
@@ -32,7 +32,7 @@ export const DateTime = ({ state, id, actions }) => html`
       <input
         type="text"
         class="form-control"
-        value=${state[id].minute}
+        .value=${state[id].minute}
         @input=${evt => actions.editMinute(id, evt.target.value)}
       />
       <span class="help-block">${getErrorMessage(state, "minute")}</span>
