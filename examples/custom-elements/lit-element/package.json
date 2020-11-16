@@ -1,0 +1,41 @@
+{
+  "name": "meiosis-example-custom-elements-lit-element",
+  "version": "1.0.0",
+  "description": "meiosis-examples custom-elements lit-element",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "custom elements",
+    "example",
+    "lit-element",
+    "meiosis",
+    "reactive"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "flyd": "^0.2.8",
+    "lit-element": "^2.4.0",
+    "mergerino": "^0.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "meiosis-tracer": "^4.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
