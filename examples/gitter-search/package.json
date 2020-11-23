@@ -29,7 +29,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "date-fns": "^2.13.0",
-    "meiosis-setup": "^5.1.0",
+    "meiosis-setup": "^5.1.1",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",
     "query-string": "^6.13.1"
