@@ -1,3 +1,5 @@
+const compose = (f, g) => x => f(g(x))
+
 export const get = (object, path) =>
   path.reduce((obj, key) => (obj == undefined ? undefined : obj[key]), object)
 
@@ -29,13 +31,26 @@ export const nest = (path, local = { path: [] }) => {
   }
 }
 
-export const Nest = update => (state, path, local = { path: [] }) => {
+export const Nest = update => (path, local = { path: [] }) => {
   const nestedPath = local.path.concat(path)
-  const nestedPatch = createNestPatchFunction(nestedPath)
+  const nestPatch = createNestPatchFunction(nestedPath)
 
   return {
-    state: get(state, nestedPath),
-    update: stateUpdate => update(nestedPatch(stateUpdate)),
+    get: state => get(state, nestedPath),
+    update: compose(update, nestPatch),
     path: nestedPath
   }
 }
+
+/*
+export const Nest = update => (state, path, local = { path: [] }) => {
+  const nestedPath = local.path.concat(path)
+  const nestPatch = createNestPatchFunction(nestedPath)
+
+  return {
+    state: get(state, nestedPath),
+    update: stateUpdate => update(nestPatch(stateUpdate)),
+    path: nestedPath
+  }
+}
+*/

@@ -1,7 +1,7 @@
 <app-el>
   <div class="row">
     <div class="col-md-4">
-      <date-time/>
+      <!--date-time/-->
     </div>
     <div class="col-md-4">
       <!-- sky-conditions
@@ -9,8 +9,8 @@
         actions={ props.actions }
         conditions={ state.conditions }/-->
 
-      <temp-el local={ nest(state, ["temperature", "air"]) }/>
-      <temp-el local={ nest(state, ["temperature", "water"]) }/>
+      <temp-el state={ air.get(state) } update={ air.update }/>
+      <temp-el state={ water.get(state) } update={ water.update }/>
     </div>
   </div>
 
@@ -28,7 +28,10 @@
 
       onBeforeMount(props) {
         this.state = props.states()
-        this.nest = props.nest
+
+        const nest = props.nest
+        this.air = nest(["temperature", "air"])
+        this.water = nest(["temperature", "water"])
       },
 
       onMounted(props) {
