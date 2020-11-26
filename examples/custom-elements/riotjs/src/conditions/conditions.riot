@@ -1,0 +1,34 @@
+<sky-conditions>
+  <div>
+    <label class="checkbox-inline">
+      <input
+        type="checkbox"
+        checked={ props.conditions.precipitations }
+        onchange={ evt => props.actions.togglePrecipitations(props.local, evt.target.checked) }
+      />
+      Precipitations
+    </label>
+    <div>
+      <sky-option
+        value="SUNNY" label="Sunny" conditions={ props.conditions }
+        local={ props.local } actions={ props.actions }/>
+
+      <sky-option
+        value="CLOUDY" label="Cloudy" conditions={ props.conditions }
+        local={ props.local } actions={ props.actions }/>
+
+      <sky-option value="MIX" label="Mix of sun and clouds" conditions={ props.conditions }
+        local={ props.local } actions={ props.actions }/>
+    </div>
+  </div>
+
+  <script>
+    import SkyOption from "./skyOption.riot"
+
+    export default {
+      components: {
+        SkyOption
+      }
+    }
+  </script>
+</sky-conditions>

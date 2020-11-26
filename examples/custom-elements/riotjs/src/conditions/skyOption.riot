@@ -1,0 +1,12 @@
+<sky-option>
+  <label class="radio-inline">
+    <input
+      type="radio"
+      name="conditions"
+      value={ props.value }
+      checked={ props.conditions.sky === props.value }
+      onchange={ evt => props.actions.changeSky(props.local, evt.target.value) }
+    />
+    { props.label }
+  </label>
+</sky-option>

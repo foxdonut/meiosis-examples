@@ -1,0 +1,39 @@
+<app-el>
+  <div class="row">
+    <div class="col-md-4">
+      <date-time/>
+    </div>
+    <div class="col-md-4">
+      <!-- sky-conditions
+        local={ nest("conditions") }
+        actions={ props.actions }
+        conditions={ state.conditions }/-->
+
+      <temp-el local={ nest(state, ["temperature", "air"]) }/>
+      <temp-el local={ nest(state, ["temperature", "water"]) }/>
+    </div>
+  </div>
+
+  <script>
+    import DateTime from "../dateTime/dateTime.riot"
+    import SkyConditions from "../conditions/conditions.riot"
+    import TempEl from "../temperature/temperature.riot"
+
+    export default {
+      components: {
+        DateTime,
+        SkyConditions,
+        TempEl
+      },
+
+      onBeforeMount(props) {
+        this.state = props.states()
+        this.nest = props.nest
+      },
+
+      onMounted(props) {
+        props.states.map(state => this.update(state))
+      }
+    }
+  </script>
+</app-el>
