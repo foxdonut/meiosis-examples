@@ -9,8 +9,8 @@
         actions={ props.actions }
         conditions={ state.conditions }/-->
 
-      <temp-el state={ air.get(state) } update={ air.update }/>
-      <temp-el state={ water.get(state) } update={ water.update }/>
+      <temp-el local={ air.get(state) }/>
+      <temp-el local={ water.get(state) }/>
     </div>
   </div>
 

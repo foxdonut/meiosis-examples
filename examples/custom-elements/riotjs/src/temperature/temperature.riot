@@ -1,26 +1,26 @@
 <temp-el>
   <div>
     <div style="margin-top: 0.8rem">
-      Temperature: { props.state.value }<sup>o</sup>{ props.state.units }
+      Temperature: { props.local.state.value }<sup>o</sup>{ props.local.state.units }
     </div>
     <div style="margin-top: 0.8rem">
       <button
         class="btn btn-primary"
-        onclick={ () => props.update({ value: props.state.value + 1 }) }
+        onclick={ () => props.local.update({ value: props.local.state.value + 1 }) }
         style="margin-right: 0.4rem"
       >
         Increment
       </button>
       <button
         class="btn btn-primary"
-        onclick={ () => props.update({ value: props.state.value - 1 }) }
+        onclick={ () => props.local.update({ value: props.local.state.value - 1 }) }
         style="margin-right: 0.4rem"
       >
         Decrement
       </button>
       <button
         class="btn btn-default"
-        onclick={ () => props.update(changeUnits(props.state)) }>
+        onclick={ () => props.local.update(changeUnits(props.local.state)) }>
         Change Units
       </button>
     </div>

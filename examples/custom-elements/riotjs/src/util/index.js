@@ -34,11 +34,18 @@ export const nest = (path, local = { path: [] }) => {
 export const Nest = update => (path, local = { path: [] }) => {
   const nestedPath = local.path.concat(path)
   const nestPatch = createNestPatchFunction(nestedPath)
+  const nestUpdate = compose(update, nestPatch)
+
+  const result = {
+    update: nestUpdate,
+    path: nestedPath
+  }
 
   return {
-    get: state => get(state, nestedPath),
-    update: compose(update, nestPatch),
-    path: nestedPath
+    get: state => {
+      result.state = get(state, nestedPath)
+      return result
+    }
   }
 }
 
