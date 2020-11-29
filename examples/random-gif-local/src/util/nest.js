@@ -10,24 +10,15 @@ const set = (object = {}, [first, ...rest], value) => {
 
 const createNestPatch = path => patch => set({}, path, patch)
 
-export const nest = (path, local = { path: [] }) => {
-  const nestedPath = local.path.concat(path)
-
-  return {
-    get: state => get(state, nestedPath),
-    patch: createNestPatch(nestedPath),
-    path: nestedPath
-  }
-}
-
-export const Nest = update => (path, local = { path: [] }) => {
-  const nestedPath = local.path.concat(path)
+const nest = (update, path, Actions = () => null, parentPath = []) => {
+  const nestedPath = parentPath.concat(path)
   const nestPatch = createNestPatch(nestedPath)
   const nestUpdate = compose(update, nestPatch)
 
   const result = {
     update: nestUpdate,
-    path: nestedPath
+    actions: Actions(nestUpdate),
+    nest: path => nest(update, path, Actions, nestedPath)
   }
 
   return {
@@ -37,3 +28,5 @@ export const Nest = update => (path, local = { path: [] }) => {
     }
   }
 }
+
+export const Nest = update => (path, Actions) => nest(update, path, Actions)

@@ -20,20 +20,20 @@ const imgsrc = image =>
   })(image)
 
 export const RandomGif = {
-  view: ({ attrs: { state, local, actions } }) =>
+  view: ({ attrs: { local } }) =>
     m(
       "div.ba.b--green.pa2.mt2",
       m("span.mr2", "Tag:"),
       m("input[type=text]", {
-        value: local.get(state).tag,
-        onkeyup: evt => actions.editTag(local, evt.target.value)
+        value: local.state.tag,
+        onkeyup: evt => local.update({ tag: evt.target.value })
       }),
       m(
         "button.bg-blue" + buttonStyle,
-        { onclick: () => actions.newGif(local, state) },
+        { onclick: () => local.actions.newGif(local.state.tag) },
         "Random Gif"
       ),
-      m("button.bg-red" + buttonStyle, { onclick: () => actions.reset(local) }, "Reset"),
-      m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(local.get(state).image) }))
+      m("button.bg-red" + buttonStyle, { onclick: () => local.actions.reset() }, "Reset"),
+      m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(local.state.image) }))
     )
 }
