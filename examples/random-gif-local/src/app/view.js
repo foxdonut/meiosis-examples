@@ -1,10 +1,7 @@
 import m from "mithril"
 
-/*
-import { nest } from "../util/nest"
 import { Button } from "../button"
 import { Counter } from "../counter"
-*/
 import { RandomGif } from "../random-gif"
 import { RandomGifPair } from "../random-gif-pair"
 import { RandomGifPairPair } from "../random-gif-pair-pair"
@@ -16,12 +13,11 @@ export const App = {
   view: ({ attrs: { state, actions } }) =>
     m(
       "div",
-      /*
-      m(Counter, { state, local: nest("counter"), actions }),
+
+      m(Counter, { state: state.counter }),
 
       m("div.mt2", "Button:"),
-      m(Button, { state, local: nest("button"), actions }),
-      */
+      m(Button, { state: state.button, actions: actions.button }),
 
       m("div.mt2", "Random Gif:"),
       m(RandomGif, { state: state.randomGif1, actions: actions.randomGif1 }),
