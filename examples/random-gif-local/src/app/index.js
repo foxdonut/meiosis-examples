@@ -5,8 +5,8 @@ import { button } from "../button"
 import { counter } from "../counter"
 */
 import { randomGif } from "../random-gif"
-/*
 import { randomGifPair } from "../random-gif-pair"
+/*
 import { randomGifPairPair } from "../random-gif-pair-pair"
 import { randomGifList } from "../random-gif-list"
 */
@@ -19,9 +19,9 @@ export const app = {
     counter: counter.Initial({ label: "Counter:" }),
     */
     randomGif1: randomGif.initial,
-    randomGif2: randomGif.initial
-    /*,
-    randomGifPair: randomGifPair.initial,
+    randomGif2: randomGif.initial,
+    randomGifPair: randomGifPair.initial
+    /*
     randomGifPairPair: randomGifPairPair.initial,
     randomGifList: randomGifList.initial
     */
@@ -49,7 +49,8 @@ export const app = {
 
     return {
       randomGif1: RandomGifActions(nest(update, "randomGif1")),
-      randomGif2: RandomGifActions(nest(update, "randomGif2"))
+      randomGif2: RandomGifActions(nest(update, "randomGif2")),
+      randomGifPair: randomGifPair.Actions(nest(update, "randomGifPair"), RandomGifActions)
     }
   },
   services: []
