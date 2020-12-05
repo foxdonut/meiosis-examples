@@ -1,7 +1,9 @@
 import { initial } from "./initial"
+import { Actions } from "./actions"
 
 export const randomGifPairPair = {
-  initial
+  initial,
+  Actions
 }
 
 export { RandomGifPairPair } from "./view"

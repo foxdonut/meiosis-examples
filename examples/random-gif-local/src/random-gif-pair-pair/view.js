@@ -1,13 +1,12 @@
 import m from "mithril"
 
-import { nest } from "../util/nest"
 import { RandomGifPair } from "../random-gif-pair"
 
 export const RandomGifPairPair = {
-  view: ({ attrs: { state, local, actions } }) =>
+  view: ({ attrs: { state, actions } }) =>
     m(
       "div.ba.b--orange.pa2.mt2",
-      m(RandomGifPair, { state, local: nest("one", local), actions }),
-      m(RandomGifPair, { state, local: nest("two", local), actions })
+      m(RandomGifPair, { state: state.one, actions: actions.one }),
+      m(RandomGifPair, { state: state.two, actions: actions.two })
     )
 }
