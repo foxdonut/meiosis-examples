@@ -5,12 +5,12 @@ import { buttonStyle } from "../util/ui"
 import { hasGifs } from "./services"
 
 const RandomGifItem = {
-  view: ({ attrs: { state, actions, subId } }) =>
+  view: ({ attrs: { state, actions, randomGifId } }) =>
     m(
       "div.dib.mr2",
-      { key: subId },
-      m(RandomGif, { state: state[subId], actions: actions[subId] }),
-      m("button.bg-red" + buttonStyle, { onclick: () => actions.remove(subId) }, "Remove")
+      { key: randomGifId },
+      m(RandomGif, { state: state[randomGifId], actions: actions[randomGifId] }),
+      m("button.bg-red" + buttonStyle, { onclick: () => actions.remove(randomGifId) }, "Remove")
     )
 }
 
@@ -23,13 +23,13 @@ export const RandomGifList = {
       m(
         "button.bg-red" + buttonStyle,
         {
-          onclick: () => state.randomGifIds.map(subId => actions[subId].reset())
+          onclick: () => state.randomGifIds.map(randomGifId => actions[randomGifId].reset())
         },
         "Reset All"
       ),
       m(
         "div",
-        state.randomGifIds.map(subId => m(RandomGifItem, { state, actions, subId }))
+        state.randomGifIds.map(randomGifId => m(RandomGifItem, { state, actions, randomGifId }))
       )
     )
 }

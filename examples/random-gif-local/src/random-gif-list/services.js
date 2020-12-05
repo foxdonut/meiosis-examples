@@ -5,6 +5,6 @@ export const hasGifs = state =>
     R.equals("Y"),
     R.map(
       R.path(["image", "value", "value", "case"]),
-      R.map(subId => R.prop(subId, state), state.randomGifIds)
+      R.map(randomGifId => R.prop(randomGifId, state), state.randomGifIds)
     )
   )

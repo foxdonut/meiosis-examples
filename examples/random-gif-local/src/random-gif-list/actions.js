@@ -6,20 +6,20 @@ import { nest } from "../util/nest"
 
 export const Actions = RandomGifActions => update => ({
   add: function () {
-    const subId = uuid()
+    const randomGifId = uuid()
     const randomGifState = randomGif.initial
 
-    this[subId] = RandomGifActions(nest(update, subId))
+    this[randomGifId] = RandomGifActions(nest(update, randomGifId))
 
-    update({ randomGifIds: R.append(subId), [subId]: randomGifState })
+    update({ randomGifIds: R.append(randomGifId), [randomGifId]: randomGifState })
   },
 
-  remove: function (subId) {
-    delete this[subId]
+  remove: function (randomGifId) {
+    delete this[randomGifId]
 
     update({
-      randomGifIds: list => R.remove(list.indexOf(subId), 1, list),
-      [subId]: undefined
+      randomGifIds: list => R.remove(list.indexOf(randomGifId), 1, list),
+      [randomGifId]: undefined
     })
   }
 })
