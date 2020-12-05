@@ -5,7 +5,7 @@ import { nest } from "../util/nest"
 import { Button } from "../button"
 import { Counter } from "../counter"
 */
-import { randomGif, RandomGif } from "../random-gif"
+import { RandomGif } from "../random-gif"
 /*
 import { RandomGifPair } from "../random-gif-pair"
 import { RandomGifPairPair } from "../random-gif-pair-pair"
@@ -13,12 +13,8 @@ import { RandomGifList } from "../random-gif-list"
 */
 
 export const App = {
-  view: ({ attrs: { state, actions, nest } }) => {
-    const RandomGifActions = randomGif.Actions(actions)
-    const nestRandomGif1 = nest("randomGif1", RandomGifActions)
-    const nestRandomGif2 = nest("randomGif2", RandomGifActions)
-
-    return m(
+  view: ({ attrs: { state, actions } }) =>
+    m(
       "div",
       /*
       m(Counter, { state, local: nest("counter"), actions }),
@@ -28,10 +24,10 @@ export const App = {
       */
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { local: nestRandomGif1.get(state) }),
+      m(RandomGif, { state: state.randomGif1, actions: actions.randomGif1 }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { local: nestRandomGif2.get(state) }) //,
+      m(RandomGif, { state: state.randomGif2, actions: actions.randomGif2 }) //,
 
       /*
       m("div.mt2", "Random Gif Pair:"),
@@ -44,5 +40,4 @@ export const App = {
       m(RandomGifList, { state, local: nest("randomGifList"), actions })
       */
     )
-  }
 }

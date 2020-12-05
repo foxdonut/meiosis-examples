@@ -1,5 +1,5 @@
-/*
 import { nest } from "../util/nest"
+/*
 import { service } from "./service"
 import { button } from "../button"
 import { counter } from "../counter"
@@ -14,8 +14,6 @@ import { randomGifList } from "../random-gif-list"
 export const app = {
   // Note: using the same initial state multiple times only works with immutability.
   initial: {
-    events: {},
-    triggers: {},
     /*
     button: button.initial,
     counter: counter.Initial({ label: "Counter:" }),
@@ -39,7 +37,21 @@ export const app = {
 
   services: [service, counter.service, randomGifList.service(nest("randomGifList"))]
   */,
-  Actions: () => ({}),
+  Actions: update => {
+    const actions = {
+      newGifGenerated: () => {
+        // would use update here
+        console.log("new gif generated")
+      }
+    }
+
+    const RandomGifActions = randomGif.Actions(actions)
+
+    return {
+      randomGif1: RandomGifActions(nest(update, "randomGif1")),
+      randomGif2: RandomGifActions(nest(update, "randomGif2"))
+    }
+  },
   services: []
 }
 
