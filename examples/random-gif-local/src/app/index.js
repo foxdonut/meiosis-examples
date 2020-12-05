@@ -1,15 +1,10 @@
 import { nest } from "../util/nest"
-/*
-import { service } from "./service"
-*/
 import { button } from "../button"
 import { counter } from "../counter"
 import { randomGif } from "../random-gif"
 import { randomGifPair } from "../random-gif-pair"
 import { randomGifPairPair } from "../random-gif-pair-pair"
-/*
 import { randomGifList } from "../random-gif-list"
-*/
 
 export const app = {
   // Note: using the same initial state multiple times only works with immutability.
@@ -19,15 +14,11 @@ export const app = {
     randomGif1: randomGif.initial,
     randomGif2: randomGif.initial,
     randomGifPair: randomGifPair.initial,
-    randomGifPairPair: randomGifPairPair.initial
-    /*
+    randomGifPairPair: randomGifPairPair.initial,
     randomGifList: randomGifList.initial
-    */
-  } /* ,
-  services: [service, counter.service, randomGifList.service(nest("randomGifList"))]
-  */,
+  },
   Actions: (update, getState) => {
-    const actions = {
+    const rootActions = {
       newGifGenerated: () => {
         const state = getState()
         const increment = state.counter.value > 3 && state.button.active ? 2 : 1
@@ -35,16 +26,18 @@ export const app = {
       }
     }
 
-    const RandomGifActions = randomGif.Actions(actions)
+    const RandomGifActions = randomGif.Actions(rootActions)
     const RandomGifPairActions = randomGifPair.Actions(RandomGifActions)
     const RandomGifPairPairActions = randomGifPairPair.Actions(RandomGifPairActions)
+    const RandomGifListActions = randomGifList.Actions(RandomGifActions)
 
     return {
       button: button.Actions(nest(update, "button")),
       randomGif1: RandomGifActions(nest(update, "randomGif1")),
       randomGif2: RandomGifActions(nest(update, "randomGif2")),
       randomGifPair: RandomGifPairActions(nest(update, "randomGifPair")),
-      randomGifPairPair: RandomGifPairPairActions(nest(update, "randomGifPairPair"))
+      randomGifPairPair: RandomGifPairPairActions(nest(update, "randomGifPairPair")),
+      randomGifList: RandomGifListActions(nest(update, "randomGifList"))
     }
   },
   services: []
