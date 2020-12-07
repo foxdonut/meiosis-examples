@@ -71,7 +71,10 @@ export const Actions = update => ({
           Object.assign(
             {
               todos: todos => {
-                todos.splice(todos.findIndex(t => t.id === todo.id), 1)
+                todos.splice(
+                  todos.findIndex(t => t.id === todo.id),
+                  1
+                )
                 return todos
               }
             },

@@ -3,22 +3,20 @@
     <label class="checkbox-inline">
       <input
         type="checkbox"
-        checked={ props.conditions.precipitations }
-        onchange={ evt => props.actions.togglePrecipitations(props.local, evt.target.checked) }
+        checked={ props.state.precipitations }
+        onchange={ evt => props.update({ precipitations: evt.target.checked }) }
       />
       Precipitations
     </label>
     <div>
       <sky-option
-        value="SUNNY" label="Sunny" conditions={ props.conditions }
-        local={ props.local } actions={ props.actions }/>
+        value="SUNNY" label="Sunny" state={ props.state } update={ props.update }/>
 
       <sky-option
-        value="CLOUDY" label="Cloudy" conditions={ props.conditions }
-        local={ props.local } actions={ props.actions }/>
+        value="CLOUDY" label="Cloudy" state={ props.state } update={ props.update }/>
 
-      <sky-option value="MIX" label="Mix of sun and clouds" conditions={ props.conditions }
-        local={ props.local } actions={ props.actions }/>
+      <sky-option
+        value="MIX" label="Mix of sun and clouds" state={ props.state } update={ props.update }/>
     </div>
   </div>
 

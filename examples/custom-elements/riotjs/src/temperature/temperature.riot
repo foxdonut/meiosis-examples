@@ -1,42 +1,28 @@
 <temp-el>
   <div>
     <div style="margin-top: 0.8rem">
-      Temperature: { props.local.state.value }<sup>o</sup>{ props.local.state.units }
+      Temperature: { props.state.value }<sup>o</sup>{ props.state.units }
     </div>
     <div style="margin-top: 0.8rem">
       <button
         class="btn btn-primary"
-        onclick={ () => props.local.update({ value: props.local.state.value + 1 }) }
+        onclick={ () => props.actions.increment(1) }
         style="margin-right: 0.4rem"
       >
         Increment
       </button>
       <button
         class="btn btn-primary"
-        onclick={ () => props.local.update({ value: props.local.state.value - 1 }) }
+        onclick={ () => props.actions.increment(-1) }
         style="margin-right: 0.4rem"
       >
         Decrement
       </button>
       <button
         class="btn btn-default"
-        onclick={ () => props.local.update(changeUnits(props.local.state)) }>
+        onclick={ () => props.actions.changeUnits() }>
         Change Units
       </button>
     </div>
   </div>
-  <script>
-    export default {
-      changeUnits(state) {
-        if (state.units === "C") {
-          state.units = "F"
-          state.value = Math.round((state.value * 9) / 5 + 32)
-        } else {
-          state.units = "C"
-          state.value = Math.round(((state.value - 32) / 9) * 5)
-        }
-        return state
-      }
-    }
-  </script>
 </temp-el>

@@ -4,8 +4,8 @@
       type="radio"
       name="conditions"
       value={ props.value }
-      checked={ props.conditions.sky === props.value }
-      onchange={ evt => props.actions.changeSky(props.local, evt.target.value) }
+      checked={ props.state.sky === props.value }
+      onchange={ evt => props.update({ sky: evt.target.value }) }
     />
     { props.label }
   </label>

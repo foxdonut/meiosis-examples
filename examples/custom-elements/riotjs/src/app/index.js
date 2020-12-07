@@ -1,22 +1,18 @@
 import { conditions } from "../conditions"
-// import { dateTime } from "../dateTime"
+import { dateTime } from "../dateTime"
 import { temperature } from "../temperature"
+import { nest } from "../util"
 
 export const app = {
   Initial: () => ({
-    // dateTime: dateTime.Initial(),
+    dateTime: dateTime.Initial(),
     conditions: conditions.Initial(),
-    temperature: {
-      air: temperature.Initial(),
-      water: temperature.Initial()
-    }
+    airTemp: temperature.Initial(),
+    waterTemp: temperature.Initial()
   }),
 
-  Actions: update =>
-    Object.assign(
-      {},
-      conditions.Actions(update),
-      // dateTime.Actions(update),
-      temperature.Actions(update)
-    )
+  Actions: update => ({
+    airTemp: temperature.Actions(nest(update, "airTemp")),
+    waterTemp: temperature.Actions(nest(update, "waterTemp"))
+  })
 }

@@ -1,5 +1,5 @@
 import { Initial } from "./initial"
 
-export const conditions = {
+export const dateTime = {
   Initial
 }
