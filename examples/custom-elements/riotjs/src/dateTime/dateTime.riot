@@ -5,8 +5,8 @@
       <input
         type="date"
         class="form-control"
-        value={ props.state.date }
-        oninput={ evt => props.update({ date: evt.target.value }) }
+        value={ state.date }
+        oninput={ evt => update({ date: evt.target.value }) }
       />
     </div>
     <div class="form-group">
@@ -14,8 +14,8 @@
       <input
         type="text"
         class="form-control"
-        value={ props.state.hour }
-        oninput={ evt => props.update({ hour: evt.target.value }) }
+        value={ state.hour }
+        oninput={ evt => update({ hour: evt.target.value }) }
       />
     </div>
     <div class="form-group">
@@ -23,9 +23,29 @@
       <input
         type="text"
         class="form-control"
-        value={ props.state.minute }
-        oninput={ evt => props.update({ minute: evt.target.value }) }
+        value={ state.minute }
+        oninput={ evt => update({ minute: evt.target.value }) }
       />
     </div>
+    <div>
+      <button class="btn btn-primary" onclick={ save }>Save</button>
+    </div>
   </div>
+
+  <script>
+    export default {
+      onBeforeMount(props) {
+        this.state = {
+          date: props.state.date,
+          hour: props.state.hour,
+          minute: props.state.minute
+        }
+      },
+
+      save() {
+        this.props.actions.saveDateTime(
+          `${this.state.date} ${this.state.hour}:${this.state.minute}`)
+      }
+    }
+  </script>
 </date-time>

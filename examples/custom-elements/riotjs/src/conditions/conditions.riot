@@ -9,23 +9,29 @@
       Precipitations
     </label>
     <div>
-      <sky-option
-        value="SUNNY" label="Sunny" state={ props.state } update={ props.update }/>
-
-      <sky-option
-        value="CLOUDY" label="Cloudy" state={ props.state } update={ props.update }/>
-
-      <sky-option
-        value="MIX" label="Mix of sun and clouds" state={ props.state } update={ props.update }/>
+      <template each={skyOption in skyOptions}>
+        <label class="radio-inline">
+          <input
+            type="radio"
+            name="conditions"
+            value={ skyOption.value }
+            checked={ props.state.sky === skyOption.value }
+            onchange={ evt => props.update({ sky: evt.target.value }) }
+          />
+          { skyOption.label }
+        </label>
+      </template>
     </div>
   </div>
 
   <script>
-    import SkyOption from "./skyOption.riot"
-
     export default {
-      components: {
-        SkyOption
+      onBeforeMount() {
+        this.skyOptions = [
+          { value: "SUNNY", label: "Sunny" },
+          { value: "CLOUDY", label: "Cloudy" },
+          { value: "MIX", label: "Mix of sun and clouds" }
+        ]
       }
     }
   </script>

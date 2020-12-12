@@ -13,6 +13,7 @@ export const app = {
 
   Actions: update => ({
     airTemp: temperature.Actions(nest(update, "airTemp")),
-    waterTemp: temperature.Actions(nest(update, "waterTemp"))
+    waterTemp: temperature.Actions(nest(update, "waterTemp")),
+    saveDateTime: dateTimeString => update({ dateTimeString })
   })
 }

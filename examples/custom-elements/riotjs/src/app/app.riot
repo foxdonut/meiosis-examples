@@ -1,7 +1,11 @@
 <app-el>
   <div class="row">
     <div class="col-md-4">
-      <date-time state={ state.dateTime } update={ nest(props.update, "dateTime") }/>
+      <date-time
+        state={ state.dateTime }
+        update={ nest(props.update, "dateTime") }
+        actions={ props.actions }/>
+      <div>Date/time: { state.dateTimeString }</div>
     </div>
     <div class="col-md-4">
       <sky-conditions state={ state.conditions } update={ nest(props.update, "conditions") }/>
