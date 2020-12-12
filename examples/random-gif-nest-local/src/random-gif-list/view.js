@@ -3,6 +3,7 @@ import m from "mithril"
 import { RandomGif } from "../random-gif"
 import { nest } from "../util/nest"
 import { buttonStyle } from "../util/ui"
+import { hasGifs } from "./util"
 
 const RandomGifItem = {
   view: ({ attrs: { state, local, actions, subId } }) =>
@@ -18,7 +19,7 @@ export const RandomGifList = {
   view: ({ attrs: { state, local, actions } }) =>
     m(
       "div.ba.b--blue.pa2.mt2",
-      m("div", "Has gifs: ", local.get(state).hasGifs ? "Yes" : "No"),
+      m("div", "Has gifs: ", hasGifs(local.get(state)) ? "Yes" : "No"),
       m("button.bg-green" + buttonStyle, { onclick: () => actions.add(local) }, "Add"),
       m(
         "button.bg-red" + buttonStyle,

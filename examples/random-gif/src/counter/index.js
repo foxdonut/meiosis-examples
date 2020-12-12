@@ -1,9 +1,7 @@
 import { Initial } from "./initial"
-import { service } from "./service"
 
 export const counter = {
-  Initial,
-  service
+  Initial
 }
 
 export { Counter } from "./view"

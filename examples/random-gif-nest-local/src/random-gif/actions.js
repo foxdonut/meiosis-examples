@@ -9,19 +9,15 @@ const api_key = "HMUbJEROIPi2Dodeq0thL28emz5CMCRX"
 export const Actions = update => ({
   editTag: (local, tag) => update(local.patch({ tag })),
 
-  newGif: (local, state) => {
+  newGif: function (local, state) {
+    const self = this
+
     update(local.patch({ image: Loaded.N() }))
 
     m.request({ url: gif_new_url, params: { api_key, tag: local.get(state).tag } })
       .then(response => {
-        update([
-          local.patch({ image: Loaded.Y(Success.Y(Image.Y(response.data.image_url))) }),
-          {
-            events: {
-              newGifGenerated: true
-            }
-          }
-        ])
+        update(local.patch({ image: Loaded.Y(Success.Y(Image.Y(response.data.image_url))) }))
+        self.newGifGenerated()
       })
       .catch(() => update(local.patch({ image: Loaded.Y(Success.N()) })))
   },

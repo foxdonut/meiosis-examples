@@ -9,7 +9,9 @@ const api_key = "HMUbJEROIPi2Dodeq0thL28emz5CMCRX"
 export const Actions = update => ({
   editTag: (id, tag) => update({ [id]: { tag } }),
 
-  newGif: (id, state) => {
+  newGif: function (id, state) {
+    const self = this
+
     update({ [id]: { image: Loaded.N() } })
 
     m.request({ url: gif_new_url, params: { api_key, tag: state[id].tag } })
@@ -17,11 +19,9 @@ export const Actions = update => ({
         update({
           [id]: {
             image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
-          },
-          events: {
-            newGifGenerated: true
           }
         })
+        self.newGifGenerated()
       })
       .catch(() => update({ [id]: { image: Loaded.Y(Success.N()) } }))
   },

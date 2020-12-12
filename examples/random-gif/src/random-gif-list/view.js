@@ -2,6 +2,7 @@ import m from "mithril"
 
 import { RandomGif } from "../random-gif"
 import { buttonStyle } from "../util/ui"
+import { hasGifs } from "./util"
 
 const RandomGifItem = {
   view: ({ attrs: { state, id, actions, subId } }) =>
@@ -17,7 +18,7 @@ export const RandomGifList = {
   view: ({ attrs: { state, id, actions } }) =>
     m(
       "div.ba.b--blue.pa2.mt2",
-      m("div", "Has gifs: ", state[id].hasGifs ? "Yes" : "No"),
+      m("div", "Has gifs: ", hasGifs(state[id]) ? "Yes" : "No"),
       m("button.bg-green" + buttonStyle, { onclick: () => actions.add(id) }, "Add"),
       m(
         "button.bg-red" + buttonStyle,

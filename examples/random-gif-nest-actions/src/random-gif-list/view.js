@@ -2,7 +2,7 @@ import m from "mithril"
 
 import { RandomGif } from "../random-gif"
 import { buttonStyle } from "../util/ui"
-import { hasGifs } from "./services"
+import { hasGifs } from "./util"
 
 const RandomGifItem = {
   view: ({ attrs: { state, actions, randomGifId } }) =>

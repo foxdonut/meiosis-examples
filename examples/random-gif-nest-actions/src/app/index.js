@@ -39,8 +39,7 @@ export const app = {
       randomGifPairPair: RandomGifPairPairActions(nest(update, "randomGifPairPair")),
       randomGifList: RandomGifListActions(nest(update, "randomGifList"))
     }
-  },
-  services: []
+  }
 }
 
 export { App } from "./view"
