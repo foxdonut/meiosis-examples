@@ -1,5 +1,6 @@
 import { html } from "lit-html"
 import { classMap } from "lit-html/directives/class-map"
+import { allCompleted, filteredTodoIds } from "../root/util"
 
 const getTodoClassMap = (state, todo) => ({
   completed: todo.completed,
@@ -40,12 +41,12 @@ const todoItem = ({ state, actions, todoId }) => {
 export const main = {
   view: ({ state, actions }) => html`
     <section class="main">
-      <input class="toggle-all" type="checkbox" .checked=${state.allCompleted} />
-      <label for="toggle-all" @click=${() => actions.toggleAllTodos(!state.allCompleted)}>
+      <input class="toggle-all" type="checkbox" .checked=${allCompleted(state)} />
+      <label for="toggle-all" @click=${() => actions.toggleAllTodos(!allCompleted(state))}>
         Mark all as complete
       </label>
       <ul class="todo-list">
-        ${state.filteredTodoIds.map(todoId => todoItem({ state, actions, todoId }))}
+        ${filteredTodoIds(state).map(todoId => todoItem({ state, actions, todoId }))}
       </ul>
     </section>
   `

@@ -19,5 +19,5 @@ export const createApp = () =>
     ),
     Actions: root.Actions,
     view: root.view,
-    services: [router.service, root.service]
+    Effects: () => [router.Effect()]
   }))

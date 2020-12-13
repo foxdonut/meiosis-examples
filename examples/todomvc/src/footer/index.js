@@ -1,5 +1,6 @@
 import { html } from "lit-html"
 import { classMap } from "lit-html/directives/class-map"
+import { clearCompletedVisible, itemsLeftText } from "../root/util"
 
 const clearCompleted = actions => html`
   <button class="clear-completed" @click=${() => actions.clearCompleted()}>
@@ -10,7 +11,7 @@ const clearCompleted = actions => html`
 export const footer = {
   view: ({ state, actions }) => html`
     <footer class="footer">
-      <span class="todo-count">${state.itemsLeftText}</span>
+      <span class="todo-count">${itemsLeftText(state)}</span>
       <ul class="filters">
         <li><a href="#/" class=${classMap({ selected: state.filterBy === "all" })}>All</a></li>
         <li>
@@ -23,7 +24,7 @@ export const footer = {
         </li>
       </ul>
 
-      ${state.clearCompletedVisible ? clearCompleted(actions) : null}
+      ${clearCompletedVisible(state) ? clearCompleted(actions) : null}
     </footer>
   `
 }
