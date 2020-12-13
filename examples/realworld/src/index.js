@@ -1,4 +1,4 @@
-import stream from "mithril/stream"
+import stream from "meiosis-setup/simple-stream"
 import merge from "mergerino"
 
 import { meiosis } from "./meiosis"

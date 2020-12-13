@@ -49,9 +49,3 @@ export const router = createRouter(routeConfig)
 
 export const toRoutePatch = route => ({ route: () => route, routeChanged: true })
 export const routeTo = compose(toRoutePatch, router.toRoute)
-
-export const routerService = state => {
-  if (state.routeChanged) {
-    return { routeChanged: false }
-  }
-}

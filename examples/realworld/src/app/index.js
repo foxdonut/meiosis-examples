@@ -9,7 +9,7 @@ import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
-import { router, routerService } from "../router"
+import { router } from "../router"
 import { locationBar } from "../locationBar"
 import { selectors } from "../state"
 
@@ -29,15 +29,7 @@ export const createApp = () =>
         profile.Actions(update)
       ),
 
-    services: [
-      settings.service,
-      register.service,
-      login.service,
-      home.service,
-      profile.service,
-      article.service,
-      routerService
-    ],
+    services: [settings.service, register.service, login.service, profile.service, article.service],
 
     Effects: update => [
       home.Effect(update),

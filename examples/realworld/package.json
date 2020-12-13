@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack",
-    "watch": "webpack --progress --colors --watch",
+    "watch": "webpack --progress --watch",
     "reload": "reload -w build -p ${PORT:-3000}",
     "server": "static-server -p ${PORT:-3000}"
   },
@@ -28,27 +28,28 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "dompurify": "^2.0.12",
+    "dompurify": "^2.2.3",
     "feather-route-matcher": "^4.0.0",
-    "marked": "^1.1.1",
+    "marked": "^1.2.6",
+    "meiosis-setup": "^5.1.2",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",
-    "preact": "^10.4.7",
-    "query-string": "^6.13.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "preact": "^10.5.7",
+    "query-string": "^6.13.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "seview": "^1.0.1",
     "tinyfunk": "^1.7.3",
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.11.0",
-    "babel-loader": "^8.1.0",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-loader": "^8.2.2",
     "meiosis-tracer": "^4.0.0",
-    "reload": "^3.1.0",
+    "reload": "^3.1.1",
     "static-server": "^2.2.1",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
   }
 }
