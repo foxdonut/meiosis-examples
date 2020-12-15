@@ -72,10 +72,7 @@ export const Settings = ({ state, actions }) => {
               [
                 "button.btn.btn-lg.btn-primary.pull-xs-right",
                 {
-                  onClick: compose(
-                    () => actions.updateSettings(state.settings),
-                    preventDefault
-                  )
+                  onClick: compose(() => actions.updateSettings(state.settings), preventDefault)
                 },
                 "Update Settings"
               ]
@@ -85,10 +82,7 @@ export const Settings = ({ state, actions }) => {
           [
             "button.btn.btn-outline-danger",
             {
-              onClick: compose(
-                () => actions.logout(),
-                preventDefault
-              )
+              onClick: compose(() => actions.logout(), preventDefault)
             },
             "Or click here to logout."
           ]

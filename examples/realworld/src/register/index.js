@@ -1,6 +1,6 @@
+import { Effect } from "./effect"
 import { Route } from "../router"
 import { credentials, Credentials } from "../credentials"
-import { service } from "./service"
 
 const options = {
   method: "register",
@@ -10,6 +10,6 @@ const options = {
   showUsername: true
 }
 
-export const register = Object.assign({ service }, credentials(options))
+export const register = { Effect, ...credentials(options) }
 
 export const Register = Credentials(options)

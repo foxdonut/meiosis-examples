@@ -29,12 +29,13 @@ export const createApp = () =>
         profile.Actions(update)
       ),
 
-    services: [settings.service, register.service, login.service, profile.service, article.service],
-
     Effects: update => [
       home.Effect(update),
+      register.Effect(update),
+      login.Effect(update),
       profile.Effect(update),
       article.Effect(update),
+      settings.Effect(update),
       locationBar.Effect(router, selectors)
     ],
 

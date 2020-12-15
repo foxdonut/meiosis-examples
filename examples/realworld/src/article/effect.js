@@ -3,10 +3,29 @@ import { loadArticleAndComments } from "../services"
 import { selectors } from "../state"
 
 export const Effect = update => state => {
-  if ([Route.ArticleDetail, Route.ArticleEdit].includes(selectors.page(state)) && state.loading) {
-    const { slug } = selectors.params(state)
-    loadArticleAndComments({ slug }).then(data =>
-      update([data, { article: { tags: (data.article.tagList || []).join(", ") }, loading: false }])
-    )
+  if (selectors.page(state) === Route.ArticleCreate && state.routeChanged) {
+    update({
+      routeChanged: false,
+      article: {
+        title: "",
+        description: "",
+        body: "",
+        tags: "",
+        tagList: [],
+        validationErrors: []
+      }
+    })
+  } else if ([Route.ArticleDetail, Route.ArticleEdit].includes(selectors.page(state))) {
+    if (state.routeChanged) {
+      update({ routeChanged: false, loading: true })
+    } else if (state.loading) {
+      const { slug } = selectors.params(state)
+      loadArticleAndComments({ slug }).then(data =>
+        update([
+          data,
+          { article: { tags: (data.article.tagList || []).join(", ") }, loading: false }
+        ])
+      )
+    }
   }
 }

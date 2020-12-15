@@ -4,18 +4,16 @@ import { selectors } from "../state"
 
 const fields = ["email", "username", "image", "bio"]
 
-export const service = state => {
+export const Effect = update => state => {
   if (selectors.page(state) === Route.Settings) {
     if (!state.user) {
-      return routeTo(Route.Home)
-    }
-
-    if (!state.settings) {
+      update(routeTo(Route.Home))
+    } else if (state.routeChanged) {
       const settings = fields.reduce(
         (result, field) => assoc(field, defaultTo("", state.user[field]), result),
         {}
       )
-      return { settings }
+      update({ routeChanged: false, settings })
     }
   }
 }

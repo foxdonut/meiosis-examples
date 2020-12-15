@@ -1,6 +1,6 @@
+import { Effect } from "./effect"
 import { Route } from "../router"
 import { credentials, Credentials } from "../credentials"
-import { service } from "./service"
 
 const options = {
   method: "login",
@@ -10,6 +10,6 @@ const options = {
   showUsername: false
 }
 
-export const login = Object.assign({ service }, credentials(options))
+export const login = { Effect, ...credentials(options) }
 
 export const Login = Credentials(options)

@@ -4,8 +4,11 @@ import { router } from "../router"
 export const Initial = () => {
   const initial = {
     articles: [],
+    login: {},
+    register: {},
     route: router.initialRoute,
-    routeChanged: true
+    routeChanged: true,
+    settings: {}
   }
 
   return credentialsApi
