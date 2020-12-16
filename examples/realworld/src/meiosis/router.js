@@ -44,6 +44,8 @@ export const createRouter = routeConfig => {
     return result + getQueryString(queryParams)
   }
 
+  const toRoute = (page, params = {}) => ({ value: page, params })
+
   const matcher = createRouteMatcher(routeConfig)
 
   const routeMatcher = path => {
@@ -68,5 +70,5 @@ export const createRouter = routeConfig => {
     }
   }
 
-  return { initialRoute, toUrl, start, syncLocationBar }
+  return { initialRoute, toUrl, toRoute, start, syncLocationBar }
 }
