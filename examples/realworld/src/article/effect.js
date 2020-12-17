@@ -15,17 +15,16 @@ export const Effect = update => state => {
         validationErrors: []
       }
     })
-  } else if ([Route.ArticleDetail, Route.ArticleEdit].includes(selectors.page(state))) {
-    if (state.routeChanged) {
-      update({ routeChanged: false, loading: true })
-    } else if (state.loading) {
-      const { slug } = selectors.params(state)
-      loadArticleAndComments({ slug }).then(data =>
-        update([
-          data,
-          { article: { tags: (data.article.tagList || []).join(", ") }, loading: false }
-        ])
-      )
-    }
+  } else if (
+    [Route.ArticleDetail, Route.ArticleEdit].includes(selectors.page(state)) &&
+    state.routeChanged
+  ) {
+    const { slug } = selectors.params(state)
+    loadArticleAndComments({ slug }).then(data =>
+      update([
+        data,
+        { article: { tags: (data.article.tagList || []).join(", ") }, routeChanged: false }
+      ])
+    )
   }
 }

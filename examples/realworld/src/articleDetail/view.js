@@ -78,11 +78,10 @@ const articleMeta = (state, actions, article, username) => [
 export const ArticleDetail = ({ state, actions }) => {
   const article = state.article
   const username = get(state, ["user", "username"])
-  const loading = state.loading || !article
 
   return [
     ".article-page",
-    !loading && [
+    !state.routeChanged && [
       ".banner",
       [".container", ["h1", article.title], articleMeta(state, actions, article, username)]
     ],
@@ -92,7 +91,7 @@ export const ArticleDetail = ({ state, actions }) => {
         ".row.article-content",
         [
           ".col-md-12",
-          loading
+          state.routeChanged
             ? "Loading..."
             : [
                 ["h2", article.description],
@@ -108,7 +107,7 @@ export const ArticleDetail = ({ state, actions }) => {
               ]
         ]
       ],
-      !loading && [
+      !state.routeChanged && [
         ["hr"],
         [".article-actions", articleMeta(state, actions, article, username)],
         [

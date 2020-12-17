@@ -5,17 +5,13 @@ import { getArticlesFilter } from "../util/filter"
 import { selectors } from "../state"
 
 export const Effect = update => state => {
-  if (selectors.page(state) === Route.Home) {
-    if (state.routeChanged) {
-      update({ loading: true, routeChanged: false })
-    } else if (state.loading) {
-      const filter = getArticlesFilter(state)
+  if (selectors.page(state) === Route.Home && state.routeChanged) {
+    const filter = getArticlesFilter(state)
 
-      selectors.params(state).feed
-        ? articlesApi
-            .getFeed(pick(["limit", "offset"], filter))
-            .then(data => update([data, { loading: false }]))
-        : loadArticlesAndTags(filter).then(data => update([data, { loading: false }]))
-    }
+    selectors.params(state).feed
+      ? articlesApi
+          .getFeed(pick(["limit", "offset"], filter))
+          .then(data => update([data, { routeChanged: false }]))
+      : loadArticlesAndTags(filter).then(data => update([data, { routeChanged: false }]))
   }
 }

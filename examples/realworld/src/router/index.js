@@ -1,5 +1,4 @@
 import { createRouter } from "../meiosis/router"
-import { compose } from "../util/fp"
 
 export const Route = {
   Home: "Home",
@@ -48,4 +47,4 @@ See https://meiosis.js.org/router for details.
 export const router = createRouter(routeConfig)
 
 export const toRoutePatch = route => ({ route: () => route, routeChanged: true })
-export const routeTo = compose(toRoutePatch, router.toRoute)
+export const routeTo = (page, params = {}) => toRoutePatch(router.toRoute(page, params))

@@ -3,7 +3,7 @@ import { defaultImage } from "../util/view"
 import { Pager } from "../pager"
 
 export const ArticleList = ({ state, actions }) => [
-  state.loading
+  state.routeChanged
     ? [".article-preview", "Loading articles..."]
     : state.articles.map(article => {
         const username = article.author.username
