@@ -15,7 +15,7 @@ createApp().then(app => {
   const { states, update, actions } = meiosis({ stream, merge, app })
 
   router.start(compose(update, toRoutePatch))
-  states.map(state => router.syncLocationBar(selectors.route(state)))
+  states.map(compose(router.syncLocationBar, selectors.route))
 
   // Only for development, to use the Meiosis Tracer as a Chrome extension.
   meiosisTracer({ streams: [{ stream: states, label: "states" }] })
