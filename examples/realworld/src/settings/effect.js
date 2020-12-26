@@ -1,6 +1,6 @@
 import { assoc, defaultTo } from "../util/fp"
 import { Route, routeTo } from "../router"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 const fields = ["email", "username", "image", "bio"]
 

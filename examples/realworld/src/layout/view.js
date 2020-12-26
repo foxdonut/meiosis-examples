@@ -1,6 +1,6 @@
 import { Route, router } from "../router"
 import { get } from "../util/fp"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 const Header = ({ state }) => {
   const active = pageId => ({ className: { active: selectors.page(state) === pageId } })

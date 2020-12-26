@@ -1,5 +1,5 @@
 export const selectors = {
-  route: state => state.route,
+  route: state => state.route || {},
   page: state => selectors.route(state).value,
   params: state => selectors.route(state).params,
   toRoute: (page, params = {}, options = {}) => ({

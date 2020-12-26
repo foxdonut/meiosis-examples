@@ -1,6 +1,6 @@
 import { Route } from "../router"
 import { loadArticleAndComments } from "../services"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 export const Effect = update => state => {
   if (selectors.page(state) === Route.ArticleCreate && state.routeChanged) {

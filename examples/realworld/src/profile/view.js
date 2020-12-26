@@ -2,7 +2,7 @@ import { get } from "../util/fp"
 import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
 import { ArticleList } from "../articleList"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 export const Profile = ({ state, actions }) => {
   const username = get(state, ["profile", "username"])

@@ -1,7 +1,7 @@
 import { Route } from "../router"
 import { getArticlesFilter } from "../util/filter"
 import { articlesApi, profileApi } from "../services"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 const loadProfileAndArticles = ({ state, update, username, author, favorited }) => {
   const filter = getArticlesFilter(state)

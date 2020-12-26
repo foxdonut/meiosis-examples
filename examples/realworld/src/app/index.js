@@ -9,9 +9,6 @@ import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
-import { router } from "../router"
-import { locationBar } from "../locationBar"
-import { selectors } from "../state"
 
 export const createApp = () =>
   Initial().then(initial => ({
@@ -35,8 +32,7 @@ export const createApp = () =>
       login.Effect(update),
       profile.Effect(update),
       article.Effect(update),
-      settings.Effect(update),
-      locationBar.Effect(router, selectors)
+      settings.Effect(update)
     ],
 
     view: Root

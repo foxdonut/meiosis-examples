@@ -1,7 +1,7 @@
 import { articlesApi, loadArticleAndComments, loadArticlesAndTags } from "../services"
 import { Route, routeTo } from "../router"
 import { getArticlesFilter } from "../util/filter"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 const refresh = (state, slug) =>
   selectors.page(state) === Route.ArticleDetail

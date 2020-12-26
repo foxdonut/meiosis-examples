@@ -6,7 +6,7 @@ import { ArticleDetail } from "../articleDetail"
 import { ArticleEdit } from "../articleEdit"
 import { Settings } from "../settings"
 import { Profile } from "../profile"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 const componentMap = {
   Home,

@@ -2,7 +2,7 @@
 /* See https://meiosis.js.org/router for details. */
 import createRouteMatcher from "feather-route-matcher"
 import queryString from "query-string"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 export const createRouter = routeConfig => {
   const prefix = "#!"
@@ -26,7 +26,7 @@ export const createRouter = routeConfig => {
   )
 
   const toUrl = (page, params = {}) => {
-    const path = prefix + pathLookup[page]
+    const path = prefix + (pathLookup[page] || "/")
     const pathParams = []
 
     const result = (path.match(/(:[^/]*)/g) || []).reduce((result, pathParam) => {
@@ -55,9 +55,8 @@ export const createRouter = routeConfig => {
     return Object.assign(match, { params: Object.assign(match.params, queryParams) })
   }
 
-  const initialRoute = routeMatcher(getPath())
-
   const start = onRouteChange => {
+    onRouteChange(routeMatcher(getPath()))
     window.onpopstate = () => onRouteChange(routeMatcher(getPath()))
   }
 
@@ -70,5 +69,5 @@ export const createRouter = routeConfig => {
     }
   }
 
-  return { initialRoute, toUrl, toRoute, start, syncLocationBar }
+  return { toUrl, toRoute, start, syncLocationBar }
 }

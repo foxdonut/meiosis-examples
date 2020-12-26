@@ -1,7 +1,7 @@
 import { articlesApi, loadArticleAndComments, profileApi } from "../services"
 import { prepend } from "../util/fp"
 import { Route, routeTo } from "../router"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 export const Actions = update => ({
   updateCommentField: comment => update({ comment }),

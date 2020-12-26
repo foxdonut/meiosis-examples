@@ -1,7 +1,7 @@
 import { range } from "../util/fp"
 import { getArticlesFilter } from "../util/filter"
 import { router } from "../router"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 export const Pager = ({ state }) => {
   const filter = getArticlesFilter(state)

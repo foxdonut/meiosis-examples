@@ -1,5 +1,5 @@
 import { assoc } from "../util/fp"
-import { selectors } from "../state"
+import { selectors } from "../selectors"
 
 export const getArticlesFilter = state => {
   const filter = ["feed", "offset", "tag"].reduce(
