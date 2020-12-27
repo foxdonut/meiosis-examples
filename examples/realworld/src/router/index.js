@@ -1,4 +1,7 @@
-import { createRouter } from "../meiosis/router"
+import { createProgrammaticUrlRouter } from "meiosis-router-setup"
+import createRouteMatcher from "feather-route-matcher"
+import queryString from "query-string"
+import { selectors } from "../selectors"
 
 export const Route = {
   Home: "Home",
@@ -24,27 +27,19 @@ const routeConfig = {
   "/profile/:username/favorites": Route.ProfileFavorites
 }
 
-/*
-Instead of meiosis/router.js,
-you can also npm install meiosis-router-setup and use it as shown below:
+const routeMatcher = createRouteMatcher(routeConfig)
+const convertMatchToRoute = ({ match, queryParams }) => ({
+  page: match.value,
+  params: match.params,
+  queryParams
+})
 
-import createRouteMatcher from "feather-route-matcher";
-import { createRouter } from "meiosis-router-setup";
-import queryString from "query-string";
-import { selectors } from "../selectors";
-
-const routeMatcher = createRouteMatcher(routeConfig);
-
-export const router = createRouter({
+export const router = createProgrammaticUrlRouter({
   routeMatcher,
+  convertMatchToRoute,
   routeConfig,
-  fromRoute: selectors.fromRoute,
   queryString
-});
-
-See https://meiosis.js.org/router for details.
-*/
-export const router = createRouter(routeConfig)
+})
 
 export const toRoutePatch = route => ({ route: () => route, routeChanged: true })
-export const routeTo = (page, params = {}) => toRoutePatch(router.toRoute(page, params))
+export const routeTo = (page, params = {}) => toRoutePatch(selectors.toRoute(page, params))
