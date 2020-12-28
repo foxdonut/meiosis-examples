@@ -1,4 +1,4 @@
-import { createProgrammaticUrlRouter } from "meiosis-router-setup"
+import { createRouter } from "meiosis-router-setup"
 import createRouteMatcher from "feather-route-matcher"
 import queryString from "query-string"
 import { selectors } from "../selectors"
@@ -34,7 +34,7 @@ const convertMatchToRoute = ({ match, queryParams }) => ({
   queryParams
 })
 
-export const router = createProgrammaticUrlRouter({
+export const router = createRouter({
   routeMatcher,
   convertMatchToRoute,
   routeConfig,
