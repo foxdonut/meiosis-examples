@@ -28,9 +28,9 @@ const routeConfig = {
 }
 
 const routeMatcher = createRouteMatcher(routeConfig)
-const convertMatchToRoute = ({ match, queryParams }) => ({
-  page: match.value,
-  params: match.params,
+const convertMatchToRoute = ({ value, params, queryParams }) => ({
+  page: value,
+  params,
   queryParams
 })
 
