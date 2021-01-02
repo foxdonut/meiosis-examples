@@ -10,6 +10,9 @@ const options = {
   showUsername: true
 }
 
-export const register = { Effect, ...credentials(options) }
+export const register = {
+  RouteChange: { [Route.Register]: Effect },
+  ...credentials(options)
+}
 
 export const Register = Credentials(options)

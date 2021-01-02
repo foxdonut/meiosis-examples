@@ -10,6 +10,9 @@ const options = {
   showUsername: false
 }
 
-export const login = { Effect, ...credentials(options) }
+export const login = {
+  RouteChange: { [Route.Login]: Effect },
+  ...credentials(options)
+}
 
 export const Login = Credentials(options)

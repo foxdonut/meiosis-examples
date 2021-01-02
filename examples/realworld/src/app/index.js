@@ -9,6 +9,26 @@ import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
+import { selectors } from "../selectors"
+
+const RouteChangeEffect = (update, effectMap) => {
+  const routeChangeUpdate = patch => update([patch, { routeChanged: false }])
+
+  const pageMap = Object.keys(effectMap).reduce(
+    (result, key) => ({ ...result, [key]: effectMap[key](routeChangeUpdate) }),
+    {}
+  )
+
+  return state => {
+    if (state.routeChanged) {
+      const effect = pageMap[selectors.page(state)]
+
+      if (effect) {
+        effect(state)
+      }
+    }
+  }
+}
 
 export const createApp = () =>
   Initial().then(initial => ({
@@ -27,11 +47,17 @@ export const createApp = () =>
       ),
 
     Effects: update => [
-      home.Effect(update),
-      register.Effect(update),
-      login.Effect(update),
-      profile.Effect(update),
-      article.Effect(update),
+      RouteChangeEffect(
+        update,
+        Object.assign(
+          {},
+          home.RouteChange,
+          register.RouteChange,
+          login.RouteChange,
+          article.RouteChange,
+          profile.RouteChange
+        )
+      ),
       settings.Effect(update)
     ],
 

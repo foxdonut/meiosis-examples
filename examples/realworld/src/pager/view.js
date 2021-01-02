@@ -10,6 +10,7 @@ export const Pager = ({ state }) => {
   const from = filter.offset + 1
   const to = Math.min(from + filter.limit - 1, state.articlesCount)
   const params = selectors.params(state)
+  const queryParams = selectors.queryParams(state)
 
   return [
     "nav",
@@ -21,8 +22,8 @@ export const Pager = ({ state }) => {
         [
           "a.page-link",
           {
-            href: router.toUrl(selectors.page(state), {
-              ...params,
+            href: router.toUrl(selectors.page(state), params, {
+              ...queryParams,
               offset: (pageNumber - 1) * filter.limit
             })
           },

@@ -3,7 +3,7 @@ import { selectors } from "../selectors"
 
 export const getArticlesFilter = state => {
   const filter = ["feed", "offset", "tag"].reduce(
-    (result, param) => assoc(param, selectors.params(state)[param], result),
+    (result, param) => assoc(param, selectors.queryParams(state)[param], result),
     {}
   )
   filter.offset = Number(filter.offset) || 0

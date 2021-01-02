@@ -14,20 +14,15 @@ const loadProfileAndArticles = ({ state, update, username, author, favorited }) 
       author,
       favorited
     })
-  ]).then(data => update([data, { routeChanged: false }]))
+  ]).then(update)
 }
 
 export const Effect = update => state => {
-  if (
-    state.routeChanged &&
-    (selectors.page(state) === Route.Profile || selectors.page(state) === Route.ProfileFavorites)
-  ) {
-    if (selectors.page(state) === Route.Profile) {
-      const { username } = selectors.params(state)
-      loadProfileAndArticles({ state, update, username, author: username })
-    } else if (selectors.page(state) === Route.ProfileFavorites) {
-      const { username } = selectors.params(state)
-      loadProfileAndArticles({ state, update, username, favorited: username })
-    }
+  if (selectors.page(state) === Route.Profile) {
+    const { username } = selectors.params(state)
+    loadProfileAndArticles({ state, update, username, author: username })
+  } else if (selectors.page(state) === Route.ProfileFavorites) {
+    const { username } = selectors.params(state)
+    loadProfileAndArticles({ state, update, username, favorited: username })
   }
 }
