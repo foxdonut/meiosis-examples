@@ -3,10 +3,10 @@ export const selectors = {
   page: state => selectors.route(state).page,
   params: state => selectors.route(state).params,
   queryParams: state => selectors.route(state).queryParams,
-  toRoute: (page, params = {}, options = {}) => ({
+  toRoute: (page, params = {}, queryParams = {}) => ({
     page,
     params,
-    ...options
+    queryParams
   }),
   fromRoute: route => ({ page: route.value, params: route.params })
 }

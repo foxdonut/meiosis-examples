@@ -55,10 +55,10 @@ export const createApp = () =>
           register.RouteChange,
           login.RouteChange,
           article.RouteChange,
+          settings.RouteChange,
           profile.RouteChange
         )
-      ),
-      settings.Effect(update)
+      )
     ],
 
     view: Root

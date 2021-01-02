@@ -42,4 +42,5 @@ export const router = createRouter({
 })
 
 export const toRoutePatch = route => ({ route: () => route, routeChanged: true })
-export const routeTo = (page, params = {}) => toRoutePatch(selectors.toRoute(page, params))
+export const routeTo = (page, params, queryParams) =>
+  toRoutePatch(selectors.toRoute(page, params, queryParams))
