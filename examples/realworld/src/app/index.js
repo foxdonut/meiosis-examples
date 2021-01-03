@@ -12,7 +12,6 @@ import { profile } from "../profile"
 
 const RouteChangeEffect = (update, Effects) => {
   const routeChangeUpdate = patch => update([patch, { routeChanged: false }])
-
   const effects = Effects.map(Effect => Effect(routeChangeUpdate))
 
   return state => {
