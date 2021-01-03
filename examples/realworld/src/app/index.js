@@ -9,23 +9,15 @@ import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
-import { selectors } from "../selectors"
 
-const RouteChangeEffect = (update, effectMap) => {
+const RouteChangeEffect = (update, Effects) => {
   const routeChangeUpdate = patch => update([patch, { routeChanged: false }])
 
-  const pageMap = Object.keys(effectMap).reduce(
-    (result, key) => ({ ...result, [key]: effectMap[key](routeChangeUpdate) }),
-    {}
-  )
+  const effects = Effects.map(Effect => Effect(routeChangeUpdate))
 
   return state => {
     if (state.routeChanged) {
-      const effect = pageMap[selectors.page(state)]
-
-      if (effect) {
-        effect(state)
-      }
+      effects.forEach(effect => effect(state))
     }
   }
 }
@@ -47,18 +39,14 @@ export const createApp = () =>
       ),
 
     Effects: update => [
-      RouteChangeEffect(
-        update,
-        Object.assign(
-          {},
-          home.RouteChange,
-          register.RouteChange,
-          login.RouteChange,
-          article.RouteChange,
-          settings.RouteChange,
-          profile.RouteChange
-        )
-      )
+      RouteChangeEffect(update, [
+        home.Effect,
+        register.Effect,
+        login.Effect,
+        article.Effect,
+        settings.Effect,
+        profile.Effect
+      ])
     ],
 
     view: Root

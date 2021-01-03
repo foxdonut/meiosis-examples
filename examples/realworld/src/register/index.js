@@ -11,7 +11,7 @@ const options = {
 }
 
 export const register = {
-  RouteChange: { [Route.Register]: Effect },
+  Effect,
   ...credentials(options)
 }
 

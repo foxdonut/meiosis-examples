@@ -1,10 +1,5 @@
-import { ArticleCreateEffect, ArticleViewEffect } from "./effect"
-import { Route } from "../router"
+import { Effect } from "./effect"
 
 export const article = {
-  RouteChange: {
-    [Route.ArticleCreate]: ArticleCreateEffect,
-    [Route.ArticleDetail]: ArticleViewEffect,
-    [Route.ArticleEdit]: ArticleViewEffect
-  }
+  Effect
 }

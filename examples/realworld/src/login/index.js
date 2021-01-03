@@ -11,7 +11,7 @@ const options = {
 }
 
 export const login = {
-  RouteChange: { [Route.Login]: Effect },
+  Effect,
   ...credentials(options)
 }
 
