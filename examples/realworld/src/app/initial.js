@@ -1,11 +1,13 @@
 import { credentialsApi, clearToken } from "../services"
 
-export const Initial = () => {
+export const Initial = router => {
   const initial = {
     articles: [],
     login: {},
     register: {},
-    settings: {}
+    settings: {},
+    route: router.initialRoute,
+    routeChanged: true
   }
 
   return credentialsApi

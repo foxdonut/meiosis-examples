@@ -21,8 +21,8 @@ const RouteChangeEffect = (update, Effects) => {
   }
 }
 
-export const createApp = () =>
-  Initial().then(initial => ({
+export const createApp = router =>
+  Initial(router).then(initial => ({
     initial,
 
     Actions: update =>
