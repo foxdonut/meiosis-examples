@@ -1,4 +1,4 @@
-import { Initial } from "./initial"
+import { credentialsApi, clearToken } from "../services"
 import { Root } from "../root"
 import { home } from "../home"
 import { register } from "../register"
@@ -9,6 +9,25 @@ import { articleEdit } from "../articleEdit"
 import { articleDetail } from "../articleDetail"
 import { settings } from "../settings"
 import { profile } from "../profile"
+
+const Initial = initialRoute => {
+  const initial = {
+    articles: [],
+    login: {},
+    register: {},
+    settings: {},
+    route: initialRoute,
+    routeChanged: true
+  }
+
+  return credentialsApi
+    .getUser()
+    .then(user => Object.assign(initial, { user }))
+    .catch(() => {
+      clearToken()
+      return initial
+    })
+}
 
 const RouteChangeEffect = (update, Effects) => {
   const routeChangeUpdate = patch => update([patch, { routeChanged: false }])
@@ -21,8 +40,8 @@ const RouteChangeEffect = (update, Effects) => {
   }
 }
 
-export const createApp = router =>
-  Initial(router).then(initial => ({
+export const createApp = initialRoute =>
+  Initial(initialRoute).then(initial => ({
     initial,
 
     Actions: update =>
