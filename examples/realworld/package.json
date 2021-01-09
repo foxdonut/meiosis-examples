@@ -31,7 +31,7 @@
     "dompurify": "^2.2.6",
     "feather-route-matcher": "^4.0.0",
     "marked": "^1.2.7",
-    "meiosis-router-setup": "^1.0.0-alpha.8",
+    "meiosis-router-setup": "^1.0.0-alpha.9",
     "meiosis-setup": "^5.1.2",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",

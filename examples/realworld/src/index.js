@@ -11,7 +11,7 @@ import { selectors } from "./selectors"
 // Only for development, to use the Meiosis Tracer as a Chrome extension.
 import meiosisTracer from "meiosis-tracer"
 
-createApp(router).then(app => {
+createApp(router.initialRoute).then(app => {
   const { states, update, actions } = meiosis({ stream, merge, app })
 
   router.start(compose(update, toRoutePatch))

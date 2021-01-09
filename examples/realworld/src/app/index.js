@@ -1,3 +1,4 @@
+import { RouteChangeEffect } from "meiosis-router-setup"
 import { credentialsApi, clearToken } from "../services"
 import { Root } from "../root"
 import { home } from "../home"
@@ -29,17 +30,6 @@ const Initial = initialRoute => {
     })
 }
 
-const RouteChangeEffect = (update, Effects) => {
-  const routeChangeUpdate = patch => update([patch, { routeChanged: false }])
-  const effects = Effects.map(Effect => Effect(routeChangeUpdate))
-
-  return state => {
-    if (state.routeChanged) {
-      effects.forEach(effect => effect(state))
-    }
-  }
-}
-
 export const createApp = initialRoute =>
   Initial(initialRoute).then(initial => ({
     initial,
@@ -57,14 +47,17 @@ export const createApp = initialRoute =>
       ),
 
     Effects: update => [
-      RouteChangeEffect(update, [
-        home.Effect,
-        register.Effect,
-        login.Effect,
-        article.Effect,
-        settings.Effect,
-        profile.Effect
-      ])
+      RouteChangeEffect({
+        update,
+        Effects: [
+          home.Effect,
+          register.Effect,
+          login.Effect,
+          article.Effect,
+          settings.Effect,
+          profile.Effect
+        ]
+      })
     ],
 
     view: Root
