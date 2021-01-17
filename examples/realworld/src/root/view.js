@@ -6,7 +6,6 @@ import { ArticleDetail } from "../articleDetail"
 import { ArticleEdit } from "../articleEdit"
 import { Settings } from "../settings"
 import { Profile } from "../profile"
-import { selectors } from "../selectors"
 
 const componentMap = {
   Home,
@@ -21,6 +20,6 @@ const componentMap = {
 }
 
 export const Root = ({ state, actions }) => {
-  const Component = componentMap[selectors.page(state)]
+  const Component = componentMap[state.route.page]
   return Layout({ state, actions, Component })
 }

@@ -1,7 +1,6 @@
 import { articlesApi, loadArticleAndComments, profileApi } from "../services"
 import { prepend } from "../util/fp"
 import { Route, routeTo } from "../router"
-import { selectors } from "../selectors"
 
 export const Actions = update => ({
   updateCommentField: comment => update({ comment }),
@@ -28,7 +27,7 @@ export const Actions = update => ({
     if (state.user) {
       profileApi
         .follow(username)
-        .then(() => loadArticleAndComments({ slug: selectors.params(state).slug }))
+        .then(() => loadArticleAndComments({ slug: state.route.params.slug }))
         .then(update)
     } else {
       update(routeTo(Route.Login))
@@ -38,6 +37,6 @@ export const Actions = update => ({
   unfollowUser: (state, username) =>
     profileApi
       .unfollow(username)
-      .then(() => loadArticleAndComments({ slug: selectors.params(state).slug }))
+      .then(() => loadArticleAndComments({ slug: state.route.params.slug }))
       .then(update)
 })

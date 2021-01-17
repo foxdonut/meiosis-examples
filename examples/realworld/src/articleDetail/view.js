@@ -81,7 +81,7 @@ export const ArticleDetail = ({ state, actions }) => {
 
   return [
     ".article-page",
-    !state.routeChanged && [
+    !state.route.routeChanged && [
       ".banner",
       [".container", ["h1", article.title], articleMeta(state, actions, article, username)]
     ],
@@ -91,7 +91,7 @@ export const ArticleDetail = ({ state, actions }) => {
         ".row.article-content",
         [
           ".col-md-12",
-          state.routeChanged
+          state.route.routeChanged
             ? "Loading..."
             : [
                 ["h2", article.description],
@@ -107,7 +107,7 @@ export const ArticleDetail = ({ state, actions }) => {
               ]
         ]
       ],
-      !state.routeChanged && [
+      !state.route.routeChanged && [
         ["hr"],
         [".article-actions", articleMeta(state, actions, article, username)],
         [

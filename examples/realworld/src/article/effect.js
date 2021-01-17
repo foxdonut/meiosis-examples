@@ -1,9 +1,8 @@
 import { loadArticleAndComments } from "../services"
 import { Route } from "../router"
-import { selectors } from "../selectors"
 
 export const Effect = update => state => {
-  if (selectors.page(state) === Route.ArticleCreate) {
+  if (state.route.page === Route.ArticleCreate) {
     update({
       article: {
         title: "",
@@ -14,8 +13,8 @@ export const Effect = update => state => {
         validationErrors: []
       }
     })
-  } else if ([Route.ArticleDetail, Route.ArticleEdit].includes(selectors.page(state))) {
-    const { slug } = selectors.params(state)
+  } else if ([Route.ArticleDetail, Route.ArticleEdit].includes(state.route.page)) {
+    const { slug } = state.route.params
     loadArticleAndComments({ slug }).then(data =>
       update([data, { article: { tags: (data.article.tagList || []).join(", ") } }])
     )

@@ -1,9 +1,8 @@
 import { Route, router } from "../router"
 import { get } from "../util/fp"
-import { selectors } from "../selectors"
 
 const Header = ({ state }) => {
-  const active = pageId => ({ className: { active: selectors.page(state) === pageId } })
+  const active = pageId => ({ className: { active: state.route.page === pageId } })
 
   return [
     "nav.navbar.navbar-light",
@@ -48,8 +47,8 @@ const Header = ({ state }) => {
                 {
                   className: {
                     active:
-                      (selectors.page(state) === "Profile" ||
-                        selectors.page(state) === "ProfileFavorites") &&
+                      (state.route.page === "Profile" ||
+                        state.route.page === "ProfileFavorites") &&
                       get(state, ["user", "username"]) === get(state, ["profile", "username"])
                   }
                 },

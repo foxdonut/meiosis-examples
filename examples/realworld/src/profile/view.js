@@ -2,12 +2,11 @@ import { get } from "../util/fp"
 import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
 import { ArticleList } from "../articleList"
-import { selectors } from "../selectors"
 
 export const Profile = ({ state, actions }) => {
   const username = get(state, ["profile", "username"])
   const isCurrentUser = get(state, ["profile", "username"]) === get(state, ["user", "username"])
-  const isFavorites = selectors.page(state) === Route.ProfileFavorites
+  const isFavorites = state.route.page === Route.ProfileFavorites
 
   return [
     ".profile-page",

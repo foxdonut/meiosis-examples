@@ -1,7 +1,6 @@
 import { createRouter } from "meiosis-router-setup"
 import createRouteMatcher from "feather-route-matcher"
 import queryString from "query-string"
-import { selectors } from "../selectors"
 
 export const Route = {
   Home: "Home",
@@ -28,19 +27,14 @@ const routeConfig = {
 }
 
 const routeMatcher = createRouteMatcher(routeConfig)
-const convertMatchToRoute = ({ value, params, queryParams }) => ({
-  page: value,
-  params,
-  queryParams
-})
+const convertMatch = ({ value, params }) => ({ page: value, params })
 
 export const router = createRouter({
   routeMatcher,
-  convertMatchToRoute,
+  convertMatch,
   routeConfig,
   queryString
 })
 
-export const toRoutePatch = route => ({ route: () => route, routeChanged: true })
-export const routeTo = (page, params, queryParams) =>
-  toRoutePatch(selectors.toRoute(page, params, queryParams))
+export const toRoutePatch = route => ({ route: () => route })
+export const routeTo = (page, params) => toRoutePatch(router.toRoute(page, params))

@@ -17,8 +17,7 @@ const Initial = initialRoute => {
     login: {},
     register: {},
     settings: {},
-    route: initialRoute,
-    routeChanged: true
+    route: initialRoute
   }
 
   return credentialsApi
