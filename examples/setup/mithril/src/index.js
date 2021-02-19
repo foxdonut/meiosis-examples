@@ -11,7 +11,7 @@ const update = stream()
 const states = stream.scan(merge, app.Initial(), update)
 
 // Only for using Meiosis Tracer in development.
-meiosisTracer({ selector: "#tracer", rows: 25, streams: [states] })
+meiosisTracer({ selector: "#tracer", rows: 30, cols: 40, streams: [states] })
 
 const actions = app.Actions(update)
 

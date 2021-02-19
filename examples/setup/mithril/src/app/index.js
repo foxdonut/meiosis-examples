@@ -29,14 +29,7 @@ export const App = {
   view: ({ attrs: { state, actions } }) =>
     m(
       "div",
-      m(
-        "div" +
-          b
-            .f("left")
-            .w("40%")
-            .pr(40),
-        m(DateTime, { state, id: "dateTime", actions })
-      ),
+      m("div" + b.f("left").w("40%").pr(40), m(DateTime, { state, id: "dateTime", actions })),
       m(
         "div" + b.f("left"),
         m(Conditions, { state, id: "conditions", actions }),

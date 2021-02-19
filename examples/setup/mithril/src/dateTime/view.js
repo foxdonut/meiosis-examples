@@ -9,8 +9,8 @@ export const DateTime = {
   view: ({ attrs: { state, id, actions } }) =>
     m(
       "div",
+      m("label", "Date:"),
       m(TextField, {
-        label: "Date:",
         type: "date",
         value: state[id].date,
         events: {
