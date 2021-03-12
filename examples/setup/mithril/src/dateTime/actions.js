@@ -1,11 +1,11 @@
 import { validateInput } from "../validation"
 
 export const Actions = update => ({
-  editDate: (id, value) => update({ [id]: { date: value } }),
+  editDate: value => update({ date: value }),
 
-  editHour: (id, value) => update({ [id]: { hour: value } }),
+  editHour: value => update({ hour: value }),
 
-  editMinute: (id, value) => update({ [id]: { minute: value } }),
+  editMinute: value => update({ minute: value }),
 
   validate: state => {
     const errors = validateInput(state)

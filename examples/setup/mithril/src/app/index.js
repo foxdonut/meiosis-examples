@@ -12,8 +12,8 @@ export const app = {
   Initial: () => ({
     dateTime: dateTime.Initial(),
     conditions: conditions.Initial(),
-    "temperature:air": temperature.Initial(),
-    "temperature:water": temperature.Initial()
+    airTemperature: temperature.Initial(),
+    waterTemperature: temperature.Initial()
   }),
 
   Actions: update =>
@@ -26,15 +26,15 @@ export const app = {
 }
 
 export const App = {
-  view: ({ attrs: { state, actions } }) =>
+  view: ({ attrs: { context } }) =>
     m(
       "div",
-      m("div" + b.f("left").w("40%").pr(40), m(DateTime, { state, id: "dateTime", actions })),
+      m("div" + b.f("left").w("40%").pr(40), m(DateTime, { context: context.nest("dateTime") })),
       m(
         "div" + b.f("left"),
-        m(Conditions, { state, id: "conditions", actions }),
-        m(Temperature, { state, id: "temperature:air", actions }),
-        m(Temperature, { state, id: "temperature:water", actions })
+        m(Conditions, { context: context.nest("conditions") }),
+        m(Temperature, { context: context.nest("airTemperature") }),
+        m(Temperature, { context: context.nest("waterTemperature") })
       )
     )
 }

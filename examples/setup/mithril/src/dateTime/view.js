@@ -6,15 +6,17 @@ const getErrorMessage = (state, field) =>
   (state.errors && state.errors.dateTime && state.errors.dateTime[field]) || " "
 
 export const DateTime = {
-  view: ({ attrs: { state, id, actions } }) =>
-    m(
+  view: ({ attrs: { context } }) => {
+    const state = context.getState()
+
+    return m(
       "div",
       m("label", "Date:"),
       m(TextField, {
         type: "date",
-        value: state[id].date,
+        value: state.date,
         events: {
-          oninput: evt => actions.editDate(id, evt.target.value)
+          oninput: evt => context.actions.editDate(evt.target.value)
         },
         help: getErrorMessage(state, "date")
       }),
@@ -22,9 +24,9 @@ export const DateTime = {
         "div" + b.mt(4),
         m(TextField, {
           label: "Hour:",
-          value: state[id].hour,
+          value: state.hour,
           events: {
-            oninput: evt => actions.editHour(id, evt.target.value)
+            oninput: evt => context.actions.editHour(evt.target.value)
           },
           help: getErrorMessage(state, "hour")
         })
@@ -33,9 +35,9 @@ export const DateTime = {
         "div" + b.mt(4),
         m(TextField, {
           label: "Minute:",
-          value: state[id].minute,
+          value: state.minute,
           events: {
-            oninput: evt => actions.editMinute(id, evt.target.value)
+            oninput: evt => context.actions.editMinute(evt.target.value)
           },
           help: getErrorMessage(state, "minute")
         })
@@ -45,9 +47,10 @@ export const DateTime = {
         m(Button, {
           label: "Validate",
           border: true,
-          events: { onclick: () => actions.validate(state) }
+          events: { onclick: () => context.actions.validate(context.root.get()) }
         }),
         m("span" + b.ml(8), state.message)
       )
     )
+  }
 }
