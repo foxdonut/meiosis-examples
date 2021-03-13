@@ -1,3 +1,3 @@
-export const Actions = update => ({
-  buttonToggle: () => update({ active: x => !x })
+export const Actions = context => ({
+  buttonToggle: () => context.update({ active: x => !x })
 })
