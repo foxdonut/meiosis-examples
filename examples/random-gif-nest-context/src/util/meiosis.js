@@ -11,7 +11,14 @@ export const meiosis = ({ stream, merge, app }) => {
   })
 
   const contextCache = {}
-  let root
+
+  const root = {
+    getState: () => states(),
+    update
+  }
+
+  const actions = app.Actions(root)
+  root.actions = actions
 
   const nest = prop => {
     if (prop) {
@@ -23,7 +30,6 @@ export const meiosis = ({ stream, merge, app }) => {
         const localContext = {
           getState,
           update: localUpdate,
-          actions: localActions,
           nest: next => nest(path.concat(next)),
           root
         }
@@ -36,15 +42,7 @@ export const meiosis = ({ stream, merge, app }) => {
     return root
   }
 
-  root = {
-    getState: () => states(),
-    update,
-    nest,
-    root
-  }
-
-  const actions = app.Actions(root)
-  root.actions = actions
+  root.nest = nest
 
   return { states, root }
 }
