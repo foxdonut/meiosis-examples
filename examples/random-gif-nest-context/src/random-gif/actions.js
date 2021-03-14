@@ -15,7 +15,7 @@ export const Actions = context => ({
     m.request({ url: gif_new_url, params: { api_key, tag: context.getState().tag } })
       .then(response => {
         context.update({ image: Loaded.Y(Success.Y(Image.Y(response.data.image_url))) })
-        context.actions.newGifGenerated()
+        context.root.actions.newGifGenerated()
       })
       .catch(() => context.update({ image: Loaded.Y(Success.N()) }))
   },

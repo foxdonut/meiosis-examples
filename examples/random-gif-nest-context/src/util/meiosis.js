@@ -6,8 +6,8 @@ export const meiosis = ({ stream, merge, app }) => {
   const pathGet = (object, path) =>
     path.reduce((obj, key) => (obj == undefined ? undefined : obj[key]), object)
 
-  const intoPath = (path, value) => ({
-    [path[0]]: path.length === 1 ? value : intoPath(path.slice(1), value)
+  const nestPatch = (path, value) => ({
+    [path[0]]: path.length === 1 ? value : nestPatch(path.slice(1), value)
   })
 
   const contextCache = {}
@@ -20,12 +20,13 @@ export const meiosis = ({ stream, merge, app }) => {
   const actions = app.Actions(root)
   root.actions = actions
 
-  const nest = prop => {
-    if (prop) {
-      const path = [].concat(prop)
+  const nest = propOrPath => {
+    if (propOrPath) {
+      const path = [].concat(propOrPath)
+
       if (!contextCache[path]) {
         const getState = () => pathGet(states(), path)
-        const localUpdate = patch => update(intoPath(path, patch))
+        const localUpdate = patch => update(nestPatch(path, patch))
 
         const localContext = {
           getState,
@@ -35,6 +36,7 @@ export const meiosis = ({ stream, merge, app }) => {
         }
         const localActions = app.Actions(localContext)
         localContext.actions = localActions
+
         contextCache[path] = localContext
       }
       return contextCache[path]
@@ -44,5 +46,5 @@ export const meiosis = ({ stream, merge, app }) => {
 
   root.nest = nest
 
-  return { states, root }
+  return { states, context: root }
 }
