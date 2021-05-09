@@ -30,7 +30,7 @@
     "joi": "^17.1.1",
     "joi-browser": "^13.4.0",
     "joi-date-extensions": "^1.2.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "preact": "^10.4.6",
     "preact-material-components": "^1.6.1"
   },
