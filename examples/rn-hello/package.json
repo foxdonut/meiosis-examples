@@ -22,6 +22,6 @@
     "expo": "^36.0.2",
     "flyd": "^0.2.8",
     "react": "16.13.1",
-    "react-native": "0.61.5"
+    "react-native": "0.62.3"
   }
 }
