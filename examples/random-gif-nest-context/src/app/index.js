@@ -17,12 +17,12 @@ export const app = {
     randomGifPairPair: randomGifPairPair.initial,
     randomGifList: randomGifList.initial
   },
-  Actions: (update, getState) =>
+  Actions: context =>
     Object.assign(
-      Actions(update, getState),
-      button.Actions(update),
-      randomGif.Actions(update),
-      randomGifList.Actions(update)
+      Actions(context),
+      button.Actions(context),
+      randomGif.Actions(context),
+      randomGifList.Actions(context)
     )
 }
 

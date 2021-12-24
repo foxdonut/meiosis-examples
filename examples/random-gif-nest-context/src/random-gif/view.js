@@ -30,11 +30,7 @@ export const RandomGif = {
         value: state.tag,
         onkeyup: evt => context.actions.editTag(evt.target.value)
       }),
-      m(
-        "button.bg-blue" + buttonStyle,
-        { onclick: () => context.actions.newGif(context) },
-        "Random Gif"
-      ),
+      m("button.bg-blue" + buttonStyle, { onclick: () => context.actions.newGif() }, "Random Gif"),
       m("button.bg-red" + buttonStyle, { onclick: () => context.actions.reset() }, "Reset"),
       m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(state.image) }))
     )

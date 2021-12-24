@@ -9,7 +9,7 @@ const api_key = "HMUbJEROIPi2Dodeq0thL28emz5CMCRX"
 export const Actions = context => ({
   editTag: tag => context.update({ tag }),
 
-  newGif: context => {
+  newGif: () => {
     context.update({ image: Loaded.N() })
 
     m.request({ url: gif_new_url, params: { api_key, tag: context.getState().tag } })
