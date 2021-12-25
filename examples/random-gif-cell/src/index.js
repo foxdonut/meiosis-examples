@@ -14,16 +14,16 @@ const stream = {
   scan: (acc, init, stream) => Stream.scan(acc, init, stream)
 }
 
-const cell = setupCell({ stream, merge, app })
-const cells = createCells(cell)
+const rootCell = setupCell({ stream, merge, app })
+const cells = createCells(rootCell)
 
 // Only for using Meiosis Tracer in development.
 meiosisTracer({
   selector: "#tracer",
-  streams: [{ label: "states", stream: cell.getState }],
+  streams: [{ label: "states", stream: rootCell.getState }],
   rows: 35
 })
 
 m.mount(document.getElementById("app"), { view: () => m(App, { cells }) })
 
-cell.getState.map(() => m.redraw())
+rootCell.getState.map(() => m.redraw())

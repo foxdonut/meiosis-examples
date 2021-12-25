@@ -23,15 +23,15 @@ export const app = {
   Actions
 }
 
-export const createCells = cell => ({
-  root: cell,
-  counter: nest(cell, "counter"),
-  button: nest(cell, "button", button.Actions),
-  randomGif1: nest(cell, "randomGif1", randomGif.Actions),
-  randomGif2: nest(cell, "randomGif2", randomGif.Actions),
-  randomGifPair: nest(cell, "randomGifPair"),
-  randomGifPairPair: nest(cell, "randomGifPairPair"),
-  randomGifList: nest(cell, "randomGifList", randomGifList.Actions)
+export const createCells = rootCell => ({
+  root: rootCell,
+  counter: nest(rootCell, "counter"),
+  button: nest(rootCell, "button", button.Actions),
+  randomGif1: nest(rootCell, "randomGif1", randomGif.Actions(rootCell)),
+  randomGif2: nest(rootCell, "randomGif2", randomGif.Actions(rootCell)),
+  randomGifPair: nest(rootCell, "randomGifPair"),
+  randomGifPairPair: nest(rootCell, "randomGifPairPair"),
+  randomGifList: nest(rootCell, "randomGifList", randomGifList.Actions)
 })
 
 export { App } from "./view"

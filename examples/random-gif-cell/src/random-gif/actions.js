@@ -7,7 +7,7 @@ const gif_new_url = "https://api.giphy.com/v1/gifs/random"
 const api_key = "HMUbJEROIPi2Dodeq0thL28emz5CMCRX"
 // const api_key = "dc6zaTOxFJmzC"
 
-export const Actions = cell => ({
+export const Actions = rootCell => cell => ({
   editTag: tag => cell.update({ tag }),
 
   newGif: () => {
@@ -15,8 +15,8 @@ export const Actions = cell => ({
 
     m.request({ url: gif_new_url, params: { api_key, tag: cell.getState().tag } })
       .then(response => {
-        cell.update({ image: Loaded.Y(Success.Y(Image.Y(response.data.image_url))) })
-        cell.root.actions.newGifGenerated()
+        cell.update({ image: Loaded.Y(Success.Y(Image.Y(response.data.images.original.url))) })
+        rootCell.actions.newGifGenerated()
       })
       .catch(() => cell.update({ image: Loaded.Y(Success.N()) }))
   },
