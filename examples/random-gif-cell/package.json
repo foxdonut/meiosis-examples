@@ -1,5 +1,5 @@
 {
-  "name": "random-gif-nest-local",
+  "name": "random-gif-cell",
   "version": "1.0.0",
   "description": "meiosis-examples random-gif",
   "private": true,
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
+    "meiosis-setup": "^6.0.0-beta.1",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",
     "ramda": "0.27.1",
