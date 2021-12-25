@@ -1,3 +1,4 @@
-export const Actions = context => ({
-  buttonToggle: () => context.update({ active: x => !x })
+// @ts-check
+export const Actions = cell => ({
+  buttonToggle: () => cell.update({ active: x => !x })
 })

@@ -1,3 +1,4 @@
+// @ts-check
 import { Initial } from "./initial"
 
 export const counter = {

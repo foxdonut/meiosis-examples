@@ -1,3 +1,6 @@
+// @ts-check
+import { nest } from "meiosis-setup/mergerino"
+
 import { Actions } from "./actions"
 import { button } from "../button"
 import { counter } from "../counter"
@@ -17,13 +20,18 @@ export const app = {
     randomGifPairPair: randomGifPairPair.initial,
     randomGifList: randomGifList.initial
   },
-  Actions: context =>
-    Object.assign(
-      Actions(context),
-      button.Actions(context),
-      randomGif.Actions(context),
-      randomGifList.Actions(context)
-    )
+  Actions
 }
+
+export const createCells = cell => ({
+  root: cell,
+  counter: nest(cell, "counter"),
+  button: nest(cell, "button", button.Actions),
+  randomGif1: nest(cell, "randomGif1", randomGif.Actions),
+  randomGif2: nest(cell, "randomGif2", randomGif.Actions),
+  randomGifPair: nest(cell, "randomGifPair"),
+  randomGifPairPair: nest(cell, "randomGifPairPair"),
+  randomGifList: nest(cell, "randomGifList", randomGifList.Actions)
+})
 
 export { App } from "./view"

@@ -1,3 +1,4 @@
+// @ts-check
 import { initial } from "./initial"
 import { Actions } from "./actions"
 

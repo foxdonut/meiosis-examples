@@ -1,12 +1,14 @@
+// @ts-check
 import m from "mithril"
+import { nest } from "meiosis-setup/mergerino"
 
 import { RandomGifPair } from "../random-gif-pair"
 
 export const RandomGifPairPair = {
-  view: ({ attrs: { context } }) =>
+  view: ({ attrs: { cell } }) =>
     m(
       "div.ba.b--orange.pa2.mt2",
-      m(RandomGifPair, { context: context.nest("one") }),
-      m(RandomGifPair, { context: context.nest("two") })
+      m(RandomGifPair, { cell: nest(cell, "one") }),
+      m(RandomGifPair, { cell: nest(cell, "two") })
     )
 }

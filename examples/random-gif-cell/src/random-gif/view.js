@@ -20,18 +20,18 @@ const imgsrc = image =>
   })(image)
 
 export const RandomGif = {
-  view: ({ attrs: { context } }) => {
-    const state = context.getState()
+  view: ({ attrs: { cell } }) => {
+    const state = cell.getState()
 
     return m(
       "div.ba.b--green.pa2.mt2",
       m("span.mr2", "Tag:"),
       m("input[type=text]", {
         value: state.tag,
-        onkeyup: evt => context.actions.editTag(evt.target.value)
+        onkeyup: evt => cell.actions.editTag(evt.target.value)
       }),
-      m("button.bg-blue" + buttonStyle, { onclick: () => context.actions.newGif() }, "Random Gif"),
-      m("button.bg-red" + buttonStyle, { onclick: () => context.actions.reset() }, "Reset"),
+      m("button.bg-blue" + buttonStyle, { onclick: () => cell.actions.newGif() }, "Random Gif"),
+      m("button.bg-red" + buttonStyle, { onclick: () => cell.actions.reset() }, "Reset"),
       m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(state.image) }))
     )
   }

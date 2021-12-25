@@ -1,3 +1,4 @@
+// @ts-check
 import yslashn from "static-sum-type/modules/yslashn"
 
 export const Loaded = yslashn.maybe("Loaded")

@@ -1,3 +1,4 @@
+// @ts-check
 import { randomGif } from "../random-gif"
 
 export const initial = {

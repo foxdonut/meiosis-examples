@@ -1,22 +1,29 @@
+// @ts-check
 import merge from "mergerino"
 import m from "mithril"
-import stream from "mithril/stream"
+import Stream from "mithril/stream"
+import { setupCell } from "meiosis-setup/mergerino"
 
-import { meiosis } from "./util/meiosis"
-import { app, App } from "./app"
+import { app, App, createCells } from "./app"
 
 // Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer"
 
-const { states, context } = meiosis({ stream, merge, app })
+const stream = {
+  stream: Stream,
+  scan: (acc, init, stream) => Stream.scan(acc, init, stream)
+}
+
+const cell = setupCell({ stream, merge, app })
+const cells = createCells(cell)
 
 // Only for using Meiosis Tracer in development.
 meiosisTracer({
   selector: "#tracer",
-  streams: [{ label: "states", stream: states }],
+  streams: [{ label: "states", stream: cell.getState }],
   rows: 35
 })
 
-m.mount(document.getElementById("app"), { view: () => m(App, { context }) })
+m.mount(document.getElementById("app"), { view: () => m(App, { cells }) })
 
-states.map(() => m.redraw())
+cell.getState.map(() => m.redraw())

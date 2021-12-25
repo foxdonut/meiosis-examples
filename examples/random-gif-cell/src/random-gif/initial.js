@@ -1,3 +1,4 @@
+// @ts-check
 import { Loaded, Success, Image } from "./types"
 
 export const initial = {
