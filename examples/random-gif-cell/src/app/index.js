@@ -27,8 +27,8 @@ export const createCells = rootCell => ({
   root: rootCell,
   counter: nest(rootCell, "counter"),
   button: nest(rootCell, "button", button.Actions),
-  randomGif1: nest(rootCell, "randomGif1", randomGif.Actions(rootCell)),
-  randomGif2: nest(rootCell, "randomGif2", randomGif.Actions(rootCell)),
+  randomGif1: nest(rootCell, "randomGif1", randomGif.Actions),
+  randomGif2: nest(rootCell, "randomGif2", randomGif.Actions),
   randomGifPair: nest(rootCell, "randomGifPair"),
   randomGifPairPair: nest(rootCell, "randomGifPairPair"),
   randomGifList: nest(rootCell, "randomGifList", randomGifList.Actions)
