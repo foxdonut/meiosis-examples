@@ -2,7 +2,7 @@
 import m from "mithril"
 import { nest } from "meiosis-setup/mergerino"
 
-import { RandomGif } from "../random-gif"
+import { RandomGif, randomGif } from "../random-gif"
 import { buttonStyle } from "../util/ui"
 import { hasGifs } from "./util"
 
@@ -11,7 +11,7 @@ const RandomGifItem = {
     m(
       "div.dib.mr2",
       { key: subId },
-      m(RandomGif, { cell: nest(cell, subId) }),
+      m(RandomGif, { cell: nest(cell, subId, randomGif.Actions) }),
       m("button.bg-red" + buttonStyle, { onclick: () => cell.actions.remove(subId) }, "Remove")
     )
 }
