@@ -24,10 +24,10 @@ export const App = {
       m(RandomGif, { cell: cells.randomGif2 }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { cell: cells.randomGifPair }),
+      m(RandomGifPair, { cells: cells.randomGifPair }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { cell: cells.randomGifPairPair }),
+      m(RandomGifPairPair, { cells: cells.randomGifPairPair }),
 
       m("div.mt2", "Random Gif List:"),
       m(RandomGifList, { cell: cells.randomGifList })

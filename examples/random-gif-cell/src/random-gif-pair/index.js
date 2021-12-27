@@ -1,8 +1,10 @@
 // @ts-check
 import { initial } from "./initial"
+import { createCells } from "./cells"
 
 export const randomGifPair = {
-  initial
+  initial,
+  createCells
 }
 
 export { RandomGifPair } from "./view"
