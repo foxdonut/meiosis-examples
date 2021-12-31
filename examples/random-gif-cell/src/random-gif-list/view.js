@@ -27,7 +27,8 @@ export const RandomGifList = {
       m(
         "button.bg-red" + buttonStyle,
         {
-          onclick: () => state.randomGifIds.map(subId => cell.nest(subId).actions.reset())
+          onclick: () =>
+            state.randomGifIds.map(subId => randomGif.createCell(nest(cell, subId)).actions.reset())
         },
         "Reset All"
       ),
