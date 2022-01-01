@@ -28,7 +28,7 @@
   "dependencies": {
     "flyd": "^0.2.8",
     "mergerino": "^0.4.0",
-    "riot": "^5.0.0"
+    "riot": "^6.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

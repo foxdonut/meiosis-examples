@@ -25,4 +25,12 @@
       </button>
     </div>
   </div>
+
+  <script>
+    export default {
+      onMounted(props) {
+        props.cell.getState.map(state => this.update(state))
+      }
+    }
+  </script>
 </temp-el>

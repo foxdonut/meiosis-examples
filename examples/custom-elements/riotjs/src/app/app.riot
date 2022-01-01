@@ -1,14 +1,14 @@
 <app-el>
   <div class="row">
     <div class="col-md-4">
-      <date-time cell={ cells.dateTime }/>
-      <div>Date/time: { cells.root.getState().dateTimeString }</div>
+      <date-time cell={ props.cells.dateTime }/>
+      <div>Date/time: { props.cells.root.getState().dateTimeString }</div>
     </div>
     <div class="col-md-4">
-      <sky-conditions cell={ cells.conditions }/>
+      <sky-conditions cell={ props.cells.conditions }/>
 
-      <temp-el cell={ cells.temperature.air }/>
-      <temp-el cell={ cells.temperature.water }/>
+      <temp-el cell={ props.cells.temperature.air }/>
+      <temp-el cell={ props.cells.temperature.water }/>
     </div>
   </div>
 
@@ -22,10 +22,6 @@
         DateTime,
         SkyConditions,
         TempEl
-      },
-
-      onBeforeMount(props) {
-        this.cells = props.cells
       },
 
       onMounted(props) {

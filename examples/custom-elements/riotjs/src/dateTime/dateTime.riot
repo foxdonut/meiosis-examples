@@ -34,6 +34,10 @@
 
   <script>
     export default {
+      onMounted(props) {
+        props.cell.getState.map(state => this.update(state))
+      },
+
       save() {
         const state = this.props.cell.getState()
 
