@@ -26,7 +26,6 @@ export const nest = (cell, prop, Actions) => {
   const nested = {
     getState,
     update: patch => cell.update(nestPatch(patch, prop)),
-    actions: null,
     root: cell.root
   }
 

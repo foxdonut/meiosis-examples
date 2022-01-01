@@ -1,8 +1,15 @@
 // @ts-check
-import { Initial } from "./initial"
+import m from "mithril"
+
+const Initial = ({ label }) => ({
+  label,
+  value: 0
+})
 
 export const counter = {
   Initial
 }
 
-export { Counter } from "./view"
+export const Counter = {
+  view: ({ attrs: { cell } }) => m("div", cell.getState().label + " " + cell.getState().value)
+}

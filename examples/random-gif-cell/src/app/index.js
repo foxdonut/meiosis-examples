@@ -1,13 +1,21 @@
 // @ts-check
 import { nest } from "meiosis-setup/mergerino"
+import m from "mithril"
 
-import { Actions } from "./actions"
-import { button } from "../button"
-import { counter } from "../counter"
-import { randomGif } from "../random-gif"
-import { randomGifPair } from "../random-gif-pair"
-import { randomGifPairPair } from "../random-gif-pair-pair"
-import { randomGifList } from "../random-gif-list"
+import { button, Button } from "../button"
+import { counter, Counter } from "../counter"
+import { randomGif, RandomGif } from "../random-gif"
+import { randomGifPair, RandomGifPair } from "../random-gif-pair"
+import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
+import { randomGifList, RandomGifList } from "../random-gif-list"
+
+const Actions = cell => ({
+  newGifGenerated: () => {
+    const state = cell.getState()
+    const increment = state.counter.value > 3 && state.button.active ? 2 : 1
+    cell.update({ counter: { value: x => x + increment } })
+  }
+})
 
 export const app = {
   // Note: using the same initial state multiple times only works with immutability.
@@ -26,12 +34,36 @@ export const app = {
 export const createCells = rootCell => ({
   root: rootCell,
   counter: nest(rootCell, "counter"),
-  button: button.createCell(nest(rootCell, "button")),
-  randomGif1: randomGif.createCell(nest(rootCell, "randomGif1")),
-  randomGif2: randomGif.createCell(nest(rootCell, "randomGif2")),
+  button: nest(rootCell, "button", button.Actions),
+  randomGif1: nest(rootCell, "randomGif1", randomGif.Actions),
+  randomGif2: nest(rootCell, "randomGif2", randomGif.Actions),
   randomGifPair: randomGifPair.createCells(nest(rootCell, "randomGifPair")),
   randomGifPairPair: randomGifPairPair.createCells(nest(rootCell, "randomGifPairPair")),
-  randomGifList: randomGifList.createCell(nest(rootCell, "randomGifList"))
+  randomGifList: nest(rootCell, "randomGifList", randomGifList.Actions)
 })
 
-export { App } from "./view"
+export const App = {
+  view: ({ attrs: { cells } }) =>
+    m(
+      "div",
+      m(Counter, { cell: cells.counter }),
+
+      m("div.mt2", "Button:"),
+      m(Button, { cell: cells.button }),
+
+      m("div.mt2", "Random Gif:"),
+      m(RandomGif, { cell: cells.randomGif1 }),
+
+      m("div.mt2", "Another Random Gif:"),
+      m(RandomGif, { cell: cells.randomGif2 }),
+
+      m("div.mt2", "Random Gif Pair:"),
+      m(RandomGifPair, { cells: cells.randomGifPair }),
+
+      m("div.mt2", "Random Gif Pair Pair:"),
+      m(RandomGifPairPair, { cells: cells.randomGifPairPair }),
+
+      m("div.mt2", "Random Gif List:"),
+      m(RandomGifList, { cell: cells.randomGifList })
+    )
+}
