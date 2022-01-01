@@ -3,8 +3,8 @@
     <label class="checkbox-inline">
       <input
         type="checkbox"
-        checked={ props.state.precipitations }
-        onchange={ evt => props.update({ precipitations: evt.target.checked }) }
+        checked={ props.cell.getState().precipitations }
+        onchange={ evt => props.cell.update({ precipitations: evt.target.checked }) }
       />
       Precipitations
     </label>
@@ -15,8 +15,8 @@
             type="radio"
             name="conditions"
             value={ skyOption.value }
-            checked={ props.state.sky === skyOption.value }
-            onchange={ evt => props.update({ sky: evt.target.value }) }
+            checked={ props.cell.getState().sky === skyOption.value }
+            onchange={ evt => props.cell.update({ sky: evt.target.value }) }
           />
           { skyOption.label }
         </label>

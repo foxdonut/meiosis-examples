@@ -1,19 +1,29 @@
 import { conditions } from "../conditions"
 import { dateTime } from "../dateTime"
 import { temperature } from "../temperature"
-import { nest } from "../util"
+import { nest } from "../meiosis"
 
 export const app = {
   Initial: () => ({
     dateTime: dateTime.Initial(),
     conditions: conditions.Initial(),
-    airTemp: temperature.Initial(),
-    waterTemp: temperature.Initial()
+    temperature: {
+      air: temperature.Initial(),
+      water: temperature.Initial()
+    }
   }),
 
-  Actions: update => ({
-    airTemp: temperature.Actions(nest(update, "airTemp")),
-    waterTemp: temperature.Actions(nest(update, "waterTemp")),
-    saveDateTime: dateTimeString => update({ dateTimeString })
+  Actions: cell => ({
+    saveDateTime: dateTimeString => cell.update({ dateTimeString })
   })
 }
+
+export const createCells = rootCell => ({
+  root: rootCell,
+  dateTime: nest(rootCell, "dateTime"),
+  conditions: nest(rootCell, "conditions"),
+  temperature: {
+    air: nest(nest(rootCell, "temperature"), "air", temperature.Actions),
+    water: nest(nest(rootCell, "temperature"), "water", temperature.Actions)
+  }
+})

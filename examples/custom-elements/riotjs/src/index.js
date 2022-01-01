@@ -1,19 +1,17 @@
 import { component } from "riot"
+import { setupCell } from "./meiosis"
 import App from "./app/app.riot"
-import flyd from "flyd"
-import merge from "mergerino"
 
-import { app } from "./app"
+import { app, createCells } from "./app"
+
+const rootCell = setupCell(app)
+const cells = createCells(rootCell)
 
 // Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer"
 
-const update = flyd.stream()
-const states = flyd.scan(merge, app.Initial(), update)
-const actions = app.Actions(update)
-
 // Only for using Meiosis Tracer in development.
-meiosisTracer({ selector: "#tracer", rows: 25, streams: [states] })
+meiosisTracer({ selector: "#tracer", rows: 25, streams: [rootCell.getState] })
 
 const element = document.getElementById("app")
-component(App)(element, { states, update, actions })
+component(App)(element, { cells })
