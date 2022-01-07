@@ -1,7 +1,7 @@
 import flyd from "flyd"
 import merge from "mergerino"
 import meiosis from "meiosis-setup/mergerino"
-import { render } from "lit-html"
+import { render } from "lit"
 
 import { createApp } from "./app"
 import { router } from "./router"

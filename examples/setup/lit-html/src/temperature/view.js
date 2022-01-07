@@ -1,4 +1,4 @@
-import { html } from "lit-html"
+import { html } from "lit"
 
 export const Temperature = ({ state, id, actions }) => html`
   <div>

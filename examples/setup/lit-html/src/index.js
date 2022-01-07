@@ -1,6 +1,6 @@
 import flyd from "flyd"
 import merge from "mergerino"
-import { render } from "lit-html"
+import { render } from "lit"
 
 import { app, App } from "./app"
 

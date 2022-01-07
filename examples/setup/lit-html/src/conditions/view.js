@@ -1,4 +1,4 @@
-import { html } from "lit-html"
+import { html } from "lit"
 
 const conditionsOption = ({ state, id, actions, value, label }) => html`
   <label class="radio-inline">
