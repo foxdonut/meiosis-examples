@@ -3,7 +3,7 @@ import * as R from "ramda"
 import { v1 as uuid } from "uuid"
 import { nest } from "meiosis-setup/mergerino"
 
-import { RandomGif, randomGif } from "../random-gif"
+import { randomGif, RandomGif } from "../random-gif"
 import { buttonStyle } from "../util/ui"
 
 const hasGifs = state =>
@@ -19,25 +19,28 @@ const initial = {
   randomGifIds: []
 }
 
-const Actions = cell => ({
-  add: () => {
+const randomGifCells = {}
+
+const actions = {
+  add: cell => {
     const subId = uuid()
     const randomGifState = randomGif.initial
+    randomGifCells[subId] = nest(cell, subId)
 
     cell.update({ randomGifIds: R.append(subId), [subId]: randomGifState })
   },
 
-  remove: subId => {
+  remove: (cell, subId) => {
+    // delete randomGifCells[subId]
     cell.update({
       randomGifIds: list => R.remove(list.indexOf(subId), 1, list),
       [subId]: undefined
     })
   }
-})
+}
 
 export const randomGifList = {
-  initial,
-  Actions
+  initial
 }
 
 const RandomGifItem = {
@@ -45,8 +48,8 @@ const RandomGifItem = {
     m(
       "div.dib.mr2",
       { key: subId },
-      m(RandomGif, { cell: nest(cell, subId, randomGif.Actions) }),
-      m("button.bg-red" + buttonStyle, { onclick: () => cell.actions.remove(subId) }, "Remove")
+      m(RandomGif, { cell: randomGifCells[subId] }),
+      m("button.bg-red" + buttonStyle, { onclick: () => actions.remove(cell, subId) }, "Remove")
     )
 }
 
@@ -57,12 +60,12 @@ export const RandomGifList = {
     return m(
       "div.ba.b--blue.pa2.mt2",
       m("div", "Has gifs: ", hasGifs(state) ? "Yes" : "No"),
-      m("button.bg-green" + buttonStyle, { onclick: () => cell.actions.add() }, "Add"),
+      m("button.bg-green" + buttonStyle, { onclick: () => actions.add(cell) }, "Add"),
       m(
         "button.bg-red" + buttonStyle,
         {
           onclick: () =>
-            state.randomGifIds.map(subId => nest(cell, subId, randomGif.Actions).actions.reset())
+            state.randomGifIds.map(subId => randomGif.actions.reset(randomGifCells[subId]))
         },
         "Reset All"
       ),

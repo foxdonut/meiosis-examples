@@ -20,10 +20,10 @@ export const randomGifPairPair = {
 }
 
 export const RandomGifPairPair = {
-  view: ({ attrs: { cells } }) =>
+  view: ({ attrs: { cells, newGifGenerated } }) =>
     m(
       "div.ba.b--orange.pa2.mt2",
-      m(RandomGifPair, { cells: cells.one }),
-      m(RandomGifPair, { cells: cells.two })
+      m(RandomGifPair, { cells: cells.one, newGifGenerated }),
+      m(RandomGifPair, { cells: cells.two, newGifGenerated })
     )
 }

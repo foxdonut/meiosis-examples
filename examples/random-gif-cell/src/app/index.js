@@ -34,17 +34,19 @@ export const app = {
 export const createCells = rootCell => ({
   root: rootCell,
   counter: nest(rootCell, "counter"),
-  button: nest(rootCell, "button", button.Actions),
-  randomGif1: nest(rootCell, "randomGif1", randomGif.Actions),
-  randomGif2: nest(rootCell, "randomGif2", randomGif.Actions),
+  button: nest(rootCell, "button"),
+  randomGif1: nest(rootCell, "randomGif1"),
+  randomGif2: nest(rootCell, "randomGif2"),
   randomGifPair: randomGifPair.createCells(nest(rootCell, "randomGifPair")),
   randomGifPairPair: randomGifPairPair.createCells(nest(rootCell, "randomGifPairPair")),
-  randomGifList: nest(rootCell, "randomGifList", randomGifList.Actions)
+  randomGifList: nest(rootCell, "randomGifList")
 })
 
 export const App = {
-  view: ({ attrs: { cells } }) =>
-    m(
+  view: ({ attrs: { cells } }) => {
+    const newGifGenerated = cells.root.actions.newGifGenerated
+
+    return m(
       "div",
       m(Counter, { cell: cells.counter }),
 
@@ -52,18 +54,19 @@ export const App = {
       m(Button, { cell: cells.button }),
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { cell: cells.randomGif1 }),
+      m(RandomGif, { cell: cells.randomGif1, newGifGenerated }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { cell: cells.randomGif2 }),
+      m(RandomGif, { cell: cells.randomGif2, newGifGenerated }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { cells: cells.randomGifPair }),
+      m(RandomGifPair, { cells: cells.randomGifPair, newGifGenerated }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { cells: cells.randomGifPairPair }),
+      m(RandomGifPairPair, { cells: cells.randomGifPairPair, newGifGenerated }),
 
       m("div.mt2", "Random Gif List:"),
       m(RandomGifList, { cell: cells.randomGifList })
     )
+  }
 }

@@ -10,8 +10,8 @@ const initial = {
 }
 
 const createCells = cell => ({
-  first: nest(cell, "first", randomGif.Actions),
-  second: nest(cell, "second", randomGif.Actions)
+  first: nest(cell, "first"),
+  second: nest(cell, "second")
 })
 
 export const randomGifPair = {
@@ -20,10 +20,10 @@ export const randomGifPair = {
 }
 
 export const RandomGifPair = {
-  view: ({ attrs: { cells } }) =>
+  view: ({ attrs: { cells, newGifGenerated } }) =>
     m(
       "div.ba.b--purple.pa2.mt2",
-      m("div.dib", m(RandomGif, { cell: cells.first })),
-      m("div.dib.ml2", m(RandomGif, { cell: cells.second }))
+      m("div.dib", m(RandomGif, { cell: cells.first, newGifGenerated })),
+      m("div.dib.ml2", m(RandomGif, { cell: cells.second, newGifGenerated }))
     )
 }

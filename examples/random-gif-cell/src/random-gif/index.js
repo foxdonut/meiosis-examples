@@ -18,26 +18,28 @@ const initial = {
   tag: ""
 }
 
-const Actions = cell => ({
-  editTag: tag => cell.update({ tag }),
+const actions = {
+  editTag: (cell, tag) => cell.update({ tag }),
 
-  newGif: () => {
+  newGif: (cell, newGifGenerated) => {
     cell.update({ image: Loaded.N() })
 
     m.request({ url: gif_new_url, params: { api_key, tag: cell.getState().tag } })
       .then(response => {
         cell.update({ image: Loaded.Y(Success.Y(Image.Y(response.data.images.original.url))) })
-        cell.root.actions.newGifGenerated()
+        if (newGifGenerated) {
+          newGifGenerated()
+        }
       })
       .catch(() => cell.update({ image: Loaded.Y(Success.N()) }))
   },
 
-  reset: () => cell.update({ image: Loaded.Y(Success.Y(Image.N())) })
-})
+  reset: cell => cell.update({ image: Loaded.Y(Success.Y(Image.N())) })
+}
 
 export const randomGif = {
   initial,
-  Actions
+  actions
 }
 
 const imgsrc = image =>
@@ -53,7 +55,7 @@ const imgsrc = image =>
   })(image)
 
 export const RandomGif = {
-  view: ({ attrs: { cell } }) => {
+  view: ({ attrs: { cell, newGifGenerated } }) => {
     const state = cell.getState()
 
     return m(
@@ -61,10 +63,14 @@ export const RandomGif = {
       m("span.mr2", "Tag:"),
       m("input[type=text]", {
         value: state.tag,
-        onkeyup: evt => cell.actions.editTag(evt.target.value)
+        onkeyup: evt => actions.editTag(cell, evt.target.value)
       }),
-      m("button.bg-blue" + buttonStyle, { onclick: () => cell.actions.newGif() }, "Random Gif"),
-      m("button.bg-red" + buttonStyle, { onclick: () => cell.actions.reset() }, "Reset"),
+      m(
+        "button.bg-blue" + buttonStyle,
+        { onclick: () => actions.newGif(cell, newGifGenerated) },
+        "Random Gif"
+      ),
+      m("button.bg-red" + buttonStyle, { onclick: () => actions.reset(cell) }, "Reset"),
       m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(state.image) }))
     )
   }

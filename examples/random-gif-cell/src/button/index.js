@@ -6,13 +6,12 @@ const initial = {
   active: false
 }
 
-const Actions = cell => ({
-  buttonToggle: () => cell.update({ active: x => !x })
-})
+const actions = {
+  buttonToggle: cell => cell.update({ active: x => !x })
+}
 
 export const button = {
-  initial,
-  Actions
+  initial
 }
 
 export const Button = {
@@ -20,6 +19,6 @@ export const Button = {
     const state = cell.getState()
     const bc = state.active ? "green" : "red"
     const label = state.active ? "Active" : "Inactive"
-    return m("button.bg-" + bc + buttonStyle, { onclick: () => cell.actions.buttonToggle() }, label)
+    return m("button.bg-" + bc + buttonStyle, { onclick: () => actions.buttonToggle(cell) }, label)
   }
 }
