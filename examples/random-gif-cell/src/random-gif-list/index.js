@@ -31,6 +31,7 @@ const actions = {
   },
 
   remove: (cell, subId) => {
+    // commented out so that Meiosis Tracer works when going back to previous states
     // delete randomGifCells[subId]
     cell.update({
       randomGifIds: list => R.remove(list.indexOf(subId), 1, list),
