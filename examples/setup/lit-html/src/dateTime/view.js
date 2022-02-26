@@ -1,4 +1,4 @@
-import { html } from "lit-html"
+import { html } from "lit"
 
 const getErrorMessage = (state, field) =>
   (state.errors && state.errors.dateTime && state.errors.dateTime[field]) || " "

@@ -1,1 +1,0 @@
-export { Results } from "./view"

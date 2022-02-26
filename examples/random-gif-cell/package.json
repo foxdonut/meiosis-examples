@@ -1,7 +1,7 @@
 {
-  "name": "todomvc",
+  "name": "random-gif-cell",
   "version": "1.0.0",
-  "description": "meiosis-examples todomvc",
+  "description": "meiosis-examples random-gif",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -14,11 +14,9 @@
   },
   "keywords": [
     "example",
-    "lit-html",
     "meiosis",
-    "reactive",
-    "routing",
-    "todomvc"
+    "mithril",
+    "reactive"
   ],
   "author": "foxdonut",
   "license": "MIT",
@@ -27,18 +25,19 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "flyd": "^0.2.8",
-    "lit": "^2.1.1",
-    "meiosis-setup": "^5.1.2",
+    "meiosis-setup": "^6.0.0-beta.2",
     "mergerino": "^0.4.0",
-    "url-mapper": "^2.0.0"
+    "mithril": "^2.0.4",
+    "ramda": "0.27.1",
+    "static-sum-type": "^0.18.1",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
-    "babel-loader": "^8.2.3",
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "babel-loader": "^8.2.2",
     "meiosis-tracer": "^4.0.0",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
+    "webpack": "^5.8.0",
+    "webpack-cli": "^4.2.0"
   }
 }

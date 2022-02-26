@@ -1,4 +1,4 @@
-import { html } from "lit-html"
+import { html } from "lit"
 
 export const header = {
   view: ({ state, actions }) => html`

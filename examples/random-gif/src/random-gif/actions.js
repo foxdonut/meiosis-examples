@@ -18,7 +18,7 @@ export const Actions = update => ({
       .then(response => {
         update({
           [id]: {
-            image: Loaded.Y(Success.Y(Image.Y(response.data.image_url)))
+            image: Loaded.Y(Success.Y(Image.Y(response.data.images.original.url)))
           }
         })
         self.newGifGenerated()
