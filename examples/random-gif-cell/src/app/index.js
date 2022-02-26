@@ -1,5 +1,4 @@
 // @ts-check
-import { nest } from "meiosis-setup/mergerino"
 import m from "mithril"
 
 import { button, Button } from "../button"
@@ -31,42 +30,31 @@ export const app = {
   Actions
 }
 
-export const createCells = rootCell => ({
-  root: rootCell,
-  counter: nest(rootCell, "counter"),
-  button: nest(rootCell, "button"),
-  randomGif1: nest(rootCell, "randomGif1"),
-  randomGif2: nest(rootCell, "randomGif2"),
-  randomGifPair: randomGifPair.createCells(nest(rootCell, "randomGifPair")),
-  randomGifPairPair: randomGifPairPair.createCells(nest(rootCell, "randomGifPairPair")),
-  randomGifList: nest(rootCell, "randomGifList")
-})
-
 export const App = {
-  view: ({ attrs: { cells } }) => {
-    const newGifGenerated = cells.root.actions.newGifGenerated
+  view: ({ attrs: { cell } }) => {
+    const newGifGenerated = cell.actions.newGifGenerated
 
     return m(
       "div",
-      m(Counter, { cell: cells.counter }),
+      m(Counter, { cell: cell.nest("counter") }),
 
       m("div.mt2", "Button:"),
-      m(Button, { cell: cells.button }),
+      m(Button, { cell: cell.nest("button") }),
 
       m("div.mt2", "Random Gif:"),
-      m(RandomGif, { cell: cells.randomGif1, newGifGenerated }),
+      m(RandomGif, { cell: cell.nest("randomGif1"), newGifGenerated }),
 
       m("div.mt2", "Another Random Gif:"),
-      m(RandomGif, { cell: cells.randomGif2, newGifGenerated }),
+      m(RandomGif, { cell: cell.nest("randomGif2"), newGifGenerated }),
 
       m("div.mt2", "Random Gif Pair:"),
-      m(RandomGifPair, { cells: cells.randomGifPair, newGifGenerated }),
+      m(RandomGifPair, { cell: cell.nest("randomGifPair"), newGifGenerated }),
 
       m("div.mt2", "Random Gif Pair Pair:"),
-      m(RandomGifPairPair, { cells: cells.randomGifPairPair, newGifGenerated }),
+      m(RandomGifPairPair, { cell: cell.nest("randomGifPairPair"), newGifGenerated }),
 
       m("div.mt2", "Random Gif List:"),
-      m(RandomGifList, { cell: cells.randomGifList })
+      m(RandomGifList, { cell: cell.nest("randomGifList") })
     )
   }
 }

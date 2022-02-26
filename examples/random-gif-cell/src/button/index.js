@@ -16,9 +16,8 @@ export const button = {
 
 export const Button = {
   view: ({ attrs: { cell } }) => {
-    const state = cell.getState()
-    const bc = state.active ? "green" : "red"
-    const label = state.active ? "Active" : "Inactive"
+    const bc = cell.state.active ? "green" : "red"
+    const label = cell.state.active ? "Active" : "Inactive"
     return m("button.bg-" + bc + buttonStyle, { onclick: () => actions.buttonToggle(cell) }, label)
   }
 }

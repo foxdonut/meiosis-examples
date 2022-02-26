@@ -11,5 +11,5 @@ export const counter = {
 }
 
 export const Counter = {
-  view: ({ attrs: { cell } }) => m("div", cell.getState().label + " " + cell.getState().value)
+  view: ({ attrs: { cell } }) => m("div", cell.state.label + " " + cell.state.value)
 }

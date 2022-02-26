@@ -24,7 +24,7 @@ const actions = {
   newGif: (cell, newGifGenerated) => {
     cell.update({ image: Loaded.N() })
 
-    m.request({ url: gif_new_url, params: { api_key, tag: cell.getState().tag } })
+    m.request({ url: gif_new_url, params: { api_key, tag: cell.state.tag } })
       .then(response => {
         cell.update({ image: Loaded.Y(Success.Y(Image.Y(response.data.images.original.url))) })
         if (newGifGenerated) {
@@ -55,14 +55,12 @@ const imgsrc = image =>
   })(image)
 
 export const RandomGif = {
-  view: ({ attrs: { cell, newGifGenerated } }) => {
-    const state = cell.getState()
-
-    return m(
+  view: ({ attrs: { cell, newGifGenerated } }) =>
+    m(
       "div.ba.b--green.pa2.mt2",
       m("span.mr2", "Tag:"),
       m("input[type=text]", {
-        value: state.tag,
+        value: cell.state.tag,
         onkeyup: evt => actions.editTag(cell, evt.target.value)
       }),
       m(
@@ -71,7 +69,6 @@ export const RandomGif = {
         "Random Gif"
       ),
       m("button.bg-red" + buttonStyle, { onclick: () => actions.reset(cell) }, "Reset"),
-      m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(state.image) }))
+      m("div.mt2", m("img", { width: 200, height: 200, src: imgsrc(cell.state.image) }))
     )
-  }
 }
