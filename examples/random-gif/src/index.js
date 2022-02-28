@@ -1,7 +1,6 @@
 // @ts-check
-import merge from "mergerino"
 import m from "mithril"
-import Stream from "mithril/stream"
+import stream from "mithril/stream"
 import { setup } from "meiosis-setup/mergerino"
 
 import { app, App } from "./app"
@@ -9,12 +8,7 @@ import { app, App } from "./app"
 // Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer"
 
-const stream = {
-  stream: Stream,
-  scan: (acc, init, stream) => Stream.scan(acc, init, stream)
-}
-
-const { states, getCell } = setup({ stream, merge, app })
+const { states, getCell } = setup({ stream, app })
 
 // Only for using Meiosis Tracer in development.
 meiosisTracer({

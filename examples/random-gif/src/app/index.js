@@ -8,13 +8,12 @@ import { randomGifPair, RandomGifPair } from "../random-gif-pair"
 import { randomGifPairPair, RandomGifPairPair } from "../random-gif-pair-pair"
 import { randomGifList, RandomGifList } from "../random-gif-list"
 
-const Actions = cell => ({
-  newGifGenerated: () => {
-    const state = cell.getState()
-    const increment = state.counter.value > 3 && state.button.active ? 2 : 1
+const actions = {
+  newGifGenerated: cell => {
+    const increment = cell.state.counter.value > 3 && cell.state.button.active ? 2 : 1
     cell.update({ counter: { value: x => x + increment } })
   }
-})
+}
 
 export const app = {
   // Note: using the same initial state multiple times only works with immutability.
@@ -26,13 +25,12 @@ export const app = {
     randomGifPair: randomGifPair.initial,
     randomGifPairPair: randomGifPairPair.initial,
     randomGifList: randomGifList.initial
-  },
-  Actions
+  }
 }
 
 export const App = {
   view: ({ attrs: { cell } }) => {
-    const newGifGenerated = cell.actions.newGifGenerated
+    const newGifGenerated = () => actions.newGifGenerated(cell)
 
     return m(
       "div",
