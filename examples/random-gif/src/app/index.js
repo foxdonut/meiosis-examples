@@ -16,15 +16,14 @@ const actions = {
 }
 
 export const app = {
-  // Note: using the same initial state multiple times only works with immutability.
-  initial: {
-    button: button.initial,
-    counter: counter.Initial({ label: "Counter:" }),
-    randomGif1: randomGif.initial,
-    randomGif2: randomGif.initial,
-    randomGifPair: randomGifPair.initial,
-    randomGifPairPair: randomGifPairPair.initial,
-    randomGifList: randomGifList.initial
+  nested: {
+    button,
+    counter,
+    randomGif1: randomGif,
+    randomGif2: randomGif,
+    randomGifPair: randomGifPair,
+    randomGifPairPair: randomGifPairPair,
+    randomGifList
   }
 }
 

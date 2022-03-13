@@ -7,7 +7,7 @@ const Initial = ({ label }) => ({
 })
 
 export const counter = {
-  Initial
+  initial: Initial({ label: "Counter:" })
 }
 
 export const Counter = {

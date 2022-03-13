@@ -3,13 +3,11 @@ import m from "mithril"
 
 import { randomGifPair, RandomGifPair } from "../random-gif-pair"
 
-const initial = {
-  one: randomGifPair.initial,
-  two: randomGifPair.initial
-}
-
 export const randomGifPairPair = {
-  initial
+  nested: {
+    one: randomGifPair,
+    two: randomGifPair
+  }
 }
 
 export const RandomGifPairPair = {
