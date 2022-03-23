@@ -1,5 +1,6 @@
 /*global __dirname*/
 var path = require("path")
+var webpack = require("webpack")
 
 module.exports = {
   mode: "development",
@@ -21,5 +22,14 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      process: {
+        env: {
+          NODE_DEBUG: false
+        }
+      }
+    })
+  ]
 }
