@@ -1,20 +1,20 @@
 import _ from "lodash/fp"
 
-export const Actions = update => ({
-  increment: (id, amount) => update(state => _.update([id, "value"], x => x + amount, state)),
+export const actions = {
+  increment: (cell, amount) => cell.update(state => _.update("value", x => x + amount, state)),
 
-  changeUnits: id =>
-    update(state =>
-      state[id].units === "C"
+  changeUnits: cell =>
+    cell.update(state =>
+      state.units === "C"
         ? _.set(
-            [id, "units"],
+            "units",
             "F",
-            _.update([id, "value"], value => Math.round((value * 9) / 5 + 32), state)
+            _.update("value", value => Math.round((value * 9) / 5 + 32), state)
           )
         : _.set(
-            [id, "units"],
+            "units",
             "C",
-            _.update([id, "value"], value => Math.round(((value - 32) / 9) * 5), state)
+            _.update("value", value => Math.round(((value - 32) / 9) * 5), state)
           )
     )
-})
+}

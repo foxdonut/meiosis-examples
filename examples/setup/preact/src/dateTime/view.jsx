@@ -9,49 +9,51 @@ import "preact-material-components/FormField/style.css"
 import "preact-material-components/TextField/style.css"
 import "preact-material-components/Theme/style.css"
 
+import { actions } from "./actions"
+
 const getErrorMessage = (state, field) => _.get(["errors", "dateTime", field], state) || " "
 
-export const DateTime = ({ state, id, actions }) => (
+export const DateTime = ({ cell }) => (
   <div>
     <Formfield>
       <TextField
         label="Date:"
         type="date"
-        value={state[id].date}
+        value={cell.state.date}
         required
-        helperText={getErrorMessage(state, "date")}
+        helperText={getErrorMessage(cell.state, "date")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onInput={evt => actions.editDate(id, evt.target.value)}
+        onInput={evt => actions.editDate(cell, evt.target.value)}
       />
     </Formfield>
     <Formfield>
       <TextField
         label="Hour:"
-        value={state[id].hour}
+        value={cell.state.hour}
         required
-        helperText={getErrorMessage(state, "hour")}
+        helperText={getErrorMessage(cell.state, "hour")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onInput={evt => actions.editHour(id, evt.target.value)}
+        onInput={evt => actions.editHour(cell, evt.target.value)}
       />
     </Formfield>
     <Formfield>
       <TextField
         label="Minute:"
-        value={state[id].minute}
+        value={cell.state.minute}
         required
-        helperText={getErrorMessage(state, "minute")}
+        helperText={getErrorMessage(cell.state, "minute")}
         helperTextPersistent={true}
         helperTextValidationMsg={true}
-        onInput={evt => actions.editMinute(id, evt.target.value)}
+        onInput={evt => actions.editMinute(cell, evt.target.value)}
       />
     </Formfield>
     <div>
-      <Button ripple onClick={() => actions.validate()}>
+      <Button ripple onClick={() => actions.validate(cell)}>
         Validate
       </Button>
-      <span style={{ marginLeft: "0.4rem" }}>{state.message}</span>
+      <span style={{ marginLeft: "0.4rem" }}>{cell.state.message}</span>
     </div>
   </div>
 )

@@ -8,33 +8,34 @@ import "preact-material-components/FormField/style.css"
 import "preact-material-components/Radio/style.css"
 import "preact-material-components/Theme/style.css"
 
-const conditionsOption = ({ state, id, actions, value, label }) => (
+import { actions } from "./actions"
+
+const conditionsOption = ({ cell, value, label }) => (
   <Formfield>
     <Radio
       id={value}
       name="conditions"
       value={value}
-      checked={state[id].sky === value}
-      onChange={evt => actions.changeSky(id, evt.target.value)}
+      checked={cell.state.sky === value}
+      onChange={evt => actions.changeSky(cell, evt.target.value)}
     />
     <label htmlFor={value}>{label}</label>
   </Formfield>
 )
 
-export const Conditions = ({ state, id, actions }) => (
+export const Conditions = ({ cell }) => (
   <div>
     <Formfield>
       <Checkbox
-        id="precipitations"
-        checked={state[id].precipitations}
-        onChange={evt => actions.togglePrecipitations(id, evt.target.checked)}
+        checked={cell.state.precipitations}
+        onChange={evt => actions.togglePrecipitations(cell, evt.target.checked)}
       />
       <label htmlFor="precipitations">Precipitations</label>
     </Formfield>
     <div>
-      {conditionsOption({ state, id, actions, value: "SUNNY", label: "Sunny" })}
-      {conditionsOption({ state, id, actions, value: "CLOUDY", label: "Cloudy" })}
-      {conditionsOption({ state, id, actions, value: "MIX", label: "Mix of sun and clouds" })}
+      {conditionsOption({ cell, value: "SUNNY", label: "Sunny" })}
+      {conditionsOption({ cell, value: "CLOUDY", label: "Cloudy" })}
+      {conditionsOption({ cell, value: "MIX", label: "Mix of sun and clouds" })}
     </div>
   </div>
 )

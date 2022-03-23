@@ -6,23 +6,25 @@ import "preact-material-components/Button/style.css"
 import "preact-material-components/FormField/style.css"
 import "preact-material-components/Theme/style.css"
 
-export const Temperature = ({ state, id, actions }) => (
+import { actions } from "./actions"
+
+export const Temperature = ({ cell }) => (
   <div>
     <div style={{ marginTop: "0.8rem" }}>
       <Formfield>
         <label>
-          Temperature: {state[id].value}&deg; {state[id].units}
+          Temperature: {cell.state.value}&deg; {cell.state.units}
         </label>
       </Formfield>
     </div>
     <div style={{ marginTop: "0.8rem" }}>
-      <Button raised onClick={() => actions.increment(id, 1)} style={{ marginRight: "0.4rem" }}>
+      <Button raised onClick={() => actions.increment(cell, 1)} style={{ marginRight: "0.4rem" }}>
         Increment
       </Button>
-      <Button raised onClick={() => actions.increment(id, -1)} style={{ marginRight: "0.4rem" }}>
+      <Button raised onClick={() => actions.increment(cell, -1)} style={{ marginRight: "0.4rem" }}>
         Decrement
       </Button>
-      <Button outlined onClick={() => actions.changeUnits(id)}>
+      <Button outlined onClick={() => actions.changeUnits(cell)}>
         Change Units
       </Button>
     </div>

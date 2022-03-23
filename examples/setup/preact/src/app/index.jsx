@@ -1,5 +1,4 @@
 import { h } from "preact"
-import { useState } from "preact/hooks"
 
 import { conditions, Conditions } from "../conditions"
 import { dateTime, DateTime } from "../dateTime"
@@ -9,34 +8,18 @@ export const app = {
   initial: {
     dateTime: dateTime.initial,
     conditions: conditions.initial,
-    "temperature:air": temperature.initial,
-    "temperature:water": temperature.initial
-  },
-
-  Actions: update =>
-    Object.assign(
-      {},
-      conditions.Actions(update),
-      dateTime.Actions(update),
-      temperature.Actions(update)
-    )
-}
-
-export const App = ({ states, actions }) => {
-  const [init, setInit] = useState(false)
-  const [state, setState] = useState(states())
-
-  if (!init) {
-    setInit(true)
-    states.map(setState)
+    temperature: {
+      air: temperature.initial,
+      water: temperature.initial
+    }
   }
-
-  return (
-    <div>
-      <DateTime state={state} id="dateTime" actions={actions} />
-      <Conditions state={state} id="conditions" actions={actions} />
-      <Temperature state={state} id="temperature:air" actions={actions} />
-      <Temperature state={state} id="temperature:water" actions={actions} />
-    </div>
-  )
 }
+
+export const App = ({ cell }) => (
+  <div>
+    <DateTime cell={cell.nest("dateTime")} />
+    <Conditions cell={cell.nest("conditions")} />
+    <Temperature cell={cell.nest("temperature").nest("air")} />
+    <Temperature cell={cell.nest("temperature").nest("water")} />
+  </div>
+)
