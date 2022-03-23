@@ -6,7 +6,7 @@
   "main": "src/index.jsx",
   "scripts": {
     "start": "webpack",
-    "watch": "webpack --progress --colors --watch"
+    "watch": "webpack --progress --watch"
   },
   "repository": {
     "type": "git",
@@ -26,22 +26,18 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
     "flyd": "^0.2.8",
-    "joi": "^17.1.1",
-    "joi-browser": "^13.4.0",
-    "joi-date-extensions": "^1.2.0",
     "lodash": "^4.17.21",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
-    "babel-loader": "^8.1.0",
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.4",
     "meiosis-tracer": "^4.0.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   }
 }

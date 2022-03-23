@@ -1,9 +1,9 @@
 {
-  "name": "meiosis-example-setup-mithril",
+  "name": "meiosis-example-setup-nesting",
   "version": "1.0.0",
-  "description": "meiosis-examples setup mithril",
+  "description": "meiosis-examples setup nesting",
   "private": true,
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "webpack",
     "watch": "webpack --progress --watch"
@@ -15,7 +15,7 @@
   "keywords": [
     "example",
     "meiosis",
-    "mithril",
+    "preact",
     "reactive",
     "virtual dom"
   ],
@@ -26,15 +26,18 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "bss": "^1.6.4",
-    "mergerino": "^0.4.0",
-    "mithril": "^2.0.4",
-    "polythene-css": "^1.7.5",
-    "polythene-mithril": "^1.7.5"
+    "flyd": "^0.2.8",
+    "joi": "^17.6.0",
+    "joi-browser": "^13.4.0",
+    "joi-date-extensions": "^1.2.0",
+    "lodash": "^4.17.21",
+    "preact": "^10.6.6",
+    "preact-material-components": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.4",
     "css-loader": "^6.7.1",
     "meiosis-tracer": "^4.0.0",

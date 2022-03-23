@@ -1,7 +1,7 @@
 {
-  "name": "meiosis-example-setup-mithril",
+  "name": "meiosis-example-setup-services",
   "version": "1.0.0",
-  "description": "meiosis-examples setup mithril",
+  "description": "meiosis-examples setup services",
   "private": true,
   "main": "src/index.js",
   "scripts": {
@@ -27,19 +27,22 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "bss": "^1.6.4",
+    "joi": "^17.4.0",
+    "joi-browser": "^13.4.0",
+    "joi-date-extensions": "^1.2.0",
     "mergerino": "^0.4.0",
     "mithril": "^2.0.4",
     "polythene-css": "^1.7.5",
     "polythene-mithril": "^1.7.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/preset-env": "^7.16.11",
-    "babel-loader": "^8.2.4",
-    "css-loader": "^6.7.1",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.2",
     "meiosis-tracer": "^4.0.0",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2"
+    "style-loader": "^2.0.0",
+    "webpack": "^5.22.0",
+    "webpack-cli": "^4.5.0"
   }
 }
