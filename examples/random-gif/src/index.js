@@ -8,15 +8,15 @@ import { app, App } from "./app"
 // Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer"
 
-const { states, getCell } = setup({ stream, app })
+const cells = setup({ stream, app })
 
 // Only for using Meiosis Tracer in development.
 meiosisTracer({
   selector: "#tracer",
-  streams: [{ label: "states", stream: states }],
+  streams: [{ label: "states", stream: cells.map(cell => cell.state) }],
   rows: 35
 })
 
-m.mount(document.getElementById("app"), { view: () => m(App, { cell: getCell() }) })
+m.mount(document.getElementById("app"), { view: () => m(App, { cell: cells() }) })
 
-states.map(() => m.redraw())
+cells.map(() => m.redraw())
