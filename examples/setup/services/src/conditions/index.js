@@ -1,9 +1,7 @@
-import { Initial } from "./initial"
-import { Actions } from "./actions"
+import { initial } from "./initial"
 
 export const conditions = {
-  Initial,
-  Actions
+  initial
 }
 
 export { Conditions } from "./view"

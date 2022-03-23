@@ -1,5 +1,5 @@
-export const Initial = () => ({
+export const initial = {
   date: "",
   hour: "",
   minute: ""
-})
+}

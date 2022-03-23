@@ -4,57 +4,37 @@ import stream from "mithril/stream"
 
 import { app, App } from "./app"
 
-// Only for using Meiosis Tracer in development.
-import meiosisTracer from "meiosis-tracer"
+const dropRepeats = (states, selector = state => state) => {
+  let prev = undefined
+  const result = stream()
+
+  states.map(state => {
+    const next = selector(state)
+    if (next !== prev) {
+      prev = next
+      result(state)
+    }
+  })
+  return result
+}
 
 const update = stream()
-const states = stream.scan(merge, app.Initial(), update)
-const actions = app.Actions(update)
+const states = stream.scan(merge, app.initial, update)
 
-const pathGet = (object, path) =>
-  path.reduce((obj, key) => (obj == undefined ? undefined : obj[key]), object)
-
-const intoPath = (path, value) => ({
-  [path[0]]: path.length === 1 ? value : intoPath(path.slice(1), value)
+app.services.forEach(service => {
+  dropRepeats(states, service.onchange).map(state => service.run({ state, update }))
 })
 
-const contextCache = {}
-let root
+const cells = dropRepeats(states).map(state => ({ state, update }))
 
-const nest = prop => {
-  if (prop) {
-    const path = [].concat(prop)
-    if (!contextCache[path]) {
-      const getState = () => pathGet(states(), path)
-      const localUpdate = patch => update(intoPath(path, patch))
-      const localActions = app.Actions(localUpdate)
-
-      contextCache[path] = {
-        getState,
-        update: localUpdate,
-        actions: localActions,
-        nest: next => nest(path.concat(next)),
-        root
-      }
-    }
-    return contextCache[path]
-  }
-  return root
-}
-
-root = {
-  getState: () => states(),
-  update,
-  actions,
-  nest,
-  root
-}
-
+// vv Only for using Meiosis Tracer in development.
 // Only for using Meiosis Tracer in development.
-meiosisTracer({ selector: "#tracer", rows: 30, cols: 40, streams: [states] })
+import meiosisTracer from "meiosis-tracer"
+meiosisTracer({ selector: "#tracer", rows: 25, streams: [states] })
+// ^^ Only for using Meiosis Tracer in development.
 
 m.mount(document.getElementById("app"), {
-  view: () => m(App, { context: nest() })
+  view: () => m(App, { cell: cells() })
 })
 
 states.map(() => m.redraw())

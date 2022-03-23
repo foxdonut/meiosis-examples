@@ -2,12 +2,14 @@ import m from "mithril"
 import b from "bss"
 import { Button, TextField } from "polythene-mithril"
 
+import { actions } from "./actions"
+
 const getErrorMessage = (state, field) =>
   (state.errors && state.errors.dateTime && state.errors.dateTime[field]) || " "
 
 export const DateTime = {
-  view: ({ attrs: { context } }) => {
-    const state = context.getState()
+  view: ({ attrs: { cell } }) => {
+    const state = cell.state
 
     return m(
       "div",
@@ -16,7 +18,7 @@ export const DateTime = {
         type: "date",
         value: state.date,
         events: {
-          oninput: evt => context.actions.editDate(evt.target.value)
+          oninput: evt => actions.editDate(cell, evt.target.value)
         },
         help: getErrorMessage(state, "date")
       }),
@@ -26,7 +28,7 @@ export const DateTime = {
           label: "Hour:",
           value: state.hour,
           events: {
-            oninput: evt => context.actions.editHour(evt.target.value)
+            oninput: evt => actions.editHour(cell, evt.target.value)
           },
           help: getErrorMessage(state, "hour")
         })
@@ -37,7 +39,7 @@ export const DateTime = {
           label: "Minute:",
           value: state.minute,
           events: {
-            oninput: evt => context.actions.editMinute(evt.target.value)
+            oninput: evt => actions.editMinute(cell, evt.target.value)
           },
           help: getErrorMessage(state, "minute")
         })
@@ -47,7 +49,7 @@ export const DateTime = {
         m(Button, {
           label: "Validate",
           border: true,
-          events: { onclick: () => context.actions.validate(context.root.get()) }
+          events: { onclick: () => actions.validate(cell) }
         }),
         m("span" + b.ml(8), state.message)
       )

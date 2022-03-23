@@ -1,9 +1,7 @@
-import { Initial } from "./initial"
-import { Actions } from "./actions"
+import { initial } from "./initial"
 
 export const temperature = {
-  Initial,
-  Actions
+  initial
 }
 
 export { Temperature } from "./view"

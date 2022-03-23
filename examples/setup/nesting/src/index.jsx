@@ -21,6 +21,7 @@ const nestCell = (getState, parentUpdate) => prop => {
 
 const update = flyd.stream()
 const states = flyd.scan((state, patch) => patch(state), app.initial, update)
+
 const nest = nestCell(states, update)
 const cells = states.map(state => ({ state, update, nest }))
 

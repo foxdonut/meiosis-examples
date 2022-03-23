@@ -9,32 +9,51 @@ import "polythene-css/dist/polythene.css"
 import "polythene-css/dist/polythene-typography.css"
 
 export const app = {
-  Initial: () => ({
-    dateTime: dateTime.Initial(),
-    conditions: conditions.Initial(),
-    airTemperature: temperature.Initial(),
-    waterTemperature: temperature.Initial()
-  }),
-
-  Actions: update =>
-    Object.assign(
-      {},
-      conditions.Actions(update),
-      dateTime.Actions(update),
-      temperature.Actions(update)
-    )
+  initial: {
+    dateTime: dateTime.initial,
+    conditions: conditions.initial,
+    temperature: temperature.initial,
+    partOfDay: "",
+    feelsLike: ""
+  },
+  services: [
+    {
+      onchange: state => state.dateTime.hour,
+      run: cell => {
+        if (cell.state.dateTime.hour.length > 0) {
+          cell.update({
+            partOfDay: cell.state.dateTime.hour < 12 ? "Morning" : "Afternoon / Evening"
+          })
+        } else {
+          cell.update({ partOfDay: "" })
+        }
+      }
+    },
+    {
+      onchange: state => state.temperature.value,
+      run: cell => {
+        if (
+          (cell.state.temperature.units === "C" && cell.state.temperature.value > 24) ||
+          (cell.state.temperature.units === "F" && cell.state.temperature.value > 75)
+        ) {
+          cell.update({ feelsLike: "Warm/Hot" })
+        } else {
+          cell.update({ feelsLike: "Cold/Cool" })
+        }
+      }
+    }
+  ]
 }
 
 export const App = {
-  view: ({ attrs: { context } }) =>
+  view: ({ attrs: { cell } }) =>
     m(
       "div",
-      m("div" + b.f("left").w("40%").pr(40), m(DateTime, { context: context.nest("dateTime") })),
       m(
-        "div" + b.f("left"),
-        m(Conditions, { context: context.nest("conditions") }),
-        m(Temperature, { context: context.nest("airTemperature") }),
-        m(Temperature, { context: context.nest("waterTemperature") })
-      )
+        "div" + b.f("left").w("25%").pr(40),
+        m(DateTime, { cell }),
+        m("div", cell.state.partOfDay, " ", cell.state.feelsLike)
+      ),
+      m("div" + b.f("left"), m(Conditions, { cell }), m(Temperature, { cell }))
     )
 }

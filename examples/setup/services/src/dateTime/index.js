@@ -1,9 +1,7 @@
-import { Initial } from "./initial"
-import { Actions } from "./actions"
+import { initial } from "./initial"
 
 export const dateTime = {
-  Initial,
-  Actions
+  initial
 }
 
 export { DateTime } from "./view"

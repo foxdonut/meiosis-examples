@@ -1,5 +1,5 @@
-export const Actions = update => ({
-  togglePrecipitations: value => update({ precipitations: value }),
+export const actions = {
+  togglePrecipitations: (cell, value) => cell.update({ conditions: { precipitations: value } }),
 
-  changeSky: value => update({ sky: value })
-})
+  changeSky: (cell, value) => cell.update({ conditions: { sky: value } })
+}

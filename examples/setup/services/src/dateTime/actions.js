@@ -1,17 +1,17 @@
 import { validateInput } from "../validation"
 
-export const Actions = update => ({
-  editDate: value => update({ date: value }),
+export const actions = {
+  editDate: (cell, value) => cell.update({ dateTime: { date: value } }),
 
-  editHour: value => update({ hour: value }),
+  editHour: (cell, value) => cell.update({ dateTime: { hour: value } }),
 
-  editMinute: value => update({ minute: value }),
+  editMinute: (cell, value) => cell.update({ dateTime: { minute: value } }),
 
-  validate: state => {
-    const errors = validateInput(state)
-    update({
+  validate: cell => {
+    const errors = validateInput(cell.state)
+    cell.update({
       errors: () => errors,
       message: (errors && Object.keys(errors).length > 0 && "Invalid!") || "Valid!"
     })
   }
-})
+}
