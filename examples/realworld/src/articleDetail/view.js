@@ -83,7 +83,8 @@ export const ArticleDetail = ({ cell }) => {
 
   return [
     ".article-page",
-    !state.route.changed && [
+    // FIXME
+    article && [
       ".banner",
       [".container", ["h1", article.title], articleMeta(cell, article, username)]
     ],
@@ -93,7 +94,8 @@ export const ArticleDetail = ({ cell }) => {
         ".row.article-content",
         [
           ".col-md-12",
-          state.route.changed
+          // FIXME
+          !article
             ? "Loading..."
             : [
                 ["h2", article.description],
@@ -109,7 +111,8 @@ export const ArticleDetail = ({ cell }) => {
               ]
         ]
       ],
-      !state.route.changed && [
+      // FIXME
+      article && [
         ["hr"],
         [".article-actions", articleMeta(cell, article, username)],
         [

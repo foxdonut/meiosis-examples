@@ -37,8 +37,8 @@ export const ArticleList = ({ cell }) => [
                     "btn-outline-primary": !article.favorited
                   },
                   onClick: article.favorited
-                    ? () => actions.unfavoriteArticle(cell.state, article.slug)
-                    : () => actions.favoriteArticle(cell.state, article.slug)
+                    ? () => actions.unfavoriteArticle(cell, article.slug)
+                    : () => actions.favoriteArticle(cell, article.slug)
                 },
                 ["i.ion-heart"],
                 ["span", ` ${article.favoritesCount} `]
