@@ -9,13 +9,15 @@ const Header = ({ cell }) => {
     [
       ".container",
       ["a.navbar-brand", { href: router.toUrl(Route.Home) }, "conduit"],
+      ["a", { href: "/index.html" }, "Back to list of examples"],
+      ["span", " | "],
       [
         "a",
         {
           href: "https://github.com/foxdonut/meiosis-examples/tree/master/examples/realworld",
           target: "_blank"
         },
-        "source code"
+        "Source code"
       ],
       [
         "ul.nav.navbar-nav.pull-xs-right",
