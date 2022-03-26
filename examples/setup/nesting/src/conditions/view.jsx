@@ -1,37 +1,31 @@
 import { h } from "preact"
-import Checkbox from "preact-material-components/Checkbox"
-import Formfield from "preact-material-components/FormField"
-import Radio from "preact-material-components/Radio"
-
-import "preact-material-components/Checkbox/style.css"
-import "preact-material-components/FormField/style.css"
-import "preact-material-components/Radio/style.css"
-import "preact-material-components/Theme/style.css"
 
 import { actions } from "./actions"
 
 const conditionsOption = ({ cell, value, label }) => (
-  <Formfield>
-    <Radio
+  <label>
+    <input
+      type="radio"
       id={value}
       name="conditions"
       value={value}
       checked={cell.state.sky === value}
       onChange={evt => actions.changeSky(cell, evt.target.value)}
     />
-    <label htmlFor={value}>{label}</label>
-  </Formfield>
+    <span style={{ marginLeft: "5px", marginRight: "10px" }}>{label}</span>
+  </label>
 )
 
 export const Conditions = ({ cell }) => (
-  <div>
-    <Formfield>
-      <Checkbox
+  <div style={{ marginTop: "10px" }}>
+    <label>
+      <input
+        type="checkbox"
         checked={cell.state.precipitations}
         onChange={evt => actions.togglePrecipitations(cell, evt.target.checked)}
       />
-      <label htmlFor="precipitations">Precipitations</label>
-    </Formfield>
+      <span style={{ marginLeft: "5px" }}>Precipitations</span>
+    </label>
     <div>
       {conditionsOption({ cell, value: "SUNNY", label: "Sunny" })}
       {conditionsOption({ cell, value: "CLOUDY", label: "Cloudy" })}

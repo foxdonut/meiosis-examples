@@ -28,17 +28,14 @@
   "dependencies": {
     "flyd": "^0.2.8",
     "lodash": "^4.17.21",
-    "preact": "^10.6.6",
-    "preact-material-components": "^1.6.1"
+    "preact": "^10.6.6"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.4",
-    "css-loader": "^6.7.1",
     "meiosis-tracer": "^4.0.0",
-    "style-loader": "^3.3.1",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2"
   }

@@ -9,9 +9,7 @@ export const actions = {
 
   validate: cell => {
     const errors = validateInput(cell.state)
-    cell.update({
-      errors: () => errors,
-      message: (errors && Object.keys(errors).length > 0 && "Invalid!") || "Valid!"
-    })
+    const message = (errors && Object.keys(errors).length > 0 && "Invalid!") || "Valid!"
+    cell.update({ errors: () => errors, message })
   }
 }
