@@ -10,14 +10,14 @@ const validationSpec = {
   title: { presence: { allowEmpty: false } }
 }
 
-export const Actions = update => ({
-  updateArticleForm: (field, value) =>
-    update({
+export const actions = {
+  updateArticleForm: (cell, field, value) =>
+    cell.update({
       article: { [field]: value }
     }),
 
-  updateArticleTags: tags =>
-    update({
+  updateArticleTags: (cell, tags) =>
+    cell.update({
       article: {
         tags,
         tagList: (tags || "")
@@ -27,9 +27,9 @@ export const Actions = update => ({
       }
     }),
 
-  publish: article => {
+  publish: (cell, article) => {
     const validationErrors = validate(article, validationSpec)
-    update({ article: { validationErrors } })
+    cell.update({ article: { validationErrors } })
     if (!validationErrors) {
       articlesApi
         .publish(
@@ -38,7 +38,7 @@ export const Actions = update => ({
           },
           article.slug
         )
-        .then(() => update(routeTo(Route.Home)))
+        .then(() => cell.update(routeTo(Route.Home)))
     }
   }
-})
+}

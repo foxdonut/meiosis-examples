@@ -2,7 +2,8 @@ import { range } from "../util/fp"
 import { getArticlesFilter } from "../util/filter"
 import { router } from "../router"
 
-export const Pager = ({ state }) => {
+export const Pager = ({ cell }) => {
+  const state = cell.state
   const filter = getArticlesFilter(state)
   const currentPageNumber = filter.offset / filter.limit + 1
   const pageList = range(1, Math.ceil(state.articlesCount / filter.limit) + 1)

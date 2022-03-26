@@ -1,27 +1,24 @@
-import stream from "meiosis-setup/simple-stream"
-import merge from "mergerino"
-
-import { meiosis } from "./meiosis"
+import meiosisSetup from "meiosis-setup/mergerino"
 import { compose } from "./util/fp"
 import { render } from "./util/view"
-import { createApp } from "./app"
+import { App, app, loadInitial } from "./app"
 import { router, toRoutePatch } from "./router"
 
-// Only for development, to use the Meiosis Tracer as a Chrome extension.
+const cells = meiosisSetup({ app })
+
+router.start(compose(cells().update, toRoutePatch))
+cells.map(compose(router.syncLocationBar, cell => cell.state.route))
+
+// vv Only for using Meiosis Tracer in development.
 import meiosisTracer from "meiosis-tracer"
+const states = cells.map(cell => cell.state)
+meiosisTracer({ streams: [{ stream: states, label: "states" }] })
+// ^^ Only for using Meiosis Tracer in development.
 
-createApp(router.initialRoute).then(app => {
-  const { states, update, actions } = meiosis({ stream, merge, app })
+const element = document.getElementById("app")
 
-  router.start(compose(update, toRoutePatch))
-  states.map(compose(router.syncLocationBar, state => state.route))
-
-  // Only for development, to use the Meiosis Tracer as a Chrome extension.
-  meiosisTracer({ streams: [{ stream: states, label: "states" }] })
-
-  const element = document.getElementById("app")
-
-  states.map(state => {
-    render(app.view({ state, actions }), element)
-  })
+cells.map(cell => {
+  render(App({ cell }), element)
 })
+
+loadInitial().then(cells().update)

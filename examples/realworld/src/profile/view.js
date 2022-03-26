@@ -2,8 +2,10 @@ import { get } from "../util/fp"
 import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
 import { ArticleList } from "../articleList"
+import { actions } from "./actions"
 
-export const Profile = ({ state, actions }) => {
+export const Profile = ({ cell }) => {
+  const state = cell.state
   const username = get(state, ["profile", "username"])
   const isCurrentUser = get(state, ["profile", "username"]) === get(state, ["user", "username"])
   const isFavorites = state.route.page === Route.ProfileFavorites
@@ -35,8 +37,8 @@ export const Profile = ({ state, actions }) => {
                         "button.btn.btn-sm.btn-outline-secondary.action-btn",
                         {
                           onClick: state.profile.following
-                            ? () => actions.unfollow(username)
-                            : () => actions.follow(username)
+                            ? () => actions.unfollow(cell, username)
+                            : () => actions.follow(cell, username)
                         },
                         ["i.ion-plus-round"],
                         state.profile.following ? " Unfollow " : " Follow ",
@@ -81,7 +83,7 @@ export const Profile = ({ state, actions }) => {
               ]
             ]
           ],
-          ArticleList({ state, actions })
+          ArticleList({ cell })
         ]
       ]
     ]

@@ -2,19 +2,19 @@ import { profileApi, clearToken } from "../services"
 import { Route, routeTo } from "../router"
 import { omit } from "../util/fp"
 
-export const Actions = update => ({
-  updateSettingsForm: (field, value) => update({ settings: { [field]: value } }),
+export const actions = {
+  updateSettingsForm: (cell, field, value) => cell.update({ settings: { [field]: value } }),
 
-  updateSettings: settings =>
+  updateSettings: (cell, settings) =>
     profileApi
       .update({ user: omit(["errors"], settings) })
       .then(() =>
-        update([routeTo(Route.Profile, { username: settings.username }), { user: settings }])
+        cell.update([routeTo(Route.Profile, { username: settings.username }), { user: settings }])
       )
-      .catch(err => update({ settings: { errors: err.errors } })),
+      .catch(err => cell.update({ settings: { errors: err.errors } })),
 
-  logout: () => {
+  logout: cell => {
     clearToken()
-    update([routeTo(Route.Home), { user: null, logout: true }])
+    cell.update([routeTo(Route.Home), { user: null, logout: true }])
   }
-})
+}

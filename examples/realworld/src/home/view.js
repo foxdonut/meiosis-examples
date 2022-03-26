@@ -4,8 +4,8 @@ import { Route, router } from "../router"
 import { ArticleList } from "../articleList"
 import { PopularTags } from "../popularTags"
 
-export const Home = ({ state, actions }) => {
-  const filter = getArticlesFilter(state)
+export const Home = ({ cell }) => {
+  const filter = getArticlesFilter(cell.state)
 
   const content = filter.tag
     ? {
@@ -19,7 +19,7 @@ export const Home = ({ state, actions }) => {
 
   return [
     ".home-page",
-    !state.user && [
+    !cell.state.user && [
       ".banner",
       [
         ".container",
@@ -50,7 +50,7 @@ export const Home = ({ state, actions }) => {
             ".feed-toggle",
             [
               "ul.nav.nav-pills.outline-active",
-              state.user && [
+              cell.state.user && [
                 "li.nav-item",
                 [
                   "a.nav-link",
@@ -75,9 +75,9 @@ export const Home = ({ state, actions }) => {
               content.tagFeedComponent
             ]
           ],
-          ArticleList({ state, actions })
+          ArticleList({ cell })
         ],
-        [".col-md-3", [".sidebar", PopularTags({ state })]]
+        [".col-md-3", [".sidebar", PopularTags({ cell })]]
       ]
     ]
   ]

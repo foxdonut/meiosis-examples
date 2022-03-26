@@ -7,26 +7,26 @@ const refresh = (state, slug) =>
     ? loadArticleAndComments({ slug })
     : loadArticlesAndTags(getArticlesFilter(state))
 
-export const Actions = update => ({
-  favoriteArticle: (state, slug) => {
-    if (state.user) {
+export const actions = {
+  favoriteArticle: (cell, slug) => {
+    if (cell.state.user) {
       articlesApi
         .favorite(slug)
-        .then(() => refresh(state, slug))
-        .then(update)
+        .then(() => refresh(cell.state, slug))
+        .then(cell.update)
     } else {
-      update(routeTo(Route.Login))
+      cell.update(routeTo(Route.Login))
     }
   },
 
-  unfavoriteArticle: (state, slug) => {
-    if (state.user) {
+  unfavoriteArticle: (cell, slug) => {
+    if (cell.state.user) {
       articlesApi
         .unfavorite(slug)
-        .then(() => refresh(state, slug))
-        .then(update)
+        .then(() => refresh(cell.state, slug))
+        .then(cell.update)
     } else {
-      update(routeTo(Route.Login))
+      cell.update(routeTo(Route.Login))
     }
   }
-})
+}

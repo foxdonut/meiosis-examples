@@ -2,13 +2,13 @@ import { articlesApi, loadArticleAndComments, profileApi } from "../services"
 import { prepend } from "../util/fp"
 import { Route, routeTo } from "../router"
 
-export const Actions = update => ({
-  updateCommentField: comment => update({ comment }),
+export const actions = {
+  updateCommentField: (cell, comment) => cell.update({ comment }),
 
-  addComment: (slug, body) => {
+  addComment: (cell, slug, body) => {
     if (body && body.trim().length > 0) {
       articlesApi.addComment(slug, { comment: { body } }).then(data =>
-        update({
+        cell.update({
           comment: "",
           comments: list => prepend(data.comment, list)
         })
@@ -16,27 +16,28 @@ export const Actions = update => ({
     }
   },
 
-  deleteComment: (slug, id) => () =>
+  deleteComment: (cell, slug, id) => () =>
     articlesApi
       .deleteComment(slug, id)
-      .then(() => update({ comments: list => list.filter(comment => comment.id !== id) })),
+      .then(() => cell.update({ comments: list => list.filter(comment => comment.id !== id) })),
 
-  deleteArticle: slug => articlesApi.unpublish(slug).then(() => update(routeTo(Route.Home))),
+  deleteArticle: (cell, slug) =>
+    articlesApi.unpublish(slug).then(() => cell.update(routeTo(Route.Home))),
 
-  followUser: (state, username) => {
-    if (state.user) {
+  followUser: (cell, username) => {
+    if (cell.state.user) {
       profileApi
         .follow(username)
-        .then(() => loadArticleAndComments({ slug: state.route.params.slug }))
-        .then(update)
+        .then(() => loadArticleAndComments({ slug: cell.state.route.params.slug }))
+        .then(cell.update)
     } else {
-      update(routeTo(Route.Login))
+      cell.update(routeTo(Route.Login))
     }
   },
 
-  unfollowUser: (state, username) =>
+  unfollowUser: (cell, username) =>
     profileApi
       .unfollow(username)
-      .then(() => loadArticleAndComments({ slug: state.route.params.slug }))
-      .then(update)
-})
+      .then(() => loadArticleAndComments({ slug: cell.state.route.params.slug }))
+      .then(cell.update)
+}

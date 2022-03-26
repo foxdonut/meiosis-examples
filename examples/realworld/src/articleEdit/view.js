@@ -1,12 +1,13 @@
 import { defaultTo, get, pipe, preventDefault, thrush } from "../util/fp"
+import { actions } from "./actions"
 
 const displayFieldErrors = errors => ["ul.error-messages", errors.map(err => ["li", err])]
 
 const getFieldErrors = validationErrors => field =>
   thrush(defaultTo([], get(defaultTo({}, validationErrors), [field])), displayFieldErrors)
 
-export const ArticleEdit = ({ state, actions }) => {
-  const article = state.article
+export const ArticleEdit = ({ cell }) => {
+  const article = cell.state.article
   const fieldErrors = getFieldErrors(article && article.validationErrors)
 
   return !article
@@ -29,7 +30,7 @@ export const ArticleEdit = ({ state, actions }) => {
                       "input:text.form-control.form-control-lg[placeholder=Article Title]",
                       {
                         value: article.title,
-                        onInput: evt => actions.updateArticleForm("title", evt.target.value)
+                        onInput: evt => actions.updateArticleForm(cell, "title", evt.target.value)
                       }
                     ],
                     fieldErrors("title")
@@ -40,7 +41,8 @@ export const ArticleEdit = ({ state, actions }) => {
                       "input:text.form-control[placeholder=What's this article about?]",
                       {
                         value: article.description,
-                        onInput: evt => actions.updateArticleForm("description", evt.target.value)
+                        onInput: evt =>
+                          actions.updateArticleForm(cell, "description", evt.target.value)
                       }
                     ],
                     fieldErrors("description")
@@ -51,7 +53,7 @@ export const ArticleEdit = ({ state, actions }) => {
                       "textarea.form-control[rows=8][placeholder=Write your article (in markdown)]",
                       {
                         value: article.body,
-                        onInput: evt => actions.updateArticleForm("body", evt.target.value)
+                        onInput: evt => actions.updateArticleForm(cell, "body", evt.target.value)
                       }
                     ],
                     fieldErrors("body")
@@ -62,7 +64,7 @@ export const ArticleEdit = ({ state, actions }) => {
                       "input:text.form-control[placeholder=Enter tags]",
                       {
                         value: article.tags,
-                        onInput: evt => actions.updateArticleTags(evt.target.value)
+                        onInput: evt => actions.updateArticleTags(cell, evt.target.value)
                       }
                     ],
                     [
@@ -73,7 +75,7 @@ export const ArticleEdit = ({ state, actions }) => {
                   [
                     "button:button.btn.btn-lg.pull-xs-right.btn-primary",
                     {
-                      onClick: pipe(preventDefault, () => actions.publish(article))
+                      onClick: pipe(preventDefault, () => actions.publish(cell, article))
                     },
                     "Publish Article"
                   ]

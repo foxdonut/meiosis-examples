@@ -1,6 +1,8 @@
 import { compose, preventDefault } from "../util/fp"
+import { actions } from "./actions"
 
-export const Settings = ({ state, actions }) => {
+export const Settings = ({ cell }) => {
+  const state = cell.state
   const errors = Object.keys(state.settings.errors || {}).map(
     key => `${key} ${state.settings.errors[key]}`
   )
@@ -25,7 +27,7 @@ export const Settings = ({ state, actions }) => {
                   "input:text.form-control[placeholder=URL of profile picture]",
                   {
                     value: state.settings.image,
-                    onInput: evt => actions.updateSettingsForm("image", evt.target.value)
+                    onInput: evt => actions.updateSettingsForm(cell, "image", evt.target.value)
                   }
                 ]
               ],
@@ -35,7 +37,7 @@ export const Settings = ({ state, actions }) => {
                   "input:text.form-control.form-control-lg[placeholder=Your Name]",
                   {
                     value: state.settings.username,
-                    onInput: evt => actions.updateSettingsForm("username", evt.target.value)
+                    onInput: evt => actions.updateSettingsForm(cell, "username", evt.target.value)
                   }
                 ]
               ],
@@ -45,7 +47,7 @@ export const Settings = ({ state, actions }) => {
                   "textarea.form-control.form-control-lg[rows=8][placeholder=Short bio about you]",
                   {
                     value: state.settings.bio,
-                    onInput: evt => actions.updateSettingsForm("bio", evt.target.value)
+                    onInput: evt => actions.updateSettingsForm(cell, "bio", evt.target.value)
                   }
                 ]
               ],
@@ -55,7 +57,7 @@ export const Settings = ({ state, actions }) => {
                   "input:text.form-control.form-control-lg[placeholder=Email]",
                   {
                     value: state.settings.email,
-                    onInput: evt => actions.updateSettingsForm("email", evt.target.value)
+                    onInput: evt => actions.updateSettingsForm(cell, "email", evt.target.value)
                   }
                 ]
               ],
@@ -65,14 +67,17 @@ export const Settings = ({ state, actions }) => {
                   "input:password.form-control.form-control-lg[placeholder=New Password]",
                   {
                     value: state.settings.password,
-                    onInput: evt => actions.updateSettingsForm("password", evt.target.value)
+                    onInput: evt => actions.updateSettingsForm(cell, "password", evt.target.value)
                   }
                 ]
               ],
               [
                 "button.btn.btn-lg.btn-primary.pull-xs-right",
                 {
-                  onClick: compose(() => actions.updateSettings(state.settings), preventDefault)
+                  onClick: compose(
+                    () => actions.updateSettings(cell, state.settings),
+                    preventDefault
+                  )
                 },
                 "Update Settings"
               ]
@@ -82,7 +87,7 @@ export const Settings = ({ state, actions }) => {
           [
             "button.btn.btn-outline-danger",
             {
-              onClick: compose(() => actions.logout(), preventDefault)
+              onClick: compose(() => actions.logout(cell), preventDefault)
             },
             "Or click here to logout."
           ]

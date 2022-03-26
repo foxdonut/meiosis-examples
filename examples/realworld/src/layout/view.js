@@ -1,8 +1,8 @@
 import { Route, router } from "../router"
 import { get } from "../util/fp"
 
-const Header = ({ state }) => {
-  const active = pageId => ({ className: { active: state.route.page === pageId } })
+const Header = ({ cell }) => {
+  const active = pageId => ({ className: { active: cell.state.route.page === pageId } })
 
   return [
     "nav.navbar.navbar-light",
@@ -20,7 +20,7 @@ const Header = ({ state }) => {
       [
         "ul.nav.navbar-nav.pull-xs-right",
         ["li.nav-item", active("Home"), ["a.nav-link", { href: router.toUrl(Route.Home) }, "Home"]],
-        state.user
+        cell.state.user
           ? [
               [
                 "li.nav-item",
@@ -47,15 +47,16 @@ const Header = ({ state }) => {
                 {
                   className: {
                     active:
-                      (state.route.page === "Profile" ||
-                        state.route.page === "ProfileFavorites") &&
-                      get(state, ["user", "username"]) === get(state, ["profile", "username"])
+                      (cell.state.route.page === "Profile" ||
+                        cell.state.route.page === "ProfileFavorites") &&
+                      get(cell.state, ["user", "username"]) ===
+                        get(cell.state, ["profile", "username"])
                   }
                 },
                 [
                   "a.nav-link",
-                  { href: router.toUrl(Route.Profile, { username: state.user.username }) },
-                  state.user.username
+                  { href: router.toUrl(Route.Profile, { username: cell.state.user.username }) },
+                  cell.state.user.username
                 ]
               ]
             ]
@@ -90,9 +91,9 @@ const Footer = () => [
   ]
 ]
 
-export const Layout = ({ state, actions, Component }) => [
+export const Layout = ({ cell, Component }) => [
   "div",
-  Header({ state }),
-  Component({ state, actions }),
+  Header({ cell }),
+  Component({ cell }),
   Footer()
 ]

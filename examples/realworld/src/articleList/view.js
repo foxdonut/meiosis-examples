@@ -1,11 +1,12 @@
 import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
 import { Pager } from "../pager"
+import { actions } from "./actions"
 
-export const ArticleList = ({ state, actions }) => [
-  state.route.changed
+export const ArticleList = ({ cell }) => [
+  cell.state.route.loading // FIXME
     ? [".article-preview", "Loading articles..."]
-    : state.articles.map(article => {
+    : cell.state.articles.map(article => {
         const username = article.author.username
 
         return [
@@ -36,8 +37,8 @@ export const ArticleList = ({ state, actions }) => [
                     "btn-outline-primary": !article.favorited
                   },
                   onClick: article.favorited
-                    ? () => actions.unfavoriteArticle(state, article.slug)
-                    : () => actions.favoriteArticle(state, article.slug)
+                    ? () => actions.unfavoriteArticle(cell.state, article.slug)
+                    : () => actions.favoriteArticle(cell.state, article.slug)
                 },
                 ["i.ion-heart"],
                 ["span", ` ${article.favoritesCount} `]
@@ -64,5 +65,5 @@ export const ArticleList = ({ state, actions }) => [
         ]
       }),
 
-  Pager({ state })
+  Pager({ cell })
 ]

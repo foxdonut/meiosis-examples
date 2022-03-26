@@ -1,13 +1,13 @@
 import { defaultTo, path } from "../util/fp"
 import { Route, router } from "../router"
 
-export const PopularTags = ({ state }) => [
+export const PopularTags = ({ cell }) => [
   ["p", "Popular Tags"],
 
   [
     ".tag-list",
-    state.tags == null ? ["span", "Loading tags..."] : null,
-    defaultTo([], path(["tags"], state)).map(tag => [
+    cell.state.tags == null ? ["span", "Loading tags..."] : null,
+    defaultTo([], path(["tags"], cell.state)).map(tag => [
       "a.tag-pill.tag-default",
       { href: router.toUrl(Route.Home, { tag }) },
       tag

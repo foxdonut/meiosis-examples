@@ -19,7 +19,7 @@ const componentMap = {
   ProfileFavorites: Profile
 }
 
-export const Root = ({ state, actions }) => {
-  const Component = componentMap[state.route.page]
-  return Layout({ state, actions, Component })
+export const App = ({ cell }) => {
+  const Component = componentMap[cell.state.route.page]
+  return Layout({ cell, Component })
 }

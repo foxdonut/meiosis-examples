@@ -1,13 +1,14 @@
-import marked from "marked"
+import { marked } from "marked"
 import { sanitize } from "dompurify"
 
 import { compose, defaultTo, get, preventDefault, thrush } from "../util/fp"
 import { Route, router } from "../router"
 import { defaultImage } from "../util/view"
+import { actions } from "./actions"
 
 const isAuthor = (username, article) => article.author.username === username
 
-const authorMeta = actions => article => [
+const authorMeta = cell => article => [
   [
     "a.btn.btn-outline-secondary.btn-sm",
     { href: router.toUrl(Route.ArticleEdit, { slug: article.slug }) },
@@ -17,13 +18,13 @@ const authorMeta = actions => article => [
   " ",
   [
     "button.btn.btn-outline-danger.btn-sm",
-    { onClick: () => actions.deleteArticle(article.slug) },
+    { onClick: () => actions.deleteArticle(cell, article.slug) },
     ["i.ion-trash-a"],
     " Delete Article"
   ]
 ]
 
-const nonAuthorMeta = (state, actions) => article => [
+const nonAuthorMeta = cell => article => [
   [
     "button.btn.btn-sm",
     {
@@ -32,8 +33,8 @@ const nonAuthorMeta = (state, actions) => article => [
         "btn-secondary": article.author.following
       },
       onClick: article.author.following
-        ? () => actions.unfollowUser(state, article.author.username)
-        : () => actions.followUser(state, article.author.username)
+        ? () => actions.unfollowUser(cell, article.author.username)
+        : () => actions.followUser(cell, article.author.username)
     },
     ["i.ion-plus-round"],
     article.author.following ? " Unfollow " : " Follow ",
@@ -46,8 +47,8 @@ const nonAuthorMeta = (state, actions) => article => [
     {
       className: { "btn-outline-primary": !article.favorited, "btn-primary": article.favorited },
       onClick: article.favorited
-        ? () => actions.unfavoriteArticle(state, article.slug)
-        : () => actions.favoriteArticle(state, article.slug)
+        ? () => actions.unfavoriteArticle(cell, article.slug)
+        : () => actions.favoriteArticle(cell, article.slug)
     },
     ["i.ion-heart"],
     article.favorited ? " Unfavorite" : " Favorite",
@@ -56,7 +57,7 @@ const nonAuthorMeta = (state, actions) => article => [
   ]
 ]
 
-const articleMeta = (state, actions, article, username) => [
+const articleMeta = (cell, article, username) => [
   ".article-meta",
   [
     "a",
@@ -72,10 +73,11 @@ const articleMeta = (state, actions, article, username) => [
     ],
     ["span.date", new Date(article.createdAt).toDateString()]
   ],
-  thrush(article, isAuthor(username, article) ? authorMeta(actions) : nonAuthorMeta(state, actions))
+  thrush(article, isAuthor(username, article) ? authorMeta(cell) : nonAuthorMeta(cell))
 ]
 
-export const ArticleDetail = ({ state, actions }) => {
+export const ArticleDetail = ({ cell }) => {
+  const state = cell.state
   const article = state.article
   const username = get(state, ["user", "username"])
 
@@ -83,7 +85,7 @@ export const ArticleDetail = ({ state, actions }) => {
     ".article-page",
     !state.route.changed && [
       ".banner",
-      [".container", ["h1", article.title], articleMeta(state, actions, article, username)]
+      [".container", ["h1", article.title], articleMeta(cell, article, username)]
     ],
     [
       ".container page",
@@ -109,7 +111,7 @@ export const ArticleDetail = ({ state, actions }) => {
       ],
       !state.route.changed && [
         ["hr"],
-        [".article-actions", articleMeta(state, actions, article, username)],
+        [".article-actions", articleMeta(cell, article, username)],
         [
           ".row",
           [
@@ -124,7 +126,7 @@ export const ArticleDetail = ({ state, actions }) => {
                       {
                         placeholder: "Write a comment...",
                         rows: "3",
-                        onInput: evt => actions.updateCommentField(evt.target.value),
+                        onInput: evt => actions.updateCommentField(cell, evt.target.value),
                         value: state.comment
                       }
                     ]
@@ -136,7 +138,7 @@ export const ArticleDetail = ({ state, actions }) => {
                       "button.btn.btn-sm.btn-primary",
                       {
                         onClick: compose(
-                          () => actions.addComment(article.slug, state.comment),
+                          () => actions.addComment(cell, article.slug, cell.state.comment),
                           preventDefault
                         )
                       },
@@ -173,7 +175,7 @@ export const ArticleDetail = ({ state, actions }) => {
                   state.user &&
                     comment.author.username === state.user.username && [
                       "i.ion-trash-a",
-                      { onClick: actions.deleteComment(article.slug, comment.id) }
+                      { onClick: actions.deleteComment(cell, article.slug, comment.id) }
                     ]
                 ]
               ]

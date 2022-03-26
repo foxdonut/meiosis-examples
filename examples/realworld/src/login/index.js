@@ -1,6 +1,6 @@
-import { Effect } from "./effect"
+import { service } from "./service"
 import { Route } from "../router"
-import { credentials, Credentials } from "../credentials"
+import { Credentials } from "../credentials"
 
 const options = {
   method: "login",
@@ -11,8 +11,7 @@ const options = {
 }
 
 export const login = {
-  Effect,
-  ...credentials(options)
+  service
 }
 
 export const Login = Credentials(options)

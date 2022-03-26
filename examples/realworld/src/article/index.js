@@ -1,5 +1,5 @@
-import { Effect } from "./effect"
+import { service } from "./service"
 
 export const article = {
-  Effect
+  service
 }

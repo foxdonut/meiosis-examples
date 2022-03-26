@@ -1,9 +1,7 @@
-import { Actions } from "./actions"
-import { Effect } from "./effect"
+import { service } from "./service"
 
 export const profile = {
-  Actions,
-  Effect
+  service
 }
 
 export { Profile } from "./view"
