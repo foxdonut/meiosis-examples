@@ -1,5 +1,5 @@
 export const initial = {
-  date: "",
-  hour: "",
-  minute: ""
-}
+  date: '',
+  hour: '',
+  minute: ''
+};

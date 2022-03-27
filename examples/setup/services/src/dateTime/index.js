@@ -1,7 +1,7 @@
-import { initial } from "./initial"
+import { initial } from './initial';
 
 export const dateTime = {
   initial
-}
+};
 
-export { DateTime } from "./view"
+export { DateTime } from './view';
