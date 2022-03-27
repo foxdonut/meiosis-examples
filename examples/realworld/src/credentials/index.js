@@ -1,1 +1,1 @@
-export { Credentials } from "./view"
+export { Credentials } from './view';

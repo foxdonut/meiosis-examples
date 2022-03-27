@@ -1,75 +1,75 @@
-import { getArticlesFilter } from "../util/filter"
-import { Route, router } from "../router"
+import { getArticlesFilter } from '../util/filter';
+import { Route, router } from '../router';
 
-import { ArticleList } from "../articleList"
-import { PopularTags } from "../popularTags"
+import { ArticleList } from '../articleList';
+import { PopularTags } from '../popularTags';
 
 export const Home = ({ cell }) => {
-  const filter = getArticlesFilter(cell.state)
+  const filter = getArticlesFilter(cell.state);
 
   const content = filter.tag
     ? {
         globalFeed: false,
-        tagFeedComponent: ["li.nav-item", ["a.nav-link.active", ["i.ion-pound"], " ", filter.tag]]
+        tagFeedComponent: ['li.nav-item', ['a.nav-link.active', ['i.ion-pound'], ' ', filter.tag]]
       }
     : {
         globalFeed: !filter.feed,
         tagFeedComponent: null
-      }
+      };
 
   return [
-    ".home-page",
+    '.home-page',
     !cell.state.user && [
-      ".banner",
+      '.banner',
       [
-        ".container",
-        ["h1.logo-font", "conduit"],
+        '.container',
+        ['h1.logo-font', 'conduit'],
         [
-          "p",
-          "A place to share your ",
+          'p',
+          'A place to share your ',
           [
-            "a",
+            'a',
             {
-              href: "https://meiosis.js.org",
-              target: "_blank",
-              style: { color: "#fff", textDecoration: "underline" }
+              href: 'https://meiosis.js.org',
+              target: '_blank',
+              style: { color: '#fff', textDecoration: 'underline' }
             },
-            "Meiosis"
+            'Meiosis'
           ],
-          " knowledge."
+          ' knowledge.'
         ]
       ]
     ],
     [
-      ".container page",
+      '.container page',
       [
-        ".row",
+        '.row',
         [
-          ".col-md-9",
+          '.col-md-9',
           [
-            ".feed-toggle",
+            '.feed-toggle',
             [
-              "ul.nav.nav-pills.outline-active",
+              'ul.nav.nav-pills.outline-active',
               cell.state.user && [
-                "li.nav-item",
+                'li.nav-item',
                 [
-                  "a.nav-link",
+                  'a.nav-link',
                   {
                     href: router.toUrl(Route.Home, { feed: true }),
                     className: { active: filter.feed }
                   },
-                  "Your Feed"
+                  'Your Feed'
                 ]
               ],
               [
-                "li.nav-item",
+                'li.nav-item',
                 [
-                  "a.nav-link",
+                  'a.nav-link',
                   {
                     href: router.toUrl(Route.Home),
                     className: { active: content.globalFeed }
                   },
-                  "Global Feed"
+                  'Global Feed'
                 ]
               ],
               content.tagFeedComponent
@@ -77,8 +77,8 @@ export const Home = ({ cell }) => {
           ],
           ArticleList({ cell })
         ],
-        [".col-md-3", [".sidebar", PopularTags({ cell })]]
+        ['.col-md-3', ['.sidebar', PopularTags({ cell })]]
       ]
     ]
-  ]
-}
+  ];
+};

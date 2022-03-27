@@ -1,7 +1,7 @@
-import { service } from "./service"
+import { service } from './service';
 
 export const profile = {
   service
-}
+};
 
-export { Profile } from "./view"
+export { Profile } from './view';

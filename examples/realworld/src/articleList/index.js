@@ -1,1 +1,1 @@
-export { ArticleList } from "./view"
+export { ArticleList } from './view';

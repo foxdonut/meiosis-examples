@@ -1,1 +1,1 @@
-export { PopularTags } from "./view"
+export { PopularTags } from './view';

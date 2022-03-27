@@ -1,1 +1,1 @@
-export { Pager } from "./view"
+export { Pager } from './view';

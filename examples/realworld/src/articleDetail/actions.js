@@ -1,6 +1,6 @@
-import { articlesApi, loadArticleAndComments, profileApi } from "../services"
-import { prepend } from "../util/fp"
-import { Route, routeTo } from "../router"
+import { articlesApi, loadArticleAndComments, profileApi } from '../services';
+import { prepend } from '../util/fp';
+import { Route, routeTo } from '../router';
 
 export const actions = {
   updateCommentField: (cell, comment) => cell.update({ comment }),
@@ -9,10 +9,10 @@ export const actions = {
     if (body && body.trim().length > 0) {
       articlesApi.addComment(slug, { comment: { body } }).then(data =>
         cell.update({
-          comment: "",
+          comment: '',
           comments: list => prepend(data.comment, list)
         })
-      )
+      );
     }
   },
 
@@ -29,9 +29,9 @@ export const actions = {
       profileApi
         .follow(username)
         .then(() => loadArticleAndComments({ slug: cell.state.route.params.slug }))
-        .then(cell.update)
+        .then(cell.update);
     } else {
-      cell.update(routeTo(Route.Login))
+      cell.update(routeTo(Route.Login));
     }
   },
 
@@ -40,4 +40,4 @@ export const actions = {
       .unfollow(username)
       .then(() => loadArticleAndComments({ slug: cell.state.route.params.slug }))
       .then(cell.update)
-}
+};

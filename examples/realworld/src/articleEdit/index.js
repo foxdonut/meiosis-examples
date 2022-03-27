@@ -1,1 +1,1 @@
-export { ArticleEdit } from "./view"
+export { ArticleEdit } from './view';

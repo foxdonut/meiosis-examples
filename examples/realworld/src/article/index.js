@@ -1,5 +1,5 @@
-import { service } from "./service"
+import { service } from './service';
 
 export const article = {
   service
-}
+};

@@ -1,14 +1,14 @@
-import validate from "validate.js"
+import validate from 'validate.js';
 
-import { articlesApi } from "../services"
-import { Route, routeTo } from "../router"
-import { pick } from "../util/fp"
+import { articlesApi } from '../services';
+import { Route, routeTo } from '../router';
+import { pick } from '../util/fp';
 
 const validationSpec = {
   body: { presence: { allowEmpty: false } },
   description: { presence: { allowEmpty: false } },
   title: { presence: { allowEmpty: false } }
-}
+};
 
 export const actions = {
   updateArticleForm: (cell, field, value) =>
@@ -20,25 +20,25 @@ export const actions = {
     cell.update({
       article: {
         tags,
-        tagList: (tags || "")
-          .split(",")
+        tagList: (tags || '')
+          .split(',')
           .map(str => str.trim())
           .filter(str => str.length > 0)
       }
     }),
 
   publish: (cell, article) => {
-    const validationErrors = validate(article, validationSpec)
-    cell.update({ article: { validationErrors } })
+    const validationErrors = validate(article, validationSpec);
+    cell.update({ article: { validationErrors } });
     if (!validationErrors) {
       articlesApi
         .publish(
           {
-            article: pick(["title", "description", "body", "tagList"], article)
+            article: pick(['title', 'description', 'body', 'tagList'], article)
           },
           article.slug
         )
-        .then(() => cell.update(routeTo(Route.Home)))
+        .then(() => cell.update(routeTo(Route.Home)));
     }
   }
-}
+};
