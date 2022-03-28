@@ -1,6 +1,6 @@
 import { assoc } from '../util/fp';
 
-export const getArticlesFilter = state => {
+export const getArticlesFilter = (state) => {
   const filter = ['feed', 'offset', 'tag'].reduce(
     (result, param) => assoc(param, state.route.params[param], result),
     {}

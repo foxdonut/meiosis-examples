@@ -2,7 +2,7 @@ import { Route, router } from '../router';
 import { get } from '../util/fp';
 
 const Header = ({ cell }) => {
-  const active = pageId => ({ className: { active: cell.state.route.page === pageId } });
+  const active = (pageId) => ({ className: { active: cell.state.route.page === pageId } });
 
   return [
     'nav.navbar.navbar-light',

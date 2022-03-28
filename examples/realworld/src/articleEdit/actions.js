@@ -22,8 +22,8 @@ export const actions = {
         tags,
         tagList: (tags || '')
           .split(',')
-          .map(str => str.trim())
-          .filter(str => str.length > 0)
+          .map((str) => str.trim())
+          .filter((str) => str.length > 0)
       }
     }),
 

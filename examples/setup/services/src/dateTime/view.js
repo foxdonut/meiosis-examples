@@ -18,7 +18,7 @@ export const DateTime = {
         type: 'date',
         value: state.date,
         events: {
-          oninput: evt => actions.editDate(cell, evt.target.value)
+          oninput: (evt) => actions.editDate(cell, evt.target.value)
         },
         help: getErrorMessage(state, 'date')
       }),
@@ -28,7 +28,7 @@ export const DateTime = {
           label: 'Hour:',
           value: state.hour,
           events: {
-            oninput: evt => actions.editHour(cell, evt.target.value)
+            oninput: (evt) => actions.editHour(cell, evt.target.value)
           },
           help: getErrorMessage(state, 'hour')
         })
@@ -39,7 +39,7 @@ export const DateTime = {
           label: 'Minute:',
           value: state.minute,
           events: {
-            oninput: evt => actions.editMinute(cell, evt.target.value)
+            oninput: (evt) => actions.editMinute(cell, evt.target.value)
           },
           help: getErrorMessage(state, 'minute')
         })

@@ -6,7 +6,7 @@ import { actions } from './actions';
 export const ArticleList = ({ cell }) => [
   cell.state.route.loading // FIXME
     ? ['.article-preview', 'Loading articles...']
-    : cell.state.articles.map(article => {
+    : cell.state.articles.map((article) => {
         const username = article.author.username;
 
         return [
@@ -56,7 +56,7 @@ export const ArticleList = ({ cell }) => [
             ],
             [
               'ul.tag-list',
-              article.tagList.map(tag => [
+              article.tagList.map((tag) => [
                 'li.tag-default.tag-pill.tag-outline',
                 ['a', { href: router.toUrl(Route.Home, { tag }) }, tag]
               ])

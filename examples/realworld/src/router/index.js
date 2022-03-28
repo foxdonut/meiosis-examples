@@ -36,5 +36,5 @@ export const router = createRouter({
   queryString
 });
 
-export const toRoutePatch = route => ({ route: () => route });
+export const toRoutePatch = (route) => ({ route: () => route });
 export const routeTo = (page, params) => toRoutePatch(router.toRoute(page, params));

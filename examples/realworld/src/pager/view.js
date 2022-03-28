@@ -15,7 +15,7 @@ export const Pager = ({ cell }) => {
     'nav',
     [
       'ul.pagination',
-      pageList.map(pageNumber => [
+      pageList.map((pageNumber) => [
         'li.page-item',
         { className: { active: pageNumber === currentPageNumber } },
         [

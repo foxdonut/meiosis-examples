@@ -7,17 +7,17 @@ import { router, toRoutePatch } from './router';
 const cells = meiosisSetup({ app });
 
 router.start(compose(cells().update, toRoutePatch));
-cells.map(compose(router.syncLocationBar, cell => cell.state.route));
+cells.map(compose(router.syncLocationBar, (cell) => cell.state.route));
 
 // vv Only for using Meiosis Tracer in development.
 import meiosisTracer from 'meiosis-tracer';
-const states = cells.map(cell => cell.state);
+const states = cells.map((cell) => cell.state);
 meiosisTracer({ streams: [{ stream: states, label: 'states' }] });
 // ^^ Only for using Meiosis Tracer in development.
 
 const element = document.getElementById('app');
 
-cells.map(cell => {
+cells.map((cell) => {
   render(App({ cell }), element);
 });
 

@@ -7,7 +7,7 @@ export const actions = {
 
   editMinute: (cell, value) => cell.update({ dateTime: { minute: value } }),
 
-  validate: cell => {
+  validate: (cell) => {
     const errors = validateInput(cell.state);
     const message = (errors && Object.keys(errors).length > 0 && 'Invalid!') || 'Valid!';
     cell.update({ errors: () => errors, message });

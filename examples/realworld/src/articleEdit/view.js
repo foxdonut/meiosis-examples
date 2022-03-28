@@ -1,9 +1,9 @@
 import { defaultTo, get, pipe, preventDefault, thrush } from '../util/fp';
 import { actions } from './actions';
 
-const displayFieldErrors = errors => ['ul.error-messages', errors.map(err => ['li', err])];
+const displayFieldErrors = (errors) => ['ul.error-messages', errors.map((err) => ['li', err])];
 
-const getFieldErrors = validationErrors => field =>
+const getFieldErrors = (validationErrors) => (field) =>
   thrush(defaultTo([], get(defaultTo({}, validationErrors), [field])), displayFieldErrors);
 
 export const ArticleEdit = ({ cell }) => {
@@ -30,7 +30,7 @@ export const ArticleEdit = ({ cell }) => {
                       'input:text.form-control.form-control-lg[placeholder=Article Title]',
                       {
                         value: article.title,
-                        onInput: evt => actions.updateArticleForm(cell, 'title', evt.target.value)
+                        onInput: (evt) => actions.updateArticleForm(cell, 'title', evt.target.value)
                       }
                     ],
                     fieldErrors('title')
@@ -41,7 +41,7 @@ export const ArticleEdit = ({ cell }) => {
                       "input:text.form-control[placeholder=What's this article about?]",
                       {
                         value: article.description,
-                        onInput: evt =>
+                        onInput: (evt) =>
                           actions.updateArticleForm(cell, 'description', evt.target.value)
                       }
                     ],
@@ -53,7 +53,7 @@ export const ArticleEdit = ({ cell }) => {
                       'textarea.form-control[rows=8][placeholder=Write your article (in markdown)]',
                       {
                         value: article.body,
-                        onInput: evt => actions.updateArticleForm(cell, 'body', evt.target.value)
+                        onInput: (evt) => actions.updateArticleForm(cell, 'body', evt.target.value)
                       }
                     ],
                     fieldErrors('body')
@@ -64,12 +64,15 @@ export const ArticleEdit = ({ cell }) => {
                       'input:text.form-control[placeholder=Enter tags]',
                       {
                         value: article.tags,
-                        onInput: evt => actions.updateArticleTags(cell, evt.target.value)
+                        onInput: (evt) => actions.updateArticleTags(cell, evt.target.value)
                       }
                     ],
                     [
                       '.tag-list',
-                      defaultTo([], article.tagList).map(tag => ['span.tag-pill.tag-default', tag])
+                      defaultTo([], article.tagList).map((tag) => [
+                        'span.tag-pill.tag-default',
+                        tag
+                      ])
                     ]
                   ],
                   [

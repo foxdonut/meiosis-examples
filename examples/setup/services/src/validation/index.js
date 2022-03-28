@@ -23,7 +23,7 @@ const options = {
   }
 };
 
-export const validateInput = input => {
+export const validateInput = (input) => {
   const result = Joi.validate(input, schema, options);
 
   const errors = {};

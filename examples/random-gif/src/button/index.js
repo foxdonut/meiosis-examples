@@ -7,7 +7,7 @@ const initial = {
 };
 
 const actions = {
-  buttonToggle: cell => cell.update({ active: x => !x })
+  buttonToggle: (cell) => cell.update({ active: (x) => !x })
 };
 
 export const button = {

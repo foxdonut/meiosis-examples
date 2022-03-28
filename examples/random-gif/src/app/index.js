@@ -9,9 +9,9 @@ import { randomGifPairPair, RandomGifPairPair } from '../random-gif-pair-pair';
 import { randomGifList, RandomGifList } from '../random-gif-list';
 
 const actions = {
-  newGifGenerated: cell => {
+  newGifGenerated: (cell) => {
     const increment = cell.state.counter.value > 3 && cell.state.button.active ? 2 : 1;
-    cell.update({ counter: { value: x => x + increment } });
+    cell.update({ counter: { value: (x) => x + increment } });
   }
 };
 

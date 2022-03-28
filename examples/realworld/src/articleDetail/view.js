@@ -8,54 +8,56 @@ import { actions } from './actions';
 
 const isAuthor = (username, article) => article.author.username === username;
 
-const authorMeta = cell => article => [
+const authorMeta = (cell) => (article) =>
   [
-    'a.btn.btn-outline-secondary.btn-sm',
-    { href: router.toUrl(Route.ArticleEdit, { slug: article.slug }) },
-    ['i.ion-edit'],
-    ' Edit Article'
-  ],
-  ' ',
-  [
-    'button.btn.btn-outline-danger.btn-sm',
-    { onClick: () => actions.deleteArticle(cell, article.slug) },
-    ['i.ion-trash-a'],
-    ' Delete Article'
-  ]
-];
+    [
+      'a.btn.btn-outline-secondary.btn-sm',
+      { href: router.toUrl(Route.ArticleEdit, { slug: article.slug }) },
+      ['i.ion-edit'],
+      ' Edit Article'
+    ],
+    ' ',
+    [
+      'button.btn.btn-outline-danger.btn-sm',
+      { onClick: () => actions.deleteArticle(cell, article.slug) },
+      ['i.ion-trash-a'],
+      ' Delete Article'
+    ]
+  ];
 
-const nonAuthorMeta = cell => article => [
+const nonAuthorMeta = (cell) => (article) =>
   [
-    'button.btn.btn-sm',
-    {
-      className: {
-        'btn-outline-secondary': !article.author.following,
-        'btn-secondary': article.author.following
+    [
+      'button.btn.btn-sm',
+      {
+        className: {
+          'btn-outline-secondary': !article.author.following,
+          'btn-secondary': article.author.following
+        },
+        onClick: article.author.following
+          ? () => actions.unfollowUser(cell, article.author.username)
+          : () => actions.followUser(cell, article.author.username)
       },
-      onClick: article.author.following
-        ? () => actions.unfollowUser(cell, article.author.username)
-        : () => actions.followUser(cell, article.author.username)
-    },
-    ['i.ion-plus-round'],
-    article.author.following ? ' Unfollow ' : ' Follow ',
-    article.author.username,
-    ' '
-  ],
-  ' ',
-  [
-    'button.btn.btn-sm',
-    {
-      className: { 'btn-outline-primary': !article.favorited, 'btn-primary': article.favorited },
-      onClick: article.favorited
-        ? () => actions.unfavoriteArticle(cell, article.slug)
-        : () => actions.favoriteArticle(cell, article.slug)
-    },
-    ['i.ion-heart'],
-    article.favorited ? ' Unfavorite' : ' Favorite',
-    ' Article ',
-    ['span.counter', `(${article.favoritesCount})`]
-  ]
-];
+      ['i.ion-plus-round'],
+      article.author.following ? ' Unfollow ' : ' Follow ',
+      article.author.username,
+      ' '
+    ],
+    ' ',
+    [
+      'button.btn.btn-sm',
+      {
+        className: { 'btn-outline-primary': !article.favorited, 'btn-primary': article.favorited },
+        onClick: article.favorited
+          ? () => actions.unfavoriteArticle(cell, article.slug)
+          : () => actions.favoriteArticle(cell, article.slug)
+      },
+      ['i.ion-heart'],
+      article.favorited ? ' Unfavorite' : ' Favorite',
+      ' Article ',
+      ['span.counter', `(${article.favoritesCount})`]
+    ]
+  ];
 
 const articleMeta = (cell, article, username) => [
   '.article-meta',
@@ -101,7 +103,7 @@ export const ArticleDetail = ({ cell }) => {
                 ['h2', article.description],
                 [
                   '.tag-list',
-                  article.tagList.map(tag => [
+                  article.tagList.map((tag) => [
                     'a.tag-pill.tag-default',
                     { href: router.toUrl(Route.Home, { tag }) },
                     tag
@@ -129,7 +131,7 @@ export const ArticleDetail = ({ cell }) => {
                       {
                         placeholder: 'Write a comment...',
                         rows: '3',
-                        onInput: evt => actions.updateCommentField(cell, evt.target.value),
+                        onInput: (evt) => actions.updateCommentField(cell, evt.target.value),
                         value: state.comment
                       }
                     ]
@@ -156,7 +158,7 @@ export const ArticleDetail = ({ cell }) => {
                   ['a', { href: router.toUrl(Route.Register) }, 'sign up'],
                   ' to add comments on this article.'
                 ],
-            defaultTo([], state.comments).map(comment => [
+            defaultTo([], state.comments).map((comment) => [
               '.card',
               ['.card-block', ['p.card-text', comment.body]],
               [

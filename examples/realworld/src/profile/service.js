@@ -19,8 +19,8 @@ const loadProfileAndArticles = ({ cell, username, author, favorited }) => {
 };
 
 export const service = {
-  onchange: state => state.route.page,
-  run: cell => {
+  onchange: (state) => state.route.page,
+  run: (cell) => {
     if (cell.state.route.page === Route.Profile) {
       const { username } = cell.state.route.params;
       loadProfileAndArticles({ cell, username, author: username });

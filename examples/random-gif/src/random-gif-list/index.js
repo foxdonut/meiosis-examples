@@ -5,12 +5,12 @@ import { v1 as uuid } from 'uuid';
 import { randomGif, RandomGif } from '../random-gif';
 import { buttonStyle } from '../util/ui';
 
-const hasGifs = state =>
+const hasGifs = (state) =>
   R.any(
     R.equals('Y'),
     R.map(
       R.path(['image', 'value', 'value', 'case']),
-      R.map(randomGifId => R.prop(randomGifId, state), state.randomGifIds)
+      R.map((randomGifId) => R.prop(randomGifId, state), state.randomGifIds)
     )
   );
 
@@ -19,7 +19,7 @@ const initial = {
 };
 
 const actions = {
-  add: cell => {
+  add: (cell) => {
     const subId = uuid();
     const randomGifState = randomGif.initial;
 
@@ -28,7 +28,7 @@ const actions = {
 
   remove: (cell, subId) => {
     cell.update({
-      randomGifIds: list => R.remove(list.indexOf(subId), 1, list),
+      randomGifIds: (list) => R.remove(list.indexOf(subId), 1, list),
       [subId]: undefined
     });
   }
@@ -58,13 +58,13 @@ export const RandomGifList = {
         'button.bg-red' + buttonStyle,
         {
           onclick: () =>
-            cell.state.randomGifIds.map(subId => randomGif.actions.reset(cell.nest(subId)))
+            cell.state.randomGifIds.map((subId) => randomGif.actions.reset(cell.nest(subId)))
         },
         'Reset All'
       ),
       m(
         'div',
-        cell.state.randomGifIds.map(subId => m(RandomGifItem, { cell, subId }))
+        cell.state.randomGifIds.map((subId) => m(RandomGifItem, { cell, subId }))
       )
     )
 };

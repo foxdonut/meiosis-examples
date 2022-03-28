@@ -4,11 +4,11 @@ import stream from 'mithril/stream';
 
 import { app, App } from './app';
 
-const dropRepeats = (states, selector = state => state) => {
+const dropRepeats = (states, selector = (state) => state) => {
   let prev = undefined;
   const result = stream();
 
-  states.map(state => {
+  states.map((state) => {
     const next = selector(state);
     if (next !== prev) {
       prev = next;
@@ -21,11 +21,11 @@ const dropRepeats = (states, selector = state => state) => {
 const update = stream();
 const states = stream.scan(merge, app.initial, update);
 
-app.services.forEach(service => {
-  dropRepeats(states, service.onchange).map(state => service.run({ state, update }));
+app.services.forEach((service) => {
+  dropRepeats(states, service.onchange).map((state) => service.run({ state, update }));
 });
 
-const cells = dropRepeats(states).map(state => ({ state, update }));
+const cells = dropRepeats(states).map((state) => ({ state, update }));
 
 // vv Only for using Meiosis Tracer in development.
 // Only for using Meiosis Tracer in development.

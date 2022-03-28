@@ -5,8 +5,10 @@ export const get = (object, path) =>
   path.reduce((obj, key) => (obj == undefined ? undefined : obj[key]), object);
 
 // Credit: https://medium.com/@jperasmus11/roll-your-own-async-compose-pipe-functions-658cafe4c46f
-export const asyncPipe = (...fns) => input =>
-  fns.reduce((chain, fn) => chain.then(fn), Promise.resolve(input));
+export const asyncPipe =
+  (...fns) =>
+  (input) =>
+    fns.reduce((chain, fn) => chain.then(fn), Promise.resolve(input));
 
 export const range = (start, end) => {
   const arr = [];
@@ -37,7 +39,7 @@ export const path = tf.path;
 export const pick = tf.pick;
 export const pipe = tf.pipe;
 export const prepend = tf.prepend;
-export const preventDefault = tf.tap(evt => evt.preventDefault());
+export const preventDefault = tf.tap((evt) => evt.preventDefault());
 export const tap = tf.tap;
 export const thrush = tf.thrush;
 export const when = tf.when;

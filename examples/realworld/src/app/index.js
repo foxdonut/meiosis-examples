@@ -10,7 +10,7 @@ import { router } from '../router';
 export const loadInitial = () =>
   credentialsApi
     .getUser()
-    .then(user => ({ user }))
+    .then((user) => ({ user }))
     .catch(() => {
       clearToken();
     });

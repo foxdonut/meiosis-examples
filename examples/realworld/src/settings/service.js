@@ -4,8 +4,8 @@ import { Route, routeTo } from '../router';
 const fields = ['email', 'username', 'image', 'bio'];
 
 export const service = {
-  onchange: state => state.route.page,
-  run: cell => {
+  onchange: (state) => state.route.page,
+  run: (cell) => {
     if (cell.state.route.page === Route.Settings) {
       if (!cell.state.user) {
         cell.update(routeTo(Route.Home));

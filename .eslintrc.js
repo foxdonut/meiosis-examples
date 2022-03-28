@@ -24,11 +24,11 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
+        arrowParens: 'always',
         printWidth: 100,
         semi: true,
         singleQuote: true,
-        trailingComma: 'none',
-        arrowParens: 'avoid'
+        trailingComma: 'none'
       }
     ],
     'react/display-name': [0],
@@ -37,7 +37,8 @@ module.exports = {
   },
   settings: {
     react: {
-      pragma: 'React'
+      pragma: 'React',
+      version: 'detect'
     }
   }
 };

@@ -4,7 +4,7 @@ import { actions } from './actions';
 export const Settings = ({ cell }) => {
   const state = cell.state;
   const errors = Object.keys(state.settings.errors || {}).map(
-    key => `${key} ${state.settings.errors[key]}`
+    (key) => `${key} ${state.settings.errors[key]}`
   );
 
   return [
@@ -16,7 +16,7 @@ export const Settings = ({ cell }) => {
         [
           '.col-md-6.offset-md-3.col-xs-12',
           ['h1.text-xs-center', 'Your Settings'],
-          ['ul.error-messages', errors.map(error => ['li', error])],
+          ['ul.error-messages', errors.map((error) => ['li', error])],
           [
             'form',
             [
@@ -27,7 +27,7 @@ export const Settings = ({ cell }) => {
                   'input:text.form-control[placeholder=URL of profile picture]',
                   {
                     value: state.settings.image,
-                    onInput: evt => actions.updateSettingsForm(cell, 'image', evt.target.value)
+                    onInput: (evt) => actions.updateSettingsForm(cell, 'image', evt.target.value)
                   }
                 ]
               ],
@@ -37,7 +37,7 @@ export const Settings = ({ cell }) => {
                   'input:text.form-control.form-control-lg[placeholder=Your Name]',
                   {
                     value: state.settings.username,
-                    onInput: evt => actions.updateSettingsForm(cell, 'username', evt.target.value)
+                    onInput: (evt) => actions.updateSettingsForm(cell, 'username', evt.target.value)
                   }
                 ]
               ],
@@ -47,7 +47,7 @@ export const Settings = ({ cell }) => {
                   'textarea.form-control.form-control-lg[rows=8][placeholder=Short bio about you]',
                   {
                     value: state.settings.bio,
-                    onInput: evt => actions.updateSettingsForm(cell, 'bio', evt.target.value)
+                    onInput: (evt) => actions.updateSettingsForm(cell, 'bio', evt.target.value)
                   }
                 ]
               ],
@@ -57,7 +57,7 @@ export const Settings = ({ cell }) => {
                   'input:text.form-control.form-control-lg[placeholder=Email]',
                   {
                     value: state.settings.email,
-                    onInput: evt => actions.updateSettingsForm(cell, 'email', evt.target.value)
+                    onInput: (evt) => actions.updateSettingsForm(cell, 'email', evt.target.value)
                   }
                 ]
               ],
@@ -67,7 +67,7 @@ export const Settings = ({ cell }) => {
                   'input:password.form-control.form-control-lg[placeholder=New Password]',
                   {
                     value: state.settings.password,
-                    onInput: evt => actions.updateSettingsForm(cell, 'password', evt.target.value)
+                    onInput: (evt) => actions.updateSettingsForm(cell, 'password', evt.target.value)
                   }
                 ]
               ],

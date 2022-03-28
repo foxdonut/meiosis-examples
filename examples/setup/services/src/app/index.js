@@ -18,8 +18,8 @@ export const app = {
   },
   services: [
     {
-      onchange: state => state.dateTime.hour,
-      run: cell => {
+      onchange: (state) => state.dateTime.hour,
+      run: (cell) => {
         if (cell.state.dateTime.hour.length > 0) {
           cell.update({
             partOfDay: cell.state.dateTime.hour < 12 ? 'Morning' : 'Afternoon / Evening'
@@ -30,8 +30,8 @@ export const app = {
       }
     },
     {
-      onchange: state => state.temperature.value,
-      run: cell => {
+      onchange: (state) => state.temperature.value,
+      run: (cell) => {
         if (
           (cell.state.temperature.units === 'C' && cell.state.temperature.value > 24) ||
           (cell.state.temperature.units === 'F' && cell.state.temperature.value > 75)

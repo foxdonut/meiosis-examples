@@ -7,7 +7,7 @@ export const PopularTags = ({ cell }) => [
   [
     '.tag-list',
     cell.state.tags == null ? ['span', 'Loading tags...'] : null,
-    defaultTo([], path(['tags'], cell.state)).map(tag => [
+    defaultTo([], path(['tags'], cell.state)).map((tag) => [
       'a.tag-pill.tag-default',
       { href: router.toUrl(Route.Home, { tag }) },
       tag

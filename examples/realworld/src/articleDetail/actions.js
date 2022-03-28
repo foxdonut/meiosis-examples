@@ -7,10 +7,10 @@ export const actions = {
 
   addComment: (cell, slug, body) => {
     if (body && body.trim().length > 0) {
-      articlesApi.addComment(slug, { comment: { body } }).then(data =>
+      articlesApi.addComment(slug, { comment: { body } }).then((data) =>
         cell.update({
           comment: '',
-          comments: list => prepend(data.comment, list)
+          comments: (list) => prepend(data.comment, list)
         })
       );
     }
@@ -19,7 +19,7 @@ export const actions = {
   deleteComment: (cell, slug, id) => () =>
     articlesApi
       .deleteComment(slug, id)
-      .then(() => cell.update({ comments: list => list.filter(comment => comment.id !== id) })),
+      .then(() => cell.update({ comments: (list) => list.filter((comment) => comment.id !== id) })),
 
   deleteArticle: (cell, slug) =>
     articlesApi.unpublish(slug).then(() => cell.update(routeTo(Route.Home))),

@@ -11,9 +11,9 @@ export const actions = {
       .then(() =>
         cell.update([routeTo(Route.Profile, { username: settings.username }), { user: settings }])
       )
-      .catch(err => cell.update({ settings: { errors: err.errors } })),
+      .catch((err) => cell.update({ settings: { errors: err.errors } })),
 
-  logout: cell => {
+  logout: (cell) => {
     clearToken();
     cell.update([routeTo(Route.Home), { user: null, logout: true }]);
   }
