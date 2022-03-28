@@ -12,6 +12,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
+  plugins: ['prettier', 'react'],
   rules: {
     'no-unused-vars': [
       'error',
@@ -34,7 +35,6 @@ module.exports = {
     'react/jsx-no-undef': [1, { allowGlobals: true }],
     'react/prop-types': [0]
   },
-  plugins: ['prettier', 'react'],
   settings: {
     react: {
       pragma: 'React'
