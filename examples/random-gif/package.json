@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
-    "meiosis-setup": "^6.0.0-beta.11",
+    "meiosis-setup": "^6.0.0-beta.13",
     "mithril": "^2.0.4",
     "ramda": "0.28.0",
     "static-sum-type": "^0.18.1",
@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.4",
     "meiosis-tracer": "^4.0.0",
-    "webpack": "^5.70.0",
+    "webpack": "^5.71.0",
     "webpack-cli": "^4.9.2"
   }
 }

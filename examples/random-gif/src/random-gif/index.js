@@ -13,11 +13,6 @@ const gif_new_url = 'https://api.giphy.com/v1/gifs/random';
 const api_key = 'HMUbJEROIPi2Dodeq0thL28emz5CMCRX';
 // const api_key = "dc6zaTOxFJmzC"
 
-const initial = {
-  image: Loaded.Y(Success.Y(Image.N())),
-  tag: ''
-};
-
 const actions = {
   editTag: (cell, tag) => cell.update({ tag }),
 
@@ -37,11 +32,6 @@ const actions = {
   reset: (cell) => cell.update({ image: Loaded.Y(Success.Y(Image.N())) })
 };
 
-export const randomGif = {
-  initial,
-  actions
-};
-
 const imgsrc = (image) =>
   fold(Loaded)({
     N: () => IMG_PREFIX + 'loading.gif',
@@ -54,8 +44,13 @@ const imgsrc = (image) =>
     })
   })(image);
 
-export const RandomGif = {
-  view: ({ attrs: { cell, newGifGenerated } }) =>
+export const randomGif = {
+  initial: {
+    image: Loaded.Y(Success.Y(Image.N())),
+    tag: ''
+  },
+  actions,
+  view: (cell, newGifGenerated) =>
     m(
       'div.ba.b--green.pa2.mt2',
       m('span.mr2', 'Tag:'),

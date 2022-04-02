@@ -2,7 +2,7 @@ import m from 'mithril';
 import * as R from 'ramda';
 import { v1 as uuid } from 'uuid';
 
-import { randomGif, RandomGif } from '../random-gif';
+import { randomGif } from '../random-gif';
 import { buttonStyle } from '../util/ui';
 
 const hasGifs = (state) =>
@@ -13,10 +13,6 @@ const hasGifs = (state) =>
       R.map((randomGifId) => R.prop(randomGifId, state), state.randomGifIds)
     )
   );
-
-const initial = {
-  randomGifIds: []
-};
 
 const actions = {
   add: (cell) => {
@@ -34,22 +30,19 @@ const actions = {
   }
 };
 
+const randomGifItem = (cell, subId, newGifGenerated) =>
+  m(
+    'div.dib.mr2',
+    { key: subId },
+    randomGif.view(cell.nest(subId), newGifGenerated),
+    m('button.bg-red' + buttonStyle, { onclick: () => actions.remove(cell, subId) }, 'Remove')
+  );
+
 export const randomGifList = {
-  initial
-};
-
-const RandomGifItem = {
-  view: ({ attrs: { cell, subId } }) =>
-    m(
-      'div.dib.mr2',
-      { key: subId },
-      m(RandomGif, { cell: cell.nest(subId) }),
-      m('button.bg-red' + buttonStyle, { onclick: () => actions.remove(cell, subId) }, 'Remove')
-    )
-};
-
-export const RandomGifList = {
-  view: ({ attrs: { cell } }) =>
+  initial: {
+    randomGifIds: []
+  },
+  view: (cell, newGifGenerated) =>
     m(
       'div.ba.b--blue.pa2.mt2',
       m('div', 'Has gifs: ', hasGifs(cell.state) ? 'Yes' : 'No'),
@@ -64,7 +57,7 @@ export const RandomGifList = {
       ),
       m(
         'div',
-        cell.state.randomGifIds.map((subId) => m(RandomGifItem, { cell, subId }))
+        cell.state.randomGifIds.map((subId) => randomGifItem(cell, subId, newGifGenerated))
       )
     )
 };
