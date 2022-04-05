@@ -1,12 +1,9 @@
-import { identity } from 'ramda';
-import { fold } from 'static-sum-type';
-import yslashn from 'static-sum-type/modules/yslashn';
+import { fold, Maybe } from 'static-tagged-union';
 import m from 'mithril';
-import { buttonStyle } from '../util/ui';
 
-export const Loaded = yslashn.maybe('Loaded');
-export const Success = yslashn.maybe('Success');
-export const Image = yslashn.maybe('Image');
+export const Loaded = Maybe;
+export const Success = Maybe;
+export const Image = Maybe;
 
 const IMG_PREFIX = '/examples/random-gif/images/';
 const gif_new_url = 'https://api.giphy.com/v1/gifs/random';
@@ -33,13 +30,13 @@ const actions = {
 };
 
 const imgsrc = (image) =>
-  fold(Loaded)({
+  fold({
     N: () => IMG_PREFIX + 'loading.gif',
-    Y: fold(Success)({
+    Y: fold({
       N: () => IMG_PREFIX + 'error.png',
-      Y: fold(Image)({
+      Y: fold({
         N: () => IMG_PREFIX + 'blank.png',
-        Y: identity
+        Y: (x) => x
       })
     })
   })(image);
@@ -52,18 +49,24 @@ export const randomGif = {
   actions,
   view: (cell, newGifGenerated) =>
     m(
-      'div.ba.b--green.pa2.mt2',
-      m('span.mr2', 'Tag:'),
-      m('input[type=text]', {
-        value: cell.state.tag,
-        onkeyup: (evt) => actions.editTag(cell, evt.target.value)
-      }),
+      'div.border.border-primary.p-2',
       m(
-        'button.bg-blue' + buttonStyle,
-        { onclick: () => actions.newGif(cell, newGifGenerated) },
-        'Random Gif'
+        'div',
+        m('span', 'Tag:'),
+        m('input[type=text].ms-1', {
+          value: cell.state.tag,
+          onkeyup: (evt) => actions.editTag(cell, evt.target.value)
+        })
       ),
-      m('button.bg-red' + buttonStyle, { onclick: () => actions.reset(cell) }, 'Reset'),
-      m('div.mt2', m('img', { width: 200, height: 200, src: imgsrc(cell.state.image) }))
+      m(
+        'div.mt-2',
+        m(
+          'button.btn.btn-primary',
+          { onclick: () => actions.newGif(cell, newGifGenerated) },
+          'Random Gif'
+        ),
+        m('button.btn.btn-warning.ms-2', { onclick: () => actions.reset(cell) }, 'Reset')
+      ),
+      m('div.mt-2', m('img', { width: 200, height: 200, src: imgsrc(cell.state.image) }))
     )
 };

@@ -1,17 +1,11 @@
 import m from 'mithril';
-import b from 'bss';
 
-import { conditions, Conditions } from '../conditions';
-import { dateTime, DateTime } from '../dateTime';
-import { temperature, Temperature } from '../temperature';
-
-import 'polythene-css/dist/polythene.css';
-import 'polythene-css/dist/polythene-typography.css';
+import { dateTime } from '../dateTime';
+import { temperature } from '../temperature';
 
 export const app = {
   initial: {
     dateTime: dateTime.initial,
-    conditions: conditions.initial,
     temperature: temperature.initial,
     partOfDay: '',
     feelsLike: ''
@@ -42,18 +36,12 @@ export const app = {
         }
       }
     }
-  ]
-};
-
-export const App = {
-  view: ({ attrs: { cell } }) =>
+  ],
+  view: (cell) =>
     m(
       'div',
-      m(
-        'div' + b.f('left').w('25%').pr(40),
-        m(DateTime, { cell }),
-        m('div', cell.state.partOfDay, ' ', cell.state.feelsLike)
-      ),
-      m('div' + b.f('left'), m(Conditions, { cell }), m(Temperature, { cell }))
+      dateTime.view(cell),
+      m('div', cell.state.partOfDay, ' ', cell.state.feelsLike),
+      temperature.view(cell)
     )
 };

@@ -10,13 +10,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js']
-    /*
-    , alias: {
-      // NB: Keep these in this order
-      "mithril/stream": path.resolve(".", "node_modules/mithril/stream/stream.js"),
-      "mithril": path.resolve(".", "node_modules/mithril/mithril.js"),
-    }
-    */
   },
   module: {
     rules: [
@@ -26,15 +19,6 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto'
       }
     ]
   }

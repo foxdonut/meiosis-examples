@@ -2,7 +2,7 @@ import m from 'mithril';
 import merge from 'mergerino';
 import stream from 'mithril/stream';
 
-import { app, App } from './app';
+import { app } from './app';
 
 const dropRepeats = (states, selector = (state) => state) => {
   let prev = undefined;
@@ -34,7 +34,7 @@ meiosisTracer({ selector: '#tracer', rows: 25, streams: [states] });
 // ^^ Only for using Meiosis Tracer in development.
 
 m.mount(document.getElementById('app'), {
-  view: () => m(App, { cell: cells() })
+  view: () => app.view(cells())
 });
 
 states.map(() => m.redraw());

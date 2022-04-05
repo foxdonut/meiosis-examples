@@ -1,6 +1,5 @@
 // @ts-check
 import m from 'mithril';
-import { buttonStyle } from '../util/ui';
 
 const actions = {
   buttonToggle: (cell) => cell.update({ active: (x) => !x })
@@ -11,8 +10,12 @@ export const button = {
     active: false
   },
   view: (cell) => {
-    const bc = cell.state.active ? 'green' : 'red';
+    const buttonState = cell.state.active ? 'btn-primary' : 'btn-secondary';
     const label = cell.state.active ? 'Active' : 'Inactive';
-    return m('button.bg-' + bc + buttonStyle, { onclick: () => actions.buttonToggle(cell) }, label);
+    return m(
+      `button.btn.${buttonState}.mt-1`,
+      { style: { width: '100px' }, onclick: () => actions.buttonToggle(cell) },
+      label
+    );
   }
 };

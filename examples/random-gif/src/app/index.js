@@ -32,22 +32,22 @@ export const app = {
       'div',
       cell.nested.counter.view(cell),
 
-      m('div.mt2', 'Button:'),
+      m('div.mt-2', 'Button:'),
       cell.nested.button.view(cell),
 
-      m('div.mt2', 'Random Gif:'),
+      m('div.mt-2', 'Random Gif:'),
       cell.nested.randomGif1.view(cell, newGifGenerated),
 
-      m('div.mt2', 'Another Random Gif:'),
+      m('div.mt-2', 'Another Random Gif:'),
       cell.nested.randomGif2.view(cell, newGifGenerated),
 
-      m('div.mt2', 'Random Gif Pair:'),
+      m('div.mt-2', 'Random Gif Pair:'),
       cell.nested.randomGifPair.view(cell, newGifGenerated),
 
-      m('div.mt2', 'Random Gif Pair Pair:'),
+      m('div.mt-2', 'Random Gif Pair Pair:'),
       cell.nested.randomGifPairPair.view(cell, newGifGenerated),
 
-      m('div.mt2', 'Random Gif List:'),
+      m('div.mt-2', 'Random Gif List:'),
       cell.nested.randomGifList.view(cell, newGifGenerated)
     );
   }

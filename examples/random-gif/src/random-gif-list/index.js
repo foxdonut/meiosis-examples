@@ -1,30 +1,32 @@
 import m from 'mithril';
-import * as R from 'ramda';
 import { v1 as uuid } from 'uuid';
 
 import { randomGif } from '../random-gif';
-import { buttonStyle } from '../util/ui';
+
+const get = (object, path) =>
+  path.reduce((obj, key) => (obj == undefined ? undefined : obj[key]), object);
 
 const hasGifs = (state) =>
-  R.any(
-    R.equals('Y'),
-    R.map(
-      R.path(['image', 'value', 'value', 'case']),
-      R.map((randomGifId) => R.prop(randomGifId, state), state.randomGifIds)
-    )
-  );
+  state.randomGifIds
+    .map((randomGifId) => state[randomGifId])
+    .map((imageState) => get(imageState, ['image', 'params', 'params', 'params', 'length']))
+    .map(Boolean)
+    .filter((x) => x).length > 0;
 
 const actions = {
   add: (cell) => {
     const subId = uuid();
     const randomGifState = randomGif.initial;
 
-    cell.update({ randomGifIds: R.append(subId), [subId]: randomGifState });
+    cell.update({ randomGifIds: (subIds) => subIds.concat(subId), [subId]: randomGifState });
   },
 
   remove: (cell, subId) => {
     cell.update({
-      randomGifIds: (list) => R.remove(list.indexOf(subId), 1, list),
+      randomGifIds: (list) => {
+        const index = list.indexOf(subId);
+        return [...list.slice(0, index), ...list.slice(index + 1, list.length)];
+      },
       [subId]: undefined
     });
   }
@@ -32,10 +34,10 @@ const actions = {
 
 const randomGifItem = (cell, subId, newGifGenerated) =>
   m(
-    'div.dib.mr2',
+    'div.border.border-warning.p-2',
     { key: subId },
     randomGif.view(cell.nest(subId), newGifGenerated),
-    m('button.bg-red' + buttonStyle, { onclick: () => actions.remove(cell, subId) }, 'Remove')
+    m('button.btn.btn-warning.mt-2', { onclick: () => actions.remove(cell, subId) }, 'Remove')
   );
 
 export const randomGifList = {
@@ -44,11 +46,11 @@ export const randomGifList = {
   },
   view: (cell, newGifGenerated) =>
     m(
-      'div.ba.b--blue.pa2.mt2',
-      m('div', 'Has gifs: ', hasGifs(cell.state) ? 'Yes' : 'No'),
-      m('button.bg-green' + buttonStyle, { onclick: () => actions.add(cell) }, 'Add'),
+      'div.border.border-primary.p-2',
+      m('div.mb-2', 'Has gifs: ', hasGifs(cell.state) ? 'Yes' : 'No'),
+      m('button.btn.btn-primary', { onclick: () => actions.add(cell) }, 'Add'),
       m(
-        'button.bg-red' + buttonStyle,
+        'button.btn.btn-warning.ms-2',
         {
           onclick: () =>
             cell.state.randomGifIds.map((subId) => randomGif.actions.reset(cell.nest(subId)))
@@ -56,7 +58,8 @@ export const randomGifList = {
         'Reset All'
       ),
       m(
-        'div',
+        'div.mt-2',
+        { style: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gridGap: '10px' } },
         cell.state.randomGifIds.map((subId) => randomGifItem(cell, subId, newGifGenerated))
       )
     )

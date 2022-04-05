@@ -10,8 +10,8 @@ export const randomGifPairPair = {
   },
   view: (cell, newGifGenerated) =>
     m(
-      'div.ba.b--orange.pa2.mt2',
-      cell.nested.one.view(cell, newGifGenerated),
-      cell.nested.two.view(cell, newGifGenerated)
+      'div.border.border-dark.p-2',
+      m('div', cell.nested.one.view(cell, newGifGenerated)),
+      m('div.mt-2', cell.nested.two.view(cell, newGifGenerated))
     )
 };

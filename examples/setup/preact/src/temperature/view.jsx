@@ -6,19 +6,11 @@ export const Temperature = ({ cell }) => (
     <div style={{ marginTop: '0.8rem' }}>
       Temperature: {cell.state.value}&deg; {cell.state.units}
     </div>
-    <div style={{ marginTop: '0.8rem' }}>
-      <button
-        className="btn btn-primary mr-4"
-        onClick={() => actions.increment(cell, 1)}
-        style={{ marginRight: '0.4rem' }}
-      >
+    <div>
+      <button className="btn btn-primary me-1" onClick={() => actions.increment(cell, 1)}>
         Increment
       </button>
-      <button
-        className="btn btn-primary mr-4"
-        onClick={() => actions.increment(cell, -1)}
-        style={{ marginRight: '0.4rem' }}
-      >
+      <button className="btn btn-primary me-1" onClick={() => actions.increment(cell, -1)}>
         Decrement
       </button>
       <button className="btn btn-secondary mr-4" onClick={() => actions.changeUnits(cell)}>

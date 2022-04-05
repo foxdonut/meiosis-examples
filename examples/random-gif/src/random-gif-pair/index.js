@@ -10,8 +10,9 @@ export const randomGifPair = {
   },
   view: (cell, newGifGenerated) =>
     m(
-      'div.ba.b--purple.pa2.mt2',
-      m('div.dib', cell.nested.first.view(cell, newGifGenerated)),
-      m('div.dib.ml2', cell.nested.second.view(cell, newGifGenerated))
+      'div.border.border-warning.p-2',
+      { style: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridGap: '5px' } },
+      m('div', cell.nested.first.view(cell, newGifGenerated)),
+      m('div', cell.nested.second.view(cell, newGifGenerated))
     )
 };

@@ -6,5 +6,5 @@ export const counter = {
     label: 'Counter:',
     value: 0
   },
-  view: (cell) => m('div', cell.state.label + ' ' + cell.state.value)
+  view: (cell) => m('div', `${cell.state.label} ${cell.state.value}`)
 };

@@ -1,7 +1,10 @@
-import { initial } from './initial';
+import { view } from './view';
 
 export const dateTime = {
-  initial
+  initial: {
+    date: '',
+    hour: '',
+    minute: ''
+  },
+  view
 };
-
-export { DateTime } from './view';
