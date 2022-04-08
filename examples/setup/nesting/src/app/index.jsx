@@ -17,10 +17,10 @@ export const app = {
   }
 };
 
-const validate = cell => {
+const validate = (cell) => {
   const errors = validateInput(cell.state);
   const message = _.isEmpty(errors) ? 'Valid!' : 'Invalid!';
-  cell.update(state => Object.assign({}, state, { errors, message }));
+  cell.update((state) => Object.assign({}, state, { errors, message }));
 };
 
 export const App = ({ cell }) => (

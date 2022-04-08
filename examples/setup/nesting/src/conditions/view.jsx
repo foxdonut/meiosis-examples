@@ -10,7 +10,7 @@ const conditionsOption = ({ cell, value, label }) => (
       name="conditions"
       value={value}
       checked={cell.state.sky === value}
-      onChange={evt => actions.changeSky(cell, evt.target.value)}
+      onChange={(evt) => actions.changeSky(cell, evt.target.value)}
     />
     <span style={{ marginLeft: '5px', marginRight: '10px' }}>{label}</span>
   </label>
@@ -22,7 +22,7 @@ export const Conditions = ({ cell }) => (
       <input
         type="checkbox"
         checked={cell.state.precipitations}
-        onChange={evt => actions.togglePrecipitations(cell, evt.target.checked)}
+        onChange={(evt) => actions.togglePrecipitations(cell, evt.target.checked)}
       />
       <span style={{ marginLeft: '5px' }}>Precipitations</span>
     </label>
