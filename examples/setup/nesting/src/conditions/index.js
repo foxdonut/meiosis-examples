@@ -1,7 +1,9 @@
-import { initial } from './initial';
+import { view } from './view';
 
 export const conditions = {
-  initial
+  initial: {
+    precipitations: false,
+    sky: null
+  },
+  view
 };
-
-export { Conditions } from './view';

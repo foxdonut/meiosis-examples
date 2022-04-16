@@ -1,7 +1,8 @@
-import { initial } from './initial';
+import { view } from './view';
 
 export const temperature = {
-  initial
+  initial: {
+    value: 22
+  },
+  view
 };
-
-export { Temperature } from './view';

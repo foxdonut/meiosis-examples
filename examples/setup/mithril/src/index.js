@@ -6,7 +6,8 @@ import { app } from './app';
 
 const update = stream();
 const states = stream.scan(merge, app.initial, update);
-const cells = states.map((state) => ({ state, update }));
+const createCell = (state) => ({ state, update });
+const cells = states.map(createCell);
 
 // vv Only for using Meiosis Tracer in development.
 // Only for using Meiosis Tracer in development.
@@ -18,4 +19,4 @@ m.mount(document.getElementById('app'), {
   view: () => app.view(cells())
 });
 
-states.map(() => m.redraw());
+cells.map(() => m.redraw());

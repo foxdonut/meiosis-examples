@@ -16,7 +16,7 @@ const conditionsOption = ({ cell, value, label }) => (
   </label>
 );
 
-export const Conditions = ({ cell }) => (
+export const view = (cell) => (
   <div style={{ marginTop: '10px' }}>
     <label>
       <input
