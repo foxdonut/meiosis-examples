@@ -14,4 +14,6 @@ meiosisTracer({ selector: '#tracer', rows: 25, streams: [states] });
 // ^^ Only for using Meiosis Tracer in development.
 
 const element = document.getElementById('app');
-cells.map((cell) => render(app.view(cell), element));
+cells.map((cell) => {
+  render(app.view(cell), element);
+});
