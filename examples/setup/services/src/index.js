@@ -38,4 +38,4 @@ m.mount(document.getElementById('app'), {
   view: () => app.view(cells())
 });
 
-states.map(() => m.redraw());
+cells.map(() => m.redraw());
