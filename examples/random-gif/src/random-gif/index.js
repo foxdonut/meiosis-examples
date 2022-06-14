@@ -6,8 +6,8 @@ export const Success = Maybe;
 export const Image = Maybe;
 
 const IMG_PREFIX = '/examples/random-gif/images/';
-const gif_new_url = 'https://api.giphy.com/v1/gifs/random';
-const api_key = 'HMUbJEROIPi2Dodeq0thL28emz5CMCRX';
+const gifNewUrl = 'https://api.giphy.com/v1/gifs/random';
+const apiKey = 'HMUbJEROIPi2Dodeq0thL28emz5CMCRX';
 // const api_key = "dc6zaTOxFJmzC"
 
 const actions = {
@@ -16,7 +16,7 @@ const actions = {
   newGif: (cell, newGifGenerated) => {
     cell.update({ image: Loaded.N() });
 
-    m.request({ url: gif_new_url, params: { api_key, tag: cell.state.tag } })
+    m.request({ url: gifNewUrl, params: { apiKey, tag: cell.state.tag } })
       .then((response) => {
         cell.update({ image: Loaded.Y(Success.Y(Image.Y(response.data.images.original.url))) });
         if (newGifGenerated) {

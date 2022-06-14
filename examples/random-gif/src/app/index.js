@@ -21,8 +21,8 @@ export const app = {
     counter,
     randomGif1: randomGif,
     randomGif2: randomGif,
-    randomGifPair: randomGifPair,
-    randomGifPairPair: randomGifPairPair,
+    randomGifPair,
+    randomGifPairPair,
     randomGifList
   },
   view: (cell) => {

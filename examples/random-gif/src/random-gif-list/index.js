@@ -4,7 +4,7 @@ import { v1 as uuid } from 'uuid';
 import { randomGif } from '../random-gif';
 
 const get = (object, path) =>
-  path.reduce((obj, key) => (obj == undefined ? undefined : obj[key]), object);
+  path.reduce((obj, key) => (obj === undefined ? undefined : obj[key]), object);
 
 const hasGifs = (state) =>
   state.randomGifIds
