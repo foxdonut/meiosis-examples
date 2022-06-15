@@ -48,20 +48,16 @@ export const randomGif = {
   },
   actions,
   view: (cell, newGifGenerated) =>
-    m(
-      'div.border.border-primary.p-2',
-      m(
-        'div',
+    m('div.border.border-primary.p-2',
+      m('div',
         m('span', 'Tag:'),
         m('input[type=text].ms-1', {
           value: cell.state.tag,
           onkeyup: (evt) => actions.editTag(cell, evt.target.value)
         })
       ),
-      m(
-        'div.mt-2',
-        m(
-          'button.btn.btn-primary',
+      m('div.mt-2',
+        m('button.btn.btn-primary',
           { onclick: () => actions.newGif(cell, newGifGenerated) },
           'Random Gif'
         ),

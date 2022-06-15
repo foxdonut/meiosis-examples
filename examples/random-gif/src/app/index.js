@@ -28,8 +28,7 @@ export const app = {
   view: (cell) => {
     const newGifGenerated = () => actions.newGifGenerated(cell);
 
-    return m(
-      'div',
+    return m('div',
       cell.nested.counter.view(cell),
 
       m('div.mt-2', 'Button:'),

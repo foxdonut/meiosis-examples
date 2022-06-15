@@ -1,11 +1,8 @@
 import m from 'mithril';
 
 export const view = (cell) => [
-  m(
-    'div',
-    { style: { marginBottom: '10px' } },
-    m(
-      'a',
+  m('div', { style: { marginBottom: '10px' } },
+    m('a',
       {
         href: '#',
         onclick: (evt) => {
@@ -16,8 +13,7 @@ export const view = (cell) => [
       'Home'
     ),
     m('span', ' | '),
-    m(
-      'a',
+    m('a',
       {
         href: '#',
         onclick: (evt) => {
@@ -28,25 +24,22 @@ export const view = (cell) => [
       'Login'
     ),
     m('span', ' | '),
-    m(
-      'a',
-      {
-        href: '#',
-        onclick: (evt) => {
-          evt.preventDefault();
-          cell.update({ page: 'Data' });
-        }
-      },
+    m('a', {
+      href: '#',
+      onclick: (evt) => {
+        evt.preventDefault();
+        cell.update({ page: 'Data' });
+      }
+    },
       'Data'
     )
   ),
   cell.state.page === 'Home'
     ? m('h4', 'Home page')
     : cell.state.page === 'Login'
-    ? [
+      ? [
         m('h4', 'Login page'),
-        m(
-          'div',
+        m('div',
           {
             style: {
               width: '300px',
@@ -73,15 +66,12 @@ export const view = (cell) => [
           })
         )
       ]
-    : cell.state.page === 'Data'
-    ? [
-        m('h4', 'Data page'),
-        cell.state.data === 'loading'
-          ? m('div', 'Loading, please wait...')
-          : m(
-              'ul',
-              cell.state.data.map((item) => m('li', item))
-            )
-      ]
-    : null
+      : cell.state.page === 'Data'
+        ? [
+          m('h4', 'Data page'),
+          cell.state.data === 'loading'
+            ? m('div', 'Loading, please wait...')
+            : m('ul', cell.state.data.map((item) => m('li', item)))
+        ]
+        : null
 ];

@@ -1,4 +1,3 @@
-// @ts-check
 import m from 'mithril';
 import stream from 'mithril/stream';
 import { setup } from 'meiosis-setup/mergerino';
