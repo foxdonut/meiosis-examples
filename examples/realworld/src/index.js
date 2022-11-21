@@ -1,4 +1,4 @@
-import meiosisSetup from 'meiosis-setup/mergerino';
+import { meiosisSetup } from 'meiosis-setup';
 import { compose } from './util/fp';
 import { render } from './util/view';
 import { App, app, loadInitial } from './app';
