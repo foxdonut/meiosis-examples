@@ -1,4 +1,4 @@
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import flyd from 'flyd';
 
 import { app } from './app';
@@ -14,6 +14,7 @@ meiosisTracer({ selector: '#tracer', rows: 25, streams: [states] });
 // ^^ Only for using Meiosis Tracer in development.
 
 const element = document.getElementById('app');
+const root = createRoot(element);
 cells.map((cell) => {
-  render(app.view(cell), element);
+  root.render(app.view(cell));
 });

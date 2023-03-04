@@ -1,7 +1,3 @@
 module.exports = {
-  settings: {
-    react: {
-      pragma: "h"
-    }
-  }
-}
+  extends: ['foxdonut/with-preact']
+};

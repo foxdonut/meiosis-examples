@@ -21,15 +21,14 @@ export const app = {
     counter,
     randomGif1: randomGif,
     randomGif2: randomGif,
-    randomGifPair: randomGifPair,
-    randomGifPairPair: randomGifPairPair,
+    randomGifPair,
+    randomGifPairPair,
     randomGifList
   },
   view: (cell) => {
     const newGifGenerated = () => actions.newGifGenerated(cell);
 
-    return m(
-      'div',
+    return m('div',
       cell.nested.counter.view(cell),
 
       m('div.mt-2', 'Button:'),

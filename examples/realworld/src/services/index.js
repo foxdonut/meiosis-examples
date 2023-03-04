@@ -20,9 +20,8 @@ const authHeader = () =>
     : {};
 
 const request = (url, options) =>
-  m
-    .request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
-    .then((response) => (response && response.data) || response);
+  m.request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
+   .then((response) => (response && response.data) || response);
 
 /*
 Parameters:
