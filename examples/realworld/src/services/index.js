@@ -28,8 +28,7 @@ const request = (url, options = {}) => {
   return fetch(API_ROOT + url, options)
     .then((response) => {
       if (!response.ok) {
-        console.log('error response:', response);
-        throw new Error(response.statusText);
+        return response.text().then((err) => Promise.reject(new Error(err)));
       }
       return response;
     })
