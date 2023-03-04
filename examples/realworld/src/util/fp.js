@@ -29,7 +29,7 @@ export const choose = (keys, obj) =>
       );
 
 // Filter an object to keep only entries with defined values
-export const filterOutNonValues = (obj) =>
+export const filterOutNullValues = (obj) =>
   Object.fromEntries(
     Object.entries(obj).filter(([_key, value]) => !!value)
   );

@@ -1,4 +1,4 @@
-import { filterOutNonValues, omit } from '../util/fp';
+import { filterOutNullValues, omit } from '../util/fp';
 
 const API_ROOT = 'https://api.realworld.io/api';
 // const API_ROOT = 'https://conduit.productionready.io/api';
@@ -22,13 +22,17 @@ const request = (url, options = {}) => {
     options.body = JSON.stringify(options.body);
   }
   if (options.params) {
-    url += '?' + new URLSearchParams(filterOutNonValues(options.params));
+    url += '?' + new URLSearchParams(filterOutNullValues(options.params));
   }
+  if (!options.headers) {
+    options.headers = {};
+  }
+  options.headers['Content-Type'] = 'application/json';
 
   return fetch(API_ROOT + url, options)
     .then((response) => {
       if (!response.ok) {
-        return response.text().then((err) => Promise.reject(new Error(err)));
+        return response.json().then((err) => Promise.reject(err));
       }
       return response;
     })

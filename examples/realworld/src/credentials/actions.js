@@ -12,6 +12,10 @@ export const actions = {
         setToken(user.token);
         cell.update([routeTo(Route.Home), { user }]);
       })
-      .catch((err) => cell.update({ [method]: { errorMessage: err.message } } ));
+      // .catch((err) => cell.update({ [method]: err } ));
+      .catch((err) => {
+        console.log('err:', err);
+        cell.update({ [method]: err } );
+      });
   }
 };
