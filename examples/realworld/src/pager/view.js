@@ -11,27 +11,19 @@ export const Pager = ({ cell }) => {
   const to = Math.min(from + filter.limit - 1, state.articlesCount);
   const params = state.route.params;
 
-  return [
-    'nav',
-    [
-      'ul.pagination',
-      pageList.map((pageNumber) => [
-        'li.page-item',
+  return ['nav',
+    ['ul.pagination',
+      pageList.map((pageNumber) => ['li.page-item',
         { className: { active: pageNumber === currentPageNumber } },
-        [
-          'a.page-link',
+        ['a.page-link',
           {
             href: router.toUrl(state.route.value, {
               ...params,
               offset: (pageNumber - 1) * filter.limit
             })
           },
-          pageNumber
-        ]
-      ])
-    ],
+          pageNumber]])],
     state.articlesCount > 0
       ? ['div', 'Displaying ', from, ' - ', to, ' of ', state.articlesCount]
-      : ['div', 'No articles here... yet.']
-  ];
+      : ['div', 'No articles here... yet.']];
 };

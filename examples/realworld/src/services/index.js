@@ -13,15 +13,15 @@ export const clearToken = () => window.localStorage.removeItem('jwt');
 const authHeader = () =>
   getToken()
     ? {
-        headers: {
-          Authorization: 'Token ' + getToken()
-        }
+      headers: {
+        Authorization: 'Token ' + getToken()
       }
+    }
     : {};
 
 const request = (url, options) =>
   m.request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
-   .then((response) => (response && response.data) || response);
+    .then((response) => (response && response.data) || response);
 
 /*
 Parameters:
