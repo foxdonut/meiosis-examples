@@ -28,6 +28,12 @@ export const choose = (keys, obj) =>
         {}
       );
 
+// Filter an object to keep only entries with defined values
+export const filterOutNonValues = (obj) =>
+  Object.fromEntries(
+    Object.entries(obj).filter(([_key, value]) => !!value)
+  );
+
 export const assoc = tf.assoc;
 export const compose = tf.compose;
 export const constant = tf.constant;

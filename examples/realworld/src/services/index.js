@@ -1,6 +1,4 @@
-import m from 'mithril';
-
-import { omit } from '../util/fp';
+import { filterOutNonValues, omit } from '../util/fp';
 
 const API_ROOT = 'https://api.realworld.io/api';
 // const API_ROOT = 'https://conduit.productionready.io/api';
@@ -19,9 +17,29 @@ const authHeader = () =>
     }
     : {};
 
-const request = (url, options) =>
-  m.request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
-    .then((response) => (response && response.data) || response);
+const request = (url, options = {}) => {
+  if (options.body) {
+    options.body = JSON.stringify(options.body);
+  }
+  if (options.params) {
+    url += '?' + new URLSearchParams(filterOutNonValues(options.params));
+  }
+
+  return fetch(API_ROOT + url, options)
+    .then((response) => {
+      if (!response.ok) {
+        console.log('error response:', response);
+        throw new Error(response.statusText);
+      }
+      return response;
+    })
+    .then((response) => response.json());
+};
+
+/*
+m.request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
+  .then((response) => (response && response.data) || response);
+*/
 
 /*
 Parameters:
