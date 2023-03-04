@@ -2,7 +2,7 @@ import { Route, router } from '../router';
 import { get } from '../util/fp';
 
 const Header = ({ cell }) => {
-  const active = (pageId) => ({ className: { active: cell.state.route.page === pageId } });
+  const active = (pageId) => ({ className: { active: cell.state.route.value === pageId } });
 
   return [
     'nav.navbar.navbar-light',
@@ -49,8 +49,8 @@ const Header = ({ cell }) => {
                 {
                   className: {
                     active:
-                      (cell.state.route.page === 'Profile' ||
-                        cell.state.route.page === 'ProfileFavorites') &&
+                      (cell.state.route.value === 'Profile' ||
+                        cell.state.route.value === 'ProfileFavorites') &&
                       get(cell.state, ['user', 'username']) ===
                         get(cell.state, ['profile', 'username'])
                   }

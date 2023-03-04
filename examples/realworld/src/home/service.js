@@ -4,9 +4,9 @@ import { getArticlesFilter } from '../util/filter';
 import { Route } from '../router';
 
 export const service = {
-  onchange: (state) => state.route.page,
+  onchange: (state) => state.route.value,
   run: (cell) => {
-    if (cell.state.route.page === Route.Home) {
+    if (cell.state.route.value === Route.Home) {
       const filter = getArticlesFilter(cell.state);
 
       filter.feed

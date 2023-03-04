@@ -3,7 +3,7 @@ import { Route, routeTo } from '../router';
 import { getArticlesFilter } from '../util/filter';
 
 const refresh = (state, slug) =>
-  state.route.page === Route.ArticleDetail
+  state.route.value === Route.ArticleDetail
     ? loadArticleAndComments({ slug })
     : loadArticlesAndTags(getArticlesFilter(state));
 

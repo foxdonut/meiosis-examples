@@ -19,12 +19,12 @@ const loadProfileAndArticles = ({ cell, username, author, favorited }) => {
 };
 
 export const service = {
-  onchange: (state) => state.route.page,
+  onchange: (state) => state.route.value,
   run: (cell) => {
-    if (cell.state.route.page === Route.Profile) {
+    if (cell.state.route.value === Route.Profile) {
       const { username } = cell.state.route.params;
       loadProfileAndArticles({ cell, username, author: username });
-    } else if (cell.state.route.page === Route.ProfileFavorites) {
+    } else if (cell.state.route.value === Route.ProfileFavorites) {
       const { username } = cell.state.route.params;
       loadProfileAndArticles({ cell, username, favorited: username });
     }

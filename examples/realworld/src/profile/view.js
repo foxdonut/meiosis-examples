@@ -8,7 +8,7 @@ export const Profile = ({ cell }) => {
   const state = cell.state;
   const username = get(state, ['profile', 'username']);
   const isCurrentUser = get(state, ['profile', 'username']) === get(state, ['user', 'username']);
-  const isFavorites = state.route.page === Route.ProfileFavorites;
+  const isFavorites = state.route.value === Route.ProfileFavorites;
 
   return [
     '.profile-page',

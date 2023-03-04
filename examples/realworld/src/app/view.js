@@ -20,6 +20,6 @@ const componentMap = {
 };
 
 export const App = ({ cell }) => {
-  const Component = componentMap[cell.state.route.page];
+  const Component = componentMap[cell.state.route.value];
   return Layout({ cell, Component });
 };

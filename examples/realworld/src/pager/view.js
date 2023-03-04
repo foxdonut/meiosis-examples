@@ -21,7 +21,7 @@ export const Pager = ({ cell }) => {
         [
           'a.page-link',
           {
-            href: router.toUrl(state.route.page, {
+            href: router.toUrl(state.route.value, {
               ...params,
               offset: (pageNumber - 1) * filter.limit
             })

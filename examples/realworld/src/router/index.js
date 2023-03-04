@@ -1,6 +1,4 @@
-import { createRouter } from 'meiosis-router-setup';
-import createRouteMatcher from 'feather-route-matcher';
-import queryString from 'query-string';
+import { createRouter } from 'meiosis-router';
 
 export const Route = {
   Home: 'Home',
@@ -26,15 +24,7 @@ const routeConfig = {
   '/profile/:username/favorites': Route.ProfileFavorites
 };
 
-const routeMatcher = createRouteMatcher(routeConfig);
-const convertMatch = ({ value, params }) => ({ page: value, params });
-
-export const router = createRouter({
-  routeMatcher,
-  convertMatch,
-  routeConfig,
-  queryString
-});
+export const router = createRouter({ routeConfig });
 
 export const toRoutePatch = (route) => ({ route: () => route });
 export const routeTo = (page, params) => toRoutePatch(router.toRoute(page, params));

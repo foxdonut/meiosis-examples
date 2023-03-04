@@ -17,12 +17,12 @@ The code in this example is for the frontend only; we will use a provided Node.j
 default, the example uses the online server provided at:
 
 ```
-https://conduit.productionready.io
+https://api.realworld.io
 ```
 
 You can check the availability by accessing an API, for example:
 
-https://conduit.productionready.io/api/articles
+https://api.realworld.io/api/articles
 
 ## Setup - Frontend
 
