@@ -21,6 +21,7 @@ export const Credentials =
               ['p.text-xs-center',
                 ['a', { href: router.toUrl(options.alternativePage) }, options.alternativeLabel]],
               ['ul.error-messages', errors.map((error) => ['li', error])],
+              ['div.error-messages', cell.state[id].errorMessage],
               ['form',
                 options.showUsername && [
                   'fieldset.form-group',

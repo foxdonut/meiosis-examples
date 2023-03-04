@@ -12,6 +12,6 @@ export const actions = {
         setToken(user.token);
         cell.update([routeTo(Route.Home), { user }]);
       })
-      .catch((err) => cell.update({ [method]: { errors: { sendCredentials: err.message } } }));
+      .catch((err) => cell.update({ [method]: { errorMessage: err.message } } ));
   }
 };
