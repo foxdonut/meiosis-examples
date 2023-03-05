@@ -8,16 +8,11 @@ const getToken = () => window.localStorage.getItem('jwt');
 export const setToken = (token) => window.localStorage.setItem('jwt', token);
 export const clearToken = () => window.localStorage.removeItem('jwt');
 
-const authHeader = () => ({
-  Authorization: 'Token ' + getToken()
-});
+const authHeader = () => getToken()
+  ? { Authorization: 'Token ' + getToken() }
+  : {};
 
-const authHeaders = () =>
-  getToken()
-    ? {
-      headers: authHeader()
-    }
-    : {};
+const authHeaders = () => ({ headers: authHeader() });
 
 const request = (url, options = {}) => {
   if (options.body) {
@@ -38,11 +33,6 @@ const request = (url, options = {}) => {
     })
     .then((response) => response.json());
 };
-
-/*
-m.request(Object.assign(options || {}, { url: API_ROOT + url }, authHeader()))
-  .then((response) => (response && response.data) || response);
-*/
 
 /*
 Parameters:
@@ -68,7 +58,7 @@ Returns:
   articles,
   articlesCount
 }
- */
+*/
 export const articlesApi = {
   getList: (params) => request('/articles', { params: omit(['feed'], params) }),
 
