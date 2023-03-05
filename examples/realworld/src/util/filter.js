@@ -11,6 +11,8 @@ export const getArticlesFilter = (state) => {
 
   if (state.route.value === Route.Profile) {
     filter.author = state.route.params.username;
+  } else if (state.route.value === Route.ProfileFavorites) {
+    filter.favorited = state.route.params.username;
   }
 
   return filter;
