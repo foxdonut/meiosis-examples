@@ -38,7 +38,8 @@ export const actions = {
           },
           article.slug
         )
-        .then(() => cell.update(routeTo(Route.Home)));
+        .then(() => cell.update(routeTo(Route.Home)))
+        .catch((err) => cell.update({ article: { validationErrors: err.errors } }));
     }
   }
 };
