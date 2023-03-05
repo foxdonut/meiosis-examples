@@ -8,12 +8,14 @@ const getToken = () => window.localStorage.getItem('jwt');
 export const setToken = (token) => window.localStorage.setItem('jwt', token);
 export const clearToken = () => window.localStorage.removeItem('jwt');
 
-const authHeader = () =>
+const authHeader = () => ({
+  Authorization: 'Token ' + getToken()
+});
+
+const authHeaders = () =>
   getToken()
     ? {
-      headers: {
-        Authorization: 'Token ' + getToken()
-      }
+      headers: authHeader()
     }
     : {};
 
@@ -24,10 +26,8 @@ const request = (url, options = {}) => {
   if (options.params) {
     url += '?' + new URLSearchParams(filterOutNullValues(options.params));
   }
-  if (!options.headers) {
-    options.headers = {};
-  }
-  options.headers['Content-Type'] = 'application/json';
+  options.headers = Object.assign(
+    { 'Content-Type': 'application/json' }, authHeader(), options.headers);
 
   return fetch(API_ROOT + url, options)
     .then((response) => {
@@ -100,7 +100,7 @@ export const credentialsApi = {
   getUser: () =>
     new Promise((resolve, reject) => {
       if (getToken()) {
-        return request('/user', authHeader())
+        return request('/user', authHeaders())
           .then((user) => resolve(user.user))
           .catch(reject);
       } else {
