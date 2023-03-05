@@ -1,5 +1,3 @@
-import { h } from 'preact';
-
 import { actions } from './actions';
 
 const conditionsOption = ({ cell, value, label }) => (

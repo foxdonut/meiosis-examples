@@ -1,5 +1,3 @@
-import { h } from 'preact';
-
 import { actions } from './actions';
 
 export const view = (cell) => (

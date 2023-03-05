@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { actions } from './actions';
 
 export const view = (cell) => (

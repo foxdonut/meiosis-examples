@@ -1,5 +1,6 @@
 /*global __dirname*/
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -11,6 +12,11 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      h: ['preact', 'h']
+    })
+  ],
   module: {
     rules: [
       {
