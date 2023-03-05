@@ -26,5 +26,4 @@ const routeConfig = {
 
 export const router = createRouter({ routeConfig });
 
-export const toRoutePatch = (route) => ({ route: () => route });
-export const routeTo = (page, params) => toRoutePatch(router.toRoute(page, params));
+export const routeTo = (page, params) => ({ route: () => router.toRoute(page, params) });

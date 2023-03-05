@@ -1,4 +1,5 @@
 import { assoc } from '../util/fp';
+import { Route } from '../router';
 
 export const getArticlesFilter = (state) => {
   const filter = ['feed', 'offset', 'tag'].reduce(
@@ -7,6 +8,10 @@ export const getArticlesFilter = (state) => {
   );
   filter.offset = Number(filter.offset) || 0;
   filter.limit = 10;
+
+  if (state.route.value === Route.Profile) {
+    filter.author = state.route.params.username;
+  }
 
   return filter;
 };
