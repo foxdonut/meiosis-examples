@@ -12,7 +12,7 @@ cells.map(compose(router.syncLocationBar, (cell) => cell.state.route));
 // vv Only for using Meiosis Tracer in development.
 import meiosisTracer from 'meiosis-tracer';
 const states = cells.map((cell) => cell.state);
-meiosisTracer({ streams: [{ stream: states, label: 'states' }] });
+meiosisTracer({ streams: [{ stream: states, label: 'state' }], rows: 50 });
 // ^^ Only for using Meiosis Tracer in development.
 
 const element = document.getElementById('app');
