@@ -9,7 +9,7 @@ const cells = meiosisSetup({ stream, app });
 // vv Only for using Meiosis Tracer in development.
 import meiosisTracer from 'meiosis-tracer';
 
-const states = cells.map((cell) => cell.state);
+const states = cells().states;
 meiosisTracer({ selector: '#tracer', streams: [{ label: 'states', stream: states }], rows: 35 });
 // ^^ Only for using Meiosis Tracer in development.
 
