@@ -1,5 +1,5 @@
 /*global __dirname*/
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   mode: 'development',

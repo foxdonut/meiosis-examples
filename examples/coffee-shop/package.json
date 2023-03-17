@@ -1,0 +1,41 @@
+{
+  "name": "coffee-shop",
+  "version": "1.0.0",
+  "description": "meiosis-examples coffee-shop",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "webpack",
+    "watch": "webpack --progress --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxdonut/meiosis-examples.git"
+  },
+  "keywords": [
+    "example",
+    "meiosis",
+    "preact",
+    "reactive",
+    "state",
+    "state management"
+  ],
+  "author": "foxdonut",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foxdonut/meiosis-examples/issues"
+  },
+  "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
+  "dependencies": {
+    "meiosis-setup": "^6.1.1",
+    "preact": "^10.13.1"
+  },
+  "devDependencies": {
+    "source-map-loader": "^4.0.1",
+    "static-server": "^2.2.1",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1"
+  }
+}

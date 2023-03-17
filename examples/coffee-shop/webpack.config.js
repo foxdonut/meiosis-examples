@@ -3,27 +3,30 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: './src/index.tsx',
+  devtool: 'source-map',
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'generated-app.js'
   },
   resolve: {
-    extensions: ['.js']
+    extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'ts-loader'
         }
       },
       {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: 'javascript/auto'
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'source-map-loader'
+        }
       }
     ]
   }
