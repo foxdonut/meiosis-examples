@@ -8,7 +8,12 @@ interface State {
 
 const actions = {
   increment: (cell: MeiosisCell<State>, amount: number) =>
-    cell.update({ value: (x) => x + amount })
+    cell.update({ value: (x) => x + amount }),
+
+  saveChanges: () => {
+    console.log('save changes');
+    // const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+  }
 };
 
 const app: MeiosisViewComponent<State> = {
@@ -29,6 +34,28 @@ const app: MeiosisViewComponent<State> = {
           onClick={() => actions.increment(cell, -1)}>
           Decrement
         </button>
+      </div>
+
+      <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button>
+
+      <div class="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Modal Body goes here
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onClick={() => actions.saveChanges()}>Save changes</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 };
