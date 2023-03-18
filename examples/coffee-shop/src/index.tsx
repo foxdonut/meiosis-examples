@@ -1,6 +1,8 @@
 import { meiosisSetup } from 'meiosis-setup';
 import { MeiosisCell, MeiosisViewComponent } from 'meiosis-setup/types';
 import { render } from 'preact';
+import { Modal } from 'bootstrap';
+import { getElementById } from './util';
 
 interface State {
   value: number;
@@ -12,7 +14,8 @@ const actions = {
 
   saveChanges: () => {
     console.log('save changes');
-    // const modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+    const modal = Modal.getInstance(getElementById('exampleModal'));
+    modal?.hide();
   }
 };
 
@@ -62,7 +65,7 @@ const app: MeiosisViewComponent<State> = {
 
 const cells = meiosisSetup<State>({ app });
 
-const element = document.getElementById('app') as HTMLElement;
+const element = getElementById('app');
 cells.map((cell) => {
   render(app.view(cell), element);
 });
