@@ -1,6 +1,6 @@
 import { meiosisSetup } from 'meiosis-setup';
 import { compose } from './util/fp';
-import { render } from './util/view';
+import { createRender } from './util/view';
 import { App, app, loadInitial } from './app';
 import { router } from './router';
 
@@ -16,9 +16,10 @@ meiosisTracer({ streams: [{ stream: states, label: 'state' }], rows: 50 });
 // ^^ Only for using Meiosis Tracer in development.
 
 const element = document.getElementById('app');
+const render = createRender(element);
 
 cells.map((cell) => {
-  render(App({ cell }), element);
+  render(App({ cell }));
 });
 
 loadInitial().then(cells().update);
