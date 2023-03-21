@@ -1,13 +1,11 @@
 .footer {
-  font-size: 11pt;
   position: absolute;
   bottom: 0;
-  width: 99%;
   height: 40px;
 }
 #tracer {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 10px;
   font-size: 11px;
 }

@@ -1,25 +1,22 @@
 import { meiosisSetup } from 'meiosis-setup';
 import { MeiosisCell, MeiosisViewComponent } from 'meiosis-setup/types';
 import { render } from 'preact';
-import { Modal } from 'bootstrap';
 import { State } from './types';
 import { getElementById } from './util';
 import { App } from './app';
+import { openModal } from './common/modal';
 
 const actions = {
   increment: (cell: MeiosisCell<State>, amount: number) =>
-    cell.update({ value: (x) => x + amount }),
-
-  saveChanges: () => {
-    console.log('save changes');
-    const modal = Modal.getInstance(getElementById('exampleModal'));
-    modal?.hide();
-  }
+    cell.update({ value: (x) => x + amount })
 };
 
 const app: MeiosisViewComponent<State> = {
   initial: {
-    value: 22
+    value: 22,
+    modal: {
+      size: ''
+    }
   },
   view: (cell) =>
     <div>
@@ -38,36 +35,23 @@ const app: MeiosisViewComponent<State> = {
         </button>
       </div>
 
-      <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">
-        Launch demo modal
-      </button>
-
-      <div class="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Modal Body goes here
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onClick={() => actions.saveChanges()}>
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
+      <div class="mt-2">
+        <button type="button" class="btn btn-primary"
+          onClick={() => openModal(cell, 'modal-lg')}>
+          Launch demo modal
+        </button>
       </div>
     </div>
 };
 
 const cells = meiosisSetup<State>({ app });
+
+// vv Only for using Meiosis Tracer in development.
+import meiosisTracer from 'meiosis-tracer';
+
+const states = cells().states;
+meiosisTracer({ streams: [{ label: 'states', stream: states }], rows: 35 });
+// ^^ Only for using Meiosis Tracer in development.
 
 const element = getElementById('app');
 cells.map((cell) => {

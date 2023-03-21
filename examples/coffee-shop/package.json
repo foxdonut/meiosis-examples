@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.6",
+    "meiosis-tracer": "^6.0.0",
     "source-map-loader": "^4.0.1",
     "static-server": "^2.2.1",
     "ts-loader": "^9.4.2",
