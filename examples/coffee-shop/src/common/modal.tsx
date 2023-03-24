@@ -9,6 +9,7 @@ export const ModalView: MeiosisView<State> = ({ cell }) => (
   <div class="modal fade" id={modalId} tabIndex={-1} aria-labelledby="modalLabel"
     aria-hidden="true">
     <div class={'modal-dialog ' + cell.state.modal.size}>
+
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="modalLabel">Modal title</h1>
@@ -16,7 +17,7 @@ export const ModalView: MeiosisView<State> = ({ cell }) => (
             aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Modal Body goes here
+          Modal Body goes here: {cell.state.value}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -25,15 +26,16 @@ export const ModalView: MeiosisView<State> = ({ cell }) => (
           </button>
         </div>
       </div>
+
     </div>
   </div>
 );
 
-export const openModal = (cell: MeiosisCell<State>, size?: string) => {
+export const openModal = (cell: MeiosisCell<State>, content: MeiosisView<State>, size?: string) => {
   if (size) {
     cell.update({ modal: { size } });
   }
   const element = getElementById(modalId);
-  const modal = Modal.getInstance(element) || new Modal(element);
-  modal?.show();
+  const modal = Modal.getOrCreateInstance(element);
+  modal.show();
 };

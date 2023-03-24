@@ -1,5 +1,5 @@
 import { meiosisSetup } from 'meiosis-setup';
-import { MeiosisCell, MeiosisViewComponent } from 'meiosis-setup/types';
+import { MeiosisCell, MeiosisView, MeiosisViewComponent } from 'meiosis-setup/types';
 import { render } from 'preact';
 import { State } from './types';
 import { getElementById } from './util';
@@ -10,6 +10,25 @@ const actions = {
   increment: (cell: MeiosisCell<State>, amount: number) =>
     cell.update({ value: (x) => x + amount })
 };
+
+const MyModal: MeiosisView<State> = ({ cell }) => (
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="modalLabel">Modal title</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal"
+        aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      Modal Body goes here: {cell.state.value}
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">
+        Save changes
+      </button>
+    </div>
+  </div>
+);
 
 const app: MeiosisViewComponent<State> = {
   initial: {
@@ -37,7 +56,7 @@ const app: MeiosisViewComponent<State> = {
 
       <div class="mt-2">
         <button type="button" class="btn btn-primary"
-          onClick={() => openModal(cell, 'modal-lg')}>
+          onClick={() => openModal(cell, MyModal, 'modal-lg')}>
           Launch demo modal
         </button>
       </div>
