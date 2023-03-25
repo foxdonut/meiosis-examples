@@ -4,34 +4,19 @@ import { State } from '../types';
 import { getElementById } from '../util';
 
 const modalId = 'appModal';
+let modalContent: MeiosisView<State>;
 
 export const ModalView: MeiosisView<State> = ({ cell }) => (
   <div class="modal fade" id={modalId} tabIndex={-1} aria-labelledby="modalLabel"
     aria-hidden="true">
     <div class={'modal-dialog ' + cell.state.modal.size}>
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Modal Body goes here: {cell.state.value}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">
-            Save changes
-          </button>
-        </div>
-      </div>
-
+      {modalContent && modalContent({ cell })}
     </div>
   </div>
 );
 
 export const openModal = (cell: MeiosisCell<State>, content: MeiosisView<State>, size?: string) => {
+  modalContent = content;
   if (size) {
     cell.update({ modal: { size } });
   }

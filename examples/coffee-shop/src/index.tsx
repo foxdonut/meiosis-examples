@@ -19,7 +19,7 @@ const MyModal: MeiosisView<State> = ({ cell }) => (
         aria-label="Close"></button>
     </div>
     <div class="modal-body">
-      Modal Body goes here: {cell.state.value}
+      Modal content: {cell.state.value}
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
