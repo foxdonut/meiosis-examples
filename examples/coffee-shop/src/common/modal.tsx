@@ -15,7 +15,8 @@ export const ModalView: MeiosisView<State> = ({ cell }) => (
   </div>
 );
 
-export const openModal = (cell: MeiosisCell<State>, content: MeiosisView<State>, size?: string) => {
+export const openModal = (cell: MeiosisCell<State>, content: MeiosisView<State>,
+  size?: string): Modal => {
   modalContent = content;
   if (size) {
     cell.update({ modal: { size } });
@@ -23,4 +24,5 @@ export const openModal = (cell: MeiosisCell<State>, content: MeiosisView<State>,
   const element = getElementById(modalId);
   const modal = Modal.getOrCreateInstance(element);
   modal.show();
+  return modal;
 };

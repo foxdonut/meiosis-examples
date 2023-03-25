@@ -1,0 +1,1 @@
+export { ModalButton } from './view';
