@@ -1,22 +1,21 @@
 import { Modal } from 'bootstrap';
 import { MeiosisCell, MeiosisView } from 'meiosis-setup/types';
-import { State } from '../types';
 import { getElementById } from '../util';
 
 const modalId = 'appModal';
-let modalParams: ModalParams;
+let modalParams: ModalParams<any>;
 
 export type ModalSize = 'modal-sm' | 'modal-lg' | 'modal-xl' | null;
 
-export type ModalParams = {
+export type ModalParams<S> = {
   size: ModalSize;
   title: string;
-  body: MeiosisView<State>;
-  footer: MeiosisView<State>;
+  body: MeiosisView<S>;
+  footer: MeiosisView<S>;
 };
 
-export const ModalView: MeiosisView<State> = ({ cell }) =>
-  modalParams ? (
+export function ModalView<S>({ cell }: { cell: MeiosisCell<S> }): any {
+  return modalParams ? (
     <div class="modal fade" id={modalId} tabIndex={-1} aria-labelledby="modalLabel"
       aria-hidden="true">
       <div class={'modal-dialog ' + modalParams.size || ''}>
@@ -36,12 +35,13 @@ export const ModalView: MeiosisView<State> = ({ cell }) =>
       </div>
     </div>
   ) : null;
+}
 
-export const openModal = (cell: MeiosisCell<State>, params: ModalParams): Modal => {
+export function openModal<S>(cell: MeiosisCell<S>, params: ModalParams<S>): Modal {
   modalParams = params;
-  cell.update({});
+  cell.update({} as S);
   const element = getElementById(modalId);
   const modal = Modal.getOrCreateInstance(element);
   modal.show();
   return modal;
-};
+}

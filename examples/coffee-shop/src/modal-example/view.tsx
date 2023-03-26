@@ -1,13 +1,13 @@
 import { MeiosisCell, MeiosisView } from 'meiosis-setup/types';
-import { State } from '../types';
+import { ModalExampleType } from './types';
 import { ModalParams, ModalSize, openModal } from '../common/modal';
 
 const actions = {
-  launchModalSm: (cell: MeiosisCell<State>) => openModal(cell, MyModal('modal-sm')),
-  launchModalLg: (cell: MeiosisCell<State>) => openModal(cell, MyModal('modal-lg'))
+  launchModalSm: (cell: MeiosisCell<ModalExampleType>) => openModal(cell, MyModal('modal-sm')),
+  launchModalLg: (cell: MeiosisCell<ModalExampleType>) => openModal(cell, MyModal('modal-lg'))
 };
 
-const MyModal = (size: ModalSize): ModalParams => ({
+const MyModal = (size: ModalSize): ModalParams<ModalExampleType> => ({
   size,
   title: 'My Modal Title',
   body: ({ cell }) => (
@@ -25,7 +25,7 @@ const MyModal = (size: ModalSize): ModalParams => ({
   )
 });
 
-export const ModalButton: MeiosisView<State> = ({ cell }) => (
+export const ModalButton: MeiosisView<ModalExampleType> = ({ cell }) => (
   <div>
     <button type="button" class="btn btn-primary" onClick={() => actions.launchModalSm(cell)}>
       Launch small modal
