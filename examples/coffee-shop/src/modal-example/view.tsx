@@ -1,4 +1,5 @@
 import { MeiosisCell, MeiosisView } from 'meiosis-setup/types';
+import { updateFormValue } from 'meiosis-setup/util';
 import { ModalExampleType } from './types';
 import { ModalParams, ModalSize, openModal } from '../common/modal';
 
@@ -12,7 +13,16 @@ const MyModal = (size: ModalSize): ModalParams<ModalExampleType> => ({
   title: 'My Modal Title',
   body: ({ cell }) => (
     <div>
-      Modal content: {cell.state.value}
+      <div>Modal content</div>
+      <div>
+        Title:
+        <input type="text" value={cell.state.title} onInput={updateFormValue(cell, 'title')}/>
+      </div>
+      <div>
+        Value:
+        <input type="number" value={cell.state.value}
+          onInput={updateFormValue(cell, 'value', (value) => parseInt(value, 10))}/>
+      </div>
     </div>
   ),
   footer: () => (
