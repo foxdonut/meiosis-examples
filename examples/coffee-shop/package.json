@@ -29,8 +29,8 @@
   "dependencies": {
     "bootstrap": "^5.2.3",
     "meiosis-router": "^1.0.0",
-    "meiosis-setup": "^6.2.0",
-    "preact": "^10.13.1"
+    "meiosis-setup": "^6.2.2",
+    "preact": "^10.13.2"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.6",
@@ -38,8 +38,8 @@
     "source-map-loader": "^4.0.1",
     "static-server": "^2.2.1",
     "ts-loader": "^9.4.2",
-    "typescript": "^5.0.2",
-    "webpack": "^5.76.2",
+    "typescript": "^5.0.3",
+    "webpack": "^5.77.0",
     "webpack-cli": "^5.0.1"
   }
 }
