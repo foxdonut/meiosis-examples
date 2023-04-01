@@ -14,6 +14,10 @@ export type ModalParams<S> = {
   footer: MeiosisView<S>;
 };
 
+export type ModalOnClose<S> = (cell: MeiosisCell<S>) => any;
+
+export type ModalCreator<S> = (onClose: ModalOnClose<S>) => ModalParams<S>;
+
 export function ModalView<S>({ cell }: { cell: MeiosisCell<S> }): any {
   return modalParams ? (
     <div class="modal fade" id={modalId} tabIndex={-1} aria-labelledby="modalLabel"

@@ -12,6 +12,8 @@
     "target": "es6"
   },
   "include": [
-    "./src/**/*.tsx"
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./src/**/*.css"
   ]
 }

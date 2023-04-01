@@ -34,9 +34,11 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.6",
+    "css-loader": "^6.7.3",
     "meiosis-tracer": "^6.0.0",
     "source-map-loader": "^4.0.1",
     "static-server": "^2.2.1",
+    "style-loader": "^3.3.2",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.3",
     "webpack": "^5.77.0",
