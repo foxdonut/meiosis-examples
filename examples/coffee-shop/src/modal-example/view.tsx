@@ -9,12 +9,13 @@ export const createMyModal: ModalCreator<ModalExampleType> = (onClose) => ({
   body: ({ cell }) => (
     <div>
       <div>Modal content</div>
-      <div class={styles.formContainer}>
+      <div class={`${styles.formContainer} mt-2`}>
         Title:
-        <input type="text" value={cell.state.title} onInput={updateFormValue(cell, 'title')} />
+        <input type="text" class="form-control"
+          value={cell.state.title} onInput={updateFormValue(cell, 'title')} />
 
         Value:
-        <input type="number" value={cell.state.value}
+        <input type="number" class="form-control" value={cell.state.value}
           onInput={updateFormValue(cell, 'value', (value) => parseInt(value, 10))} />
       </div>
     </div>

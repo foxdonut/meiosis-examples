@@ -19,6 +19,7 @@ export type ModalOnClose<S> = (cell: MeiosisCell<S>) => any;
 export type ModalCreator<S> = (onClose: ModalOnClose<S>) => ModalParams<S>;
 
 export function ModalView<S>({ cell }: { cell: MeiosisCell<S> }): any {
+  console.log('ModalView:', cell.state, modalParams);
   return modalParams ? (
     <div class="modal fade" id={modalId} tabIndex={-1} aria-labelledby="modalLabel"
       aria-hidden="true">
@@ -42,6 +43,7 @@ export function ModalView<S>({ cell }: { cell: MeiosisCell<S> }): any {
 }
 
 export function openModal<S>(cell: MeiosisCell<S>, params: ModalParams<S>): Modal {
+  console.log('openModal:', cell.state);
   modalParams = params;
   cell.update({} as S);
   const element = getElementById(modalId);

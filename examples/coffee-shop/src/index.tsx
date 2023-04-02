@@ -7,7 +7,11 @@ import { App } from './app';
 
 const app: MeiosisViewComponent<State> = {
   initial: {
-    value: 42
+    value: 42,
+    modalExample: {
+      title: '',
+      value: 0
+    }
   },
   view: (cell) => (
     <App cell={cell}></App>
