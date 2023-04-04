@@ -8,7 +8,7 @@ interface ModalType extends MeiosisViewParam<ModalExampleType> {
   onClose: ModalOnClose<ModalExampleType>;
 }
 
-export const modalExample = ({ cell, onClose }: ModalType) => (
+export const modalExample = ({ cell, onClose }: ModalType) =>
   modalView({
     cell, params: {
       size: 'modal-sm',
@@ -36,5 +36,4 @@ export const modalExample = ({ cell, onClose }: ModalType) => (
         </div>
       )
     }
-  })
-);
+  });
