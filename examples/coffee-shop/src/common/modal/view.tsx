@@ -1,7 +1,15 @@
 import { MeiosisCell } from 'meiosis-setup/types';
 import { ModalParams } from './types';
+import { Modal } from 'bootstrap';
+import { getElementById } from '../../util';
 
-export const modalId = 'appModal';
+const modalId = 'appModal';
+
+export const openModal = () => {
+  const element = getElementById(modalId);
+  const modal = Modal.getOrCreateInstance(element);
+  modal.show();
+};
 
 export function modalView<S>({ cell, params }:
   { cell: MeiosisCell<S>, params: ModalParams<S> }): any {
