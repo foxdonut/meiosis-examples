@@ -1,2 +1,2 @@
 export { ModalExampleType } from './types';
-export { createMyModal } from './view';
+export { modalExample } from './view';

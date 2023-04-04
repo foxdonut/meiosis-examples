@@ -29,7 +29,7 @@
   "dependencies": {
     "bootstrap": "^5.2.3",
     "meiosis-router": "^1.0.0",
-    "meiosis-setup": "^6.2.2",
+    "meiosis-setup": "^6.2.3",
     "preact": "^10.13.2"
   },
   "devDependencies": {
