@@ -1,12 +1,19 @@
-import { MeiosisViewParam } from 'meiosis-setup/types';
+import { MeiosisCell, MeiosisViewParam } from 'meiosis-setup/types';
 import { updateFormValue } from 'meiosis-setup/util';
 import { ModalExampleType } from './types';
-import { modalView, ModalOnClose } from '../common/modal';
+import { closeModal, modalView, ModalOnClose } from '../common/modal';
 import styles from './style.module.css';
 
 interface ModalType extends MeiosisViewParam<ModalExampleType> {
   onClose: ModalOnClose<ModalExampleType>;
 }
+
+const actions = {
+  save: (cell: MeiosisCell<ModalExampleType>, onClose: ModalOnClose<ModalExampleType>) => {
+    closeModal();
+    onClose(cell);
+  }
+};
 
 export const modalExample = ({ cell, onClose }: ModalType) =>
   modalView({
@@ -30,7 +37,8 @@ export const modalExample = ({ cell, onClose }: ModalType) =>
       footer: ({ cell }) => (
         <div>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary ms-2" onClick={() => onClose(cell)}>
+          <button type="button" class="btn btn-primary ms-2"
+            onClick={() => actions.save(cell, onClose)}>
             Save changes
           </button>
         </div>
