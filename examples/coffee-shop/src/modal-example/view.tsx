@@ -5,17 +5,22 @@ import { closeModal, modalView, ModalOnClose } from '../common/modal';
 import styles from './style.module.css';
 
 interface ModalType extends MeiosisViewParam<ModalExampleType> {
-  onClose: ModalOnClose<ModalExampleType>;
+  onSave: ModalOnClose<ModalExampleType>;
+  onCancel: ModalOnClose<ModalExampleType>;
 }
 
 const actions = {
-  save: (cell: MeiosisCell<ModalExampleType>, onClose: ModalOnClose<ModalExampleType>) => {
+  save: (cell: MeiosisCell<ModalExampleType>, onSave: ModalOnClose<ModalExampleType>) => {
     closeModal();
-    onClose(cell);
+    onSave(cell);
+  },
+  cancel: (cell: MeiosisCell<ModalExampleType>, onCancel: ModalOnClose<ModalExampleType>) => {
+    closeModal();
+    onCancel(cell);
   }
 };
 
-export const modalExample = ({ cell, onClose }: ModalType) =>
+export const modalExample = ({ cell, onSave, onCancel }: ModalType) =>
   modalView({
     cell, params: {
       size: 'modal-sm',
@@ -36,9 +41,12 @@ export const modalExample = ({ cell, onClose }: ModalType) =>
       ),
       footer: ({ cell }) => (
         <div>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary"
+            onClick={() => actions.cancel(cell, onCancel)}>
+              Cancel
+          </button>
           <button type="button" class="btn btn-primary ms-2"
-            onClick={() => actions.save(cell, onClose)}>
+            onClick={() => actions.save(cell, onSave)}>
             Save changes
           </button>
         </div>
