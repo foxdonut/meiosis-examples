@@ -25,6 +25,7 @@ export const modalExample = ({ cell, onSave, onCancel }: ModalType) =>
     cell, params: {
       size: 'modal-sm',
       title: 'My Modal Title',
+      onCancel: () => actions.cancel(cell, onCancel),
       body: ({ cell }) => (
         <div>
           <div>Modal content</div>

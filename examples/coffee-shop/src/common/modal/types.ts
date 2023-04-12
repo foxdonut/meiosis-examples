@@ -7,6 +7,7 @@ export type ModalParams<S> = {
   title: string;
   body: MeiosisView<S>;
   footer: MeiosisView<S>;
+  onCancel?: () => any;
 };
 
 export type ModalOnClose<S> = (cell: MeiosisCell<S>) => any;
