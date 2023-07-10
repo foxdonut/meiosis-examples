@@ -14,7 +14,7 @@ export const Pager = ({ cell }) => {
   return ['nav',
     ['ul.pagination',
       pageList.map((pageNumber) => ['li.page-item',
-        { className: { active: pageNumber === currentPageNumber } },
+        { class: { active: pageNumber === currentPageNumber } },
         ['a.page-link',
           {
             href: router.toUrl(state.route.value, {

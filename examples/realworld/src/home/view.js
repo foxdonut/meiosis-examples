@@ -38,14 +38,14 @@ export const Home = ({ cell }) => {
               cell.state.user && ['li.nav-item',
                 ['a.nav-link', {
                   href: router.toUrl(Route.Home, { feed: true }),
-                  className: { active: filter.feed }
+                  class: { active: filter.feed }
                 },
                   'Your Feed']],
               ['li.nav-item',
                 ['a.nav-link',
                   {
                     href: router.toUrl(Route.Home),
-                    className: { active: content.globalFeed }
+                    class: { active: content.globalFeed }
                   },
                   'Global Feed']],
               content.tagFeedComponent]],

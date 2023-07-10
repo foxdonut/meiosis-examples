@@ -22,7 +22,7 @@ export const ArticleList = ({ cell }) => [
           ['.pull-xs-right',
             ['button.btn.btn-sm',
               {
-                className: {
+                class: {
                   'btn-primary': article.favorited,
                   'btn-outline-primary': !article.favorited
                 },

@@ -2,7 +2,7 @@ import { Route, router } from '../router';
 import { get } from '../util/fp';
 
 const Header = ({ cell }) => {
-  const active = (pageId) => ({ className: { active: cell.state.route.value === pageId } });
+  const active = (pageId) => ({ class: { active: cell.state.route.value === pageId } });
 
   return ['nav.navbar.navbar-light',
     ['.container',
@@ -33,7 +33,7 @@ const Header = ({ cell }) => {
                 ' Settings']],
             ['li.nav-item',
               {
-                className: {
+                class: {
                   active:
                     (cell.state.route.value === 'Profile' ||
                       cell.state.route.value === 'ProfileFavorites') &&

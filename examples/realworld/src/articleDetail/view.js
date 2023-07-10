@@ -25,7 +25,7 @@ const nonAuthorMeta = (cell) => (article) =>
   [
     ['button.btn.btn-sm',
       {
-        className: {
+        class: {
           'btn-outline-secondary': !article.author.following,
           'btn-secondary': article.author.following
         },
@@ -40,7 +40,7 @@ const nonAuthorMeta = (cell) => (article) =>
     ' ',
     ['button.btn.btn-sm',
       {
-        className: { 'btn-outline-primary': !article.favorited, 'btn-primary': article.favorited },
+        class: { 'btn-outline-primary': !article.favorited, 'btn-primary': article.favorited },
         onClick: article.favorited
           ? () => actions.unfavoriteArticle(cell, article.slug)
           : () => actions.favoriteArticle(cell, article.slug)

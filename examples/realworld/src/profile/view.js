@@ -42,14 +42,14 @@ export const Profile = ({ cell }) => {
               ['li.nav-item',
                 ['a.nav-link',
                   {
-                    className: { active: !isFavorites },
+                    class: { active: !isFavorites },
                     href: router.toUrl(Route.Profile, { username })
                   },
                   'My Articles']],
               ['li.nav-item',
                 ['a.nav-link',
                   {
-                    className: { active: isFavorites },
+                    class: { active: isFavorites },
                     href: router.toUrl(Route.ProfileFavorites, { username })
                   },
                   'Favorited Articles']]]],
