@@ -1,13 +1,13 @@
 import { credentialsApi, setToken } from '../services';
 import { Route, routeTo } from '../router';
-import { pick } from '../util/fp';
+import { pick } from 'lodash';
 
 export const actions = {
-  updateCredForm: (cell, method, field) => (text) => cell.update({ [method]: { [field]: text } }),
+  updateCredForm: (cell, method, field, text) => cell.update({ [method]: { [field]: text } }),
 
-  sendCredentials: (method) => (cell) => {
+  sendCredentials: (cell, method) => {
     const fields = ['email', 'password'].concat(method === 'register' ? ['username'] : []);
-    credentialsApi[method]({ user: pick(fields, cell.state[method]) })
+    credentialsApi[method]({ user: pick(cell.state[method], fields) })
       .then(({ user }) => {
         setToken(user.token);
         cell.update([routeTo(Route.Home), { user }]);

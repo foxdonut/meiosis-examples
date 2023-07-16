@@ -1,4 +1,4 @@
-import { range } from '../util/fp';
+import { range } from 'lodash';
 import { getArticlesFilter } from '../util/filter';
 import { router } from '../router';
 

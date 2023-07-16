@@ -1,14 +1,14 @@
 import { marked } from 'marked';
 import { sanitize } from 'dompurify';
+import { defaultTo, get } from 'lodash';
 
-import { compose, defaultTo, get, preventDefault, thrush } from '../util/fp';
 import { Route, router } from '../router';
 import { defaultImage } from '../util/view';
 import { actions } from './actions';
 
 const isAuthor = (username, article) => article.author.username === username;
 
-const authorMeta = (cell) => (article) =>
+const authorMeta = (cell, article) =>
   [
     ['a.btn.btn-outline-secondary.btn-sm',
       { href: router.toUrl(Route.ArticleEdit, { slug: article.slug }) },
@@ -21,7 +21,7 @@ const authorMeta = (cell) => (article) =>
       ' Delete Article']
   ];
 
-const nonAuthorMeta = (cell) => (article) =>
+const nonAuthorMeta = (cell, article) =>
   [
     ['button.btn.btn-sm',
       {
@@ -61,7 +61,7 @@ const articleMeta = (cell, article, username) => [
       { href: router.toUrl(Route.Profile, { username: article.author.username }) },
       article.author.username],
     ['span.date', new Date(article.createdAt).toDateString()]],
-  thrush(article, isAuthor(username, article) ? authorMeta(cell) : nonAuthorMeta(cell))
+  isAuthor(username, article) ? authorMeta(cell, article) : nonAuthorMeta(cell, article)
 ];
 
 export const ArticleDetail = ({ cell }) => {
@@ -105,12 +105,9 @@ export const ArticleDetail = ({ cell }) => {
                     }]],
                 ['.card-footer',
                   ['img.comment-author-img', { src: state.user.image || defaultImage }],
-                  ['button.btn.btn-sm.btn-primary',
+                  ['button.btn.btn-sm.btn-primary[type=button]',
                     {
-                      onClick: compose(
-                        () => actions.addComment(cell, article.slug, cell.state.comment),
-                        preventDefault
-                      )
+                      onClick: () => actions.addComment(cell, article.slug, cell.state.comment)
                     },
                     'Post Comment']]]
               : ['p',
@@ -118,7 +115,7 @@ export const ArticleDetail = ({ cell }) => {
                 ' or ',
                 ['a', { href: router.toUrl(Route.Register) }, 'sign up'],
                 ' to add comments on this article.'],
-            defaultTo([], state.comments).map((comment) => ['.card',
+            defaultTo(state.comments, []).map((comment) => ['.card',
               ['.card-block', ['p.card-text', comment.body]],
               ['.card-footer',
                 ['a.comment-author',

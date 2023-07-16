@@ -2,7 +2,7 @@ import validate from 'validate.js';
 
 import { articlesApi } from '../services';
 import { Route, routeTo } from '../router';
-import { pick } from '../util/fp';
+import { pick } from 'lodash';
 
 const validationSpec = {
   body: { presence: { allowEmpty: false } },
@@ -34,7 +34,7 @@ export const actions = {
       articlesApi
         .publish(
           {
-            article: pick(['title', 'description', 'body', 'tagList'], article)
+            article: pick(article, ['title', 'description', 'body', 'tagList'])
           },
           article.slug
         )

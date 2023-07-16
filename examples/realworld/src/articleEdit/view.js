@@ -1,10 +1,10 @@
-import { defaultTo, get, pipe, preventDefault, thrush } from '../util/fp';
+import { defaultTo, get } from 'lodash';
 import { actions } from './actions';
 
 const displayFieldErrors = (errors) => ['ul.error-messages', errors.map((err) => ['li', err])];
 
 const getFieldErrors = (validationErrors) => (field) =>
-  thrush(defaultTo([], get(defaultTo({}, validationErrors), [field])), displayFieldErrors);
+  displayFieldErrors(defaultTo(get(defaultTo(validationErrors, {}), field), []));
 
 export const ArticleEdit = ({ cell }) => {
   const article = cell.state.article;
@@ -47,13 +47,13 @@ export const ArticleEdit = ({ cell }) => {
                       onInput: (evt) => actions.updateArticleTags(cell, evt.target.value)
                     }],
                   ['.tag-list',
-                    defaultTo([], article.tagList).map((tag) => [
+                    defaultTo(article.tagList, []).map((tag) => [
                       'span.tag-pill.tag-default',
                       tag
                     ])]],
-                ['button:button.btn.btn-lg.pull-xs-right.btn-primary',
+                ['button:button.btn.btn-lg.pull-xs-right.btn-primary[type=button]',
                   {
-                    onClick: pipe(preventDefault, () => actions.publish(cell, article))
+                    onClick: () => actions.publish(cell, article)
                   },
                   'Publish Article']]]]]]];
 };

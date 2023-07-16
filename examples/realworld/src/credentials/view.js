@@ -1,12 +1,9 @@
-import { constant, path, pipe, preventDefault } from '../util/fp';
 import { router } from '../router';
 import { actions } from './actions';
 
 export const Credentials =
   (options) =>
     ({ cell }) => {
-      const updateCredForm = (method, field) =>
-        pipe(path(['target', 'value']), actions.updateCredForm(cell, method, field));
       const id = options.method;
 
       const errors = Object.keys(cell.state[id].errors || {}).map(
@@ -29,22 +26,28 @@ export const Credentials =
                     'input:text.form-control.form-control-lg[placeholder=Username]',
                     {
                       value: cell.state[id].username || '',
-                      onInput: updateCredForm(id, 'username')
+                      onInput: (evt) =>
+                        actions.updateCredForm(cell, id, 'username', evt.target.value)
                     }
                   ]
                 ],
                 ['fieldset.form-group',
                   ['input:text.form-control.form-control-lg[placeholder=Email]',
-                    { value: cell.state[id].email || '', onInput: updateCredForm(id, 'email') }]],
+                    {
+                      value: cell.state[id].email || '',
+                      onInput: (evt) =>
+                        actions.updateCredForm(cell, id, 'email', evt.target.value)
+                    }]],
                 ['fieldset.form-group',
                   ['input:password.form-control.form-control-lg[placeholder=Password]',
                     {
                       value: cell.state[id].password || '',
-                      onInput: updateCredForm(id, 'password')
+                      onInput: (evt) =>
+                        actions.updateCredForm(cell, id, 'password', evt.target.value)
                     }]],
-                ['button.btn.btn-lg.btn-primary.pull-xs-right',
+                ['button.btn.btn-lg.btn-primary.pull-xs-right[type=button]',
                   {
-                    onClick: pipe(preventDefault, constant(cell), actions.sendCredentials(id))
+                    onClick: () => actions.sendCredentials(cell, id)
                   },
                   options.label]]]]]];
     };

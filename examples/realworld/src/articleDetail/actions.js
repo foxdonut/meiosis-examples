@@ -1,5 +1,4 @@
 import { articlesApi, loadArticleAndComments, profileApi } from '../services';
-import { prepend } from '../util/fp';
 import { Route, routeTo } from '../router';
 
 export const actions = {
@@ -10,7 +9,7 @@ export const actions = {
       articlesApi.addComment(slug, { comment: { body } }).then((data) =>
         cell.update({
           comment: '',
-          comments: (list) => prepend(data.comment, list)
+          comments: (list) => [data.comment].concat(list)
         })
       );
     }

@@ -1,5 +1,5 @@
+import { get } from 'lodash';
 import { Route, router } from '../router';
-import { get } from '../util/fp';
 
 const Header = ({ cell }) => {
   const active = (pageId) => ({ class: { active: cell.state.route.value === pageId } });

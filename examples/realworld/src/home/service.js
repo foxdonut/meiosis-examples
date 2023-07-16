@@ -1,7 +1,7 @@
 import { articlesApi, loadArticlesAndTags } from '../services';
-import { pick } from '../util/fp';
 import { getArticlesFilter } from '../util/filter';
 import { Route } from '../router';
+import { pick } from 'lodash';
 
 export const service = {
   onchange: (state) => {
@@ -13,7 +13,7 @@ export const service = {
       const filter = getArticlesFilter(cell.state);
 
       filter.feed
-        ? articlesApi.getFeed(pick(['limit', 'offset'], filter)).then(cell.update)
+        ? articlesApi.getFeed(pick(filter, ['limit', 'offset'])).then(cell.update)
         : loadArticlesAndTags(filter).then(cell.update);
     }
   }

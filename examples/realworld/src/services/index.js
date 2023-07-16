@@ -1,4 +1,4 @@
-import { filterOutNullValues, omit } from '../util/fp';
+import { omit, pickBy } from 'lodash';
 
 // const API_ROOT = 'https://api.realworld.io/api';
 const API_ROOT = 'https://conduit.productionready.io/api';
@@ -19,7 +19,7 @@ const request = (url, options = {}) => {
     options.body = JSON.stringify(options.body);
   }
   if (options.params) {
-    url += '?' + new URLSearchParams(filterOutNullValues(options.params));
+    url += '?' + new URLSearchParams(pickBy(options.params));
   }
   options.headers = Object.assign(
     { 'Content-Type': 'application/json' }, authHeader(), options.headers);
@@ -60,9 +60,9 @@ Returns:
 }
 */
 export const articlesApi = {
-  getList: (params) => request('/articles', { params: omit(['feed'], params) }),
+  getList: (params) => request('/articles', { params: omit(params, 'feed') }),
 
-  getFeed: (params) => request('/articles/feed', { params: omit(['feed'], params) }),
+  getFeed: (params) => request('/articles/feed', { params: omit(params, 'feed') }),
 
   getSingle: (slug) => request(`/articles/${slug}`),
 

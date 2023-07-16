@@ -1,4 +1,4 @@
-import { get } from '../util/fp';
+import { get } from 'lodash';
 import { Route, router } from '../router';
 import { defaultImage } from '../util/view';
 import { ArticleList } from '../articleList';

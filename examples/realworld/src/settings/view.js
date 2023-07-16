@@ -1,4 +1,3 @@
-import { compose, preventDefault } from '../util/fp';
 import { actions } from './actions';
 
 export const Settings = ({ cell }) => {
@@ -45,18 +44,15 @@ export const Settings = ({ cell }) => {
                     value: state.settings.password,
                     onInput: (evt) => actions.updateSettingsForm(cell, 'password', evt.target.value)
                   }]],
-              ['button.btn.btn-lg.btn-primary.pull-xs-right',
+              ['button.btn.btn-lg.btn-primary.pull-xs-right[type=button]',
                 {
-                  onClick: compose(
-                    () => actions.updateSettings(cell, state.settings),
-                    preventDefault
-                  )
+                  onClick: () => actions.updateSettings(cell, state.settings)
                 },
                 'Update Settings']]],
           ['hr'],
-          ['button.btn.btn-outline-danger',
+          ['button.btn.btn-outline-danger[type=button]',
             {
-              onClick: compose(() => actions.logout(cell), preventDefault)
+              onClick: () => actions.logout(cell)
             },
             'Or click here to logout.']]]]];
 };

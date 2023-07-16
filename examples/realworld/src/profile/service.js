@@ -1,4 +1,5 @@
-import { Route } from '../router';
+import { set } from 'lodash';
+import { Route, routeTo } from '../router';
 import { getArticlesFilter } from '../util/filter';
 import { articlesApi, profileApi } from '../services';
 
@@ -21,12 +22,14 @@ const loadProfileAndArticles = ({ cell, username, author, favorited }) => {
 export const service = {
   onchange: (state) => state.route.value,
   run: (cell) => {
-    if (cell.state.route.value === Route.Profile) {
-      const { username } = cell.state.route.params;
-      loadProfileAndArticles({ cell, username, author: username });
-    } else if (cell.state.route.value === Route.ProfileFavorites) {
-      const { username } = cell.state.route.params;
-      loadProfileAndArticles({ cell, username, favorited: username });
+    if ([Route.Profile, Route.ProfileFavorites].includes(cell.state.route.value)) {
+      if (!cell.state.user) {
+        cell.update(routeTo(Route.Home));
+      } else {
+        const { username } = cell.state.route.params;
+        const param = cell.state.route.value === Route.Profile ? 'author' : 'favorited';
+        loadProfileAndArticles(set({ cell, username }, param, username));
+      }
     }
   }
 };

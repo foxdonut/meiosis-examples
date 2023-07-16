@@ -1,4 +1,4 @@
-import { assoc, defaultTo } from '../util/fp';
+import { defaultTo, set } from 'lodash';
 import { Route, routeTo } from '../router';
 
 const fields = ['email', 'username', 'image', 'bio'];
@@ -11,7 +11,7 @@ export const service = {
         cell.update(routeTo(Route.Home));
       } else {
         const settings = fields.reduce(
-          (result, field) => assoc(field, defaultTo('', cell.state.user[field]), result),
+          (result, field) => set(result, field, defaultTo('', cell.state.user[field])),
           {}
         );
         cell.update({ settings });

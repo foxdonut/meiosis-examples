@@ -1,9 +1,9 @@
-import { assoc } from '../util/fp';
+import { set } from 'lodash';
 import { Route } from '../router';
 
 export const getArticlesFilter = (state) => {
   const filter = ['feed', 'offset', 'tag'].reduce(
-    (result, param) => assoc(param, state.route.params[param], result),
+    (result, param) => set(result, param, state.route.params[param]),
     {}
   );
   filter.offset = Number(filter.offset) || 0;
