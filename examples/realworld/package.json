@@ -47,7 +47,7 @@
     "meiosis-tracer": "^6.0.0",
     "reload": "^3.2.1",
     "static-server": "^2.2.1",
-    "webpack": "^5.88.1",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
   }
 }
