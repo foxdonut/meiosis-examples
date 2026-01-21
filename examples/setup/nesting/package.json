@@ -29,7 +29,7 @@
     "flyd": "^0.2.8",
     "joi": "^17.9.2",
     "joi-browser": "^13.4.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "preact": "^10.16.0"
   },
   "devDependencies": {
