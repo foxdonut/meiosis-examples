@@ -27,7 +27,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "flyd": "^0.2.8",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
