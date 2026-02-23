@@ -33,7 +33,7 @@
     "marked": "^4.3.0",
     "meiosis-router": "^1.1.0",
     "meiosis-setup": "^6.2.3",
-    "mithril": "^2.2.2",
+    "mithril": "^2.3.8",
     "preact": "^10.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
