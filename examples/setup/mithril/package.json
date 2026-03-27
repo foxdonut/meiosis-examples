@@ -27,7 +27,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "mergerino": "^0.4.0",
-    "mithril": "^2.2.2"
+    "mithril": "^2.3.8"
   },
   "devDependencies": {
     "@babel/core": "^7.22.8",
