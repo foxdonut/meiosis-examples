@@ -29,7 +29,7 @@
   "homepage": "https://github.com/foxdonut/meiosis-examples#readme",
   "dependencies": {
     "dompurify": "^3.3.2",
-    "lodash": "^4.17.23",
+    "lodash": "^4.18.1",
     "marked": "^4.3.0",
     "meiosis-router": "^1.1.0",
     "meiosis-setup": "^6.2.3",
